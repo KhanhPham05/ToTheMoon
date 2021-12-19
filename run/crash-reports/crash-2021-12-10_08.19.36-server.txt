@@ -1,0 +1,105 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 08:19 10/12/2021
+Description: Ticking block entity
+
+java.lang.ArrayIndexOutOfBoundsException: 1
+	at java.util.Arrays$ArrayList.get(Arrays.java:3841) ~[?:1.8.0_281] {}
+	at net.minecraft.util.NonNullList.get(NonNullList.java:46) ~[forge:?] {re:classloading}
+	at com.khanhpham.tothemoon.common.machineblock.EnergyGenerator$Tile.tick(EnergyGenerator.java:127) ~[?:?] {re:classloading}
+	at net.minecraft.world.World.tickBlockEntities(World.java:491) ~[forge:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:371) ~[forge:?] {re:classloading,re:mixin}
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:851) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:787) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.integrated.IntegratedServer.tickServer(IntegratedServer.java:78) ~[forge:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:642) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:232) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at java.util.Arrays$ArrayList.get(Arrays.java:3841) ~[?:1.8.0_281] {}
+	at net.minecraft.util.NonNullList.get(NonNullList.java:46) ~[forge:?] {re:classloading}
+	at com.khanhpham.tothemoon.common.machineblock.EnergyGenerator$Tile.tick(EnergyGenerator.java:127) ~[?:?] {re:classloading}
+-- Block entity being ticked --
+Details:
+	Name: tothemoon:energy_generator_tile_entity // com.khanhpham.tothemoon.common.machineblock.EnergyGenerator.Tile
+	Block: Block{tothemoon:energy_generator}
+	Block location: World: (-249,4,-344), Chunk: (at 7,0,8 in -16,-22; contains blocks -256,0,-352 to -241,255,-337), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Block: Block{tothemoon:energy_generator}
+	Block location: World: (-249,4,-344), Chunk: (at 7,0,8 in -16,-22; contains blocks -256,0,-352 to -241,255,-337), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+Stacktrace:
+	at net.minecraft.world.World.tickBlockEntities(World.java:491) ~[forge:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:371) ~[forge:?] {re:classloading,re:mixin}
+
+
+-- Affected level --
+Details:
+	All players: 1 total; [ServerPlayerEntity['Dev'/22, l='ServerLevel[New World]', x=-248.65, y=5.00, z=-343.10]]
+	Chunk stats: ServerChunkCache: 2469
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (-176,4,-224), Chunk: (at 0,0,0 in -11,-14; contains blocks -176,0,-224 to -161,255,-209), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Level time: 36784 game time, 36784 day time
+	Level name: New World
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+	Level weather: Rain time: 92099 (now: false), thunder time: 17536 (now: false)
+	Known server brands: forge
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:851) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:787) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.integrated.IntegratedServer.tickServer(IntegratedServer.java:78) ~[forge:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:642) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:232) ~[forge:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_281, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 221660872 bytes (211 MB) / 457179136 bytes (436 MB) up to 922746880 bytes (880 MB)
+	CPUs: 4
+	JVM Flags: 2 total; -XX:+IgnoreUnrecognizedVMOptions -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	ModLauncher: 8.0.9+86+master.3cf110c
+	ModLauncher launch target: fmluserdevclient
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/mixin-0.8.4.jar mixin PLUGINSERVICE 
+		/eventbus-4.0.0.jar eventbus PLUGINSERVICE 
+		/forge-1.16.5-36.2.9_mapped_parchment_2021.10.17-1.16.5-launcher.jar object_holder_definalize PLUGINSERVICE 
+		/forge-1.16.5-36.2.9_mapped_parchment_2021.10.17-1.16.5-launcher.jar runtime_enum_extender PLUGINSERVICE 
+		/accesstransformers-3.0.1.jar accesstransformer PLUGINSERVICE 
+		/forge-1.16.5-36.2.9_mapped_parchment_2021.10.17-1.16.5-launcher.jar capability_inject_definalize PLUGINSERVICE 
+		/forge-1.16.5-36.2.9_mapped_parchment_2021.10.17-1.16.5-launcher.jar runtimedistcleaner PLUGINSERVICE 
+		/mixin-0.8.4.jar mixin TRANSFORMATIONSERVICE 
+		/forge-1.16.5-36.2.9_mapped_parchment_2021.10.17-1.16.5-launcher.jar fml TRANSFORMATIONSERVICE 
+	FML: 36.2
+	Forge: net.minecraftforge:36.2.9
+	FML Language Providers: 
+		javafml@36.2
+		minecraft@1
+	Mod List: 
+		client-extra.jar                                  |Minecraft                     |minecraft                     |1.16.5              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		the-one-probe-245211-3319255_mapped_parchment_2021|The One Probe                 |theoneprobe                   |1.16-3.1.4          |DONE      |Manifest: NOSIGNATURE
+		main                                              |To The Moon                   |tothemoon                     |NONE                |DONE      |Manifest: NOSIGNATURE
+		forge-1.16.5-36.2.9_mapped_parchment_2021.10.17-1.|Forge                         |forge                         |36.2.9              |DONE      |Manifest: NOSIGNATURE
+		silent-lib-242998-3235738_mapped_parchment_2021.10|Silent Lib                    |silentlib                     |4.9.6               |DONE      |Manifest: NOSIGNATURE
+		lazy-dfu-forge-460819-3249059_mapped_parchment_202|LazyDFU                       |lazydfu                       |0.1.3               |DONE      |Manifest: NOSIGNATURE
+		ferritecore-429235-3485636_mapped_parchment_2021.1|Ferrite Core                  |ferritecore                   |2.1.0               |DONE      |Manifest: NOSIGNATURE
+		jei-238222-3530253_mapped_parchment_2021.10.17-1.1|Just Enough Items             |jei                           |7.7.1.137           |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: 21d97931-1bff-4329-a4bd-4ca620d9969f
+	Player Count: 1 / 8; [ServerPlayerEntity['Dev'/22, l='ServerLevel[New World]', x=-248.65, y=5.00, z=-343.10]]
+	Data Packs: vanilla, mod:tothemoon, mod:forge, mod:silentlib (incompatible), mod:lazydfu, mod:ferritecore (incompatible), mod:jei, mod:theoneprobe
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'forge'

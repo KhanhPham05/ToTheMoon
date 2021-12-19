@@ -1,0 +1,7 @@
+Java Launcher: C:\Program Files\Java\jdk1.8.0_281\bin\java.exe
+Arguments: '--inJar, H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.9\forge-1.16.5-36.2.9-injected.jar, --outJar, H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.9_mapped_official_1.16.5\forge-1.16.5-36.2.9_mapped_official_1.16.5.jar, --logFile, accesstransform.log, --atFile, H:\FORGE 1.16\To The Moon - 1.16\src\main\resources\META-INF\accesstransformer.cfg, --atFile, H:\FORGE 1.16\To The Moon - 1.16\build\_atJar_9\parent_at.cfg'
+Classpath:
+ - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\3.0.1\accesstransformers-3.0.1-fatjar.jar
+Working directory: H:\FORGE 1.16\To The Moon - 1.16\build\_atJar_9
+Main class: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================

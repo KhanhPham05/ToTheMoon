@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "tothemoon:block/energy_bank"
+    },
+    "facing=south": {
+      "model": "tothemoon:block/energy_bank",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tothemoon:block/energy_bank",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "tothemoon:block/energy_bank",
+      "y": 90
+    }
+  }
+}

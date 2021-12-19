@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/copper",
+    "tothemoon:copper_ingot"
+  ]
+}

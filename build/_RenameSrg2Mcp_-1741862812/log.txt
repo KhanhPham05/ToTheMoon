@@ -1,0 +1,15 @@
+Java Launcher: C:\Program Files\Java\jdk1.8.0_281\bin\java.exe
+Arguments: '--task, SRG_TO_MCP, --input, C:\Users\HP\.gradle\caches\modules-2\files-2.1\curse.maven\tinkers-construct-74072\3526444\635eb0206e8b35f5477064ea8c172c49b91dff38\tinkers-construct-74072-3526444.jar, --output, C:\Users\HP\.gradle\caches\forge_gradle\deobf_dependencies\curse\maven\tinkers-construct-74072\3526444_mapped_official_1.16.5\tinkers-construct-74072-3526444_mapped_official_1.16.5.jar, --mcp, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\mapping\1.16.5\mapping-1.16.5-mapping.zip, --strip-signatures'
+Classpath:
+ - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\installertools\1.2.8\installertools-1.2.8-fatjar.jar
+Working directory: H:\FORGE 1.16\To The Moon - 1.16\build\_RenameSrg2Mcp_-1741862812
+Main class: net.minecraftforge.installertools.ConsoleTool
+====================================
+Task: SRG_TO_MCP
+Input:  C:\Users\HP\.gradle\caches\modules-2\files-2.1\curse.maven\tinkers-construct-74072\3526444\635eb0206e8b35f5477064ea8c172c49b91dff38\tinkers-construct-74072-3526444.jar
+Output: C:\Users\HP\.gradle\caches\forge_gradle\deobf_dependencies\curse\maven\tinkers-construct-74072\3526444_mapped_official_1.16.5\tinkers-construct-74072-3526444_mapped_official_1.16.5.jar
+MCP:    C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\mapping\1.16.5\mapping-1.16.5-mapping.zip
+Loading MCP Data
+Processing ZIP file
+Stripped Manifest of sha digests
+Process complete
