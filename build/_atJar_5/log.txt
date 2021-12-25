@@ -1,7 +1,7 @@
-Java Launcher: C:\Program Files\Java\jdk1.8.0_281\bin\java.exe
-Arguments: '--inJar, H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.20\forge-1.16.5-36.2.20-injected.jar, --outJar, H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.20_mapped_parchment_2021.10.17-1.16.5\forge-1.16.5-36.2.20_mapped_parchment_2021.10.17-1.16.5.jar, --logFile, accesstransform.log, --atFile, H:\FORGE 1.16\To The Moon - 1.16\src\main\resources\META-INF\accesstransformer.cfg, --atFile, H:\FORGE 1.16\To The Moon - 1.16\build\_atJar_5\parent_at.cfg'
+Java Launcher: C:\Program Files\Java\jdk-17.0.1\bin\java.exe
+Arguments: '--inJar, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.8\forge-1.18.1-39.0.8-injected.jar, --outJar, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.8_mapped_parchment_2021.12.19-1.18.1\forge-1.18.1-39.0.8_mapped_parchment_2021.12.19-1.18.1.jar, --logFile, accesstransform.log, --atFile, H:\FORGE 1.18\TTM - 39.0.7\build\_atJar_5\parent_at.cfg'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\8.0.5\accesstransformers-8.0.5-fatjar.jar
-Working directory: H:\FORGE 1.16\To The Moon - 1.16\build\_atJar_5
+Working directory: H:\FORGE 1.18\TTM - 39.0.7\build\_atJar_5
 Main class: net.minecraftforge.accesstransformer.TransformerProcessor
 ====================================
