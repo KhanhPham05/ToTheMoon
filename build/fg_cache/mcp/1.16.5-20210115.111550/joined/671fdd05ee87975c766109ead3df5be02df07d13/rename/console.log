@@ -1,9 +1,0 @@
-JVM:         C:\Program Files\Java\jdk1.8.0_281\bin\java.exe
-JVM Args:    
-Run Args:    "--in-jar", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\merge\output.jar", "--out-jar", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\rename\output.jar", "--srg-in", "config/joined.tsrg"
-Classpath:   C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\md-5\SpecialSource\1.8.3\SpecialSource-1.8.3-shaded.jar
-Working Dir: H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\rename
-Main Class:  net.md_5.specialsource.SpecialSource
-Loading mappings
-0 packages, 5447 classes, 21481 fields, 38359 methods
-Remapping final jar

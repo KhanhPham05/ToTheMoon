@@ -1,6 +1,0 @@
-JVM:         C:\Program Files\Java\jdk1.8.0_281\bin\java.exe
-JVM Args:    
-Run Args:    "--client", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\stripClient\output.jar", "--server", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\stripServer\output.jar", "--ann", "1.16.5", "--output", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\merge\output.jar", "--inject", "false"
-Classpath:   C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\mergetool\1.1.1\mergetool-1.1.1-fatjar.jar
-Working Dir: H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\merge
-Main Class:  net.minecraftforge.mergetool.ConsoleMerger

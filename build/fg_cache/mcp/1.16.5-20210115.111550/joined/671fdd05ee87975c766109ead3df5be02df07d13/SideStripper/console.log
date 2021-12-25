@@ -1,9 +1,0 @@
-JVM:         C:\Program Files\Java\jdk1.8.0_281\bin\java.exe
-JVM Args:    
-Run Args:    "--strip", "--input", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\AccessTransformer\output.jar", "--output", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\SideStripper\output.jar", "--data", "H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\SideStripper\string_data.sas"
-Classpath:   C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\mergetool\1.1.3\mergetool-1.1.3-fatjar.jar
-Working Dir: H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\SideStripper
-Main Class:  net.minecraftforge.mergetool.ConsoleMerger
-Input:  H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\AccessTransformer\output.jar
-Output: H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\SideStripper\output.jar
-Data:   H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\mcp\1.16.5-20210115.111550\joined\671fdd05ee87975c766109ead3df5be02df07d13\SideStripper\string_data.sas

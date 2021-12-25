@@ -1,9 +1,0 @@
-[13:45:26] [main/INFO]: Writing debug log file accesstransform.log
-[13:45:26] [main/INFO]: Access Transformer processor running version 3.0.1+61+master.47bca0e
-[13:45:26] [main/INFO]: Command line arguments [--inJar, H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.9\forge-1.16.5-36.2.9-injected.jar, --outJar, H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.9_mapped_official_1.16.5\forge-1.16.5-36.2.9_mapped_official_1.16.5.jar, --logFile, accesstransform.log, --atFile, H:\FORGE 1.16\To The Moon - 1.16\src\main\resources\META-INF\accesstransformer.cfg, --atFile, H:\FORGE 1.16\To The Moon - 1.16\build\_atJar_9\parent_at.cfg]
-[13:45:26] [main/INFO]: Reading from H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.9\forge-1.16.5-36.2.9-injected.jar
-[13:45:26] [main/INFO]: Writing to H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.9_mapped_official_1.16.5\forge-1.16.5-36.2.9_mapped_official_1.16.5.jar
-[13:45:26] [main/INFO]: Transformer file H:\FORGE 1.16\To The Moon - 1.16\src\main\resources\META-INF\accesstransformer.cfg
-[13:45:26] [main/INFO]: Transformer file H:\FORGE 1.16\To The Moon - 1.16\build\_atJar_9\parent_at.cfg
-[13:45:26] [main/WARN]: Found existing output jar H:\FORGE 1.16\To The Moon - 1.16\build\fg_cache\net\minecraftforge\forge\1.16.5-36.2.9_mapped_official_1.16.5\forge-1.16.5-36.2.9_mapped_official_1.16.5.jar, overwriting
-[13:45:26] [main/DEBUG]: Loading access transformer accesstransformer.cfg from path H:\FORGE 1.16\To The Moon - 1.16\src\main\resources\META-INF\accesstransformer.cfg
