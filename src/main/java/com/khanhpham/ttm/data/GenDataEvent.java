@@ -1,7 +1,8 @@
 package com.khanhpham.ttm.data;
 
 import com.khanhpham.ttm.ToTheMoonMain;
-import com.khanhpham.ttm.data.client.BlockModelStates;
+import com.khanhpham.ttm.data.client.ModBlockModels;
+import com.khanhpham.ttm.data.client.ModBlockStates;
 import com.khanhpham.ttm.data.client.ModItemModels;
 import com.khanhpham.ttm.data.lang.EngLangProvider;
 import com.khanhpham.ttm.data.loot.ModLootTables;
@@ -25,7 +26,9 @@ public final class GenDataEvent {
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
         ModTagsProvider tagsProvider = new ModTagsProvider(data, fileHelper);
 
-        data.addProvider(new BlockModelStates(data, fileHelper));
+
+        data.addProvider(new ModBlockModels(data, fileHelper));
+        data.addProvider(new ModBlockStates(data, fileHelper));
         data.addProvider(new ModItemModels(data, fileHelper));
         data.addProvider(new EngLangProvider(data));
         data.addProvider(new ModLootTables(data));

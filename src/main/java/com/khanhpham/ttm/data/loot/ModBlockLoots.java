@@ -15,7 +15,7 @@ public class ModBlockLoots extends BlockLoot implements Consumer<BiConsumer<Reso
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
         dropSelf(ModBlocks.ENERGY_BANK);
         dropSelf(ModBlocks.ENERGY_GEN);
-        dropSelf(ModBlocks.MOON_SURFACE_STONE_BRICKS);
+        dropSelf(ModBlocks.MOON_STONE_BRICKS);
         cobble(ModBlocks.MOON_SURFACE_STONE, ModBlocks.MOON_COBBLESTONE);
     }
 

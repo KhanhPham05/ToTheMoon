@@ -1,7 +1,9 @@
 package com.khanhpham.ttm.data.client;
 
 import com.khanhpham.ttm.ToTheMoonMain;
+import com.khanhpham.ttm.core.blocks.variants.MineableStairBlock;
 import com.khanhpham.ttm.init.ModBlocks;
+import com.khanhpham.ttm.utils.block.ModCapableBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -22,9 +24,7 @@ public final class ModItemModels extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        blockItem(ModBlocks.MOON_SURFACE_STONE_BRICKS);
-        blockItem(ModBlocks.MOON_SURFACE_STONE);
-
+        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block instanceof MineableStairBlock) && !block.equals(ModBlocks.ENERGY_BANK)&& !block.equals(ModBlocks.ENERGY_GEN)).forEach(this::blockItem);
     }
 
     @NotNull

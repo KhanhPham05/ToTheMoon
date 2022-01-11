@@ -6,6 +6,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -18,6 +19,7 @@ import javax.annotation.Nonnull;
 public final class ToTheMoonMain {
     public static final String MOD_ID = "tothemoon";
     public static final Logger LOG = LogManager.getLogger("ToTheMoonMain");
+    public static boolean hasJEI = false;
 
     public static final CreativeModeTab TTM_TAB = new CreativeModeTab("ttm_tab") {
         @Override
@@ -31,5 +33,10 @@ public final class ToTheMoonMain {
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         RegistryTypes.init(bus);
+        boolean flag = ModList.get().getModContainerById("jei").isPresent();
+        if (flag) {
+            LOG.info("JEI DETECTED !");
+            hasJEI = true;
+        }
     }
 }
