@@ -1,8 +1,7 @@
 package com.khanhpham.ttm.init;
 
 import com.khanhpham.ttm.ToTheMoonMain;
-import com.khanhpham.ttm.testfeatures.RegistryHelper;
-import com.khanhpham.ttm.utils.RegistryTypes;
+import com.khanhpham.ttm.registration.RegistryHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -11,7 +10,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Objects;
 

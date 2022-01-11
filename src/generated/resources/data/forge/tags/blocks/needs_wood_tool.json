@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "tothemoon:moon_stone",
+    "tothemoon:moon_smooth_stone",
+    "tothemoon:moon_cobblestone",
+    "tothemoon:moon_smooth_stone_slab",
+    "tothemoon:moon_surface_stone",
+    "tothemoon:moon_stone_slab",
+    "tothemoon:moon_surface_stone_bricks",
+    "tothemoon:moon_stone_brick_slab",
+    "tothemoon:moon_cobblestone_slab"
+  ]
+}

@@ -1,8 +1,12 @@
 {
+  "block.tothemoon.copper_energy_generator": "Copper Energy Generator",
   "block.tothemoon.energy_bank": "Energy Bank",
   "block.tothemoon.energy_generator": "Energy Generator",
   "block.tothemoon.moon_cobblestone": "Moon Cobblestone",
   "block.tothemoon.moon_surface_stone": "Moon Surface Stone",
   "block.tothemoon.moon_surface_stone_bricks": "Moon Surface Stone Bricks",
+  "gui.tothemoon.copper_gen": "Copper Energy Generator",
+  "gui.tothemoon.copper_generator": "Copper Energy Generator",
+  "gui.tothemoon.test_energy_generator": "Test Energy Generator",
   "item.tothemoon.icon": "TTM Icon"
 }

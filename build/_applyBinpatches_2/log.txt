@@ -1,17 +1,17 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.1\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar, --output, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.8\forge-1.18.1-39.0.8-binpatched.jar, --apply, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.8\forge-1.18.1-39.0.8-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar, --output, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatched.jar, --apply, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
-Working directory: H:\FORGE 1.18\TTM - 39.0.7\build\_applyBinpatches_2
+Working directory: H:\FORGE 1.18\ToTheMoon - 1-18\build\_applyBinpatches_2
 Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar
-  Output:    C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.8\forge-1.18.1-39.0.8-binpatched.jar
+  Output:    C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.8\forge-1.18.1-39.0.8-binpatches.lzma
-Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.8\forge-1.18.1-39.0.8-binpatches.lzma
+  Patches:   C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatches.lzma
+Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: 35977cab Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -2050,6 +2050,8 @@ Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_rep
     Checksum: 4a98645 Exists: true
   Reading patch net.minecraft.world.level.block.Blocks.binpatch
     Checksum: 14af1986 Exists: true
+  Reading patch net.minecraft.world.level.block.BucketPickup.binpatch
+    Checksum: a9489b84 Exists: true
   Reading patch net.minecraft.world.level.block.BushBlock.binpatch
     Checksum: bf24b06a Exists: true
   Reading patch net.minecraft.world.level.block.CactusBlock.binpatch
@@ -2368,10 +2370,16 @@ Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_rep
     Checksum: 3ea13a3 Exists: true
   Reading patch net.minecraft.world.level.levelgen.feature.MonsterRoomFeature.binpatch
     Checksum: 3514b759 Exists: true
+  Reading patch net.minecraft.world.level.levelgen.feature.NetherFortressFeature.binpatch
+    Checksum: 5eb4ec7a Exists: true
   Reading patch net.minecraft.world.level.levelgen.feature.OceanMonumentFeature.binpatch
     Checksum: 5bd92512 Exists: true
+  Reading patch net.minecraft.world.level.levelgen.feature.PillagerOutpostFeature.binpatch
+    Checksum: 780f02b3 Exists: true
   Reading patch net.minecraft.world.level.levelgen.feature.StructureFeature.binpatch
     Checksum: 451a1f83 Exists: true
+  Reading patch net.minecraft.world.level.levelgen.feature.SwamplandHutFeature.binpatch
+    Checksum: e8a5d37e Exists: true
   Reading patch net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration$TreeConfigurationBuilder.binpatch
     Checksum: 539e2c35 Exists: true
   Reading patch net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration.binpatch
@@ -3524,6 +3532,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/Block$BlockStatePairKey 1/1
   Patching net/minecraft/world/level/block/Block 1/1
   Patching net/minecraft/world/level/block/Blocks 1/1
+  Patching net/minecraft/world/level/block/BucketPickup 1/1
   Patching net/minecraft/world/level/block/BushBlock 1/1
   Patching net/minecraft/world/level/block/CactusBlock 1/1
   Patching net/minecraft/world/level/block/CampfireBlock 1/1
@@ -3683,8 +3692,11 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/levelgen/carver/WorldCarver 1/1
   Patching net/minecraft/world/level/levelgen/feature/Feature 1/1
   Patching net/minecraft/world/level/levelgen/feature/MonsterRoomFeature 1/1
+  Patching net/minecraft/world/level/levelgen/feature/NetherFortressFeature 1/1
   Patching net/minecraft/world/level/levelgen/feature/OceanMonumentFeature 1/1
+  Patching net/minecraft/world/level/levelgen/feature/PillagerOutpostFeature 1/1
   Patching net/minecraft/world/level/levelgen/feature/StructureFeature 1/1
+  Patching net/minecraft/world/level/levelgen/feature/SwamplandHutFeature 1/1
   Patching net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration$TreeConfigurationBuilder 1/1
   Patching net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration 1/1
   Patching net/minecraft/world/level/levelgen/feature/foliageplacers/FoliagePlacerType 1/1

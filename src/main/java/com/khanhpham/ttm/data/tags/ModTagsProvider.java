@@ -1,6 +1,7 @@
 package com.khanhpham.ttm.data.tags;
 
 import com.khanhpham.ttm.ToTheMoonMain;
+import com.khanhpham.ttm.core.blocks.MineableBlock;
 import com.khanhpham.ttm.core.tag.ModTags;
 import com.khanhpham.ttm.init.ModBlocks;
 import net.minecraft.data.DataGenerator;
@@ -32,8 +33,12 @@ public record ModTagsProvider(DataGenerator data, ExistingFileHelper fileHelper)
 
         @Override
         protected void addTags() {
-            tag(ModTags.REQ_PICKAXE).add(ModBlocks.ENERGY_BANK, ModBlocks.ENERGY_GEN);
-            tag(ModTags.REG_TIER_STONE).add(ModBlocks.ENERGY_BANK, ModBlocks.ENERGY_GEN);
+            ModBlocks.BLOCKS.getEntries().forEach(block -> {
+                if (block instanceof MineableBlock) {
+                    tag(((MineableBlock) block).getHarvestTool().getTag()).add(block);
+                    tag(((MineableBlock) block).getMiningLevel().getTag()).add(block);
+                }
+            });
         }
     }
 
