@@ -1,12 +1,7 @@
 {
   "replace": false,
   "values": [
-    "tothemoon:moon_cobblestone_stairs",
-    "tothemoon:moon_stone_brick_stairs",
-    "tothemoon:copper_energy_generator",
-    "tothemoon:moon_stone_stairs",
-    "tothemoon:energy_generator",
-    "tothemoon:energy_bank",
-    "tothemoon:moon_smooth_stone_stairs"
+    "tothemoon:moon_rock_barrel",
+    "tothemoon:copper_energy_generator"
   ]
 }

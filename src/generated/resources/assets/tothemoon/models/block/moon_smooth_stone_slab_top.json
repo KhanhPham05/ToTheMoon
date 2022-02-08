@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "side": "tothemoon:block/moon_smooth_stone",
-    "bottom": "tothemoon:block/moon_smooth_stone",
-    "top": "tothemoon:block/moon_smooth_stone"
-  }
-}

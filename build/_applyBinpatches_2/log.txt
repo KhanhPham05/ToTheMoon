@@ -1,17 +1,17 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.1\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar, --output, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatched.jar, --apply, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar, --output, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.59\forge-1.18.1-39.0.59-binpatched.jar, --apply, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.59\forge-1.18.1-39.0.59-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
-Working directory: H:\FORGE 1.18\ToTheMoon - 1-18\build\_applyBinpatches_2
+Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
 Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar
-  Output:    C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatched.jar
+  Output:    C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.59\forge-1.18.1-39.0.59-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatches.lzma
-Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.17\forge-1.18.1-39.0.17-binpatches.lzma
+  Patches:   C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.59\forge-1.18.1-39.0.59-binpatches.lzma
+Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.59\forge-1.18.1-39.0.59-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: 35977cab Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -666,12 +666,22 @@ Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_rep
     Checksum: d532a568 Exists: true
   Reading patch net.minecraft.client.sounds.SoundEngine.binpatch
     Checksum: eeefb193 Exists: true
+  Reading patch net.minecraft.commands.CommandSourceStack.binpatch
+    Checksum: a5f6c645 Exists: true
   Reading patch net.minecraft.commands.Commands$CommandSelection.binpatch
     Checksum: f9517fb2 Exists: true
   Reading patch net.minecraft.commands.Commands$ParseFunction.binpatch
     Checksum: 4aa48485 Exists: true
   Reading patch net.minecraft.commands.Commands.binpatch
     Checksum: fca35275 Exists: true
+  Reading patch net.minecraft.commands.arguments.ObjectiveArgument.binpatch
+    Checksum: 43aa5e50 Exists: true
+  Reading patch net.minecraft.commands.arguments.ResourceLocationArgument.binpatch
+    Checksum: 25b904a1 Exists: true
+  Reading patch net.minecraft.commands.arguments.TeamArgument.binpatch
+    Checksum: 6d5464ec Exists: true
+  Reading patch net.minecraft.commands.arguments.coordinates.BlockPosArgument.binpatch
+    Checksum: 8f7e1365 Exists: true
   Reading patch net.minecraft.commands.arguments.selector.EntitySelectorParser.binpatch
     Checksum: 68c5f0b5 Exists: true
   Reading patch net.minecraft.commands.synchronization.ArgumentTypes$Entry.binpatch
@@ -2338,6 +2348,8 @@ Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_rep
     Checksum: 15c69999 Exists: true
   Reading patch net.minecraft.world.level.chunk.storage.EntityStorage.binpatch
     Checksum: 2769397c Exists: true
+  Reading patch net.minecraft.world.level.dimension.LevelStem.binpatch
+    Checksum: b79d1413 Exists: true
   Reading patch net.minecraft.world.level.dimension.end.EndDragonFight.binpatch
     Checksum: 50ab220f Exists: true
   Reading patch net.minecraft.world.level.entity.PersistentEntitySectionManager$Callback.binpatch
@@ -2843,9 +2855,14 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/client/server/IntegratedServer 1/1
   Patching net/minecraft/client/sounds/SoundEngine$DeviceCheckState 1/1
   Patching net/minecraft/client/sounds/SoundEngine 1/1
+  Patching net/minecraft/commands/CommandSourceStack 1/1
   Patching net/minecraft/commands/Commands$CommandSelection 1/1
   Patching net/minecraft/commands/Commands$ParseFunction 1/1
   Patching net/minecraft/commands/Commands 1/1
+  Patching net/minecraft/commands/arguments/ObjectiveArgument 1/1
+  Patching net/minecraft/commands/arguments/ResourceLocationArgument 1/1
+  Patching net/minecraft/commands/arguments/TeamArgument 1/1
+  Patching net/minecraft/commands/arguments/coordinates/BlockPosArgument 1/1
   Patching net/minecraft/commands/arguments/selector/EntitySelectorParser 1/1
   Patching net/minecraft/commands/synchronization/ArgumentTypes$Entry 1/1
   Patching net/minecraft/commands/synchronization/ArgumentTypes 1/1
@@ -3676,6 +3693,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/chunk/ProtoChunk 1/1
   Patching net/minecraft/world/level/chunk/storage/ChunkSerializer 1/1
   Patching net/minecraft/world/level/chunk/storage/EntityStorage 1/1
+  Patching net/minecraft/world/level/dimension/LevelStem 1/1
   Patching net/minecraft/world/level/dimension/end/EndDragonFight 1/1
   Patching net/minecraft/world/level/entity/PersistentEntitySectionManager$Callback 1/1
   Patching net/minecraft/world/level/entity/PersistentEntitySectionManager$ChunkLoadStatus 1/1

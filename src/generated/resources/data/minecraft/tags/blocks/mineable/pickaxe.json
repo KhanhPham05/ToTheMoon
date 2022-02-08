@@ -1,21 +1,9 @@
 {
   "replace": false,
   "values": [
-    "tothemoon:moon_cobblestone_stairs",
-    "tothemoon:moon_stone_brick_stairs",
-    "tothemoon:moon_stone",
-    "tothemoon:copper_energy_generator",
-    "tothemoon:moon_smooth_stone",
-    "tothemoon:moon_stone_stairs",
-    "tothemoon:energy_generator",
-    "tothemoon:energy_bank",
-    "tothemoon:moon_cobblestone",
-    "tothemoon:moon_smooth_stone_slab",
-    "tothemoon:moon_surface_stone",
-    "tothemoon:moon_stone_slab",
-    "tothemoon:moon_surface_stone_bricks",
-    "tothemoon:moon_stone_brick_slab",
-    "tothemoon:moon_smooth_stone_stairs",
-    "tothemoon:moon_cobblestone_slab"
+    "tothemoon:moon_rock_bricks",
+    "tothemoon:moon_rock_barrel",
+    "tothemoon:moon_rock",
+    "tothemoon:copper_energy_generator"
   ]
 }
