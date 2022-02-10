@@ -23,4 +23,16 @@ public class Energy extends EnergyStorage {
     public void setChanged() {
 
     }
+
+    @Override
+    public int receiveEnergy(int maxReceive, boolean simulate) {
+        if (super.energy + maxReceive > super.capacity) {
+            return super.receiveEnergy(capacity - energy, simulate);
+        }
+        return super.receiveEnergy(maxReceive, simulate);
+    }
+
+    public boolean isFull() {
+        return super.energy == super.capacity;
+    }
 }

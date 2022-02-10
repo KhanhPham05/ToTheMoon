@@ -90,4 +90,15 @@ public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
 
         return this.data.get(0) * 13 / i;
     }
+
+    /**
+     * @see net.minecraft.world.inventory.AbstractFurnaceMenu
+     * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
+     */
+    public int getEnergyProcess() {
+        int i = data.get(2);
+        int j = data.get(3);
+
+        return j != 0 && i != 0 ? i * 143 / j : 0;
+    }
 }

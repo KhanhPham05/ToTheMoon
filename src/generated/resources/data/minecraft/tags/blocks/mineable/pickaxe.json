@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "tothemoon:moon_rock_bricks",
     "tothemoon:moon_rock_barrel",
-    "tothemoon:moon_rock",
-    "tothemoon:copper_energy_generator"
+    "tothemoon:copper_energy_generator",
+    "tothemoon:moon_rock_bricks",
+    "tothemoon:moon_rock"
   ]
 }

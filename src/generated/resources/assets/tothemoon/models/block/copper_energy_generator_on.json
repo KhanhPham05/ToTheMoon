@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "side": "tothemoon:block/copper_energy_generator_bottom",
+    "front": "tothemoon:block/copper_energy_generator_front_on",
+    "bottom": "tothemoon:block/copper_energy_generator_bottom",
+    "top": "tothemoon:block/copper_energy_generator_top"
+  }
+}
