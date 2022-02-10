@@ -16,26 +16,27 @@ import net.minecraft.world.level.material.Material;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
-    public static final BlockRegister BLOCKS = new BlockRegister();
+
+    public ModBlocks() {
+    }
+
+    public static final BlockRegister BLOCK_REGISTER = new BlockRegister();
 
     public static final Block MOON_ROCK = register("moon_rock", 3.0f, 6.0f);
     public static final Block MOON_ROCK_BRICKS = register("moon_rock_bricks", 3.1f, 6.1f);
     public static final Block MOON_ROCK_BARREL = register("moon_rock_barrel", new MoonRockBarrel(properties(Material.STONE, 3.0f, 5.5f, SoundType.STONE), MoonBarrelTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
     public static final Block COPPER_ENERGY_GENERATOR = register("copper_energy_generator", new CopperEnergyGeneratorBlock(properties(Material.METAL, 3.5f, 6.0f, SoundType.METAL), CopperEnergyGeneratorTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
 
-
-    private ModBlocks() {
-    }
-
     private static Block register(String name, float hardness, float resistance) {
-        return BLOCKS.register(name, new MineableBlock(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(hardness, resistance).requiresCorrectToolForDrops(), MiningTool.NEEDS_STONE_PICKAXE));
+        return BLOCK_REGISTER.register(name, new MineableBlock(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(hardness, resistance).requiresCorrectToolForDrops(), MiningTool.NEEDS_STONE_PICKAXE));
     }
 
     private static <T extends TileEntityBlock<?>> Block register(String name, T block) {
-        return BLOCKS.register(name, (Block) block);
+        return BLOCK_REGISTER.register(name, block);
     }
 
     private static BlockBehaviour.Properties properties(Material material, float hardness, float resistance, SoundType breakSound) {
@@ -44,7 +45,10 @@ public class ModBlocks {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        BLOCKS.registerAll(event.getRegistry());
+        init(event.getRegistry());
     }
 
+    public static void init(IForgeRegistry<Block> registry) {
+        BLOCK_REGISTER.registerAll(registry);
+    }
 }

@@ -34,7 +34,11 @@ public abstract class BaseContainerScreen<T extends BaseContainer> extends Abstr
         if (minecraft != null) {
             minecraft.textureManager.bindForSetup(this.texture);
             this.blit(pPoseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+            this.renderExtra(pPoseStack);
         }
+    }
+
+    protected void renderExtra(PoseStack pPoseStack) {
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.khanhpham.tothemoon.data;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
+import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -44,6 +44,7 @@ public class ModModelProvider {
             build(ModBlocks.MOON_ROCK);
             build(ModBlocks.MOON_ROCK_BRICKS);
             build(ModBlocks.MOON_ROCK_BARREL);
+            build(ModBlocks.COPPER_ENERGY_GENERATOR);
         }
 
         private void build(Block block) {
@@ -66,12 +67,24 @@ public class ModModelProvider {
             cubeAll(ModBlocks.MOON_ROCK);
             cubeAll(ModBlocks.MOON_ROCK_BRICKS);
             cubeAll(ModBlocks.MOON_ROCK_BARREL);
+            generatorBlock(ModBlocks.COPPER_ENERGY_GENERATOR);
         }
 
         private void cubeAll(Block block) {
             cubeAll(block.getRegistryName().getPath(), modLoc("block/" + block.getRegistryName().getPath()));
         }
-        
+
+        private void generatorBlock(Block block) {
+            if (block instanceof AbstractEnergyGeneratorBlock) {
+                String name = block.getRegistryName().getPath();
+                super.orientableWithBottom(name, blockLoc(name + "_bottom"), blockLoc(name + "_front"), blockLoc(name + "_bottom"), blockLoc(name + "_top"));
+                super.orientableWithBottom(name + "_on", blockLoc(name + "_bottom"), blockLoc(name + "_front_on"), blockLoc(name + "_bottom"), blockLoc(name + "_top"));
+            }
+        }
+
+        private ResourceLocation blockLoc(String name) {
+            return modLoc("block/" + name);
+        }
 
     }
 
@@ -85,7 +98,7 @@ public class ModModelProvider {
             simpleBlock(ModBlocks.MOON_ROCK);
             simpleBlock(ModBlocks.MOON_ROCK_BRICKS);
             simpleBlock(ModBlocks.MOON_ROCK_BARREL);
-            //generatorBlock(ModBlocks.COPPER_ENERGY_GENERATOR);
+            generatorBlock(ModBlocks.COPPER_ENERGY_GENERATOR);
         }
 
         private void generatorBlock(Block block) {

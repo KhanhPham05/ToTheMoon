@@ -7,6 +7,7 @@ import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModTagsProvider {
 
@@ -27,7 +28,7 @@ public class ModTagsProvider {
 
         @Override
         protected void addTags() {
-            ModBlocks.BLOCKS.getRegisteredBlocks().stream().filter(block -> block instanceof Mineable).forEach(block -> {
+            ModBlocks.BLOCK_REGISTER.getRegisteredBlocks().stream().filter(block -> block instanceof Mineable).forEach(block -> {
                 MiningTool tool = ((Mineable) block).getTool();
                 super.tag(tool.getToolTag()).add(block);
                 super.tag(tool.getGetLevelTag()).add(block);

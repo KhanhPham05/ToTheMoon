@@ -1,5 +1,5 @@
 version:2865
-autoJump:true
+autoJump:false
 autoSuggestions:true
 chatColors:true
 chatLinks:true

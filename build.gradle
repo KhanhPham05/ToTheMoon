@@ -107,7 +107,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.59'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.75'
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3577512")
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3550045")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")

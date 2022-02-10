@@ -1,17 +1,16 @@
 package com.khanhpham.tothemoon.utils;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ModUtils;
 import com.khanhpham.tothemoon.ToTheMoon;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class ItemRegister {
-    private final Set<Item> items = new HashSet<>();
+    public final List<Item> items = new ArrayList<>();
 
     public ItemRegister() {
     }
@@ -22,12 +21,15 @@ public class ItemRegister {
 
     public <T extends Item> Item register(String name, T item) {
         System.out.println("Registering " + name);
-        items.add(item.setRegistryName(Names.MOD_ID, name));
+        items.add(item.setRegistryName(ModUtils.modLoc(name)));
         return item;
     }
 
     public void registerAll(IForgeRegistry<Item> reg) {
-        items.forEach(reg::register);
+        items.forEach(item -> {
+            reg.register(item);
+            System.out.println("Registered " + item.getRegistryName());
+        });
     }
 
     public void forEachItem(Consumer<Item> item) {
