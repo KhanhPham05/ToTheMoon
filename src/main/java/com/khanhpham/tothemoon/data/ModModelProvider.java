@@ -1,13 +1,17 @@
 package com.khanhpham.tothemoon.data;
 
+import com.khanhpham.tothemoon.ModUtils;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
+import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -77,8 +81,8 @@ public class ModModelProvider {
         private void generatorBlock(Block block) {
             if (block instanceof AbstractEnergyGeneratorBlock) {
                 String name = block.getRegistryName().getPath();
-                super.orientableWithBottom(name, blockLoc(name + "_bottom"), blockLoc(name + "_front"), blockLoc(name + "_bottom"), blockLoc(name + "_top"));
-                super.orientableWithBottom(name + "_on", blockLoc(name + "_bottom"), blockLoc(name + "_front_on"), blockLoc(name + "_bottom"), blockLoc(name + "_top"));
+                super.orientableWithBottom(name, blockLoc(name + "_side"), blockLoc(name + "_front"), blockLoc(name + "_bottom"), blockLoc(name + "_top"));
+                super.orientableWithBottom(name + "_on", blockLoc(name + "_side"), blockLoc(name + "_front_on"), blockLoc(name + "_bottom"), blockLoc(name + "_top"));
             }
         }
 
@@ -99,6 +103,32 @@ public class ModModelProvider {
             simpleBlock(ModBlocks.MOON_ROCK_BRICKS);
             simpleBlock(ModBlocks.MOON_ROCK_BARREL);
             generatorBlock(ModBlocks.COPPER_ENERGY_GENERATOR);
+            slabBlocks(ModBlocks.MOON_ROCK_SLAB, ModBlocks.MOON_ROCK_BRICK_SLAB);
+            stairBlocks(ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_STAIRS);
+        }
+
+        private void slabBlocks(Block... blocks) {
+            for (Block block : blocks) {
+                this.slabBlock(block);
+            }
+        }
+
+        private void slabBlock(Block block) {
+            if (block instanceof MineableSlabBlocks slabBlock) {
+                super.slabBlock(slabBlock, ModUtils.modLoc("block/" + slabBlock.parentBlock().getRegistryName().getPath()), ModUtils.modLoc("block/" + slabBlock.parentBlock().getRegistryName().getPath()));
+            }
+        }
+
+        private void stairBlocks(Block ... blocks) {
+            for (Block block : blocks) {
+                this.stairBlock(block);
+            }
+        }
+
+        private void stairBlock(Block block) {
+            if (block instanceof MineableStairBlock stairBlock) {
+                super.stairsBlock(stairBlock, ModUtils.modLoc("block/" + stairBlock.parentBlock().getRegistryName().getPath()));
+            }
         }
 
         private void generatorBlock(Block block) {

@@ -1,6 +1,5 @@
 package com.khanhpham.tothemoon.utils.blocks;
 
-import com.khanhpham.tothemoon.utils.blocks.TileEntityBlock;
 import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorTileEntity;
 import net.minecraft.core.BlockPos;
@@ -30,6 +29,8 @@ public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<Abstr
 
     public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorTileEntity> supplier, MiningTool tool) {
         super(p_49224_, supplier, tool);
+
+        registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.FALSE));
     }
 
     @Override

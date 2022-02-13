@@ -7,6 +7,8 @@ import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.utils.BlockRegister;
 import com.khanhpham.tothemoon.utils.blocks.MineableBlock;
+import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
+import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
 import com.khanhpham.tothemoon.utils.blocks.TileEntityBlock;
 import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import net.minecraft.world.level.block.Block;
@@ -27,12 +29,32 @@ public class ModBlocks {
     public static final BlockRegister BLOCK_REGISTER = new BlockRegister();
 
     public static final Block MOON_ROCK = register("moon_rock", 3.0f, 6.0f);
+    public static final Block MOON_ROCK_STAIRS = registerStair(MOON_ROCK, MiningTool.NEEDS_STONE_PICKAXE);
+    public static final Block MOON_ROCK_SLAB = registerSlab(MOON_ROCK, MiningTool.NEEDS_STONE_PICKAXE);
+
+
     public static final Block MOON_ROCK_BRICKS = register("moon_rock_bricks", 3.1f, 6.1f);
+    public static final Block MOON_ROCK_BRICK_STAIR = registerStair(MOON_ROCK_BRICKS, MiningTool.NEEDS_STONE_PICKAXE);
+    public static final Block MOON_ROCK_BRICK_SLAB = registerSlab(MOON_ROCK_BRICKS, MiningTool.NEEDS_STONE_PICKAXE);
+
     public static final Block MOON_ROCK_BARREL = register("moon_rock_barrel", new MoonRockBarrel(properties(Material.STONE, 3.0f, 5.5f, SoundType.STONE), MoonBarrelTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
     public static final Block COPPER_ENERGY_GENERATOR = register("copper_energy_generator", new CopperEnergyGeneratorBlock(properties(Material.METAL, 3.5f, 6.0f, SoundType.METAL), CopperEnergyGeneratorTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
 
     private static Block register(String name, float hardness, float resistance) {
         return BLOCK_REGISTER.register(name, new MineableBlock(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(hardness, resistance).requiresCorrectToolForDrops(), MiningTool.NEEDS_STONE_PICKAXE));
+    }
+
+    /**
+     * @see net.minecraft.world.level.block.Blocks
+     */
+    private static Block registerStair(Block parentBlock, MiningTool tool) {
+        String name = parentBlock.getRegistryName().getPath() + "_stair";
+        return BLOCK_REGISTER.register(name, new MineableStairBlock(parentBlock, tool));
+    }
+
+    private static Block registerSlab(Block parentBlock, MiningTool tool) {
+        String name = parentBlock.getRegistryName().getPath() + "_slab";
+        return BLOCK_REGISTER.register(name, new MineableSlabBlocks(tool, parentBlock));
     }
 
     private static <T extends TileEntityBlock<?>> Block register(String name, T block) {

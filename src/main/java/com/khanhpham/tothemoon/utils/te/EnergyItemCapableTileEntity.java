@@ -93,6 +93,7 @@ public abstract class EnergyItemCapableTileEntity extends EnergyCapableTileEntit
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         ContainerHelper.saveAllItems(pTag, this.items);
+        energy.save(pTag);
         saveExtra(pTag);
     }
 
@@ -103,6 +104,7 @@ public abstract class EnergyItemCapableTileEntity extends EnergyCapableTileEntit
         super.load(pTag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(pTag, this.items);
+        energy.load(pTag);
         loadExtra(pTag);
     }
 

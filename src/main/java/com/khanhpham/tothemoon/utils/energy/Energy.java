@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.utils.energy;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class Energy extends EnergyStorage {
@@ -34,5 +35,13 @@ public class Energy extends EnergyStorage {
 
     public boolean isFull() {
         return super.energy == super.capacity;
+    }
+
+    public void save(CompoundTag pTag) {
+        pTag.putInt("energy", energy);
+    }
+
+    public void load(CompoundTag pTag) {
+        this.energy = pTag.getInt("energy");
     }
 }

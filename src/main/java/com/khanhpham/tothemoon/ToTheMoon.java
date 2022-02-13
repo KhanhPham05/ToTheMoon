@@ -4,11 +4,10 @@ import com.khanhpham.tothemoon.core.energygenerator.containerscreens.EnergyGener
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelScreen;
 import com.khanhpham.tothemoon.data.ModLanguageProvider;
 import com.khanhpham.tothemoon.data.ModModelProvider;
+import com.khanhpham.tothemoon.data.recipe.ModRecipeProvider;
 import com.khanhpham.tothemoon.data.ModTagsProvider;
-import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModContainerTypes;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.init.ModTileEntityTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.CreativeModeTab;
@@ -54,6 +53,8 @@ public class ToTheMoon {
         public static void gatherData(GatherDataEvent event) {
             DataGenerator data = event.getGenerator();
             ExistingFileHelper fileHelper = event.getExistingFileHelper();
+
+            data.addProvider(new ModRecipeProvider(data));
 
             ModModelProvider models = new ModModelProvider(data, fileHelper);
             data.addProvider(models.blockStates());

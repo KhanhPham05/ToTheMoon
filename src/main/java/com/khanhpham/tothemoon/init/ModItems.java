@@ -4,6 +4,7 @@ package com.khanhpham.tothemoon.init;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.utils.ItemRegister;
+import com.khanhpham.tothemoon.utils.blocks.TileEntityBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -18,10 +19,14 @@ public class ModItems {
 
     public static final Item URANIUM_INGOT;
     public static final Item URANIUM_DUST;
+    public static final Item STEEL_INGOT;
+    public static final Item STEEL_DUST;
 
     static {
         URANIUM_INGOT = register("uranium_ingot");
         URANIUM_DUST = register("uranium_dust");
+        STEEL_DUST = register("steel_dust");
+        STEEL_INGOT = register("steel_ingot");
     }
 
     public ModItems() {
@@ -33,7 +38,10 @@ public class ModItems {
     }
 
     private static void registerBLockItem(Block block) {
-        ITEMS.register(block.getRegistryName().getPath(), new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)));
+        if (!(block instanceof TileEntityBlock<?>))
+            ITEMS.register(block.getRegistryName().getPath(), new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)));
+        else
+            ITEMS.register(block.getRegistryName().getPath(), new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB).stacksTo(1)));
     }
 
     @SubscribeEvent

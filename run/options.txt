@@ -11,7 +11,7 @@ discrete_mouse_scroll:false
 invertYMouse:false
 realmsNotifications:true
 reducedDebugInfo:false
-showSubtitles:false
+showSubtitles:true
 touchscreen:false
 fullscreen:false
 bobView:true
@@ -28,14 +28,14 @@ renderDistance:3
 simulationDistance:5
 entityDistanceScaling:1.0
 guiScale:0
-particles:0
+particles:2
 maxFps:120
 difficulty:2
 graphicsMode:0
 ao:0
 prioritizeChunkUpdates:0
 biomeBlendRadius:2
-renderClouds:true
+renderClouds:false
 resourcePacks:[]
 incompatibleResourcePacks:[]
 lastServer:
@@ -136,7 +136,7 @@ key_key.jei.previousRecipePage:key.keyboard.page.up
 key_key.jei.nextRecipePage:key.keyboard.page.down
 key_key.jei.previousCategory:key.keyboard.page.up:SHIFT
 key_key.jei.nextCategory:key.keyboard.page.down:SHIFT
-soundCategory_master:1.0
+soundCategory_master:0.13410597
 soundCategory_music:0.0
 soundCategory_record:1.0
 soundCategory_weather:1.0

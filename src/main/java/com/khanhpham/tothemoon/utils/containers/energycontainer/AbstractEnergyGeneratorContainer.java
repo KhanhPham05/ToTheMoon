@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.utils.containers.energycontainer;
 
 import com.khanhpham.tothemoon.utils.containers.BaseContainer;
+import com.khanhpham.tothemoon.utils.slot.BurnableSlot;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,12 +13,12 @@ import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
-    private final ContainerData data;
+    public final ContainerData data;
 
     protected AbstractEnergyGeneratorContainer(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData intData) {
         super(pMenuType, externalContainer, playerInventory, pContainerId);
 
-        super.addSlot(externalContainer, 0, 81, 33);
+        super.addSlot(new BurnableSlot(externalContainer, 0, 81, 33));
         super.addPlayerInventorySlots(8, 97);
 
         this.data = intData;
@@ -32,35 +33,33 @@ public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(pIndex);
-        if(slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack stack1 = slot.getItem();
             stack = stack1.copy();
 
-            if (pIndex == 0) {
-                if (!super.moveItemStackTo(stack1, 1, this.slots.size() - 1, true)) {
+            if (this.isFuel(stack1)) {
+                if (!super.moveItemStackTo(stack1, 0, 1, false)) {
+                    System.out.println(42);
                     return ItemStack.EMPTY;
                 }
-
-                slot.onQuickCraft(stack1, stack);
-            } else  {
-                if (this.isFuel(stack1)) {
-                    if (!super.moveItemStackTo(stack1, 0, 0, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (pIndex >= 1 && pIndex < super.slots.size() - 9) {
-                    if (!super.moveItemStackTo(stack1, super.slots.size() - 10, super.slots.size() - 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (pIndex >= super.slots.size() - 10 && pIndex < super.slots.size() - 1 && !super.moveItemStackTo(stack1, 0, super.slots.size() - 10, false)) {
+            } else if (pIndex >= 1 && pIndex < super.slots.size() - 9) {
+                if (!super.moveItemStackTo(stack1, super.slots.size() - 10, super.slots.size() - 1, false)) {
+                    System.out.println(47);
                     return ItemStack.EMPTY;
                 }
+            } else if (pIndex >= super.slots.size() - 10 && pIndex < super.slots.size() - 1 && !super.moveItemStackTo(stack1, 0, super.slots.size() - 10, false)) {
+                System.out.println(51);
+                return ItemStack.EMPTY;
             }
 
+
             if (!super.moveItemStackTo(stack1, 1, super.slots.size() - 1, false)) {
+                System.out.println(57);
                 return ItemStack.EMPTY;
             }
 
             if (stack1.isEmpty()) {
+                System.out.println(62);
                 slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
@@ -71,7 +70,6 @@ public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
             }
 
             slot.onTake(pPlayer, stack1);
-
         }
 
         return stack;
@@ -79,6 +77,14 @@ public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
 
     private boolean isFuel(ItemStack stack) {
         return ForgeHooks.getBurnTime(stack, null) > 0;
+    }
+
+    public int getEnergyStored() {
+        return data.get(2);
+    }
+
+    public int getCapacity() {
+        return data.get(3);
     }
 
     public int getLitProgress() {

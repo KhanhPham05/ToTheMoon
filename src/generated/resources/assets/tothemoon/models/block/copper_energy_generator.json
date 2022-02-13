@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
-    "side": "tothemoon:block/copper_energy_generator_bottom",
+    "side": "tothemoon:block/copper_energy_generator_side",
     "front": "tothemoon:block/copper_energy_generator_front",
     "bottom": "tothemoon:block/copper_energy_generator_bottom",
     "top": "tothemoon:block/copper_energy_generator_top"

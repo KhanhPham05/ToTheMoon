@@ -14,7 +14,6 @@ public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock {
     public CopperEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorTileEntity> supplier, MiningTool tool) {
         super(p_49224_, supplier, tool);
 
-        registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.FALSE));
     }
 
     @Override

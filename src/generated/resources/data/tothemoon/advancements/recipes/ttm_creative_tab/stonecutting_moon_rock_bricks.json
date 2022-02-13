@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:stonecutting_moon_rock_bricks"
+    ]
+  },
+  "criteria": {
+    "collect_moon_rock_bricks_stair": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:moon_rock_bricks_stair"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:stonecutting_moon_rock_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect_moon_rock_bricks_stair",
+      "has_the_recipe"
+    ]
+  ]
+}
