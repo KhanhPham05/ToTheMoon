@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "tothemoon:moon_rock_barrel",
-    "tothemoon:copper_energy_generator"
+    "tothemoon:copper_energy_generator",
+    "tothemoon:moon_rock_barrel"
   ]
 }

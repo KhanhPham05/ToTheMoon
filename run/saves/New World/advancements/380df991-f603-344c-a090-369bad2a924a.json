@@ -53,6 +53,12 @@
     },
     "done": true
   },
+  "tothemoon:recipes/ttm_creative_tab/crafting_steel_rod": {
+    "criteria": {
+      "collect_steel_ingot": "2022-02-14 18:33:27 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/acacia_pressure_plate": {
     "criteria": {
       "has_planks": "2022-02-07 15:13:02 +0700"

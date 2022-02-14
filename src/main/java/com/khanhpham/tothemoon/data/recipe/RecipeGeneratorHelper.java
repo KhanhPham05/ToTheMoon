@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -16,7 +17,7 @@ import java.util.function.Consumer;
 public interface RecipeGeneratorHelper {
     default void stairBlock(Consumer<FinishedRecipe> consumer, Block resultBlock) {
         if (resultBlock instanceof MineableStairBlock stairBlock) {
-            craftingShaped(stairBlock, 4).pattern("A  ").pattern("AA ").pattern("AAA").define('A', stairBlock.parentBlock()).unlockedBy("collect_" + stairBlock.parentBlock().getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(stairBlock.parentBlock())).save(consumer, ModUtils.modLoc("craft_" + stairBlock.getRegistryName().getPath()));
+            craftingShaped(stairBlock, 4).pattern("A  ").pattern("AA ").pattern("AAA").define('A', stairBlock.parentBlock()).unlockedBy("collect_" + stairBlock.parentBlock().getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(stairBlock.parentBlock())).save(consumer, ModUtils.modLoc("crafting_" + stairBlock.getRegistryName().getPath()));
             stonecutting(consumer, stairBlock.parentBlock(), stairBlock, 1);
         }
     }
@@ -46,5 +47,13 @@ public interface RecipeGeneratorHelper {
 
     default void stonecutting(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike from, int amount) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(result), from, amount).unlockedBy("collect_" + from.asItem().getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(from)).save(consumer, ModUtils.modLoc("stonecutting_" + result.asItem().getRegistryName().getPath()));
+    }
+
+    default void smelting(Consumer<FinishedRecipe> consumer, ItemLike from, ItemLike result, float experience) {
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(from), result, experience, 200).unlockedBy("collect_" + from.asItem().getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(from)).save(consumer, ModUtils.modLoc("smelting_" + result.asItem().getRegistryName().getPath()));
+    }
+
+    default void blasting(Consumer<FinishedRecipe> consumer, ItemLike from, ItemLike result, float experience) {
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(from), result, experience, 100).unlockedBy("collect_" + from.asItem().getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(from)).save(consumer, ModUtils.modLoc("blasting_" + result.asItem().getRegistryName().getPath()));
     }
 }

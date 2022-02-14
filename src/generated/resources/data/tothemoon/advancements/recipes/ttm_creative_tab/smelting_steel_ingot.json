@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:smelting_steel_ingot"
+    ]
+  },
+  "criteria": {
+    "collect_steel_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_dust"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:smelting_steel_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "collect_steel_dust",
+      "has_the_recipe"
+    ]
+  ]
+}

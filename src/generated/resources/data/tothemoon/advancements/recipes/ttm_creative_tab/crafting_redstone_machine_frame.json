@@ -2,17 +2,18 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "tothemoon:craft_moon_rock_bricks_stair"
+      "tothemoon:crafting_redstone_machine_frame"
     ]
   },
   "criteria": {
-    "collect_moon_rock_bricks": {
+    "collect_steel_or_redstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "tothemoon:moon_rock_bricks"
+              "minecraft:redstone",
+              "tothemoon:steel_rod"
             ]
           }
         ]
@@ -21,13 +22,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "tothemoon:craft_moon_rock_bricks_stair"
+        "recipe": "tothemoon:crafting_redstone_machine_frame"
       }
     }
   },
   "requirements": [
     [
-      "collect_moon_rock_bricks",
+      "collect_steel_or_redstone",
       "has_the_recipe"
     ]
   ]

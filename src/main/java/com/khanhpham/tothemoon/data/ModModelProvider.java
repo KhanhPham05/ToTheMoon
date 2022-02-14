@@ -3,6 +3,7 @@ package com.khanhpham.tothemoon.data;
 import com.khanhpham.tothemoon.ModUtils;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModBlocks;
+import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
 import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
@@ -49,14 +50,28 @@ public class ModModelProvider {
             build(ModBlocks.MOON_ROCK_BRICKS);
             build(ModBlocks.MOON_ROCK_BARREL);
             build(ModBlocks.COPPER_ENERGY_GENERATOR);
+            build(ModBlocks.MOON_ROCK_STAIRS, ModBlocks.MOON_ROCK_BRICK_SLAB, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_SLAB);
+            build(ModItems.COPPER_PLATE, ModItems.IRON_PLATE, ModItems.STEEL_INGOT, ModItems.URANIUM_INGOT);
+        }
+
+        private void build(Block... blocks) {
+            for (Block block : blocks) {
+                this.build(block);
+            }
         }
 
         private void build(Block block) {
             super.getBuilder(block.getRegistryName().getPath()).parent(getExistingFile(modLoc("block/" + block.getRegistryName().getPath())));
         }
 
+        private void build(Item... items) {
+            for (Item item : items) {
+                this.build(item);
+            }
+        }
+
         private void build(Item item) {
-            super.getBuilder(item.getRegistryName().getPath()).parent(getExistingFile(mcLoc("item/generated"))).texture("leyer0", "item/" + item.getRegistryName().getPath());
+            super.getBuilder(item.getRegistryName().getPath()).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", "item/" + item.getRegistryName().getPath());
         }
     }
 

@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModUtils {
+    @Deprecated(forRemoval = true)
     public static <T extends ForgeRegistryEntry<T>> DeferredRegister<T> createRegistry(IForgeRegistry<T> reg) {
         return DeferredRegister.create(reg, Names.MOD_ID);
     }
