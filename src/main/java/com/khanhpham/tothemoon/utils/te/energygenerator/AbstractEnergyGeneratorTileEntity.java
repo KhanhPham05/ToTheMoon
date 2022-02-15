@@ -47,21 +47,39 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
         super(pType, pWorldPosition, pBlockState, energy, label, INVENTORY_CAPACITY);
     }
 
-    public void tick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorTileEntity pBlockEntity) {
-        if (pBlockEntity.isStillWorking()) {
+    public AbstractEnergyGeneratorTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int i, int i1, int i2, Component label) {
+        this(pType, pWorldPosition, pBlockState, new Energy(i, i1, i2), label);
+    }
+
+    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorTileEntity pBlockEntity) {
+        /*if (pBlockEntity.isStillWorking()) {
             pBlockEntity.workingTime--;
             pBlockEntity.energy.receiveEnergy(pBlockEntity.energy.getMaxReceive(), false);
         }
 
 
         ItemStack input = pBlockEntity.items.get(0);
-        if (this.canConsumeFuelAndWork(input)) {
+        if (pBlockEntity.canConsumeFuelAndWork(input)) {
             pBlockEntity.workingTime = pBlockEntity.getBurnTime(input);
             pBlockEntity.workingDuration = pBlockEntity.workingTime;
             input.shrink(1);
             level.setBlock(blockPos, blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE), 2);
         } else {
             level.setBlock(blockPos, blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.FALSE), 2);
+        }*/
+
+        ItemStack input = pBlockEntity.items.get(0);
+
+        if (pBlockEntity.isStillWorking()) {
+            pBlockEntity.workingTime--;
+            pBlockEntity.energy.receiveEnergy(pBlockEntity.energy.getMaxReceive(), false);
+        } else if (pBlockEntity.canConsumeFuelAndWork(input)) {
+            input.shrink(1);
+            pBlockEntity.workingTime = pBlockEntity.getBurnTime(input) / 2;
+            pBlockEntity.workingDuration = pBlockEntity.workingTime;
+            level.setBlock(blockPos, level.getBlockState(blockPos).setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE), 2);
+        } else {
+            level.setBlock(blockPos, level.getBlockState(blockPos).setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.FALSE), 2);
         }
 
         pBlockEntity.markDirty();
@@ -82,11 +100,5 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
     private void markDirty() {
         super.setChanged();
         super.energy.setChanged();
-    }
-
-    public static <E extends AbstractEnergyGeneratorTileEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, E e) {
-        if (!level.isClientSide) {
-            e.tick(level, blockPos, blockState, e);
-        }
     }
 }

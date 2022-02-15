@@ -22,7 +22,7 @@ public class ModTileEntityTypes {
 
     static {
         MOON_STORAGE = register("moon_storage", MoonBarrelTileEntity::new, ModBlocks.MOON_ROCK_BARREL);
-        COPPER_ENERGY_GENERATOR_TE = register("energy_generator_tile_entity", CopperEnergyGeneratorTileEntity::new, ModBlocks.COPPER_ENERGY_GENERATOR);
+        COPPER_ENERGY_GENERATOR_TE = register("copper_energy_generator_tile_entity", CopperEnergyGeneratorTileEntity::new, ModBlocks.COPPER_ENERGY_GENERATOR);
     }
 
     private ModTileEntityTypes() {

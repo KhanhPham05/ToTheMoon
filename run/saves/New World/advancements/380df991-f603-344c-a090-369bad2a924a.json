@@ -5,6 +5,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/smoker": {
+    "criteria": {
+      "has_furnace": "2022-02-11 18:59:01 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/oak_fence_gate": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:31 +0700"
@@ -47,6 +53,12 @@
     },
     "done": true
   },
+  "tothemoon:recipes/ttm_creative_tab/crafting_steel_rod": {
+    "criteria": {
+      "collect_steel_ingot": "2022-02-14 18:33:27 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/acacia_pressure_plate": {
     "criteria": {
       "has_planks": "2022-02-07 15:13:02 +0700"
@@ -59,9 +71,27 @@
     },
     "done": true
   },
+  "tothemoon:recipes/ttm_creative_tab/stonecutting_moon_rock_bricks": {
+    "criteria": {
+      "collect_moon_rock_bricks_stair": "2022-02-13 16:52:03 +0700"
+    },
+    "done": true
+  },
+  "minecraft:nether/root": {
+    "criteria": {
+      "entered_nether": "2022-02-13 18:46:11 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/spruce_fence_gate": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:41 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/cauldron": {
+    "criteria": {
+      "has_water_bucket": "2022-02-13 18:45:57 +0700"
     },
     "done": true
   },
@@ -83,6 +113,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/charcoal": {
+    "criteria": {
+      "has_log": "2022-02-11 14:35:37 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/misc/copper_ingot_from_blasting_deepslate_copper_ore": {
     "criteria": {
       "has_deepslate_copper_ore": "2022-02-07 14:32:13 +0700"
@@ -92,6 +128,12 @@
   "minecraft:recipes/building_blocks/dark_oak_slab": {
     "criteria": {
       "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2022-02-13 20:49:22 +0700"
     },
     "done": true
   },
@@ -110,6 +152,12 @@
   "minecraft:recipes/redstone/spruce_button": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:41 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/enchanting_table": {
+    "criteria": {
+      "has_obsidian": "2022-02-13 18:45:44 +0700"
     },
     "done": true
   },
@@ -155,6 +203,18 @@
     },
     "done": true
   },
+  "minecraft:recipes/tools/flint_and_steel": {
+    "criteria": {
+      "has_obsidian": "2022-02-13 18:45:44 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_planks": {
+    "criteria": {
+      "has_logs": "2022-02-11 14:35:37 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/decorations/spruce_fence": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:41 +0700"
@@ -170,6 +230,12 @@
   "minecraft:recipes/building_blocks/dark_oak_stairs": {
     "criteria": {
       "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:story/enter_the_nether": {
+    "criteria": {
+      "entered_nether": "2022-02-13 18:46:11 +0700"
     },
     "done": true
   },
@@ -227,6 +293,12 @@
     },
     "done": true
   },
+  "minecraft:nether/explore_nether": {
+    "criteria": {
+      "minecraft:crimson_forest": "2022-02-13 18:46:11 +0700"
+    },
+    "done": false
+  },
   "minecraft:recipes/misc/copper_ingot_from_blasting_copper_ore": {
     "criteria": {
       "has_copper_ore": "2022-02-07 14:32:14 +0700"
@@ -242,6 +314,12 @@
   "minecraft:recipes/misc/emerald_from_blasting_emerald_ore": {
     "criteria": {
       "has_emerald_ore": "2022-02-07 15:16:24 +0700"
+    },
+    "done": true
+  },
+  "tothemoon:recipes/ttm_creative_tab/stonecutting_moon_rock": {
+    "criteria": {
+      "collect_moon_rock_stair": "2022-02-13 16:51:47 +0700"
     },
     "done": true
   },
@@ -281,6 +359,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/coal": {
+    "criteria": {
+      "has_coal_block": "2022-02-11 14:35:30 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/decorations/oak_sign": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:31 +0700"
@@ -296,6 +380,12 @@
   "minecraft:recipes/building_blocks/oak_slab": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:31 +0700"
+    },
+    "done": true
+  },
+  "minecraft:story/form_obsidian": {
+    "criteria": {
+      "obsidian": "2022-02-13 18:45:45 +0700"
     },
     "done": true
   },

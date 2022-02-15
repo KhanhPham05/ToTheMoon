@@ -26,6 +26,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add(ModLang.MOON_ROCK_BARREL, "Moon Rock Barrel");
         add(MoonBarrelTileEntity.MENU_DISPLAY_NAME, "Moon Rock Barrel");
         add(CopperEnergyGeneratorTileEntity.LABEL, "Copper Energy Generator");
+        add("gui.tothemoon.energy_per_capacity", "Energy: %s / %s");
     }
 
     private void add(TranslatableComponent component, String trans) {

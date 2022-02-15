@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RSR",
+    "S S",
+    "RSR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "tothemoon:steel_rod"
+    }
+  },
+  "result": {
+    "item": "tothemoon:redstone_machine_frame"
+  }
+}

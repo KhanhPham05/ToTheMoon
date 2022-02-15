@@ -18,10 +18,9 @@ import javax.annotation.Nonnull;
 public class CopperEnergyGeneratorTileEntity extends AbstractEnergyGeneratorTileEntity {
 
     public static final Component LABEL = new TranslatableComponent("gui.tothemoon.energy_generator.copper");
-    private static final Energy ENERGY = new Energy(100000, 500, 200);
 
     public CopperEnergyGeneratorTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, @NotNull Component label) {
-        super(pType, pWorldPosition, pBlockState, ENERGY, label);
+        super(pType, pWorldPosition, pBlockState, 100000, 50, 200, label);
     }
 
     public CopperEnergyGeneratorTileEntity(BlockPos pos, BlockState state) {
