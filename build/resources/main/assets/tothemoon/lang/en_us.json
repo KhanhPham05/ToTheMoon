@@ -12,6 +12,7 @@
   "gui.tothemoon.moon_rock_barrel": "Moon Rock Barrel",
   "gui.tothemoon.moon_storage": "Moon Rock Barrel",
   "item.tothemoon.copper_plate": "Copper Plate",
+  "item.tothemoon.iron_plate": "Iron Plate",
   "item.tothemoon.redstone_machine_frame": "Redstone Machine Frame",
   "item.tothemoon.steel_dust": "Steel Dust",
   "item.tothemoon.steel_ingot": "Steel Ingot",
@@ -19,5 +20,6 @@
   "item.tothemoon.steel_rod": "Steel Rod",
   "item.tothemoon.uranium_dust": "Uranium Dust",
   "item.tothemoon.uranium_ingot": "Uranium Ingot",
+  "item.tothemoon.uranium_plate": "Uranium Plate",
   "itemGroup.ttm_creative_tab": "To The Moon"
 }

@@ -12,7 +12,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -51,7 +50,7 @@ public class ModModelProvider {
             build(ModBlocks.MOON_ROCK_BARREL);
             build(ModBlocks.COPPER_ENERGY_GENERATOR);
             build(ModBlocks.MOON_ROCK_STAIRS, ModBlocks.MOON_ROCK_BRICK_SLAB, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_SLAB);
-            build(ModItems.COPPER_PLATE, ModItems.IRON_PLATE, ModItems.STEEL_INGOT, ModItems.URANIUM_INGOT);
+            build(ModItems.COPPER_PLATE, ModItems.STEEL_PLATE, ModItems.IRON_PLATE, ModItems.STEEL_INGOT, ModItems.URANIUM_INGOT);
         }
 
         private void build(Block... blocks) {
@@ -134,7 +133,7 @@ public class ModModelProvider {
             }
         }
 
-        private void stairBlocks(Block ... blocks) {
+        private void stairBlocks(Block... blocks) {
             for (Block block : blocks) {
                 this.stairBlock(block);
             }
@@ -148,16 +147,17 @@ public class ModModelProvider {
 
         private void generatorBlock(Block block) {
             if (block instanceof AbstractEnergyGeneratorBlock generatorBlock) {
-                VariantBlockStateBuilder.PartialBlockstate builder = super.getVariantBuilder(generatorBlock).partialState();
-
-                String blockName = generatorBlock.getRegistryName().getPath();
-                ConfiguredModel on = new ConfiguredModel(new ModelFile.UncheckedModelFile(new ResourceLocation(Names.MOD_ID, "block/" + blockName + "_on")));
-                ConfiguredModel off = new ConfiguredModel(new ModelFile.UncheckedModelFile(new ResourceLocation(Names.MOD_ID, "block/" + blockName)));
-
                 for (Direction direction : Direction.values()) {
                     if (direction != Direction.UP && direction != Direction.DOWN) {
-                        this.addModel(builder, direction, Boolean.TRUE, on);
-                        this.addModel(builder, direction, Boolean.FALSE, off);
+                        if (direction == Direction.EAST) {
+                            addModel(generatorBlock, direction, 90);
+                        } else if (direction == Direction.NORTH) {
+                            addModel(generatorBlock, direction, 0);
+                        } else if (direction == Direction.SOUTH) {
+                            addModel(generatorBlock, direction, 180);
+                        } else if (direction == Direction.WEST) {
+                            addModel(generatorBlock, direction, 270);
+                        }
                     }
                 }
             }
@@ -166,6 +166,21 @@ public class ModModelProvider {
         private void addModel(VariantBlockStateBuilder.PartialBlockstate builder, Direction direction, Boolean lit, ConfiguredModel model) {
             builder.with(AbstractEnergyGeneratorBlock.FACING, direction).with(AbstractEnergyGeneratorBlock.LIT, lit)
                     .addModels(model);
+        }
+
+        private void addModel(Block generatorBlock, Direction direction, int y) {
+            VariantBlockStateBuilder.PartialBlockstate builder = super.getVariantBuilder(generatorBlock).partialState();
+
+            String blockName = generatorBlock.getRegistryName().getPath();
+            final ResourceLocation locOn = new ResourceLocation(Names.MOD_ID, "block/" + blockName + "_on");
+            final ResourceLocation locOff = new ResourceLocation(Names.MOD_ID, "block/" + blockName);
+
+
+            ConfiguredModel on = new ConfiguredModel(new ModelFile.UncheckedModelFile(locOn), 0, y, false);
+            ConfiguredModel off = new ConfiguredModel(new ModelFile.UncheckedModelFile(locOff), 0, y, false);
+
+            this.addModel(builder, direction, Boolean.TRUE, on);
+            this.addModel(builder, direction, Boolean.FALSE, off);
         }
     }
 }

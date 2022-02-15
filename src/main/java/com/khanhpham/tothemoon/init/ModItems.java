@@ -40,9 +40,7 @@ public class ModItems {
         IRON_PLATE = register("iron_plate");
     }
 
-    private ModItems() {
-
-    }
+    private ModItems() {}
 
     private static Item register(String name) {
         return ITEMS.register(name, new Item(new Item.Properties().tab(ToTheMoon.TAB)));
