@@ -51,42 +51,48 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
         this(pType, pWorldPosition, pBlockState, new Energy(i, i1, i2), label);
     }
 
-    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorTileEntity pBlockEntity) {
-        /*if (pBlockEntity.isStillWorking()) {
-            pBlockEntity.workingTime--;
-            pBlockEntity.energy.receiveEnergy(pBlockEntity.energy.getMaxReceive(), false);
+    /**
+     * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
+     * @see net.minecraft.world.inventory.AbstractFurnaceMenu
+     */
+
+    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorTileEntity blockEntity) {
+        //System.out.println("Working time = " + blockEntity.workingTime);
+        //System.out.println("Is full = " + blockEntity.energy.isFull());
+        if (blockEntity.workingTime <= 0 && !blockEntity.energy.isFull()) {
+            int burnTime = ForgeHooks.getBurnTime(blockEntity.items.get(0), null);
+            if (!blockEntity.items.get(0).isEmpty() && burnTime > 0) {
+                //System.out.println("stack burning time = ");
+                blockEntity.items.get(0).shrink(1);
+                blockEntity.workingTime = burnTime;
+                blockEntity.workingDuration = blockEntity.workingTime;
+                blockState = blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE);
+                level.setBlock(blockPos, blockState, 3);
+            }
+        } else {
+            blockState = blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.FALSE);
+            level.setBlock(blockPos, blockState, 3);
+        }
+
+        if (blockEntity.workingTime > 0) {
+            //System.out.println("working");
+            blockEntity.workingTime--;
+            if (!blockEntity.energy.isFull()) {
+                //System.out.println("generating energy");
+                blockEntity.energy.generateEnergy();
+            }
         }
 
 
-        ItemStack input = pBlockEntity.items.get(0);
-        if (pBlockEntity.canConsumeFuelAndWork(input)) {
-            pBlockEntity.workingTime = pBlockEntity.getBurnTime(input);
-            pBlockEntity.workingDuration = pBlockEntity.workingTime;
-            input.shrink(1);
-            level.setBlock(blockPos, blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE), 2);
-        } else {
-            level.setBlock(blockPos, blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.FALSE), 2);
-        }*/
+        markDirty(level, blockPos, blockState);
+    }
 
-        ItemStack input = pBlockEntity.items.get(0);
-
-        if (pBlockEntity.isStillWorking()) {
-            pBlockEntity.workingTime--;
-            pBlockEntity.energy.receiveEnergy(pBlockEntity.energy.getMaxReceive(), false);
-        } else if (pBlockEntity.canConsumeFuelAndWork(input)) {
-            input.shrink(1);
-            pBlockEntity.workingTime = pBlockEntity.getBurnTime(input) / 2;
-            pBlockEntity.workingDuration = pBlockEntity.workingTime;
-            level.setBlock(blockPos, level.getBlockState(blockPos).setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE), 2);
-        } else {
-            level.setBlock(blockPos, level.getBlockState(blockPos).setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.FALSE), 2);
-        }
-
-        pBlockEntity.markDirty();
+    private static void markDirty(Level level, BlockPos pos, BlockState state) {
+        setChanged(level, pos, state);
     }
 
     public boolean canConsumeFuelAndWork(ItemStack stack) {
-        return !stack.isEmpty() && !this.isStillWorking() && this.getBurnTime(stack) > 0 && !super.energy.isFull();
+        return !stack.isEmpty() && !this.isStillWorking() && this.getBurnTime(stack) > 0 && super.energy.isFull();
     }
 
     public int getBurnTime(ItemStack stack) {
@@ -95,10 +101,5 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
 
     public boolean isStillWorking() {
         return workingTime > 0;
-    }
-
-    private void markDirty() {
-        super.setChanged();
-        super.energy.setChanged();
     }
 }

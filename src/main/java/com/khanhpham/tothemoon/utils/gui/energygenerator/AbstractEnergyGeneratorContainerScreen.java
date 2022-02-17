@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+
 public abstract class AbstractEnergyGeneratorContainerScreen<T extends AbstractEnergyGeneratorContainer> extends BaseContainerScreen<T> {
     public AbstractEnergyGeneratorContainerScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture) {
         super(pMenu, pPlayerInventory, pTitle, texture);
@@ -20,7 +21,8 @@ public abstract class AbstractEnergyGeneratorContainerScreen<T extends AbstractE
      */
     @Override
     protected void renderExtra(PoseStack pPoseStack) {
-        blit(pPoseStack, leftPos + 17, topPos + 74,16, 185, menu.getEnergyProcess() + 1, 12);
+        blit(pPoseStack, leftPos + 81, topPos + 70 - menu.getLitProgress(), 176, 14 - menu.getLitProgress(), 14, menu.getLitProgress() + 1);
+        blit(pPoseStack, leftPos + 15, topPos + 72,16, 185, menu.getEnergyProcess() + 1, 12);
     }
 
     @Override

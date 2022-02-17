@@ -14,11 +14,12 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
     public final ContainerData data;
+    private final ItemStack EMPTY = ItemStack.EMPTY;
 
     protected AbstractEnergyGeneratorContainer(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData intData) {
         super(pMenuType, externalContainer, playerInventory, pContainerId);
 
-        super.addSlot(new BurnableSlot(externalContainer, 0, 81, 33));
+        super.addSlot(new BurnableSlot(externalContainer, 0, 80, 32));
         super.addPlayerInventorySlots(8, 97);
 
         this.data = intData;
@@ -30,43 +31,44 @@ public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
      * @see net.minecraft.world.inventory.AbstractFurnaceMenu
      */
     @Override
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+    public ItemStack quickMoveStack(Player pPlayer, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(pIndex);
+        Slot slot = this.slots.get(index);
         if (slot.hasItem()) {
             ItemStack stack1 = slot.getItem();
             stack = stack1.copy();
 
-            if (this.isFuel(stack1)) {
-                if (!super.moveItemStackTo(stack1, 0, 1, false)) {
-                    System.out.println(42);
-                    return ItemStack.EMPTY;
+            final int containerSize = 1;
+            final int inventoryEnd = containerSize + 27;
+            final int hotbarEnd = inventoryEnd + 9;
+
+            if (index != 0) {
+                if (isFuel(stack1)) {
+                    if (!moveItemStackTo(stack1, 0, 1, false)) {
+                        return EMPTY;
+                    }
+                } else if (index < inventoryEnd) {
+                    if (!moveItemStackTo(stack1, inventoryEnd, hotbarEnd, false)) {
+                        return EMPTY;
+                    }
+                } else if (index < hotbarEnd && !moveItemStackTo(stack1, containerSize, inventoryEnd, false)) {
+                            return EMPTY;
                 }
-            } else if (pIndex >= 1 && pIndex < super.slots.size() - 9) {
-                if (!super.moveItemStackTo(stack1, super.slots.size() - 10, super.slots.size() - 1, false)) {
-                    System.out.println(47);
-                    return ItemStack.EMPTY;
+            } else {
+                if (!moveItemStackTo(stack1, containerSize, inventoryEnd, false)) {
+                    return EMPTY;
                 }
-            } else if (pIndex >= super.slots.size() - 10 && pIndex < super.slots.size() - 1 && !super.moveItemStackTo(stack1, 0, super.slots.size() - 10, false)) {
-                System.out.println(51);
-                return ItemStack.EMPTY;
             }
 
-
-            if (!super.moveItemStackTo(stack1, 1, super.slots.size() - 1, false)) {
-                System.out.println(57);
-                return ItemStack.EMPTY;
-            }
 
             if (stack1.isEmpty()) {
-                System.out.println(62);
-                slot.set(ItemStack.EMPTY);
+                slot.set(EMPTY);
             } else {
                 slot.setChanged();
             }
 
             if (stack1.getCount() == stack.getCount()) {
-                return ItemStack.EMPTY;
+                return EMPTY;
             }
 
             slot.onTake(pPlayer, stack1);

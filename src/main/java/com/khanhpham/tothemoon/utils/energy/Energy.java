@@ -25,6 +25,10 @@ public class Energy extends EnergyStorage {
 
     }
 
+    public void generateEnergy() {
+        this.receiveEnergy(this.maxReceive, false);
+    }
+
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
         if (super.energy + maxReceive > super.capacity) {
@@ -34,7 +38,7 @@ public class Energy extends EnergyStorage {
     }
 
     public boolean isFull() {
-        return super.energy == super.capacity;
+        return super.energy >= super.capacity;
     }
 
     public void save(CompoundTag pTag) {

@@ -38,7 +38,7 @@ public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<Abstr
 
 
     public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorTileEntity> supplier, MiningTool tool) {
-        super(p_49224_, supplier, tool);
+        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0), supplier, tool);
 
         registerDefaultState(super.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
@@ -73,14 +73,18 @@ public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<Abstr
         return InteractionResult.FAIL;
     }
 
+    /**
+     * @see net.minecraft.world.level.block.AbstractFurnaceBlock
+     *
+     */
     @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pState.is(pNewState.getBlock())) {
+        if (!pState.is(pNewState.getBlock())) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof AbstractEnergyGeneratorTileEntity energyGeneratorTileEntity) {
-                if (pLevel instanceof ServerLevel serverLevel) {
-                    Containers.dropContents(serverLevel, pPos, energyGeneratorTileEntity);
+                if (pLevel instanceof ServerLevel) {
+                    Containers.dropContents(pLevel, pPos, energyGeneratorTileEntity);
                 }
 
                 pLevel.updateNeighbourForOutputSignal(pPos, this);
