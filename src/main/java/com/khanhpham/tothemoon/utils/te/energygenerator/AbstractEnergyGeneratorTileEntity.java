@@ -57,28 +57,27 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
      */
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorTileEntity blockEntity) {
-        //System.out.println("Working time = " + blockEntity.workingTime);
-        //System.out.println("Is full = " + blockEntity.energy.isFull());
-        if (blockEntity.workingTime <= 0 && !blockEntity.energy.isFull()) {
-            int burnTime = ForgeHooks.getBurnTime(blockEntity.items.get(0), null);
-            if (!blockEntity.items.get(0).isEmpty() && burnTime > 0) {
-                //System.out.println("stack burning time = ");
-                blockEntity.items.get(0).shrink(1);
-                blockEntity.workingTime = burnTime;
-                blockEntity.workingDuration = blockEntity.workingTime;
-                blockState = blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE);
-                level.setBlock(blockPos, blockState, 3);
+        if (!blockEntity.energy.isFull()) {
+            if (blockEntity.workingTime <= 0) {
+                int burnTime = ForgeHooks.getBurnTime(blockEntity.items.get(0), null);
+                if (!blockEntity.items.get(0).isEmpty() && burnTime > 0) {
+                    blockEntity.items.get(0).shrink(1);
+                    blockEntity.workingTime = burnTime;
+                    blockEntity.workingDuration = blockEntity.workingTime;
+                    blockState = blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE);
+                    level.setBlock(blockPos, blockState, 3);
+                }
             }
-        } else {
+        }
+
+        if (blockEntity.workingTime <= 0 && blockEntity.items.get(0).isEmpty()) {
             blockState = blockState.setValue(AbstractEnergyGeneratorBlock.LIT, Boolean.FALSE);
             level.setBlock(blockPos, blockState, 3);
         }
 
         if (blockEntity.workingTime > 0) {
-            //System.out.println("working");
             blockEntity.workingTime--;
             if (!blockEntity.energy.isFull()) {
-                //System.out.println("generating energy");
                 blockEntity.energy.generateEnergy();
             }
         }
@@ -89,10 +88,6 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
 
     private static void markDirty(Level level, BlockPos pos, BlockState state) {
         setChanged(level, pos, state);
-    }
-
-    public boolean canConsumeFuelAndWork(ItemStack stack) {
-        return !stack.isEmpty() && !this.isStillWorking() && this.getBurnTime(stack) > 0 && super.energy.isFull();
     }
 
     public int getBurnTime(ItemStack stack) {

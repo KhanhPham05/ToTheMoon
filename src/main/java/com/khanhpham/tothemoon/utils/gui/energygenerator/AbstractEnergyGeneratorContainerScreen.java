@@ -22,7 +22,7 @@ public abstract class AbstractEnergyGeneratorContainerScreen<T extends AbstractE
     @Override
     protected void renderExtra(PoseStack pPoseStack) {
         blit(pPoseStack, leftPos + 81, topPos + 70 - menu.getLitProgress(), 176, 14 - menu.getLitProgress(), 14, menu.getLitProgress() + 1);
-        blit(pPoseStack, leftPos + 15, topPos + 72,16, 185, menu.getEnergyProcess() + 1, 12);
+        blit(pPoseStack, leftPos + 14, topPos + 72,14, 183, menu.getEnergyProcess() + 1, 12);
     }
 
     @Override
