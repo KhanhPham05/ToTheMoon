@@ -9,14 +9,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock {
-    public CopperEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorTileEntity> supplier, MiningTool tool) {
+public class DiamondEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock {
+    public DiamondEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorTileEntity> supplier, MiningTool tool) {
         super(p_49224_, supplier, tool);
-
     }
 
     @Override
     protected <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level level, BlockEntityType<A> pBlockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModTileEntityTypes.COPPER_ENERGY_GENERATOR_TE, AbstractEnergyGeneratorTileEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModTileEntityTypes.DIAMOND_ENERGY_GENERATOR_TE, AbstractEnergyGeneratorTileEntity::serverTick);
     }
 }

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "side": "tothemoon:block/diamond_energy_generator_side",
+    "front": "tothemoon:block/diamond_energy_generator_front_on",
+    "bottom": "tothemoon:block/diamond_energy_generator_bottom",
+    "top": "tothemoon:block/diamond_energy_generator_top"
+  }
+}

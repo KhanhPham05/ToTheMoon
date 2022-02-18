@@ -16,7 +16,7 @@ public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
     public final ContainerData data;
     private final ItemStack EMPTY = ItemStack.EMPTY;
 
-    protected AbstractEnergyGeneratorContainer(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData intData) {
+    public AbstractEnergyGeneratorContainer(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData intData) {
         super(pMenuType, externalContainer, playerInventory, pContainerId);
 
         super.addSlot(new BurnableSlot(externalContainer, 0, 80, 32));

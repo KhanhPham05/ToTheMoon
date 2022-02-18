@@ -35,6 +35,7 @@ import java.util.Random;
 
 /**
  * @see net.minecraft.world.level.block.AbstractFurnaceBlock
+ * @see net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase
  */
 public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<AbstractEnergyGeneratorTileEntity> {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -42,19 +43,12 @@ public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<Abstr
 
 
     public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorTileEntity> supplier, MiningTool tool) {
-        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0), supplier, tool);
+        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier, tool);
 
         registerDefaultState(super.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(LIT, Boolean.FALSE));
     }
-
-    @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return createBlockEntity(pPos, pState);
-    }
-
-    protected abstract @Nonnull AbstractEnergyGeneratorTileEntity createBlockEntity(BlockPos pos, BlockState state);
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {

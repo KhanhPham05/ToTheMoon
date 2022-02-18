@@ -3,6 +3,7 @@ package com.khanhpham.tothemoon.data;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorTileEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorTileEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -27,6 +28,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add(MoonBarrelTileEntity.MENU_DISPLAY_NAME, "Moon Rock Barrel");
         add(CopperEnergyGeneratorTileEntity.LABEL, "Copper Energy Generator");
         add("gui.tothemoon.energy_per_capacity", "Energy: %s / %s");
+        add(IronEnergyGeneratorTileEntity.LABEL, "Iron Energy Generator");
     }
 
     private void add(TranslatableComponent component, String trans) {

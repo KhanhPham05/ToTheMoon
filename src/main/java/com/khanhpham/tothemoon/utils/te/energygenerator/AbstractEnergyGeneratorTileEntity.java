@@ -1,10 +1,13 @@
 package com.khanhpham.tothemoon.utils.te.energygenerator;
 
+import com.khanhpham.tothemoon.core.energygenerator.containers.EnergyGeneratorContainer;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.te.EnergyItemCapableTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -43,7 +46,7 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
         }
     };
 
-    public AbstractEnergyGeneratorTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label) {
+    private AbstractEnergyGeneratorTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label) {
         super(pType, pWorldPosition, pBlockState, energy, label, INVENTORY_CAPACITY);
     }
 
@@ -90,11 +93,10 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
         setChanged(level, pos, state);
     }
 
-    public int getBurnTime(ItemStack stack) {
-        return ForgeHooks.getBurnTime(stack, null);
-    }
 
-    public boolean isStillWorking() {
-        return workingTime > 0;
+    @NotNull
+    @Override
+    protected AbstractContainerMenu createMenu(int containerId, Inventory playerInventory) {
+        return new EnergyGeneratorContainer(this, playerInventory, containerId, data);
     }
 }

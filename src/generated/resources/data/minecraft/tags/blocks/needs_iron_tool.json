@@ -1,7 +1,10 @@
 {
   "replace": false,
   "values": [
+    "tothemoon:machine_frame",
+    "tothemoon:gold_energy_generator",
     "tothemoon:copper_energy_generator",
+    "tothemoon:diamond_energy_generator",
     "tothemoon:moon_rock_barrel"
   ]
 }

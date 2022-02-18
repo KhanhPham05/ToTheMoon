@@ -1,5 +1,9 @@
 {
   "block.tothemoon.copper_energy_generator": "Copper Energy Generator",
+  "block.tothemoon.diamond_energy_generator": "Diamond Energy Generator",
+  "block.tothemoon.gold_energy_generator": "Gold Energy Generator",
+  "block.tothemoon.iron_energy_generator": "Iron Energy Generator",
+  "block.tothemoon.machine_frame": "Machine Frame",
   "block.tothemoon.moon_rock": "Moon Rock",
   "block.tothemoon.moon_rock_barrel": "Moon Rock Barrel",
   "block.tothemoon.moon_rock_bricks": "Moon Rock Bricks",
@@ -8,6 +12,7 @@
   "block.tothemoon.moon_rock_slab": "Moon Rock Slab",
   "block.tothemoon.moon_rock_stair": "Moon Rock Stair",
   "gui.tothemoon.energy_generator.copper": "Copper Energy Generator",
+  "gui.tothemoon.energy_generator.iron": "Iron Energy Generator",
   "gui.tothemoon.energy_per_capacity": "Energy: %s / %s",
   "gui.tothemoon.moon_rock_barrel": "Moon Rock Barrel",
   "gui.tothemoon.moon_storage": "Moon Rock Barrel",

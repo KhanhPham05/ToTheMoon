@@ -10,6 +10,7 @@ import com.khanhpham.tothemoon.init.ModContainerTypes;
 import com.khanhpham.tothemoon.init.ModItems;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;

@@ -227,6 +227,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/diamond_from_blasting_deepslate_diamond_ore": {
+    "criteria": {
+      "has_deepslate_diamond_ore": "2022-02-18 16:42:43 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/spruce_slab": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:41 +0700"
@@ -332,6 +338,12 @@
   "minecraft:recipes/decorations/dark_oak_fence": {
     "criteria": {
       "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/diamond_from_smelting_deepslate_diamond_ore": {
+    "criteria": {
+      "has_deepslate_diamond_ore": "2022-02-18 16:42:43 +0700"
     },
     "done": true
   },

@@ -19,6 +19,7 @@ public abstract class TileEntityBlock<T extends BlockEntity> extends BaseEntityB
         this.supplier = supplier;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
