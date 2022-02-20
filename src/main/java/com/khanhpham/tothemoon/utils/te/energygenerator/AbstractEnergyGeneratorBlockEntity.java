@@ -1,15 +1,14 @@
 package com.khanhpham.tothemoon.utils.te.energygenerator;
 
-import com.khanhpham.tothemoon.core.energygenerator.containers.EnergyGeneratorContainer;
+import com.khanhpham.tothemoon.core.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.utils.energy.Energy;
-import com.khanhpham.tothemoon.utils.te.EnergyItemCapableTileEntity;
+import com.khanhpham.tothemoon.utils.te.EnergyItemCapableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
  */
-public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapableTileEntity {
+public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapableBlockEntity {
     public static final int INVENTORY_CAPACITY = 1;
     public static final int CONTAINER_DATA_COUNT = 4;
     protected int workingTime;
@@ -46,11 +45,11 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
         }
     };
 
-    private AbstractEnergyGeneratorTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label) {
+    private AbstractEnergyGeneratorBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label) {
         super(pType, pWorldPosition, pBlockState, energy, label, INVENTORY_CAPACITY);
     }
 
-    public AbstractEnergyGeneratorTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int i, int i1, int i2, Component label) {
+    public AbstractEnergyGeneratorBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int i, int i1, int i2, Component label) {
         this(pType, pWorldPosition, pBlockState, new Energy(i, i1, i2), label);
     }
 
@@ -59,7 +58,8 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
      * @see net.minecraft.world.inventory.AbstractFurnaceMenu
      */
 
-    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorTileEntity blockEntity) {
+    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorBlockEntity blockEntity) {
+        blockEntity.transferEnergyToOther(level, blockPos);
         if (!blockEntity.energy.isFull()) {
             if (blockEntity.workingTime <= 0) {
                 int burnTime = ForgeHooks.getBurnTime(blockEntity.items.get(0), null);
@@ -81,7 +81,7 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
         if (blockEntity.workingTime > 0) {
             blockEntity.workingTime--;
             if (!blockEntity.energy.isFull()) {
-                blockEntity.energy.generateEnergy();
+                blockEntity.energy.receiveEnergy();
             }
         }
 
@@ -89,14 +89,10 @@ public abstract class AbstractEnergyGeneratorTileEntity extends EnergyItemCapabl
         markDirty(level, blockPos, blockState);
     }
 
-    private static void markDirty(Level level, BlockPos pos, BlockState state) {
-        setChanged(level, pos, state);
-    }
-
 
     @NotNull
     @Override
     protected AbstractContainerMenu createMenu(int containerId, Inventory playerInventory) {
-        return new EnergyGeneratorContainer(this, playerInventory, containerId, data);
+        return new EnergyGeneratorMenu(this, playerInventory, containerId, data);
     }
 }

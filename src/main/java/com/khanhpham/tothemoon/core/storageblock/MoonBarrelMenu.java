@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.storageblock;
 
 import com.khanhpham.tothemoon.init.ModContainerTypes;
-import com.khanhpham.tothemoon.utils.containers.BaseContainer;
+import com.khanhpham.tothemoon.utils.containers.BaseMenu;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,11 +15,11 @@ import org.jetbrains.annotations.Nullable;
  * @see net.minecraft.world.level.block.entity.ChestBlockEntity
  * @see net.minecraft.world.inventory.ChestMenu
  */
-public class MoonBarrelContainer extends BaseContainer {
+public class MoonBarrelMenu extends BaseMenu {
     public static final int CAPACITY = 9 * 4;
     private final int containerSize;
 
-    protected MoonBarrelContainer(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventor, int pContainerId) {
+    protected MoonBarrelMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventor, int pContainerId) {
         super(pMenuType, externalContainer, playerInventor, pContainerId);
         this.containerSize = externalContainer.getContainerSize();
         int a = 0;
@@ -36,11 +36,11 @@ public class MoonBarrelContainer extends BaseContainer {
 
     }
 
-    public MoonBarrelContainer(int containerId, Container externalContainer, Inventory playerInventory) {
+    public MoonBarrelMenu(int containerId, Container externalContainer, Inventory playerInventory) {
         this(ModContainerTypes.STORAGE_BLOCK, externalContainer, playerInventory, containerId);
     }
 
-    public MoonBarrelContainer(int containerId, Inventory playerContainer) {
+    public MoonBarrelMenu(int containerId, Inventory playerContainer) {
         this(ModContainerTypes.STORAGE_BLOCK, new SimpleContainer(CAPACITY), playerContainer, containerId);
     }
 

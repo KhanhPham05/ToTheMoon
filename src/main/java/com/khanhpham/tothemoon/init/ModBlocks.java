@@ -5,17 +5,17 @@ import com.khanhpham.tothemoon.core.energygenerator.blocks.CopperEnergyGenerator
 import com.khanhpham.tothemoon.core.energygenerator.blocks.DiamondEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.energygenerator.blocks.GoldEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.energygenerator.blocks.IronEnergyGeneratorBlock;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorTileEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.DiamondEnergyGeneratorTileEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.GoldEnergyGeneratorTileEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorTileEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.utils.BlockRegister;
 import com.khanhpham.tothemoon.utils.blocks.MineableBlock;
 import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
 import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
-import com.khanhpham.tothemoon.utils.blocks.TileEntityBlock;
+import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -50,10 +50,10 @@ public class ModBlocks {
     public static final Block MOON_ROCK_BARREL = register("moon_rock_barrel", new MoonRockBarrel(properties(Material.STONE, 3.0f, 5.5f, SoundType.STONE), MoonBarrelTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
 
     //Fuel Energy Generators
-    public static final Block COPPER_ENERGY_GENERATOR = register("copper_energy_generator", new CopperEnergyGeneratorBlock(properties(Material.METAL, 3.5f, 5.0f, SoundType.METAL), CopperEnergyGeneratorTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
-    public static final Block IRON_ENERGY_GENERATOR = register("iron_energy_generator", new IronEnergyGeneratorBlock(properties(Material.METAL, 4.0f,5.0f, SoundType.METAL), IronEnergyGeneratorTileEntity::new, MiningTool.NEEDS_STONE_PICKAXE));
-    public static final Block GOLD_ENERGY_GENERATOR = register("gold_energy_generator", new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), GoldEnergyGeneratorTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
-    public static final Block DIAMOND_ENERGY_GENERATOR = register("diamond_energy_generator", new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK), DiamondEnergyGeneratorTileEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
+    public static final Block COPPER_ENERGY_GENERATOR = register("copper_energy_generator", new CopperEnergyGeneratorBlock(properties(Material.METAL, 3.5f, 5.0f, SoundType.METAL), CopperEnergyGeneratorBlockEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
+    public static final Block IRON_ENERGY_GENERATOR = register("iron_energy_generator", new IronEnergyGeneratorBlock(properties(Material.METAL, 4.0f,5.0f, SoundType.METAL), IronEnergyGeneratorBlockEntity::new, MiningTool.NEEDS_STONE_PICKAXE));
+    public static final Block GOLD_ENERGY_GENERATOR = register("gold_energy_generator", new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), GoldEnergyGeneratorBlockEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
+    public static final Block DIAMOND_ENERGY_GENERATOR = register("diamond_energy_generator", new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK), DiamondEnergyGeneratorBlockEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
 
     public ModBlocks() {
     }
@@ -75,7 +75,7 @@ public class ModBlocks {
         return BLOCK_REGISTER.register(name, new MineableSlabBlocks(tool, parentBlock));
     }
 
-    private static <T extends TileEntityBlock<?>> Block register(String name, T block) {
+    private static <T extends BaseEntityBlock<?>> Block register(String name, T block) {
         return BLOCK_REGISTER.register(name, block);
     }
 

@@ -3,7 +3,7 @@ package com.khanhpham.tothemoon.init;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.utils.ItemRegister;
-import com.khanhpham.tothemoon.utils.blocks.TileEntityBlock;
+import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -47,7 +47,7 @@ public class ModItems {
     }
 
     private static void registerBLockItem(Block block) {
-        if (!(block instanceof TileEntityBlock<?>))
+        if (!(block instanceof BaseEntityBlock<?>))
             ITEMS.register(block.getRegistryName().getPath(), new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)));
         else
             ITEMS.register(block.getRegistryName().getPath(), new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB).stacksTo(1)));

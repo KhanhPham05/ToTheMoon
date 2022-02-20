@@ -2,16 +2,16 @@
   "replace": false,
   "values": [
     "tothemoon:moon_rock_slab",
-    "tothemoon:machine_frame",
-    "tothemoon:moon_rock_bricks",
-    "tothemoon:iron_energy_generator",
-    "tothemoon:moon_rock_stair",
     "tothemoon:moon_rock_bricks_stair",
-    "tothemoon:gold_energy_generator",
-    "tothemoon:copper_energy_generator",
     "tothemoon:diamond_energy_generator",
-    "tothemoon:moon_rock",
     "tothemoon:moon_rock_bricks_slab",
-    "tothemoon:moon_rock_barrel"
+    "tothemoon:gold_energy_generator",
+    "tothemoon:iron_energy_generator",
+    "tothemoon:moon_rock_bricks",
+    "tothemoon:moon_rock_stair",
+    "tothemoon:machine_frame",
+    "tothemoon:moon_rock_barrel",
+    "tothemoon:copper_energy_generator",
+    "tothemoon:moon_rock"
   ]
 }

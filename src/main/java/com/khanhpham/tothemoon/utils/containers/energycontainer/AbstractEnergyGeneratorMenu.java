@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.utils.containers.energycontainer;
 
-import com.khanhpham.tothemoon.utils.containers.BaseContainer;
+import com.khanhpham.tothemoon.utils.containers.BaseMenu;
 import com.khanhpham.tothemoon.utils.slot.BurnableSlot;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,11 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractEnergyGeneratorContainer extends BaseContainer {
+public abstract class AbstractEnergyGeneratorMenu extends BaseMenu {
     public final ContainerData data;
     private final ItemStack EMPTY = ItemStack.EMPTY;
 
-    public AbstractEnergyGeneratorContainer(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData intData) {
+    public AbstractEnergyGeneratorMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData intData) {
         super(pMenuType, externalContainer, playerInventory, pContainerId);
 
         super.addSlot(new BurnableSlot(externalContainer, 0, 80, 32));

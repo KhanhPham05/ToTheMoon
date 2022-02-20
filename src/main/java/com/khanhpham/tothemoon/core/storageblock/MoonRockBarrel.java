@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.storageblock;
 
-import com.khanhpham.tothemoon.utils.blocks.TileEntityBlock;
+import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -15,7 +15,7 @@ import net.minecraft.world.phys.BlockHitResult;
 /**
  * @see net.minecraft.world.level.block.AbstractFurnaceBlock
  */
-public class MoonRockBarrel extends TileEntityBlock<MoonBarrelTileEntity> {
+public class MoonRockBarrel extends BaseEntityBlock<MoonBarrelTileEntity> {
     public MoonRockBarrel(Properties p_49224_, BlockEntityType.BlockEntitySupplier<MoonBarrelTileEntity> supplier, MiningTool tool) {
         super(p_49224_, supplier, tool);
     }

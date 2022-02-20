@@ -2,14 +2,14 @@ package com.khanhpham.tothemoon.core.storageblock;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.utils.ModLang;
-import com.khanhpham.tothemoon.utils.gui.BaseContainerScreen;
+import com.khanhpham.tothemoon.utils.gui.BaseMenuScreen;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class MoonBarrelScreen extends BaseContainerScreen<MoonBarrelContainer> {
-    public MoonBarrelScreen(MoonBarrelContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
+public class MoonBarrelScreen extends BaseMenuScreen<MoonBarrelMenu> {
+    public MoonBarrelScreen(MoonBarrelMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle, GUI);
         super.setImageWidthAndHeight(176, 186);
     }

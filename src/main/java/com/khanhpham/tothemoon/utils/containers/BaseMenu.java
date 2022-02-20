@@ -13,14 +13,14 @@ import org.jetbrains.annotations.Nullable;
  * @see net.minecraft.world.inventory.AbstractFurnaceMenu
  * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
  */
-public abstract class BaseContainer extends AbstractContainerMenu {
+public abstract class BaseMenu extends AbstractContainerMenu {
 
     protected final int endInvIndex = 27;
     protected final int endHotBarIndex = 36;
     protected final int inventorySize;
     protected final Inventory playerInventory;
 
-    protected BaseContainer(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId) {
+    protected BaseMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId) {
         super(pMenuType, pContainerId);
         this.inventorySize = externalContainer.getContainerSize();
         this.playerInventory = playerInventory;

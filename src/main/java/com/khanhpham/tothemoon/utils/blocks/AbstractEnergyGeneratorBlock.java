@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.utils.blocks;
 
 import com.khanhpham.tothemoon.utils.mining.MiningTool;
-import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorTileEntity;
+import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -30,19 +30,18 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 /**
  * @see net.minecraft.world.level.block.AbstractFurnaceBlock
  * @see net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase
  */
-public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<AbstractEnergyGeneratorTileEntity> {
+public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<AbstractEnergyGeneratorBlockEntity> {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 
-    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorTileEntity> supplier, MiningTool tool) {
+    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier, MiningTool tool) {
         super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier, tool);
 
         registerDefaultState(super.stateDefinition.any()
@@ -62,7 +61,7 @@ public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<Abstr
             return InteractionResult.FAIL;
         } else {
             BlockEntity te = pLevel.getBlockEntity(pPos);
-            if (te instanceof AbstractEnergyGeneratorTileEntity energyGeneratorTileEntity) {
+            if (te instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorTileEntity) {
                 pPlayer.openMenu(energyGeneratorTileEntity);
                 return InteractionResult.SUCCESS;
             }
@@ -80,7 +79,7 @@ public abstract class AbstractEnergyGeneratorBlock extends TileEntityBlock<Abstr
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (!pState.is(pNewState.getBlock())) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof AbstractEnergyGeneratorTileEntity energyGeneratorTileEntity) {
+            if (blockEntity instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorTileEntity) {
                 if (pLevel instanceof ServerLevel) {
                     Containers.dropContents(pLevel, pPos, energyGeneratorTileEntity);
                 }

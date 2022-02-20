@@ -25,7 +25,7 @@ public class Energy extends EnergyStorage {
 
     }
 
-    public void generateEnergy() {
+    public void receiveEnergy() {
         this.receiveEnergy(this.maxReceive, false);
     }
 
@@ -39,6 +39,11 @@ public class Energy extends EnergyStorage {
 
     public boolean isFull() {
         return super.energy >= super.capacity;
+    }
+
+    public void extractEnergy() {
+        if (canExtract())
+            super.extractEnergy(this.maxExtract, false);
     }
 
     public void save(CompoundTag pTag) {
