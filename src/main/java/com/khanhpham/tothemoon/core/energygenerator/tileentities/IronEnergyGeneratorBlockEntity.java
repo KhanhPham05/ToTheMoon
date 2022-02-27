@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.energygenerator.tileentities;
 
-import com.khanhpham.tothemoon.init.ModTileEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -10,6 +10,6 @@ public class IronEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBlock
     public static final TranslatableComponent LABEL = new TranslatableComponent("gui.tothemoon.energy_generator.iron");
 
     public IronEnergyGeneratorBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModTileEntityTypes.IRON_ENERGY_GENERATOR_TE, pWorldPosition, pBlockState, 200000, 150, 500, LABEL);
+        super(ModBlockEntityTypes.IRON_ENERGY_GENERATOR_TE, pWorldPosition, pBlockState, 200000, 150, 500, LABEL);
     }
 }

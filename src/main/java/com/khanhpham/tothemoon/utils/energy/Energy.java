@@ -41,6 +41,10 @@ public class Energy extends EnergyStorage {
         return super.energy >= super.capacity;
     }
 
+    public boolean isEmpty() {
+        return super.energy <= 0;
+    }
+
     public void extractEnergy() {
         if (canExtract())
             super.extractEnergy(this.maxExtract, false);

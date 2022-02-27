@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.energygenerator.tileentities;
 
-import com.khanhpham.tothemoon.init.ModTileEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -19,6 +19,6 @@ public class CopperEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBlo
     }
 
     public CopperEnergyGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        this(ModTileEntityTypes.COPPER_ENERGY_GENERATOR_TE, pos, state, LABEL);
+        this(ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE, pos, state, LABEL);
     }
 }

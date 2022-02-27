@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.energygenerator.containers;
 
-import com.khanhpham.tothemoon.init.ModContainerTypes;
+import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.containers.energycontainer.AbstractEnergyGeneratorMenu;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.world.Container;
@@ -17,10 +17,10 @@ public class EnergyGeneratorMenu extends AbstractEnergyGeneratorMenu {
     }
 
     public EnergyGeneratorMenu(AbstractEnergyGeneratorBlockEntity externalContainer, Inventory inventory, int containerId, ContainerData intData) {
-        this(ModContainerTypes.ENERGY_GENERATOR_CONTAINER, externalContainer, inventory, containerId, intData);
+        this(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, externalContainer, inventory, containerId, intData);
     }
 
     public EnergyGeneratorMenu(int containerId, Inventory inventory) {
-        this(ModContainerTypes.ENERGY_GENERATOR_CONTAINER, new SimpleContainer(AbstractEnergyGeneratorBlockEntity.INVENTORY_CAPACITY), inventory, containerId, new SimpleContainerData(AbstractEnergyGeneratorBlockEntity.CONTAINER_DATA_COUNT));
+        this(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, new SimpleContainer(AbstractEnergyGeneratorBlockEntity.INVENTORY_CAPACITY), inventory, containerId, new SimpleContainerData(AbstractEnergyGeneratorBlockEntity.CONTAINER_DATA_COUNT));
     }
 }

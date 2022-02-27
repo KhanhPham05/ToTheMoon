@@ -1,6 +1,8 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterBlock;
+import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.energygenerator.blocks.CopperEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.energygenerator.blocks.DiamondEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.energygenerator.blocks.GoldEnergyGeneratorBlock;
@@ -11,7 +13,7 @@ import com.khanhpham.tothemoon.core.energygenerator.tileentities.GoldEnergyGener
 import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonRockBarrel;
-import com.khanhpham.tothemoon.utils.BlockRegister;
+import com.khanhpham.tothemoon.utils.registration.BlockRegister;
 import com.khanhpham.tothemoon.utils.blocks.MineableBlock;
 import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
 import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
@@ -54,6 +56,9 @@ public class ModBlocks {
     public static final Block IRON_ENERGY_GENERATOR = register("iron_energy_generator", new IronEnergyGeneratorBlock(properties(Material.METAL, 4.0f,5.0f, SoundType.METAL), IronEnergyGeneratorBlockEntity::new, MiningTool.NEEDS_STONE_PICKAXE));
     public static final Block GOLD_ENERGY_GENERATOR = register("gold_energy_generator", new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), GoldEnergyGeneratorBlockEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
     public static final Block DIAMOND_ENERGY_GENERATOR = register("diamond_energy_generator", new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK), DiamondEnergyGeneratorBlockEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
+
+    //Alloy Smelter
+    public static final Block ALLOY_SMELTER = register("alloy_smelter", new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), AlloySmelterBlockEntity::new, MiningTool.NEEDS_IRON_PICKAXE));
 
     public ModBlocks() {
     }

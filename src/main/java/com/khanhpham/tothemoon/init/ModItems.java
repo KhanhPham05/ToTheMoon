@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
-import com.khanhpham.tothemoon.utils.ItemRegister;
+import com.khanhpham.tothemoon.utils.registration.ItemRegister;
 import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -16,6 +16,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModItems {
     public static final ItemRegister ITEMS = new ItemRegister();
 
+    //special ingredient
+    public static final Item REDSTONE_STEEL_ALLOY;
+    public static final Item REDSTONE_INGOT;
+
+    //common crafting ingredient
     public static final Item URANIUM_INGOT;
     public static final Item URANIUM_DUST;
     public static final Item COPPER_PLATE;
@@ -26,6 +31,7 @@ public class ModItems {
     public static final Item STEEL_ROD;
     public static final Item REDSTONE_MACHINE_FRAME;
     public static final Item IRON_PLATE;
+
 
     static {
         URANIUM_INGOT = register("uranium_ingot");
@@ -38,6 +44,8 @@ public class ModItems {
         COPPER_PLATE = register("copper_plate");
         URANIUM_PLATE = register("uranium_plate");
         IRON_PLATE = register("iron_plate");
+        REDSTONE_INGOT = register("redstone_ingot");
+        REDSTONE_STEEL_ALLOY = register("redstone_steel_alloy");
     }
 
     private ModItems() {}

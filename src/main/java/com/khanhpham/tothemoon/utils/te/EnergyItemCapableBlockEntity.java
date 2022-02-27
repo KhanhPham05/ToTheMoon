@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.utils.te;
 
 import com.khanhpham.tothemoon.utils.energy.Energy;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -23,7 +24,10 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEntity implements Container, MenuProvider, Nameable {
     protected final Component label;
     protected final int containerSize;
@@ -104,7 +108,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         saveExtra(pTag);
     }
 
-    protected void saveExtra(CompoundTag tag) {
+    protected void saveExtra(CompoundTag ignored) {
     }
 
     @Override
@@ -116,11 +120,11 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         loadExtra(pTag);
     }
 
-    protected void loadExtra(CompoundTag tag) {
+    protected void loadExtra(CompoundTag ignored) {
     }
 
     @Nonnull
-    protected abstract AbstractContainerMenu createMenu(int containerId, Inventory playerInventory);
+    protected abstract AbstractContainerMenu createMenu(int containerId,@Nonnull Inventory playerInventory);
 
     protected void transferEnergyToOther(Level level, BlockPos blockPos) {
         transferEnergy(level, blockPos, Direction.NORTH, Direction.DOWN);

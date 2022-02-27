@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.storageblock;
 
-import com.khanhpham.tothemoon.init.ModContainerTypes;
+import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.containers.BaseMenu;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -37,11 +37,11 @@ public class MoonBarrelMenu extends BaseMenu {
     }
 
     public MoonBarrelMenu(int containerId, Container externalContainer, Inventory playerInventory) {
-        this(ModContainerTypes.STORAGE_BLOCK, externalContainer, playerInventory, containerId);
+        this(ModMenuTypes.STORAGE_BLOCK, externalContainer, playerInventory, containerId);
     }
 
     public MoonBarrelMenu(int containerId, Inventory playerContainer) {
-        this(ModContainerTypes.STORAGE_BLOCK, new SimpleContainer(CAPACITY), playerContainer, containerId);
+        this(ModMenuTypes.STORAGE_BLOCK, new SimpleContainer(CAPACITY), playerContainer, containerId);
     }
 
     @Override

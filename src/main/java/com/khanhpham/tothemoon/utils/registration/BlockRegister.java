@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.utils;
+package com.khanhpham.tothemoon.utils.registration;
 
 import com.khanhpham.tothemoon.Names;
 import net.minecraft.resources.ResourceLocation;

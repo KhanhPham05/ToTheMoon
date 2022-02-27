@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.utils;
+package com.khanhpham.tothemoon.utils.registration;
 
 import com.khanhpham.tothemoon.Names;
 import net.minecraft.resources.ResourceLocation;
@@ -9,10 +9,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ContainerTypeRegister {
+public class MenuTypeRegister {
     private final Set<MenuType<?>> containerTypes = new HashSet<>();
 
-    public ContainerTypeRegister() {}
+    public MenuTypeRegister() {}
 
     public <T extends AbstractContainerMenu> MenuType<T> register(String name, MenuType.MenuSupplier<T> supplier) {
         MenuType<T> containerType = new MenuType<>(supplier);

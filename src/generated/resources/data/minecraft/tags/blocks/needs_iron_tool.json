@@ -2,9 +2,10 @@
   "replace": false,
   "values": [
     "tothemoon:diamond_energy_generator",
-    "tothemoon:gold_energy_generator",
-    "tothemoon:machine_frame",
+    "tothemoon:alloy_smelter",
+    "tothemoon:copper_energy_generator",
     "tothemoon:moon_rock_barrel",
-    "tothemoon:copper_energy_generator"
+    "tothemoon:machine_frame",
+    "tothemoon:gold_energy_generator"
   ]
 }

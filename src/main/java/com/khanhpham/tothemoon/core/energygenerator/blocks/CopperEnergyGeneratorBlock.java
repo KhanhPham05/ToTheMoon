@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.energygenerator.blocks;
 
-import com.khanhpham.tothemoon.init.ModTileEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
@@ -17,6 +17,6 @@ public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock {
 
     @Override
     protected <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level level, BlockEntityType<A> pBlockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModTileEntityTypes.COPPER_ENERGY_GENERATOR_TE, AbstractEnergyGeneratorBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE, AbstractEnergyGeneratorBlockEntity::serverTick);
     }
 }

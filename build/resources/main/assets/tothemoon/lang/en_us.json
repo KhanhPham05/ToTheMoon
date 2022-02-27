@@ -1,4 +1,5 @@
 {
+  "block.tothemoon.alloy_smelter": "Alloy Smelter",
   "block.tothemoon.copper_energy_generator": "Copper Energy Generator",
   "block.tothemoon.diamond_energy_generator": "Diamond Energy Generator",
   "block.tothemoon.gold_energy_generator": "Gold Energy Generator",
@@ -18,7 +19,9 @@
   "gui.tothemoon.moon_storage": "Moon Rock Barrel",
   "item.tothemoon.copper_plate": "Copper Plate",
   "item.tothemoon.iron_plate": "Iron Plate",
+  "item.tothemoon.redstone_ingot": "Redstone Ingot",
   "item.tothemoon.redstone_machine_frame": "Redstone Machine Frame",
+  "item.tothemoon.redstone_steel_alloy": "Redstone Steel Alloy",
   "item.tothemoon.steel_dust": "Steel Dust",
   "item.tothemoon.steel_ingot": "Steel Ingot",
   "item.tothemoon.steel_plate": "Steel Plate",

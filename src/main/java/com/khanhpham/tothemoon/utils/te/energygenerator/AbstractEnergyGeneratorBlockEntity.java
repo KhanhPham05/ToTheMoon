@@ -92,7 +92,7 @@ public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapab
 
     @NotNull
     @Override
-    protected AbstractContainerMenu createMenu(int containerId, Inventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory) {
         return new EnergyGeneratorMenu(this, playerInventory, containerId, data);
     }
 }

@@ -19,11 +19,13 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     protected final int endHotBarIndex = 36;
     protected final int inventorySize;
     protected final Inventory playerInventory;
+    protected final Container externalCcontainer;
 
     protected BaseMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId) {
         super(pMenuType, pContainerId);
         this.inventorySize = externalContainer.getContainerSize();
         this.playerInventory = playerInventory;
+        this.externalCcontainer = externalContainer;
     }
 
     protected void addPlayerInventorySlots(int beginX, int beginY) {
@@ -40,8 +42,13 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         }
     }
 
+
     protected void addSlot(Container container, int index, int x, int y) {
         super.addSlot(new Slot(container, index, x, y));
+    }
+
+    protected void addSlot(int index, int x, int y) {
+        super.addSlot(new Slot(this.externalCcontainer, index, x, y));
     }
 
     @Override

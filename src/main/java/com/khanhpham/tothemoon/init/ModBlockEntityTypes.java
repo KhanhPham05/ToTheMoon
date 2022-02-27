@@ -1,11 +1,12 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.energygenerator.tileentities.*;
 import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
-import com.khanhpham.tothemoon.utils.BlockEntityRegister;
+import com.khanhpham.tothemoon.utils.registration.BlockEntityRegister;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,7 +17,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 
 @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModTileEntityTypes {
+public class ModBlockEntityTypes {
     public static final BlockEntityRegister BLOCK_ENTITIES = new BlockEntityRegister();
 
     public static final BlockEntityType<MoonBarrelTileEntity> MOON_STORAGE;
@@ -25,6 +26,7 @@ public class ModTileEntityTypes {
     public static final BlockEntityType<IronEnergyGeneratorBlockEntity> IRON_ENERGY_GENERATOR_TE;
     public static final BlockEntityType<GoldEnergyGeneratorBlockEntity> GOLD_ENERGY_GENERATOR_TE;
     public static final BlockEntityType<DiamondEnergyGeneratorBlockEntity> DIAMOND_ENERGY_GENERATOR_TE;
+    public static final BlockEntityType<AlloySmelterBlockEntity> ALLOY_SMELTER;
 
     static {
         MOON_STORAGE = register("moon_storage", MoonBarrelTileEntity::new, ModBlocks.MOON_ROCK_BARREL);
@@ -32,9 +34,10 @@ public class ModTileEntityTypes {
         IRON_ENERGY_GENERATOR_TE = register("iron_energy_generator_tile_entity", IronEnergyGeneratorBlockEntity::new, ModBlocks.IRON_ENERGY_GENERATOR);
         GOLD_ENERGY_GENERATOR_TE = register("gold_energy_generator_tile_entity", GoldEnergyGeneratorBlockEntity::new, ModBlocks.GOLD_ENERGY_GENERATOR);
         DIAMOND_ENERGY_GENERATOR_TE = register("diamond_energy_generator_tile_entity", DiamondEnergyGeneratorBlockEntity::new, ModBlocks.DIAMOND_ENERGY_GENERATOR);
+        ALLOY_SMELTER = register("alloy_smelter", AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER);
     }
 
-    private ModTileEntityTypes() {
+    private ModBlockEntityTypes() {
     }
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType.BlockEntitySupplier<T> supplier, Block... validBlocks) {

@@ -6,11 +6,10 @@ import com.khanhpham.tothemoon.data.ModLanguageProvider;
 import com.khanhpham.tothemoon.data.ModModelProvider;
 import com.khanhpham.tothemoon.data.recipe.ModRecipeProvider;
 import com.khanhpham.tothemoon.data.ModTagsProvider;
-import com.khanhpham.tothemoon.init.ModContainerTypes;
+import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.init.ModItems;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -46,8 +45,8 @@ public class ToTheMoon {
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(ModContainerTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
-            MenuScreens.register(ModContainerTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorContainerScreen::new);
+            MenuScreens.register(ModMenuTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
+            MenuScreens.register(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorContainerScreen::new);
         }
 
         @SubscribeEvent
