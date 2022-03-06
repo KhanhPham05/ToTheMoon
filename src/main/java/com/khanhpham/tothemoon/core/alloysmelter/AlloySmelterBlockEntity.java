@@ -29,10 +29,9 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
     public static final int MENU_SIZE = 3;
     public static final TranslatableComponent LABEL = ModUtils.translate("gui.tothemoon.alloy_smelter");
     public static final int DATA_CAPACITY = 4;
-    int isActive = 0;
     private int workingTime;
     private int workingDuration;
-    private final int[] datas = new int[]{workingTime, workingDuration, energy.getEnergyStored(), energy.getMaxEnergyStored(), isActive};
+    private final int[] datas = new int[]{workingTime, workingDuration, energy.getEnergyStored(), energy.getMaxEnergyStored()};
     private final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -73,21 +72,45 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
         if (!blockEntity.energy.isEmpty()) {
             ItemStack resultSlot = blockEntity.items.get(2);
             AlloySmeltingRecipe recipe = level.getRecipeManager().getRecipeFor(ModRecipes.ALLOY_SMELTING, blockEntity, level).orElse(null);
-            if (!resultSlot.isEmpty() && recipe != null) {
-                if (blockEntity.canProcess()) {
-                    if (recipe.matches(blockEntity, level)) {
-                        blockEntity.items.get(0).shrink(recipe.getFirstIngredient().getAmount());
-                        blockEntity.items.get(1).shrink(recipe.getSecondIngredient().getAmount());
-                        blockEntity.setTime();
-                        blockEntity.isActive = 1;
-                    } else {
-                        blockEntity.isActive = 0;
-                    }
+            if (recipe != null) {
+                if (!resultSlot.isEmpty()) {
+                    blockEntity.processRecipe(level, recipe);
+                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
+                } else {
+                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
                 }
+
+                if (resultSlot.is(recipe.getResultItem().getItem()) && resultSlot.getCount() <= 64 - recipe.getResultItem().getCount()) {
+                    blockEntity.processRecipe(level, recipe);
+                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
+                } else {
+                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+                }
+            } else {
+                blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
             }
         }
 
+        if (!blockEntity.energy.isEmpty() && blockEntity.workingTime > 0) {
+            blockEntity.workingTime--;
+            blockEntity.energy.extractEnergy();
+        }
+
+        if (blockEntity.energy.isEmpty()) {
+            blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+        }
+
         markDirty(level, pos, state);
+    }
+
+    private void processRecipe(Level level, AlloySmeltingRecipe recipe) {
+        if (canProcess()) {
+            if (recipe.matches(this, level)) {
+                items.get(0).shrink(recipe.getFirstIngredient().getAmount());
+                items.get(1).shrink(recipe.getSecondIngredient().getAmount());
+                setTime();
+            }
+        }
     }
 
     private boolean canProcess() {

@@ -1,9 +1,8 @@
 package com.khanhpham.tothemoon.core.alloysmelter;
 
-import com.khanhpham.tothemoon.ModUtils;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.containers.BaseMenu;
-import net.minecraft.resources.ResourceLocation;
+import com.khanhpham.tothemoon.utils.containers.DataContainerMenuHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,9 +11,9 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import org.jetbrains.annotations.Nullable;
 
-public class AlloySmelterMenu extends BaseMenu {
+
+public class AlloySmelterMenu extends BaseMenu implements DataContainerMenuHelper {
     private final ContainerData data;
-    public static final ResourceLocation GUI = ModUtils.modLoc("textures/gui/alloy_smelter.png");
 
     protected AlloySmelterMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData data) {
         super(pMenuType, externalContainer, playerInventory, pContainerId);
@@ -26,9 +25,6 @@ public class AlloySmelterMenu extends BaseMenu {
         addPlayerInventorySlots(8, 95);
     }
 
-    //UNFINISHED
-    //public int getEnergyBar() {}
-
     public AlloySmelterMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, new SimpleContainer(AlloySmelterBlockEntity.MENU_SIZE), new SimpleContainerData(AlloySmelterBlockEntity.DATA_CAPACITY));
     }
@@ -38,4 +34,22 @@ public class AlloySmelterMenu extends BaseMenu {
     }
 
 
+    @Override
+    public ContainerData getContainerData() {
+        return this.data;
+    }
+
+    public int getEnergyBar() {
+        return getEnergyBar(2, 3);
+    }
+
+    /**
+     * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
+     * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
+     */
+    public int getAlloyingProcess() {
+        int i = data.get(0);
+        int j = data.get(1);
+        return j != 0 && i != 0 ? i * 35 / j : 0;
+    }
 }

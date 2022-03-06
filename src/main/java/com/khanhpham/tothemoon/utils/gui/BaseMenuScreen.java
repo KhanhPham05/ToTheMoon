@@ -3,12 +3,17 @@ package com.khanhpham.tothemoon.utils.gui;
 import com.khanhpham.tothemoon.utils.containers.BaseMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContainerScreen<T> {
     protected final ResourceLocation texture;
 
@@ -17,9 +22,9 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
         this.texture = texture;
     }
 
-    protected final void setImageWidthAndHeight(int width, int height) {
+    protected final void setImageWidthAndHeight(int height) {
         super.imageHeight = height;
-        super.imageWidth = width;
+        super.imageWidth = 176;
     }
 
     /**
@@ -28,7 +33,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
     @Override
     protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1,1,1,1);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.setShaderTexture(0, this.texture);
 
         if (minecraft != null) {

@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon;
 
+import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.energygenerator.containerscreens.EnergyGeneratorContainerScreen;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelScreen;
 import com.khanhpham.tothemoon.data.ModLanguageProvider;
@@ -38,15 +39,16 @@ public class ToTheMoon {
     }
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static final class Registration {
+    public static final class CommonEvents {
 
-        public Registration() {
+        public CommonEvents() {
         }
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorContainerScreen::new);
+            MenuScreens.register(ModMenuTypes.ALLOY_SMELTER, AlloySmelterMenuScreen::new);
         }
 
         @SubscribeEvent

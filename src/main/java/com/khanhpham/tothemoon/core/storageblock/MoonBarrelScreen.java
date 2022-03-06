@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 public class MoonBarrelScreen extends BaseMenuScreen<MoonBarrelMenu> {
     public MoonBarrelScreen(MoonBarrelMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle, GUI);
-        super.setImageWidthAndHeight(176, 186);
+        super.setImageWidthAndHeight(186);
     }
 
     private static final ResourceLocation GUI = new ResourceLocation(Names.MOD_ID, "textures/gui/moon_rock_barrel.png");

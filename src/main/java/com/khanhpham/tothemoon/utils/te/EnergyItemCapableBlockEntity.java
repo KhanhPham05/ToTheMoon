@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.Nullable;
@@ -149,9 +150,9 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
 
         if (te != null) {
             te.getCapability(CapabilityEnergy.ENERGY, direction2).ifPresent(e -> {
-                if (e.canExtract()) {
-                    super.energy.receiveEnergy();
-                    e.extractEnergy(energy.getMaxReceive(), false);
+                if (e.canExtract() && e.getEnergyStored() > 0) {
+                    int i = e.extractEnergy(super.energy.getMaxReceive(), false);
+                    super.energy.receiveEnergy(i, false);
                 }
             });
         }
@@ -167,6 +168,14 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
                 }
             });
         }
+    }
 
+    /**
+     * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
+     */
+    protected <T extends Comparable<T>> BlockState setNewBlockState(Level level, BlockPos pos, BlockState state, Property<T> property, T value) {
+        state = state.setValue(property, value);
+        level.setBlock(pos, state, 3);
+        return state;
     }
 }

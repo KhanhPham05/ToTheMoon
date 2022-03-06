@@ -149,15 +149,21 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
                             MultipleIngredient ingredient2 = null;
                             if (object1.has(JsonNames.ITEM_NAME)) {
                                 ingredient1 = MultipleIngredient.of(Ingredient.of(Registry.ITEM.get(new ResourceLocation(object1.get(JsonNames.ITEM_NAME).getAsString()))), amount1);
+                                System.out.println(ingredient1.getIngredient());
                             } else if (object1.has(JsonNames.ITEM_TAG)) {
                                 ingredient1 = MultipleIngredient.of(Ingredient.of(ItemTags.bind(object1.get(JsonNames.ITEM_TAG).getAsString())), amount1);
+                                System.out.println(ingredient1.getIngredient());
                             }
 
                             if (object2.has(JsonNames.ITEM_NAME)) {
                                 ingredient2 = MultipleIngredient.of(Ingredient.of(Registry.ITEM.get(new ResourceLocation(object2.get(JsonNames.ITEM_NAME).getAsString()))), amount2);
+                                System.out.println(ingredient2.getIngredient());
                             } else if (object2.has(JsonNames.ITEM_TAG)) {
                                 ingredient2 = MultipleIngredient.of(Ingredient.of(ItemTags.bind(object2.get(JsonNames.ITEM_TAG).getAsString())), amount2);
+                                System.out.println(ingredient2.getIngredient());
                             }
+
+
 
                             return new MultipleInputIngredient(ingredient1, ingredient2);
                         } else throw new JsonSyntaxException("");

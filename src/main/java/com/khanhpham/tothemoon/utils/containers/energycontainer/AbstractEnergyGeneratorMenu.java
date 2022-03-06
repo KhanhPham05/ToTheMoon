@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.utils.containers.energycontainer;
 
 import com.khanhpham.tothemoon.utils.containers.BaseMenu;
+import com.khanhpham.tothemoon.utils.containers.DataContainerMenuHelper;
 import com.khanhpham.tothemoon.utils.slot.BurnableSlot;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractEnergyGeneratorMenu extends BaseMenu {
+public abstract class AbstractEnergyGeneratorMenu extends BaseMenu implements DataContainerMenuHelper {
     public final ContainerData data;
     private final ItemStack EMPTY = ItemStack.EMPTY;
 
@@ -26,6 +27,12 @@ public abstract class AbstractEnergyGeneratorMenu extends BaseMenu {
 
         super.addDataSlots(intData);
     }
+
+    @Override
+    public ContainerData getContainerData() {
+        return this.data;
+    }
+
 
     /**
      * @see net.minecraft.world.inventory.AbstractFurnaceMenu
@@ -99,14 +106,7 @@ public abstract class AbstractEnergyGeneratorMenu extends BaseMenu {
         return this.data.get(0) * 13 / i;
     }
 
-    /**
-     * @see net.minecraft.world.inventory.AbstractFurnaceMenu
-     * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
-     */
-    public int getEnergyProcess() {
-        int i = data.get(2);
-        int j = data.get(3);
-
-        return j != 0 && i != 0 ? i * 143 / j : 0;
+    public int getEnergyBar() {
+        return getEnergyBar(2, 3);
     }
 }

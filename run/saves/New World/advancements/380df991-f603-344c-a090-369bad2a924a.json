@@ -239,6 +239,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/iron_ingot_from_iron_block": {
+    "criteria": {
+      "has_iron_block": "2022-03-06 15:40:42 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/oak_planks": {
     "criteria": {
       "has_logs": "2022-02-11 14:35:37 +0700"
@@ -377,6 +383,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/diamond": {
+    "criteria": {
+      "has_diamond_block": "2022-03-06 15:40:36 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/decorations/dark_oak_fence": {
     "criteria": {
       "has_planks": "2022-02-07 14:32:37 +0700"
@@ -416,6 +428,12 @@
   "immersiveengineering:recipes/immersiveengineering/crafting/railgun": {
     "criteria": {
       "has_capacitor_hv": "2022-02-20 10:41:39 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/anvil": {
+    "criteria": {
+      "has_iron_block": "2022-03-06 15:40:42 +0700"
     },
     "done": true
   },
