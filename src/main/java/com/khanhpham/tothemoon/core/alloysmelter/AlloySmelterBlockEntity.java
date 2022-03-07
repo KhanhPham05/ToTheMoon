@@ -60,34 +60,29 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
             }
         }, LABEL, MENU_SIZE);
     }
-
-    /**
-     * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
-     */
-
     public static void serverTick(Level level, BlockPos pos, BlockState state, AlloySmelterBlockEntity blockEntity) {
 
         blockEntity.receiveEnergyFromOther(level, pos);
 
         if (!blockEntity.energy.isEmpty()) {
             ItemStack resultSlot = blockEntity.items.get(2);
-            AlloySmeltingRecipe recipe = level.getRecipeManager().getRecipeFor(ModRecipes.ALLOY_SMELTING, blockEntity, level).orElse(null);
+            AlloySmeltingRecipe recipe = level.getRecipeManager().getRecipeFor(AlloySmeltingRecipe.RECIPE_TYPE, blockEntity, level).orElse(null);
             if (recipe != null) {
                 if (!resultSlot.isEmpty()) {
                     blockEntity.processRecipe(level, recipe);
                     blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
                 } else {
-                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+                    state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
                 }
 
                 if (resultSlot.is(recipe.getResultItem().getItem()) && resultSlot.getCount() <= 64 - recipe.getResultItem().getCount()) {
                     blockEntity.processRecipe(level, recipe);
-                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
+                    state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
                 } else {
-                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+                    state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
                 }
             } else {
-                blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+                state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
             }
         }
 
@@ -97,18 +92,17 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
         }
 
         if (blockEntity.energy.isEmpty()) {
-            blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+            state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
         }
 
         markDirty(level, pos, state);
     }
 
+    //TODO : this
     private void processRecipe(Level level, AlloySmeltingRecipe recipe) {
         if (canProcess()) {
             if (recipe.matches(this, level)) {
-                items.get(0).shrink(recipe.getFirstIngredient().getAmount());
-                items.get(1).shrink(recipe.getSecondIngredient().getAmount());
-                setTime();
+
             }
         }
     }

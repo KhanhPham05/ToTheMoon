@@ -1,14 +1,23 @@
 {
   "type": "tothemoon:alloy_smelting",
-  "alloyIngredients": [
-    {
-      "item": "minecraft:diamond_block",
-      "count": 2
+
+  "baseIngredient": {
+    "item": "minecraft:iron_ingot",
+    "count": 2
+  },
+
+  "secondaryIngredient": {
+    "item": {
+      "tag": "forge:dusts/redstone"
     },
-    {
-      "item": "minecraft:iron_block",
-      "count": 3
-    }
-  ],
-  "result": "minecraft:dirt"
+    "count": 1
+  },
+
+  "result": {
+    "item": {
+      "item": "tothemoon:redstone_ingot"
+    },
+    "count" : 3
+  },
+
 }

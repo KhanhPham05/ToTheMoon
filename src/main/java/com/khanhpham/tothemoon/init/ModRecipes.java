@@ -15,19 +15,14 @@ import net.minecraftforge.fml.common.Mod;
 
 public class ModRecipes {
 
-    public static final RecipeType<AlloySmeltingRecipe> ALLOY_SMELTING = new RecipeType<>() {
-        @Override
-        public String toString() {
-            return AlloySmeltingRecipe.RECIPE_ID.toString();
-        }
-    };
+    public static final RecipeSerializer<AlloySmeltingRecipe> ALLOY_SMELTING_RECIPE_SERIALIZER = new AlloySmeltingRecipe.Serializer();
 
     public ModRecipes() {
     }
 
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<RecipeSerializer<?>> event) {
-        reg(event, ALLOY_SMELTING, new AlloySmeltingRecipe.Serializer());
+        reg(event, AlloySmeltingRecipe.RECIPE_TYPE, ALLOY_SMELTING_RECIPE_SERIALIZER);
     }
 
     private static <T extends Recipe<?>> void reg(RegistryEvent.Register<RecipeSerializer<?>> event, RecipeType<T> recipeType, RecipeSerializer<T> serializer) {
