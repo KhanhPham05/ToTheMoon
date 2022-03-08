@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
-    public static RecipeType<AlloySmeltingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType("alloy_smelting");
+    public static RecipeType<AlloySmeltingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModRecipeLocations.ALLOY_SMELTING.getPath());
 
     public final IngredientStack baseIngredient;
     public final IngredientStack secondaryIngredient;
@@ -32,6 +32,21 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
         this.result = result;
         this.alloyingTime = alloyingTime;
         this.id = id;
+
+        //TEST ONLY
+        printEverything();
+    }
+
+    private void printEverything() {
+        System.out.println(baseIngredient);
+        System.out.println(secondaryIngredient);
+        System.out.println(result);
+        System.out.println(alloyingTime);
+        System.out.println(id.toString());
+    }
+
+    public int getAlloyingTime() {
+        return alloyingTime;
     }
 
     @Override
@@ -73,6 +88,11 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
     }
 
     public static final class Serializer extends BaseRecipeSerializer<AlloySmeltingRecipe> {
+
+        public Serializer() {
+            super.setRegistryName(ModRecipeLocations.ALLOY_SMELTING);
+        }
+
         @Override
         public AlloySmeltingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack result = resultFromJson(pSerializedRecipe);

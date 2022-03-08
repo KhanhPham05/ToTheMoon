@@ -3,7 +3,6 @@ package com.khanhpham.tothemoon.core.alloysmelter;
 import com.khanhpham.tothemoon.ModUtils;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.utils.te.EnergyItemCapableBlockEntity;
@@ -60,6 +59,7 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
             }
         }, LABEL, MENU_SIZE);
     }
+
     public static void serverTick(Level level, BlockPos pos, BlockState state, AlloySmelterBlockEntity blockEntity) {
 
         blockEntity.receiveEnergyFromOther(level, pos);
@@ -100,75 +100,28 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
 
     //TODO : this
     private void processRecipe(Level level, AlloySmeltingRecipe recipe) {
-        if (canProcess()) {
-            if (recipe.matches(this, level)) {
-
+        //if (canProcess()) {
+        if (recipe.matches(this, level)) {
+            System.out.println("RECIPE MATCHED, processing");
+            if (workingTime <= 0) {
+                this.energy.extractEnergy();
+                this.workingDuration = recipe.getAlloyingTime();
+                this.workingTime = 0;
             }
+        } else {
+            this.workingTime = 0;
+            this.workingDuration = 0;
         }
+        //}
     }
 
-    private boolean canProcess() {
+    /*private boolean canProcess() {
         return workingTime <= 0;
-    }
+    }*/
 
     @NotNull
     @Override
     protected AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory) {
         return new AlloySmelterMenu(containerId, playerInventory, this, this.data);
-    }
-
-    private void processRecipes() {
-        ItemStack input1 = items.get(0);
-        ItemStack input2 = items.get(1);
-        ItemStack output = items.get(2);
-
-        if (!input1.isEmpty() && !input2.isEmpty()) {
-            SetRecipes[] recipes = SetRecipes.values();
-            for (SetRecipes recipe : recipes) {
-                if (recipe.check(input1, input2) && (output.getCount() <= output.getMaxStackSize() - recipe.resultAmount && (output.is(recipe.result) || output.isEmpty()))) {
-                    setTime();
-                    input1.shrink(recipe.amount1);
-                    input2.shrink(recipe.amount2);
-                }
-            }
-        }
-
-        if (this.workingTime <= 0) {
-
-        }
-    }
-
-    private void setTime() {
-        this.workingTime = 200;
-        this.workingDuration = this.workingTime;
-    }
-
-    private enum SetRecipes {
-        REDSTONE_STEEL_ALLOY(ModItems.STEEL_INGOT, Items.REDSTONE, ModItems.REDSTONE_STEEL_ALLOY, 1, 3, 1),
-        REDSTONE_INGOT(Items.IRON_INGOT, Items.REDSTONE, ModItems.REDSTONE_INGOT, 1, 3, 1);
-
-        final Item req1;
-        final Item req2;
-        final Item result;
-        final int amount1;
-        final int amount2;
-        final int resultAmount;
-
-        SetRecipes(Item req1, Item req2, Item result, int amount1, int amound2, int resultAmount) {
-            this.req1 = req1;
-            this.req2 = req2;
-            this.result = result;
-            this.amount1 = amount1;
-            this.amount2 = amound2;
-            this.resultAmount = resultAmount;
-        }
-
-        private boolean check(ItemStack stack1, ItemStack stack2) {
-            return (!stack1.isEmpty() && !stack2.isEmpty()) && (check(stack1, req1, amount1) && check(stack2, req2, amount2));
-        }
-
-        private boolean check(ItemStack stack1, Item req, int amount) {
-            return (stack1.is(req)) && stack1.getCount() >= amount;
-        }
     }
 }

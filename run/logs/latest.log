@@ -1,160 +1,146 @@
-[06Mar2022 16:39:06.254] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, MOD_DEV, --assetIndex, 1.18, --assetsDir, C:\Users\HP\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 39.1.2, --fml.mcVersion, 1.18.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20211210.034407]
-[06Mar2022 16:39:06.259] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 9.1.3+9.1.3+main.9b69c82a starting: java version 17.0.2 by Oracle Corporation
-[06Mar2022 16:39:06.494] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/HP/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%2327!/ Service=ModLauncher Env=CLIENT
-[06Mar2022 16:39:13.786] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
-[06Mar2022 16:39:13.816] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, MOD_DEV, --gameDir, ., --assetsDir, C:\Users\HP\.gradle\caches\forge_gradle\assets, --assetIndex, 1.18]
-[06Mar2022 16:39:14.482] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.497] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.501] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.505] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.508] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.512] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.514] [main/INFO] [mixin/]: Remapping refMap lazydfu.refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.518] [main/INFO] [mixin/]: Remapping refMap immersiveengineering.refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:14.522] [main/INFO] [mixin/]: Remapping refMap patchouli.refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
-[06Mar2022 16:39:19.410] [pool-3-thread-1/INFO] [me.steinborn.lazydfu.LazyDFU/]: Lazy DFU
-[06Mar2022 16:39:21.968] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/HP/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1/forge-1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1-recomp.jar%2377!/assets/.mcassetsroot' uses unexpected schema
-[06Mar2022 16:39:21.969] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/HP/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1/forge-1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1-recomp.jar%2377!/data/.mcassetsroot' uses unexpected schema
-[06Mar2022 16:39:21.985] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[06Mar2022 16:39:21.992] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
-[06Mar2022 16:39:22.160] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.2.2 SNAPSHOT
-[06Mar2022 16:39:23.294] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 39.1.2, for MC 1.18.1 with MCP 20211210.034407
-[06Mar2022 16:39:23.294] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v39.1.2 Initialized
-[06Mar2022 16:39:26.555] [Render thread/INFO] [com.mojang.text2speech.NarratorWindows/]: Narrator library for x64 successfully loaded
-[06Mar2022 16:39:26.620] [Render thread/INFO] [net.minecraftforge.gametest.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
-[06Mar2022 16:39:27.108] [Render thread/INFO] [net.minecraft.server.packs.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, Mod Resources
-[06Mar2022 16:39:27.148] [Thread-0/FATAL] [mcjty.theoneprobe.TheOneProbe/CORE]: theoneprobe config just got changed on the file system!
-[06Mar2022 16:39:27.176] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file H:\FORGE 1.18\ToTheMoon  NEW\run\config\patchouli-client.toml is not correct. Correcting
-[06Mar2022 16:39:27.181] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key noAdvancementBooks was corrected from [] to its default, []. 
-[06Mar2022 16:39:27.187] [Thread-0/WARN] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Configuration file H:\FORGE 1.18\ToTheMoon  NEW\run\config\patchouli-client.toml is not correct. Correcting
-[06Mar2022 16:39:27.350] [Thread-0/FATAL] [mcjty.theoneprobe.TheOneProbe/CORE]: theoneprobe config just got changed on the file system!
-[06Mar2022 16:39:32.233] [Immersive Engineering Contributors Thread/INFO] [immersiveengineering/]: Attempting to download special revolvers from GitHub
-[06Mar2022 16:39:32.485] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
-[06Mar2022 16:39:33.557] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: AHEAD Current: 39.1.2 Target: null
-[06Mar2022 16:39:33.557] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [immersiveengineering] Starting version check at https://raw.githubusercontent.com/BluSunrize/ImmersiveEngineering/1.18.1/changelog.json
-[06Mar2022 16:39:33.881] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [immersiveengineering] Found status: UP_TO_DATE Current: 1.18.1-7.1.0-145 Target: null
-[06Mar2022 16:39:38.013] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: tothemoon:blockstates/alloy_smelter.json: java.io.FileNotFoundException: tothemoon:blockstates/alloy_smelter.json
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=north,lit=true'
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=east,lit=true'
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=south,lit=true'
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=south,lit=false'
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=west,lit=false'
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=east,lit=false'
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=north,lit=false'
-[06Mar2022 16:39:38.014] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=west,lit=true'
-[06Mar2022 16:39:38.030] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: tothemoon:blockstates/machine_frame.json: java.io.FileNotFoundException: tothemoon:blockstates/machine_frame.json
-[06Mar2022 16:39:38.030] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/machine_frame.json' missing model for variant: 'tothemoon:machine_frame#'
-[06Mar2022 16:39:40.836] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:uranium_dust#inventory' referenced from: tothemoon:uranium_dust#inventory: java.io.FileNotFoundException: tothemoon:models/item/uranium_dust.json
-[06Mar2022 16:39:40.839] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:steel_dust#inventory' referenced from: tothemoon:steel_dust#inventory: java.io.FileNotFoundException: tothemoon:models/item/steel_dust.json
-[06Mar2022 16:39:40.850] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:redstone_machine_frame#inventory' referenced from: tothemoon:redstone_machine_frame#inventory: java.io.FileNotFoundException: tothemoon:models/item/redstone_machine_frame.json
-[06Mar2022 16:39:40.852] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:steel_rod#inventory' referenced from: tothemoon:steel_rod#inventory: java.io.FileNotFoundException: tothemoon:models/item/steel_rod.json
-[06Mar2022 16:39:40.861] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:uranium_plate#inventory' referenced from: tothemoon:uranium_plate#inventory: java.io.FileNotFoundException: tothemoon:models/item/uranium_plate.json
-[06Mar2022 16:39:40.869] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:redstone_ingot#inventory' referenced from: tothemoon:redstone_ingot#inventory: java.io.FileNotFoundException: tothemoon:models/item/redstone_ingot.json
-[06Mar2022 16:39:40.871] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:redstone_steel_alloy#inventory' referenced from: tothemoon:redstone_steel_alloy#inventory: java.io.FileNotFoundException: tothemoon:models/item/redstone_steel_alloy.json
-[06Mar2022 16:39:40.907] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:alloy_smelter#inventory' referenced from: tothemoon:alloy_smelter#inventory: java.io.FileNotFoundException: tothemoon:models/item/alloy_smelter.json
-[06Mar2022 16:39:40.913] [Worker-Main-4/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:machine_frame#inventory' referenced from: tothemoon:machine_frame#inventory: java.io.FileNotFoundException: tothemoon:models/item/machine_frame.json
-[06Mar2022 16:39:41.974] [Worker-Main-4/INFO] [immersiveengineering/]: Stitching Revolver Textures!
-[06Mar2022 16:39:53.075] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on Speakers (Realtek High Definition Audio)
-[06Mar2022 16:39:53.078] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
-[06Mar2022 16:39:53.412] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/blocks.png-atlas
-[06Mar2022 16:39:54.064] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
-[06Mar2022 16:39:54.066] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
-[06Mar2022 16:39:54.080] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
-[06Mar2022 16:39:54.102] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
-[06Mar2022 16:39:54.107] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
-[06Mar2022 16:39:54.119] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
-[06Mar2022 16:39:58.093] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
-[06Mar2022 16:39:58.168] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
-[06Mar2022 16:39:58.180] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[06Mar2022 16:39:58.195] [Render thread/INFO] [patchouli/]: BookContentResourceListenerLoader preloaded 39 jsons
-[06Mar2022 16:39:58.196] [Render thread/INFO] [patchouli/]: Not reloading resource pack-based books as client world is missing
-[06Mar2022 16:39:58.196] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 jei:textures/atlas/gui.png-atlas
-[06Mar2022 16:40:00.442] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient/]: Could not authorize you against Realms server: Invalid session id
-[06Mar2022 16:40:30.133] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[06Mar2022 16:40:30.139] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[06Mar2022 16:40:30.167] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[06Mar2022 16:40:30.169] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[06Mar2022 16:40:30.172] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[06Mar2022 16:40:30.226] [Render thread/INFO] [net.minecraft.server.packs.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, the-one-probe-245211-3577512_mapped_parchment_2022.01.23-1.18.1.jar, main, , lazy-dfu-forge-460819-3544496_mapped_parchment_2022.01.23-1.18.1.jar, ferritecore-429235-3550045_mapped_parchment_2022.01.23-1.18.1.jar, jei-1.18.1-9.2.1.69_mapped_parchment_2022.01.23-1.18.1.jar, immersive-engineering-231951-3587149_mapped_parchment_2022.01.23-1.18.1.jar, Patchouli-1.18.1-65_mapped_parchment_2022.01.23-1.18.1.jar, patchouli-datagen-ptd-lib-585667-3671853_mapped_parchment_2022.01.23-1.18.1.jar
-[06Mar2022 16:40:41.836] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 27 recipes
-[06Mar2022 16:40:45.475] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1693 advancements
-[06Mar2022 16:40:45.626] [Render thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 radiator, missing knowledge for {1 water_bucket=0.25}
-[06Mar2022 16:40:45.628] [Render thread/INFO] [immersiveengineering/]: Finished recipe profiler for Arc Recycling, took 148 milliseconds
-[06Mar2022 16:40:45.701] [Render thread/INFO] [immersiveengineering/]: Recipes for potions: minecraft:strong_turtle_master, minecraft:strong_swiftness, minecraft:poison, minecraft:strong_regeneration, minecraft:awkward, minecraft:long_leaping, minecraft:harming, minecraft:fire_resistance, minecraft:night_vision, minecraft:long_slowness, minecraft:strong_healing, minecraft:strength, minecraft:healing, minecraft:long_poison, minecraft:long_slow_falling, minecraft:regeneration, minecraft:weakness, minecraft:long_weakness, minecraft:long_fire_resistance, minecraft:turtle_master, minecraft:slowness, minecraft:strong_poison, minecraft:strong_leaping, minecraft:long_night_vision, minecraft:long_regeneration, minecraft:strong_slowness, minecraft:water_breathing, minecraft:water, minecraft:long_invisibility, minecraft:long_turtle_master, minecraft:swiftness, minecraft:strong_strength, minecraft:long_strength, minecraft:strong_harming, minecraft:leaping, minecraft:long_swiftness, minecraft:slow_falling, minecraft:long_water_breathing, minecraft:invisibility
-[06Mar2022 16:40:48.919] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[06Mar2022 16:40:49.024] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.18.1
-[06Mar2022 16:40:49.025] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
-[06Mar2022 16:40:49.653] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
-[06Mar2022 16:40:51.731] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:51.731] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:51.731] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:51.731] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:54.458] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:54.460] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:54.461] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:54.481] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:54.482] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:54.482] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:54.756] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:55.256] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:56.318] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:56.318] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[06Mar2022 16:40:56.795] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 10%
-[06Mar2022 16:40:57.488] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 16%
-[06Mar2022 16:41:00.131] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
-[06Mar2022 16:41:00.134] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
-[06Mar2022 16:41:00.134] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
-[06Mar2022 16:41:00.134] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
-[06Mar2022 16:41:00.135] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
-[06Mar2022 16:41:00.859] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 30%
-[06Mar2022 16:41:00.860] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 30%
-[06Mar2022 16:41:03.699] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
-[06Mar2022 16:41:03.700] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
-[06Mar2022 16:41:03.700] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
-[06Mar2022 16:41:03.700] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
-[06Mar2022 16:41:04.562] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
-[06Mar2022 16:41:04.562] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
-[06Mar2022 16:41:04.562] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
-[06Mar2022 16:41:04.931] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 64%
-[06Mar2022 16:41:05.351] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 75%
-[06Mar2022 16:41:05.750] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 83%
-[06Mar2022 16:41:06.251] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 86%
-[06Mar2022 16:41:07.187] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 90%
-[06Mar2022 16:41:07.288] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 98%
-[06Mar2022 16:41:07.360] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
-[06Mar2022 16:41:07.362] [Server thread/INFO] [patchouli/]: Sending reload packet to clients
-[06Mar2022 16:41:07.379] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 17641 ms
-[06Mar2022 16:41:07.638] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 3, from 10
-[06Mar2022 16:41:07.642] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 5, from 0
-[06Mar2022 16:41:09.045] [Netty Local Client IO #0/INFO] [net.minecraftforge.network.NetworkHooks/]: Connected to a modded server.
-[06Mar2022 16:41:09.150] [Server thread/INFO] [net.minecraftforge.common.AdvancementLoadFix/]: Using new advancement loading for net.minecraft.server.PlayerAdvancements@29303681
-[06Mar2022 16:41:09.200] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:f18ca663] logged in with entity id 24 at (-30.91572334328779, -57.62570668690344, 8.649321999820858)
-[06Mar2022 16:41:09.308] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
-[06Mar2022 16:41:09.623] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Starting JEI...
-[06Mar2022 16:41:09.691] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient list...
-[06Mar2022 16:41:09.695] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient list took 4.058 ms
-[06Mar2022 16:41:09.696] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient filter...
-[06Mar2022 16:41:09.967] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient filter took 271.5 ms
-[06Mar2022 16:41:09.968] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building bookmarks...
-[06Mar2022 16:41:09.970] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building bookmarks took 2.187 ms
-[06Mar2022 16:41:10.023] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building recipe registry...
-[06Mar2022 16:41:10.041] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building recipe registry took 17.22 ms
-[06Mar2022 16:41:10.174] [Render thread/INFO] [immersiveengineering/]: Adding recipes to JEI!!
-[06Mar2022 16:41:10.214] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building runtime...
-[06Mar2022 16:41:10.263] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building runtime took 48.69 ms
-[06Mar2022 16:41:10.310] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Starting JEI took 685.5 ms
-[06Mar2022 16:41:10.397] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 110 advancements
-[06Mar2022 16:44:58.635] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[06Mar2022 16:44:58.858] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[06Mar2022 16:44:58.971] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[06Mar2022 16:44:58.984] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[06Mar2022 16:45:07.145] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
-[06Mar2022 16:45:07.214] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
-[06Mar2022 16:45:07.332] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
-[06Mar2022 16:45:07.332] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[06Mar2022 16:45:07.702] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[06Mar2022 16:45:07.703] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[06Mar2022 16:45:07.754] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (New World): All chunks are saved
-[06Mar2022 16:45:07.761] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[06Mar2022 16:45:07.763] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[06Mar2022 16:45:07.763] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[08Mar2022 19:45:55.689] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, MOD_DEV, --assetIndex, 1.18, --assetsDir, C:\Users\HP\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 39.1.2, --fml.mcVersion, 1.18.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20211210.034407]
+[08Mar2022 19:45:55.694] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 9.1.3+9.1.3+main.9b69c82a starting: java version 17.0.2 by Oracle Corporation
+[08Mar2022 19:45:55.859] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/HP/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%2327!/ Service=ModLauncher Env=CLIENT
+[08Mar2022 19:46:02.884] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[08Mar2022 19:46:02.916] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, MOD_DEV, --gameDir, ., --assetsDir, C:\Users\HP\.gradle\caches\forge_gradle\assets, --assetIndex, 1.18]
+[08Mar2022 19:46:03.470] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.474] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.478] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.481] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.485] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.488] [main/INFO] [mixin/]: Remapping refMap ferritecore-common-refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.490] [main/INFO] [mixin/]: Remapping refMap lazydfu.refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.493] [main/INFO] [mixin/]: Remapping refMap immersiveengineering.refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:03.495] [main/INFO] [mixin/]: Remapping refMap patchouli.refmap.json using H:\FORGE 1.18\ToTheMoon  NEW/build/createSrgToMcp/output.srg
+[08Mar2022 19:46:07.942] [pool-3-thread-1/INFO] [me.steinborn.lazydfu.LazyDFU/]: Lazy DFU
+[08Mar2022 19:46:10.024] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/HP/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1/forge-1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1-recomp.jar%2377!/assets/.mcassetsroot' uses unexpected schema
+[08Mar2022 19:46:10.025] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/HP/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1/forge-1.18.1-39.1.2_mapped_parchment_2022.01.23-1.18.1-recomp.jar%2377!/data/.mcassetsroot' uses unexpected schema
+[08Mar2022 19:46:10.039] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[08Mar2022 19:46:10.047] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[08Mar2022 19:46:10.189] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.2.2 SNAPSHOT
+[08Mar2022 19:46:11.540] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 39.1.2, for MC 1.18.1 with MCP 20211210.034407
+[08Mar2022 19:46:11.540] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v39.1.2 Initialized
+[08Mar2022 19:46:14.967] [Render thread/INFO] [com.mojang.text2speech.NarratorWindows/]: Narrator library for x64 successfully loaded
+[08Mar2022 19:46:15.044] [Render thread/INFO] [net.minecraftforge.gametest.ForgeGameTestHooks/]: Enabled Gametest Namespaces: []
+[08Mar2022 19:46:15.590] [Render thread/INFO] [net.minecraft.server.packs.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, Mod Resources
+[08Mar2022 19:46:15.664] [Thread-0/FATAL] [mcjty.theoneprobe.TheOneProbe/CORE]: theoneprobe config just got changed on the file system!
+[08Mar2022 19:46:15.706] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file H:\FORGE 1.18\ToTheMoon  NEW\run\config\patchouli-client.toml is not correct. Correcting
+[08Mar2022 19:46:15.740] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key noAdvancementBooks was corrected from [] to its default, []. 
+[08Mar2022 19:46:22.595] [Immersive Engineering Contributors Thread/INFO] [immersiveengineering/]: Attempting to download special revolvers from GitHub
+[08Mar2022 19:46:23.175] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[08Mar2022 19:46:24.214] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: AHEAD Current: 39.1.2 Target: null
+[08Mar2022 19:46:24.215] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [immersiveengineering] Starting version check at https://raw.githubusercontent.com/BluSunrize/ImmersiveEngineering/1.18.1/changelog.json
+[08Mar2022 19:46:24.408] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [immersiveengineering] Found status: UP_TO_DATE Current: 1.18.1-7.1.0-145 Target: null
+[08Mar2022 19:46:27.514] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: tothemoon:blockstates/machine_frame.json: java.io.FileNotFoundException: tothemoon:blockstates/machine_frame.json
+[08Mar2022 19:46:27.515] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/machine_frame.json' missing model for variant: 'tothemoon:machine_frame#'
+[08Mar2022 19:46:27.589] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: tothemoon:blockstates/alloy_smelter.json: java.io.FileNotFoundException: tothemoon:blockstates/alloy_smelter.json
+[08Mar2022 19:46:27.589] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=north,lit=true'
+[08Mar2022 19:46:27.590] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=east,lit=true'
+[08Mar2022 19:46:27.590] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=south,lit=true'
+[08Mar2022 19:46:27.590] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=south,lit=false'
+[08Mar2022 19:46:27.590] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=west,lit=false'
+[08Mar2022 19:46:27.590] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=east,lit=false'
+[08Mar2022 19:46:27.590] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=north,lit=false'
+[08Mar2022 19:46:27.590] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'tothemoon:blockstates/alloy_smelter.json' missing model for variant: 'tothemoon:alloy_smelter#facing=west,lit=true'
+[08Mar2022 19:46:29.986] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:uranium_dust#inventory' referenced from: tothemoon:uranium_dust#inventory: java.io.FileNotFoundException: tothemoon:models/item/uranium_dust.json
+[08Mar2022 19:46:29.988] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:steel_dust#inventory' referenced from: tothemoon:steel_dust#inventory: java.io.FileNotFoundException: tothemoon:models/item/steel_dust.json
+[08Mar2022 19:46:29.995] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:redstone_machine_frame#inventory' referenced from: tothemoon:redstone_machine_frame#inventory: java.io.FileNotFoundException: tothemoon:models/item/redstone_machine_frame.json
+[08Mar2022 19:46:29.996] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:steel_rod#inventory' referenced from: tothemoon:steel_rod#inventory: java.io.FileNotFoundException: tothemoon:models/item/steel_rod.json
+[08Mar2022 19:46:30.011] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:uranium_plate#inventory' referenced from: tothemoon:uranium_plate#inventory: java.io.FileNotFoundException: tothemoon:models/item/uranium_plate.json
+[08Mar2022 19:46:30.016] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:redstone_ingot#inventory' referenced from: tothemoon:redstone_ingot#inventory: java.io.FileNotFoundException: tothemoon:models/item/redstone_ingot.json
+[08Mar2022 19:46:30.017] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:redstone_steel_alloy#inventory' referenced from: tothemoon:redstone_steel_alloy#inventory: java.io.FileNotFoundException: tothemoon:models/item/redstone_steel_alloy.json
+[08Mar2022 19:46:30.018] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:machine_frame#inventory' referenced from: tothemoon:machine_frame#inventory: java.io.FileNotFoundException: tothemoon:models/item/machine_frame.json
+[08Mar2022 19:46:30.030] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'tothemoon:alloy_smelter#inventory' referenced from: tothemoon:alloy_smelter#inventory: java.io.FileNotFoundException: tothemoon:models/item/alloy_smelter.json
+[08Mar2022 19:46:30.856] [Worker-Main-2/INFO] [immersiveengineering/]: Stitching Revolver Textures!
+[08Mar2022 19:46:34.679] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on Speakers (Realtek High Definition Audio)
+[08Mar2022 19:46:34.681] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[08Mar2022 19:46:34.995] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[08Mar2022 19:46:35.386] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[08Mar2022 19:46:35.389] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[08Mar2022 19:46:35.399] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[08Mar2022 19:46:35.410] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[08Mar2022 19:46:35.412] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[08Mar2022 19:46:35.418] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[08Mar2022 19:46:38.143] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[08Mar2022 19:46:38.176] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[08Mar2022 19:46:38.181] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[08Mar2022 19:46:38.192] [Render thread/INFO] [patchouli/]: BookContentResourceListenerLoader preloaded 39 jsons
+[08Mar2022 19:46:38.192] [Render thread/INFO] [patchouli/]: Not reloading resource pack-based books as client world is missing
+[08Mar2022 19:46:38.192] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 jei:textures/atlas/gui.png-atlas
+[08Mar2022 19:46:39.356] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient/]: Could not authorize you against Realms server: Invalid session id
+[08Mar2022 19:46:48.029] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08Mar2022 19:46:48.031] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08Mar2022 19:46:48.034] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[08Mar2022 19:46:48.036] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[08Mar2022 19:46:48.037] [Render thread/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08Mar2022 19:46:48.044] [Render thread/INFO] [net.minecraft.server.packs.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, the-one-probe-245211-3577512_mapped_parchment_2022.01.23-1.18.1.jar, main, , lazy-dfu-forge-460819-3544496_mapped_parchment_2022.01.23-1.18.1.jar, ferritecore-429235-3550045_mapped_parchment_2022.01.23-1.18.1.jar, jei-1.18.1-9.2.1.69_mapped_parchment_2022.01.23-1.18.1.jar, immersive-engineering-231951-3587149_mapped_parchment_2022.01.23-1.18.1.jar, Patchouli-1.18.1-65_mapped_parchment_2022.01.23-1.18.1.jar, patchouli-datagen-ptd-lib-585667-3671853_mapped_parchment_2022.01.23-1.18.1.jar
+[08Mar2022 19:46:54.368] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 27 recipes
+[08Mar2022 19:46:57.174] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1693 advancements
+[08Mar2022 19:46:57.241] [Render thread/INFO] [immersiveengineering/]: Couldn't fully analyze 1 radiator, missing knowledge for {1 water_bucket=0.25}
+[08Mar2022 19:46:57.241] [Render thread/INFO] [immersiveengineering/]: Finished recipe profiler for Arc Recycling, took 65 milliseconds
+[08Mar2022 19:46:57.257] [Render thread/INFO] [immersiveengineering/]: Recipes for potions: minecraft:weakness, minecraft:long_regeneration, minecraft:leaping, minecraft:strong_leaping, minecraft:strong_swiftness, minecraft:slow_falling, minecraft:water, minecraft:long_slowness, minecraft:turtle_master, minecraft:poison, minecraft:long_weakness, minecraft:strong_poison, minecraft:invisibility, minecraft:strong_turtle_master, minecraft:long_fire_resistance, minecraft:strong_slowness, minecraft:water_breathing, minecraft:long_night_vision, minecraft:strong_regeneration, minecraft:harming, minecraft:long_poison, minecraft:fire_resistance, minecraft:strong_strength, minecraft:long_slow_falling, minecraft:swiftness, minecraft:long_swiftness, minecraft:healing, minecraft:long_strength, minecraft:awkward, minecraft:strong_healing, minecraft:night_vision, minecraft:regeneration, minecraft:long_water_breathing, minecraft:long_invisibility, minecraft:long_leaping, minecraft:long_turtle_master, minecraft:strong_harming, minecraft:strength, minecraft:slowness
+[08Mar2022 19:46:59.416] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[08Mar2022 19:46:59.481] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.18.1
+[08Mar2022 19:46:59.482] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[08Mar2022 19:46:59.917] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[08Mar2022 19:47:01.262] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:01.262] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:01.263] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:01.539] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:01.932] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:02.465] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:03.425] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:03.426] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08Mar2022 19:47:04.059] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 9%
+[08Mar2022 19:47:04.618] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 16%
+[08Mar2022 19:47:04.994] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 23%
+[08Mar2022 19:47:05.644] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
+[08Mar2022 19:47:06.011] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 37%
+[08Mar2022 19:47:06.426] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 48%
+[08Mar2022 19:47:06.974] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 69%
+[08Mar2022 19:47:07.560] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 76%
+[08Mar2022 19:47:07.955] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 83%
+[08Mar2022 19:47:08.926] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 89%
+[08Mar2022 19:47:08.927] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 89%
+[08Mar2022 19:47:09.297] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[08Mar2022 19:47:09.299] [Server thread/INFO] [patchouli/]: Sending reload packet to clients
+[08Mar2022 19:47:09.310] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 9386 ms
+[08Mar2022 19:47:09.546] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 3, from 10
+[08Mar2022 19:47:09.548] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 5, from 0
+[08Mar2022 19:47:10.769] [Netty Local Client IO #0/INFO] [net.minecraftforge.network.NetworkHooks/]: Connected to a modded server.
+[08Mar2022 19:47:10.942] [Server thread/INFO] [net.minecraftforge.common.AdvancementLoadFix/]: Using new advancement loading for net.minecraft.server.PlayerAdvancements@46d05674
+[08Mar2022 19:47:10.964] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:1ccd704f] logged in with entity id 26 at (-31.376733850449465, -60.0, 3.4328941985469323)
+[08Mar2022 19:47:11.082] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
+[08Mar2022 19:47:11.517] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Starting JEI...
+[08Mar2022 19:47:11.574] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient list...
+[08Mar2022 19:47:11.579] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient list took 4.625 ms
+[08Mar2022 19:47:11.579] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient filter...
+[08Mar2022 19:47:11.789] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building ingredient filter took 210.4 ms
+[08Mar2022 19:47:11.789] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building bookmarks...
+[08Mar2022 19:47:11.809] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building bookmarks took 19.26 ms
+[08Mar2022 19:47:11.870] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building recipe registry...
+[08Mar2022 19:47:11.902] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building recipe registry took 32.42 ms
+[08Mar2022 19:47:12.239] [Render thread/INFO] [immersiveengineering/]: Adding recipes to JEI!!
+[08Mar2022 19:47:12.276] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building runtime...
+[08Mar2022 19:47:12.322] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Building runtime took 45.72 ms
+[08Mar2022 19:47:12.398] [Render thread/INFO] [mezz.jei.util.LoggedTimer/]: Starting JEI took 880.2 ms
+[08Mar2022 19:47:12.485] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 110 advancements
+[08Mar2022 19:47:49.211] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Gave 1 [Iron Ingot] to Dev]
+[08Mar2022 19:47:49.289] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [CHAT] Gave 1 [Iron Ingot] to Dev
+[08Mar2022 19:47:50.758] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Gave 64 [Iron Ingot] to Dev]
+[08Mar2022 19:47:50.817] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [CHAT] Gave 64 [Iron Ingot] to Dev
+[08Mar2022 19:47:55.469] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Gave 64 [Redstone Dust] to Dev]
+[08Mar2022 19:47:55.484] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [CHAT] Gave 64 [Redstone Dust] to Dev
+[08Mar2022 19:48:20.201] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[08Mar2022 19:48:20.208] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[08Mar2022 19:48:20.333] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Internal Exception: java.lang.StackOverflowError
+[08Mar2022 19:48:20.334] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev left the game
+[08Mar2022 19:48:20.666] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Stopping singleplayer server as player logged out
+[08Mar2022 19:48:20.666] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[08Mar2022 19:48:20.667] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[08Mar2022 19:48:21.075] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[08Mar2022 19:48:21.080] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[08Mar2022 19:48:21.194] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (New World): All chunks are saved
+[08Mar2022 19:48:21.194] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[08Mar2022 19:48:21.194] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[08Mar2022 19:48:21.194] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved

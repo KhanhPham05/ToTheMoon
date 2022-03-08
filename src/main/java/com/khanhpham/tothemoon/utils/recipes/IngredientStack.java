@@ -2,6 +2,7 @@ package com.khanhpham.tothemoon.utils.recipes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.khanhpham.tothemoon.JsonNames;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
@@ -36,23 +37,32 @@ public class IngredientStack implements Predicate<ItemStack> {
             JsonObject ingredientObject = ingredientElement.getAsJsonObject();
             if (ingredientObject.has(JsonNames.ITEM)) {
 
-                JsonObject itemObject = ingredientObject.getAsJsonObject(JsonNames.ITEM);
+                JsonElement itemElement = ingredientObject.get(JsonNames.ITEM);
 
-                if (itemObject.has(JsonNames.TAG)) {
-                    String tag = GsonHelper.getAsString(itemObject, JsonNames.TAG);
-                    Tag.Named<Item> namedTag = ItemTags.bind(tag);
-                    ingredient = Ingredient.of(namedTag);
-                }
+                if (itemElement.isJsonObject()) {
+                    JsonObject itemObject = ingredientObject.getAsJsonObject(JsonNames.ITEM);
 
-                if (itemObject.has(JsonNames.ITEM)) {
-                    String itemName = GsonHelper.getAsString(itemObject, JsonNames.ITEM);
-                    Item item = Registry.ITEM.getOptional(new ResourceLocation(itemName)).orElseThrow(() -> new IllegalStateException("Not a valid item id"));
-                    ingredient = Ingredient.of(item);
-                }
 
-                int amount = GsonHelper.getAsInt(ingredientObject, JsonNames.COUNT, 1);
+                    ingredient = CraftingHelper.getIngredient(itemObject);
 
-                return new IngredientStack(ingredient, amount);
+                    /*if (itemObject.has(JsonNames.TAG)) {
+                        String tag = GsonHelper.getAsString(itemObject, JsonNames.TAG);
+                        Tag.Named<Item> namedTag = ItemTags.bind(tag);
+                        ingredient = Ingredient.of(namedTag);
+                    }
+
+                    if (itemObject.has(JsonNames.ITEM)) {
+                        String itemName = GsonHelper.getAsString(itemObject, JsonNames.ITEM);
+                        Item item = Registry.ITEM.getOptional(new ResourceLocation(itemName)).orElseThrow(() -> new IllegalStateException("Not a valid item id"));
+                        ingredient = Ingredient.of(item);
+                    }*/
+
+                    int amount = GsonHelper.getAsInt(ingredientObject, JsonNames.COUNT, 1);
+
+                    return new IngredientStack(ingredient, amount);
+                } else throw new IllegalStateException("Ingredient should be a JsonObject");
+
+
             } else {
                 throw new IllegalStateException("No item definition found");
             }
@@ -61,7 +71,7 @@ public class IngredientStack implements Predicate<ItemStack> {
         throw new IllegalStateException("Ingredient should follow the correct syntax");
     }
 
-    public static IngredientStack fromJson(JsonObject recipeObject,String memberName ) {
+    public static IngredientStack fromJson(JsonObject recipeObject, String memberName) {
         return fromJson(recipeObject.get(memberName));
     }
 

@@ -26,7 +26,7 @@ public abstract class BaseRecipeSerializer<T extends Recipe<?>> extends ForgeReg
         @Nullable JsonElement element = json.get(JsonNames.RESULT);
         if (element != null && element.isJsonObject() && element.getAsJsonObject().has(JsonNames.ITEM)) {
             JsonObject resultItemObject = element.getAsJsonObject().get(JsonNames.ITEM).getAsJsonObject();
-            return ShapedRecipe.itemStackFromJson(resultItemObject.get(JsonNames.ITEM).getAsJsonObject());
+            return ShapedRecipe.itemStackFromJson(resultItemObject);
         }
 
         throw new IllegalStateException("No result definition is found");

@@ -2,7 +2,9 @@
   "type": "tothemoon:alloy_smelting",
 
   "baseIngredient": {
-    "item": "minecraft:iron_ingot",
+    "item": {
+      "tag" : "forge:ingots/iron"
+    },
     "count": 2
   },
 
@@ -19,5 +21,5 @@
     },
     "count" : 3
   },
-
+  "processTime": 200
 }
