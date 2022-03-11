@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+
+@Deprecated
 public class ModModelProvider {
     private final ItemProvider items;
     private final BlockProvider blocks;

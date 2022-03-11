@@ -29,7 +29,6 @@ public class ModItems {
     public static final Item STEEL_INGOT;
     public static final Item STEEL_DUST;
     public static final Item STEEL_ROD;
-    public static final Item REDSTONE_MACHINE_FRAME;
     public static final Item IRON_PLATE;
 
 
@@ -38,7 +37,6 @@ public class ModItems {
         URANIUM_DUST = register("uranium_dust");
         STEEL_DUST = register("steel_dust");
         STEEL_INGOT = register("steel_ingot");
-        REDSTONE_MACHINE_FRAME = register("redstone_machine_frame");
         STEEL_ROD = register("steel_rod");
         STEEL_PLATE = register("steel_plate");
         COPPER_PLATE = register("copper_plate");

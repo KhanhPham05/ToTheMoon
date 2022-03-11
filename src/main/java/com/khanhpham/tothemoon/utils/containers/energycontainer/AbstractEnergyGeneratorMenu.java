@@ -38,7 +38,7 @@ public abstract class AbstractEnergyGeneratorMenu extends BaseMenu implements Da
      * @see net.minecraft.world.inventory.AbstractFurnaceMenu
      */
     @Override
-    public ItemStack quickMoveStack(Player pPlayer, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasItem()) {
@@ -78,7 +78,7 @@ public abstract class AbstractEnergyGeneratorMenu extends BaseMenu implements Da
                 return EMPTY;
             }
 
-            slot.onTake(pPlayer, stack1);
+            slot.onTake(player, stack1);
         }
 
         return stack;

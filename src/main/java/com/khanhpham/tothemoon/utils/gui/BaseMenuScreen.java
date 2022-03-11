@@ -16,6 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContainerScreen<T> {
     protected final ResourceLocation texture;
+    protected final int blackColor = 0x404040;
 
     public BaseMenuScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture) {
         super(pMenu, pPlayerInventory, pTitle);

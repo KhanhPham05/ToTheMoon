@@ -116,7 +116,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
     //runtimeOnly fg.deobf("curse.maven:pipez-443900:3569514")
     //runtimeOnly fg.deobf("curse.maven:mekanism-268560:3590099")
-    runtimeOnly fg.deobf("curse.maven:immersive-engineering-231951:3587149")
+    implementation fg.deobf("curse.maven:immersive-engineering-231951:3587149")
 
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     // at runtime, use the full JEI jar

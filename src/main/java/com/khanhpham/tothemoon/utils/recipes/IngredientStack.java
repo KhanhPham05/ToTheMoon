@@ -2,15 +2,9 @@ package com.khanhpham.tothemoon.utils.recipes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 import com.khanhpham.tothemoon.JsonNames;
-import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -30,10 +24,9 @@ public class IngredientStack implements Predicate<ItemStack> {
      * @see net.minecraft.world.item.crafting.SimpleCookingSerializer
      */
 
-    @SuppressWarnings("deprecation")
     public static IngredientStack fromJson(JsonElement ingredientElement) {
         if (ingredientElement.isJsonObject()) {
-            Ingredient ingredient = null;
+
             JsonObject ingredientObject = ingredientElement.getAsJsonObject();
             if (ingredientObject.has(JsonNames.ITEM)) {
 
@@ -42,20 +35,7 @@ public class IngredientStack implements Predicate<ItemStack> {
                 if (itemElement.isJsonObject()) {
                     JsonObject itemObject = ingredientObject.getAsJsonObject(JsonNames.ITEM);
 
-
-                    ingredient = CraftingHelper.getIngredient(itemObject);
-
-                    /*if (itemObject.has(JsonNames.TAG)) {
-                        String tag = GsonHelper.getAsString(itemObject, JsonNames.TAG);
-                        Tag.Named<Item> namedTag = ItemTags.bind(tag);
-                        ingredient = Ingredient.of(namedTag);
-                    }
-
-                    if (itemObject.has(JsonNames.ITEM)) {
-                        String itemName = GsonHelper.getAsString(itemObject, JsonNames.ITEM);
-                        Item item = Registry.ITEM.getOptional(new ResourceLocation(itemName)).orElseThrow(() -> new IllegalStateException("Not a valid item id"));
-                        ingredient = Ingredient.of(item);
-                    }*/
+                    Ingredient ingredient = CraftingHelper.getIngredient(itemObject);
 
                     int amount = GsonHelper.getAsInt(ingredientObject, JsonNames.COUNT, 1);
 

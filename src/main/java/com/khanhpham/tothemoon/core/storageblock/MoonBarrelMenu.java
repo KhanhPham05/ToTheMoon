@@ -45,7 +45,7 @@ public class MoonBarrelMenu extends BaseMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+    public ItemStack quickMoveStack(Player player, int pIndex) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = super.slots.get(pIndex);
         if (slot.hasItem()) {

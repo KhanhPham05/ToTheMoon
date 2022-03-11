@@ -36,7 +36,9 @@ public class ModBlocks {
     public static final BlockRegister BLOCK_REGISTER = new BlockRegister();
 
     //DECORATE / CRAFTING BLOCKS
-    public static final Block MACHINE_FRAME = register("machine_frame", new MineableBlock(properties(Material.STONE, 2.5f, 3.5f, SoundType.STONE), MiningTool.NEEDS_IRON_PICKAXE));
+    public static final Block COPPER_MACHINE_FRAME = register("copper_machine_frame", 2.5f, 3.5f, Material.METAL, SoundType.METAL, MiningTool.NEEDS_IRON_PICKAXE);
+    public static final Block STEEL_MACHINE_FRAME = register("steel_machine_frame", 2.5f, 3.5f, Material.METAL, SoundType.METAL, MiningTool.NEEDS_IRON_PICKAXE);
+    public static final Block REDSTONE_MACHINE_FRAME = register("redstone_machine_frame", 3.0f, 4.0f, Material.METAL, SoundType.METAL, MiningTool.NEEDS_IRON_PICKAXE);
 
     //REGULAR ROCKS
     public static final Block MOON_ROCK = register("moon_rock", 3.0f, 6.0f);
@@ -65,6 +67,10 @@ public class ModBlocks {
 
     private static Block register(String name, float hardness, float resistance) {
         return BLOCK_REGISTER.register(name, new MineableBlock(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(hardness, resistance).requiresCorrectToolForDrops(), MiningTool.NEEDS_STONE_PICKAXE));
+    }
+
+    private static Block register(String name, float hardness, float resistance, Material material, SoundType sound, MiningTool tool) {
+        return BLOCK_REGISTER.register(name, new MineableBlock(BlockBehaviour.Properties.of(material).strength(hardness, resistance).sound(sound), tool));
     }
 
     /**

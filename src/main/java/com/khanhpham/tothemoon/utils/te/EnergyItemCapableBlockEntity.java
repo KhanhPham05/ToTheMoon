@@ -151,8 +151,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         if (te != null) {
             te.getCapability(CapabilityEnergy.ENERGY, direction2).ifPresent(e -> {
                 if (e.canExtract() && e.getEnergyStored() > 0) {
-                    int i = e.extractEnergy(super.energy.getMaxReceive(), false);
-                    super.energy.receiveEnergy(i, false);
+                    super.energy.receiveEnergy(e.extractEnergy(super.energy.getMaxReceive(), false), false);
                 }
             });
         }
@@ -162,9 +161,8 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         BlockEntity te = level.getBlockEntity(blockPos.relative(direction));
         if (te != null) {
             te.getCapability(CapabilityEnergy.ENERGY, direction2).ifPresent(e -> {
-                if (e.canReceive()) {
-                    e.receiveEnergy(super.energy.getMaxExtract(), false);
-                    super.energy.extractEnergy();
+                if (e.canReceive() && e.getEnergyStored() < e.getMaxEnergyStored()) {
+                    super.energy.extractEnergy(e.receiveEnergy(super.energy.getMaxExtract(), false), false);
                 }
             });
         }

@@ -45,9 +45,10 @@ public class Energy extends EnergyStorage {
         return super.energy <= 0;
     }
 
-    public void extractEnergy() {
+    public int extractEnergy() {
         if (canExtract())
-            super.extractEnergy(this.maxExtract, false);
+            return super.extractEnergy(this.maxExtract, false);
+        return 0;
     }
 
     public void save(CompoundTag pTag) {

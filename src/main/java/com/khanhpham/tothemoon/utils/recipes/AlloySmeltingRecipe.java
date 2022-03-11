@@ -10,6 +10,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -53,8 +54,17 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
     public boolean matches(AlloySmelterBlockEntity pContainer, Level pLevel) {
         ItemStack outputSlot = pContainer.getItem(2);
         if (outputSlot.isEmpty()) {
-            return true;
-        } else return outputSlot.is(getResultItem().getItem()) && outputSlot.getCount() < pContainer.getMaxStackSize() - getResultItem().getCount();
+            return ingredientMatches(pContainer) ;
+        } else
+            return outputSlot.is(getResultItem().getItem()) && outputSlot.getCount() < pContainer.getMaxStackSize() - getResultItem().getCount() && ingredientMatches(pContainer);
+    }
+
+    private boolean ingredientMatches(AlloySmelterBlockEntity container) {
+        if (!container.getItem(0).isEmpty() && !container.getItem(1).isEmpty()) {
+            return this.baseIngredient.test(container.getItem(0)) && secondaryIngredient.test(container.getItem(1));
+        }
+
+        return false;
     }
 
     @Override
@@ -87,6 +97,10 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
         return RECIPE_TYPE;
     }
 
+    public boolean isOutputSlotAvailable(ItemStack resultSlot) {
+        return resultSlot.is(this.result.getItem()) && resultSlot.getCount() <= 64 - this.result.getCount();
+    }
+
     public static final class Serializer extends BaseRecipeSerializer<AlloySmeltingRecipe> {
 
         public Serializer() {
@@ -103,16 +117,22 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
         }
 
 
-
         @Nullable
         @Override
         public AlloySmeltingRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-            return null;
+            IngredientStack baseIngredient = IngredientStack.fromNetwork(pBuffer);
+            IngredientStack secondaryIngredient = IngredientStack.fromNetwork(pBuffer);
+            ItemStack result = pBuffer.readItem();
+            int processTime = pBuffer.readInt();
+            return new AlloySmeltingRecipe(baseIngredient, secondaryIngredient, result, processTime, pRecipeId);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf pBuffer, AlloySmeltingRecipe pRecipe) {
-
+            pRecipe.baseIngredient.toNetwork(pBuffer);
+            pRecipe.secondaryIngredient.toNetwork(pBuffer);
+            pBuffer.writeItemStack(pRecipe.result, false);
+            pBuffer.writeInt(pRecipe.alloyingTime);
         }
 
         @Override

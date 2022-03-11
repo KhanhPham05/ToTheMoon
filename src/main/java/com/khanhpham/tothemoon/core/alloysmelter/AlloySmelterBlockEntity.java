@@ -2,7 +2,6 @@ package com.khanhpham.tothemoon.core.alloysmelter;
 
 import com.khanhpham.tothemoon.ModUtils;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
-import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.utils.te.EnergyItemCapableBlockEntity;
@@ -13,13 +12,14 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @see AbstractEnergyGeneratorBlockEntity
@@ -30,11 +30,16 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
     public static final int DATA_CAPACITY = 4;
     private int workingTime;
     private int workingDuration;
-    private final int[] datas = new int[]{workingTime, workingDuration, energy.getEnergyStored(), energy.getMaxEnergyStored()};
     private final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
-            return datas[pIndex];
+            return switch (pIndex) {
+                case 0 -> workingTime;
+                case 1 -> workingDuration;
+                case 2 -> energy.getEnergyStored();
+                case 3 -> energy.getMaxEnergyStored();
+                default -> throw new ArrayStoreException();
+            };
         }
 
         @Override
@@ -43,7 +48,7 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
 
         @Override
         public int getCount() {
-            return datas.length;
+            return DATA_CAPACITY;
         }
     };
 
@@ -61,63 +66,65 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, AlloySmelterBlockEntity blockEntity) {
+        blockEntity.serverTick(level, pos, state);
+    }
 
-        blockEntity.receiveEnergyFromOther(level, pos);
+    private void serverTick(Level level, BlockPos pos, BlockState state) {
+        receiveEnergyFromOther(level, pos);
 
-        if (!blockEntity.energy.isEmpty()) {
-            ItemStack resultSlot = blockEntity.items.get(2);
-            AlloySmeltingRecipe recipe = level.getRecipeManager().getRecipeFor(AlloySmeltingRecipe.RECIPE_TYPE, blockEntity, level).orElse(null);
-            if (recipe != null) {
-                if (!resultSlot.isEmpty()) {
-                    blockEntity.processRecipe(level, recipe);
-                    blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
-                } else {
-                    state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
-                }
+        @Nullable
+        AlloySmeltingRecipe recipe = level.getRecipeManager().getRecipeFor(AlloySmeltingRecipe.RECIPE_TYPE, this, level).orElse(null);
 
-                if (resultSlot.is(recipe.getResultItem().getItem()) && resultSlot.getCount() <= 64 - recipe.getResultItem().getCount()) {
-                    blockEntity.processRecipe(level, recipe);
-                    state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
-                } else {
-                    state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
-                }
+        if (recipe != null && this.workingTime >= this.workingDuration && this.workingDuration > 0) {
+            this.exchangeInputsWithOutput(recipe);
+        }
+
+        if (recipe !=null && this.workingDuration > 0 && this.workingTime < this.workingDuration) {
+            this.workingTime++;
+        }
+
+        if (recipe != null && !isSlotFull(items.get(2))) {
+            if (recipe.matches(this, level)) {
+                processRecipe(recipe);
+                state = super.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.TRUE);
             } else {
-                state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+                state = super.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+                resetTime();
             }
-        }
-
-        if (!blockEntity.energy.isEmpty() && blockEntity.workingTime > 0) {
-            blockEntity.workingTime--;
-            blockEntity.energy.extractEnergy();
-        }
-
-        if (blockEntity.energy.isEmpty()) {
-            state = blockEntity.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+        } else {
+            state = super.setNewBlockState(level, pos, state, AlloySmelterBlock.LIT, Boolean.FALSE);
+            resetTime();
         }
 
         markDirty(level, pos, state);
     }
 
-    //TODO : this
-    private void processRecipe(Level level, AlloySmeltingRecipe recipe) {
-        //if (canProcess()) {
-        if (recipe.matches(this, level)) {
-            System.out.println("RECIPE MATCHED, processing");
-            if (workingTime <= 0) {
-                this.energy.extractEnergy();
-                this.workingDuration = recipe.getAlloyingTime();
-                this.workingTime = 0;
-            }
-        } else {
-            this.workingTime = 0;
-            this.workingDuration = 0;
-        }
-        //}
+    private void processRecipe(@Nonnull AlloySmeltingRecipe recipe) {
+        this.workingDuration = recipe.getAlloyingTime();
+        this.workingTime = 0;
+        this.energy.extractEnergy();
     }
 
-    /*private boolean canProcess() {
-        return workingTime <= 0;
-    }*/
+    private void exchangeInputsWithOutput(@Nonnull AlloySmeltingRecipe recipe) {
+        this.items.get(0).shrink(recipe.baseIngredient.amount);
+        this.items.get(1).shrink(recipe.secondaryIngredient.amount);
+        if (this.items.get(2).isEmpty()) {
+            this.items.set(2, recipe.result);
+        } else {
+            this.items.get(2).grow(recipe.result.getCount());
+        }
+
+        this.resetTime();
+    }
+
+    private boolean isSlotFull(ItemStack stack) {
+        return stack.getCount() == getMaxStackSize();
+    }
+
+    private void resetTime() {
+        this.workingDuration = 0;
+        this.workingTime = 0;
+    }
 
     @NotNull
     @Override
