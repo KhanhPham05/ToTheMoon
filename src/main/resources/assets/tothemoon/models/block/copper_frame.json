@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench/Made by xu3u https://www.curseforge.com/members/xu3u_",
 	"textures": {
 		"0": "tothemoon:block/copper_frame",
-		"1": "#1",
+		"1": "tothemoon:block/copper_frame_in",
 		"particle": "tothemoon:block/copper_frame"
 	},
 	"elements": [
