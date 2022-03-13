@@ -3,7 +3,7 @@
 	"textures": {
 		"0": "tothemoon:block/redstone_frame",
 		"1": "tothemoon:block/redstone_frame_in",
-		"particle": "redstone_frame"
+		"particle": "tothemoon:block/redstone_frame"
 	},
 	"elements": [
 		{

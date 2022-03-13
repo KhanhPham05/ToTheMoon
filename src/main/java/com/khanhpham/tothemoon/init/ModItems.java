@@ -23,13 +23,22 @@ public class ModItems {
     //common crafting ingredient
     public static final Item URANIUM_INGOT;
     public static final Item URANIUM_DUST;
+
     public static final Item COPPER_PLATE;
+    public static final Item COPPER_DUST;
+
     public static final Item URANIUM_PLATE;
+
     public static final Item STEEL_PLATE;
     public static final Item STEEL_INGOT;
     public static final Item STEEL_DUST;
     public static final Item STEEL_ROD;
+
     public static final Item IRON_PLATE;
+    public static final Item IRON_DUST;
+
+    public static final Item GOLD_PLATE;
+    public static final Item GOLD_DUST;
 
 
     static {
@@ -44,6 +53,10 @@ public class ModItems {
         IRON_PLATE = register("iron_plate");
         REDSTONE_INGOT = register("redstone_ingot");
         REDSTONE_STEEL_ALLOY = register("redstone_steel_alloy");
+        COPPER_DUST = register("copper_dust");
+        IRON_DUST = register("iron_dust");
+        GOLD_DUST = register("gold_dust");
+        GOLD_PLATE = register("gold_plate");
     }
 
     private ModItems() {}

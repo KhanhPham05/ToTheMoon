@@ -50,7 +50,7 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.ALLOY_SMELTER, AlloySmelterMenuScreen::new);
         }
 
-        @SubscribeEvent
+
         public static void gatherData(GatherDataEvent event) {
             DataGenerator data = event.getGenerator();
             ExistingFileHelper fileHelper = event.getExistingFileHelper();

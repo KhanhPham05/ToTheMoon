@@ -2,104 +2,104 @@
 	"credit": "Made with Blockbench/Made by xu3u https://www.curseforge.com/members/xu3u_",
 	"textures": {
 		"0": "tothemoon:block/copper_frame",
-		"1": "tothemoon:block/copper_frame_in",
-		"particle": "copper_frame"
+		"1": "#1",
+		"particle": "tothemoon:block/copper_frame"
 	},
 	"elements": [
 		{
 			"from": [0, 0, 0],
 			"to": [16, 16, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		},
 		{
 			"from": [2.5, 2.5, 2.5],
 			"to": [13.5, 13.5, 13.5],
 			"faces": {
-				"north": {"uv": [0, 0, 8, 8], "texture": "tothemoon:block/copper_frame_in"},
-				"east": {"uv": [0, 0, 8, 8], "texture": "tothemoon:block/copper_frame_in"},
-				"south": {"uv": [0, 0, 8, 8], "texture": "tothemoon:block/copper_frame_in"},
-				"west": {"uv": [0, 0, 8, 8], "texture": "tothemoon:block/copper_frame_in"},
-				"up": {"uv": [0, 0, 8, 8], "texture": "tothemoon:block/copper_frame_in"},
-				"down": {"uv": [0, 0, 8, 8], "texture": "tothemoon:block/copper_frame_in"}
+				"north": {"uv": [0, 0, 8, 8], "texture": "#1"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#1"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#1"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#1"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#1"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#1"}
 			}
 		},
 		{
 			"from": [0, 0, 3],
 			"to": [16, 16, 3],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"east": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"west": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"up": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"down": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 0], "texture": "#0"}
 			}
 		},
 		{
 			"from": [0, 0, 13],
 			"to": [16, 16, 13],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"east": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"west": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"up": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"down": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 0], "texture": "#0"}
 			}
 		},
 		{
 			"from": [13, 0, 0],
 			"to": [13, 16, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"south": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"up": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"down": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"}
+				"north": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 16], "texture": "#0"}
 			}
 		},
 		{
 			"from": [3, 0, 0],
 			"to": [3, 16, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"south": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"up": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"},
-				"down": {"uv": [0, 0, 0, 16], "texture": "tothemoon:block/copper_frame"}
+				"north": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 16], "texture": "#0"}
 			}
 		},
 		{
 			"from": [0, 3, 0],
 			"to": [16, 3, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"east": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"south": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"west": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"}
+				"north": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		},
 		{
 			"from": [0, 13, 0],
 			"to": [16, 13, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"east": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"south": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"west": {"uv": [0, 0, 16, 0], "texture": "tothemoon:block/copper_frame"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "tothemoon:block/copper_frame"}
+				"north": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		}
 	],

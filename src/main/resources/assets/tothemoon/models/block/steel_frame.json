@@ -3,7 +3,7 @@
 	"textures": {
 		"0": "tothemoon:block/steel_frame",
 		"1": "tothemoon:block/steel_frame_in",
-		"particle": "steel_frame"
+		"particle": "tothemoon:block/steel_frame"
 	},
 	"elements": [
 		{
