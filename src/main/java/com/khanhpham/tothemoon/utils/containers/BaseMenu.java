@@ -17,9 +17,6 @@ import java.util.Objects;
  * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
  */
 public abstract class BaseMenu extends AbstractContainerMenu {
-
-    protected final int endInvIndex = 27;
-    protected final int endHotBarIndex = 36;
     protected final int inventorySize;
     protected final Inventory playerInventory;
     protected final Container externalCcontainer;

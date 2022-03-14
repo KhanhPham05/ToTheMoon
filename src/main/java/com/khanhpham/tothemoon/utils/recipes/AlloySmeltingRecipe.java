@@ -51,12 +51,8 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
     }
 
     @Override
-    public boolean matches(AlloySmelterBlockEntity pContainer, Level pLevel) {
-        ItemStack outputSlot = pContainer.getItem(2);
-        if (outputSlot.isEmpty()) {
-            return ingredientMatches(pContainer) ;
-        } else
-            return outputSlot.is(getResultItem().getItem()) && outputSlot.getCount() < pContainer.getMaxStackSize() - getResultItem().getCount() && ingredientMatches(pContainer);
+    public boolean matches(AlloySmelterBlockEntity container, Level pLevel) {
+        return this.baseIngredient.test(container.items.get(0)) && this.secondaryIngredient.test(container.items.get(1));
     }
 
     private boolean ingredientMatches(AlloySmelterBlockEntity container) {
@@ -112,7 +108,7 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
             ItemStack result = resultFromJson(pSerializedRecipe);
             IngredientStack baseIngredient = IngredientStack.fromJson(pSerializedRecipe.get(JsonNames.BASE_INGREDIENT));
             IngredientStack secondaryIngredient = IngredientStack.fromJson(pSerializedRecipe.get(JsonNames.SECONDARY_INGREDIENT));
-            int processTime = GsonHelper.getAsInt(pSerializedRecipe, JsonNames.PROCESS_TIME);
+            int processTime = GsonHelper.getAsInt(pSerializedRecipe, JsonNames.PROCESS_TIME, 200);
             return new AlloySmeltingRecipe(baseIngredient, secondaryIngredient, result, processTime, pRecipeId);
         }
 

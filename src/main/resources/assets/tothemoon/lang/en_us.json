@@ -30,5 +30,9 @@
   "item.tothemoon.uranium_dust": "Uranium Dust",
   "item.tothemoon.uranium_ingot": "Uranium Ingot",
   "item.tothemoon.uranium_plate": "Uranium Plate",
+  "item.tothemoon.copper_dust": "Copper Dust",
+  "item.tothemoon.iron_dust": "Iron Dust",
+  "item.tothemoon.gold_dust": "Gold Dust",
+  "item.tothemoon.gold_plate": "Gold Plate",
   "itemGroup.ttm_creative_tab": "To The Moon"
 }

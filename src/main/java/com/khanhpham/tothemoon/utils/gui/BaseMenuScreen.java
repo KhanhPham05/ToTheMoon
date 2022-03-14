@@ -28,9 +28,6 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
         super.imageWidth = 176;
     }
 
-    /**
-     * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
-     */
     @Override
     protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -44,8 +41,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
         }
     }
 
-    protected void renderExtra(PoseStack pPoseStack) {
-    }
+    protected void renderExtra(PoseStack pPoseStack) {}
 
     @Override
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {

@@ -32,7 +32,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEntity implements Container, MenuProvider, Nameable {
     protected final Component label;
     protected final int containerSize;
-    protected NonNullList<ItemStack> items;
+    public NonNullList<ItemStack> items;
 
     public EnergyItemCapableBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @Nonnull Component label, final int containerSize) {
         super(pType, pWorldPosition, pBlockState, energy);
@@ -109,7 +109,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         saveExtra(pTag);
     }
 
-    protected void saveExtra(CompoundTag ignored) {
+    protected void saveExtra(CompoundTag tag) {
     }
 
     @Override
@@ -121,7 +121,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         loadExtra(pTag);
     }
 
-    protected void loadExtra(CompoundTag ignored) {
+    protected void loadExtra(CompoundTag tag) {
     }
 
     @Nonnull

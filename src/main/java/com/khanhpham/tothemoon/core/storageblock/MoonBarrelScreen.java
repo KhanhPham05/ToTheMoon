@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.NotNull;
 
 public class MoonBarrelScreen extends BaseMenuScreen<MoonBarrelMenu> {
     public MoonBarrelScreen(MoonBarrelMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
@@ -17,7 +18,7 @@ public class MoonBarrelScreen extends BaseMenuScreen<MoonBarrelMenu> {
     private static final ResourceLocation GUI = new ResourceLocation(Names.MOD_ID, "textures/gui/moon_rock_barrel.png");
 
     @Override
-    protected void renderLabels(PoseStack poseStack) {
+    protected void renderLabels(@NotNull PoseStack poseStack) {
         font.draw(poseStack, ModLang.MOON_ROCK_BARREL, 7, 5, 0x404040);
         font.draw(poseStack, super.playerInventoryTitle, 7, 92, 0x404040);
     }

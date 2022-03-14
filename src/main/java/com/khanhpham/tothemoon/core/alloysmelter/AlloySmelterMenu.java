@@ -23,6 +23,8 @@ public class AlloySmelterMenu extends BaseMenu {
         addSlot(1, 45, 47);
         addSlot(new FurnaceResultSlot(playerInventory.player, externalContainer, 2, 107, 33));
         addPlayerInventorySlots(8, 95);
+
+        super.addDataSlots(data);
     }
 
     public AlloySmelterMenu(int containerId, Inventory playerInventory) {

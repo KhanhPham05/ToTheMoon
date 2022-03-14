@@ -13,11 +13,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.Optional;
 
 public class ModUtils {
-    @Deprecated(forRemoval = true)
-    public static <T extends ForgeRegistryEntry<T>> DeferredRegister<T> createRegistry(IForgeRegistry<T> reg) {
-        return DeferredRegister.create(reg, Names.MOD_ID);
-    }
-
     public static ResourceLocation modLoc(String loc) {
         return new ResourceLocation(Names.MOD_ID, loc);
     }
