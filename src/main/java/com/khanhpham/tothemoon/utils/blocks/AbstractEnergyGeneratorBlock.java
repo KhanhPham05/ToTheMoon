@@ -70,24 +70,20 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
         return InteractionResult.FAIL;
     }
 
-    /**
-     * @see net.minecraft.world.level.block.AbstractFurnaceBlock
-     *
-     */
     @SuppressWarnings("deprecation")
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+    public void onRemove(BlockState state, Level level, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!state.is(pNewState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pPos);
             if (blockEntity instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorTileEntity) {
-                if (pLevel instanceof ServerLevel) {
-                    Containers.dropContents(pLevel, pPos, energyGeneratorTileEntity);
+                if (level instanceof ServerLevel) {
+                    Containers.dropContents(level, pPos, energyGeneratorTileEntity);
                 }
 
-                pLevel.updateNeighbourForOutputSignal(pPos, this);
+                level.updateNeighbourForOutputSignal(pPos, this);
             }
 
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+            super.onRemove(state, level, pPos, pNewState, pIsMoving);
         }
     }
 

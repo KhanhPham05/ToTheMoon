@@ -5,7 +5,6 @@ import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.utils.te.EnergyItemCapableBlockEntity;
-import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -23,9 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @see AbstractEnergyGeneratorBlockEntity
- */
 public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
     public static final int MENU_SIZE = 3;
     public static final TranslatableComponent LABEL = ModUtils.translate("gui.tothemoon.alloy_smelter");
@@ -59,7 +55,7 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
     }
 
     public AlloySmelterBlockEntity(BlockPos blockPos, BlockState state) {
-        this(ModBlockEntityTypes.ALLOY_SMELTER, blockPos, state, new Energy(175000, 500, 1) {
+        this(ModBlockEntityTypes.ALLOY_SMELTER, blockPos, state, new Energy(175000, 750, 500) {
             @Override
             public boolean canExtract() {
                 return false;
@@ -156,16 +152,12 @@ public class AlloySmelterBlockEntity extends EnergyItemCapableBlockEntity {
         this.items.get(0).shrink(recipe.baseIngredient.amount);
         this.items.get(1).shrink(recipe.secondaryIngredient.amount);
         if (this.items.get(2).isEmpty()) {
-            this.items.set(2, recipe.result);
+            this.items.set(2, recipe.assemble(this).copy());
         } else {
             this.items.get(2).grow(recipe.result.getCount());
         }
 
         this.resetTime();
-    }
-
-    private boolean isSlotFull(ItemStack stack) {
-        return stack.getCount() == getMaxStackSize();
     }
 
     private void resetTime() {

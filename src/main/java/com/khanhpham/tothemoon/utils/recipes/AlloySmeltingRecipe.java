@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
@@ -34,16 +35,6 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
         this.alloyingTime = alloyingTime;
         this.id = id;
 
-        //TEST ONLY
-        printEverything();
-    }
-
-    private void printEverything() {
-        System.out.println(baseIngredient);
-        System.out.println(secondaryIngredient);
-        System.out.println(result);
-        System.out.println(alloyingTime);
-        System.out.println(id.toString());
     }
 
     public int getAlloyingTime() {
@@ -55,17 +46,9 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
         return this.baseIngredient.test(container.items.get(0)) && this.secondaryIngredient.test(container.items.get(1));
     }
 
-    private boolean ingredientMatches(AlloySmelterBlockEntity container) {
-        if (!container.getItem(0).isEmpty() && !container.getItem(1).isEmpty()) {
-            return this.baseIngredient.test(container.getItem(0)) && secondaryIngredient.test(container.getItem(1));
-        }
-
-        return false;
-    }
-
     @Override
     public ItemStack assemble(AlloySmelterBlockEntity pContainer) {
-        return this.result;
+        return this.result.copy();
     }
 
     @Override
@@ -113,9 +96,8 @@ public class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
         }
 
 
-        @Nullable
         @Override
-        public AlloySmeltingRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+        public @NotNull AlloySmeltingRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
             IngredientStack baseIngredient = IngredientStack.fromNetwork(pBuffer);
             IngredientStack secondaryIngredient = IngredientStack.fromNetwork(pBuffer);
             ItemStack result = pBuffer.readItem();

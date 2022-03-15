@@ -56,26 +56,14 @@ public class AlloySmelterMenu extends BaseMenu {
             ItemStack stack1 = slot.getItem();
             itemstack = stack1.copy();
 
-            if (index == 0) {
-                if (!super.moveItemStackTo(stack1, 3, slots.size() -1, true)) {
-                    return empty();
-                }
-            } else if (index == 1) {
-                if (!super.moveItemStackTo(stack1, 3, slots.size() -1, true)) {
-                    return empty();
-                }
-            }
-
-            else if (index == 2) {
+            if (index <= 2) {
                 if (!super.moveItemStackTo(stack1, 3, slots.size() - 1, true)) {
                     return empty();
                 }
 
                 slot.onQuickCraft(stack1, itemstack);
-            } else if (index >= 3) {
-                if (!super.moveItemStackTo(stack1, 0, 1, false)) {
-                    return empty();
-                } else if (!super.moveItemStackTo(stack1, 1, 2, false)) {
+            } else {
+                if (!super.moveItemStackTo(stack1, 0, 2, false)) {
                     return empty();
                 } else if (index < 30) {
                     if (!super.moveItemStackTo(stack1, 30, 39, false)) {
@@ -84,8 +72,6 @@ public class AlloySmelterMenu extends BaseMenu {
                 } else if (index < 39 && !super.moveItemStackTo(stack1, 3, 30, false)) {
                     return empty();
                 }
-            } else if (!super.moveItemStackTo(stack1, 3, slots.size() - 1, false)) {
-                return empty();
             }
 
             if (stack1.isEmpty()) {
