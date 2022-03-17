@@ -2,9 +2,9 @@ package com.khanhpham.tothemoon.data;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorTileEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
-import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.ModLang;
 import net.minecraft.data.DataGenerator;
@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.RegistryObject;
 
 public class ModLanguageProvider extends LanguageProvider {
     public ModLanguageProvider(DataGenerator gen) {
@@ -25,8 +24,9 @@ public class ModLanguageProvider extends LanguageProvider {
         add(((TranslatableComponent)ToTheMoon.TAB.getDisplayName()).getKey(), "To The Moon");
         add(ModLang.MOON_ROCK_BARREL, "Moon Rock Barrel");
         add(MoonBarrelTileEntity.MENU_DISPLAY_NAME, "Moon Rock Barrel");
-        add(CopperEnergyGeneratorTileEntity.LABEL, "Copper Energy Generator");
+        add(CopperEnergyGeneratorBlockEntity.LABEL, "Copper Energy Generator");
         add("gui.tothemoon.energy_per_capacity", "Energy: %s / %s");
+        add(IronEnergyGeneratorBlockEntity.LABEL, "Iron Energy Generator");
     }
 
     private void add(TranslatableComponent component, String trans) {

@@ -1,5 +1,5 @@
-Java Launcher: C:\Program Files\Java\jdk-17.0.1\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar, --output, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.75\forge-1.18.1-39.0.75-binpatched.jar, --apply, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.75\forge-1.18.1-39.0.75-binpatches.lzma'
+Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar, --output, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.1.2\forge-1.18.1-39.1.2-binpatched.jar, --apply, C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.1.2\forge-1.18.1-39.1.2-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.1-20211210.034407\joined-1.18.1-20211210.034407-srg.jar
-  Output:    C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.75\forge-1.18.1-39.0.75-binpatched.jar
+  Output:    C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.1.2\forge-1.18.1-39.1.2-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.75\forge-1.18.1-39.0.75-binpatches.lzma
-Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.0.75\forge-1.18.1-39.0.75-binpatches.lzma
+  Patches:   C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.1.2\forge-1.18.1-39.1.2-binpatches.lzma
+Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.18.1-39.1.2\forge-1.18.1-39.1.2-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: 35977cab Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -822,6 +822,18 @@ Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_rep
     Checksum: e959f7ca Exists: true
   Reading patch net.minecraft.data.worldgen.biome.OverworldBiomes.binpatch
     Checksum: dd2fb8fc Exists: true
+  Reading patch net.minecraft.gametest.framework.GameTest.binpatch
+    Checksum: b05a90f Exists: true
+  Reading patch net.minecraft.gametest.framework.GameTestRegistry.binpatch
+    Checksum: a101534c Exists: true
+  Reading patch net.minecraft.gametest.framework.GameTestServer$1.binpatch
+    Checksum: cc51c5ab Exists: true
+  Reading patch net.minecraft.gametest.framework.GameTestServer.binpatch
+    Checksum: b0d65d8f Exists: true
+  Reading patch net.minecraft.gametest.framework.StructureUtils$1.binpatch
+    Checksum: f71ddb12 Exists: true
+  Reading patch net.minecraft.gametest.framework.StructureUtils.binpatch
+    Checksum: 71edbaba Exists: true
   Reading patch net.minecraft.locale.Language$1.binpatch
     Checksum: 6f7ee16e Exists: true
   Reading patch net.minecraft.locale.Language.binpatch
@@ -968,6 +980,8 @@ Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_rep
     Checksum: 92c63357 Exists: true
   Reading patch net.minecraft.server.Bootstrap.binpatch
     Checksum: bfa35f0d Exists: true
+  Reading patch net.minecraft.server.Eula.binpatch
+    Checksum: a3cdbb15 Exists: true
   Reading patch net.minecraft.server.Main$1.binpatch
     Checksum: 28a9cc03 Exists: true
   Reading patch net.minecraft.server.Main.binpatch
@@ -1510,6 +1524,20 @@ Loading patches file: C:\Users\HP\.gradle\caches\forge_gradle\minecraft_user_rep
     Checksum: c89e544a Exists: true
   Reading patch net.minecraft.world.entity.monster.Ravager.binpatch
     Checksum: 2a657479 Exists: true
+  Reading patch net.minecraft.world.entity.monster.Shulker$ShulkerAttackGoal.binpatch
+    Checksum: d4a443af Exists: true
+  Reading patch net.minecraft.world.entity.monster.Shulker$ShulkerBodyRotationControl.binpatch
+    Checksum: 233bc3fc Exists: true
+  Reading patch net.minecraft.world.entity.monster.Shulker$ShulkerDefenseAttackGoal.binpatch
+    Checksum: 921c56ed Exists: true
+  Reading patch net.minecraft.world.entity.monster.Shulker$ShulkerLookControl.binpatch
+    Checksum: a02f1ac8 Exists: true
+  Reading patch net.minecraft.world.entity.monster.Shulker$ShulkerNearestAttackGoal.binpatch
+    Checksum: 7292bd26 Exists: true
+  Reading patch net.minecraft.world.entity.monster.Shulker$ShulkerPeekGoal.binpatch
+    Checksum: a234ad43 Exists: true
+  Reading patch net.minecraft.world.entity.monster.Shulker.binpatch
+    Checksum: 4aa02f6e Exists: true
   Reading patch net.minecraft.world.entity.monster.Silverfish$SilverfishMergeWithStoneGoal.binpatch
     Checksum: 8e6de23d Exists: true
   Reading patch net.minecraft.world.entity.monster.Silverfish$SilverfishWakeUpFriendsGoal.binpatch
@@ -2933,6 +2961,12 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/data/tags/TagsProvider$TagAppender 1/1
   Patching net/minecraft/data/tags/TagsProvider 1/1
   Patching net/minecraft/data/worldgen/biome/OverworldBiomes 1/1
+  Patching net/minecraft/gametest/framework/GameTest 1/1
+  Patching net/minecraft/gametest/framework/GameTestRegistry 1/1
+  Patching net/minecraft/gametest/framework/GameTestServer$1 1/1
+  Patching net/minecraft/gametest/framework/GameTestServer 1/1
+  Patching net/minecraft/gametest/framework/StructureUtils$1 1/1
+  Patching net/minecraft/gametest/framework/StructureUtils 1/1
   Patching net/minecraft/locale/Language$1 1/1
   Patching net/minecraft/locale/Language 1/1
   Patching net/minecraft/nbt/CompoundTag$1 1/1
@@ -3006,6 +3040,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/resources/ResourceLocation 1/1
   Patching net/minecraft/server/Bootstrap$1 1/1
   Patching net/minecraft/server/Bootstrap 1/1
+  Patching net/minecraft/server/Eula 1/1
   Patching net/minecraft/server/Main$1 1/1
   Patching net/minecraft/server/Main 1/1
   Patching net/minecraft/server/MinecraftServer$1 1/1
@@ -3276,6 +3311,13 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/entity/monster/Ravager$RavagerNavigation 1/1
   Patching net/minecraft/world/entity/monster/Ravager$RavagerNodeEvaluator 1/1
   Patching net/minecraft/world/entity/monster/Ravager 1/1
+  Patching net/minecraft/world/entity/monster/Shulker$ShulkerAttackGoal 1/1
+  Patching net/minecraft/world/entity/monster/Shulker$ShulkerBodyRotationControl 1/1
+  Patching net/minecraft/world/entity/monster/Shulker$ShulkerDefenseAttackGoal 1/1
+  Patching net/minecraft/world/entity/monster/Shulker$ShulkerLookControl 1/1
+  Patching net/minecraft/world/entity/monster/Shulker$ShulkerNearestAttackGoal 1/1
+  Patching net/minecraft/world/entity/monster/Shulker$ShulkerPeekGoal 1/1
+  Patching net/minecraft/world/entity/monster/Shulker 1/1
   Patching net/minecraft/world/entity/monster/Silverfish$SilverfishMergeWithStoneGoal 1/1
   Patching net/minecraft/world/entity/monster/Silverfish$SilverfishWakeUpFriendsGoal 1/1
   Patching net/minecraft/world/entity/monster/Silverfish 1/1

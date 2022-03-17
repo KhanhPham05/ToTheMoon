@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+
+@Deprecated
 public class ModModelProvider {
     private final ItemProvider items;
     private final BlockProvider blocks;
@@ -48,7 +50,10 @@ public class ModModelProvider {
             build(ModBlocks.MOON_ROCK);
             build(ModBlocks.MOON_ROCK_BRICKS);
             build(ModBlocks.MOON_ROCK_BARREL);
+            build(ModBlocks.GOLD_ENERGY_GENERATOR);
+            build(ModBlocks.DIAMOND_ENERGY_GENERATOR);
             build(ModBlocks.COPPER_ENERGY_GENERATOR);
+            build(ModBlocks.IRON_ENERGY_GENERATOR);
             build(ModBlocks.MOON_ROCK_STAIRS, ModBlocks.MOON_ROCK_BRICK_SLAB, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_SLAB);
             build(ModItems.COPPER_PLATE, ModItems.STEEL_PLATE, ModItems.IRON_PLATE, ModItems.STEEL_INGOT, ModItems.URANIUM_INGOT);
         }
@@ -85,7 +90,10 @@ public class ModModelProvider {
             cubeAll(ModBlocks.MOON_ROCK);
             cubeAll(ModBlocks.MOON_ROCK_BRICKS);
             cubeAll(ModBlocks.MOON_ROCK_BARREL);
+            generatorBlock(ModBlocks.GOLD_ENERGY_GENERATOR);
+            generatorBlock(ModBlocks.DIAMOND_ENERGY_GENERATOR);
             generatorBlock(ModBlocks.COPPER_ENERGY_GENERATOR);
+            generatorBlock(ModBlocks.IRON_ENERGY_GENERATOR);
         }
 
         private void cubeAll(Block block) {
@@ -116,7 +124,10 @@ public class ModModelProvider {
             simpleBlock(ModBlocks.MOON_ROCK);
             simpleBlock(ModBlocks.MOON_ROCK_BRICKS);
             simpleBlock(ModBlocks.MOON_ROCK_BARREL);
+            generatorBlock(ModBlocks.GOLD_ENERGY_GENERATOR);
+            generatorBlock(ModBlocks.DIAMOND_ENERGY_GENERATOR);
             generatorBlock(ModBlocks.COPPER_ENERGY_GENERATOR);
+            generatorBlock(ModBlocks.IRON_ENERGY_GENERATOR);
             slabBlocks(ModBlocks.MOON_ROCK_SLAB, ModBlocks.MOON_ROCK_BRICK_SLAB);
             stairBlocks(ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_STAIRS);
         }

@@ -11,15 +11,9 @@
     },
     "done": true
   },
-  "minecraft:recipes/redstone/oak_fence_gate": {
+  "immersiveengineering:recipes/immersiveengineering/crafting/cokebrick": {
     "criteria": {
-      "has_planks": "2022-02-07 15:16:31 +0700"
-    },
-    "done": true
-  },
-  "minecraft:recipes/building_blocks/acacia_slab": {
-    "criteria": {
-      "has_planks": "2022-02-07 15:13:02 +0700"
+      "has_cokebrick": "2022-03-10 20:27:27 +0700"
     },
     "done": true
   },
@@ -29,21 +23,21 @@
     },
     "done": true
   },
-  "minecraft:recipes/decorations/acacia_fence": {
-    "criteria": {
-      "has_planks": "2022-02-07 15:13:02 +0700"
-    },
-    "done": true
-  },
   "minecraft:recipes/redstone/acacia_button": {
     "criteria": {
       "has_planks": "2022-02-07 15:13:02 +0700"
     },
     "done": true
   },
-  "minecraft:recipes/redstone/oak_button": {
+  "immersiveengineering:recipes/immersiveengineering/crafting/radiator": {
     "criteria": {
-      "has_planks": "2022-02-07 15:16:31 +0700"
+      "has_water_bucket": "2022-02-20 10:04:25 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/iron_sword": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -53,21 +47,15 @@
     },
     "done": true
   },
-  "tothemoon:recipes/ttm_creative_tab/crafting_steel_rod": {
-    "criteria": {
-      "collect_steel_ingot": "2022-02-14 18:33:27 +0700"
-    },
-    "done": true
-  },
   "minecraft:recipes/redstone/acacia_pressure_plate": {
     "criteria": {
       "has_planks": "2022-02-07 15:13:02 +0700"
     },
     "done": true
   },
-  "minecraft:recipes/redstone/dark_oak_pressure_plate": {
+  "minecraft:recipes/tools/iron_pickaxe": {
     "criteria": {
-      "has_planks": "2022-02-07 14:32:37 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -83,23 +71,17 @@
     },
     "done": true
   },
+  "immersiveengineering:recipes/immersiveengineering/crafting/rs_engineering": {
+    "criteria": {
+      "has_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/spruce_fence_gate": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:41 +0700"
     },
     "done": true
-  },
-  "minecraft:recipes/brewing/cauldron": {
-    "criteria": {
-      "has_water_bucket": "2022-02-13 18:45:57 +0700"
-    },
-    "done": true
-  },
-  "minecraft:adventure/adventuring_time": {
-    "criteria": {
-      "minecraft:plains": "2022-02-05 19:52:34 +0700"
-    },
-    "done": false
   },
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
@@ -113,21 +95,15 @@
     },
     "done": true
   },
-  "minecraft:recipes/misc/charcoal": {
-    "criteria": {
-      "has_log": "2022-02-11 14:35:37 +0700"
-    },
-    "done": true
-  },
-  "minecraft:recipes/misc/copper_ingot_from_blasting_deepslate_copper_ore": {
-    "criteria": {
-      "has_deepslate_copper_ore": "2022-02-07 14:32:13 +0700"
-    },
-    "done": true
-  },
   "minecraft:recipes/building_blocks/dark_oak_slab": {
     "criteria": {
       "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_nugget": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -137,15 +113,21 @@
     },
     "done": true
   },
-  "minecraft:recipes/building_blocks/oak_stairs": {
+  "immersiveengineering:recipes/immersiveengineering/crafting/coil_hv": {
     "criteria": {
-      "has_planks": "2022-02-07 15:16:31 +0700"
+      "has_wirecoil_steel": "2022-02-20 10:41:57 +0700"
     },
     "done": true
   },
-  "minecraft:recipes/decorations/barrel": {
+  "immersiveengineering:recipes/immersiveengineering/crafting/stick_iron": {
     "criteria": {
-      "has_planks": "2022-02-07 14:32:37 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/iron_block": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -155,21 +137,9 @@
     },
     "done": true
   },
-  "minecraft:recipes/decorations/enchanting_table": {
-    "criteria": {
-      "has_obsidian": "2022-02-13 18:45:44 +0700"
-    },
-    "done": true
-  },
   "minecraft:recipes/redstone/dark_oak_button": {
     "criteria": {
       "has_planks": "2022-02-07 14:32:37 +0700"
-    },
-    "done": true
-  },
-  "minecraft:recipes/redstone/acacia_door": {
-    "criteria": {
-      "has_planks": "2022-02-07 15:13:02 +0700"
     },
     "done": true
   },
@@ -179,9 +149,9 @@
     },
     "done": true
   },
-  "minecraft:recipes/redstone/oak_door": {
+  "minecraft:recipes/tools/shears": {
     "criteria": {
-      "has_planks": "2022-02-07 15:16:31 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -215,9 +185,9 @@
     },
     "done": true
   },
-  "minecraft:recipes/decorations/spruce_fence": {
+  "immersiveengineering:recipes/immersiveengineering/crafting/cokebrick_from_slab": {
     "criteria": {
-      "has_planks": "2022-02-07 15:16:41 +0700"
+      "has_cokebrick": "2022-03-10 20:27:27 +0700"
     },
     "done": true
   },
@@ -227,21 +197,9 @@
     },
     "done": true
   },
-  "minecraft:recipes/building_blocks/dark_oak_stairs": {
+  "minecraft:recipes/combat/iron_leggings": {
     "criteria": {
-      "has_planks": "2022-02-07 14:32:37 +0700"
-    },
-    "done": true
-  },
-  "minecraft:story/enter_the_nether": {
-    "criteria": {
-      "entered_nether": "2022-02-13 18:46:11 +0700"
-    },
-    "done": true
-  },
-  "minecraft:recipes/decorations/acacia_sign": {
-    "criteria": {
-      "has_planks": "2022-02-07 15:13:02 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -257,9 +215,21 @@
     },
     "done": true
   },
-  "minecraft:recipes/decorations/dark_oak_sign": {
+  "minecraft:recipes/tools/iron_axe": {
     "criteria": {
-      "has_planks": "2022-02-07 14:32:37 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/survey_tools": {
+    "criteria": {
+      "has_hammer": "2022-02-20 10:41:47 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/shield": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -269,15 +239,9 @@
     },
     "done": true
   },
-  "minecraft:recipes/building_blocks/spruce_stairs": {
+  "minecraft:recipes/misc/bucket": {
     "criteria": {
-      "has_planks": "2022-02-07 15:16:41 +0700"
-    },
-    "done": true
-  },
-  "minecraft:recipes/redstone/dark_oak_fence_gate": {
-    "criteria": {
-      "has_planks": "2022-02-07 14:32:37 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -287,21 +251,27 @@
     },
     "done": true
   },
-  "minecraft:recipes/redstone/spruce_trapdoor": {
+  "minecraft:recipes/combat/iron_boots": {
     "criteria": {
-      "has_planks": "2022-02-07 15:16:41 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
-  "minecraft:nether/explore_nether": {
+  "minecraft:recipes/redstone/hopper": {
     "criteria": {
-      "minecraft:crimson_forest": "2022-02-13 18:46:11 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/misc/copper_ingot_from_blasting_copper_ore": {
     "criteria": {
       "has_copper_ore": "2022-02-07 14:32:14 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/cokebrick_to_slab": {
+    "criteria": {
+      "has_cokebrick": "2022-03-10 20:27:27 +0700"
     },
     "done": true
   },
@@ -311,39 +281,33 @@
     },
     "done": true
   },
-  "minecraft:recipes/misc/emerald_from_blasting_emerald_ore": {
+  "immersiveengineering:recipes/immersiveengineering/crafting/redstone_breaker": {
     "criteria": {
-      "has_emerald_ore": "2022-02-07 15:16:24 +0700"
+      "has_hv_connector": "2022-02-20 10:04:56 +0700"
     },
     "done": true
   },
-  "tothemoon:recipes/ttm_creative_tab/stonecutting_moon_rock": {
+  "minecraft:recipes/redstone/note_block": {
     "criteria": {
-      "collect_moon_rock_stair": "2022-02-13 16:51:47 +0700"
+      "has_redstone": "2022-03-08 21:13:15 +0700"
     },
     "done": true
   },
-  "minecraft:recipes/decorations/dark_oak_fence": {
+  "minecraft:recipes/redstone/dropper": {
     "criteria": {
-      "has_planks": "2022-02-07 14:32:37 +0700"
+      "has_redstone": "2022-03-08 21:13:15 +0700"
     },
     "done": true
   },
-  "minecraft:recipes/misc/copper_ingot_from_smelting_copper_ore": {
+  "minecraft:recipes/combat/iron_chestplate": {
     "criteria": {
-      "has_copper_ore": "2022-02-07 14:32:14 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
-  "minecraft:recipes/building_blocks/acacia_stairs": {
+  "minecraft:recipes/combat/crossbow": {
     "criteria": {
-      "has_planks": "2022-02-07 15:13:02 +0700"
-    },
-    "done": true
-  },
-  "minecraft:recipes/decorations/oak_fence": {
-    "criteria": {
-      "has_planks": "2022-02-07 15:16:31 +0700"
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
     },
     "done": true
   },
@@ -377,15 +341,453 @@
     },
     "done": true
   },
-  "minecraft:recipes/building_blocks/oak_slab": {
+  "minecraft:story/form_obsidian": {
+    "criteria": {
+      "obsidian": "2022-02-13 18:45:45 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/iron_helmet": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_fence_gate": {
     "criteria": {
       "has_planks": "2022-02-07 15:16:31 +0700"
     },
     "done": true
   },
-  "minecraft:story/form_obsidian": {
+  "minecraft:recipes/building_blocks/acacia_slab": {
     "criteria": {
-      "obsidian": "2022-02-13 18:45:45 +0700"
+      "has_planks": "2022-02-07 15:13:02 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/acacia_planks": {
+    "criteria": {
+      "has_log": "2022-02-17 19:54:51 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/redstone_acid": {
+    "criteria": {
+      "has_redstone_dust": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/compass": {
+    "criteria": {
+      "has_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/acacia_fence": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:13:02 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_button": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:31 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/iron_bars": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/hammer": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/coil_mv": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "tothemoon:recipes/ttm_creative_tab/crafting_steel_rod": {
+    "criteria": {
+      "collect_steel_ingot": "2022-02-14 18:33:27 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/dark_oak_pressure_plate": {
+    "criteria": {
+      "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/target": {
+    "criteria": {
+      "has_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/minecart": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:main/root": {
+    "criteria": {
+      "manual": "2022-03-08 20:10:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/cauldron": {
+    "criteria": {
+      "has_water_bucket": "2022-02-13 18:45:57 +0700"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:plains": "2022-02-05 19:52:34 +0700"
+    },
+    "done": false
+  },
+  "minecraft:recipes/redstone/iron_door": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/charcoal": {
+    "criteria": {
+      "has_log": "2022-02-11 14:35:37 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/transformer_hv": {
+    "criteria": {
+      "has_hv_connector": "2022-02-20 10:04:56 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/iron_hoe": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/copper_ingot_from_blasting_deepslate_copper_ore": {
+    "criteria": {
+      "has_deepslate_copper_ore": "2022-02-07 14:32:13 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:main/craft_hammer": {
+    "criteria": {
+      "hammer": "2022-02-20 10:41:47 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone_torch": {
+    "criteria": {
+      "has_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_stairs": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:31 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/barrel": {
+    "criteria": {
+      "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/coil_lv": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/enchanting_table": {
+    "criteria": {
+      "has_obsidian": "2022-02-13 18:45:44 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/iron_shovel": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/smithing_table": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/iron_trapdoor": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/acacia_door": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:13:02 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/oak_door": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:31 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/toolbox": {
+    "criteria": {
+      "has_crate": "2022-03-08 20:11:38 +0700"
+    },
+    "done": true
+  },
+  "tothemoon:recipes/ttm_creative_tab/crafting_redstone_machine_frame": {
+    "criteria": {
+      "collect_steel_or_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/connector_hv": {
+    "criteria": {
+      "has_aluminum_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/component_iron": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/plate_iron_hammering": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_ingot_from_iron_block": {
+    "criteria": {
+      "has_iron_block": "2022-03-06 15:40:42 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/heavy_weighted_pressure_plate": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/clock": {
+    "criteria": {
+      "has_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/spruce_fence": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:41 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/diamond_from_blasting_deepslate_diamond_ore": {
+    "criteria": {
+      "has_deepslate_diamond_ore": "2022-02-18 16:42:43 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dark_oak_stairs": {
+    "criteria": {
+      "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:story/enter_the_nether": {
+    "criteria": {
+      "entered_nether": "2022-02-13 18:46:11 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/acacia_sign": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:13:02 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone_block": {
+    "criteria": {
+      "has_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/drillhead_iron": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/piston": {
+    "criteria": {
+      "has_redstone": "2022-03-08 21:13:15 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/lantern": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/dark_oak_sign": {
+    "criteria": {
+      "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/spruce_stairs": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:41 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/dark_oak_fence_gate": {
+    "criteria": {
+      "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/wirecutter": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/spruce_trapdoor": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:41 +0700"
+    },
+    "done": true
+  },
+  "minecraft:nether/explore_nether": {
+    "criteria": {
+      "minecraft:crimson_forest": "2022-02-13 18:46:11 +0700"
+    },
+    "done": false
+  },
+  "minecraft:recipes/misc/emerald_from_blasting_emerald_ore": {
+    "criteria": {
+      "has_emerald_ore": "2022-02-07 15:16:24 +0700"
+    },
+    "done": true
+  },
+  "tothemoon:recipes/ttm_creative_tab/stonecutting_moon_rock": {
+    "criteria": {
+      "collect_moon_rock_stair": "2022-02-13 16:51:47 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:main/connect_wire": {
+    "criteria": {
+      "code_trigger": "2022-02-20 10:42:05 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/diamond": {
+    "criteria": {
+      "has_diamond_block": "2022-03-06 15:40:36 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chain": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/dark_oak_fence": {
+    "criteria": {
+      "has_planks": "2022-02-07 14:32:37 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/diamond_from_smelting_deepslate_diamond_ore": {
+    "criteria": {
+      "has_deepslate_diamond_ore": "2022-02-18 16:42:43 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/screwdriver": {
+    "criteria": {
+      "has_iron_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/copper_ingot_from_smelting_copper_ore": {
+    "criteria": {
+      "has_copper_ore": "2022-02-07 14:32:14 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/acacia_stairs": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:13:02 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/oak_fence": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:31 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/tesla_coil": {
+    "criteria": {
+      "has_capacitor_hv": "2022-02-20 10:41:39 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/railgun": {
+    "criteria": {
+      "has_capacitor_hv": "2022-02-20 10:41:39 +0700"
+    },
+    "done": true
+  },
+  "minecraft:story/smelt_iron": {
+    "criteria": {
+      "iron": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/anvil": {
+    "criteria": {
+      "has_iron_block": "2022-03-06 15:40:42 +0700"
+    },
+    "done": true
+  },
+  "immersiveengineering:recipes/immersiveengineering/crafting/connector_hv_relay": {
+    "criteria": {
+      "has_aluminum_ingot": "2022-03-10 09:45:54 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_slab": {
+    "criteria": {
+      "has_planks": "2022-02-07 15:16:31 +0700"
     },
     "done": true
   },

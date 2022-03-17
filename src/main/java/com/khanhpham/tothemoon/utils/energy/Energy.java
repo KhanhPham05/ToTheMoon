@@ -21,8 +21,8 @@ public class Energy extends EnergyStorage {
         return maxExtract;
     }
 
-    public void setChanged() {
-
+    public void receiveEnergy() {
+        this.receiveEnergy(this.maxReceive, false);
     }
 
     @Override
@@ -34,7 +34,21 @@ public class Energy extends EnergyStorage {
     }
 
     public boolean isFull() {
-        return super.energy == super.capacity;
+        return super.energy >= super.capacity;
+    }
+
+    public boolean isEmpty() {
+        return super.energy <= 0;
+    }
+
+    public int consumeEnergy() {
+        if (canExtract())
+            return super.extractEnergy(this.maxExtract, false);
+        return 0;
+    }
+
+    public void consumeEnergyIgnoreCondition() {
+        this.energy -= Math.min(this.energy, this.maxExtract);
     }
 
     public void save(CompoundTag pTag) {

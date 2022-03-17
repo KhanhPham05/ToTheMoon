@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "tothemoon:alloy_smelter",
+    "tothemoon:steel_machine_frame",
+    "tothemoon:redstone_machine_frame",
+    "tothemoon:moon_rock_barrel",
+    "tothemoon:copper_machine_frame",
+    "tothemoon:copper_energy_generator",
+    "tothemoon:gold_energy_generator",
+    "tothemoon:diamond_energy_generator"
+  ]
+}
