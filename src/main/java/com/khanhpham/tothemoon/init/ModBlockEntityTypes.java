@@ -2,9 +2,10 @@ package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.*;
 import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.utils.registration.BlockEntityRegister;
 import net.minecraft.world.level.block.Block;

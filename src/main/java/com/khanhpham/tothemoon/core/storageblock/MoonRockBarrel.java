@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.core.storageblock;
 
 import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -12,12 +11,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-/**
- * @see net.minecraft.world.level.block.AbstractFurnaceBlock
- */
 public class MoonRockBarrel extends BaseEntityBlock<MoonBarrelTileEntity> {
-    public MoonRockBarrel(Properties p_49224_, BlockEntityType.BlockEntitySupplier<MoonBarrelTileEntity> supplier, MiningTool tool) {
-        super(p_49224_, supplier, tool);
+    public MoonRockBarrel(Properties p_49224_, BlockEntityType.BlockEntitySupplier<MoonBarrelTileEntity> supplier) {
+        super(p_49224_, supplier);
     }
 
     @SuppressWarnings("deprecation")
@@ -26,7 +22,7 @@ public class MoonRockBarrel extends BaseEntityBlock<MoonBarrelTileEntity> {
         if (!pLevel.isClientSide) {
             BlockEntity te = pLevel.getBlockEntity(pPos);
             if (te instanceof MoonBarrelTileEntity barrelTileEntity) {
-               pPlayer.openMenu(barrelTileEntity);
+                pPlayer.openMenu(barrelTileEntity);
             }
         }
         return InteractionResult.SUCCESS;

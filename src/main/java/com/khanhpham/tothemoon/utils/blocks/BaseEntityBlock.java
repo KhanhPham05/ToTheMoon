@@ -1,6 +1,5 @@
 package com.khanhpham.tothemoon.utils.blocks;
 
-import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.RenderShape;
@@ -13,14 +12,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecraft.world.level.block.BaseEntityBlock implements Mineable {
-    private final MiningTool tool;
+public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecraft.world.level.block.BaseEntityBlock {
     private final BlockEntityType.BlockEntitySupplier<T> supplier;
 
-    public BaseEntityBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<T> supplier, MiningTool tool) {
+    public BaseEntityBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<T> supplier) {
         super(p_49224_);
-        this.tool = tool;
         this.supplier = supplier;
+
+
     }
 
     @SuppressWarnings("deprecation")
@@ -33,10 +32,5 @@ public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecra
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return this.supplier.create(pPos, pState);
-    }
-
-    @Override
-    public MiningTool getTool() {
-        return this.tool;
     }
 }

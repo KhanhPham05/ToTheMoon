@@ -5,27 +5,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class MineableSlabBlocks extends SlabBlock implements Mineable , CraftedBlock{
-    private final MiningTool tool;
-    private final Block parentBlock;
-
-    public MineableSlabBlocks(Properties p_56359_, MiningTool tool, Block parentBlock) {
+public class MineableSlabBlocks extends SlabBlock{
+    public MineableSlabBlocks(Properties p_56359_) {
         super(p_56359_);
-        this.tool = tool;
-        this.parentBlock = parentBlock;
     }
 
-    public MineableSlabBlocks(MiningTool tool, Block parentBlock) {
-        this(BlockBehaviour.Properties.copy(parentBlock), tool, parentBlock);
-    }
-
-    @Override
-    public MiningTool getTool() {
-        return tool;
-    }
-
-    @Override
-    public Block parentBlock() {
-        return parentBlock;
+    public MineableSlabBlocks(Block parentBlock) {
+        this(BlockBehaviour.Properties.copy(parentBlock));
     }
 }

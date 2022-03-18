@@ -2,7 +2,6 @@ package com.khanhpham.tothemoon.core.alloysmelter;
 
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,8 +39,8 @@ public class AlloySmelterBlock extends BaseEntityBlock<AlloySmelterBlockEntity> 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-    public AlloySmelterBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AlloySmelterBlockEntity> supplier, MiningTool tool) {
-        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0), supplier, tool);
+    public AlloySmelterBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AlloySmelterBlockEntity> supplier) {
+        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0), supplier);
 
         registerDefaultState(super.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)

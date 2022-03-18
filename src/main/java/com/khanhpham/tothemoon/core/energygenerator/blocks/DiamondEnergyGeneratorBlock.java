@@ -2,7 +2,6 @@ package com.khanhpham.tothemoon.core.energygenerator.blocks;
 
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
-import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -10,8 +9,8 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class DiamondEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock {
-    public DiamondEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier, MiningTool tool) {
-        super(p_49224_, supplier, tool);
+    public DiamondEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier) {
+        super(p_49224_, supplier);
     }
 
     @Override

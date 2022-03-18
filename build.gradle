@@ -114,12 +114,12 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3577512")
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3550045")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
-    //runtimeOnly fg.deobf("curse.maven:pipez-443900:3569514")
+    compileOnly fg.deobf("curse.maven:pipez-443900:3569514")
     //runtimeOnly fg.deobf("curse.maven:mekanism-268560:3590099")
+    //runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3544525")
     implementation fg.deobf("curse.maven:immersive-engineering-231951:3587149")
 
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.1-65:api")

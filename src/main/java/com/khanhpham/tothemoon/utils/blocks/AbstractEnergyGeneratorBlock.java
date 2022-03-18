@@ -1,6 +1,5 @@
 package com.khanhpham.tothemoon.utils.blocks;
 
-import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,8 +40,8 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 
-    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier, MiningTool tool) {
-        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier, tool);
+    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier) {
+        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier);
 
         registerDefaultState(super.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)

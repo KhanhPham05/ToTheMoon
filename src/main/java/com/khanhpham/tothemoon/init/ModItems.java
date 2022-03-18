@@ -18,7 +18,7 @@ public class ModItems {
 
     //special ingredient
     public static final Item REDSTONE_STEEL_ALLOY;
-    public static final Item REDSTONE_INGOT;
+    public static final Item REDSTONE_METAL;
 
     //common crafting ingredient
     public static final Item URANIUM_INGOT;
@@ -51,7 +51,7 @@ public class ModItems {
         COPPER_PLATE = register("copper_plate");
         URANIUM_PLATE = register("uranium_plate");
         IRON_PLATE = register("iron_plate");
-        REDSTONE_INGOT = register("redstone_ingot");
+        REDSTONE_METAL = register("redstone_metal");
         REDSTONE_STEEL_ALLOY = register("redstone_steel_alloy");
         COPPER_DUST = register("copper_dust");
         IRON_DUST = register("iron_dust");
