@@ -3,9 +3,12 @@ package com.khanhpham.tothemoon;
 import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
 import com.khanhpham.tothemoon.core.storageblock.MoonBarrelScreen;
+import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -55,6 +58,9 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorMenuScreen::new);
             MenuScreens.register(ModMenuTypes.ALLOY_SMELTER, AlloySmelterMenuScreen::new);
+
+            LOG.info(ModBlocks.MODDED_NON_SOLID_BLOCKS);
+            ModBlocks.MODDED_NON_SOLID_BLOCKS.forEach(ModBlocks::cutoutRendering);
         }
     }
 }

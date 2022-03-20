@@ -9,9 +9,17 @@ public class MineableStairBlock extends StairBlock {
 
     public MineableStairBlock(BlockState pBaseState, Properties pProperties, Block parentBlock) {
         super(() -> pBaseState, pProperties);
+        this.parentBlock = parentBlock;
     }
+
+    final Block parentBlock;
 
     public MineableStairBlock(Block parentBlock) {
         this(parentBlock.defaultBlockState(), BlockBehaviour.Properties.copy(parentBlock), parentBlock);
     }
+
+    public Block parentBlock() {
+        return this.parentBlock;
+    }
+
 }
