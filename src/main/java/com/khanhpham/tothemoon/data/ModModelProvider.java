@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.data;
 
-import com.khanhpham.tothemoon.ModUtils;
+import com.khanhpham.tothemoon.utils.ModUtils;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;

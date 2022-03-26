@@ -9,6 +9,6 @@ public interface DataContainerMenuHelper {
         int i = getContainerData().get(i1);
         int j = getContainerData().get(i2);
 
-        return j != 0 && i != 0 ? i * 147 / j : 0;
+        return j != 0 && i != 0 ? i * 146 / j : 0;
     }
 }

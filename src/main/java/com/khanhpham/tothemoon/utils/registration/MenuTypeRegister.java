@@ -12,7 +12,8 @@ import java.util.Set;
 public class MenuTypeRegister {
     private final Set<MenuType<?>> containerTypes = new HashSet<>();
 
-    public MenuTypeRegister() {}
+    public MenuTypeRegister() {
+    }
 
     public <T extends AbstractContainerMenu> MenuType<T> register(String name, MenuType.MenuSupplier<T> supplier) {
         MenuType<T> containerType = new MenuType<>(supplier);

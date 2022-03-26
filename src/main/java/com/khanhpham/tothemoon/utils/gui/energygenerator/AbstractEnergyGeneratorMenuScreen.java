@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.utils.gui.energygenerator;
 
-import com.khanhpham.tothemoon.ModUtils;
+import com.khanhpham.tothemoon.utils.ModUtils;
 import com.khanhpham.tothemoon.utils.containers.energycontainer.AbstractEnergyGeneratorMenu;
 import com.khanhpham.tothemoon.utils.gui.BaseMenuScreen;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,7 +17,7 @@ public abstract class AbstractEnergyGeneratorMenuScreen<T extends AbstractEnergy
     public AbstractEnergyGeneratorMenuScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture) {
         super(pMenu, pPlayerInventory, pTitle, texture);
 
-        super.setImageWidthAndHeight(179);
+        super.setImageHeight(179);
     }
 
     @Override

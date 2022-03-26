@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
-    "side": "tothemoon:block/gold_energy_generator_side",
-    "front": "tothemoon:block/gold_energy_generator_front",
-    "bottom": "tothemoon:block/gold_energy_generator_bottom",
-    "top": "tothemoon:block/gold_energy_generator_top"
+    "side": "tothemoon:block/energy_generator_side",
+    "front": "tothemoon:block/gold_energy_generator",
+    "bottom": "tothemoon:block/energy_generator_top",
+    "top": "tothemoon:block/energy_generator_top"
   }
 }

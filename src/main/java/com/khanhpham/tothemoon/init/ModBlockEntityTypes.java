@@ -1,12 +1,13 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
+import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.metalpress.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.machines.storageblock.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.utils.registration.BlockEntityRegister;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -27,7 +28,10 @@ public class ModBlockEntityTypes {
     public static final BlockEntityType<IronEnergyGeneratorBlockEntity> IRON_ENERGY_GENERATOR_TE;
     public static final BlockEntityType<GoldEnergyGeneratorBlockEntity> GOLD_ENERGY_GENERATOR_TE;
     public static final BlockEntityType<DiamondEnergyGeneratorBlockEntity> DIAMOND_ENERGY_GENERATOR_TE;
+
     public static final BlockEntityType<AlloySmelterBlockEntity> ALLOY_SMELTER;
+
+    public static final BlockEntityType<MetalPressBlockEntity> METAL_PRESS;
 
     static {
         MOON_STORAGE = register("moon_storage", MoonBarrelTileEntity::new, ModBlocks.MOON_ROCK_BARREL);
@@ -36,6 +40,7 @@ public class ModBlockEntityTypes {
         GOLD_ENERGY_GENERATOR_TE = register("gold_energy_generator_tile_entity", GoldEnergyGeneratorBlockEntity::new, ModBlocks.GOLD_ENERGY_GENERATOR);
         DIAMOND_ENERGY_GENERATOR_TE = register("diamond_energy_generator_tile_entity", DiamondEnergyGeneratorBlockEntity::new, ModBlocks.DIAMOND_ENERGY_GENERATOR);
         ALLOY_SMELTER = register("alloy_smelter", AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER);
+        METAL_PRESS = register("metal_press", MetalPressBlockEntity::new, ModBlocks.METAL_PRESS);
     }
 
     private ModBlockEntityTypes() {

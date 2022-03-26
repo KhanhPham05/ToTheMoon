@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.data.recipe;
 
-import com.khanhpham.tothemoon.ModUtils;
+import com.khanhpham.tothemoon.utils.ModUtils;
 import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
 import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;

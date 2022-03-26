@@ -1,18 +1,20 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterBlock;
-import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.blocks.CopperEnergyGeneratorBlock;
-import com.khanhpham.tothemoon.core.energygenerator.blocks.DiamondEnergyGeneratorBlock;
-import com.khanhpham.tothemoon.core.energygenerator.blocks.GoldEnergyGeneratorBlock;
-import com.khanhpham.tothemoon.core.energygenerator.blocks.IronEnergyGeneratorBlock;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.storageblock.MoonBarrelTileEntity;
-import com.khanhpham.tothemoon.core.storageblock.MoonRockBarrel;
+import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterBlock;
+import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.blocks.CopperEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.core.machines.energygenerator.blocks.DiamondEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.core.machines.energygenerator.blocks.GoldEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.core.machines.energygenerator.blocks.IronEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.machines.metalpress.MetalPressBlock;
+import com.khanhpham.tothemoon.core.machines.metalpress.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.machines.storageblock.MoonBarrelTileEntity;
+import com.khanhpham.tothemoon.core.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
 import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
@@ -63,8 +65,13 @@ public class ModBlocks {
     //Fuel Energy Generators
     public static final Block COPPER_ENERGY_GENERATOR = register("copper_energy_generator", new CopperEnergyGeneratorBlock(properties(Material.METAL, 3.5f, 5.0f, SoundType.METAL), CopperEnergyGeneratorBlockEntity::new));
     public static final Block IRON_ENERGY_GENERATOR = register("iron_energy_generator", new IronEnergyGeneratorBlock(properties(Material.METAL, 4.0f, 5.0f, SoundType.METAL), IronEnergyGeneratorBlockEntity::new));
-    //Alloy Smelter
-    public static final Block ALLOY_SMELTER = register("alloy_smelter", new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), AlloySmelterBlockEntity::new));    public static final Block DIAMOND_ENERGY_GENERATOR = register("diamond_energy_generator", new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK), DiamondEnergyGeneratorBlockEntity::new));
+    public static final Block DIAMOND_ENERGY_GENERATOR = register("diamond_energy_generator", new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK), DiamondEnergyGeneratorBlockEntity::new));
+
+
+    //Machines
+    public static final Block ALLOY_SMELTER = register("alloy_smelter", new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), AlloySmelterBlockEntity::new));
+    public static final Block METAL_PRESS = register("metal_press", new MetalPressBlock(properties(Material.METAL, 3.5f, 4.0f, SoundType.METAL), MetalPressBlockEntity::new));
+
     public static final Block REDSTONE_METAL_BLOCK = register("redstone_metal_block", 4.5f, 6.0f, Material.METAL, SoundType.METAL);
     public static final Block STEEL_BLOCK = register("steel_block", 4.0f, 5.0f, Material.METAL, SoundType.METAL);
     public static final Block REDSTONE_STEEL_ALLOY_BLOCk = register("redstone_steel_alloy_block", 4.5f, 6.0F, Material.METAL, SoundType.METAL);
@@ -115,7 +122,7 @@ public class ModBlocks {
 
     private static <T extends Block> Block register(String name, T block) {
         return BLOCK_REGISTER.register(name, block);
-    }    public static final Block GOLD_ENERGY_GENERATOR = register("gold_energy_generator", new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), GoldEnergyGeneratorBlockEntity::new));
+    }
 
     private static BlockBehaviour.Properties properties(Material material, float hardness, float resistance, SoundType breakSound) {
         return BlockBehaviour.Properties.of(material).strength(hardness, resistance).sound(breakSound).requiresCorrectToolForDrops();
@@ -124,7 +131,7 @@ public class ModBlocks {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         init(event.getRegistry());
-    }
+    }    public static final Block GOLD_ENERGY_GENERATOR = register("gold_energy_generator", new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK), GoldEnergyGeneratorBlockEntity::new));
 
     public static void init(IForgeRegistry<Block> registry) {
         BLOCK_REGISTER.registerAll(registry);
