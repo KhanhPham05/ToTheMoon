@@ -5,6 +5,8 @@ import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -40,12 +42,27 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return super.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        return super.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite()).setValue(LIT, Boolean.FALSE);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(LIT, FACING);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock())) {
+            BlockEntity te = pLevel.getBlockEntity(pPos);
+            if (te instanceof MetalPressBlockEntity metalPress) {
+                if (pLevel instanceof ServerLevel) {
+                    Containers.dropContents(pLevel, pPos, metalPress);
+                }
+            }
+
+            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        }
     }
 
     @SuppressWarnings("deprecation")
@@ -59,7 +76,7 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
             }
         }
 
-        return InteractionResult.CONSUME;
+        return InteractionResult.FAIL;
     }
 
     @Nullable

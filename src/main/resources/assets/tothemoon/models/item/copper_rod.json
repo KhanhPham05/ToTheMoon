@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "layer0": {
+    "texture": "tothemoon:item/copper_rod"
+  }
+}

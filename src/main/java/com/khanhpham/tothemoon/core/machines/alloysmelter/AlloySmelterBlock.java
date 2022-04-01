@@ -78,10 +78,6 @@ public class AlloySmelterBlock extends BaseEntityBlock<AlloySmelterBlockEntity> 
         return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.ALLOY_SMELTER, AlloySmelterBlockEntity::serverTick);
     }
 
-    /**
-     * @see net.minecraft.world.level.block.AbstractFurnaceBlock
-     * @see net.minecraftforge.fml.common.Mod
-     */
     @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {

@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "tothemoon:item/redstone_steel_gear",
-		"particle": "tothemoon:item/redstone_steel_gear"
+		"0": "tothemoon:item/redstone_steel_alloy_gear",
+		"particle": "tothemoon:item/redstone_steel_alloy_gear"
 	},
 	"elements": [
 		{

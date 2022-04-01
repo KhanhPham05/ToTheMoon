@@ -22,20 +22,24 @@ public class ModItems {
     public static Item REDSTONE_STEEL_ALLOY_GEAR;
     public static Item REDSTONE_STEEL_ALLOY_PLATE;
     public static Item REDSTONE_STEEL_ALLOY_DUST;
+    public static Item REDSTONE_STEEL_ALLOY_ROD;
 
     public static Item REDSTONE_METAL;
     public static Item REDSTONE_METAL_PLATE;
     public static Item REDSTONE_METAL_GEAR;
+    public static Item REDSTONE_METAL_ROD;
 
     //common crafting ingredient
     public static Item URANIUM_INGOT;
     public static Item URANIUM_DUST;
     public static Item URANIUM_PLATE;
     public static Item URANIUM_GEAR;
+    public static Item URANIUM_ROD;
 
     public static Item COPPER_PLATE;
     public static Item COPPER_DUST;
     public static Item COPPER_GEAR;
+    public static Item COPPER_ROD;
 
     public static Item STEEL_PLATE;
     public static Item STEEL_INGOT;
@@ -46,15 +50,18 @@ public class ModItems {
     public static Item IRON_PLATE;
     public static Item IRON_DUST;
     public static Item IRON_GEAR;
+    public static Item IRON_ROD;
 
     public static Item GOLD_PLATE;
     public static Item GOLD_DUST;
     public static Item GOLD_GEAR;
+    public static Item GOLD_ROD;
 
     //METAL PRESS MOLDS
     public static Item BLANK_MOLD;
     public static Item GEAR_MOLD;
     public static Item PLATE_MOLD;
+    public static Item ROD_MOLD;
 
 
     private ModItems() {
@@ -79,7 +86,7 @@ public class ModItems {
     }
 
     @Nonnull
-    private static ResourceLocation getRegistryName(Block block) {
+    public static ResourceLocation getRegistryName(Block block) {
         return Objects.requireNonNull(block.getRegistryName());
     }
 }

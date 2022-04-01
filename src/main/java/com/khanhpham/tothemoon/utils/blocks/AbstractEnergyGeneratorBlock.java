@@ -31,10 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-/**
- * @see net.minecraft.world.level.block.AbstractFurnaceBlock
- * @see net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase
- */
 public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<AbstractEnergyGeneratorBlockEntity> {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -56,12 +52,10 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide) {
-            return InteractionResult.FAIL;
-        } else {
+        if (!pLevel.isClientSide) {
             BlockEntity te = pLevel.getBlockEntity(pPos);
-            if (te instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorTileEntity) {
-                pPlayer.openMenu(energyGeneratorTileEntity);
+            if (te instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorBlockEntity) {
+                pPlayer.openMenu(energyGeneratorBlockEntity);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -84,17 +78,6 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
 
             super.onRemove(state, level, pPos, pNewState, pIsMoving);
         }
-    }
-
-    @Override
-    public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
-        return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
     @Nullable

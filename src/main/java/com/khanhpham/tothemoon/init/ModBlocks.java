@@ -16,8 +16,7 @@ import com.khanhpham.tothemoon.core.machines.metalpress.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.machines.storageblock.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.core.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
-import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
+import com.khanhpham.tothemoon.utils.blocks.ModStairBlock;
 import com.khanhpham.tothemoon.utils.registration.BlockRegister;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -38,6 +37,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
 
@@ -107,13 +107,13 @@ public class ModBlocks {
     }
 
     private static Block registerStair(Block parentBlock) {
-        String name = parentBlock.getRegistryName().getPath() + "_stair";
-        return BLOCK_REGISTER.register(name, new MineableStairBlock(parentBlock));
+        String name = ModItems.getRegistryName(parentBlock).getPath() + "_stair";
+        return BLOCK_REGISTER.register(name, new ModStairBlock(parentBlock));
     }
 
     private static Block registerSlab(Block parentBlock) {
-        String name = parentBlock.getRegistryName().getPath() + "_slab";
-        return BLOCK_REGISTER.register(name, new MineableSlabBlocks(parentBlock));
+        String name = ModItems.getRegistryName(parentBlock).getPath() + "_slab";
+        return BLOCK_REGISTER.register(name, new ModStairBlock(parentBlock));
     }
 
     private static <T extends BaseEntityBlock<?>> Block register(String name, T block) {
@@ -136,10 +136,4 @@ public class ModBlocks {
     public static void init(IForgeRegistry<Block> registry) {
         BLOCK_REGISTER.registerAll(registry);
     }
-
-
-
-
-
-
 }

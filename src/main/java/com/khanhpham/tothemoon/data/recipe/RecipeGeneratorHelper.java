@@ -1,8 +1,8 @@
 package com.khanhpham.tothemoon.data.recipe;
 
 import com.khanhpham.tothemoon.utils.ModUtils;
-import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
-import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
+import com.khanhpham.tothemoon.utils.blocks.ModSlabBlock;
+import com.khanhpham.tothemoon.utils.blocks.ModStairBlock;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public interface RecipeGeneratorHelper {
     default void stairBlock(Consumer<FinishedRecipe> consumer, Block resultBlock) {
-        if (resultBlock instanceof MineableStairBlock stairBlock) {
+        if (resultBlock instanceof ModStairBlock stairBlock) {
             craftingShaped(stairBlock, 4).pattern("A  ").pattern("AA ").pattern("AAA").define('A', stairBlock.parentBlock()).unlockedBy("collect_" + stairBlock.parentBlock().getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(stairBlock.parentBlock())).save(consumer, ModUtils.modLoc("crafting_" + stairBlock.getRegistryName().getPath()));
             stonecutting(consumer, stairBlock.parentBlock(), stairBlock, 1);
         }
@@ -29,7 +29,7 @@ public interface RecipeGeneratorHelper {
     }
 
     default void slabBlock(Consumer<FinishedRecipe> consumer, Block resultBlock) {
-        if (resultBlock instanceof MineableSlabBlocks slabBlock) {
+        if (resultBlock instanceof ModSlabBlock slabBlock) {
             craftingShaped(slabBlock, 6).pattern("AAA").define('A', slabBlock.parentBlock()).unlockedBy("collect_" + slabBlock.parentBlock().getRegistryName().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(slabBlock.parentBlock())).save(consumer, ModUtils.modLoc("crafting_" + slabBlock.getRegistryName().getPath()));
             stonecutting(consumer, slabBlock, slabBlock.parentBlock(), 2);
         }

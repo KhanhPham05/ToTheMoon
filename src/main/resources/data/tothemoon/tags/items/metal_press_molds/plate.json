@@ -1,6 +1,7 @@
 {
   "replace" : false,
-  "values": [
-    "immersiveengineering:mold_plate"
+  "values" : [
+    "immersiveengineering:mold_plate",
+    "tothemoon:plate_mold"
   ]
 }

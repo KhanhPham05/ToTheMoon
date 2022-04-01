@@ -5,8 +5,8 @@ import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
-import com.khanhpham.tothemoon.utils.blocks.MineableSlabBlocks;
-import com.khanhpham.tothemoon.utils.blocks.MineableStairBlock;
+import com.khanhpham.tothemoon.utils.blocks.ModSlabBlock;
+import com.khanhpham.tothemoon.utils.blocks.ModStairBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -139,7 +139,7 @@ public class ModModelProvider {
         }
 
         private void slabBlock(Block block) {
-            if (block instanceof MineableSlabBlocks slabBlock) {
+            if (block instanceof ModSlabBlock slabBlock) {
                 super.slabBlock(slabBlock, ModUtils.modLoc("block/" + slabBlock.parentBlock().getRegistryName().getPath()), ModUtils.modLoc("block/" + slabBlock.parentBlock().getRegistryName().getPath()));
             }
         }
@@ -151,7 +151,7 @@ public class ModModelProvider {
         }
 
         private void stairBlock(Block block) {
-            if (block instanceof MineableStairBlock stairBlock) {
+            if (block instanceof ModStairBlock stairBlock) {
                 super.stairsBlock(stairBlock, ModUtils.modLoc("block/" + stairBlock.parentBlock().getRegistryName().getPath()));
             }
         }
