@@ -75,7 +75,7 @@ public class AlloySmelterBlock extends BaseEntityBlock<AlloySmelterBlockEntity> 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.ALLOY_SMELTER, AlloySmelterBlockEntity::serverTick);
+        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.ALLOY_SMELTER.get(), AlloySmelterBlockEntity::serverTick);
     }
 
     @SuppressWarnings("deprecation")

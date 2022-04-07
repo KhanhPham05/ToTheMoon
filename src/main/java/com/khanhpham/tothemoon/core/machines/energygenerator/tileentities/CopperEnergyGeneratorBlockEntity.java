@@ -19,6 +19,6 @@ public class CopperEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBlo
     }
 
     public CopperEnergyGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE, pos, state, LABEL);
+        this(ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE.get(), pos, state, LABEL);
     }
 }

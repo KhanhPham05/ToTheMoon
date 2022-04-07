@@ -13,7 +13,7 @@ public class MoonBarrelTileEntity extends ItemCapableTileEntity {
     public static final TranslatableComponent MENU_DISPLAY_NAME = new TranslatableComponent("gui.tothemoon.moon_storage");
 
     public MoonBarrelTileEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntityTypes.MOON_STORAGE, pWorldPosition, pBlockState, MoonBarrelMenu.CAPACITY);
+        super(ModBlockEntityTypes.MOON_STORAGE.get(), pWorldPosition, pBlockState, MoonBarrelMenu.CAPACITY);
     }
 
     @Override

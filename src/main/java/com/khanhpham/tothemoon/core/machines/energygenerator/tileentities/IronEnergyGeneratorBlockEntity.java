@@ -10,6 +10,6 @@ public class IronEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBlock
     public static final TranslatableComponent LABEL = new TranslatableComponent("gui.tothemoon.energy_generator.iron");
 
     public IronEnergyGeneratorBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntityTypes.IRON_ENERGY_GENERATOR_TE, pWorldPosition, pBlockState, 200000, 150, 500, LABEL);
+        super(ModBlockEntityTypes.IRON_ENERGY_GENERATOR_TE.get(), pWorldPosition, pBlockState, 200000, 150, 500, LABEL);
     }
 }

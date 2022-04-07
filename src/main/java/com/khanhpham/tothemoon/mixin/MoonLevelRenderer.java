@@ -2,16 +2,15 @@ package com.khanhpham.tothemoon.mixin;
 
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
-import com.khanhpham.tothemoon.utils.ModUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,12 +26,13 @@ public class MoonLevelRenderer {
     @Final
     @Shadow
     private Minecraft minecraft;
+
     @Inject(at = @At("RETURN"), method = "renderSky")
-    public void renderSky(PoseStack pPoseStack, Matrix4f pProjectionMatrix, float pPartialTick, Runnable pSkyFogSetup, CallbackInfo ci) {
+    public void renderSky(PoseStack p_202424_, Matrix4f p_202425_, float p_202426_, Camera p_202427_, boolean p_202428_, Runnable p_202429_, CallbackInfo ci) {
         //
         @Nullable ClientLevel level = this.minecraft.level;
         if (level != null && level.effects() instanceof TheMoonDimensionEffect) {
-            this.renderTheMoonSky(pPoseStack);
+            this.renderTheMoonSky(p_202424_);
         }
     }
 
@@ -48,11 +48,16 @@ public class MoonLevelRenderer {
         for (int i = 0; i <= 5; i++) {
             poseStack.pushPose();
             switch (i) {
-                case 1 : rotationDegrees(poseStack, Vector3f.XP, 90);
-                case 2 : rotationDegrees(poseStack, Vector3f.XP, -90);
-                case 3 : rotationDegrees(poseStack, Vector3f.XP, 180);
-                case 4 : rotationDegrees(poseStack, Vector3f.ZP, 90);
-                case 5 : rotationDegrees(poseStack, Vector3f.ZP, -90);
+                case 1:
+                    rotationDegrees(poseStack, Vector3f.XP, 90);
+                case 2:
+                    rotationDegrees(poseStack, Vector3f.XP, -90);
+                case 3:
+                    rotationDegrees(poseStack, Vector3f.XP, 180);
+                case 4:
+                    rotationDegrees(poseStack, Vector3f.ZP, 90);
+                case 5:
+                    rotationDegrees(poseStack, Vector3f.ZP, -90);
             }
 
             Matrix4f matrix4f = poseStack.last().pose();

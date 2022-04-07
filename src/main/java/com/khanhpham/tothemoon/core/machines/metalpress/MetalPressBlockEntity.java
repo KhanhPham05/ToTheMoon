@@ -29,7 +29,7 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity {
     }
 
     public MetalPressBlockEntity(BlockPos blockPos, BlockState blockState) {
-        this(ModBlockEntityTypes.METAL_PRESS, blockPos, blockState, new EnergyReceivable(175000, 5000, 2000), new TranslatableComponent("gui.tothemoon.metal_press"), MENU_SIZE);
+        this(ModBlockEntityTypes.METAL_PRESS.get(), blockPos, blockState, new EnergyReceivable(175000, 5000, 2000), new TranslatableComponent("gui.tothemoon.metal_press"), MENU_SIZE);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState state, MetalPressBlockEntity e) {

@@ -84,7 +84,7 @@ public class MetalPressingRecipe implements Recipe<MetalPressBlockEntity> {
 
         @Override
         protected ItemLike getIcon() {
-            return ModBlocks.METAL_PRESS;
+            return ModBlocks.METAL_PRESS.get();
         }
 
 

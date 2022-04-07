@@ -15,6 +15,6 @@ public class IronEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock {
 
     @Override
     protected <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level level, BlockEntityType<A> pBlockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.IRON_ENERGY_GENERATOR_TE, AbstractEnergyGeneratorBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.IRON_ENERGY_GENERATOR_TE.get(), AbstractEnergyGeneratorBlockEntity::serverTick);
     }
 }

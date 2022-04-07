@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.utils;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -37,5 +38,9 @@ public class ModUtils {
             return true;
         }
         return givenStack.is(recipeStack.getItem()) & givenStack.getCount() + recipeStack.getCount() <= 64;
+    }
+
+    public static void info(String message, Object... arguments) {
+        ToTheMoon.LOG.info(message, arguments);
     }
 }

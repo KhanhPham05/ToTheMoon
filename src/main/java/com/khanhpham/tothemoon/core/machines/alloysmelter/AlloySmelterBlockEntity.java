@@ -29,7 +29,7 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity {
     }
 
     public AlloySmelterBlockEntity(BlockPos blockPos, BlockState state) {
-        this(ModBlockEntityTypes.ALLOY_SMELTER, blockPos, state, new EnergyReceivable(175000, 750, 500), LABEL, MENU_SIZE);
+        this(ModBlockEntityTypes.ALLOY_SMELTER.get(), blockPos, state, new EnergyReceivable(175000, 750, 500), LABEL, MENU_SIZE);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, AlloySmelterBlockEntity blockEntity) {

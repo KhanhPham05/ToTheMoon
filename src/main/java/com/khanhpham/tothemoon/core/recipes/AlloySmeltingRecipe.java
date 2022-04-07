@@ -2,9 +2,9 @@ package com.khanhpham.tothemoon.core.recipes;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
+import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.ModUtils;
 import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -108,7 +108,7 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
 
         @Override
         protected ItemLike getIcon() {
-            return ModBlocks.ALLOY_SMELTER;
+            return ModBlocks.ALLOY_SMELTER.get();
         }
     }
 

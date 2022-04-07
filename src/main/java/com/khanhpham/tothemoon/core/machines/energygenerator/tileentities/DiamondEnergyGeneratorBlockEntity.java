@@ -15,6 +15,6 @@ public class DiamondEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBl
     }
 
     public DiamondEnergyGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityTypes.DIAMOND_ENERGY_GENERATOR_TE, pos, state, 300000, 500, 1500, new TranslatableComponent(ModBlocks.DIAMOND_ENERGY_GENERATOR.getDescriptionId()));
+        this(ModBlockEntityTypes.DIAMOND_ENERGY_GENERATOR_TE.get(), pos, state, 300000, 500, 1500, new TranslatableComponent(ModBlocks.DIAMOND_ENERGY_GENERATOR.get().getDescriptionId()));
     }
 }

@@ -18,8 +18,6 @@ public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecra
     public BaseEntityBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<T> supplier) {
         super(p_49224_);
         this.supplier = supplier;
-
-
     }
 
     @SuppressWarnings("deprecation")
