@@ -8,7 +8,7 @@
     <module name="ToTheMoon__NEW.main"/>
     <envs>
       <env name="MOD_CLASSES" value="tothemoon%%$PROJECT_DIR$\build\resources\main;tothemoon%%$PROJECT_DIR$\build\classes\java\main"/>
-      <env name="MCP_MAPPINGS" value="parchment_2022.01.23-1.18.1"/>
+      <env name="MCP_MAPPINGS" value="parchment_2022.03.13-1.18.2"/>
     </envs>
     <method v="2">
       <option enabled="true" name="Make"/>

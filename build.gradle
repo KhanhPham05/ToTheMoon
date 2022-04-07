@@ -127,7 +127,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3671753")
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
-    //    //compileOnly fg.deobf("curse.maven:pipez-443900:3569514")
+    //compileOnly fg.deobf("curse.maven:pipez-443900:3569514")
     //runtimeOnly fg.deobf("curse.maven:mekanism-268560:3590099")
     runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3544525")
     implementation fg.deobf("curse.maven:immersive-engineering-231951:3721708")

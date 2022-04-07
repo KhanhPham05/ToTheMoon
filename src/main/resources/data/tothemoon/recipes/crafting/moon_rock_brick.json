@@ -1,9 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "A  ",
-    "AA ",
-    "AAA"
+    "AA",
+    "AA"
   ],
   "key": {
     "A": {
@@ -11,7 +10,6 @@
     }
   },
   "result": {
-    "item": "tothemoon:moon_rock_stair",
-    "count": 4
+    "item": "tothemoon:moon_rock_brick"
   }
 }
