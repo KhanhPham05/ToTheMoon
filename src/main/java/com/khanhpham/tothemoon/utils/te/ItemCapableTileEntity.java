@@ -7,9 +7,13 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 /**
  * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
@@ -19,11 +23,12 @@ public abstract class ItemCapableTileEntity extends BaseContainerBlockEntity {
 
     protected NonNullList<ItemStack> items;
 
-    public ItemCapableTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int inventorySize) {
+    protected ItemCapableTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int inventorySize) {
         super(pType, pWorldPosition, pBlockState);
 
         this.items = NonNullList.withSize(inventorySize, ItemStack.EMPTY);
     }
+
 
 
     @Override

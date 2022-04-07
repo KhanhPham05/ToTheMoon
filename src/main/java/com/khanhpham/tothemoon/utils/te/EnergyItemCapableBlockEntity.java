@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.utils.te;
 
+import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -15,6 +16,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -102,7 +105,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
+    protected final void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         ContainerHelper.saveAllItems(pTag, this.items);
         energy.save(pTag);
@@ -113,7 +116,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
     }
 
     @Override
-    public void load(CompoundTag pTag) {
+    public final void load(CompoundTag pTag) {
         super.load(pTag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(pTag, this.items);
@@ -127,7 +130,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
     @Nonnull
     protected abstract AbstractContainerMenu createMenu(int containerId,@Nonnull Inventory playerInventory);
 
-    protected void transferEnergyToOther(Level level, BlockPos blockPos) {
+    protected final void transferEnergyToOther(Level level, BlockPos blockPos) {
         transferEnergy(level, blockPos, Direction.NORTH, Direction.DOWN);
         transferEnergy(level, blockPos, Direction.SOUTH, Direction.NORTH);
         transferEnergy(level, blockPos, Direction.WEST, Direction.EAST);
@@ -136,7 +139,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         transferEnergy(level, blockPos, Direction.DOWN, Direction.UP);
     }
 
-    protected void receiveEnergyFromOther(Level level, BlockPos blockPos) {
+    protected final void receiveEnergyFromOther(Level level, BlockPos blockPos) {
         receiveEnergy(level, blockPos, Direction.NORTH, Direction.DOWN);
         receiveEnergy(level, blockPos, Direction.SOUTH, Direction.NORTH);
         receiveEnergy(level, blockPos, Direction.WEST, Direction.EAST);
@@ -168,9 +171,12 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         }
     }
 
-    /**
-     * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
-     */
+
+
+    @javax.annotation.Nullable
+    protected <C extends Container, T extends Recipe<C>> T getRecipe(Level level, RecipeType<T> recipeType, C container) {
+        return level.getRecipeManager().getRecipeFor(recipeType, container, level).orElse(null);
+    }
     protected <T extends Comparable<T>> BlockState setNewBlockState(Level level, BlockPos pos, BlockState state, Property<T> property, T value) {
         state = state.setValue(property, value);
         level.setBlock(pos, state, 3);

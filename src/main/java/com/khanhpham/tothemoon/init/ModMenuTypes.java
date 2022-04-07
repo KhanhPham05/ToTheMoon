@@ -1,11 +1,12 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.alloysmelter.AlloySmelterMenu;
-import com.khanhpham.tothemoon.core.energygenerator.containers.EnergyGeneratorMenu;
-import com.khanhpham.tothemoon.core.storageblock.MoonBarrelMenu;
-import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
+import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterMenu;
+import com.khanhpham.tothemoon.core.machines.energygenerator.containers.EnergyGeneratorMenu;
+import com.khanhpham.tothemoon.core.machines.metalpress.MetalPressMenu;
+import com.khanhpham.tothemoon.core.machines.storageblock.MoonBarrelMenu;
 import com.khanhpham.tothemoon.utils.containers.BaseMenu;
+import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,25 +15,29 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModMenuTypes {
-   // public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Names.MOD_ID);
-    public static final MenuTypeRegister CONTAINERS = new MenuTypeRegister();
+
+    public static final MenuTypeRegister MENU_TYPES = new MenuTypeRegister();
 
     public static final MenuType<MoonBarrelMenu> STORAGE_BLOCK;
 
     public static final MenuType<EnergyGeneratorMenu> ENERGY_GENERATOR_CONTAINER;
+
     public static final MenuType<AlloySmelterMenu> ALLOY_SMELTER;
+
+    public static final MenuType<MetalPressMenu> METAL_PRESS;
 
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
         ENERGY_GENERATOR_CONTAINER = register("energy_generator_container", EnergyGeneratorMenu::new);
         ALLOY_SMELTER = register("alloy_smelter", AlloySmelterMenu::new);
+        METAL_PRESS = register("metal_press_menu", MetalPressMenu::new);
     }
 
     private ModMenuTypes() {
     }
 
     private static <T extends BaseMenu> MenuType<T> register(String name, MenuType.MenuSupplier<T> supplier) {
-        return CONTAINERS.register(name, supplier);
+        return MENU_TYPES.register(name, supplier);
     }
 
     @SubscribeEvent
@@ -41,6 +46,6 @@ public class ModMenuTypes {
     }
 
     public static void init(IForgeRegistry<MenuType<?>> reg) {
-        CONTAINERS.registerAll(reg);
+        MENU_TYPES.registerAll(reg);
     }
 }

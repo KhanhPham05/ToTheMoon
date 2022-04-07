@@ -2,83 +2,109 @@ package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
-import com.khanhpham.tothemoon.utils.registration.ItemRegister;
 import com.khanhpham.tothemoon.utils.blocks.BaseEntityBlock;
+import com.khanhpham.tothemoon.utils.registration.ItemRegister;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 
-@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+import javax.annotation.Nonnull;
+import java.lang.reflect.Field;
+import java.util.Locale;
+import java.util.Objects;
+
+//Just want to add it here so my IDEA don't give me some stupid warnings
+@SuppressWarnings("unused")
 public class ModItems {
     public static final ItemRegister ITEMS = new ItemRegister();
 
+    public static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, Names.MOD_ID);
     //special ingredient
-    public static final Item REDSTONE_STEEL_ALLOY;
-    public static final Item REDSTONE_INGOT;
+    public static RegistryObject<Item> REDSTONE_STEEL_ALLOY;
+    public static RegistryObject<Item> REDSTONE_STEEL_ALLOY_GEAR;
+    public static RegistryObject<Item> REDSTONE_STEEL_ALLOY_PLATE;
+    public static RegistryObject<Item> REDSTONE_STEEL_ALLOY_DUST;
+    public static RegistryObject<Item> REDSTONE_STEEL_ALLOY_ROD;
+
+    public static RegistryObject<Item> REDSTONE_METAL;
+    public static RegistryObject<Item> REDSTONE_METAL_PLATE;
+    public static RegistryObject<Item> REDSTONE_METAL_GEAR;
+    public static RegistryObject<Item> REDSTONE_METAL_ROD;
 
     //common crafting ingredient
-    public static final Item URANIUM_INGOT;
-    public static final Item URANIUM_DUST;
+    public static RegistryObject<Item> URANIUM_INGOT;
+    public static RegistryObject<Item> URANIUM_DUST;
+    public static RegistryObject<Item> URANIUM_PLATE;
+    public static RegistryObject<Item> URANIUM_GEAR;
+    public static RegistryObject<Item> URANIUM_ROD;
 
-    public static final Item COPPER_PLATE;
-    public static final Item COPPER_DUST;
+    public static RegistryObject<Item> COPPER_PLATE;
+    public static RegistryObject<Item> COPPER_DUST;
+    public static RegistryObject<Item> COPPER_GEAR;
+    public static RegistryObject<Item> COPPER_ROD;
 
-    public static final Item URANIUM_PLATE;
+    public static RegistryObject<Item> STEEL_PLATE;
+    public static RegistryObject<Item> STEEL_INGOT;
+    public static RegistryObject<Item> STEEL_DUST;
+    public static RegistryObject<Item> STEEL_ROD;
+    public static RegistryObject<Item> STEEL_GEAR;
 
-    public static final Item STEEL_PLATE;
-    public static final Item STEEL_INGOT;
-    public static final Item STEEL_DUST;
-    public static final Item STEEL_ROD;
+    public static RegistryObject<Item> IRON_PLATE;
+    public static RegistryObject<Item> IRON_DUST;
+    public static RegistryObject<Item> IRON_GEAR;
+    public static RegistryObject<Item> IRON_ROD;
 
-    public static final Item IRON_PLATE;
-    public static final Item IRON_DUST;
+    public static RegistryObject<Item> GOLD_PLATE;
+    public static RegistryObject<Item> GOLD_DUST;
+    public static RegistryObject<Item> GOLD_GEAR;
+    public static RegistryObject<Item> GOLD_ROD;
 
-    public static final Item GOLD_PLATE;
-    public static final Item GOLD_DUST;
+    //METAL PRESS MOLDS
+    public static RegistryObject<Item> BLANK_MOLD;
+    public static RegistryObject<Item> GEAR_MOLD;
+    public static RegistryObject<Item> PLATE_MOLD;
+    public static RegistryObject<Item> ROD_MOLD;
 
-
-    static {
-        URANIUM_INGOT = register("uranium_ingot");
-        URANIUM_DUST = register("uranium_dust");
-        STEEL_DUST = register("steel_dust");
-        STEEL_INGOT = register("steel_ingot");
-        STEEL_ROD = register("steel_rod");
-        STEEL_PLATE = register("steel_plate");
-        COPPER_PLATE = register("copper_plate");
-        URANIUM_PLATE = register("uranium_plate");
-        IRON_PLATE = register("iron_plate");
-        REDSTONE_INGOT = register("redstone_ingot");
-        REDSTONE_STEEL_ALLOY = register("redstone_steel_alloy");
-        COPPER_DUST = register("copper_dust");
-        IRON_DUST = register("iron_dust");
-        GOLD_DUST = register("gold_dust");
-        GOLD_PLATE = register("gold_plate");
+    private ModItems() {
     }
 
-    private ModItems() {}
-
-    private static Item register(String name) {
+    public static Item register(String name) {
         return ITEMS.register(name, new Item(new Item.Properties().tab(ToTheMoon.TAB)));
     }
 
-    private static void registerBLockItem(Block block) {
+    private static void registerBlockItem(Block block) {
+        Item.Properties properties = new Item.Properties().tab(ToTheMoon.TAB);
+
         if (!(block instanceof BaseEntityBlock<?>))
-            ITEMS.register(block.getRegistryName().getPath(), new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)));
+            ITEMS.register(getRegistryName(block).getPath(), new BlockItem(block, properties));
         else
-            ITEMS.register(block.getRegistryName().getPath(), new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB).stacksTo(1)));
+            ITEMS.register(getRegistryName(block).getPath(), new BlockItem(block, properties.stacksTo(1)));
     }
 
-    @SubscribeEvent
-    public static void init(RegistryEvent.Register<Item> event) {
-        init(event.getRegistry());
+
+    @Nonnull
+    public static ResourceLocation getRegistryName(Block block) {
+        return Objects.requireNonNull(block.getRegistryName());
     }
 
-    public static void init(IForgeRegistry<Item> registry) {
-        ModBlocks.BLOCK_REGISTER.getRegisteredBlocks().forEach(ModItems::registerBLockItem);
-        ITEMS.registerAll(registry);
+    public static void registerItems() {
+        Class<ModItems> modItemsClass = ModItems.class;
+        for (Field field : modItemsClass.getDeclaredFields()) {
+            if (field.getType().equals(RegistryObject.class)) {
+                try {
+                    field.set(RegistryObject.class, ITEM_DEFERRED_REGISTER.register(field.getName().toLowerCase(Locale.ROOT), () -> new Item(new Item.Properties().tab(ToTheMoon.TAB))));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void init() {
     }
 }

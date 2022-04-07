@@ -10,26 +10,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.FakePlayer;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
+import javax.annotation.Nonnull;
 
-/**
- * @see net.minecraft.world.inventory.AbstractFurnaceMenu
- * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
- */
 public abstract class BaseMenu extends AbstractContainerMenu {
-    protected final int inventorySize;
     protected final Inventory playerInventory;
-    protected final Container externalCcontainer;
+    protected final Container externalContainer;
+    public int playerInventorySlotStartsX;
+    public int playerInventorySlotStartsY;
 
     protected BaseMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId) {
         super(pMenuType, pContainerId);
-        this.inventorySize = externalContainer.getContainerSize();
         this.playerInventory = playerInventory;
-        this.externalCcontainer = externalContainer;
+        this.externalContainer = externalContainer;
     }
 
     protected void addPlayerInventorySlots(int beginX, int beginY) {
-        int i,j;
+        int i, j;
 
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 9; j++) {
@@ -40,6 +36,9 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         for (i = 0; i < 9; i++) {
             this.addSlot(new Slot(playerInventory, i, beginX + i * 18, beginY + 58));
         }
+
+        this.playerInventorySlotStartsX = beginX;
+        this.playerInventorySlotStartsY = beginY;
     }
 
 
@@ -48,11 +47,15 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     }
 
     protected void addSlot(int index, int x, int y) {
-        super.addSlot(new Slot(this.externalCcontainer, index, x, y));
+        super.addSlot(new Slot(this.externalContainer, index, x, y));
     }
 
     @Override
     public boolean stillValid(Player pPlayer) {
         return !(pPlayer instanceof FakePlayer);
     }
+
+    @Override
+    @Nonnull
+    public abstract ItemStack quickMoveStack(Player player, int index);
 }

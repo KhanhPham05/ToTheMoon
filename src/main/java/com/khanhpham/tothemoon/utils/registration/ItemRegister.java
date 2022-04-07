@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.utils.registration;
 
-import com.khanhpham.tothemoon.ModUtils;
+import com.khanhpham.tothemoon.utils.ModUtils;
 import com.khanhpham.tothemoon.ToTheMoon;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;

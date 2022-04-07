@@ -1,6 +1,5 @@
 package com.khanhpham.tothemoon.utils.blocks;
 
-import com.khanhpham.tothemoon.utils.mining.MiningTool;
 import com.khanhpham.tothemoon.utils.te.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,17 +31,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-/**
- * @see net.minecraft.world.level.block.AbstractFurnaceBlock
- * @see net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase
- */
 public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<AbstractEnergyGeneratorBlockEntity> {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 
-    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier, MiningTool tool) {
-        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier, tool);
+    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier) {
+        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier);
 
         registerDefaultState(super.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
@@ -57,12 +52,10 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide) {
-            return InteractionResult.FAIL;
-        } else {
+        if (!pLevel.isClientSide) {
             BlockEntity te = pLevel.getBlockEntity(pPos);
-            if (te instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorTileEntity) {
-                pPlayer.openMenu(energyGeneratorTileEntity);
+            if (te instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorBlockEntity) {
+                pPlayer.openMenu(energyGeneratorBlockEntity);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -85,17 +78,6 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
 
             super.onRemove(state, level, pPos, pNewState, pIsMoving);
         }
-    }
-
-    @Override
-    public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
-        return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
     @Nullable

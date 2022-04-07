@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "tothemoon:block/metal_press_top",
+    "front": "tothemoon:block/metal_press",
+    "side": "tothemoon:block/metal_press_side"
+  }
+}

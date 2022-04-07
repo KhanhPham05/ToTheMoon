@@ -1,7 +1,8 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.utils.recipes.AlloySmeltingRecipe;
+import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
+import com.khanhpham.tothemoon.core.recipes.MetalPressingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
@@ -16,16 +17,18 @@ import net.minecraftforge.fml.common.Mod;
 public class ModRecipes {
 
     public static final RecipeSerializer<AlloySmeltingRecipe> ALLOY_SMELTING_RECIPE_SERIALIZER = new AlloySmeltingRecipe.Serializer();
+    public static final RecipeSerializer<MetalPressingRecipe> METAL_PRESSING_RECIPE_SERIALIZER = new MetalPressingRecipe.Serializer();
 
     public ModRecipes() {
     }
 
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<RecipeSerializer<?>> event) {
-        reg(event, AlloySmeltingRecipe.RECIPE_TYPE, ALLOY_SMELTING_RECIPE_SERIALIZER);
+        register(event, AlloySmeltingRecipe.RECIPE_TYPE, ALLOY_SMELTING_RECIPE_SERIALIZER);
+        register(event, MetalPressingRecipe.RECIPE_TYPE, METAL_PRESSING_RECIPE_SERIALIZER);
     }
 
-    private static <T extends Recipe<?>> void reg(RegistryEvent.Register<RecipeSerializer<?>> event, RecipeType<T> recipeType, RecipeSerializer<T> serializer) {
+    private static <T extends Recipe<?>> void register(RegistryEvent.Register<RecipeSerializer<?>> event, RecipeType<T> recipeType, RecipeSerializer<T> serializer) {
         System.out.println("Registering Recipes");
         Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(recipeType.toString()), recipeType);
         event.getRegistry().register(serializer);

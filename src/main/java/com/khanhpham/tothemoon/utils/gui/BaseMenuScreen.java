@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.utils.gui;
 
 import com.khanhpham.tothemoon.utils.containers.BaseMenu;
+import com.khanhpham.tothemoon.utils.containers.DataContainerMenuHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -23,7 +24,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
         this.texture = texture;
     }
 
-    protected final void setImageWidthAndHeight(int height) {
+    protected final void setImageHeight(int height) {
         super.imageHeight = height;
         super.imageWidth = 176;
     }
@@ -41,7 +42,8 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
         }
     }
 
-    protected void renderExtra(PoseStack pPoseStack) {}
+    protected void renderExtra(PoseStack pPoseStack) {
+    }
 
     @Override
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
@@ -52,8 +54,11 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
 
     @Override
     protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
-        renderLabels(pPoseStack);
+        super.font.draw(pPoseStack, super.playerInventoryTitle, menu.playerInventorySlotStartsX - 1, menu.playerInventorySlotStartsY - 11, this.blackColor);
+        super.font.draw(pPoseStack, super.title, 7, 8, blackColor);
     }
 
-    protected abstract void renderLabels(PoseStack poseStack);
+    @Deprecated
+    protected void renderExtraLabels(PoseStack poseStack) {
+    }
 }

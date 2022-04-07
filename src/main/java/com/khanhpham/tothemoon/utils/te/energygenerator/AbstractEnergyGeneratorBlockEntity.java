@@ -1,10 +1,12 @@
 package com.khanhpham.tothemoon.utils.te.energygenerator;
 
-import com.khanhpham.tothemoon.core.energygenerator.containers.EnergyGeneratorMenu;
+import com.khanhpham.tothemoon.core.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.utils.blocks.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.te.EnergyItemCapableBlockEntity;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -15,9 +17,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @see net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
- */
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapableBlockEntity {
     public static final int INVENTORY_CAPACITY = 1;
     public static final int CONTAINER_DATA_COUNT = 4;
@@ -89,6 +92,12 @@ public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapab
         markDirty(level, blockPos, blockState);
     }
 
+    @Override
+    protected void transferEnergy(Level level, BlockPos blockPos, Direction direction, Direction direction2) {
+        if (!(level.getBlockEntity(blockPos) instanceof AbstractEnergyGeneratorBlockEntity)) {
+            super.transferEnergy(level, blockPos, direction, direction2);
+        }
+    }
 
     @NotNull
     @Override

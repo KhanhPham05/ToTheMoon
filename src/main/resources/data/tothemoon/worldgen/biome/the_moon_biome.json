@@ -1,0 +1,24 @@
+{
+  "temperature": 0.1,
+  "downfall": 0.1,
+  "precipitation": "none",
+  "temperature_modifier": "none",
+  "category": "forest",
+  "effects": {
+    "sky_color": 0,
+    "fog_color": 517,
+    "water_color": 11914,
+    "water_fog_color": 329011,
+    "grass_color_modifier": "none",
+    "particle": {
+      "options": {
+        "type": "minecraft:warped_spore"
+      },
+      "probability": 0
+    }
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": []
+}
