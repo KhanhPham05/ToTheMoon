@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    "tothemoon:copper_machine_frame",
+    "tothemoon:steel_machine_frame",
+    "tothemoon:redstone_machine_frame",
+    "tothemoon:anti_pressure_glass",
+    "tothemoon:moon_rock",
+    "tothemoon:moon_rock_stair",
+    "tothemoon:moon_rock_slab",
+    "tothemoon:moon_rock_brick",
+    "tothemoon:moon_rock_brick_stair",
+    "tothemoon:moon_rock_brick_slab",
+    "tothemoon:deepslate_uranium_ore",
+    "tothemoon:moon_iron_ore",
+    "tothemoon:moon_gold_ore",
+    "tothemoon:moon_quartz_ore",
+    "tothemoon:moon_redstone_ore",
+    "tothemoon:moon_uranium_ore",
+    "tothemoon:redstone_metal_block",
+    "tothemoon:steel_block",
+    "tothemoon:redstone_steel_alloy_block",
+    "tothemoon:moon_rock_barrel",
+    "tothemoon:copper_energy_generator",
+    "tothemoon:iron_energy_generator",
+    "tothemoon:alloy_smelter",
+    "tothemoon:metal_press",
+    "tothemoon:diamond_energy_generator",
+    "tothemoon:gold_energy_generator"
+  ]
+}

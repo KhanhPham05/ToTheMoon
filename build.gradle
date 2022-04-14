@@ -60,7 +60,7 @@ minecraft {
             }
         }
 
-        /*data {
+        data {
             workingDirectory project.file('run')
 
             property 'forge.logging.markers', 'REGISTRIES'
@@ -78,7 +78,7 @@ minecraft {
                     source sourceSets.main
                 }
             }
-        }*/
+        }
     }
 }
 
@@ -123,14 +123,14 @@ mixin {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.34'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.45'
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3671753")
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
-    //compileOnly fg.deobf("curse.maven:pipez-443900:3569514")
-    //runtimeOnly fg.deobf("curse.maven:mekanism-268560:3590099")
     runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3544525")
     implementation fg.deobf("curse.maven:immersive-engineering-231951:3721708")
+    implementation fg.deobf("curse.maven:ctm-267602:3737369")
+    runtimeOnly fg.deobf("curse.maven:rubidium-574856:3749094")
 
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
@@ -138,8 +138,6 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67")
 
-    annotationProcessor fg.deobf("io.github.noeppi_noeppi.mods:LibX:${mc_version}-${libx_version}")
-    compileOnly fg.deobf("io.github.noeppi_noeppi.mods:LibX:${mc_version}-${libx_version}")
 
 
     //implementation fg.deobf("curse.maven:patchouli-datagen-ptd-lib-585667:3671853")

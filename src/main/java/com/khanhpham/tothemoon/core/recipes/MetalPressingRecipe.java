@@ -76,15 +76,10 @@ public class MetalPressingRecipe implements Recipe<MetalPressBlockEntity> {
         return RECIPE_TYPE;
     }
 
-    public static final class Serializer extends BaseRecipeSerializer<MetalPressingRecipe> {
+    public static final class Serializer extends SimpleRecipeSerializer<MetalPressingRecipe> {
 
         public Serializer() {
             super.setRegistryName(ModRecipeLocations.METAL_PRESSING);
-        }
-
-        @Override
-        protected ItemLike getIcon() {
-            return ModBlocks.METAL_PRESS.get();
         }
 
 

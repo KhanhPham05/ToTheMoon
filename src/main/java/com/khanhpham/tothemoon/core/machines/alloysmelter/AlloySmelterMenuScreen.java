@@ -18,7 +18,6 @@ public class AlloySmelterMenuScreen extends BaseMenuScreen<AlloySmelterMenu> {
         super(pMenu, pPlayerInventory, pTitle, GUI);
 
         super.setImageHeight(177);
-
     }
 
     @Override

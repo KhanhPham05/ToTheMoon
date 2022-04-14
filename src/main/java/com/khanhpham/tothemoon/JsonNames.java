@@ -10,4 +10,5 @@ public class JsonNames {
     public static final String TAG = "tag";
     public static final String ITEM = "item";
     public static final String PROCESS_TIME = "processTime";
+    public static final String GROUP = "group";
 }

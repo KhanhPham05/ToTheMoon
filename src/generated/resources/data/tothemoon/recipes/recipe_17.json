@@ -1,0 +1,12 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/uranium"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/rod"
+  },
+  "result": {
+    "item": "tothemoon:uranium_rod"
+  }
+}

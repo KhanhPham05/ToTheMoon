@@ -58,6 +58,10 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         return this.items.isEmpty();
     }
 
+    public boolean isEmpty(int index) {
+        return this.items.get(index).isEmpty();
+    }
+
     @Override
     public ItemStack getItem(int pIndex) {
         return this.items.get(pIndex);

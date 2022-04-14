@@ -12,6 +12,6 @@ public class MetalPressSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack pStack) {
-        return pStack.is(ModTags.TAG_PRESS_MOLDS);
+        return pStack.is(ModTags.GENERAL_PRESS_MOLDS);
     }
 }

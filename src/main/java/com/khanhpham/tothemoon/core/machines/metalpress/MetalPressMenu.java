@@ -99,6 +99,6 @@ public class MetalPressMenu extends BaseMenu {
     }
 
     private boolean isPress(ItemStack stack) {
-        return !stack.isEmpty() && stack.is(ModTags.TAG_PRESS_MOLDS);
+        return !stack.isEmpty() && stack.is(ModTags.GENERAL_PRESS_MOLDS);
     }
 }

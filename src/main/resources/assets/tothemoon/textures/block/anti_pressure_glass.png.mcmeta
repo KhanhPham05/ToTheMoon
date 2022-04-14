@@ -1,0 +1,17 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "CUTOUT",
+        "textures": [
+            "tothemoon:block/anti_pressure_glass_ctm"
+        ],
+        "extra": {
+            "connect_to": [
+                {
+                    "block": "tothemoon:anti_pressure_glass"
+                }
+            ]
+        }
+    }
+}

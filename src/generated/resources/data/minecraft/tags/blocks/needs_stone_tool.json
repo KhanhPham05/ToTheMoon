@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "tothemoon:moon_rock",
+    "tothemoon:moon_rock_brick",
+    "tothemoon:moon_rock_stair",
+    "tothemoon:moon_rock_brick_stair",
+    "tothemoon:moon_rock_brick_slab",
+    "tothemoon:moon_rock",
+    "tothemoon:moon_iron_ore",
+    "tothemoon:moon_quartz_ore",
+    "tothemoon:moon_dust"
+  ]
+}

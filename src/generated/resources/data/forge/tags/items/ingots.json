@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "tothemoon:steel_ingot",
+    "tothemoon:uranium_ingot",
+    "tothemoon:redstone_metal",
+    "tothemoon:redstone_steel_alloy"
+  ]
+}

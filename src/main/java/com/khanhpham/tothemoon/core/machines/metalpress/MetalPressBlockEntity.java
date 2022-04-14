@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,6 +24,29 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity {
     private int workingTime;
     private int workingDuration;
     public static final int DATA_SIZE = 4;
+
+    public final ContainerData data = new ContainerData() {
+        @Override
+        public int get(int pIndex) {
+            return switch (pIndex) {
+                case 0-> workingTime;
+                case 1 -> workingDuration;
+                case 2 -> energy.getEnergyStored();
+                case 3 -> energy.getMaxEnergyStored();
+                default -> throw new IllegalStateException("Unexpected value: " + pIndex);
+            };
+        }
+
+        @Override
+        public void set(int pIndex, int pValue) {
+
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+    };
 
     public MetalPressBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
         super(pType, pWorldPosition, pBlockState, energy, label, containerSize);
@@ -39,7 +63,7 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity {
     @NotNull
     @Override
     protected AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory) {
-        return new MetalPressMenu(this, playerInventory, containerId, data);
+        return new MetalPressMenu(this, playerInventory, containerId, this.data);
     }
 
     //TODO : fix Processing bug
