@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "tothemoon:block/moon_rock_barrel"
-  }
-}

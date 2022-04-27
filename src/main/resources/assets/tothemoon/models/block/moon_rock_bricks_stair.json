@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "side": "tothemoon:block/moon_rock_bricks",
-    "bottom": "tothemoon:block/moon_rock_bricks",
-    "top": "tothemoon:block/moon_rock_bricks"
-  }
-}

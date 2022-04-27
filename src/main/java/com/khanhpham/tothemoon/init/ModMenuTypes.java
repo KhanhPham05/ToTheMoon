@@ -1,11 +1,11 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterMenu;
-import com.khanhpham.tothemoon.core.machines.energygenerator.containers.EnergyGeneratorMenu;
-import com.khanhpham.tothemoon.core.machines.metalpress.MetalPressMenu;
-import com.khanhpham.tothemoon.core.machines.storageblock.MoonBarrelMenu;
-import com.khanhpham.tothemoon.utils.containers.BaseMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
+import com.khanhpham.tothemoon.core.containers.BaseMenu;
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.event.RegistryEvent;

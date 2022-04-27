@@ -2,10 +2,10 @@ package com.khanhpham.tothemoon.core.recipes;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
-import com.khanhpham.tothemoon.init.ModBlocks;
-import com.khanhpham.tothemoon.utils.ModUtils;
-import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.init.ModRecipes;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -13,12 +13,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
-    public static RecipeType<AlloySmeltingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModRecipeLocations.ALLOY_SMELTING.getPath());
+    public static RecipeType<AlloySmeltingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModRecipeLocations.ALLOY_SMELTING);
 
     public final IngredientStack baseIngredient;
     public final IngredientStack secondaryIngredient;
@@ -34,12 +39,13 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
         this.id = id;
     }
 
+
     public int getAlloyingTime() {
         return alloyingTime;
     }
 
     @Override
-    public boolean matches(AlloySmelterBlockEntity container, Level pLevel) {
+    public boolean matches(AlloySmelterBlockEntity container, @Nonnull Level pLevel) {
         return this.baseIngredient.test(container.items.get(0)) && this.secondaryIngredient.test(container.items.get(1));
     }
 
@@ -73,7 +79,7 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
         return RECIPE_TYPE;
     }
 
-    public static final class Serializer extends BaseRecipeSerializer<AlloySmeltingRecipe> {
+    public static final class Serializer extends SimpleRecipeSerializer<AlloySmeltingRecipe> {
 
         public Serializer() {
             super.setRegistryName(ModRecipeLocations.ALLOY_SMELTING);
@@ -81,7 +87,7 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
 
         @Override
         public AlloySmeltingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            ItemStack result = resultFromJson(pSerializedRecipe);
+            ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT), false);
             IngredientStack baseIngredient = IngredientStack.fromJson(pSerializedRecipe.get(JsonNames.BASE_INGREDIENT));
             IngredientStack secondaryIngredient = IngredientStack.fromJson(pSerializedRecipe.get(JsonNames.SECONDARY_INGREDIENT));
             int processTime = GsonHelper.getAsInt(pSerializedRecipe, JsonNames.PROCESS_TIME, 200);
@@ -104,11 +110,6 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
             pRecipe.secondaryIngredient.toNetwork(pBuffer);
             pBuffer.writeItemStack(pRecipe.result, false);
             pBuffer.writeInt(pRecipe.alloyingTime);
-        }
-
-        @Override
-        protected ItemLike getIcon() {
-            return ModBlocks.ALLOY_SMELTER.get();
         }
     }
 

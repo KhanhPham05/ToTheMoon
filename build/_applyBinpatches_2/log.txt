@@ -1,17 +1,17 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220228.144236\joined-1.18.2-20220228.144236-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.0.34\forge-1.18.2-40.0.34-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.0.34\forge-1.18.2-40.0.34-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
 Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
-  Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220228.144236\joined-1.18.2-20220228.144236-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.0.34\forge-1.18.2-40.0.34-binpatched.jar
+  Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.0.34\forge-1.18.2-40.0.34-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.0.34\forge-1.18.2-40.0.34-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -742,22 +742,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 9fd09b04 Exists: true
   Reading patch net.minecraft.core.Registry.binpatch
     Checksum: 4e38cb9d Exists: true
-  Reading patch net.minecraft.core.RegistryAccess$1.binpatch
-    Checksum: 6aa52715 Exists: true
-  Reading patch net.minecraft.core.RegistryAccess$Frozen.binpatch
-    Checksum: d8247a1c Exists: true
-  Reading patch net.minecraft.core.RegistryAccess$ImmutableRegistryAccess.binpatch
-    Checksum: cef23c13 Exists: true
-  Reading patch net.minecraft.core.RegistryAccess$RegistryData.binpatch
-    Checksum: 7cbd5bf2 Exists: true
-  Reading patch net.minecraft.core.RegistryAccess$RegistryEntry.binpatch
-    Checksum: 3ce6f366 Exists: true
-  Reading patch net.minecraft.core.RegistryAccess$Writable.binpatch
-    Checksum: b9714df1 Exists: true
-  Reading patch net.minecraft.core.RegistryAccess$WritableRegistryAccess.binpatch
-    Checksum: fe5e84e6 Exists: true
-  Reading patch net.minecraft.core.RegistryAccess.binpatch
-    Checksum: 1de2498d Exists: true
   Reading patch net.minecraft.core.RegistryCodecs$1.binpatch
     Checksum: 885ba5c8 Exists: true
   Reading patch net.minecraft.core.RegistryCodecs$RegistryEntry.binpatch
@@ -1240,6 +1224,10 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: cda31c4f Exists: true
   Reading patch net.minecraft.tags.TagManager.binpatch
     Checksum: 28134481 Exists: true
+  Reading patch net.minecraft.util.datafix.fixes.StructuresBecomeConfiguredFix$Conversion.binpatch
+    Checksum: e0caf627 Exists: true
+  Reading patch net.minecraft.util.datafix.fixes.StructuresBecomeConfiguredFix.binpatch
+    Checksum: be74cd47 Exists: true
   Reading patch net.minecraft.world.effect.MobEffect.binpatch
     Checksum: b5e9398f Exists: true
   Reading patch net.minecraft.world.effect.MobEffectCategory.binpatch
@@ -1708,6 +1696,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 9ad929f3 Exists: true
   Reading patch net.minecraft.world.entity.vehicle.MinecartSpawner.binpatch
     Checksum: 99587c3c Exists: true
+  Reading patch net.minecraft.world.food.FoodData.binpatch
+    Checksum: b09c7ea1 Exists: true
   Reading patch net.minecraft.world.food.FoodProperties$Builder.binpatch
     Checksum: ab463132 Exists: true
   Reading patch net.minecraft.world.food.FoodProperties.binpatch
@@ -2582,7 +2572,7 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: a9525be7 Exists: true
   Reading patch net.minecraft.world.phys.Vec3.binpatch
     Checksum: 6ff64e5 Exists: true
-Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220228.144236\joined-1.18.2-20220228.144236-srg.jar
+Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
   Patching com/mojang/blaze3d/pipeline/RenderTarget 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager$BlendState 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager$BooleanState 1/1
@@ -2947,14 +2937,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/core/Registry$1 1/1
   Patching net/minecraft/core/Registry$RegistryBootstrap 1/1
   Patching net/minecraft/core/Registry 1/1
-  Patching net/minecraft/core/RegistryAccess$1 1/1
-  Patching net/minecraft/core/RegistryAccess$Frozen 1/1
-  Patching net/minecraft/core/RegistryAccess$ImmutableRegistryAccess 1/1
-  Patching net/minecraft/core/RegistryAccess$RegistryData 1/1
-  Patching net/minecraft/core/RegistryAccess$RegistryEntry 1/1
-  Patching net/minecraft/core/RegistryAccess$Writable 1/1
-  Patching net/minecraft/core/RegistryAccess$WritableRegistryAccess 1/1
-  Patching net/minecraft/core/RegistryAccess 1/1
   Patching net/minecraft/core/RegistryCodecs$1 1/1
   Patching net/minecraft/core/RegistryCodecs$RegistryEntry 1/1
   Patching net/minecraft/core/RegistryCodecs 1/1
@@ -3196,6 +3178,8 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/tags/TagLoader 1/1
   Patching net/minecraft/tags/TagManager$LoadResult 1/1
   Patching net/minecraft/tags/TagManager 1/1
+  Patching net/minecraft/util/datafix/fixes/StructuresBecomeConfiguredFix$Conversion 1/1
+  Patching net/minecraft/util/datafix/fixes/StructuresBecomeConfiguredFix 1/1
   Patching net/minecraft/world/effect/MobEffect 1/1
   Patching net/minecraft/world/effect/MobEffectCategory 1/1
   Patching net/minecraft/world/effect/MobEffectInstance 1/1
@@ -3430,6 +3414,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/entity/vehicle/MinecartFurnace 1/1
   Patching net/minecraft/world/entity/vehicle/MinecartSpawner$1 1/1
   Patching net/minecraft/world/entity/vehicle/MinecartSpawner 1/1
+  Patching net/minecraft/world/food/FoodData 1/1
   Patching net/minecraft/world/food/FoodProperties$Builder 1/1
   Patching net/minecraft/world/food/FoodProperties 1/1
   Patching net/minecraft/world/inventory/AbstractContainerMenu$1 1/1

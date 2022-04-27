@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "tothemoon:copper_machine_frame",
+    "tothemoon:steel_machine_frame",
+    "tothemoon:redstone_machine_frame",
+    "tothemoon:deepslate_uranium_ore",
+    "tothemoon:moon_gold_ore",
+    "tothemoon:moon_redstone_ore",
+    "tothemoon:moon_uranium_ore"
+  ]
+}

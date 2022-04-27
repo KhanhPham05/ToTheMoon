@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.utils.slot;
 
-import com.khanhpham.tothemoon.utils.ModTags;
+import com.khanhpham.tothemoon.utils.helpers.ModTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +12,6 @@ public class MetalPressSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack pStack) {
-        return pStack.is(ModTags.TAG_PRESS_MOLDS);
+        return pStack.is(ModTags.GENERAL_PRESS_MOLDS);
     }
 }

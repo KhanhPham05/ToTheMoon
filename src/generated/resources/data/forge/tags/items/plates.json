@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:plates/steel",
+    "#forge:plates/iron",
+    "#forge:plates/copper",
+    "#forge:plates/gold",
+    "#forge:plates/redstone_steel_alloy",
+    "#forge:plates/redstone_metal",
+    "#forge:plates/uranium"
+  ]
+}
