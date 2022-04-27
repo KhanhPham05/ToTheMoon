@@ -19,6 +19,7 @@ public class ModLanguage extends LanguageProvider {
     }
     public static final TranslatableComponent METAL_PRESS_RECIPE_CATEGORY = create("jei", "metal_press_category");
     public static final TranslatableComponent ALLOY_SMELTER_RECIPE_CATEGORY = create("jei", "alloy_smelter_category");
+    public static final TranslatableComponent MANUAL_METAL_PRESSING_CATEGORY = create("jei", "manual_metal_pressing");
     @Override
     protected void addTranslations() {
         ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().forEach(this::addBlocks);
@@ -27,6 +28,7 @@ public class ModLanguage extends LanguageProvider {
         add("gui.tothemoon.metal_press", "Metal Press");
         add(METAL_PRESS_RECIPE_CATEGORY, "Metal Pressing");
         add(ALLOY_SMELTER_RECIPE_CATEGORY, "Alloy Smelting");
+        add(MANUAL_METAL_PRESSING_CATEGORY, "Manual Metal Pressing");
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
     }
 

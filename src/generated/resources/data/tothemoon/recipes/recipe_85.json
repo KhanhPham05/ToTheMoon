@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "item": "tothemoon:redstone_steel_alloy"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tothemoon:steel_block"
     }
-  },
+  ],
   "result": {
-    "item": "tothemoon:redstone_steel_alloy_block"
+    "item": "tothemoon:steel_ingot",
+    "count": 9
   }
 }

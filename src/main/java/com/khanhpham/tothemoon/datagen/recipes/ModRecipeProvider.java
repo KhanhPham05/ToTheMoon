@@ -40,6 +40,10 @@ public class ModRecipeProvider extends RecipeProvider {
         return id;
     }
 
+    static TickTrigger.TriggerInstance tick() {
+        return new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY);
+    }
+
     @Override
     protected void buildCraftingRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
         buildSmeltingRecipes(consumer);
@@ -50,8 +54,10 @@ public class ModRecipeProvider extends RecipeProvider {
     private void buildCraftingTableRecipes(Consumer<FinishedRecipe> consumer) {
         buildStair(consumer, ModBlocks.MOON_ROCK_STAIR, ModBlocks.MOON_ROCK);
         buildStair(consumer, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_BRICK);
+        buildStair(consumer, ModBlocks.POLISHED_MOON_ROCK_STAIR, ModBlocks.POLISHED_MOON_ROCK);
         buildSlab(consumer, ModBlocks.MOON_ROCK_SLAB, ModBlocks.MOON_ROCK);
         buildSlab(consumer, ModBlocks.MOON_ROCK_BRICK_SLAB, ModBlocks.MOON_ROCK_BRICK);
+        buildSlab(consumer, ModBlocks.POLISHED_MOON_ROCK_SLAB, ModBlocks.POLISHED_MOON_ROCK);
 
         storageBlock(consumer, ModBlocks.STEEL_BLOCK, ModItems.STEEL_INGOT);
         storageBlock(consumer, ModBlocks.REDSTONE_METAL_BLOCK, ModItems.REDSTONE_METAL);
@@ -77,6 +83,9 @@ public class ModRecipeProvider extends RecipeProvider {
         shapeless(consumer, ModItems.GOLD_PLATE, 8, ModBlocks.GOLD_SHEET_BLOCK);
         shapeless(consumer, ModItems.STEEL_PLATE, 8, ModBlocks.STEEL_SHEET_BLOCK);
         shapeless(consumer, ModItems.IRON_PLATE, 8, ModBlocks.IRON_SHEET_BLOCK);
+
+        polished(consumer, ModBlocks.SMOOTH_PURIFIED_QUARTZ_BLOCK, ModBlocks.PURIFIED_QUARTZ_BLOCK);
+        polished(consumer, ModBlocks.POLISHED_MOON_ROCK, ModBlocks.MOON_ROCK);
     }
 
     private void sheetBlock(Consumer<FinishedRecipe> consumer, Supplier<? extends Block> block, TagKey<Item> material) {
@@ -107,6 +116,11 @@ public class ModRecipeProvider extends RecipeProvider {
 
         builder.unlockedBy("tick", tick());
         builder.save(consumer, createRecipeId());
+    }
+
+    private void polished(Consumer<FinishedRecipe> consumer, Supplier<? extends Block> block, Supplier<? extends Block> material) {
+        shaped(block).pattern("AA").pattern("AA").define('A', material.get()).save(consumer, createRecipeId());
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(material.get()), block.get()).unlockedBy("tick", tick()).save(consumer, createRecipeId());
     }
 
     private void buildModdedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -180,10 +194,6 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private ShapedRecipeBuilder shaped(Supplier<? extends ItemLike> item) {
         return ShapedRecipeBuilder.shaped(item.get()).unlockedBy("tick", tick());
-    }
-
-    static TickTrigger.TriggerInstance tick() {
-        return new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY);
     }
 
     private void buildStair(Consumer<FinishedRecipe> consumer, Supplier<? extends StairBlock> resultSupplier, Supplier<? extends Block> materialSupplier) {

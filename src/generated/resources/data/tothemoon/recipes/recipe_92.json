@@ -5,10 +5,10 @@
       "tag": "tothemoon:hammers"
     },
     {
-      "tag": "forge:ingots/redstone_metal"
+      "tag": "forge:ingots/steel"
     }
   ],
   "result": {
-    "item": "tothemoon:redstone_metal_plate"
+    "item": "tothemoon:steel_plate"
   }
 }

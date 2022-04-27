@@ -34,7 +34,11 @@
   "block.tothemoon.moon_rock_stair": "Moon Rock Stair",
   "block.tothemoon.moon_rock_step": "Moon Rock Footsteps",
   "block.tothemoon.moon_uranium_ore": "Moon Uranium Ore",
+  "block.tothemoon.polished_moon_rock": "Polished Moon Rock",
+  "block.tothemoon.polished_moon_rock_slab": "Polished Moon Rock Slab",
+  "block.tothemoon.polished_moon_rock_stair": "Polished Moon Rock Stair",
   "block.tothemoon.processed_wood": "Processed Wood",
+  "block.tothemoon.purified_quartz_block": "Purified Quartz Block",
   "block.tothemoon.redstone_machine_frame": "Redstone Machine Frame",
   "block.tothemoon.redstone_metal_block": "Redstone Metal Block",
   "block.tothemoon.redstone_steel_alloy_block": "Redstone Steel Alloy Block",
@@ -97,5 +101,6 @@
   "item.tothemoon.uranium_wire": "Uranium Wire",
   "item.tothemoon.wooden_hammer": "Wooden Hammer",
   "jei.tothemoon.alloy_smelter_category": "Alloy Smelting",
+  "jei.tothemoon.manual_metal_pressing": "Manual Metal Pressing",
   "jei.tothemoon.metal_press_category": "Metal Pressing"
 }

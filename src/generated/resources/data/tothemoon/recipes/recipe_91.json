@@ -5,10 +5,10 @@
       "tag": "tothemoon:hammers"
     },
     {
-      "tag": "forge:ingots/gold"
+      "tag": "forge:ingots/uranium"
     }
   ],
   "result": {
-    "item": "tothemoon:gold_plate"
+    "item": "tothemoon:uranium_plate"
   }
 }

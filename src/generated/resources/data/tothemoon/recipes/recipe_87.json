@@ -2,13 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "tothemoon:hammers"
-    },
-    {
-      "tag": "forge:ingots/copper"
+      "item": "tothemoon:redstone_metal_block"
     }
   ],
   "result": {
-    "item": "tothemoon:copper_plate"
+    "item": "tothemoon:redstone_metal",
+    "count": 9
   }
 }

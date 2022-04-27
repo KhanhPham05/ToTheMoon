@@ -1,16 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SSS",
-    "S S",
+    "RRR",
+    "DGD",
     "SSS"
   ],
   "key": {
+    "R": {
+      "tag": "forge:plates/redstone_metal"
+    },
+    "D": {
+      "tag": "forge:dusts/redstone"
+    },
+    "G": {
+      "tag": "forge:dust/gold"
+    },
     "S": {
       "tag": "forge:plates/steel"
     }
   },
   "result": {
-    "item": "tothemoon:steel_sheet_block"
+    "item": "tothemoon:processor_chip"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "tothemoon:block/polished_moon_rock_slab_top"
+    },
+    "type=bottom": {
+      "model": "tothemoon:block/polished_moon_rock_slab"
+    },
+    "type=double": {
+      "model": "tothemoon:block/polished_moon_rock"
+    }
+  }
+}
