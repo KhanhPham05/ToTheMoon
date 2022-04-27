@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tothemoon:block/smooth_purified_quartz_block"
+  }
+}

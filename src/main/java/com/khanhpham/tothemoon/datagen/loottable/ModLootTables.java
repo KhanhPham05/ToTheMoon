@@ -3,7 +3,7 @@ package com.khanhpham.tothemoon.datagen.loottable;
 import com.google.common.collect.ImmutableList;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.utils.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;

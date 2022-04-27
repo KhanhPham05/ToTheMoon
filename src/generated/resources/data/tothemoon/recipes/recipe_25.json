@@ -1,17 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#  ",
-    "## ",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "tothemoon:moon_rock_brick"
-    }
+  "type": "tothemoon:manual_metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/uranium"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
-    "item": "tothemoon:moon_rock_brick_stair",
-    "count": 4
+    "item": "tothemoon:uranium_gear"
   }
 }

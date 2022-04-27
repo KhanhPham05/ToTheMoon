@@ -1,12 +1,12 @@
 {
-  "type": "tothemoon:metal_pressing",
+  "type": "tothemoon:manual_metal_pressing",
   "ingredient": {
-    "tag": "forge:ingots/redstone_steel_alloy"
+    "tag": "forge:ingots/uranium"
   },
   "mold": {
-    "tag": "tothemoon:metal_press_molds/rod"
+    "tag": "tothemoon:metal_press_molds/plate"
   },
   "result": {
-    "item": "tothemoon:redstone_steel_alloy_rod"
+    "item": "tothemoon:uranium_plate"
   }
 }

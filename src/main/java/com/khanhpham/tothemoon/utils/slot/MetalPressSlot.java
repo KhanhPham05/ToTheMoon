@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.utils.slot;
 
-import com.khanhpham.tothemoon.utils.ModTags;
+import com.khanhpham.tothemoon.utils.helpers.ModTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

@@ -1,8 +1,12 @@
 {
-  "type": "minecraft:stonecutting",
+  "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "item": "tothemoon:moon_rock"
+    "tag": "forge:plates/uranium"
   },
-  "result": "tothemoon:moon_rock_slab",
-  "count": 2
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/rod"
+  },
+  "result": {
+    "item": "tothemoon:uranium_rod"
+  }
 }

@@ -11,12 +11,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.items.ItemHandlerHelper;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class IngredientStack implements Predicate<ItemStack> {
     public final Ingredient ingredient;
     public final int amount;
+
 
     private IngredientStack(Ingredient ingredient, int amount) {
         this.ingredient = ingredient;
@@ -24,7 +29,7 @@ public class IngredientStack implements Predicate<ItemStack> {
     }
 
     private IngredientStack(ItemLike item, int amount) {
-        this.ingredient = Ingredient.of(item);
+        this.ingredient = Ingredient.of(new ItemStack(item, amount));
         this.amount = amount;
     }
 
@@ -60,12 +65,27 @@ public class IngredientStack implements Predicate<ItemStack> {
         return new IngredientStack(baseIngredient, amount);
     }
 
+    public List<ItemStack> getIngredientStacks() {
+        ItemStack[] stack = ingredient.getItems();
+        ItemStack[] stack1 = new ItemStack[stack.length];
+
+        for (int i = 0; i < stack.length; i++) {
+            stack1[i] = ItemHandlerHelper.copyStackWithSize(stack[i], this.amount);
+        }
+
+        return Arrays.asList(stack1);
+    }
+
+    public ItemStack getStack() {
+        return new ItemStack(this.ingredient.getItems()[0].getItem(), amount);
+    }
+
     public Item getIngredientItem() {
         return ingredient.getItems()[0].getItem();
     }
 
     public String getIngredientName() {
-        return getIngredientItem().getRegistryName().getPath();
+        return Objects.requireNonNull(getIngredientItem().getRegistryName()).getPath();
     }
 
     public JsonObject toJson() {

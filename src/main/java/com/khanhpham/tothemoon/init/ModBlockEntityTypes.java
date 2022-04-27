@@ -2,13 +2,14 @@ package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
-import com.khanhpham.tothemoon.core.machines.alloysmelter.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.machines.metalpress.MetalPressBlockEntity;
-import com.khanhpham.tothemoon.core.machines.storageblock.MoonBarrelTileEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelTileEntity;
+import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,6 +34,8 @@ public class ModBlockEntityTypes {
 
     public static final RegistryObject<BlockEntityType<MetalPressBlockEntity>> METAL_PRESS;
 
+    public static final RegistryObject<BlockEntityType<MetalPressingPlateBlockEntity>> METAL_PRESSING_PLATE;
+
     static {
         ToTheMoon.LOG.info("Registering BEs");
         MOON_STORAGE = BE_DEFERRED_REGISTER.register("moon_storage", () -> BlockEntityType.Builder.of(MoonBarrelTileEntity::new, ModBlocks.MOON_ROCK_BARREL.get()).build(null));
@@ -42,6 +45,7 @@ public class ModBlockEntityTypes {
         DIAMOND_ENERGY_GENERATOR_TE = register("diamond_gen", () -> BlockEntityType.Builder.of(DiamondEnergyGeneratorBlockEntity::new, ModBlocks.DIAMOND_ENERGY_GENERATOR.get()).build(null));
         ALLOY_SMELTER = register("alloy_smelter", () -> BlockEntityType.Builder.of(AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER.get()).build(null));
         METAL_PRESS = register("metal_press", () -> BlockEntityType.Builder.of(MetalPressBlockEntity::new, ModBlocks.METAL_PRESS.get()).build(null));
+        METAL_PRESSING_PLATE = register("metal_pressing_plate", () -> BlockEntityType.Builder.of(MetalPressingPlateBlockEntity::new, ModBlocks.METAL_PRESSING_PLATE.get()).build(null));
     }
 
     private ModBlockEntityTypes() {
@@ -53,23 +57,4 @@ public class ModBlockEntityTypes {
 
     public static void init() {
     }
-
-
-
-
-    /*
-    @SubscribeEvent
-    public static void init(RegistryEvent.Register<BlockEntityType<?>> event) throws IllegalAccessException {
-        IForgeRegistry<BlockEntityType<?>> registry = event.getRegistry();
-        Class<ModBlockEntityTypes> clazz = ModBlockEntityTypes.class;
-        for (Field field : clazz.getDeclaredFields()) {
-            if (field.getType().equals(BlockEntityType.class)) {
-                BlockEntityType<?> oldBe = (BlockEntityType<?>) field.get(BlockEntityType.class);
-                BlockEntityType<?> neeBe = oldBe.setRegistryName(ModUtils.modLoc(field.getName().toLowerCase(Locale.ROOT)));
-                ModUtils.info("Registering BE [{}] with hasCode [{}]", neeBe.getRegistryName(), neeBe.hashCode());
-                registry.register(neeBe);
-                field.set(oldBe, neeBe);
-            }
-        }
-    }*/
 }

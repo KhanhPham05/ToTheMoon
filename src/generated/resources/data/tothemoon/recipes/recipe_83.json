@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "tothemoon:redstone_metal"
+    }
+  },
+  "result": {
+    "item": "tothemoon:redstone_metal_block"
+  }
+}

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
     "side": "tothemoon:block/energy_generator_side",
-    "front": "tothemoon:block/iron_energy_generator_on",
+    "front": "tothemoon:block/iron_energy_generator",
     "bottom": "tothemoon:block/energy_generator_top",
     "top": "tothemoon:block/energy_generator_top"
   }

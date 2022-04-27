@@ -1,0 +1,12 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/copper"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/gear"
+  },
+  "result": {
+    "item": "tothemoon:copper_gear"
+  }
+}

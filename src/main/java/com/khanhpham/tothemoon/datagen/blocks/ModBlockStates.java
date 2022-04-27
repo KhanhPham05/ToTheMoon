@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.datagen.blocks;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModBlocks;
-import com.khanhpham.tothemoon.utils.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;

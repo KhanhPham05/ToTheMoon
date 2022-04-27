@@ -1,12 +1,12 @@
 {
   "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:ingots/uranium"
+    "tag": "forge:ingots/steel"
   },
   "mold": {
-    "tag": "tothemoon:metal_press_molds/plate"
+    "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
-    "item": "tothemoon:uranium_plate"
+    "item": "tothemoon:steel_gear"
   }
 }

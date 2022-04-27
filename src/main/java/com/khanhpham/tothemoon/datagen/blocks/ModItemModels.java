@@ -1,12 +1,12 @@
 package com.khanhpham.tothemoon.datagen.blocks;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.machines.storageblock.MoonRockBarrel;
+import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.utils.ModUtils;
-import com.khanhpham.tothemoon.utils.blocks.MachineFrameBlock;
-import com.khanhpham.tothemoon.utils.item.GearItem;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
+import com.khanhpham.tothemoon.core.items.GearItem;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
