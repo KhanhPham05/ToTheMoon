@@ -16,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.common.Tags;
@@ -73,6 +74,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         shaped(ModItems.CPU_CHIP).pattern("RRR").pattern("DGD").pattern("SSS").define('R', PLATES_REDSTONE_METAL).define('D', DUSTS_REDSTONE).define('G', DUSTS_GOLD).define('S', PLATES_STEEL).save(consumer, createRecipeId());
         shaped(ModItems.CIRCUIT_BOARD).pattern("UUU").pattern("RCR").pattern("GGG").define('U', PLATES_URANIUM).define('R', DUSTS_REDSTONE_STEEL_ALLOY).define('G', PLATES_GOLD).define('C', ModItems.CPU_CHIP.get());
+        shaped(ModBlocks.METAL_PRESSING_PLATE).pattern("AAA").define('A', Blocks.SMOOTH_STONE_SLAB).save(consumer, createRecipeId());
 
         sheetBlock(consumer, ModBlocks.COPPER_SHEET_BLOCK, PLATES_COPPER);
         sheetBlock(consumer, ModBlocks.GOLD_SHEET_BLOCK, PLATES_GOLD);

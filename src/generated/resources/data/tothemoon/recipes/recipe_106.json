@@ -1,15 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AA",
-    "AA"
-  ],
-  "key": {
-    "A": {
-      "item": "tothemoon:purified_quartz_block"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tothemoon:iron_sheet_block"
     }
-  },
+  ],
   "result": {
-    "item": "tothemoon:smooth_purified_quartz_block"
+    "item": "tothemoon:iron_plate",
+    "count": 8
   }
 }

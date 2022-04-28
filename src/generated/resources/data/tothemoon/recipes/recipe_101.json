@@ -7,10 +7,10 @@
   ],
   "key": {
     "S": {
-      "tag": "forge:plates/iron"
+      "tag": "forge:plates/steel"
     }
   },
   "result": {
-    "item": "tothemoon:iron_sheet_block"
+    "item": "tothemoon:steel_sheet_block"
   }
 }

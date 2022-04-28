@@ -1,16 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SSS",
-    "S S",
-    "SSS"
+    "AAA"
   ],
   "key": {
-    "S": {
-      "tag": "forge:plates/copper"
+    "A": {
+      "item": "minecraft:smooth_stone_slab"
     }
   },
   "result": {
-    "item": "tothemoon:copper_sheet_block"
+    "item": "tothemoon:metal_pressing_plate"
   }
 }

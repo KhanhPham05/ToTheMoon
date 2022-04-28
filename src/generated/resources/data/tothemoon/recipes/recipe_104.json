@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "tothemoon:steel_sheet_block"
+      "item": "tothemoon:gold_sheet_block"
     }
   ],
   "result": {
-    "item": "tothemoon:steel_plate",
+    "item": "tothemoon:gold_plate",
     "count": 8
   }
 }

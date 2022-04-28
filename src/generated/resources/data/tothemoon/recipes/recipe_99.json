@@ -7,10 +7,10 @@
   ],
   "key": {
     "S": {
-      "tag": "forge:plates/gold"
+      "tag": "forge:plates/copper"
     }
   },
   "result": {
-    "item": "tothemoon:gold_sheet_block"
+    "item": "tothemoon:copper_sheet_block"
   }
 }

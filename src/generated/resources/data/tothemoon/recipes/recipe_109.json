@@ -1,8 +1,15 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tothemoon:moon_rock"
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AA",
+    "AA"
+  ],
+  "key": {
+    "A": {
+      "item": "tothemoon:moon_rock"
+    }
   },
-  "result": "tothemoon:polished_moon_rock",
-  "count": 1
+  "result": {
+    "item": "tothemoon:polished_moon_rock"
+  }
 }
