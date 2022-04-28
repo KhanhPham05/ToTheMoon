@@ -1,12 +1,13 @@
-package com.khanhpham.tothemoon.datagen.blocks;
+package com.khanhpham.tothemoon.datagen;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
+import com.khanhpham.tothemoon.core.items.GearItem;
+import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
-import com.khanhpham.tothemoon.core.items.GearItem;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModItemModels extends ItemModelProvider {
@@ -23,7 +25,17 @@ public class ModItemModels extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ModItems.ITEM_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(i -> !(i instanceof GearItem)).forEach(this::simpleItem);
+        List<? extends Item> items = ModItems.ITEM_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).toList();
+
+        for (Item item : items) {
+            if (!(item instanceof GearItem)) {
+                if (item instanceof HammerItem) {
+                    String path = ModUtils.convertRlToPath(item);
+                    withExistingParent(path, new ResourceLocation("item/handheld")).texture("layer0", "item/" + path);
+                } else simpleItem(item);
+            }
+        }
+
         ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(b -> !(b instanceof MachineFrameBlock) && !(b instanceof MoonRockBarrel)).forEach(this::blockItem);
     }
 

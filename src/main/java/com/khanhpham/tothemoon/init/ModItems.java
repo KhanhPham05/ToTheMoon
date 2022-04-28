@@ -3,6 +3,7 @@ package com.khanhpham.tothemoon.init;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.GearItem;
+import com.khanhpham.tothemoon.core.items.HammerItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -91,10 +92,10 @@ public class ModItems {
     public static final RegistryObject<Item> CPU_CHIP = item("processor_chip");
 
     //TODO : durability crafting
-    public static final RegistryObject<Item> WOODEN_HAMMER = registerBreakable("wooden_hammer", 16);
-    public static final RegistryObject<Item> STEEL_HAMMER = registerBreakable("steel_hammer", 64);
-    public static final RegistryObject<Item> DIAMOND_HAMMER = registerBreakable("diamond_hammer", 128);
-    public static final RegistryObject<Item> NETHERITE_HAMMER = ITEM_DEFERRED_REGISTER.register("netherite_hammer", () -> new Item(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(256).fireResistant().setNoRepair()) {
+    public static final RegistryObject<HammerItem> WOODEN_HAMMER = registerBreakable("wooden_hammer", 16);
+    public static final RegistryObject<HammerItem> STEEL_HAMMER = registerBreakable("steel_hammer", 64);
+    public static final RegistryObject<HammerItem> DIAMOND_HAMMER = registerBreakable("diamond_hammer", 128);
+    public static final RegistryObject<HammerItem> NETHERITE_HAMMER = ITEM_DEFERRED_REGISTER.register("netherite_hammer", () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(256).fireResistant().setNoRepair()) {
         @Override
         @Nonnull
         public Rarity getRarity(@Nonnull ItemStack pStack) {
@@ -109,8 +110,8 @@ public class ModItems {
         return ITEM_DEFERRED_REGISTER.register(name, supplier);
     }
 
-    public static RegistryObject<Item> registerBreakable(String name, int durability) {
-        return ITEM_DEFERRED_REGISTER.register(name, () -> new Item(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
+    public static RegistryObject<HammerItem> registerBreakable(String name, int durability) {
+        return ITEM_DEFERRED_REGISTER.register(name, () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
     }
 
     public static RegistryObject<Item> item(String name) {

@@ -10,7 +10,7 @@ import com.khanhpham.tothemoon.datagen.ModLanguage;
 import com.khanhpham.tothemoon.datagen.ModTagProvider;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockStates;
-import com.khanhpham.tothemoon.datagen.blocks.ModItemModels;
+import com.khanhpham.tothemoon.datagen.ModItemModels;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
 import com.khanhpham.tothemoon.datagen.recipes.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
