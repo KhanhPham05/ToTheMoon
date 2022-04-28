@@ -22,6 +22,7 @@ import com.khanhpham.tothemoon.init.sounds.ModSoundTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -64,7 +65,7 @@ public class ModBlocks {
 
     public static final RegistryObject<OreBlock> MOON_IRON_ORE = register("moon_iron_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<OreBlock> MOON_GOLD_ORE = register("moon_gold_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
-    public static final RegistryObject<OreBlock> MOON_QUARTZ_ORE = register("moon_quartz_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
+    public static final RegistryObject<OreBlock> MOON_QUARTZ_ORE = register("moon_quartz_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK), UniformInt.of(1, 5)));
     public static final RegistryObject<RedStoneOreBlock> MOON_REDSTONE_ORE = register("moon_redstone_ore", () -> new RedStoneOreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<OreBlock> MOON_URANIUM_ORE = register("moon_uranium_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<FallingBlock> MOON_DUST = register("moon_dust", () -> new FallingBlock(BlockBehaviour.Properties.of(Material.SAND).strength(0.75f).sound(ModSoundTypes.MOON_DUST)));

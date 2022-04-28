@@ -26,6 +26,6 @@ public abstract class EnergyCapableTileEntity extends BlockEntity implements Has
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return getEnergyCapability(cap, side, super.getCapability(cap, side), energyDataOptional);
+        return energyDataOptional.cast();
     }
 }

@@ -12,12 +12,17 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -71,9 +76,13 @@ public class ModLootTables extends LootTableProvider {
             this.createOreDrops(ModBlocks.MOON_IRON_ORE, Items.RAW_IRON);
             this.createOreDrops(ModItems.RAW_URANIUM_ORE.get(), ModBlocks.MOON_URANIUM_ORE, DEEPSLATE_URANIUM_ORE);
             this.createOreDrops(ModBlocks.MOON_GOLD_ORE, Items.RAW_GOLD);
-            this.createOreDrops(ModBlocks.MOON_QUARTZ_ORE, ModItems.PURIFIED_QUARTZ.get());
+            add(MOON_QUARTZ_ORE.get(), this::quartzDrops);
             add(MOON_REDSTONE_ORE.get(), BlockLoot::createRedstoneOreDrops);
             DROP_SELF_BLOCKS.stream().map(Supplier::get).forEach(super::dropSelf);
+        }
+
+        private LootTable.Builder quartzDrops(Block p_176051_) {
+            return createSilkTouchDispatchTable(p_176051_, applyExplosionDecay(p_176051_, LootItem.lootTableItem(ModItems.PURIFIED_QUARTZ.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
         }
 
         private void createOreDrops(Supplier<? extends Block> blockSupplier, Item item) {
