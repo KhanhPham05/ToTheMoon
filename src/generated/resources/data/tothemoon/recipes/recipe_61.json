@@ -1,12 +1,12 @@
 {
-  "type": "tothemoon:manual_metal_pressing",
+  "type": "tothemoon:metal_pressing",
   "ingredient": {
     "tag": "forge:ingots/gold"
   },
   "mold": {
-    "tag": "tothemoon:metal_press_molds/plate"
+    "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
-    "item": "tothemoon:gold_plate"
+    "item": "tothemoon:gold_gear"
   }
 }

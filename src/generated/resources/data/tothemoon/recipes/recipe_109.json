@@ -1,15 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AA",
-    "AA"
+    "SSS",
+    "S S",
+    "SSS"
   ],
   "key": {
-    "A": {
-      "item": "tothemoon:moon_rock"
+    "S": {
+      "tag": "forge:plates/iron"
     }
   },
   "result": {
-    "item": "tothemoon:polished_moon_rock"
+    "item": "tothemoon:iron_sheet_block"
   }
 }

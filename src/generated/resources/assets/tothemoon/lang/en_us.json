@@ -1,6 +1,10 @@
 {
   "block.tothemoon.alloy_smelter": "Alloy Smelter",
   "block.tothemoon.anti_pressure_glass": "Anti Pressure Glass",
+  "block.tothemoon.battery": "Battery",
+  "block.tothemoon.cobbled_moon_rock": "Cobbled Moon Rock",
+  "block.tothemoon.cobbled_moon_rock_slab": "Cobbled Moon Rock Slab",
+  "block.tothemoon.cobbled_moon_rock_stair": "Cobbled Moon Rock Stair",
   "block.tothemoon.copper_energy_generator": "Copper Energy Generator",
   "block.tothemoon.copper_machine_frame": "Copper Machine Frame",
   "block.tothemoon.copper_sheet_block": "Copper Sheet Block",

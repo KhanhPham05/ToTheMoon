@@ -1,12 +1,15 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "tothemoon:redstone_metal_block"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
   ],
+  "key": {
+    "#": {
+      "item": "tothemoon:moon_rock_brick"
+    }
+  },
   "result": {
-    "item": "tothemoon:redstone_metal",
-    "count": 9
+    "item": "tothemoon:moon_rock_brick_slab",
+    "count": 6
   }
 }

@@ -1,6 +1,8 @@
 package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.ImmutableSet;
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlockEntity;
@@ -50,6 +52,7 @@ public class ModBlocks {
 
     public static final RegistryObject<GlassBlock> ANTI_PRESSURE_GLASS = register("anti_pressure_glass", () -> new GlassBlock(BlockBehaviour.Properties.of(Material.STONE, DyeColor.LIGHT_GRAY).strength(4.5f, 7).sound(SoundType.STONE).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(ModBlocks::never)));
 
+
     public static final RegistryObject<Block> MOON_ROCK = register("moon_rock", BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).sound(ModSoundTypes.MOON_ROCK));
     public static final RegistryObject<StairBlock> MOON_ROCK_STAIR = registerWaterlogged("moon_rock_stair", () -> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<SlabBlock> MOON_ROCK_SLAB = registerWaterlogged("moon_rock_slab", () -> new SlabBlock(BlockBehaviour.Properties.of(Material.STONE).sound(ModSoundTypes.MOON_ROCK)));
@@ -57,8 +60,12 @@ public class ModBlocks {
     public static final RegistryObject<StairBlock> MOON_ROCK_BRICK_STAIR = registerWaterlogged("moon_rock_brick_stair", () -> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.of(Material.STONE).strength(3.5f, 6.5f).sound(SoundType.STONE).sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<SlabBlock> MOON_ROCK_BRICK_SLAB = registerWaterlogged("moon_rock_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3.5f, 6.5f).sound(SoundType.STONE).sound(ModSoundTypes.MOON_ROCK)));
 
+    public static final RegistryObject<Block> COBBLED_MOON_ROCK = register("cobbled_moon_rock", () -> new Block(BlockBehaviour.Properties.copy(MOON_ROCK.get())));
+    public static final RegistryObject<StairBlock> COBBLED_MOON_ROCK_STAIR = register("cobbled_moon_rock_stair", () -> new StairBlock(COBBLED_MOON_ROCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(COBBLED_MOON_ROCK.get())));
+    public static final RegistryObject<SlabBlock> COBBLED_MOON_ROCK_SLAB = register("cobbled_moon_rock_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(COBBLED_MOON_ROCK.get())));
+
     public static final RegistryObject<Block> POLISHED_MOON_ROCK = register("polished_moon_rock", () -> new Block(BlockBehaviour.Properties.copy(MOON_ROCK.get())));
-    public static final RegistryObject<StairBlock> POLISHED_MOON_ROCK_STAIR = register("polished_moon_rock_stair", () -> new StairBlock(() -> MOON_ROCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(MOON_ROCK.get())));
+    public static final RegistryObject<StairBlock> POLISHED_MOON_ROCK_STAIR = register("polished_moon_rock_stair", () -> new StairBlock(MOON_ROCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(MOON_ROCK.get())));
     public static final RegistryObject<SlabBlock> POLISHED_MOON_ROCK_SLAB = register("polished_moon_rock_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(MOON_ROCK.get())));
 
     public static final RegistryObject<OreBlock> DEEPSLATE_URANIUM_ORE = register("deepslate_uranium_ore", () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops()));
@@ -82,7 +89,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PURIFIED_QUARTZ_BLOCK =register("purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
     public static final RegistryObject<Block> SMOOTH_PURIFIED_QUARTZ_BLOCK = register("smooth_purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
-    public static final ImmutableSet<RegistryObject<? extends Block>> SOLID_BLOCKS = ImmutableSet.of(PURIFIED_QUARTZ_BLOCK, POLISHED_MOON_ROCK, SMOOTH_PURIFIED_QUARTZ_BLOCK, STEEL_SHEET_BLOCK, REINFORCED_WOOD, PROCESSED_WOOD, IRON_SHEET_BLOCK, GOLD_SHEET_BLOCK, COPPER_SHEET_BLOCK, REDSTONE_METAL_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, STEEL_BLOCK, ANTI_PRESSURE_GLASS, MOON_DUST, MOON_URANIUM_ORE, MOON_REDSTONE_ORE, MOON_ROCK, MOON_QUARTZ_ORE, MOON_ROCK_BRICK, DEEPSLATE_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE);
+    public static final ImmutableSet<RegistryObject<? extends Block>> SOLID_BLOCKS = ImmutableSet.of(PURIFIED_QUARTZ_BLOCK, POLISHED_MOON_ROCK, SMOOTH_PURIFIED_QUARTZ_BLOCK,COBBLED_MOON_ROCK, STEEL_SHEET_BLOCK, REINFORCED_WOOD, PROCESSED_WOOD, IRON_SHEET_BLOCK, GOLD_SHEET_BLOCK, COPPER_SHEET_BLOCK, REDSTONE_METAL_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, STEEL_BLOCK, ANTI_PRESSURE_GLASS, MOON_DUST, MOON_URANIUM_ORE, MOON_REDSTONE_ORE, MOON_ROCK, MOON_QUARTZ_ORE, MOON_ROCK_BRICK, DEEPSLATE_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE);
 
     public static final RegistryObject<GoldEnergyGeneratorBlock> GOLD_ENERGY_GENERATOR = registerBlockEntity("gold_energy_generator", () -> new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), GoldEnergyGeneratorBlockEntity::new));
 
@@ -93,6 +100,9 @@ public class ModBlocks {
     public static final RegistryObject<MetalPressBlock> METAL_PRESS = registerBlockEntity("metal_press", () -> new MetalPressBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 4).sound(ModSoundTypes.METAL_MACHINE), MetalPressBlockEntity::new));
     public static final RegistryObject<MetalPressingPlate> METAL_PRESSING_PLATE = registerBlockEntity("metal_pressing_plate", () -> new MetalPressingPlate(BlockBehaviour.Properties.copy(Blocks.SMOOTH_STONE_SLAB), MetalPressingPlateBlockEntity::new));
 
+    public static final RegistryObject<BatteryBlock> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity::new));
+
+        //METAL_CRUSHER
 
     private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
@@ -111,7 +121,9 @@ public class ModBlocks {
 
     private static <T extends Block & EntityBlock> RegistryObject<T> registerBlockEntity(String name, Supplier<T> block) {
         return BLOCK_DEFERRED_REGISTER.register(name, block);
-    }    public static final RegistryObject<DiamondEnergyGeneratorBlock> DIAMOND_ENERGY_GENERATOR = registerBlockEntity("diamond_energy_generator", () -> new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), DiamondEnergyGeneratorBlockEntity::new));
+    }
+
+    public static final RegistryObject<DiamondEnergyGeneratorBlock> DIAMOND_ENERGY_GENERATOR = registerBlockEntity("diamond_energy_generator", () -> new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), DiamondEnergyGeneratorBlockEntity::new));
 
     private static RegistryObject<Block> register(String name, BlockBehaviour.Properties properties) {
         return register(name, () -> new Block(properties.requiresCorrectToolForDrops()));

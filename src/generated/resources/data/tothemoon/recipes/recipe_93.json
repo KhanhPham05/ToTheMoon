@@ -1,14 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "tag": "tothemoon:hammers"
-    },
-    {
-      "tag": "forge:ingots/iron"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
   ],
+  "key": {
+    "A": {
+      "item": "tothemoon:redstone_metal"
+    }
+  },
   "result": {
-    "item": "tothemoon:iron_plate"
+    "item": "tothemoon:redstone_metal_block"
   }
 }

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "tothemoon:moon_uranium_ore"
+    "item": "tothemoon:moon_quartz_ore"
   },
-  "result": "tothemoon:uranium_ingot",
+  "result": "tothemoon:purified_quartz",
   "experience": 1.0,
   "cookingtime": 200
 }

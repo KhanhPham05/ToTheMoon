@@ -1,25 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "RRR",
-    "DGD",
-    "SSS"
-  ],
-  "key": {
-    "R": {
-      "tag": "forge:plates/redstone_metal"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "tothemoon:hammers"
     },
-    "D": {
-      "tag": "forge:dusts/redstone"
-    },
-    "G": {
-      "tag": "forge:dust/gold"
-    },
-    "S": {
-      "tag": "forge:plates/steel"
+    {
+      "tag": "forge:ingots/copper"
     }
-  },
+  ],
   "result": {
-    "item": "tothemoon:processor_chip"
+    "item": "tothemoon:copper_plate"
   }
 }

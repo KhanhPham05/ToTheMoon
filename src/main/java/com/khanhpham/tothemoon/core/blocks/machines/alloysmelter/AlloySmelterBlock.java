@@ -58,7 +58,7 @@ public class AlloySmelterBlock extends BaseEntityBlock<AlloySmelterBlockEntity> 
         return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
-    @SuppressWarnings("deprecation")
+    /*@SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
@@ -70,6 +70,11 @@ public class AlloySmelterBlock extends BaseEntityBlock<AlloySmelterBlockEntity> 
         }
 
         return InteractionResult.FAIL;
+    }*/
+
+    @Override
+    protected BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntityTypes.ALLOY_SMELTER.get();
     }
 
     @Nullable

@@ -1,8 +1,17 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tothemoon:moon_rock"
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "tothemoon:moon_rock"
+    }
   },
-  "result": "tothemoon:moon_rock_slab",
-  "count": 2
+  "result": {
+    "item": "tothemoon:moon_rock_stair",
+    "count": 4
+  }
 }

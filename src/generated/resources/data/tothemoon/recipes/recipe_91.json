@@ -1,14 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "tag": "tothemoon:hammers"
-    },
-    {
-      "tag": "forge:ingots/uranium"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
   ],
+  "key": {
+    "A": {
+      "item": "tothemoon:steel_ingot"
+    }
+  },
   "result": {
-    "item": "tothemoon:uranium_plate"
+    "item": "tothemoon:steel_block"
   }
 }

@@ -2,12 +2,19 @@ package com.khanhpham.tothemoon.utils.helpers;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryConnectionMode;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
@@ -15,7 +22,8 @@ import java.util.Objects;
 
 public class ModUtils {
 
-
+    public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
+    public static final EnumProperty<BatteryConnectionMode> BATTERY_CONNECTION_MODE = EnumProperty.create("connect", BatteryConnectionMode.class);
     public static ResourceLocation modLoc(String loc) {
         return new ResourceLocation(Names.MOD_ID, loc);
     }
@@ -48,5 +56,9 @@ public class ModUtils {
 
     public static <T extends IForgeRegistryEntry<T>> String getNameFromObject(T object) {
         return Objects.requireNonNull(object.getRegistryName()).getPath();
+    }
+
+    public static BlockState getBlock(Level level, BlockPos pos) {
+        return level.getBlockState(pos);
     }
 }

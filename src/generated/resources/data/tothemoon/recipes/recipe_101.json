@@ -1,16 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "SSS",
-    "S S",
-    "SSS"
-  ],
-  "key": {
-    "S": {
-      "tag": "forge:plates/steel"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "tothemoon:hammers"
+    },
+    {
+      "tag": "forge:ingots/gold"
     }
-  },
+  ],
   "result": {
-    "item": "tothemoon:steel_sheet_block"
+    "item": "tothemoon:gold_plate"
   }
 }

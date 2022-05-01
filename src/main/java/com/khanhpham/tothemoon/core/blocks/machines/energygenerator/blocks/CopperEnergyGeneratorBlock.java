@@ -15,6 +15,11 @@ public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock {
     }
 
     @Override
+    protected BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE.get();
+    }
+
+    @Override
     protected <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level level, BlockEntityType<A> pBlockEntityType) {
         return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE.get(), AbstractEnergyGeneratorBlockEntity::serverTick);
     }

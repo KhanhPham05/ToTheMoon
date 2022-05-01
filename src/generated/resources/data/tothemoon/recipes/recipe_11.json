@@ -1,19 +1,9 @@
 {
-  "type": "tothemoon:alloy_smelting",
-  "baseIngredient": {
-    "item": {
-      "tag": "forge:dusts/coal"
-    },
-    "count": 2
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "tothemoon:raw_uranium_ore"
   },
-  "secondaryIngredient": {
-    "item": {
-      "tag": "forge:ingots/iron"
-    },
-    "count": 1
-  },
-  "result": {
-    "item": "tothemoon:steel_ingot",
-    "count": 1
-  }
+  "result": "tothemoon:uranium_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
 }

@@ -24,6 +24,11 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         this.externalContainer = externalContainer;
     }
 
+
+    protected ItemStack empty() {
+        return ItemStack.EMPTY;
+    }
+
     protected void addPlayerInventorySlots(int beginX, int beginY) {
         int i, j;
 

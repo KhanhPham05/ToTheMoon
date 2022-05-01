@@ -1,0 +1,664 @@
+{
+  "variants": {
+    "connect=above,facing=north,level=0": {
+      "model": "tothemoon:block/battery_connect_above_level_0"
+    },
+    "connect=below,facing=north,level=0": {
+      "model": "tothemoon:block/battery_connect_below_level_0"
+    },
+    "connect=cross,facing=north,level=0": {
+      "model": "tothemoon:block/battery_connect_cross_level_0"
+    },
+    "connect=none,facing=north,level=0": {
+      "model": "tothemoon:block/battery_connect_none_level_0"
+    },
+    "connect=above,facing=south,level=0": {
+      "model": "tothemoon:block/battery_connect_above_level_0",
+      "y": 180
+    },
+    "connect=below,facing=south,level=0": {
+      "model": "tothemoon:block/battery_connect_below_level_0",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=0": {
+      "model": "tothemoon:block/battery_connect_cross_level_0",
+      "y": 180
+    },
+    "connect=none,facing=south,level=0": {
+      "model": "tothemoon:block/battery_connect_none_level_0",
+      "y": 180
+    },
+    "connect=above,facing=west,level=0": {
+      "model": "tothemoon:block/battery_connect_above_level_0",
+      "y": 270
+    },
+    "connect=below,facing=west,level=0": {
+      "model": "tothemoon:block/battery_connect_below_level_0",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=0": {
+      "model": "tothemoon:block/battery_connect_cross_level_0",
+      "y": 270
+    },
+    "connect=none,facing=west,level=0": {
+      "model": "tothemoon:block/battery_connect_none_level_0",
+      "y": 270
+    },
+    "connect=above,facing=east,level=0": {
+      "model": "tothemoon:block/battery_connect_above_level_0",
+      "y": 90
+    },
+    "connect=below,facing=east,level=0": {
+      "model": "tothemoon:block/battery_connect_below_level_0",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=0": {
+      "model": "tothemoon:block/battery_connect_cross_level_0",
+      "y": 90
+    },
+    "connect=none,facing=east,level=0": {
+      "model": "tothemoon:block/battery_connect_none_level_0",
+      "y": 90
+    },
+    "connect=above,facing=north,level=1": {
+      "model": "tothemoon:block/battery_connect_above_level_1"
+    },
+    "connect=below,facing=north,level=1": {
+      "model": "tothemoon:block/battery_connect_below_level_1"
+    },
+    "connect=cross,facing=north,level=1": {
+      "model": "tothemoon:block/battery_connect_cross_level_1"
+    },
+    "connect=none,facing=north,level=1": {
+      "model": "tothemoon:block/battery_connect_none_level_1"
+    },
+    "connect=above,facing=south,level=1": {
+      "model": "tothemoon:block/battery_connect_above_level_1",
+      "y": 180
+    },
+    "connect=below,facing=south,level=1": {
+      "model": "tothemoon:block/battery_connect_below_level_1",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=1": {
+      "model": "tothemoon:block/battery_connect_cross_level_1",
+      "y": 180
+    },
+    "connect=none,facing=south,level=1": {
+      "model": "tothemoon:block/battery_connect_none_level_1",
+      "y": 180
+    },
+    "connect=above,facing=west,level=1": {
+      "model": "tothemoon:block/battery_connect_above_level_1",
+      "y": 270
+    },
+    "connect=below,facing=west,level=1": {
+      "model": "tothemoon:block/battery_connect_below_level_1",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=1": {
+      "model": "tothemoon:block/battery_connect_cross_level_1",
+      "y": 270
+    },
+    "connect=none,facing=west,level=1": {
+      "model": "tothemoon:block/battery_connect_none_level_1",
+      "y": 270
+    },
+    "connect=above,facing=east,level=1": {
+      "model": "tothemoon:block/battery_connect_above_level_1",
+      "y": 90
+    },
+    "connect=below,facing=east,level=1": {
+      "model": "tothemoon:block/battery_connect_below_level_1",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=1": {
+      "model": "tothemoon:block/battery_connect_cross_level_1",
+      "y": 90
+    },
+    "connect=none,facing=east,level=1": {
+      "model": "tothemoon:block/battery_connect_none_level_1",
+      "y": 90
+    },
+    "connect=above,facing=north,level=2": {
+      "model": "tothemoon:block/battery_connect_above_level_2"
+    },
+    "connect=below,facing=north,level=2": {
+      "model": "tothemoon:block/battery_connect_below_level_2"
+    },
+    "connect=cross,facing=north,level=2": {
+      "model": "tothemoon:block/battery_connect_cross_level_2"
+    },
+    "connect=none,facing=north,level=2": {
+      "model": "tothemoon:block/battery_connect_none_level_2"
+    },
+    "connect=above,facing=south,level=2": {
+      "model": "tothemoon:block/battery_connect_above_level_2",
+      "y": 180
+    },
+    "connect=below,facing=south,level=2": {
+      "model": "tothemoon:block/battery_connect_below_level_2",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=2": {
+      "model": "tothemoon:block/battery_connect_cross_level_2",
+      "y": 180
+    },
+    "connect=none,facing=south,level=2": {
+      "model": "tothemoon:block/battery_connect_none_level_2",
+      "y": 180
+    },
+    "connect=above,facing=west,level=2": {
+      "model": "tothemoon:block/battery_connect_above_level_2",
+      "y": 270
+    },
+    "connect=below,facing=west,level=2": {
+      "model": "tothemoon:block/battery_connect_below_level_2",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=2": {
+      "model": "tothemoon:block/battery_connect_cross_level_2",
+      "y": 270
+    },
+    "connect=none,facing=west,level=2": {
+      "model": "tothemoon:block/battery_connect_none_level_2",
+      "y": 270
+    },
+    "connect=above,facing=east,level=2": {
+      "model": "tothemoon:block/battery_connect_above_level_2",
+      "y": 90
+    },
+    "connect=below,facing=east,level=2": {
+      "model": "tothemoon:block/battery_connect_below_level_2",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=2": {
+      "model": "tothemoon:block/battery_connect_cross_level_2",
+      "y": 90
+    },
+    "connect=none,facing=east,level=2": {
+      "model": "tothemoon:block/battery_connect_none_level_2",
+      "y": 90
+    },
+    "connect=above,facing=north,level=3": {
+      "model": "tothemoon:block/battery_connect_above_level_3"
+    },
+    "connect=below,facing=north,level=3": {
+      "model": "tothemoon:block/battery_connect_below_level_3"
+    },
+    "connect=cross,facing=north,level=3": {
+      "model": "tothemoon:block/battery_connect_cross_level_3"
+    },
+    "connect=none,facing=north,level=3": {
+      "model": "tothemoon:block/battery_connect_none_level_3"
+    },
+    "connect=above,facing=south,level=3": {
+      "model": "tothemoon:block/battery_connect_above_level_3",
+      "y": 180
+    },
+    "connect=below,facing=south,level=3": {
+      "model": "tothemoon:block/battery_connect_below_level_3",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=3": {
+      "model": "tothemoon:block/battery_connect_cross_level_3",
+      "y": 180
+    },
+    "connect=none,facing=south,level=3": {
+      "model": "tothemoon:block/battery_connect_none_level_3",
+      "y": 180
+    },
+    "connect=above,facing=west,level=3": {
+      "model": "tothemoon:block/battery_connect_above_level_3",
+      "y": 270
+    },
+    "connect=below,facing=west,level=3": {
+      "model": "tothemoon:block/battery_connect_below_level_3",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=3": {
+      "model": "tothemoon:block/battery_connect_cross_level_3",
+      "y": 270
+    },
+    "connect=none,facing=west,level=3": {
+      "model": "tothemoon:block/battery_connect_none_level_3",
+      "y": 270
+    },
+    "connect=above,facing=east,level=3": {
+      "model": "tothemoon:block/battery_connect_above_level_3",
+      "y": 90
+    },
+    "connect=below,facing=east,level=3": {
+      "model": "tothemoon:block/battery_connect_below_level_3",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=3": {
+      "model": "tothemoon:block/battery_connect_cross_level_3",
+      "y": 90
+    },
+    "connect=none,facing=east,level=3": {
+      "model": "tothemoon:block/battery_connect_none_level_3",
+      "y": 90
+    },
+    "connect=above,facing=north,level=4": {
+      "model": "tothemoon:block/battery_connect_above_level_4"
+    },
+    "connect=below,facing=north,level=4": {
+      "model": "tothemoon:block/battery_connect_below_level_4"
+    },
+    "connect=cross,facing=north,level=4": {
+      "model": "tothemoon:block/battery_connect_cross_level_4"
+    },
+    "connect=none,facing=north,level=4": {
+      "model": "tothemoon:block/battery_connect_none_level_4"
+    },
+    "connect=above,facing=south,level=4": {
+      "model": "tothemoon:block/battery_connect_above_level_4",
+      "y": 180
+    },
+    "connect=below,facing=south,level=4": {
+      "model": "tothemoon:block/battery_connect_below_level_4",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=4": {
+      "model": "tothemoon:block/battery_connect_cross_level_4",
+      "y": 180
+    },
+    "connect=none,facing=south,level=4": {
+      "model": "tothemoon:block/battery_connect_none_level_4",
+      "y": 180
+    },
+    "connect=above,facing=west,level=4": {
+      "model": "tothemoon:block/battery_connect_above_level_4",
+      "y": 270
+    },
+    "connect=below,facing=west,level=4": {
+      "model": "tothemoon:block/battery_connect_below_level_4",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=4": {
+      "model": "tothemoon:block/battery_connect_cross_level_4",
+      "y": 270
+    },
+    "connect=none,facing=west,level=4": {
+      "model": "tothemoon:block/battery_connect_none_level_4",
+      "y": 270
+    },
+    "connect=above,facing=east,level=4": {
+      "model": "tothemoon:block/battery_connect_above_level_4",
+      "y": 90
+    },
+    "connect=below,facing=east,level=4": {
+      "model": "tothemoon:block/battery_connect_below_level_4",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=4": {
+      "model": "tothemoon:block/battery_connect_cross_level_4",
+      "y": 90
+    },
+    "connect=none,facing=east,level=4": {
+      "model": "tothemoon:block/battery_connect_none_level_4",
+      "y": 90
+    },
+    "connect=above,facing=north,level=5": {
+      "model": "tothemoon:block/battery_connect_above_level_5"
+    },
+    "connect=below,facing=north,level=5": {
+      "model": "tothemoon:block/battery_connect_below_level_5"
+    },
+    "connect=cross,facing=north,level=5": {
+      "model": "tothemoon:block/battery_connect_cross_level_5"
+    },
+    "connect=none,facing=north,level=5": {
+      "model": "tothemoon:block/battery_connect_none_level_5"
+    },
+    "connect=above,facing=south,level=5": {
+      "model": "tothemoon:block/battery_connect_above_level_5",
+      "y": 180
+    },
+    "connect=below,facing=south,level=5": {
+      "model": "tothemoon:block/battery_connect_below_level_5",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=5": {
+      "model": "tothemoon:block/battery_connect_cross_level_5",
+      "y": 180
+    },
+    "connect=none,facing=south,level=5": {
+      "model": "tothemoon:block/battery_connect_none_level_5",
+      "y": 180
+    },
+    "connect=above,facing=west,level=5": {
+      "model": "tothemoon:block/battery_connect_above_level_5",
+      "y": 270
+    },
+    "connect=below,facing=west,level=5": {
+      "model": "tothemoon:block/battery_connect_below_level_5",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=5": {
+      "model": "tothemoon:block/battery_connect_cross_level_5",
+      "y": 270
+    },
+    "connect=none,facing=west,level=5": {
+      "model": "tothemoon:block/battery_connect_none_level_5",
+      "y": 270
+    },
+    "connect=above,facing=east,level=5": {
+      "model": "tothemoon:block/battery_connect_above_level_5",
+      "y": 90
+    },
+    "connect=below,facing=east,level=5": {
+      "model": "tothemoon:block/battery_connect_below_level_5",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=5": {
+      "model": "tothemoon:block/battery_connect_cross_level_5",
+      "y": 90
+    },
+    "connect=none,facing=east,level=5": {
+      "model": "tothemoon:block/battery_connect_none_level_5",
+      "y": 90
+    },
+    "connect=above,facing=north,level=6": {
+      "model": "tothemoon:block/battery_connect_above_level_6"
+    },
+    "connect=below,facing=north,level=6": {
+      "model": "tothemoon:block/battery_connect_below_level_6"
+    },
+    "connect=cross,facing=north,level=6": {
+      "model": "tothemoon:block/battery_connect_cross_level_6"
+    },
+    "connect=none,facing=north,level=6": {
+      "model": "tothemoon:block/battery_connect_none_level_6"
+    },
+    "connect=above,facing=south,level=6": {
+      "model": "tothemoon:block/battery_connect_above_level_6",
+      "y": 180
+    },
+    "connect=below,facing=south,level=6": {
+      "model": "tothemoon:block/battery_connect_below_level_6",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=6": {
+      "model": "tothemoon:block/battery_connect_cross_level_6",
+      "y": 180
+    },
+    "connect=none,facing=south,level=6": {
+      "model": "tothemoon:block/battery_connect_none_level_6",
+      "y": 180
+    },
+    "connect=above,facing=west,level=6": {
+      "model": "tothemoon:block/battery_connect_above_level_6",
+      "y": 270
+    },
+    "connect=below,facing=west,level=6": {
+      "model": "tothemoon:block/battery_connect_below_level_6",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=6": {
+      "model": "tothemoon:block/battery_connect_cross_level_6",
+      "y": 270
+    },
+    "connect=none,facing=west,level=6": {
+      "model": "tothemoon:block/battery_connect_none_level_6",
+      "y": 270
+    },
+    "connect=above,facing=east,level=6": {
+      "model": "tothemoon:block/battery_connect_above_level_6",
+      "y": 90
+    },
+    "connect=below,facing=east,level=6": {
+      "model": "tothemoon:block/battery_connect_below_level_6",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=6": {
+      "model": "tothemoon:block/battery_connect_cross_level_6",
+      "y": 90
+    },
+    "connect=none,facing=east,level=6": {
+      "model": "tothemoon:block/battery_connect_none_level_6",
+      "y": 90
+    },
+    "connect=above,facing=north,level=7": {
+      "model": "tothemoon:block/battery_connect_above_level_7"
+    },
+    "connect=below,facing=north,level=7": {
+      "model": "tothemoon:block/battery_connect_below_level_7"
+    },
+    "connect=cross,facing=north,level=7": {
+      "model": "tothemoon:block/battery_connect_cross_level_7"
+    },
+    "connect=none,facing=north,level=7": {
+      "model": "tothemoon:block/battery_connect_none_level_7"
+    },
+    "connect=above,facing=south,level=7": {
+      "model": "tothemoon:block/battery_connect_above_level_7",
+      "y": 180
+    },
+    "connect=below,facing=south,level=7": {
+      "model": "tothemoon:block/battery_connect_below_level_7",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=7": {
+      "model": "tothemoon:block/battery_connect_cross_level_7",
+      "y": 180
+    },
+    "connect=none,facing=south,level=7": {
+      "model": "tothemoon:block/battery_connect_none_level_7",
+      "y": 180
+    },
+    "connect=above,facing=west,level=7": {
+      "model": "tothemoon:block/battery_connect_above_level_7",
+      "y": 270
+    },
+    "connect=below,facing=west,level=7": {
+      "model": "tothemoon:block/battery_connect_below_level_7",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=7": {
+      "model": "tothemoon:block/battery_connect_cross_level_7",
+      "y": 270
+    },
+    "connect=none,facing=west,level=7": {
+      "model": "tothemoon:block/battery_connect_none_level_7",
+      "y": 270
+    },
+    "connect=above,facing=east,level=7": {
+      "model": "tothemoon:block/battery_connect_above_level_7",
+      "y": 90
+    },
+    "connect=below,facing=east,level=7": {
+      "model": "tothemoon:block/battery_connect_below_level_7",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=7": {
+      "model": "tothemoon:block/battery_connect_cross_level_7",
+      "y": 90
+    },
+    "connect=none,facing=east,level=7": {
+      "model": "tothemoon:block/battery_connect_none_level_7",
+      "y": 90
+    },
+    "connect=above,facing=north,level=8": {
+      "model": "tothemoon:block/battery_connect_above_level_8"
+    },
+    "connect=below,facing=north,level=8": {
+      "model": "tothemoon:block/battery_connect_below_level_8"
+    },
+    "connect=cross,facing=north,level=8": {
+      "model": "tothemoon:block/battery_connect_cross_level_8"
+    },
+    "connect=none,facing=north,level=8": {
+      "model": "tothemoon:block/battery_connect_none_level_8"
+    },
+    "connect=above,facing=south,level=8": {
+      "model": "tothemoon:block/battery_connect_above_level_8",
+      "y": 180
+    },
+    "connect=below,facing=south,level=8": {
+      "model": "tothemoon:block/battery_connect_below_level_8",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=8": {
+      "model": "tothemoon:block/battery_connect_cross_level_8",
+      "y": 180
+    },
+    "connect=none,facing=south,level=8": {
+      "model": "tothemoon:block/battery_connect_none_level_8",
+      "y": 180
+    },
+    "connect=above,facing=west,level=8": {
+      "model": "tothemoon:block/battery_connect_above_level_8",
+      "y": 270
+    },
+    "connect=below,facing=west,level=8": {
+      "model": "tothemoon:block/battery_connect_below_level_8",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=8": {
+      "model": "tothemoon:block/battery_connect_cross_level_8",
+      "y": 270
+    },
+    "connect=none,facing=west,level=8": {
+      "model": "tothemoon:block/battery_connect_none_level_8",
+      "y": 270
+    },
+    "connect=above,facing=east,level=8": {
+      "model": "tothemoon:block/battery_connect_above_level_8",
+      "y": 90
+    },
+    "connect=below,facing=east,level=8": {
+      "model": "tothemoon:block/battery_connect_below_level_8",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=8": {
+      "model": "tothemoon:block/battery_connect_cross_level_8",
+      "y": 90
+    },
+    "connect=none,facing=east,level=8": {
+      "model": "tothemoon:block/battery_connect_none_level_8",
+      "y": 90
+    },
+    "connect=above,facing=north,level=9": {
+      "model": "tothemoon:block/battery_connect_above_level_9"
+    },
+    "connect=below,facing=north,level=9": {
+      "model": "tothemoon:block/battery_connect_below_level_9"
+    },
+    "connect=cross,facing=north,level=9": {
+      "model": "tothemoon:block/battery_connect_cross_level_9"
+    },
+    "connect=none,facing=north,level=9": {
+      "model": "tothemoon:block/battery_connect_none_level_9"
+    },
+    "connect=above,facing=south,level=9": {
+      "model": "tothemoon:block/battery_connect_above_level_9",
+      "y": 180
+    },
+    "connect=below,facing=south,level=9": {
+      "model": "tothemoon:block/battery_connect_below_level_9",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=9": {
+      "model": "tothemoon:block/battery_connect_cross_level_9",
+      "y": 180
+    },
+    "connect=none,facing=south,level=9": {
+      "model": "tothemoon:block/battery_connect_none_level_9",
+      "y": 180
+    },
+    "connect=above,facing=west,level=9": {
+      "model": "tothemoon:block/battery_connect_above_level_9",
+      "y": 270
+    },
+    "connect=below,facing=west,level=9": {
+      "model": "tothemoon:block/battery_connect_below_level_9",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=9": {
+      "model": "tothemoon:block/battery_connect_cross_level_9",
+      "y": 270
+    },
+    "connect=none,facing=west,level=9": {
+      "model": "tothemoon:block/battery_connect_none_level_9",
+      "y": 270
+    },
+    "connect=above,facing=east,level=9": {
+      "model": "tothemoon:block/battery_connect_above_level_9",
+      "y": 90
+    },
+    "connect=below,facing=east,level=9": {
+      "model": "tothemoon:block/battery_connect_below_level_9",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=9": {
+      "model": "tothemoon:block/battery_connect_cross_level_9",
+      "y": 90
+    },
+    "connect=none,facing=east,level=9": {
+      "model": "tothemoon:block/battery_connect_none_level_9",
+      "y": 90
+    },
+    "connect=above,facing=north,level=10": {
+      "model": "tothemoon:block/battery_connect_above_level_10"
+    },
+    "connect=below,facing=north,level=10": {
+      "model": "tothemoon:block/battery_connect_below_level_10"
+    },
+    "connect=cross,facing=north,level=10": {
+      "model": "tothemoon:block/battery_connect_cross_level_10"
+    },
+    "connect=none,facing=north,level=10": {
+      "model": "tothemoon:block/battery_connect_none_level_10"
+    },
+    "connect=above,facing=south,level=10": {
+      "model": "tothemoon:block/battery_connect_above_level_10",
+      "y": 180
+    },
+    "connect=below,facing=south,level=10": {
+      "model": "tothemoon:block/battery_connect_below_level_10",
+      "y": 180
+    },
+    "connect=cross,facing=south,level=10": {
+      "model": "tothemoon:block/battery_connect_cross_level_10",
+      "y": 180
+    },
+    "connect=none,facing=south,level=10": {
+      "model": "tothemoon:block/battery_connect_none_level_10",
+      "y": 180
+    },
+    "connect=above,facing=west,level=10": {
+      "model": "tothemoon:block/battery_connect_above_level_10",
+      "y": 270
+    },
+    "connect=below,facing=west,level=10": {
+      "model": "tothemoon:block/battery_connect_below_level_10",
+      "y": 270
+    },
+    "connect=cross,facing=west,level=10": {
+      "model": "tothemoon:block/battery_connect_cross_level_10",
+      "y": 270
+    },
+    "connect=none,facing=west,level=10": {
+      "model": "tothemoon:block/battery_connect_none_level_10",
+      "y": 270
+    },
+    "connect=above,facing=east,level=10": {
+      "model": "tothemoon:block/battery_connect_above_level_10",
+      "y": 90
+    },
+    "connect=below,facing=east,level=10": {
+      "model": "tothemoon:block/battery_connect_below_level_10",
+      "y": 90
+    },
+    "connect=cross,facing=east,level=10": {
+      "model": "tothemoon:block/battery_connect_cross_level_10",
+      "y": 90
+    },
+    "connect=none,facing=east,level=10": {
+      "model": "tothemoon:block/battery_connect_none_level_10",
+      "y": 90
+    }
+  }
+}

@@ -89,8 +89,4 @@ public class AlloySmelterMenu extends BaseMenu {
 
         return itemstack;
     }
-
-    private ItemStack empty() {
-        return ItemStack.EMPTY;
-    }
 }

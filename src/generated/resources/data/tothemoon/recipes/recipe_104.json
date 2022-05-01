@@ -1,12 +1,25 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "tothemoon:gold_sheet_block"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "DGD",
+    "SSS"
   ],
+  "key": {
+    "R": {
+      "tag": "forge:plates/redstone_metal"
+    },
+    "D": {
+      "tag": "forge:dusts/redstone"
+    },
+    "G": {
+      "tag": "forge:dust/gold"
+    },
+    "S": {
+      "tag": "forge:plates/steel"
+    }
+  },
   "result": {
-    "item": "tothemoon:gold_plate",
-    "count": 8
+    "item": "tothemoon:processor_chip"
   }
 }

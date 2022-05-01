@@ -1,12 +1,19 @@
 {
-  "type": "tothemoon:metal_pressing",
-  "ingredient": {
-    "tag": "forge:ingots/steel"
+  "type": "tothemoon:alloy_smelting",
+  "baseIngredient": {
+    "item": {
+      "tag": "forge:dusts/coal"
+    },
+    "count": 2
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/gear"
+  "secondaryIngredient": {
+    "item": {
+      "tag": "forge:ingots/iron"
+    },
+    "count": 1
   },
   "result": {
-    "item": "tothemoon:steel_gear"
+    "item": "tothemoon:steel_ingot",
+    "count": 1
   }
 }

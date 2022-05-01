@@ -133,7 +133,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
     @Nonnull
     protected abstract AbstractContainerMenu createMenu(int containerId,@Nonnull Inventory playerInventory);
 
-    protected final void transferEnergyToOther(Level level, BlockPos blockPos) {
+    protected void transferEnergyToOther(Level level, BlockPos blockPos) {
         transferEnergy(level, blockPos, Direction.NORTH, Direction.DOWN);
         transferEnergy(level, blockPos, Direction.SOUTH, Direction.NORTH);
         transferEnergy(level, blockPos, Direction.WEST, Direction.EAST);
@@ -142,7 +142,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         transferEnergy(level, blockPos, Direction.DOWN, Direction.UP);
     }
 
-    protected final void receiveEnergyFromOther(Level level, BlockPos blockPos) {
+    protected void receiveEnergyFromOther(Level level, BlockPos blockPos) {
         receiveEnergy(level, blockPos, Direction.NORTH, Direction.DOWN);
         receiveEnergy(level, blockPos, Direction.SOUTH, Direction.NORTH);
         receiveEnergy(level, blockPos, Direction.WEST, Direction.EAST);

@@ -1,8 +1,12 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tothemoon:moon_rock"
-  },
-  "result": "tothemoon:polished_moon_rock",
-  "count": 1
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tothemoon:copper_sheet_block"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:copper_plate",
+    "count": 8
+  }
 }

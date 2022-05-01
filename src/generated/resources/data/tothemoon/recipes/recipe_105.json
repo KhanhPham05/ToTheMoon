@@ -1,12 +1,14 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "tothemoon:steel_sheet_block"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA"
   ],
+  "key": {
+    "A": {
+      "item": "minecraft:smooth_stone_slab"
+    }
+  },
   "result": {
-    "item": "tothemoon:steel_plate",
-    "count": 8
+    "item": "tothemoon:metal_pressing_plate"
   }
 }

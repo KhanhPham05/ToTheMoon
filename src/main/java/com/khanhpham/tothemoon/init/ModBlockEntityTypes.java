@@ -1,7 +1,9 @@
 package com.khanhpham.tothemoon.init;
 
+import com.google.common.collect.ImmutableSet;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
@@ -35,6 +37,7 @@ public class ModBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<MetalPressBlockEntity>> METAL_PRESS;
 
     public static final RegistryObject<BlockEntityType<MetalPressingPlateBlockEntity>> METAL_PRESSING_PLATE;
+    public static final RegistryObject<BlockEntityType<BatteryBlockEntity>> BATTERY;
 
     static {
         ToTheMoon.LOG.info("Registering BEs");
@@ -46,6 +49,7 @@ public class ModBlockEntityTypes {
         ALLOY_SMELTER = register("alloy_smelter", () -> BlockEntityType.Builder.of(AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER.get()).build(null));
         METAL_PRESS = register("metal_press", () -> BlockEntityType.Builder.of(MetalPressBlockEntity::new, ModBlocks.METAL_PRESS.get()).build(null));
         METAL_PRESSING_PLATE = register("metal_pressing_plate", () -> BlockEntityType.Builder.of(MetalPressingPlateBlockEntity::new, ModBlocks.METAL_PRESSING_PLATE.get()).build(null));
+        BATTERY = register("battery", () -> new BlockEntityType<>(BatteryBlockEntity::new, ImmutableSet.of(ModBlocks.BATTERY.get()), null));
     }
 
     private ModBlockEntityTypes() {

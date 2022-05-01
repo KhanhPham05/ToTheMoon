@@ -1,16 +1,17 @@
 package com.khanhpham.tothemoon;
 
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
 import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
+import com.khanhpham.tothemoon.datagen.ModItemModels;
 import com.khanhpham.tothemoon.datagen.ModLanguage;
 import com.khanhpham.tothemoon.datagen.ModTagProvider;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockStates;
-import com.khanhpham.tothemoon.datagen.ModItemModels;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
 import com.khanhpham.tothemoon.datagen.recipes.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
@@ -82,20 +83,11 @@ public class ToTheMoon {
     private static void initClasses() {
         ModBlocks.init();
         ModItems.start();
-        // ModSoundEvents.init();
     }
 
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static final class ModEvents {
-
-        public ModEvents() {
-        }
-
-        @SubscribeEvent
-        public static void onItemRegistration(RegistryEvent.Register<Item> event) {
-            ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).forEach(block -> event.getRegistry().register(new BlockItem(block, new Item.Properties().tab(TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(block)))));
-        }
 
         @SubscribeEvent
         public static void gatherData(GatherDataEvent event) {
@@ -113,12 +105,23 @@ public class ToTheMoon {
             ModTagProvider tagsProviders = new ModTagProvider(data, fileHelper);
         }
 
+        public ModEvents() {
+        }
+
+        @SubscribeEvent
+        public static void onItemRegistration(RegistryEvent.Register<Item> event) {
+            ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).forEach(block -> event.getRegistry().register(new BlockItem(block, new Item.Properties().tab(TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(block)))));
+        }
+
+
+
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorMenuScreen::new);
             MenuScreens.register(ModMenuTypes.ALLOY_SMELTER, AlloySmelterMenuScreen::new);
             MenuScreens.register(ModMenuTypes.METAL_PRESS, MetalPressMenuScreen::new);
+            MenuScreens.register(ModMenuTypes.BATTERY, BatteryMenuScreen::new);
 
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
@@ -147,6 +150,12 @@ public class ToTheMoon {
                 }
                 if (block.is(Blocks.WATER)) {
                     level.setBlock(event.getPos(), Blocks.PACKED_ICE.defaultBlockState(), 3);
+                }
+            }
+
+            if (block.is(ModBlocks.METAL_PRESSING_PLATE.get())) {
+                if (level.getBlockState(event.getPos().below()).isAir()) {
+                    level.destroyBlock(event.getPos(), true, null);
                 }
             }
         }

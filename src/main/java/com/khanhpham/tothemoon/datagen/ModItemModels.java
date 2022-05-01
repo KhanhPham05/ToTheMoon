@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.datagen;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlock;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.core.items.GearItem;
@@ -36,7 +37,8 @@ public class ModItemModels extends ItemModelProvider {
             }
         }
 
-        ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(b -> !(b instanceof MachineFrameBlock) && !(b instanceof MoonRockBarrel)).forEach(this::blockItem);
+        ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(b -> !(b instanceof BatteryBlock) && !(b instanceof MachineFrameBlock) && !(b instanceof MoonRockBarrel)).forEach(this::blockItem);
+
     }
 
     private void simpleItem(Item item) {

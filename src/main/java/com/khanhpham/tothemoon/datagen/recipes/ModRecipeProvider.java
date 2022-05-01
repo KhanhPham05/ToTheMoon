@@ -56,6 +56,8 @@ public class ModRecipeProvider extends RecipeProvider {
         buildStair(consumer, ModBlocks.MOON_ROCK_STAIR, ModBlocks.MOON_ROCK);
         buildStair(consumer, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_BRICK);
         buildStair(consumer, ModBlocks.POLISHED_MOON_ROCK_STAIR, ModBlocks.POLISHED_MOON_ROCK);
+        buildStair(consumer, ModBlocks.COBBLED_MOON_ROCK_STAIR, ModBlocks.COBBLED_MOON_ROCK);
+        buildSlab(consumer, ModBlocks.COBBLED_MOON_ROCK_SLAB, ModBlocks.COBBLED_MOON_ROCK);
         buildSlab(consumer, ModBlocks.MOON_ROCK_SLAB, ModBlocks.MOON_ROCK);
         buildSlab(consumer, ModBlocks.MOON_ROCK_BRICK_SLAB, ModBlocks.MOON_ROCK_BRICK);
         buildSlab(consumer, ModBlocks.POLISHED_MOON_ROCK_SLAB, ModBlocks.POLISHED_MOON_ROCK);
@@ -178,7 +180,9 @@ public class ModRecipeProvider extends RecipeProvider {
         this.oreSmelting(consumer, ModBlocks.DEEPSLATE_URANIUM_ORE, ModItems.URANIUM_INGOT);
         this.oreSmelting(consumer, ModBlocks.MOON_GOLD_ORE, Items.GOLD_INGOT);
         this.oreSmelting(consumer, ModBlocks.MOON_IRON_ORE, Items.IRON_INGOT);
+        this.oreSmelting(consumer, ModBlocks.MOON_QUARTZ_ORE, ModItems.PURIFIED_QUARTZ);
         this.oreSmelting(consumer, ModBlocks.MOON_URANIUM_ORE, ModItems.URANIUM_INGOT);
+        this.oreSmelting(consumer, ModItems.RAW_URANIUM_ORE, ModItems.URANIUM_INGOT);
     }
 
     private void oreSmelting(Consumer<FinishedRecipe> consumer, Supplier<? extends ItemLike> ingredient, Supplier<? extends Item> resultSupplier) {

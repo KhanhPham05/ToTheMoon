@@ -1,8 +1,15 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tothemoon:polished_moon_rock"
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "tothemoon:cobbled_moon_rock"
+    }
   },
-  "result": "tothemoon:polished_moon_rock_slab",
-  "count": 2
+  "result": {
+    "item": "tothemoon:cobbled_moon_rock_slab",
+    "count": 6
+  }
 }

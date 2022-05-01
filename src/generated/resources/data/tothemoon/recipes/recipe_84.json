@@ -1,16 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "item": "tothemoon:steel_ingot"
-    }
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tothemoon:cobbled_moon_rock"
   },
-  "result": {
-    "item": "tothemoon:steel_block"
-  }
+  "result": "tothemoon:cobbled_moon_rock_slab",
+  "count": 2
 }

@@ -1,12 +1,9 @@
 {
-  "type": "tothemoon:metal_pressing",
+  "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "forge:ingots/steel"
+    "item": "tothemoon:raw_uranium_ore"
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/plate"
-  },
-  "result": {
-    "item": "tothemoon:steel_plate"
-  }
+  "result": "tothemoon:uranium_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
 }

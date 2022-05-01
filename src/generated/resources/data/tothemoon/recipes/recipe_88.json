@@ -1,16 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "item": "tothemoon:redstone_steel_alloy"
-    }
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tothemoon:moon_rock_brick"
   },
-  "result": {
-    "item": "tothemoon:redstone_steel_alloy_block"
-  }
+  "result": "tothemoon:moon_rock_brick_slab",
+  "count": 2
 }

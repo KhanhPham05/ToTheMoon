@@ -93,6 +93,10 @@ public class MetalPressingPlateBlockEntity extends BlockEntity implements Contai
         ContainerHelper.loadAllItems(pTag, this.items);
     }
 
+    public void markDirty(Level level, BlockPos pos, BlockState state) {
+        setChanged(level, pos, state);
+    }
+
     public boolean attemptPutItem(ItemStack item) {
         if (this.items.get(0).isEmpty()) {
             this.items.set(0, new ItemStack(item.getItem(), 1));

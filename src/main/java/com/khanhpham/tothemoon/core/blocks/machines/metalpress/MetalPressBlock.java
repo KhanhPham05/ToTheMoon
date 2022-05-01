@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.metalpress;
 
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
+import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -65,7 +65,7 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
         }
     }
 
-    @SuppressWarnings("deprecation")
+    /*@SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
@@ -77,6 +77,11 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
         }
 
         return InteractionResult.FAIL;
+    }*/
+
+    @Override
+    protected BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntityTypes.METAL_PRESS.get();
     }
 
     @Nullable

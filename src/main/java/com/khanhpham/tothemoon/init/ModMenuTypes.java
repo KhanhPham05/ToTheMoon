@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
@@ -25,12 +26,14 @@ public class ModMenuTypes {
     public static final MenuType<AlloySmelterMenu> ALLOY_SMELTER;
 
     public static final MenuType<MetalPressMenu> METAL_PRESS;
+    public static final MenuType<BatteryMenu> BATTERY;
 
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
         ENERGY_GENERATOR_CONTAINER = register("energy_generator_container", EnergyGeneratorMenu::new);
         ALLOY_SMELTER = register("alloy_smelter", AlloySmelterMenu::new);
         METAL_PRESS = register("metal_press_menu", MetalPressMenu::new);
+        BATTERY = register("battery", BatteryMenu::new);
     }
 
     private ModMenuTypes() {

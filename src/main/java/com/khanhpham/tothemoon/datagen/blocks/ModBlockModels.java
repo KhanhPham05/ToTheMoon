@@ -1,8 +1,10 @@
 package com.khanhpham.tothemoon.datagen.blocks;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryConnectionMode;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
@@ -19,6 +21,8 @@ public class ModBlockModels extends BlockModelProvider {
     protected void registerModels() {
         ModBlocks.SOLID_BLOCKS.forEach(this::cubeAll);
     }
+
+
 
     private void cubeAll(Supplier<? extends Block> supplier) {
         String id = ModUtils.getNameFromObject(supplier.get());

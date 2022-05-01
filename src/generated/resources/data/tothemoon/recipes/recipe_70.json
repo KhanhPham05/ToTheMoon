@@ -1,12 +1,12 @@
 {
-  "type": "tothemoon:manual_metal_pressing",
+  "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:ingots/copper"
+    "tag": "forge:plates/copper"
   },
   "mold": {
-    "tag": "tothemoon:metal_press_molds/plate"
+    "tag": "tothemoon:metal_press_molds/rod"
   },
   "result": {
-    "item": "tothemoon:copper_plate"
+    "item": "tothemoon:copper_rod"
   }
 }

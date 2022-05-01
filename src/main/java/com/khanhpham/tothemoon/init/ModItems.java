@@ -91,7 +91,6 @@ public class ModItems {
     public static final RegistryObject<Item> CIRCUIT_BOARD = item("circuit_board");
     public static final RegistryObject<Item> CPU_CHIP = item("processor_chip");
 
-    //TODO : durability crafting
     public static final RegistryObject<HammerItem> WOODEN_HAMMER = registerBreakable("wooden_hammer", 16);
     public static final RegistryObject<HammerItem> STEEL_HAMMER = registerBreakable("steel_hammer", 64);
     public static final RegistryObject<HammerItem> DIAMOND_HAMMER = registerBreakable("diamond_hammer", 128);

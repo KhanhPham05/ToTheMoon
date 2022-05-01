@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks;
 
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -46,7 +47,7 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
         pBuilder.add(FACING, LIT);
     }
 
-    @SuppressWarnings("deprecation")
+    /*@SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
@@ -58,7 +59,7 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
         }
 
         return InteractionResult.FAIL;
-    }
+    }*/
 
     @SuppressWarnings("deprecation")
     @Override

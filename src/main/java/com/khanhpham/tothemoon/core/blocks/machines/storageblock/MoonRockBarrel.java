@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.storageblock;
 
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
+import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,6 +15,11 @@ import net.minecraft.world.phys.BlockHitResult;
 public class MoonRockBarrel extends BaseEntityBlock<MoonBarrelTileEntity> {
     public MoonRockBarrel(Properties p_49224_, BlockEntityType.BlockEntitySupplier<MoonBarrelTileEntity> supplier) {
         super(p_49224_, supplier);
+    }
+
+    @Override
+    protected BlockEntityType<?> getBlockEntityType() {
+        return ModBlockEntityTypes.MOON_STORAGE.get();
     }
 
     @SuppressWarnings("deprecation")
