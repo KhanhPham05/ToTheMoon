@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "forge:dusts/redstone_steel_metal"
+    "tag": "forge:dusts/redstone_metal"
   },
-  "result": "tothemoon:redstone_steel_alloy",
+  "result": "tothemoon:redstone_metal",
   "experience": 1.0,
-  "cookingtime": 10
+  "cookingtime": 100
 }

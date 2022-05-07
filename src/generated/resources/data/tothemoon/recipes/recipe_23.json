@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "tag": "forge:dusts/gold"
+    "tag": "forge:dusts/redstone_steel_metal"
   },
-  "result": "minecraft:gold_ingot",
+  "result": "tothemoon:redstone_steel_alloy",
   "experience": 1.0,
-  "cookingtime": 20
+  "cookingtime": 200
 }

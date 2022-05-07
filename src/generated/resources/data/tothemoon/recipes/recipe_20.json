@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "forge:dusts/uranium"
+    "tag": "forge:dusts/steel"
   },
-  "result": "tothemoon:uranium_ingot",
+  "result": "tothemoon:steel_ingot",
   "experience": 1.0,
-  "cookingtime": 10
+  "cookingtime": 100
 }

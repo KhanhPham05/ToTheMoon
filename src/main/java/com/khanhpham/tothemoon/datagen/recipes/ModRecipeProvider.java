@@ -186,13 +186,13 @@ public class ModRecipeProvider extends RecipeProvider {
         this.oreSmelting(consumer, ModBlocks.MOON_IRON_ORE, Items.IRON_INGOT);
         this.oreSmelting(consumer, ModBlocks.MOON_QUARTZ_ORE, ModItems.PURIFIED_QUARTZ);
         this.oreSmelting(consumer, ModBlocks.MOON_URANIUM_ORE, ModItems.URANIUM_INGOT);
-        this.oreSmelting(consumer, URANIUM_RAW_MATERIAL, ModItems.URANIUM_INGOT, 1.0f, 20);
-        this.oreSmelting(consumer, RAW_URANIUM_STORAGE_BLOCK, ModBlocks.URANIUM_BLOCK, 3.0f, 20 * 9);
+        this.oreSmelting(consumer, URANIUM_RAW_MATERIAL, ModItems.URANIUM_INGOT, 1.0f, 200);
+        this.oreSmelting(consumer, RAW_URANIUM_STORAGE_BLOCK, ModBlocks.URANIUM_BLOCK, 3.0f, 200 * 9);
         this.dustSmelting(consumer);
     }
 
     private void dustSmelting(Consumer<FinishedRecipe> consumer) {
-        GENERAL_DUSTS.getProcessMap().forEach((tag, item) -> this.oreSmelting(consumer, tag, item, 1.0f, 20));
+        GENERAL_DUSTS.getProcessMap().forEach((tag, item) -> this.oreSmelting(consumer, tag, item, 1.0f, 200));
     }
 
 
