@@ -1,15 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AA",
-    "AA"
-  ],
-  "key": {
-    "A": {
-      "item": "tothemoon:moon_rock"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "tothemoon:hammers"
+    },
+    {
+      "tag": "forge:ingots/uranium"
     }
-  },
+  ],
   "result": {
-    "item": "tothemoon:polished_moon_rock"
+    "item": "tothemoon:uranium_plate"
   }
 }

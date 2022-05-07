@@ -1,12 +1,9 @@
 {
-  "type": "tothemoon:metal_pressing",
+  "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "forge:ingots/uranium"
+    "tag": "forge:dusts/gold"
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/gear"
-  },
-  "result": {
-    "item": "tothemoon:uranium_gear"
-  }
+  "result": "minecraft:gold_ingot",
+  "experience": 1.0,
+  "cookingtime": 10
 }

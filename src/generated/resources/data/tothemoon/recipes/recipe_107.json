@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SSS",
-    "S S",
-    "SSS"
+    "AAA",
+    "AAA",
+    "AAA"
   ],
   "key": {
-    "S": {
-      "tag": "forge:plates/gold"
+    "A": {
+      "item": "tothemoon:steel_ingot"
     }
   },
   "result": {
-    "item": "tothemoon:gold_sheet_block"
+    "item": "tothemoon:steel_block"
   }
 }

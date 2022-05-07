@@ -27,7 +27,6 @@ public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecra
         this.supplier = supplier;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
@@ -46,6 +45,11 @@ public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecra
     }
 
     protected abstract BlockEntityType<?> getBlockEntityType();
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
 
     @Nullable
     @Override

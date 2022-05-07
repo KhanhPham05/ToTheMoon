@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"
+    "#  ",
+    "## ",
+    "###"
   ],
   "key": {
-    "A": {
-      "item": "tothemoon:redstone_steel_alloy"
+    "#": {
+      "item": "tothemoon:moon_rock"
     }
   },
   "result": {
-    "item": "tothemoon:redstone_steel_alloy_block"
+    "item": "tothemoon:moon_rock_stair",
+    "count": 4
   }
 }

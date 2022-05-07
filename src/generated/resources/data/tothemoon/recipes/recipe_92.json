@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "tothemoon:steel_block"
-    }
-  ],
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/copper"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/gear"
+  },
   "result": {
-    "item": "tothemoon:steel_ingot",
-    "count": 9
+    "item": "tothemoon:copper_gear"
   }
 }

@@ -1,12 +1,9 @@
 {
-  "type": "tothemoon:metal_pressing",
+  "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "forge:plates/steel"
+    "tag": "forge:dusts/redstone_metal"
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/rod"
-  },
-  "result": {
-    "item": "tothemoon:steel_rod"
-  }
+  "result": "tothemoon:redstone_metal",
+  "experience": 1.0,
+  "cookingtime": 10
 }

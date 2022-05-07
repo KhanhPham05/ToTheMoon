@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.recipes.metalpressing;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
-import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.ModRecipeLocations;
 import com.khanhpham.tothemoon.core.recipes.SimpleRecipeSerializer;
 import com.khanhpham.tothemoon.init.ModRecipes;

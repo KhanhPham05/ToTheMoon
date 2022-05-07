@@ -1,11 +1,11 @@
 package com.khanhpham.tothemoon.datagen;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.core.items.GearItem;
-import com.khanhpham.tothemoon.core.items.HammerItem;
+import com.khanhpham.tothemoon.core.items.HandheldItem;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -30,7 +30,7 @@ public class ModItemModels extends ItemModelProvider {
 
         for (Item item : items) {
             if (!(item instanceof GearItem)) {
-                if (item instanceof HammerItem) {
+                if (item instanceof HandheldItem) {
                     String path = ModUtils.convertRlToPath(item);
                     withExistingParent(path, new ResourceLocation("item/handheld")).texture("layer0", "item/" + path);
                 } else simpleItem(item);
@@ -38,7 +38,7 @@ public class ModItemModels extends ItemModelProvider {
         }
 
         ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(b -> !(b instanceof BatteryBlock) && !(b instanceof MachineFrameBlock) && !(b instanceof MoonRockBarrel)).forEach(this::blockItem);
-
+        withExistingParent(ModUtils.convertRlToPath(ModBlocks.BATTERY.get()), modLoc("block/battery_level_0"));
     }
 
     private void simpleItem(Item item) {

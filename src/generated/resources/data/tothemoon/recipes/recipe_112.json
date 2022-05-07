@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "tothemoon:steel_sheet_block"
+      "item": "tothemoon:redstone_steel_alloy_block"
     }
   ],
   "result": {
-    "item": "tothemoon:steel_plate",
-    "count": 8
+    "item": "tothemoon:redstone_steel_alloy",
+    "count": 9
   }
 }

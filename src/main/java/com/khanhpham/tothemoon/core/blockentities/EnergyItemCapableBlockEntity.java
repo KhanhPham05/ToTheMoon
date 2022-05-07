@@ -18,22 +18,32 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEntity implements Container, MenuProvider, Nameable {
+public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEntity implements IItemHandler, Container, MenuProvider, Nameable {
+    protected final HashMap<BlockPos, IEnergyStorage> energyStorages = new HashMap<>();
     protected final Component label;
     protected final int containerSize;
+    private final LazyOptional<IItemHandler> lo = LazyOptional.of(() -> this);
     public NonNullList<ItemStack> items;
 
     public EnergyItemCapableBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @Nonnull Component label, final int containerSize) {
@@ -43,8 +53,107 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
         this.items = NonNullList.withSize(containerSize, ItemStack.EMPTY);
     }
 
-    protected static void markDirty(Level level, BlockPos pos, BlockState state) {
-        setChanged(level, pos, state);
+    @Override
+    public int getSlots() {
+        return items.size();
+    }
+
+    @NotNull
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return items.get(slot);
+    }
+
+    @NotNull
+    @Override
+    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+        if (stack.isEmpty())
+            return ItemStack.EMPTY;
+
+        if (!isItemValid(slot, stack))
+            return stack;
+
+        ensureValidSlotIndex(slot);
+
+        ItemStack existing = this.items.get(slot);
+
+        int limit = Math.min(64, stack.getMaxStackSize());
+
+        if (!existing.isEmpty()) {
+            if (!ItemHandlerHelper.canItemStacksStack(stack, existing))
+                return stack;
+
+            limit -= existing.getCount();
+        }
+
+        if (limit <= 0)
+            return stack;
+
+        boolean reachedLimit = stack.getCount() > limit;
+
+        if (!simulate) {
+            if (existing.isEmpty()) {
+                this.items.set(slot, reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
+            } else {
+                existing.grow(reachedLimit ? limit : stack.getCount());
+            }
+        }
+        return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
+    }
+
+    private void ensureValidSlotIndex(int slot) {
+        if (!(slot >= 0 && slot < this.items.size())) {
+            throw new IllegalStateException();
+        }
+    }
+
+    @Nonnull
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        if (amount == 0)
+            return ItemStack.EMPTY;
+
+        ensureValidSlotIndex(slot);
+
+        ItemStack existing = this.items.get(slot);
+
+        if (existing.isEmpty())
+            return ItemStack.EMPTY;
+
+        int toExtract = Math.min(amount, existing.getMaxStackSize());
+
+        if (existing.getCount() <= toExtract) {
+            if (!simulate) {
+                this.items.set(slot, ItemStack.EMPTY);
+                return existing;
+            } else {
+                return existing.copy();
+            }
+        } else {
+            if (!simulate) {
+                this.items.set(slot, ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract));
+            }
+
+            return ItemHandlerHelper.copyStackWithSize(existing, toExtract);
+        }
+    }
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return this.lo.cast();
+        }
+
+        return cap.orEmpty(CapabilityEnergy.ENERGY, super.energyDataOptional.cast()).cast();
+    }
+
+    @Override
+    public int getSlotLimit(int slot) {
+        return 64;
+    }
+
+    @Override
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+        return true;
     }
 
     @Override
@@ -131,58 +240,39 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
     }
 
     @Nonnull
-    protected abstract AbstractContainerMenu createMenu(int containerId,@Nonnull Inventory playerInventory);
+    protected abstract AbstractContainerMenu createMenu(int containerId, @Nonnull Inventory playerInventory);
 
-    protected void transferEnergyToOther(Level level, BlockPos blockPos) {
-        transferEnergy(level, blockPos, Direction.NORTH, Direction.DOWN);
-        transferEnergy(level, blockPos, Direction.SOUTH, Direction.NORTH);
-        transferEnergy(level, blockPos, Direction.WEST, Direction.EAST);
-        transferEnergy(level, blockPos, Direction.EAST, Direction.WEST);
-        transferEnergy(level, blockPos, Direction.UP, Direction.DOWN);
-        transferEnergy(level, blockPos, Direction.DOWN, Direction.UP);
-    }
-
-    protected void receiveEnergyFromOther(Level level, BlockPos blockPos) {
-        receiveEnergy(level, blockPos, Direction.NORTH, Direction.DOWN);
-        receiveEnergy(level, blockPos, Direction.SOUTH, Direction.NORTH);
-        receiveEnergy(level, blockPos, Direction.WEST, Direction.EAST);
-        receiveEnergy(level, blockPos, Direction.EAST, Direction.WEST);
-        receiveEnergy(level, blockPos, Direction.UP, Direction.DOWN);
-        receiveEnergy(level, blockPos, Direction.DOWN, Direction.UP);
-    }
-
-    protected void receiveEnergy(Level level, BlockPos blockPos, Direction direction, Direction direction2) {
-        BlockEntity te = level.getBlockEntity(blockPos.relative(direction));
-
-        if (te != null) {
-            te.getCapability(CapabilityEnergy.ENERGY, direction2).ifPresent(e -> {
-                if (e.canExtract() && e.getEnergyStored() > 0) {
-                    super.energy.receiveEnergy(e.extractEnergy(super.energy.getMaxReceive(), false), false);
-                }
-            });
+    protected void collectBlockEntities(Level level, BlockPos pos) {
+        energyStorages.clear();
+        for (Direction direction : Direction.values()) {
+            var be = level.getBlockEntity(pos.relative(direction));
+            if (be != null)
+                be.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite()).ifPresent(energy -> energyStorages.put(pos.relative(direction), energy));
         }
     }
 
-    protected void transferEnergy(Level level, BlockPos blockPos, Direction direction, Direction direction2) {
-        BlockEntity te = level.getBlockEntity(blockPos.relative(direction));
-        if (te != null) {
-            te.getCapability(CapabilityEnergy.ENERGY, direction2).ifPresent(e -> {
-                if (e.canReceive() && e.getEnergyStored() < e.getMaxEnergyStored()) {
-                    super.energy.extractEnergy(e.receiveEnergy(super.energy.getMaxExtract(), false), false);
-                }
-            });
+    protected void transferEnergy() {
+        for (IEnergyStorage energyStorage : energyStorages.values()) {
+            if (!energy.isEmpty() && energy.canExtract() && energyStorage.canReceive() && !isEnergyStorageFull(energyStorage)) {
+                this.energy.extractEnergy(energyStorage.receiveEnergy(energy.getMaxExtract(), false), false);
+            }
         }
     }
 
+    protected boolean isEnergyStorageFull(IEnergyStorage storage) {
+        return storage.getEnergyStored() >= storage.getMaxEnergyStored();
+    }
 
 
     @javax.annotation.Nullable
     protected <C extends Container, T extends Recipe<C>> T getRecipe(Level level, RecipeType<T> recipeType, C container) {
         return level.getRecipeManager().getRecipeFor(recipeType, container, level).orElse(null);
     }
+
     protected <T extends Comparable<T>> BlockState setNewBlockState(Level level, BlockPos pos, BlockState state, Property<T> property, T value) {
         state = state.setValue(property, value);
         level.setBlock(pos, state, 3);
+        setChanged(level, pos, state);
         return state;
     }
 }

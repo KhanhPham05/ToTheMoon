@@ -1,12 +1,19 @@
 {
-  "type": "tothemoon:manual_metal_pressing",
-  "ingredient": {
-    "tag": "forge:ingots/uranium"
+  "type": "tothemoon:alloy_smelting",
+  "baseIngredient": {
+    "item": {
+      "tag": "forge:ingots/steel"
+    },
+    "count": 1
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/gear"
+  "secondaryIngredient": {
+    "item": {
+      "tag": "forge:dusts/redstone"
+    },
+    "count": 3
   },
   "result": {
-    "item": "tothemoon:uranium_gear"
+    "item": "tothemoon:redstone_steel_alloy",
+    "count": 1
   }
 }

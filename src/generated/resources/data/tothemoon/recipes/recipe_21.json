@@ -1,12 +1,9 @@
 {
-  "type": "tothemoon:metal_pressing",
+  "type": "minecraft:smelting",
   "ingredient": {
-    "tag": "forge:ingots/uranium"
+    "tag": "forge:dusts/redstone_metal"
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/plate"
-  },
-  "result": {
-    "item": "tothemoon:uranium_plate"
-  }
+  "result": "tothemoon:redstone_metal",
+  "experience": 1.0,
+  "cookingtime": 20
 }

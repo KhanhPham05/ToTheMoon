@@ -1,14 +1,15 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "tag": "tothemoon:hammers"
-    },
-    {
-      "tag": "forge:ingots/steel"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
   ],
+  "key": {
+    "#": {
+      "item": "tothemoon:cobbled_moon_rock"
+    }
+  },
   "result": {
-    "item": "tothemoon:steel_plate"
+    "item": "tothemoon:cobbled_moon_rock_slab",
+    "count": 6
   }
 }

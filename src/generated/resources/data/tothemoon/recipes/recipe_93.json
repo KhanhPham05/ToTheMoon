@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "item": "tothemoon:redstone_metal"
-    }
+  "type": "tothemoon:manual_metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/copper"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
-    "item": "tothemoon:redstone_metal_block"
+    "item": "tothemoon:copper_gear"
   }
 }

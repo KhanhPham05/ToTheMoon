@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:recipe_30"
+    ]
+  },
+  "criteria": {
+    "has_barrier_and_barrier": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:barrier"
+            ]
+          },
+          {
+            "items": [
+              "minecraft:barrier"
+            ]
+          }
+        ]
+      }
+    },
+    "unlock_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:recipe_30"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_barrier_and_barrier"
+    ],
+    [
+      "unlock_recipe"
+    ]
+  ]
+}

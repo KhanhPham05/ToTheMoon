@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;

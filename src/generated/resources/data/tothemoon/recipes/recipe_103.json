@@ -1,14 +1,15 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "tag": "tothemoon:hammers"
-    },
-    {
-      "tag": "forge:ingots/redstone_steel_alloy"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
   ],
+  "key": {
+    "#": {
+      "item": "tothemoon:moon_rock_brick"
+    }
+  },
   "result": {
-    "item": "tothemoon:redstone_steel_alloy_plate"
+    "item": "tothemoon:moon_rock_brick_slab",
+    "count": 6
   }
 }

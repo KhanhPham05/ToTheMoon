@@ -1,17 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#  ",
-    "## ",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "tothemoon:moon_rock_brick"
-    }
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/gold"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/plate"
   },
   "result": {
-    "item": "tothemoon:moon_rock_brick_stair",
-    "count": 4
+    "item": "tothemoon:gold_plate"
   }
 }

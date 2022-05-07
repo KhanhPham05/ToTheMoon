@@ -1,12 +1,9 @@
 {
-  "type": "tothemoon:metal_pressing",
+  "type": "minecraft:smelting",
   "ingredient": {
-    "tag": "forge:ingots/steel"
+    "tag": "forge:dusts/uranium"
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/gear"
-  },
-  "result": {
-    "item": "tothemoon:steel_gear"
-  }
+  "result": "tothemoon:uranium_ingot",
+  "experience": 1.0,
+  "cookingtime": 20
 }

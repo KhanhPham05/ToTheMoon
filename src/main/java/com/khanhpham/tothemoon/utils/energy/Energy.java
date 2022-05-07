@@ -4,8 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class Energy extends EnergyStorage {
-    private final int maxReceive;
-    private final int maxExtract;
+    protected final int maxReceive;
+    protected final int maxExtract;
 
     public Energy(int capacity, int maxReceive, int maxExtract) {
         super(capacity, maxReceive, maxExtract);
@@ -21,30 +21,12 @@ public class Energy extends EnergyStorage {
         return maxExtract;
     }
 
-    public void receiveEnergy() {
-        this.receiveEnergy(this.maxReceive, false);
-    }
-
-    @Override
-    public int receiveEnergy(int maxReceive, boolean simulate) {
-        if (super.energy + maxReceive > super.capacity) {
-            return super.receiveEnergy(capacity - energy, simulate);
-        }
-        return super.receiveEnergy(maxReceive, simulate);
-    }
-
     public boolean isFull() {
         return super.energy >= super.capacity;
     }
 
     public boolean isEmpty() {
         return super.energy <= 0;
-    }
-
-    public int consumeEnergy() {
-        if (canExtract())
-            return super.extractEnergy(this.maxExtract, false);
-        return 0;
     }
 
     public void consumeEnergyIgnoreCondition() {
@@ -57,5 +39,17 @@ public class Energy extends EnergyStorage {
 
     public void load(CompoundTag pTag) {
         this.energy = pTag.getInt("energy");
+    }
+
+    public int getAvailableAmount() {
+        return this.capacity - this.energy;
+    }
+
+    public void receiveEnergyIgnoreCondition() {
+        if (this.energy + this.maxReceive >= this.capacity) {
+            this.energy += (this.capacity - energy);
+        } else {
+            this.energy += this.maxReceive;
+        }
     }
 }

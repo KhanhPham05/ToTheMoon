@@ -1,25 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "RRR",
-    "DGD",
-    "SSS"
-  ],
-  "key": {
-    "R": {
-      "tag": "forge:plates/redstone_metal"
-    },
-    "D": {
-      "tag": "forge:dusts/redstone"
-    },
-    "G": {
-      "tag": "forge:dust/gold"
-    },
-    "S": {
-      "tag": "forge:plates/steel"
-    }
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tothemoon:moon_rock_brick"
   },
-  "result": {
-    "item": "tothemoon:processor_chip"
-  }
+  "result": "tothemoon:moon_rock_brick_slab",
+  "count": 2
 }

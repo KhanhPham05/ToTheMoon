@@ -1,11 +1,11 @@
 package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.ImmutableSet;
-import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlock;
-import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
-import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.CopperEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.DiamondEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.GoldEnergyGeneratorBlock;
@@ -15,8 +15,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
-import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelTileEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlate;
 import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
@@ -87,13 +86,17 @@ public class ModBlocks {
     public static final RegistryObject<Block> IRON_SHEET_BLOCK = register("iron_sheet_block", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
     public static final RegistryObject<Block> PROCESSED_WOOD = register("processed_wood", BlockBehaviour.Properties.copy(Blocks.OAK_WOOD));
 
+    public static final RegistryObject<Block> RAW_URANIUM_BLOCK = register("raw_uranium_block", BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK));
+
+    public static final RegistryObject<Block> URANIUM_BLOCK = register("uranium_block", BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK));
+
     public static final RegistryObject<Block> PURIFIED_QUARTZ_BLOCK =register("purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
     public static final RegistryObject<Block> SMOOTH_PURIFIED_QUARTZ_BLOCK = register("smooth_purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
-    public static final ImmutableSet<RegistryObject<? extends Block>> SOLID_BLOCKS = ImmutableSet.of(PURIFIED_QUARTZ_BLOCK, POLISHED_MOON_ROCK, SMOOTH_PURIFIED_QUARTZ_BLOCK,COBBLED_MOON_ROCK, STEEL_SHEET_BLOCK, REINFORCED_WOOD, PROCESSED_WOOD, IRON_SHEET_BLOCK, GOLD_SHEET_BLOCK, COPPER_SHEET_BLOCK, REDSTONE_METAL_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, STEEL_BLOCK, ANTI_PRESSURE_GLASS, MOON_DUST, MOON_URANIUM_ORE, MOON_REDSTONE_ORE, MOON_ROCK, MOON_QUARTZ_ORE, MOON_ROCK_BRICK, DEEPSLATE_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE);
+    public static final ImmutableSet<RegistryObject<? extends Block>> SOLID_BLOCKS = ImmutableSet.of(RAW_URANIUM_BLOCK, PURIFIED_QUARTZ_BLOCK, POLISHED_MOON_ROCK, SMOOTH_PURIFIED_QUARTZ_BLOCK,COBBLED_MOON_ROCK, STEEL_SHEET_BLOCK, REINFORCED_WOOD, PROCESSED_WOOD, IRON_SHEET_BLOCK, GOLD_SHEET_BLOCK, COPPER_SHEET_BLOCK, REDSTONE_METAL_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, STEEL_BLOCK, ANTI_PRESSURE_GLASS, MOON_DUST, MOON_URANIUM_ORE, MOON_REDSTONE_ORE, MOON_ROCK, MOON_QUARTZ_ORE, MOON_ROCK_BRICK, DEEPSLATE_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE, URANIUM_BLOCK);
 
     public static final RegistryObject<GoldEnergyGeneratorBlock> GOLD_ENERGY_GENERATOR = registerBlockEntity("gold_energy_generator", () -> new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), GoldEnergyGeneratorBlockEntity::new));
 
-    public static final RegistryObject<MoonRockBarrel> MOON_ROCK_BARREL = registerBlockEntity("moon_rock_barrel", () -> new MoonRockBarrel(BlockBehaviour.Properties.of(Material.STONE).strength(3.0f, 5.0f).sound(ModSoundTypes.METAL_MACHINE), MoonBarrelTileEntity::new));
+    public static final RegistryObject<MoonRockBarrel> MOON_ROCK_BARREL = registerBlockEntity("moon_rock_barrel", () -> new MoonRockBarrel(BlockBehaviour.Properties.of(Material.STONE).strength(3.0f, 5.0f).sound(ModSoundTypes.METAL_MACHINE)));
     public static final RegistryObject<CopperEnergyGeneratorBlock> COPPER_ENERGY_GENERATOR = registerBlockEntity("copper_energy_generator", () -> new CopperEnergyGeneratorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 5).sound(ModSoundTypes.METAL_MACHINE), CopperEnergyGeneratorBlockEntity::new));
     public static final RegistryObject<IronEnergyGeneratorBlock> IRON_ENERGY_GENERATOR = registerBlockEntity("iron_energy_generator", () -> new IronEnergyGeneratorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), IronEnergyGeneratorBlockEntity::new));
     public static final RegistryObject<AlloySmelterBlock> ALLOY_SMELTER = registerBlockEntity("alloy_smelter", () -> new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ModSoundTypes.METAL_MACHINE), AlloySmelterBlockEntity::new));

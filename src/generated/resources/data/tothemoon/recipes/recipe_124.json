@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "S S",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:plates/copper"
+    }
+  },
+  "result": {
+    "item": "tothemoon:copper_sheet_block"
+  }
+}

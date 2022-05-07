@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard;
 
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
-import com.khanhpham.tothemoon.utils.helpers.ModTags;
+import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -77,14 +77,14 @@ public class MetalPressingPlate extends BaseEntityBlock<MetalPressingPlateBlockE
             if (blockEntity.isPresent()) {
                 MetalPressingPlateBlockEntity te = blockEntity.get();
                 ItemStack item = pPlayer.getItemInHand(InteractionHand.MAIN_HAND);
-                if (item.is(Tags.Items.INGOTS) || item.is(ModTags.GENERAL_PRESS_MOLDS)) {
+                if (item.is(Tags.Items.INGOTS) || item.is(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag())) {
                     if (te.attemptPutItem(item)) {
                         ItemStack copy = item.copy();
                         copy.setCount(item.getCount() - 1);
                         pPlayer.setItemInHand(InteractionHand.MAIN_HAND, copy);
                     }
                     return InteractionResult.PASS;
-                } else if (item.is(ModTags.GENERAL_TTM_HAMMERS)) {
+                } else if (item.is(ModItemTags.GENERAL_TTM_HAMMERS)) {
                     te.performPress(pLevel, pPos, pPlayer);
                 } else if (item.isEmpty()) {
                     Block.popResourceFromFace(pLevel, pPlayer.blockPosition().above(), Direction.DOWN, te.takeItem());

@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon;
 
-import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
@@ -9,7 +10,7 @@ import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.Meta
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.ModItemModels;
 import com.khanhpham.tothemoon.datagen.ModLanguage;
-import com.khanhpham.tothemoon.datagen.ModTagProvider;
+import com.khanhpham.tothemoon.datagen.tags.ModTagProvider;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockStates;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
@@ -32,7 +33,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -46,12 +49,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @Mod(value = Names.MOD_ID)
 public class ToTheMoon {
@@ -89,6 +96,9 @@ public class ToTheMoon {
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static final class ModEvents {
 
+        public ModEvents() {
+        }
+
         @SubscribeEvent
         public static void gatherData(GatherDataEvent event) {
             DataGenerator data = event.getGenerator();
@@ -105,14 +115,23 @@ public class ToTheMoon {
             ModTagProvider tagsProviders = new ModTagProvider(data, fileHelper);
         }
 
-        public ModEvents() {
-        }
-
         @SubscribeEvent
         public static void onItemRegistration(RegistryEvent.Register<Item> event) {
-            ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).forEach(block -> event.getRegistry().register(new BlockItem(block, new Item.Properties().tab(TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(block)))));
-        }
+            IForgeRegistry<Item> reg = event.getRegistry();
+            Set<? extends Block> blocks = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
+            for (Block block : blocks) {
+                if (block instanceof BurnableBlock burnableBlock) {
+                    reg.register(new BlockItem(burnableBlock, new Item.Properties().tab(ToTheMoon.TAB)){
+                        @Override
+                        public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+                            return burnableBlock.getBurningTime();
+                        }
+                    }.setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(burnableBlock))));
+                }
 
+                else reg.register(new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(block))));
+            }
+        }
 
 
         @SubscribeEvent

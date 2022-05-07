@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SSS",
-    "S S",
-    "SSS"
+    "AAA",
+    "AAA",
+    "AAA"
   ],
   "key": {
-    "S": {
-      "tag": "forge:plates/iron"
+    "A": {
+      "item": "tothemoon:redstone_metal"
     }
   },
   "result": {
-    "item": "tothemoon:iron_sheet_block"
+    "item": "tothemoon:redstone_metal_block"
   }
 }

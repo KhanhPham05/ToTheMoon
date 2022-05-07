@@ -1,0 +1,116 @@
+package com.khanhpham.tothemoon.datagen.tags;
+
+import com.khanhpham.tothemoon.init.ModItems;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
+
+import java.util.function.Supplier;
+
+import static net.minecraftforge.common.Tags.Items.*;
+
+public class ModItemTags {
+    public static final AppendableItemTagKey GENERAL_PRESS_MOLDS = createAppendable(modLoc("metal_press_molds"));
+    public static final TagKey<Item> PLATE_MOLD = mod("metal_press_molds/plate");
+    public static final TagKey<Item> ROD_MOLD = mod("metal_press_molds/rod");
+    public static final TagKey<Item> GEAR_MOLD = mod("metal_press_molds/gear");
+
+    public static final TagKey<Item> INGOTS_STEEL = forge("ingots/steel");
+    public static final TagKey<Item> INGOTS_URANIUM = forge("ingots/uranium");
+    public static final TagKey<Item> INGOTS_REDSTONE_METAL = forge("ingots/redstone_metal");
+    public static final TagKey<Item> INGOTS_REDSTONE_STEEL_ALLOY = forge("ingots/redstone_steel_alloy");
+
+
+    public static final TagKey<Item> GENERAL_PLATES = forge("plates");
+    public static final TagKey<Item> PLATES_STEEL =  append(GENERAL_PLATES, "steel");
+    public static final TagKey<Item> PLATES_URANIUM = append(GENERAL_PLATES, "uranium");
+    public static final TagKey<Item> PLATES_REDSTONE_METAL = append(GENERAL_PLATES, "redstone_metal");
+    public static final TagKey<Item> PLATES_REDSTONE_STEEL_ALLOY = append(GENERAL_PLATES, "redstone_steel_alloy");
+
+    public static final TagKey<Item> PLATES_IRON = append(GENERAL_PLATES, "iron");
+    public static final TagKey<Item> PLATES_COPPER = append(GENERAL_PLATES, "copper");
+    public static final TagKey<Item> PLATES_GOLD = append(GENERAL_PLATES, "gold");
+
+    public static final AppendableItemTagKey.Processable GENERAL_DUSTS = new AppendableItemTagKey.Processable(DUSTS);
+    public static final TagKey<Item> DUSTS_COAL = GENERAL_DUSTS.append("coal", ModItems.COAL_DUST);
+    public static final TagKey<Item> DUSTS_GOLD = GENERAL_DUSTS.append("gold", ModItems.GOLD_DUST, () -> Items.GOLD_INGOT);
+    public static final TagKey<Item> DUSTS_REDSTONE_STEEL_ALLOY = GENERAL_DUSTS.append( "redstone_steel_metal", ModItems.REDSTONE_STEEL_ALLOY_DUST, ModItems.REDSTONE_STEEL_ALLOY);
+    public static final TagKey<Item> DUSTS_URANIUM = GENERAL_DUSTS.append("uranium", ModItems.URANIUM_DUST, ModItems.URANIUM_INGOT);
+    public static final TagKey<Item> DUSTS_STEEL = GENERAL_DUSTS.append("steel", ModItems.STEEL_DUST, ModItems.STEEL_INGOT);
+    public static final TagKey<Item> DUSTS_REDSTONE_METAL = GENERAL_DUSTS.append("redstone_metal", ModItems.REDSTONE_METAL_DUSTS, ModItems.REDSTONE_METAL);
+    public static final TagKey<Item> DUSTS_IRON = GENERAL_DUSTS.append("iron", ModItems.IRON_DUST, () -> Items.IRON_INGOT);
+    public static final TagKey<Item> DUSTS_COPPER = GENERAL_DUSTS.append("copper", ModItems.COPPER_DUST, () -> Items.COPPER_INGOT);
+
+    public static final TagKey<Item> GENERAL_TTM_HAMMERS = mod("hammers");
+    public static final TagKey<Item> MOON_ROCKS = mod("moon_rocks");
+    public static final TagKey<Item> SHEETMETALS = forge("sheetmetals");
+
+    public static final TagKey<Item> SHEETMETAL_COPPER = append(SHEETMETALS,  "copper");
+    public static final TagKey<Item> SHEETMETAL_STEEL = append(SHEETMETALS, "steel");
+    public static final TagKey<Item> SHEETMETAL_GOLD = append(SHEETMETALS, "gold");
+    public static final TagKey<Item> SHEETMETAL_IRON = append(SHEETMETALS, "iron");
+
+    public static final TagKey<Item> URANIUM_RAW_MATERIAL = append(RAW_MATERIALS, "uranium");
+
+    public static final TagKey<Item> STEEL_STORAGE_BLOCK = append(STORAGE_BLOCKS, "steel");
+    public static final TagKey<Item> REDSTONE_METAL_STORAGE_BLOCK = append(STORAGE_BLOCKS, "redstone_metal");
+    public static final TagKey<Item> REDSTONE_STEEL_STORAGE_BLOCK = append(STORAGE_BLOCKS, "redstone_steel");
+    public static final TagKey<Item> URANIUM_STORAGE_BLOCK = append(STORAGE_BLOCKS, "uranium");
+    public static final TagKey<Item> RAW_URANIUM_STORAGE_BLOCK = append(STORAGE_BLOCKS, "raw_uranium");
+
+    public static final TagKey<Item> PURIFIED_QUARTZ_STORAGE_BLOCK = append(STORAGE_BLOCKS, "purified_quartz");
+
+    public static final TagKey<Item> GEMS_PURIFIED_QUARTZ = append(GEMS, "purified_quartz");
+
+    public static final TagKey<Item> GLASS_DARK = append(GLASS, "dark");
+
+    public static final TagKey<Item> ORES_IN_MOON_ROCK = forge("ores_in_ground/moon_rock");
+    public static final TagKey<Item> ORES_IN_MOON_DUST = forge("ores_in_ground/moon_dust");
+
+    //Already available in Forge Tags
+    //ORE_BEARING_GROUND_STONE
+    //ORE_RATES_DENSE / SINGULAR
+    //ORE_IN_GROUND
+
+    public static final TagKey<Item> WIRES = forge("wire");
+    public static final TagKey<Item> WIRES_COPPER = append(WIRES, "copper");
+    public static final TagKey<Item> WIRES_GOLD = append(WIRES, "gold");
+    public static final TagKey<Item> WIRES_IRON = append(WIRES, "iron");
+    public static final TagKey<Item> WIRES_REDSTONE_METAL = append(WIRES, "redstone_metal");
+    public static final TagKey<Item> WIRES_REDSTONE_STEEL_ALLOY = append(WIRES, "redstone_steel_alloy");
+    public static final TagKey<Item> WIRES_STEEL= append(WIRES, "steel");
+    public static final TagKey<Item> WIRES_URANIUM = append(WIRES, "uranium");
+
+    public static final TagKey<Item> TREATED_WOOD = forge("treated_wood");
+
+
+
+    private static TagKey<Item> mod(final String name) {
+        return ItemTags.create(ModUtils.modLoc(name));
+    }
+
+    private static TagKey<Item> append(final TagKey<Item> prefix, final String suffix) {
+        return ItemTags.create(ModUtils.append(prefix.location(), '/' + suffix));
+    }
+
+    private static TagKey<Item> forge(final String name) {
+        return ItemTags.create(new ResourceLocation("forge", name));
+    }
+
+    private static ResourceLocation modLoc(String name) {
+        return ModUtils.modLoc(name);
+    }
+
+    private static AppendableItemTagKey createAppendable(ResourceLocation rl) {
+        return new AppendableItemTagKey(ItemTags.create(rl));
+    }
+
+    private static TagKey<Item> append(final AppendableItemTagKey tag, String name, Supplier<? extends Item> item) {
+        return tag.append(name, item);
+    }
+
+}

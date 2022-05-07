@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.recipes;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
-import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;

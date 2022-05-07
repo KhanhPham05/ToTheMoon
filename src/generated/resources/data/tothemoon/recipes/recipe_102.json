@@ -1,14 +1,8 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "tag": "tothemoon:hammers"
-    },
-    {
-      "tag": "forge:ingots/redstone_metal"
-    }
-  ],
-  "result": {
-    "item": "tothemoon:redstone_metal_plate"
-  }
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "tothemoon:moon_rock"
+  },
+  "result": "tothemoon:moon_rock_slab",
+  "count": 2
 }

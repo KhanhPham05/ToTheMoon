@@ -1,8 +1,14 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tothemoon:moon_rock"
-  },
-  "result": "tothemoon:polished_moon_rock",
-  "count": 1
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "tothemoon:hammers"
+    },
+    {
+      "tag": "forge:ingots/steel"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:steel_plate"
+  }
 }

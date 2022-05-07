@@ -1,15 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "tothemoon:moon_rock_brick"
-    }
+  "type": "tothemoon:manual_metal_pressing",
+  "ingredient": {
+    "tag": "forge:plates/copper"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/rod"
   },
   "result": {
-    "item": "tothemoon:moon_rock_brick_slab",
-    "count": 6
+    "item": "tothemoon:copper_rod"
   }
 }

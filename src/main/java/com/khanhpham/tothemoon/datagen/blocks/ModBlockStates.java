@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.datagen.blocks;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.blockentities.bettery.BatteryConnectionMode;
+import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.Direction;
@@ -16,9 +16,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
-
-import static net.minecraft.core.Direction.*;
-import static com.khanhpham.tothemoon.core.blockentities.bettery.BatteryBlock.*;
 
 public class ModBlockStates extends BlockStateProvider {
     public ModBlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
@@ -36,7 +33,8 @@ public class ModBlockStates extends BlockStateProvider {
         this.stairBlock(ModBlocks.MOON_ROCK_BRICK_STAIR.get(), ModBlocks.MOON_ROCK_BRICK.get());
         this.stairBlock(ModBlocks.COBBLED_MOON_ROCK_STAIR.get(), ModBlocks.COBBLED_MOON_ROCK.get());
         this.slabBlock(ModBlocks.COBBLED_MOON_ROCK_SLAB.get(), ModBlocks.COBBLED_MOON_ROCK.get());
-        this.batteryBlockStates();
+
+        batteryBlockStates();
     }
 
     private void simpleBlock(Supplier<? extends Block> supplier) {
@@ -54,20 +52,18 @@ public class ModBlockStates extends BlockStateProvider {
 
     private void batteryBlockStates() {
         var builder = super.getVariantBuilder(ModBlocks.BATTERY.get());
-        Direction[] directions = new Direction[]{NORTH, SOUTH, WEST, EAST};
+        Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
 
-        for (BatteryConnectionMode mode : BatteryConnectionMode.values()) {
+        for (int i = 0; i <= 10; i++) {
             for (Direction direction : directions) {
-                for (int i = 0; i <= 10; i++) {
-                    builder.addModels(builder.partialState().with(CONNECTION_MODE, mode).with(FACING, direction).with(ENERGY_LEVEL, i),getModel(direction, mode, i));
-                }
+                builder.addModels(builder.partialState().with(BatteryBlock.FACING, direction).with(BatteryBlock.ENERGY_LEVEL, i), getModel(direction, i));
             }
         }
 
     }
 
-    private ConfiguredModel getModel(Direction direction, BatteryConnectionMode mode, int powerLevel) {
-        ConfiguredModel.Builder<?> builder = ConfiguredModel.builder().modelFile(new ModelFile.UncheckedModelFile(ModUtils.modLoc("block/battery_connect_" + mode.getSerializedName() + "_level_" + powerLevel)));
+    private ConfiguredModel getModel(Direction direction, int powerLevel) {
+        ConfiguredModel.Builder<?> builder = ConfiguredModel.builder().modelFile(new ModelFile.UncheckedModelFile(ModUtils.modLoc("block/battery_level_" + powerLevel)));
         switch (direction) {
             case SOUTH -> builder.rotationY(180);
             case WEST -> builder.rotationY(270);

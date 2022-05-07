@@ -1,12 +1,19 @@
 {
-  "type": "tothemoon:metal_pressing",
-  "ingredient": {
-    "tag": "forge:ingots/redstone_metal"
+  "type": "tothemoon:alloy_smelting",
+  "baseIngredient": {
+    "item": {
+      "tag": "forge:ingots/iron"
+    },
+    "count": 1
   },
-  "mold": {
-    "tag": "tothemoon:metal_press_molds/plate"
+  "secondaryIngredient": {
+    "item": {
+      "tag": "forge:dusts/redstone"
+    },
+    "count": 3
   },
   "result": {
-    "item": "tothemoon:redstone_metal_plate"
+    "item": "tothemoon:redstone_metal",
+    "count": 1
   }
 }

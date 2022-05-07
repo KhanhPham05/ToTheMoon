@@ -14,9 +14,13 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class EnergyCapableTileEntity extends BlockEntity implements HasEnergyCapable{
-    protected final Energy energy;
-    private final LazyOptional<IEnergyStorage> energyDataOptional;
+public abstract class EnergyCapableTileEntity extends BlockEntity implements HasEnergyCapable {
+    public final Energy energy;
+    protected final LazyOptional<IEnergyStorage> energyDataOptional;
+
+    public Energy getEnergy() {
+        return energy;
+    }
 
     public EnergyCapableTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy) {
         super(pType, pWorldPosition, pBlockState);
@@ -27,6 +31,8 @@ public abstract class EnergyCapableTileEntity extends BlockEntity implements Has
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return cap.orEmpty(CapabilityEnergy.ENERGY, energyDataOptional.cast()).cast();
+        LazyOptional<T> lo;
+        lo = cap.orEmpty(CapabilityEnergy.ENERGY, energyDataOptional.cast()).cast();
+        return lo;
     }
 }
