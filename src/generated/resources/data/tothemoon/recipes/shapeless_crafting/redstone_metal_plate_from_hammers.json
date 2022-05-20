@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "tothemoon:hammers"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:redstone_metal_plate"
+  }
+}

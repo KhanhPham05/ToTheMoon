@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "tothemoon:cobbled_moon_rock"
+    }
+  },
+  "result": {
+    "item": "tothemoon:cobbled_moon_rock_slab",
+    "count": 6
+  }
+}

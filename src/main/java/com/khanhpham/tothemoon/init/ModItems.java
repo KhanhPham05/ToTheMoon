@@ -3,6 +3,7 @@ package com.khanhpham.tothemoon.init;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.GearItem;
+import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.core.items.HandheldItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -92,10 +93,10 @@ public class ModItems {
     public static final RegistryObject<Item> CIRCUIT_BOARD = item("circuit_board");
     public static final RegistryObject<Item> CPU_CHIP = item("processor_chip");
 
-    public static final RegistryObject<HandheldItem> WOODEN_HAMMER = registerHammer("wooden_hammer", 16);
-    public static final RegistryObject<HandheldItem> STEEL_HAMMER = registerHammer("steel_hammer", 64);
-    public static final RegistryObject<HandheldItem> DIAMOND_HAMMER = registerHammer("diamond_hammer", 128);
-    public static final RegistryObject<HandheldItem> NETHERITE_HAMMER = ITEM_DEFERRED_REGISTER.register("netherite_hammer", () -> new HandheldItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(256).fireResistant().setNoRepair()) {
+    public static final RegistryObject<HammerItem> WOODEN_HAMMER = registerHammer("wooden_hammer", 16);
+    public static final RegistryObject<HammerItem> STEEL_HAMMER = registerHammer("steel_hammer", 64);
+    public static final RegistryObject<HammerItem> DIAMOND_HAMMER = registerHammer("diamond_hammer", 128);
+    public static final RegistryObject<HammerItem> NETHERITE_HAMMER = ITEM_DEFERRED_REGISTER.register("netherite_hammer", () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(256).fireResistant().setNoRepair()) {
         @Override
         @Nonnull
         public Rarity getRarity(@Nonnull ItemStack pStack) {
@@ -110,8 +111,8 @@ public class ModItems {
         return ITEM_DEFERRED_REGISTER.register(name, supplier);
     }
 
-    public static RegistryObject<HandheldItem> registerHammer(String name, int durability) {
-        return ITEM_DEFERRED_REGISTER.register(name, () -> new HandheldItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
+    public static RegistryObject<HammerItem> registerHammer(String name, int durability) {
+        return ITEM_DEFERRED_REGISTER.register(name, () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
     }
 
     public static RegistryObject<Item> item(String name) {

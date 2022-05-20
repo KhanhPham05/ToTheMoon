@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatched.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.0\forge-1.18.2-40.1.0-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -1300,6 +1300,10 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 1e923116 Exists: true
   Reading patch net.minecraft.world.entity.ai.behavior.HarvestFarmland.binpatch
     Checksum: 9d85df1 Exists: true
+  Reading patch net.minecraft.world.entity.ai.control.MoveControl$Operation.binpatch
+    Checksum: c6878c76 Exists: true
+  Reading patch net.minecraft.world.entity.ai.control.MoveControl.binpatch
+    Checksum: 620eab64 Exists: true
   Reading patch net.minecraft.world.entity.ai.goal.BreakDoorGoal.binpatch
     Checksum: 2f4de9c8 Exists: true
   Reading patch net.minecraft.world.entity.ai.goal.EatBlockGoal.binpatch
@@ -2496,6 +2500,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: e3dbbc9f Exists: true
   Reading patch net.minecraft.world.level.material.LavaFluid.binpatch
     Checksum: 9bf5a826 Exists: true
+  Reading patch net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator.binpatch
+    Checksum: eeefb895 Exists: true
   Reading patch net.minecraft.world.level.pathfinder.BlockPathTypes.binpatch
     Checksum: 9d8d3ccb Exists: true
   Reading patch net.minecraft.world.level.pathfinder.WalkNodeEvaluator.binpatch
@@ -2570,6 +2576,18 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: d49c13b4 Exists: true
   Reading patch net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition.binpatch
     Checksum: a9525be7 Exists: true
+  Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider$1.binpatch
+    Checksum: d654ddd Exists: true
+  Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider$2.binpatch
+    Checksum: be3d0793 Exists: true
+  Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider$Getter.binpatch
+    Checksum: ca60d9cd Exists: true
+  Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider$InlineSerializer.binpatch
+    Checksum: a0c852b4 Exists: true
+  Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider$Serializer.binpatch
+    Checksum: 29a64636 Exists: true
+  Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider.binpatch
+    Checksum: 9b7f69fe Exists: true
   Reading patch net.minecraft.world.phys.Vec3.binpatch
     Checksum: 6ff64e5 Exists: true
 Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
@@ -3216,6 +3234,8 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/entity/ai/behavior/CrossbowAttack$CrossbowState 1/1
   Patching net/minecraft/world/entity/ai/behavior/CrossbowAttack 1/1
   Patching net/minecraft/world/entity/ai/behavior/HarvestFarmland 1/1
+  Patching net/minecraft/world/entity/ai/control/MoveControl$Operation 1/1
+  Patching net/minecraft/world/entity/ai/control/MoveControl 1/1
   Patching net/minecraft/world/entity/ai/goal/BreakDoorGoal 1/1
   Patching net/minecraft/world/entity/ai/goal/EatBlockGoal 1/1
   Patching net/minecraft/world/entity/ai/goal/MeleeAttackGoal 1/1
@@ -3812,6 +3832,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/material/LavaFluid$Flowing 1/1
   Patching net/minecraft/world/level/material/LavaFluid$Source 1/1
   Patching net/minecraft/world/level/material/LavaFluid 1/1
+  Patching net/minecraft/world/level/pathfinder/AmphibiousNodeEvaluator 1/1
   Patching net/minecraft/world/level/pathfinder/BlockPathTypes 1/1
   Patching net/minecraft/world/level/pathfinder/WalkNodeEvaluator 1/1
   Patching net/minecraft/world/level/portal/PortalForcer 1/1
@@ -3849,6 +3870,12 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceCondition 1/1
   Patching net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceWithLootingCondition$Serializer 1/1
   Patching net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceWithLootingCondition 1/1
+  Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$1 1/1
+  Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$2 1/1
+  Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$Getter 1/1
+  Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$InlineSerializer 1/1
+  Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$Serializer 1/1
+  Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider 1/1
   Patching net/minecraft/world/phys/Vec3 1/1
   Patching net/minecraft/world/level/biome/BiomeSpecialEffects$GrassColorModifier$ColorModifier 1/1
   Patching net/minecraft/Util$3 1/1

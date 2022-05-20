@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:smelting/uranium_ingot_from_moon_uranium_ore"
+    ]
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:smelting/uranium_ingot_from_moon_uranium_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tick",
+      "has_the_recipe"
+    ]
+  ]
+}

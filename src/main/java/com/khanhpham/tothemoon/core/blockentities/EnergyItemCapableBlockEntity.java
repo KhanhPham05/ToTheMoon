@@ -34,7 +34,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 @ParametersAreNonnullByDefault
@@ -270,9 +269,10 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEnti
     }
 
     protected <T extends Comparable<T>> BlockState setNewBlockState(Level level, BlockPos pos, BlockState state, Property<T> property, T value) {
-        state = state.setValue(property, value);
-        level.setBlock(pos, state, 3);
-        setChanged(level, pos, state);
+        if (!state.getValue(property).equals(value)) {
+            state = state.setValue(property, value);
+            level.setBlock(pos, state, 3);
+        }
         return state;
     }
 }

@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.machines.battery;
 
-import com.khanhpham.tothemoon.core.blockentities.BaseMenuScreen;
+import com.khanhpham.tothemoon.core.BaseMenuScreen;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ public class BatteryMenuScreen extends BaseMenuScreen<BatteryMenu> {
 
     @Override
     protected void renderExtra(PoseStack pPoseStack) {
-        super.blit(pPoseStack, leftPos + 15, topPos + 78, 14, 183, menu.getEnergyBar() + 1, 12);
+        blit(pPoseStack, leftPos + 15, topPos + 78, 14, 183, menu.getEnergyBar() + 1, 12);
     }
 
     @Override

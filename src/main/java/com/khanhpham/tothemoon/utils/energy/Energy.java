@@ -26,7 +26,7 @@ public class Energy extends EnergyStorage {
     }
 
     public boolean isEmpty() {
-        return super.energy <= 0;
+        return this.getAvailableAmount() >= this.capacity;
     }
 
     public void consumeEnergyIgnoreCondition() {

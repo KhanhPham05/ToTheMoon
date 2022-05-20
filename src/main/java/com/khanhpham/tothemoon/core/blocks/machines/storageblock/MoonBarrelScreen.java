@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.storageblock;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.blockentities.BaseMenuScreen;
+import com.khanhpham.tothemoon.core.BaseMenuScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;

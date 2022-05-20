@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks;
 
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
-import com.khanhpham.tothemoon.core.blocks.AbstractEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

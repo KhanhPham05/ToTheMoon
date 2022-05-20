@@ -1,8 +1,8 @@
 package com.khanhpham.tothemoon.core.blocks.machines.metalpress;
 
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import com.khanhpham.tothemoon.core.containers.DataContainerMenuHelper;
-import com.khanhpham.tothemoon.core.blockentities.BaseMenuScreen;
+import com.khanhpham.tothemoon.core.menus.DataContainerMenuHelper;
+import com.khanhpham.tothemoon.core.BaseMenuScreen;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

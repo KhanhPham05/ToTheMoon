@@ -44,6 +44,7 @@ public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecra
         return InteractionResult.FAIL;
     }
 
+
     protected abstract BlockEntityType<?> getBlockEntityType();
 
     @Override

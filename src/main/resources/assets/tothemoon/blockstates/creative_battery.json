@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,level=10" : {
+      "model" : "tothemoon:block/creative_battery"
+    },
+    "facing=east,level=10" : {
+      "model" : "tothemoon:block/creative_battery",
+      "y": 90
+    },
+    "facing=west,level=10" : {
+      "model" : "tothemoon:block/creative_battery",
+      "y": 270
+    },
+    "facing=south,level=10" : {
+      "model" : "tothemoon:block/creative_battery",
+      "y": 180
+    },
+    "facing=north,level=0" : {
+      "model" : "tothemoon:block/empty_creative_battery"
+    },
+    "facing=east,level=0" : {
+      "model" : "tothemoon:block/empty_creative_battery",
+      "y": 90
+    },
+    "facing=west,level=0" : {
+      "model" : "tothemoon:block/empty_creative_battery",
+      "y": 270
+    },
+    "facing=south,level=0" : {
+      "model" : "tothemoon:block/empty_creative_battery",
+      "y": 180
+    }
+  }
+}

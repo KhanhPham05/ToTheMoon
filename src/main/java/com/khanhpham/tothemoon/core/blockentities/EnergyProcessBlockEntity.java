@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.core.blockentities;
 
 import com.khanhpham.tothemoon.utils.energy.Energy;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -9,6 +10,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -102,5 +104,14 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
     protected final void loadExtra(CompoundTag tag) {
         this.workingDuration = tag.getInt("workingDuration");
         this.workingTime = tag.getInt("workingTime");
+    }
+
+    protected void trade(ItemStack input, int result, Recipe<Container> recipe) {
+        input.shrink(1);
+        if (items.get(result).isEmpty()) {
+            items.set(result, recipe.getResultItem());
+        } else {
+            items.get(result).grow(recipe.getResultItem().getCount());
+        }
     }
 }

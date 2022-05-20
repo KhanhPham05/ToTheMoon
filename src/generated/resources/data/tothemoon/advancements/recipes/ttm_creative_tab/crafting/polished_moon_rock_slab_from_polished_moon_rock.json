@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:crafting/polished_moon_rock_slab_from_polished_moon_rock"
+    ]
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:crafting/polished_moon_rock_slab_from_polished_moon_rock"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tick",
+      "has_the_recipe"
+    ]
+  ]
+}

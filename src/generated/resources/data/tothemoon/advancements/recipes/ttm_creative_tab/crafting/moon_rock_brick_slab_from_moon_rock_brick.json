@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:crafting/moon_rock_brick_slab_from_moon_rock_brick"
+    ]
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:crafting/moon_rock_brick_slab_from_moon_rock_brick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tick",
+      "has_the_recipe"
+    ]
+  ]
+}

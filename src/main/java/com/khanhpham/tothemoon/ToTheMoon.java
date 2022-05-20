@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
 import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
@@ -141,6 +142,7 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.ALLOY_SMELTER, AlloySmelterMenuScreen::new);
             MenuScreens.register(ModMenuTypes.METAL_PRESS, MetalPressMenuScreen::new);
             MenuScreens.register(ModMenuTypes.BATTERY, BatteryMenuScreen::new);
+            MenuScreens.register(ModMenuTypes.ENERGY_SMELTER, EnergySmelterScreen::new);
 
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());

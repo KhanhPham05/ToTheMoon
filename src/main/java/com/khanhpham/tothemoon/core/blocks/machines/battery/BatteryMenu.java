@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.machines.battery;
 
-import com.khanhpham.tothemoon.core.containers.BaseMenu;
+import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.slot.EnergyItemSlot;
 import net.minecraft.world.Container;
@@ -37,10 +37,6 @@ public class BatteryMenu extends BaseMenu {
         int j = containerData.get(1);
 
         return j != 0 && i != 0 ? i * 147 / j : 0;
-    }
-
-    public int getBatteryConnectionId() {
-        return containerData.get(2);
     }
 
     @NotNull

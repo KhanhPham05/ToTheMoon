@@ -1,12 +1,13 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
-import com.khanhpham.tothemoon.core.containers.BaseMenu;
+import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.event.RegistryEvent;
@@ -27,6 +28,7 @@ public class ModMenuTypes {
 
     public static final MenuType<MetalPressMenu> METAL_PRESS;
     public static final MenuType<BatteryMenu> BATTERY;
+    public static final MenuType<EnergySmelterMenu> ENERGY_SMELTER;
 
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
@@ -34,6 +36,7 @@ public class ModMenuTypes {
         ALLOY_SMELTER = register("alloy_smelter", AlloySmelterMenu::new);
         METAL_PRESS = register("metal_press_menu", MetalPressMenu::new);
         BATTERY = register("battery", BatteryMenu::new);
+        ENERGY_SMELTER = register("energy_smelter", EnergySmelterMenu::new);
     }
 
     private ModMenuTypes() {

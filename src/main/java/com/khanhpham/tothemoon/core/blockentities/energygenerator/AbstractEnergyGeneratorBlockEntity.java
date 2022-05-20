@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blockentities.energygenerator;
 
 import com.khanhpham.tothemoon.core.blockentities.EnergyItemCapableBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.AbstractEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.energy.ExtractableEnergy;

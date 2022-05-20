@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "tag": "forge:storage_blocks/raw_uranium"
-  },
-  "result": "tothemoon:uranium_block",
-  "experience": 3.0,
-  "cookingtime": 1800
-}
