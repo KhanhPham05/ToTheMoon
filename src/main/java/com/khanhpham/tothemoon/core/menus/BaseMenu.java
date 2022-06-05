@@ -1,5 +1,4 @@
 package com.khanhpham.tothemoon.core.menus;
-
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -24,6 +23,9 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         this.externalContainer = externalContainer;
     }
 
+    public Container getExternalContainer() {
+        return externalContainer;
+    }
 
     protected ItemStack empty() {
         return ItemStack.EMPTY;

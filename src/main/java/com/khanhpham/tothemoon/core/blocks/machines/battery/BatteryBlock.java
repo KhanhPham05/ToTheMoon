@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.machines.battery;
 
 import com.khanhpham.tothemoon.core.blockentities.battery.AbstractBatteryBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -41,7 +40,7 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> {
 
     @Override
     @Nonnull
-    protected BlockEntityType<?> getBlockEntityType() {
+    protected BlockEntityType<AbstractBatteryBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.BATTERY.get();
     }
 
@@ -60,13 +59,6 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> {
 
         return super.getDrops(pState, pBuilder);
     }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.BATTERY.get(), AbstractBatteryBlockEntity::serverTick);
-    }
-
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {

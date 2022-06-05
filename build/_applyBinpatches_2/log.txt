@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatched.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.19\forge-1.18.2-40.1.19-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -708,22 +708,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: da647962 Exists: true
   Reading patch net.minecraft.commands.synchronization.ArgumentTypes.binpatch
     Checksum: 913496cb Exists: true
-  Reading patch net.minecraft.core.Direction$1.binpatch
-    Checksum: 4b2713ad Exists: true
-  Reading patch net.minecraft.core.Direction$Axis$1.binpatch
-    Checksum: 44e4dbf5 Exists: true
-  Reading patch net.minecraft.core.Direction$Axis$2.binpatch
-    Checksum: ca6dbf1 Exists: true
-  Reading patch net.minecraft.core.Direction$Axis$3.binpatch
-    Checksum: 2007dc24 Exists: true
-  Reading patch net.minecraft.core.Direction$Axis.binpatch
-    Checksum: 812b431f Exists: true
-  Reading patch net.minecraft.core.Direction$AxisDirection.binpatch
-    Checksum: 8a61c780 Exists: true
-  Reading patch net.minecraft.core.Direction$Plane.binpatch
-    Checksum: afd5472c Exists: true
-  Reading patch net.minecraft.core.Direction.binpatch
-    Checksum: 6dbd7176 Exists: true
   Reading patch net.minecraft.core.Holder$Direct.binpatch
     Checksum: 27d51365 Exists: true
   Reading patch net.minecraft.core.Holder$Kind.binpatch
@@ -912,16 +896,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: d788bd79 Exists: true
   Reading patch net.minecraft.network.chat.TranslatableComponent.binpatch
     Checksum: 7ed44095 Exists: true
-  Reading patch net.minecraft.network.protocol.game.ClientboundCommandsPacket$Entry.binpatch
-    Checksum: a9984a51 Exists: true
-  Reading patch net.minecraft.network.protocol.game.ClientboundCommandsPacket.binpatch
-    Checksum: 1802d69d Exists: true
   Reading patch net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket.binpatch
     Checksum: 9f68aa95 Exists: true
-  Reading patch net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket$AttributeSnapshot.binpatch
-    Checksum: 1decead2 Exists: true
-  Reading patch net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket.binpatch
-    Checksum: 432a067e Exists: true
   Reading patch net.minecraft.network.protocol.game.ServerboundContainerClickPacket.binpatch
     Checksum: 6d42959f Exists: true
   Reading patch net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket.binpatch
@@ -1168,14 +1144,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 5afad686 Exists: true
   Reading patch net.minecraft.server.packs.repository.PackRepository.binpatch
     Checksum: b7f207ec Exists: true
-  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager$LeakedResourceWarningInputStream.binpatch
-    Checksum: 5af293f3 Exists: true
-  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager.binpatch
-    Checksum: 88feac7b Exists: true
-  Reading patch net.minecraft.server.packs.resources.ResourceManager$Empty.binpatch
-    Checksum: 2e6df44b Exists: true
-  Reading patch net.minecraft.server.packs.resources.ResourceManager.binpatch
-    Checksum: 1600a01a Exists: true
   Reading patch net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener.binpatch
     Checksum: 2fe376fc Exists: true
   Reading patch net.minecraft.server.players.PlayerList$1.binpatch
@@ -1230,8 +1198,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: be74cd47 Exists: true
   Reading patch net.minecraft.world.effect.MobEffect.binpatch
     Checksum: b5e9398f Exists: true
-  Reading patch net.minecraft.world.effect.MobEffectCategory.binpatch
-    Checksum: 5bdda538 Exists: true
   Reading patch net.minecraft.world.effect.MobEffectInstance.binpatch
     Checksum: 39bef9 Exists: true
   Reading patch net.minecraft.world.effect.MobEffects$1.binpatch
@@ -1878,24 +1844,10 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: f1972cfb Exists: true
   Reading patch net.minecraft.world.item.alchemy.PotionBrewing.binpatch
     Checksum: 5ddc71cb Exists: true
-  Reading patch net.minecraft.world.item.crafting.AbstractCookingRecipe.binpatch
-    Checksum: 4fd30f64 Exists: true
-  Reading patch net.minecraft.world.item.crafting.ArmorDyeRecipe.binpatch
-    Checksum: bb99dc50 Exists: true
   Reading patch net.minecraft.world.item.crafting.BannerDuplicateRecipe.binpatch
     Checksum: 16281684 Exists: true
-  Reading patch net.minecraft.world.item.crafting.BlastingRecipe.binpatch
-    Checksum: 66b351e3 Exists: true
   Reading patch net.minecraft.world.item.crafting.BookCloningRecipe.binpatch
     Checksum: af266aeb Exists: true
-  Reading patch net.minecraft.world.item.crafting.CampfireCookingRecipe.binpatch
-    Checksum: ab6a5a1b Exists: true
-  Reading patch net.minecraft.world.item.crafting.FireworkRocketRecipe.binpatch
-    Checksum: 5cfeb48c Exists: true
-  Reading patch net.minecraft.world.item.crafting.FireworkStarFadeRecipe.binpatch
-    Checksum: be8da588 Exists: true
-  Reading patch net.minecraft.world.item.crafting.FireworkStarRecipe.binpatch
-    Checksum: 76c9769e Exists: true
   Reading patch net.minecraft.world.item.crafting.Ingredient$ItemValue.binpatch
     Checksum: cc76ed23 Exists: true
   Reading patch net.minecraft.world.item.crafting.Ingredient$TagValue.binpatch
@@ -1904,8 +1856,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 39f085a0 Exists: true
   Reading patch net.minecraft.world.item.crafting.Ingredient.binpatch
     Checksum: 194aabdb Exists: true
-  Reading patch net.minecraft.world.item.crafting.MapCloningRecipe.binpatch
-    Checksum: 3eda0981 Exists: true
   Reading patch net.minecraft.world.item.crafting.Recipe.binpatch
     Checksum: 6c6335c7 Exists: true
   Reading patch net.minecraft.world.item.crafting.RecipeManager.binpatch
@@ -1922,8 +1872,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 693948ce Exists: true
   Reading patch net.minecraft.world.item.crafting.ShapelessRecipe.binpatch
     Checksum: cfaf95a3 Exists: true
-  Reading patch net.minecraft.world.item.crafting.ShieldDecorationRecipe.binpatch
-    Checksum: e64d75ac Exists: true
   Reading patch net.minecraft.world.item.crafting.ShulkerBoxColoring.binpatch
     Checksum: e88de7b4 Exists: true
   Reading patch net.minecraft.world.item.crafting.SimpleCookingSerializer$CookieBaker.binpatch
@@ -1938,16 +1886,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 799e8024 Exists: true
   Reading patch net.minecraft.world.item.crafting.SingleItemRecipe.binpatch
     Checksum: bf37459e Exists: true
-  Reading patch net.minecraft.world.item.crafting.SmeltingRecipe.binpatch
-    Checksum: e49c51d0 Exists: true
-  Reading patch net.minecraft.world.item.crafting.SmokingRecipe.binpatch
-    Checksum: 90c050a5 Exists: true
-  Reading patch net.minecraft.world.item.crafting.StonecutterRecipe.binpatch
-    Checksum: 80d8c033 Exists: true
-  Reading patch net.minecraft.world.item.crafting.SuspiciousStewRecipe.binpatch
-    Checksum: 585e83dc Exists: true
-  Reading patch net.minecraft.world.item.crafting.TippedArrowRecipe.binpatch
-    Checksum: 96cbc092 Exists: true
   Reading patch net.minecraft.world.item.crafting.UpgradeRecipe$Serializer.binpatch
     Checksum: 218a79f5 Exists: true
   Reading patch net.minecraft.world.item.crafting.UpgradeRecipe.binpatch
@@ -2084,16 +2022,10 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: b7a7b27d Exists: true
   Reading patch net.minecraft.world.level.biome.MobSpawnSettings.binpatch
     Checksum: fbc5022d Exists: true
-  Reading patch net.minecraft.world.level.block.AbstractBannerBlock.binpatch
-    Checksum: b0301404 Exists: true
-  Reading patch net.minecraft.world.level.block.AttachedStemBlock.binpatch
-    Checksum: 979c5e72 Exists: true
   Reading patch net.minecraft.world.level.block.BambooBlock.binpatch
     Checksum: 6c2ab46b Exists: true
   Reading patch net.minecraft.world.level.block.BambooSaplingBlock.binpatch
     Checksum: a9ed443 Exists: true
-  Reading patch net.minecraft.world.level.block.BannerBlock.binpatch
-    Checksum: ab1f1475 Exists: true
   Reading patch net.minecraft.world.level.block.BaseFireBlock.binpatch
     Checksum: c7cae1c5 Exists: true
   Reading patch net.minecraft.world.level.block.BaseRailBlock$1.binpatch
@@ -2102,12 +2034,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 9df91179 Exists: true
   Reading patch net.minecraft.world.level.block.BeehiveBlock.binpatch
     Checksum: f751b4e3 Exists: true
-  Reading patch net.minecraft.world.level.block.BeetrootBlock.binpatch
-    Checksum: 7a9d3cb9 Exists: true
-  Reading patch net.minecraft.world.level.block.BigDripleafStemBlock$1.binpatch
-    Checksum: d1c4c8d0 Exists: true
-  Reading patch net.minecraft.world.level.block.BigDripleafStemBlock.binpatch
-    Checksum: a44e5f Exists: true
   Reading patch net.minecraft.world.level.block.Block$1.binpatch
     Checksum: febbce6c Exists: true
   Reading patch net.minecraft.world.level.block.Block$2.binpatch
@@ -2126,14 +2052,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: a1653d1 Exists: true
   Reading patch net.minecraft.world.level.block.CampfireBlock.binpatch
     Checksum: d614cd20 Exists: true
-  Reading patch net.minecraft.world.level.block.CandleCakeBlock.binpatch
-    Checksum: 20877196 Exists: true
-  Reading patch net.minecraft.world.level.block.CarrotBlock.binpatch
-    Checksum: 52d5bbbd Exists: true
-  Reading patch net.minecraft.world.level.block.CaveVinesBlock.binpatch
-    Checksum: 74c5f5a3 Exists: true
-  Reading patch net.minecraft.world.level.block.CaveVinesPlantBlock.binpatch
-    Checksum: 1872189f Exists: true
   Reading patch net.minecraft.world.level.block.ChestBlock$1.binpatch
     Checksum: a2c7f785 Exists: true
   Reading patch net.minecraft.world.level.block.ChestBlock$2$1.binpatch
@@ -2170,42 +2088,26 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 4059a05e Exists: true
   Reading patch net.minecraft.world.level.block.EnchantmentTableBlock.binpatch
     Checksum: 2497e7ff Exists: true
-  Reading patch net.minecraft.world.level.block.EndGatewayBlock.binpatch
-    Checksum: f7487983 Exists: true
-  Reading patch net.minecraft.world.level.block.EndPortalBlock.binpatch
-    Checksum: 223430f0 Exists: true
   Reading patch net.minecraft.world.level.block.FarmBlock.binpatch
     Checksum: 598310ea Exists: true
   Reading patch net.minecraft.world.level.block.FireBlock.binpatch
     Checksum: 9758cd4c Exists: true
   Reading patch net.minecraft.world.level.block.FlowerPotBlock.binpatch
     Checksum: 5aa73ce6 Exists: true
-  Reading patch net.minecraft.world.level.block.FrostedIceBlock.binpatch
-    Checksum: af939831 Exists: true
-  Reading patch net.minecraft.world.level.block.GrowingPlantBodyBlock.binpatch
-    Checksum: 657edb8e Exists: true
   Reading patch net.minecraft.world.level.block.GrowingPlantHeadBlock.binpatch
     Checksum: f301f453 Exists: true
   Reading patch net.minecraft.world.level.block.LeavesBlock.binpatch
     Checksum: 2a1c192a Exists: true
-  Reading patch net.minecraft.world.level.block.LightBlock.binpatch
-    Checksum: 46ffb3b8 Exists: true
   Reading patch net.minecraft.world.level.block.LiquidBlock.binpatch
     Checksum: ff303e93 Exists: true
   Reading patch net.minecraft.world.level.block.MushroomBlock.binpatch
     Checksum: 1c36dc66 Exists: true
-  Reading patch net.minecraft.world.level.block.NetherPortalBlock$1.binpatch
-    Checksum: 6c0b2477 Exists: true
-  Reading patch net.minecraft.world.level.block.NetherPortalBlock.binpatch
-    Checksum: cca81b8b Exists: true
   Reading patch net.minecraft.world.level.block.NetherWartBlock.binpatch
     Checksum: 229aefd4 Exists: true
   Reading patch net.minecraft.world.level.block.NoteBlock.binpatch
     Checksum: f795451f Exists: true
   Reading patch net.minecraft.world.level.block.OreBlock.binpatch
     Checksum: 2a36c8a4 Exists: true
-  Reading patch net.minecraft.world.level.block.PotatoBlock.binpatch
-    Checksum: b4afbc0c Exists: true
   Reading patch net.minecraft.world.level.block.PowderSnowBlock.binpatch
     Checksum: fc404361 Exists: true
   Reading patch net.minecraft.world.level.block.PoweredRailBlock$1.binpatch
@@ -2232,10 +2134,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 93da8c75 Exists: true
   Reading patch net.minecraft.world.level.block.SeagrassBlock.binpatch
     Checksum: 55e55ea6 Exists: true
-  Reading patch net.minecraft.world.level.block.ShulkerBoxBlock$1.binpatch
-    Checksum: fe195b0d Exists: true
-  Reading patch net.minecraft.world.level.block.ShulkerBoxBlock.binpatch
-    Checksum: 9de32a6e Exists: true
   Reading patch net.minecraft.world.level.block.SoundType.binpatch
     Checksum: 75874c3c Exists: true
   Reading patch net.minecraft.world.level.block.SpawnerBlock.binpatch
@@ -2254,8 +2152,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 402437a Exists: true
   Reading patch net.minecraft.world.level.block.TallGrassBlock.binpatch
     Checksum: c403f8eb Exists: true
-  Reading patch net.minecraft.world.level.block.TallSeagrassBlock.binpatch
-    Checksum: 7d85f2b5 Exists: true
   Reading patch net.minecraft.world.level.block.TntBlock.binpatch
     Checksum: dc69976e Exists: true
   Reading patch net.minecraft.world.level.block.TrapDoorBlock$1.binpatch
@@ -2324,16 +2220,10 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 738b5e92 Exists: true
   Reading patch net.minecraft.world.level.block.entity.SpawnerBlockEntity.binpatch
     Checksum: fc3352b6 Exists: true
-  Reading patch net.minecraft.world.level.block.piston.MovingPistonBlock.binpatch
-    Checksum: a5066770 Exists: true
   Reading patch net.minecraft.world.level.block.piston.PistonBaseBlock$1.binpatch
     Checksum: df4c90 Exists: true
   Reading patch net.minecraft.world.level.block.piston.PistonBaseBlock.binpatch
     Checksum: ca517146 Exists: true
-  Reading patch net.minecraft.world.level.block.piston.PistonHeadBlock$1.binpatch
-    Checksum: 7b23db19 Exists: true
-  Reading patch net.minecraft.world.level.block.piston.PistonHeadBlock.binpatch
-    Checksum: be42307b Exists: true
   Reading patch net.minecraft.world.level.block.piston.PistonMovingBlockEntity$1.binpatch
     Checksum: a4a6435a Exists: true
   Reading patch net.minecraft.world.level.block.piston.PistonMovingBlockEntity.binpatch
@@ -2588,8 +2478,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 29a64636 Exists: true
   Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider.binpatch
     Checksum: 9b7f69fe Exists: true
-  Reading patch net.minecraft.world.phys.Vec3.binpatch
-    Checksum: 6ff64e5 Exists: true
 Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
   Patching com/mojang/blaze3d/pipeline/RenderTarget 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager$BlendState 1/1
@@ -2938,14 +2826,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/commands/arguments/selector/EntitySelectorParser 1/1
   Patching net/minecraft/commands/synchronization/ArgumentTypes$Entry 1/1
   Patching net/minecraft/commands/synchronization/ArgumentTypes 1/1
-  Patching net/minecraft/core/Direction$1 1/1
-  Patching net/minecraft/core/Direction$Axis$1 1/1
-  Patching net/minecraft/core/Direction$Axis$2 1/1
-  Patching net/minecraft/core/Direction$Axis$3 1/1
-  Patching net/minecraft/core/Direction$Axis 1/1
-  Patching net/minecraft/core/Direction$AxisDirection 1/1
-  Patching net/minecraft/core/Direction$Plane 1/1
-  Patching net/minecraft/core/Direction 1/1
   Patching net/minecraft/core/Holder$Direct 1/1
   Patching net/minecraft/core/Holder$Kind 1/1
   Patching net/minecraft/core/Holder$Reference$Type 1/1
@@ -3040,11 +2920,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/network/chat/Style$Serializer 1/1
   Patching net/minecraft/network/chat/Style 1/1
   Patching net/minecraft/network/chat/TranslatableComponent 1/1
-  Patching net/minecraft/network/protocol/game/ClientboundCommandsPacket$Entry 1/1
-  Patching net/minecraft/network/protocol/game/ClientboundCommandsPacket 1/1
   Patching net/minecraft/network/protocol/game/ClientboundCustomPayloadPacket 1/1
-  Patching net/minecraft/network/protocol/game/ClientboundUpdateAttributesPacket$AttributeSnapshot 1/1
-  Patching net/minecraft/network/protocol/game/ClientboundUpdateAttributesPacket 1/1
   Patching net/minecraft/network/protocol/game/ServerboundContainerClickPacket 1/1
   Patching net/minecraft/network/protocol/game/ServerboundCustomPayloadPacket 1/1
   Patching net/minecraft/network/protocol/game/ServerboundSetCreativeModeSlotPacket 1/1
@@ -3168,10 +3044,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/server/packs/repository/Pack$Position 1/1
   Patching net/minecraft/server/packs/repository/Pack 1/1
   Patching net/minecraft/server/packs/repository/PackRepository 1/1
-  Patching net/minecraft/server/packs/resources/FallbackResourceManager$LeakedResourceWarningInputStream 1/1
-  Patching net/minecraft/server/packs/resources/FallbackResourceManager 1/1
-  Patching net/minecraft/server/packs/resources/ResourceManager$Empty 1/1
-  Patching net/minecraft/server/packs/resources/ResourceManager 1/1
   Patching net/minecraft/server/packs/resources/SimpleJsonResourceReloadListener 1/1
   Patching net/minecraft/server/players/PlayerList$1 1/1
   Patching net/minecraft/server/players/PlayerList 1/1
@@ -3199,7 +3071,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/util/datafix/fixes/StructuresBecomeConfiguredFix$Conversion 1/1
   Patching net/minecraft/util/datafix/fixes/StructuresBecomeConfiguredFix 1/1
   Patching net/minecraft/world/effect/MobEffect 1/1
-  Patching net/minecraft/world/effect/MobEffectCategory 1/1
   Patching net/minecraft/world/effect/MobEffectInstance 1/1
   Patching net/minecraft/world/effect/MobEffects$1 1/1
   Patching net/minecraft/world/effect/MobEffects 1/1
@@ -3522,20 +3393,12 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/item/alchemy/Potion 1/1
   Patching net/minecraft/world/item/alchemy/PotionBrewing$Mix 1/1
   Patching net/minecraft/world/item/alchemy/PotionBrewing 1/1
-  Patching net/minecraft/world/item/crafting/AbstractCookingRecipe 1/1
-  Patching net/minecraft/world/item/crafting/ArmorDyeRecipe 1/1
   Patching net/minecraft/world/item/crafting/BannerDuplicateRecipe 1/1
-  Patching net/minecraft/world/item/crafting/BlastingRecipe 1/1
   Patching net/minecraft/world/item/crafting/BookCloningRecipe 1/1
-  Patching net/minecraft/world/item/crafting/CampfireCookingRecipe 1/1
-  Patching net/minecraft/world/item/crafting/FireworkRocketRecipe 1/1
-  Patching net/minecraft/world/item/crafting/FireworkStarFadeRecipe 1/1
-  Patching net/minecraft/world/item/crafting/FireworkStarRecipe 1/1
   Patching net/minecraft/world/item/crafting/Ingredient$ItemValue 1/1
   Patching net/minecraft/world/item/crafting/Ingredient$TagValue 1/1
   Patching net/minecraft/world/item/crafting/Ingredient$Value 1/1
   Patching net/minecraft/world/item/crafting/Ingredient 1/1
-  Patching net/minecraft/world/item/crafting/MapCloningRecipe 1/1
   Patching net/minecraft/world/item/crafting/Recipe 1/1
   Patching net/minecraft/world/item/crafting/RecipeManager 1/1
   Patching net/minecraft/world/item/crafting/RecipeSerializer 1/1
@@ -3544,7 +3407,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/item/crafting/ShapedRecipe 1/1
   Patching net/minecraft/world/item/crafting/ShapelessRecipe$Serializer 1/1
   Patching net/minecraft/world/item/crafting/ShapelessRecipe 1/1
-  Patching net/minecraft/world/item/crafting/ShieldDecorationRecipe 1/1
   Patching net/minecraft/world/item/crafting/ShulkerBoxColoring 1/1
   Patching net/minecraft/world/item/crafting/SimpleCookingSerializer$CookieBaker 1/1
   Patching net/minecraft/world/item/crafting/SimpleCookingSerializer 1/1
@@ -3552,11 +3414,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/item/crafting/SingleItemRecipe$Serializer$SingleItemMaker 1/1
   Patching net/minecraft/world/item/crafting/SingleItemRecipe$Serializer 1/1
   Patching net/minecraft/world/item/crafting/SingleItemRecipe 1/1
-  Patching net/minecraft/world/item/crafting/SmeltingRecipe 1/1
-  Patching net/minecraft/world/item/crafting/SmokingRecipe 1/1
-  Patching net/minecraft/world/item/crafting/StonecutterRecipe 1/1
-  Patching net/minecraft/world/item/crafting/SuspiciousStewRecipe 1/1
-  Patching net/minecraft/world/item/crafting/TippedArrowRecipe 1/1
   Patching net/minecraft/world/item/crafting/UpgradeRecipe$Serializer 1/1
   Patching net/minecraft/world/item/crafting/UpgradeRecipe 1/1
   Patching net/minecraft/world/item/enchantment/DiggingEnchantment 1/1
@@ -3624,18 +3481,12 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/biome/MobSpawnSettings$MobSpawnCost 1/1
   Patching net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData 1/1
   Patching net/minecraft/world/level/biome/MobSpawnSettings 1/1
-  Patching net/minecraft/world/level/block/AbstractBannerBlock 1/1
-  Patching net/minecraft/world/level/block/AttachedStemBlock 1/1
   Patching net/minecraft/world/level/block/BambooBlock 1/1
   Patching net/minecraft/world/level/block/BambooSaplingBlock 1/1
-  Patching net/minecraft/world/level/block/BannerBlock 1/1
   Patching net/minecraft/world/level/block/BaseFireBlock 1/1
   Patching net/minecraft/world/level/block/BaseRailBlock$1 1/1
   Patching net/minecraft/world/level/block/BaseRailBlock 1/1
   Patching net/minecraft/world/level/block/BeehiveBlock 1/1
-  Patching net/minecraft/world/level/block/BeetrootBlock 1/1
-  Patching net/minecraft/world/level/block/BigDripleafStemBlock$1 1/1
-  Patching net/minecraft/world/level/block/BigDripleafStemBlock 1/1
   Patching net/minecraft/world/level/block/Block$1 1/1
   Patching net/minecraft/world/level/block/Block$2 1/1
   Patching net/minecraft/world/level/block/Block$BlockStatePairKey 1/1
@@ -3645,10 +3496,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/BushBlock 1/1
   Patching net/minecraft/world/level/block/CactusBlock 1/1
   Patching net/minecraft/world/level/block/CampfireBlock 1/1
-  Patching net/minecraft/world/level/block/CandleCakeBlock 1/1
-  Patching net/minecraft/world/level/block/CarrotBlock 1/1
-  Patching net/minecraft/world/level/block/CaveVinesBlock 1/1
-  Patching net/minecraft/world/level/block/CaveVinesPlantBlock 1/1
   Patching net/minecraft/world/level/block/ChestBlock$1 1/1
   Patching net/minecraft/world/level/block/ChestBlock$2$1 1/1
   Patching net/minecraft/world/level/block/ChestBlock$2 1/1
@@ -3667,24 +3514,16 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/DoublePlantBlock 1/1
   Patching net/minecraft/world/level/block/DropperBlock 1/1
   Patching net/minecraft/world/level/block/EnchantmentTableBlock 1/1
-  Patching net/minecraft/world/level/block/EndGatewayBlock 1/1
-  Patching net/minecraft/world/level/block/EndPortalBlock 1/1
   Patching net/minecraft/world/level/block/FarmBlock 1/1
   Patching net/minecraft/world/level/block/FireBlock 1/1
   Patching net/minecraft/world/level/block/FlowerPotBlock 1/1
-  Patching net/minecraft/world/level/block/FrostedIceBlock 1/1
-  Patching net/minecraft/world/level/block/GrowingPlantBodyBlock 1/1
   Patching net/minecraft/world/level/block/GrowingPlantHeadBlock 1/1
   Patching net/minecraft/world/level/block/LeavesBlock 1/1
-  Patching net/minecraft/world/level/block/LightBlock 1/1
   Patching net/minecraft/world/level/block/LiquidBlock 1/1
   Patching net/minecraft/world/level/block/MushroomBlock 1/1
-  Patching net/minecraft/world/level/block/NetherPortalBlock$1 1/1
-  Patching net/minecraft/world/level/block/NetherPortalBlock 1/1
   Patching net/minecraft/world/level/block/NetherWartBlock 1/1
   Patching net/minecraft/world/level/block/NoteBlock 1/1
   Patching net/minecraft/world/level/block/OreBlock 1/1
-  Patching net/minecraft/world/level/block/PotatoBlock 1/1
   Patching net/minecraft/world/level/block/PowderSnowBlock 1/1
   Patching net/minecraft/world/level/block/PoweredRailBlock$1 1/1
   Patching net/minecraft/world/level/block/PoweredRailBlock 1/1
@@ -3698,8 +3537,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/RedStoneWireBlock 1/1
   Patching net/minecraft/world/level/block/SaplingBlock 1/1
   Patching net/minecraft/world/level/block/SeagrassBlock 1/1
-  Patching net/minecraft/world/level/block/ShulkerBoxBlock$1 1/1
-  Patching net/minecraft/world/level/block/ShulkerBoxBlock 1/1
   Patching net/minecraft/world/level/block/SoundType 1/1
   Patching net/minecraft/world/level/block/SpawnerBlock 1/1
   Patching net/minecraft/world/level/block/SpreadingSnowyDirtBlock 1/1
@@ -3709,7 +3546,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/SugarCaneBlock 1/1
   Patching net/minecraft/world/level/block/SweetBerryBushBlock 1/1
   Patching net/minecraft/world/level/block/TallGrassBlock 1/1
-  Patching net/minecraft/world/level/block/TallSeagrassBlock 1/1
   Patching net/minecraft/world/level/block/TntBlock 1/1
   Patching net/minecraft/world/level/block/TrapDoorBlock$1 1/1
   Patching net/minecraft/world/level/block/TrapDoorBlock 1/1
@@ -3744,11 +3580,8 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/entity/ShulkerBoxBlockEntity 1/1
   Patching net/minecraft/world/level/block/entity/SpawnerBlockEntity$1 1/1
   Patching net/minecraft/world/level/block/entity/SpawnerBlockEntity 1/1
-  Patching net/minecraft/world/level/block/piston/MovingPistonBlock 1/1
   Patching net/minecraft/world/level/block/piston/PistonBaseBlock$1 1/1
   Patching net/minecraft/world/level/block/piston/PistonBaseBlock 1/1
-  Patching net/minecraft/world/level/block/piston/PistonHeadBlock$1 1/1
-  Patching net/minecraft/world/level/block/piston/PistonHeadBlock 1/1
   Patching net/minecraft/world/level/block/piston/PistonMovingBlockEntity$1 1/1
   Patching net/minecraft/world/level/block/piston/PistonMovingBlockEntity 1/1
   Patching net/minecraft/world/level/block/piston/PistonStructureResolver 1/1
@@ -3876,7 +3709,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$InlineSerializer 1/1
   Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$Serializer 1/1
   Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider 1/1
-  Patching net/minecraft/world/phys/Vec3 1/1
   Patching net/minecraft/world/level/biome/BiomeSpecialEffects$GrassColorModifier$ColorModifier 1/1
   Patching net/minecraft/Util$3 1/1
   Patching net/minecraft/world/item/Items$1 1/1

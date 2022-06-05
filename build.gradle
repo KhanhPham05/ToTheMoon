@@ -125,7 +125,7 @@ mixin {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.19'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.23'
     implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")
@@ -147,7 +147,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:pipez-443900:3760255")
     runtimeOnly fg.deobf("curse.maven:create-328085:3737418")
     runtimeOnly fg.deobf("curse.maven:flywheel-486392:3737402")
-    runtimeOnly 'curse.maven:nbt-tool-451553:3748971'
+    runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3748971")
 
     //implementation fg.deobf("curse.maven:patchouli-datagen-ptd-lib-585667:3671853")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.core.blockentities;
+package com.khanhpham.tothemoon.core.abstracts;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

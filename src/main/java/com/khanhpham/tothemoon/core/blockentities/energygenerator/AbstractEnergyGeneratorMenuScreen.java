@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blockentities.energygenerator;
 
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.core.menus.energycontainer.AbstractEnergyGeneratorMenu;
-import com.khanhpham.tothemoon.core.BaseMenuScreen;
+import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;

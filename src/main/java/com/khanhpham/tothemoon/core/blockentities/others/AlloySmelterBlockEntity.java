@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blockentities.others;
 
-import com.khanhpham.tothemoon.core.blockentities.EnergyProcessBlockEntity;
+import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
@@ -68,10 +68,7 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements
     }
 
 
-    private void serverTick(Level level, BlockPos pos, BlockState state) {
-        //receiveEnergy();
-
-
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
         if (!super.isEmpty(0) || !super.isEmpty(1)) {
             @Nullable AlloySmeltingRecipe recipe = super.getRecipe(level, AlloySmeltingRecipe.RECIPE_TYPE, this);
             if (recipe != null) {

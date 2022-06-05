@@ -47,43 +47,8 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
         pBuilder.add(LIT, FACING);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity te = pLevel.getBlockEntity(pPos);
-            if (te instanceof MetalPressBlockEntity metalPress) {
-                if (pLevel instanceof ServerLevel) {
-                    Containers.dropContents(pLevel, pPos, metalPress);
-                }
-            }
-
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-        }
-    }
-
-    /*@SuppressWarnings("deprecation")
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide) {
-            var a = pLevel.getBlockEntity(pPos);
-            if (a instanceof MetalPressBlockEntity blockEntity) {
-                pPlayer.openMenu(blockEntity);
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        return InteractionResult.FAIL;
-    }*/
-
-    @Override
-    protected BlockEntityType<?> getBlockEntityType() {
+    protected BlockEntityType<MetalPressBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.METAL_PRESS.get();
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.METAL_PRESS.get(), MetalPressBlockEntity::serverTick);
     }
 }

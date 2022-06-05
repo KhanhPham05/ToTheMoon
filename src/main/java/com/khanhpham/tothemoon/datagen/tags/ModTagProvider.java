@@ -105,6 +105,12 @@ public class ModTagProvider {
                 appender.add(supplier.get().asItem());
             }
         }
+
+        private void add(AppendableItemTagKey tag) {
+            for (Supplier<? extends Item> perspectiveItem : tag.perspectiveItems) {
+                this.add(tag.getMainTag(), perspectiveItem);
+            }
+        }
     }
 
     public static final class ModBlockTagsProvider extends BlockTagsProvider {

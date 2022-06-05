@@ -7,7 +7,6 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscr
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
-import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.ModItemModels;
 import com.khanhpham.tothemoon.datagen.ModLanguage;
@@ -148,10 +147,7 @@ public class ToTheMoon {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
         }
 
-        @SubscribeEvent
-        public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(ModBlockEntityTypes.METAL_PRESSING_PLATE.get(), MetalPressingPlateBlockEntity.Renderer::new);
-        }
+
     }
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -171,12 +167,6 @@ public class ToTheMoon {
                 }
                 if (block.is(Blocks.WATER)) {
                     level.setBlock(event.getPos(), Blocks.PACKED_ICE.defaultBlockState(), 3);
-                }
-            }
-
-            if (block.is(ModBlocks.METAL_PRESSING_PLATE.get())) {
-                if (level.getBlockState(event.getPos().below()).isAir()) {
-                    level.destroyBlock(event.getPos(), true, null);
                 }
             }
         }

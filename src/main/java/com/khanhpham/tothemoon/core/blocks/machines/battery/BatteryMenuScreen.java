@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.machines.battery;
 
-import com.khanhpham.tothemoon.core.BaseMenuScreen;
+import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;

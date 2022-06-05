@@ -7,14 +7,12 @@ import com.khanhpham.tothemoon.core.blockentities.battery.AbstractBatteryBlockEn
 import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.EnergySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.MoonBarrelTileEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.others.MoonBarrelTileEntity;
-import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
-import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -39,7 +37,7 @@ public class ModBlockEntityTypes {
 
     public static final RegistryObject<BlockEntityType<MetalPressBlockEntity>> METAL_PRESS;
 
-    public static final RegistryObject<BlockEntityType<MetalPressingPlateBlockEntity>> METAL_PRESSING_PLATE;
+    //public static final RegistryObject<BlockEntityType<MetalPressingPlateBlockEntity>> METAL_PRESSING_PLATE;
     public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> BATTERY;
     public static final RegistryObject<BlockEntityType<EnergySmelterBlockEntity>> ENERGY_SMELTER;
 
@@ -52,7 +50,7 @@ public class ModBlockEntityTypes {
         DIAMOND_ENERGY_GENERATOR_TE = register("diamond_gen", () -> BlockEntityType.Builder.of(DiamondEnergyGeneratorBlockEntity::new, ModBlocks.DIAMOND_ENERGY_GENERATOR.get()).build(null));
         ALLOY_SMELTER = register("alloy_smelter", () -> BlockEntityType.Builder.of(AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER.get()).build(null));
         METAL_PRESS = register("metal_press", () -> BlockEntityType.Builder.of(MetalPressBlockEntity::new, ModBlocks.METAL_PRESS.get()).build(null));
-        METAL_PRESSING_PLATE = register("metal_pressing_plate", () -> BlockEntityType.Builder.of(MetalPressingPlateBlockEntity::new, ModBlocks.METAL_PRESSING_PLATE.get()).build(null));
+        //METAL_PRESSING_PLATE = register("metal_pressing_plate", () -> BlockEntityType.Builder.of(MetalPressingPlateBlockEntity::new, ModBlocks.METAL_PRESSING_PLATE.get()).build(null));
         BATTERY = register("battery", () -> new BlockEntityType<>(BatteryBlockEntity::new, ImmutableSet.of(ModBlocks.BATTERY.get(), ModBlocks.CREATIVE_BATTERY.get()), null));
         ENERGY_SMELTER = register("energy_smelter", () -> new BlockEntityType<>(EnergySmelterBlockEntity::new, ImmutableSet.of(ModBlocks.ENERGY_SMELTER.get()), null));
     }

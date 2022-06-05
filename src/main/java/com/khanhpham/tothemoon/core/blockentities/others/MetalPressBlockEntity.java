@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blockentities.others;
 
-import com.khanhpham.tothemoon.core.blockentities.EnergyProcessBlockEntity;
+import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.IMetalPressBlockEntity;
@@ -70,7 +70,7 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity implements I
     }
 
     //TODO : fix Processing bug
-    private void serverTick(Level level, BlockPos pos, BlockState state) {
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
         //super.receiveEnergy();
 
         if (!super.isEmpty(0) || !super.isEmpty(1)) {
@@ -112,10 +112,11 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity implements I
         }
         this.resetTime();
 
-        level.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+        level.playSound(null, pos, SoundEvents.SMITHING_TABLE_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
     }
 
     @Override
+    @Nonnull
     public int[] getSlotsForFace(Direction pSide) {
         return pSide == Direction.DOWN ? new int[]{2} : new int[]{0, 1};
     }

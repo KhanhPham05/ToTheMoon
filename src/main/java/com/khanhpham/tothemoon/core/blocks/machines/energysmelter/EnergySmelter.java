@@ -5,11 +5,8 @@ import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,13 +40,7 @@ public class EnergySmelter extends BaseEntityBlock<EnergySmelterBlockEntity> {
 
     @Nonnull
     @Override
-    protected BlockEntityType<?> getBlockEntityType() {
+    protected BlockEntityType<EnergySmelterBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.ENERGY_SMELTER.get();
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.ENERGY_SMELTER.get(), EnergySmelterBlockEntity::tick);
     }
 }

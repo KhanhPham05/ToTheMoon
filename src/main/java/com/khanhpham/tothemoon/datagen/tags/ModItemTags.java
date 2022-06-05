@@ -109,8 +109,4 @@ public class ModItemTags {
         return new AppendableItemTagKey(ItemTags.create(rl));
     }
 
-    private static TagKey<Item> append(final AppendableItemTagKey tag, String name, Supplier<? extends Item> item) {
-        return tag.append(name, item);
-    }
-
 }

@@ -1,14 +1,11 @@
 package com.khanhpham.tothemoon.core.blockentities.battery;
 
-import com.khanhpham.tothemoon.core.blockentities.EnergyItemCapableBlockEntity;
+import com.khanhpham.tothemoon.core.abstracts.EnergyItemCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.battery.creative.CreativeBatteryBlock;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
-import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.energy.BatteryEnergy;
 import com.khanhpham.tothemoon.utils.energy.Energy;
-import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -64,7 +61,7 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
         return new BatteryMenu(this, playerInventory, containerId, data);
     }
 
-    protected void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
+    public void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
         blockState = tryUpdateBlockState(level, blockPos, blockState);
         super.collectBlockEntities(level, blockPos);
         transferEnergy();

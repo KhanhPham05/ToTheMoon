@@ -2,7 +2,6 @@ package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
-import com.khanhpham.tothemoon.core.recipes.metalpressing.ManualMetalPressRecipe;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -20,8 +19,6 @@ public class ModRecipes {
     public static final RecipeSerializer<AlloySmeltingRecipe> ALLOY_SMELTING_RECIPE_SERIALIZER = new AlloySmeltingRecipe.Serializer();
     public static final RecipeSerializer<MetalPressingRecipe> METAL_PRESSING_RECIPE_SERIALIZER = new MetalPressingRecipe.Serializer();
 
-    public static final RecipeSerializer<ManualMetalPressRecipe> MANUAL_METAL_PRESS_RECIPE_SERIALIZER = new ManualMetalPressRecipe.Serializer();
-
     public ModRecipes() {
     }
 
@@ -29,7 +26,6 @@ public class ModRecipes {
     public static void registerRecipes(RegistryEvent.Register<RecipeSerializer<?>> event) {
         register(event, AlloySmeltingRecipe.RECIPE_TYPE, ALLOY_SMELTING_RECIPE_SERIALIZER);
         register(event, MetalPressingRecipe.RECIPE_TYPE, METAL_PRESSING_RECIPE_SERIALIZER);
-        register(event, ManualMetalPressRecipe.RECIPE_TYPE, MANUAL_METAL_PRESS_RECIPE_SERIALIZER);
     }
 
     private static <T extends Recipe<?>> void register(RegistryEvent.Register<RecipeSerializer<?>> event, RecipeType<T> recipeType, RecipeSerializer<T> serializer) {

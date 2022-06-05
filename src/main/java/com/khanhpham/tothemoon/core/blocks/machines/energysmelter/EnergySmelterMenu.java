@@ -2,9 +2,9 @@ package com.khanhpham.tothemoon.core.blocks.machines.energysmelter;
 
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
+import com.khanhpham.tothemoon.utils.helpers.SimpleUpgradableMenu;
 import com.khanhpham.tothemoon.utils.slot.ResultSlot;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -20,7 +20,7 @@ public class EnergySmelterMenu extends BaseMenu {
         super(ModMenuTypes.ENERGY_SMELTER, externalContainer, playerInventory, pContainerId);
 
         super.addSlot(0, 41, 33);
-        super.addSlot(new ResultSlot(externalContainer, 1, 106, 32));
+        super.addSlot(new ResultSlot(externalContainer, 1, 106, 33));
         super.addPlayerInventorySlots(8, 95);
 
         this.data = data;
@@ -31,24 +31,27 @@ public class EnergySmelterMenu extends BaseMenu {
         this(container, playerInventory, containerId, data);
     }
 
+    public EnergySmelterMenu(int i, Inventory inventory) {
+        this(i, inventory, new SimpleUpgradableMenu(2), new SimpleContainerData(4));
+    }
+
     public int getEnergyBar() {
         int i = data.get(2);
         int j = data.get(3);
 
-        return j != 0 && i != 0 ? i * 147 / j : 0 ;
+        return j != 0 && i != 0 ? i * 147 / j : 0;
     }
 
     public int getSmeltingProcess() {
-         int i = this.data.get(0);
-         int j = this.data.get(1);
+        int i = this.data.get(0);
+        int j = this.data.get(1);
 
-         return j != 0 && i != 0 ? i * 32 / j : 0;
+        return j != 0 && i != 0 ? i * 32 / j : 0;
     }
 
-    public EnergySmelterMenu(int i, Inventory inventory) {
-        this(i, inventory, new SimpleContainer(2), new SimpleContainerData(4));
-    }
-
+    /**
+     * @see net.minecraft.world.inventory.AbstractFurnaceMenu#quickMoveStack(Player, int)
+     */
     @NotNull
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
@@ -65,14 +68,14 @@ public class EnergySmelterMenu extends BaseMenu {
 
                 slot.onQuickCraft(stack1, itemStack);
             } else {
-                if (!super.moveItemStackTo(stack1, 0, 1, false)) {
+                if (!moveItemStackTo(stack1, 0, 1, false)) {
                     return empty();
                 } else if (index < 29) {
-                    if (!super.moveItemStackTo(stack1, 29, 38, false)) {
-                        return empty();
-                    } else if (!super.moveItemStackTo(stack1, 2, 29, false)) {
+                    if (moveItemStackTo(stack1, 29, 38, false)) {
                         return empty();
                     }
+                } else if (index < 38 && !moveItemStackTo(stack1, 2, 38, false)) {
+                    return empty();
                 }
             }
 

@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blockentities.energygenerator;
 
-import com.khanhpham.tothemoon.core.blockentities.EnergyItemCapableBlockEntity;
+import com.khanhpham.tothemoon.core.abstracts.EnergyItemCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.utils.energy.Energy;
@@ -61,7 +61,7 @@ public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapab
         blockEntity.serverTick(level, blockPos, blockState);
     }
 
-    private void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
+    public void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
         ItemStack item = items.get(0);
         if (!energy.isFull()) {
             if (burningTime <= 0) {

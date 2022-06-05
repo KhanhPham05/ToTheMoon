@@ -33,7 +33,7 @@ a91bd7033ed62f3cf91b8589ebab696aa7c6f4ee assets/tothemoon/blockstates/raw_uraniu
 31326ae37d8433e2db02b978d664b7a1ec55a138 assets/tothemoon/blockstates/steel_block.json
 36b4193e61f6dcf4085a0eaf93f1278f0856e2c2 assets/tothemoon/blockstates/steel_sheet_block.json
 0e4962c034adfced923df406f502baa36fc6a1d6 assets/tothemoon/blockstates/uranium_block.json
-64e3574959b097f69b3fb58245de9453c9df7279 assets/tothemoon/lang/en_us.json
+579c36570bc3646f2d68eb3f1e0d7949a2526f0f assets/tothemoon/lang/en_us.json
 0a595220fdc9162b5120ec88d64e419b8f916c2f assets/tothemoon/models/block/anti_pressure_glass.json
 78ee5abf59ff5ccc55acd9268289c36089e0c8c3 assets/tothemoon/models/block/battery_level_0.json
 7d442af3b132c46bc0c0cf140bd429563605c2e0 assets/tothemoon/models/block/battery_level_1.json
@@ -110,6 +110,8 @@ ec76de8dbd065415c98271128eded3cbef479202 assets/tothemoon/models/item/deepslate_
 05e55e48902aacd08714694bc63ae8c5e2f33c97 assets/tothemoon/models/item/diamond_energy_generator.json
 8d336e615dca197295fa8474b96acc06171e8c5d assets/tothemoon/models/item/diamond_hammer.json
 7b473214b54eee68adeff723c115cfd2ff327aa9 assets/tothemoon/models/item/energy_smelter.json
+2521ef5d4a3cac9815ccd4db9713f0e4c7adbfeb assets/tothemoon/models/item/energy_upgrade_tier_1.json
+fcd4f0086abda6bf5676f459e29b43369c34794b assets/tothemoon/models/item/energy_upgrade_tier_2.json
 24c35f87ebc8b03349e44f39b0d6194ed90f0f6e assets/tothemoon/models/item/gear_mold.json
 936b0b0eb73863f4900426d0c2eb820daf4f0183 assets/tothemoon/models/item/gold_dust.json
 4331e1601f5953d92be9d0d61cccd820b093a856 assets/tothemoon/models/item/gold_energy_generator.json
@@ -165,6 +167,8 @@ d29ed632c55d8e5c3365ac16a3c746273f82f907 assets/tothemoon/models/item/redstone_s
 2b2220de39f522a229522932a96127a92ab07416 assets/tothemoon/models/item/reinforced_wood.json
 9546daa6ba48f6ac6714d747faedabda7dcde933 assets/tothemoon/models/item/rod_mold.json
 e370651a5c66e23b406e661ed5efdaf73853faba assets/tothemoon/models/item/smooth_purified_quartz_block.json
+22dfbf42b1d429b6f9aff7aa5c6a70ed3769bd5b assets/tothemoon/models/item/speed_upgrade_tier_1.json
+9773578fe71ea64423988063b4dd89604c1e9ae3 assets/tothemoon/models/item/speed_upgrade_tier_2.json
 fd063bba78dccebeb1e01f12c2911bd3694c3143 assets/tothemoon/models/item/steel_block.json
 98116754f72c1a9852805ebc1a63bfbed0eb2e07 assets/tothemoon/models/item/steel_dust.json
 fe85075d44664764a0be75b57e6613d6eb1658da assets/tothemoon/models/item/steel_hammer.json
@@ -186,7 +190,7 @@ b9adfd1e84d23521801f03acaf69f9cd60b70c85 assets/tothemoon/sounds.json
 d1a849908d6561ae9d842c6ef972ad47348a51b1 data/forge/tags/blocks/ore_rates/singular.json
 5da9e59383021e3531c4c2e321bd647ded0ecfbf data/forge/tags/blocks/ores/quartz.json
 3b3e3a64c2549a54fd10abf6aadd19bb262cc6df data/forge/tags/blocks/ores/uranium.json
-87a5bf33c945dfe5b0c9c5799c135862e1b0cee2 data/forge/tags/blocks/sheetmetals.json
+325a45e72ce5ee1dceca292fa20149180b6f23fa data/forge/tags/blocks/sheetmetals.json
 e1188083f462e6850dcd6392f5009dafe36f6a09 data/forge/tags/blocks/sheetmetals/copper.json
 1423883a20bc9c06e3ad7f5602ab079fa02b3b56 data/forge/tags/blocks/sheetmetals/gold.json
 4184cd658d5a6715138ce16727a77c656d5ebac8 data/forge/tags/blocks/sheetmetals/iron.json

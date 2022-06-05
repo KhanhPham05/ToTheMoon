@@ -46,7 +46,7 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
 
     @Override
     public boolean matches(AlloySmelterBlockEntity container, @Nonnull Level pLevel) {
-        return this.baseIngredient.test(container.items.get(0)) && this.secondaryIngredient.test(container.items.get(1));
+        return (this.baseIngredient.test(container.items.get(0)) && this.secondaryIngredient.test(container.items.get(1))) || this.baseIngredient.test(container.items.get(1)) && this.secondaryIngredient.test(container.items.get(0));
     }
 
     @Override

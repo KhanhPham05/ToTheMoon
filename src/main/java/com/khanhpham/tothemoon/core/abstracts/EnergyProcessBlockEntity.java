@@ -1,16 +1,17 @@
-package com.khanhpham.tothemoon.core.blockentities;
+package com.khanhpham.tothemoon.core.abstracts;
 
+import com.khanhpham.tothemoon.core.abstracts.machines.UpgradableContainer;
+import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.utils.energy.Energy;
-import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,10 +25,11 @@ import javax.annotation.Nullable;
 
 public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEntity implements WorldlyContainer {
     protected int workingTime;
-    protected int workingDuration;
+    protected int workingDuration = 200;
 
+    @Deprecated public int workingSpeedModify = 1;
     public EnergyProcessBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
-        super(pType, pWorldPosition, pBlockState, energy, label, containerSize);
+        super(pType, pWorldPosition, pBlockState, energy, label, containerSize + 4);
     }
 
     private LazyOptional<? extends IItemHandler>[] handler = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
@@ -43,8 +45,6 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
         }
         return super.getCapability(cap, side);
     }
-
-
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, Direction pDirection) {
@@ -71,11 +71,11 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
     }
 
     protected boolean isStillWorking() {
-        return this.workingTime < this.workingDuration && this.workingDuration != 0;
+        return this.workingTime < this.workingDuration;
     }
 
     protected boolean isIdle() {
-        return this.workingDuration <= 0 && this.workingTime == 0;
+        return this.workingTime == 0;
     }
 
     protected <C extends Container> boolean isResultSlotFreeForProcess(ItemStack stack, @Nullable Recipe<C> recipe) {
@@ -83,14 +83,13 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
             if (stack.isEmpty()) {
                 return true;
             } else
-                return stack.is(recipe.getResultItem().getItem()) && stack.getCount() + recipe.getResultItem().getCount() <= this.getMaxStackSize();
+                return stack.sameItem(recipe.getResultItem()) && stack.getCount() + recipe.getResultItem().getCount() <= this.getMaxStackSize();
         }
 
         return false;
     }
 
     protected void resetTime() {
-        this.workingDuration = 0;
         this.workingTime = 0;
     }
 
@@ -106,12 +105,4 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
         this.workingTime = tag.getInt("workingTime");
     }
 
-    protected void trade(ItemStack input, int result, Recipe<Container> recipe) {
-        input.shrink(1);
-        if (items.get(result).isEmpty()) {
-            items.set(result, recipe.getResultItem());
-        } else {
-            items.get(result).grow(recipe.getResultItem().getCount());
-        }
-    }
 }

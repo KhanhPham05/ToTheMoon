@@ -1,5 +1,6 @@
-package com.khanhpham.tothemoon.core.blockentities;
+package com.khanhpham.tothemoon.core.abstracts;
 
+import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -38,7 +39,7 @@ import java.util.HashMap;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEntity implements IItemHandler, Container, MenuProvider, Nameable {
+public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEntity implements TickableBlockEntity, IItemHandler, Container, MenuProvider, Nameable {
     protected final HashMap<BlockPos, IEnergyStorage> energyStorages = new HashMap<>();
     protected final Component label;
     protected final int containerSize;

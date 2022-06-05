@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.core.blockentities;
+package com.khanhpham.tothemoon.core.abstracts;
 
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.energy.HasEnergyCapable;

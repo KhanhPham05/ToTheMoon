@@ -5,6 +5,7 @@ import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.GearItem;
 import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.core.items.HandheldItem;
+import com.khanhpham.tothemoon.core.items.UpgradeItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,77 +23,17 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ModItems {
     public static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, Names.MOD_ID);
-    private static final String S = "steel";
-    private static final String RSA = "redstone_steel_alloy";
-    private static final String RM = "redstone_metal";
-    private static final String UR = "uranium";
-    private static final String C = "copper";
-    private static final String I = "iron";
-    private static final String G = "gold";
-
-
-    //special ingredient
-    public static final RegistryObject<Item> REDSTONE_STEEL_ALLOY = item(RSA);
-    public static final RegistryObject<GearItem> REDSTONE_STEEL_ALLOY_GEAR = gear(RSA);
-    public static final RegistryObject<Item> REDSTONE_STEEL_ALLOY_PLATE = plate(RSA);
-    public static final RegistryObject<Item> REDSTONE_STEEL_ALLOY_DUST = dust(RSA);
-    public static final RegistryObject<HandheldItem> REDSTONE_STEEL_ALLOY_ROD = rod(RSA);
-    public static final RegistryObject<HandheldItem> REDSTONE_STEEL_ALLOY_WIRE = wire(RSA);
-
-    public static final RegistryObject<Item> REDSTONE_METAL = item(RM);
-    public static final RegistryObject<Item> REDSTONE_METAL_PLATE = plate(RM);
-    public static final RegistryObject<GearItem> REDSTONE_METAL_GEAR = gear(RM);
-    public static final RegistryObject<HandheldItem> REDSTONE_METAL_ROD = rod(RM);
-
-    public static final RegistryObject<HandheldItem> REDSTONE_METAL_WIRE = wire(RM);
-    public static final RegistryObject<Item> REDSTONE_METAL_DUSTS = dust(RM);
-
-    //common crafting ingredient
-    public static final RegistryObject<Item> URANIUM_INGOT = item(UR + "_ingot");
-    public static final RegistryObject<Item> URANIUM_DUST = dust(UR);
-    public static final RegistryObject<Item> URANIUM_PLATE = plate(UR);
-    public static final RegistryObject<GearItem> URANIUM_GEAR = gear(UR);
-    public static final RegistryObject<HandheldItem> URANIUM_ROD = rod(UR);
-    public static final RegistryObject<HandheldItem> URANIUM_WIRE = wire(UR);
-
-    public static final RegistryObject<Item> COPPER_PLATE = plate(C);
-    public static final RegistryObject<Item> COPPER_DUST = dust(C);
-    public static final RegistryObject<GearItem> COPPER_GEAR = gear(C);
-    public static final RegistryObject<HandheldItem> COPPER_ROD = rod(C);
-    public static final RegistryObject<HandheldItem> COPPER_WIRE = wire(C);
-
-    public static final RegistryObject<Item> STEEL_PLATE = plate(S);
-    public static final RegistryObject<Item> STEEL_INGOT = item(S + "_ingot");
-    public static final RegistryObject<Item> STEEL_DUST = dust(S);
-    public static final RegistryObject<HandheldItem> STEEL_ROD = rod(S);
-    public static final RegistryObject<GearItem> STEEL_GEAR = gear(S);
-    public static final RegistryObject<HandheldItem> STEEL_WIRE = wire(S);
-
-    public static final RegistryObject<Item> IRON_PLATE = plate(I);
-    public static final RegistryObject<Item> IRON_DUST = dust(I);
-    public static final RegistryObject<GearItem> IRON_GEAR = gear(I);
-    public static final RegistryObject<HandheldItem> IRON_ROD = rod(I);
-    public static final RegistryObject<HandheldItem> IRON_WIRE = wire(I);
-
-    public static final RegistryObject<Item> GOLD_PLATE = plate(G);
-    public static final RegistryObject<Item> GOLD_DUST = dust(G);
-    public static final RegistryObject<GearItem> GOLD_GEAR = gear(G);
-    public static final RegistryObject<HandheldItem> GOLD_ROD = rod(G);
-    public static final RegistryObject<HandheldItem> GOLD_WIRE = wire(G);
-
     //METAL PRESS MOLDS
     public static final RegistryObject<Item> BLANK_MOLD = mold("blank");
     public static final RegistryObject<Item> GEAR_MOLD = mold("gear");
     public static final RegistryObject<Item> PLATE_MOLD = mold("plate");
     public static final RegistryObject<Item> ROD_MOLD = mold("rod");
-
     //OTHERS
     public static final RegistryObject<Item> PURIFIED_QUARTZ = item("purified_quartz");
     public static final RegistryObject<Item> COAL_DUST = item("coal_dust");
     public static final RegistryObject<Item> RAW_URANIUM_ORE = item("raw_uranium_ore");
     public static final RegistryObject<Item> CIRCUIT_BOARD = item("circuit_board");
     public static final RegistryObject<Item> CPU_CHIP = item("processor_chip");
-
     public static final RegistryObject<HammerItem> WOODEN_HAMMER = registerHammer("wooden_hammer", 16);
     public static final RegistryObject<HammerItem> STEEL_HAMMER = registerHammer("steel_hammer", 64);
     public static final RegistryObject<HammerItem> DIAMOND_HAMMER = registerHammer("diamond_hammer", 128);
@@ -103,6 +44,62 @@ public class ModItems {
             return Rarity.UNCOMMON;
         }
     });
+    private static final String S = "steel";
+    public static final RegistryObject<Item> STEEL_PLATE = plate(S);
+    public static final RegistryObject<Item> STEEL_INGOT = item(S + "_ingot");
+    public static final RegistryObject<Item> STEEL_DUST = dust(S);
+    public static final RegistryObject<HandheldItem> STEEL_ROD = rod(S);
+    public static final RegistryObject<GearItem> STEEL_GEAR = gear(S);
+    public static final RegistryObject<HandheldItem> STEEL_WIRE = wire(S);
+    private static final String RSA = "redstone_steel_alloy";
+    //special ingredient
+    public static final RegistryObject<Item> REDSTONE_STEEL_ALLOY = item(RSA);
+    public static final RegistryObject<GearItem> REDSTONE_STEEL_ALLOY_GEAR = gear(RSA);
+    public static final RegistryObject<Item> REDSTONE_STEEL_ALLOY_PLATE = plate(RSA);
+    public static final RegistryObject<Item> REDSTONE_STEEL_ALLOY_DUST = dust(RSA);
+    public static final RegistryObject<HandheldItem> REDSTONE_STEEL_ALLOY_ROD = rod(RSA);
+    public static final RegistryObject<HandheldItem> REDSTONE_STEEL_ALLOY_WIRE = wire(RSA);
+    private static final String RM = "redstone_metal";
+    public static final RegistryObject<Item> REDSTONE_METAL = item(RM);
+    public static final RegistryObject<Item> REDSTONE_METAL_PLATE = plate(RM);
+    public static final RegistryObject<GearItem> REDSTONE_METAL_GEAR = gear(RM);
+    public static final RegistryObject<HandheldItem> REDSTONE_METAL_ROD = rod(RM);
+    public static final RegistryObject<HandheldItem> REDSTONE_METAL_WIRE = wire(RM);
+    public static final RegistryObject<Item> REDSTONE_METAL_DUSTS = dust(RM);
+    private static final String UR = "uranium";
+    //common crafting ingredient
+    public static final RegistryObject<Item> URANIUM_INGOT = item(UR + "_ingot");
+    public static final RegistryObject<Item> URANIUM_DUST = dust(UR);
+    public static final RegistryObject<Item> URANIUM_PLATE = plate(UR);
+    public static final RegistryObject<GearItem> URANIUM_GEAR = gear(UR);
+    public static final RegistryObject<HandheldItem> URANIUM_ROD = rod(UR);
+    public static final RegistryObject<HandheldItem> URANIUM_WIRE = wire(UR);
+    private static final String C = "copper";
+    public static final RegistryObject<Item> COPPER_PLATE = plate(C);
+    public static final RegistryObject<Item> COPPER_DUST = dust(C);
+    public static final RegistryObject<GearItem> COPPER_GEAR = gear(C);
+    public static final RegistryObject<HandheldItem> COPPER_ROD = rod(C);
+    public static final RegistryObject<HandheldItem> COPPER_WIRE = wire(C);
+    private static final String I = "iron";
+    public static final RegistryObject<Item> IRON_PLATE = plate(I);
+    public static final RegistryObject<Item> IRON_DUST = dust(I);
+    public static final RegistryObject<GearItem> IRON_GEAR = gear(I);
+    public static final RegistryObject<HandheldItem> IRON_ROD = rod(I);
+    public static final RegistryObject<HandheldItem> IRON_WIRE = wire(I);
+    private static final String G = "gold";
+    public static final RegistryObject<Item> GOLD_PLATE = plate(G);
+    public static final RegistryObject<Item> GOLD_DUST = dust(G);
+    public static final RegistryObject<GearItem> GOLD_GEAR = gear(G);
+    public static final RegistryObject<HandheldItem> GOLD_ROD = rod(G);
+    public static final RegistryObject<HandheldItem> GOLD_WIRE = wire(G);
+
+    static {
+        for (int i = 1; i < 3; i++) {
+            int level = i;
+            ITEM_DEFERRED_REGISTER.register("speed_upgrade_tier_" + i, () -> new UpgradeItem.SpeedUpgrade(level));
+            ITEM_DEFERRED_REGISTER.register("energy_upgrade_tier_" + i, () -> new UpgradeItem.EnergyUpgrade(level));
+        }
+    }
 
     private ModItems() {
     }
@@ -144,7 +141,8 @@ public class ModItems {
 
     }
 
-    public static void start() {}
+    public static void start() {
+    }
 
     @Nonnull
     public static ResourceLocation getRegistryName(Block block) {

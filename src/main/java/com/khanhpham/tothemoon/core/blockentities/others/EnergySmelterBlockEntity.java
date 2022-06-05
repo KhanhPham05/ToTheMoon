@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blockentities.others;
 
-import com.khanhpham.tothemoon.core.blockentities.EnergyProcessBlockEntity;
+import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
@@ -10,16 +10,19 @@ import com.khanhpham.tothemoon.utils.energy.EnergyReceivable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
@@ -46,6 +49,7 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
             return 4;
         }
     };
+    private boolean flag;
 
     public EnergySmelterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
         super(pType, pWorldPosition, pBlockState, energy, label, containerSize);
@@ -53,10 +57,6 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
 
     public EnergySmelterBlockEntity(BlockPos pos, BlockState state) {
         this(ModBlockEntityTypes.ENERGY_SMELTER.get(), pos, state, new EnergyReceivable(150000, 2000, 750), ModBlocks.ENERGY_SMELTER.get().getName(), 2);
-    }
-
-    public static void tick(Level level, BlockPos blockPos, BlockState state, EnergySmelterBlockEntity e) {
-        e.serverTick(level, blockPos, state);
     }
 
     @NotNull
@@ -71,31 +71,49 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
         return pSide == Direction.DOWN ? new int[1] : new int[0];
     }
 
-    private void serverTick(Level level, BlockPos pos, BlockState state) {
-        final SmeltingRecipe recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, this, level).orElse(null);
-        ItemStack input = super.items.get(0);
-        ItemStack result = super.items.get(1);
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
+        flag = false;
 
-        if (isStillWorking()) {
-            this.workingTime--;
-        }
-
-        if (this.workingDuration != 0 && this.workingTime <= 0) {
-            super.trade(input, 1, recipe);
-        }
-
-
-        if (!energy.isEmpty() && !input.isEmpty()) {
-            if (recipe != null && super.isResultSlotFreeForProcess(result, recipe)  && recipe.matches(this, level)) {
-                this.workingTime = recipe.getCookingTime();
-                this.workingDuration = this.workingTime;
-                super.setNewBlockState(level, pos, state, EnergySmelter.WORKING, Boolean.TRUE);
+        if (!items.get(0).isEmpty()) {
+            SmeltingRecipe recipe = super.getRecipe(level, RecipeType.SMELTING, this);
+            if (recipe != null && !energy.isEmpty() && isResultSlotFreeForProcess(items.get(1), recipe)) {
+                ++workingTime;
+                energy.consumeEnergyIgnoreCondition();
+                flag = true;
+                if (workingTime >= workingDuration) {
+                    workingTime = 0;
+                    workingDuration = recipe.getCookingTime();
+                    burn(recipe);
+                }
+            } else {
+                workingTime = 0;
             }
-        } else {
-            resetTime();
-            super.setNewBlockState(level, pos, state, EnergySmelter.WORKING, Boolean.FALSE);
+        } else if (workingTime > 0) {
+            //If the energy runs out, the cooking progress will slowly decrease
+            workingTime = Mth.clamp(workingTime - 2, 0, workingDuration);
         }
 
+        state = super.setNewBlockState(level, pos, state, EnergySmelter.WORKING, flag);
         setChanged(level, pos, state);
+    }
+
+    private void burn(@Nonnull SmeltingRecipe recipe) {
+        if (items.get(1).isEmpty()) {
+            items.set(1, recipe.assemble(this));
+        } else if (items.get(1).sameItem(recipe.getResultItem()) && recipe.getResultItem().getCount() + items.get(1).getCount() <= getMaxStackSize()) {
+            items.get(1).grow(1);
+        }
+
+        items.get(0).shrink(1);
+    }
+
+    /**
+     * @see net.minecraft.world.level.block.entity.ChestBlockEntity
+     * @see net.minecraft.world.level.block.entity.HopperBlockEntity
+     *
+     */
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        return super.getCapability(cap, side);
     }
 }

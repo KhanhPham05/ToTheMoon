@@ -1,6 +1,5 @@
 package com.khanhpham.tothemoon.core.blockentities.battery;
 
-import com.khanhpham.tothemoon.core.blockentities.EnergyItemCapableBlockEntity;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.energy.BatteryEnergy;

@@ -69,29 +69,8 @@ public class AlloySmelterBlock extends BaseEntityBlock<AlloySmelterBlockEntity> 
     }*/
 
     @Override
-    protected BlockEntityType<?> getBlockEntityType() {
+    protected BlockEntityType<AlloySmelterBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.ALLOY_SMELTER.get();
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.ALLOY_SMELTER.get(), AlloySmelterBlockEntity::serverTick);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity te = pLevel.getBlockEntity(pPos);
-            if (te instanceof AlloySmelterBlockEntity blockEntity) {
-                if (pLevel instanceof ServerLevel) {
-                    Containers.dropContents(pLevel, pPos, blockEntity);
-                }
-            }
-
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-        }
     }
 
 

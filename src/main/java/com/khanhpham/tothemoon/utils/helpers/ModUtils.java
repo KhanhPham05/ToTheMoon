@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class ModUtils {
-
+    public static final ResourceLocation WIDGETS = modLoc("textures/widgets.png");
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
     public static final EnumProperty<BatteryConnectionMode> BATTERY_CONNECTION_MODE = EnumProperty.create("connect", BatteryConnectionMode.class);
     public static ResourceLocation modLoc(String loc) {

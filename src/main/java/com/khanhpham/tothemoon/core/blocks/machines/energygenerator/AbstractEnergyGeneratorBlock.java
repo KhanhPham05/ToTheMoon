@@ -5,10 +5,8 @@ import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -25,12 +23,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<AbstractEnergyGeneratorBlockEntity> {
+public abstract class AbstractEnergyGeneratorBlock<T extends AbstractEnergyGeneratorBlockEntity> extends BaseEntityBlock<T> {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 
-    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractEnergyGeneratorBlockEntity> supplier) {
+    public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<T> supplier) {
         super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier);
 
         registerDefaultState(super.stateDefinition.any()
@@ -43,46 +41,10 @@ public abstract class AbstractEnergyGeneratorBlock extends BaseEntityBlock<Abstr
         pBuilder.add(FACING, LIT);
     }
 
-    /*@SuppressWarnings("deprecation")
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide) {
-            BlockEntity te = pLevel.getBlockEntity(pPos);
-            if (te instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorBlockEntity) {
-                pPlayer.openMenu(energyGeneratorBlockEntity);
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        return InteractionResult.FAIL;
-    }*/
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!state.is(pNewState.getBlock())) {
-            BlockEntity blockEntity = level.getBlockEntity(pPos);
-            if (blockEntity instanceof AbstractEnergyGeneratorBlockEntity energyGeneratorTileEntity) {
-                if (level instanceof ServerLevel) {
-                    Containers.dropContents(level, pPos, energyGeneratorTileEntity);
-                }
-
-                level.updateNeighbourForOutputSignal(pPos, this);
-            }
-
-            super.onRemove(state, level, pPos, pNewState, pIsMoving);
-        }
-    }
-
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-    }
-
-    @Override
-    public @Nullable <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level pLevel, BlockState pState, BlockEntityType<A> pBlockEntityType) {
-        return this.getTicker(pLevel, pBlockEntityType);
     }
 
     @Override

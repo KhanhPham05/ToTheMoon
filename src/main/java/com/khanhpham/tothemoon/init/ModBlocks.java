@@ -19,10 +19,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
-import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlate;
-import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
-import com.khanhpham.tothemoon.init.sounds.ModSoundTypes;
+import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;import com.khanhpham.tothemoon.init.sounds.ModSoundTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
@@ -100,7 +97,6 @@ public class ModBlocks {
     public static final RegistryObject<IronEnergyGeneratorBlock> IRON_ENERGY_GENERATOR = registerBlockEntity("iron_energy_generator", () -> new IronEnergyGeneratorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), IronEnergyGeneratorBlockEntity::new));
     public static final RegistryObject<AlloySmelterBlock> ALLOY_SMELTER = registerBlockEntity("alloy_smelter", () -> new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ModSoundTypes.METAL_MACHINE), AlloySmelterBlockEntity::new));
     public static final RegistryObject<MetalPressBlock> METAL_PRESS = registerBlockEntity("metal_press", () -> new MetalPressBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 4).sound(ModSoundTypes.METAL_MACHINE), MetalPressBlockEntity::new));
-    public static final RegistryObject<MetalPressingPlate> METAL_PRESSING_PLATE = registerBlockEntity("metal_pressing_plate", () -> new MetalPressingPlate(BlockBehaviour.Properties.copy(Blocks.SMOOTH_STONE_SLAB), MetalPressingPlateBlockEntity::new));
 
     public static final RegistryObject<BatteryBlock> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity::new));
     public static final RegistryObject<EnergySmelter> ENERGY_SMELTER = registerBlockEntity("energy_smelter", () -> new EnergySmelter(BlockBehaviour.Properties.copy(ALLOY_SMELTER.get())));
