@@ -16,12 +16,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
 
 public class ModBlockStates extends BlockStateProvider {
-    private static final BooleanProperty LIT = BlockStateProperties.LIT;
     private final Direction[] horizontalDirections = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
 
     public ModBlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
@@ -39,7 +39,7 @@ public class ModBlockStates extends BlockStateProvider {
         this.stairBlock(ModBlocks.MOON_ROCK_BRICK_STAIR.get(), ModBlocks.MOON_ROCK_BRICK.get());
         this.stairBlock(ModBlocks.COBBLED_MOON_ROCK_STAIR.get(), ModBlocks.COBBLED_MOON_ROCK.get());
         this.slabBlock(ModBlocks.COBBLED_MOON_ROCK_SLAB.get(), ModBlocks.COBBLED_MOON_ROCK.get());
-
+        this.horizontalFacingBlock(ModBlocks.CREATIVE_BATTERY.get());
         batteryBlockStates();
     }
 
@@ -66,6 +66,11 @@ public class ModBlockStates extends BlockStateProvider {
             }
         }
 
+    }
+
+    private void horizontalFacingBlock(Block block) {
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+        for (Direction direction : horizontalDirections) builder.addModels(builder.partialState().with(HorizontalDirectionalBlock.FACING, direction), getModel(direction, "block/creative_battery"));
     }
 
     private ConfiguredModel getModel(Direction direction, String name) {

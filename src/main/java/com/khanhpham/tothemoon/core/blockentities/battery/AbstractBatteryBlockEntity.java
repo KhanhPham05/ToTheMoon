@@ -7,6 +7,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.battery.creative.CreativeBat
 import com.khanhpham.tothemoon.utils.energy.BatteryEnergy;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -63,7 +64,7 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
 
     public void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
         blockState = tryUpdateBlockState(level, blockPos, blockState);
-        super.collectBlockEntities(level, blockPos);
+        collectBlockEntities(level, blockPos);
         transferEnergy();
 
         if (getEnergy().getBatteryType() == BatteryEnergy.BatteryEnergyType.ALWAYS_FULL) {
@@ -98,5 +99,16 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
         int capacity = getEnergy().getMaxEnergyStored();
         int batteryLevel = (energyStored * 10) / capacity;
         return setNewBlockState(level, pos, blockState, BatteryBlock.ENERGY_LEVEL, batteryLevel);
+    }
+
+
+    @Override
+    protected void collectBlockEntities(Level level, BlockPos pos) {
+        energyStorages.clear();
+        for (Direction direction : Direction.values()) {
+            var be = level.getBlockEntity(pos.relative(direction));
+            if (be != null && !(be instanceof BatteryBlockEntity))
+                be.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite()).ifPresent(energy -> energyStorages.put(pos.relative(direction), energy));
+        }
     }
 }

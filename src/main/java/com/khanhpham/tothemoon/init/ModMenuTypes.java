@@ -29,7 +29,6 @@ public class ModMenuTypes {
     public static final MenuType<MetalPressMenu> METAL_PRESS;
     public static final MenuType<BatteryMenu> BATTERY;
     public static final MenuType<EnergySmelterMenu> ENERGY_SMELTER;
-
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
         ENERGY_GENERATOR_CONTAINER = register("energy_generator_container", EnergyGeneratorMenu::new);

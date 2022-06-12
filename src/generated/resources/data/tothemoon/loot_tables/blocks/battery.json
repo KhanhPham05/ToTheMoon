@@ -7,12 +7,29 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "source": "energy",
+                  "target": "BlockEntityTag.energy",
+                  "op": "replace"
+                },
+                {
+                  "source": "capacity",
+                  "target": "BlockEntityTag.capacity",
+                  "op": "replace"
+                }
+              ]
+            }
+          ],
           "name": "tothemoon:battery"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
         }
       ]
     }

@@ -1,18 +1,24 @@
 package com.khanhpham.tothemoon.core.blocks.machines.battery;
 
 import com.khanhpham.tothemoon.core.blockentities.battery.AbstractBatteryBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
+import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
+import com.khanhpham.tothemoon.core.items.BatteryItem;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,9 +31,10 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Objects;
 
 @ParametersAreNonnullByDefault
-public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> {
+public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> implements HasCustomBlockItem {
 
     public static final IntegerProperty ENERGY_LEVEL = ModUtils.ENERGY_LEVEL;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -59,9 +66,38 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> {
 
         return super.getDrops(pState, pBuilder);
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public BlockItem getRawItem() {
+        return new BatteryItem(this);
+    }
+
+    @Override
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
+
+        if (pStack.hasTag()) {
+            CompoundTag tag = Objects.requireNonNull(pStack.getTag());
+            if (tag.contains("BlockEntityTag")) {
+                CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
+                if (blockEntityTag.contains("energy", 3)) {
+                    if (pLevel.getBlockEntity(pPos) instanceof BatteryBlockEntity battery) {
+                        battery.energy.setEnergy(blockEntityTag.getInt("energy"));
+                    }
+                }
+            }
+        }
+
+        /*LazyOptional<IEnergyStorage> energyStorageLazyOptional = pStack.getCapability(CapabilityEnergy.ENERGY);
+        energyStorageLazyOptional.ifPresent(energyStorage -> {
+            if (pLevel.getBlockEntity(pPos) instanceof BatteryBlockEntity battery) {
+                battery.energy.setEnergy(energyStorage.getEnergyStored());
+            }
+        });*/
     }
 }

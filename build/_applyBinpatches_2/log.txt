@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatched.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.23\forge-1.18.2-40.1.23-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -290,6 +290,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: b3e59fcf Exists: true
   Reading patch net.minecraft.client.gui.screens.inventory.EnchantmentScreen.binpatch
     Checksum: 3da15c6b Exists: true
+  Reading patch net.minecraft.client.gui.screens.inventory.LoomScreen.binpatch
+    Checksum: 9c8cd570 Exists: true
   Reading patch net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent.binpatch
     Checksum: 80e333d7 Exists: true
   Reading patch net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen.binpatch
@@ -620,6 +622,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 1edcd15a Exists: true
   Reading patch net.minecraft.client.renderer.texture.AbstractTexture.binpatch
     Checksum: 2197e6ac Exists: true
+  Reading patch net.minecraft.client.renderer.texture.MipmapGenerator.binpatch
+    Checksum: 85af99c6 Exists: true
   Reading patch net.minecraft.client.renderer.texture.Stitcher$Holder.binpatch
     Checksum: 6b5adf85 Exists: true
   Reading patch net.minecraft.client.renderer.texture.Stitcher$Region.binpatch
@@ -726,6 +730,22 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 9fd09b04 Exists: true
   Reading patch net.minecraft.core.Registry.binpatch
     Checksum: 4e38cb9d Exists: true
+  Reading patch net.minecraft.core.RegistryAccess$1.binpatch
+    Checksum: 6aa52715 Exists: true
+  Reading patch net.minecraft.core.RegistryAccess$Frozen.binpatch
+    Checksum: d8247a1c Exists: true
+  Reading patch net.minecraft.core.RegistryAccess$ImmutableRegistryAccess.binpatch
+    Checksum: cef23c13 Exists: true
+  Reading patch net.minecraft.core.RegistryAccess$RegistryData.binpatch
+    Checksum: 7cbd5bf2 Exists: true
+  Reading patch net.minecraft.core.RegistryAccess$RegistryEntry.binpatch
+    Checksum: 3ce6f366 Exists: true
+  Reading patch net.minecraft.core.RegistryAccess$Writable.binpatch
+    Checksum: b9714df1 Exists: true
+  Reading patch net.minecraft.core.RegistryAccess$WritableRegistryAccess.binpatch
+    Checksum: fe5e84e6 Exists: true
+  Reading patch net.minecraft.core.RegistryAccess.binpatch
+    Checksum: 1de2498d Exists: true
   Reading patch net.minecraft.core.RegistryCodecs$1.binpatch
     Checksum: 885ba5c8 Exists: true
   Reading patch net.minecraft.core.RegistryCodecs$RegistryEntry.binpatch
@@ -1136,14 +1156,22 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: fa30074a Exists: true
   Reading patch net.minecraft.server.packs.VanillaPackResources.binpatch
     Checksum: 7bc7990e Exists: true
+  Reading patch net.minecraft.server.packs.metadata.pack.PackMetadataSection.binpatch
+    Checksum: aa74f68e Exists: true
+  Reading patch net.minecraft.server.packs.metadata.pack.PackMetadataSectionSerializer.binpatch
+    Checksum: ef9065f0 Exists: true
   Reading patch net.minecraft.server.packs.repository.Pack$PackConstructor.binpatch
     Checksum: f69abddd Exists: true
   Reading patch net.minecraft.server.packs.repository.Pack$Position.binpatch
     Checksum: 9f791744 Exists: true
   Reading patch net.minecraft.server.packs.repository.Pack.binpatch
     Checksum: 5afad686 Exists: true
+  Reading patch net.minecraft.server.packs.repository.PackCompatibility.binpatch
+    Checksum: 4f20184f Exists: true
   Reading patch net.minecraft.server.packs.repository.PackRepository.binpatch
     Checksum: b7f207ec Exists: true
+  Reading patch net.minecraft.server.packs.resources.ReloadableResourceManager.binpatch
+    Checksum: 5794dc5 Exists: true
   Reading patch net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener.binpatch
     Checksum: 2fe376fc Exists: true
   Reading patch net.minecraft.server.players.PlayerList$1.binpatch
@@ -1722,6 +1750,20 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: d6afb208 Exists: true
   Reading patch net.minecraft.world.inventory.InventoryMenu.binpatch
     Checksum: 6c4dd3fd Exists: true
+  Reading patch net.minecraft.world.inventory.LoomMenu$1.binpatch
+    Checksum: ed86de84 Exists: true
+  Reading patch net.minecraft.world.inventory.LoomMenu$2.binpatch
+    Checksum: bd41c83a Exists: true
+  Reading patch net.minecraft.world.inventory.LoomMenu$3.binpatch
+    Checksum: 1f316847 Exists: true
+  Reading patch net.minecraft.world.inventory.LoomMenu$4.binpatch
+    Checksum: effb6728 Exists: true
+  Reading patch net.minecraft.world.inventory.LoomMenu$5.binpatch
+    Checksum: 97b6b5a Exists: true
+  Reading patch net.minecraft.world.inventory.LoomMenu$6.binpatch
+    Checksum: 484c4af1 Exists: true
+  Reading patch net.minecraft.world.inventory.LoomMenu.binpatch
+    Checksum: 62e1a237 Exists: true
   Reading patch net.minecraft.world.inventory.MenuType$MenuSupplier.binpatch
     Checksum: c131b8ed Exists: true
   Reading patch net.minecraft.world.inventory.MenuType.binpatch
@@ -1742,6 +1784,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: bcd7d4a Exists: true
   Reading patch net.minecraft.world.item.AxeItem.binpatch
     Checksum: 7eb0b3b5 Exists: true
+  Reading patch net.minecraft.world.item.BannerItem.binpatch
+    Checksum: 7d77c2e2 Exists: true
   Reading patch net.minecraft.world.item.BlockItem.binpatch
     Checksum: 2410cc7f Exists: true
   Reading patch net.minecraft.world.item.BoneMealItem.binpatch
@@ -2617,6 +2661,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/client/gui/screens/inventory/CreativeModeInventoryScreen 1/1
   Patching net/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen 1/1
   Patching net/minecraft/client/gui/screens/inventory/EnchantmentScreen 1/1
+  Patching net/minecraft/client/gui/screens/inventory/LoomScreen 1/1
   Patching net/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipComponent 1/1
   Patching net/minecraft/client/gui/screens/multiplayer/JoinMultiplayerScreen 1/1
   Patching net/minecraft/client/gui/screens/multiplayer/ServerSelectionList$Entry 1/1
@@ -2782,6 +2827,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/client/renderer/item/ItemProperties$CompassWobble 1/1
   Patching net/minecraft/client/renderer/item/ItemProperties 1/1
   Patching net/minecraft/client/renderer/texture/AbstractTexture 1/1
+  Patching net/minecraft/client/renderer/texture/MipmapGenerator 1/1
   Patching net/minecraft/client/renderer/texture/Stitcher$Holder 1/1
   Patching net/minecraft/client/renderer/texture/Stitcher$Region 1/1
   Patching net/minecraft/client/renderer/texture/Stitcher$SpriteLoader 1/1
@@ -2835,6 +2881,14 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/core/Registry$1 1/1
   Patching net/minecraft/core/Registry$RegistryBootstrap 1/1
   Patching net/minecraft/core/Registry 1/1
+  Patching net/minecraft/core/RegistryAccess$1 1/1
+  Patching net/minecraft/core/RegistryAccess$Frozen 1/1
+  Patching net/minecraft/core/RegistryAccess$ImmutableRegistryAccess 1/1
+  Patching net/minecraft/core/RegistryAccess$RegistryData 1/1
+  Patching net/minecraft/core/RegistryAccess$RegistryEntry 1/1
+  Patching net/minecraft/core/RegistryAccess$Writable 1/1
+  Patching net/minecraft/core/RegistryAccess$WritableRegistryAccess 1/1
+  Patching net/minecraft/core/RegistryAccess 1/1
   Patching net/minecraft/core/RegistryCodecs$1 1/1
   Patching net/minecraft/core/RegistryCodecs$RegistryEntry 1/1
   Patching net/minecraft/core/RegistryCodecs 1/1
@@ -3040,10 +3094,14 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/server/packs/PackResources 1/1
   Patching net/minecraft/server/packs/VanillaPackResources$1 1/1
   Patching net/minecraft/server/packs/VanillaPackResources 1/1
+  Patching net/minecraft/server/packs/metadata/pack/PackMetadataSection 1/1
+  Patching net/minecraft/server/packs/metadata/pack/PackMetadataSectionSerializer 1/1
   Patching net/minecraft/server/packs/repository/Pack$PackConstructor 1/1
   Patching net/minecraft/server/packs/repository/Pack$Position 1/1
   Patching net/minecraft/server/packs/repository/Pack 1/1
+  Patching net/minecraft/server/packs/repository/PackCompatibility 1/1
   Patching net/minecraft/server/packs/repository/PackRepository 1/1
+  Patching net/minecraft/server/packs/resources/ReloadableResourceManager 1/1
   Patching net/minecraft/server/packs/resources/SimpleJsonResourceReloadListener 1/1
   Patching net/minecraft/server/players/PlayerList$1 1/1
   Patching net/minecraft/server/players/PlayerList 1/1
@@ -3333,6 +3391,13 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/inventory/InventoryMenu$1 1/1
   Patching net/minecraft/world/inventory/InventoryMenu$2 1/1
   Patching net/minecraft/world/inventory/InventoryMenu 1/1
+  Patching net/minecraft/world/inventory/LoomMenu$1 1/1
+  Patching net/minecraft/world/inventory/LoomMenu$2 1/1
+  Patching net/minecraft/world/inventory/LoomMenu$3 1/1
+  Patching net/minecraft/world/inventory/LoomMenu$4 1/1
+  Patching net/minecraft/world/inventory/LoomMenu$5 1/1
+  Patching net/minecraft/world/inventory/LoomMenu$6 1/1
+  Patching net/minecraft/world/inventory/LoomMenu 1/1
   Patching net/minecraft/world/inventory/MenuType$MenuSupplier 1/1
   Patching net/minecraft/world/inventory/MenuType 1/1
   Patching net/minecraft/world/inventory/RecipeBookMenu 1/1
@@ -3343,6 +3408,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/item/ArmorItem 1/1
   Patching net/minecraft/world/item/ArrowItem 1/1
   Patching net/minecraft/world/item/AxeItem 1/1
+  Patching net/minecraft/world/item/BannerItem 1/1
   Patching net/minecraft/world/item/BlockItem 1/1
   Patching net/minecraft/world/item/BoneMealItem 1/1
   Patching net/minecraft/world/item/BowItem 1/1

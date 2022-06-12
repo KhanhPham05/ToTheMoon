@@ -107,11 +107,6 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
         items.get(0).shrink(1);
     }
 
-    /**
-     * @see net.minecraft.world.level.block.entity.ChestBlockEntity
-     * @see net.minecraft.world.level.block.entity.HopperBlockEntity
-     *
-     */
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         return super.getCapability(cap, side);

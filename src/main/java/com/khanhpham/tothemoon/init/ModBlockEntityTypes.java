@@ -9,6 +9,7 @@ import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity
 import com.khanhpham.tothemoon.core.blockentities.others.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MoonBarrelTileEntity;
+import com.khanhpham.tothemoon.core.blockentities.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
@@ -40,6 +41,7 @@ public class ModBlockEntityTypes {
     //public static final RegistryObject<BlockEntityType<MetalPressingPlateBlockEntity>> METAL_PRESSING_PLATE;
     public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> BATTERY;
     public static final RegistryObject<BlockEntityType<EnergySmelterBlockEntity>> ENERGY_SMELTER;
+    public static final RegistryObject<BlockEntityType<CreativeBatteryBlockEntity>> CREATIVE_BATTERY;
 
     static {
         ToTheMoon.LOG.info("Registering BEs");
@@ -51,7 +53,8 @@ public class ModBlockEntityTypes {
         ALLOY_SMELTER = register("alloy_smelter", () -> BlockEntityType.Builder.of(AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER.get()).build(null));
         METAL_PRESS = register("metal_press", () -> BlockEntityType.Builder.of(MetalPressBlockEntity::new, ModBlocks.METAL_PRESS.get()).build(null));
         //METAL_PRESSING_PLATE = register("metal_pressing_plate", () -> BlockEntityType.Builder.of(MetalPressingPlateBlockEntity::new, ModBlocks.METAL_PRESSING_PLATE.get()).build(null));
-        BATTERY = register("battery", () -> new BlockEntityType<>(BatteryBlockEntity::new, ImmutableSet.of(ModBlocks.BATTERY.get(), ModBlocks.CREATIVE_BATTERY.get()), null));
+        BATTERY = register("battery", () -> new BlockEntityType<>(BatteryBlockEntity::new, ImmutableSet.of(ModBlocks.BATTERY.get()), null));
+        CREATIVE_BATTERY = register("creative_battery", () -> BlockEntityType.Builder.of(CreativeBatteryBlockEntity::new, ModBlocks.CREATIVE_BATTERY.get()).build(null));
         ENERGY_SMELTER = register("energy_smelter", () -> new BlockEntityType<>(EnergySmelterBlockEntity::new, ImmutableSet.of(ModBlocks.ENERGY_SMELTER.get()), null));
     }
 

@@ -39,7 +39,7 @@ import java.util.HashMap;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public abstract class EnergyItemCapableBlockEntity extends EnergyCapableTileEntity implements TickableBlockEntity, IItemHandler, Container, MenuProvider, Nameable {
+public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEntity implements TickableBlockEntity, IItemHandler, Container, MenuProvider, Nameable {
     protected final HashMap<BlockPos, IEnergyStorage> energyStorages = new HashMap<>();
     protected final Component label;
     protected final int containerSize;

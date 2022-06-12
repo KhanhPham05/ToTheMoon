@@ -13,6 +13,12 @@ public class Energy extends EnergyStorage {
         this.maxReceive = maxReceive;
     }
 
+    public Energy(int capacity) {
+        super(capacity);
+        this.maxReceive = capacity;
+        this.maxExtract = capacity;
+    }
+
     public int getMaxReceive() {
         return maxReceive;
     }
@@ -35,6 +41,7 @@ public class Energy extends EnergyStorage {
 
     public void save(CompoundTag pTag) {
         pTag.putInt("energy", energy);
+        pTag.putInt("capacity", capacity);
     }
 
     public void load(CompoundTag pTag) {
@@ -51,5 +58,9 @@ public class Energy extends EnergyStorage {
         } else {
             this.energy += this.maxReceive;
         }
+    }
+
+    public void setEnergy(int energyNbt) {
+        this.energy = energyNbt;
     }
 }
