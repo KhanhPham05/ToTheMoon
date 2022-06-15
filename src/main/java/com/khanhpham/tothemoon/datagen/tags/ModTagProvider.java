@@ -30,6 +30,9 @@ public class ModTagProvider {
         data.addProvider(provider);
     }
 
+    /**
+     * @see Tags.Items
+     */
     public static final class ModItemTagsProvider extends ItemTagsProvider {
         public ModItemTagsProvider(DataGenerator pGenerator, BlockTagsProvider pBlockTagsProvider, ExistingFileHelper existingFileHelper) {
             super(pGenerator, pBlockTagsProvider, Names.MOD_ID, existingFileHelper);

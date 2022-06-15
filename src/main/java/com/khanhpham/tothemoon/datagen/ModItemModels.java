@@ -10,6 +10,7 @@ import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -29,7 +30,7 @@ public class ModItemModels extends ItemModelProvider {
 
         for (Item item : items) {
             if (!(item instanceof GearItem)) {
-                if (item instanceof HandheldItem) {
+                if (item instanceof HandheldItem || item instanceof DiggerItem) {
                     String path = ModUtils.convertRlToPath(item);
                     withExistingParent(path, new ResourceLocation("item/handheld")).texture("layer0", "item/" + path);
                 } else simpleItem(item);

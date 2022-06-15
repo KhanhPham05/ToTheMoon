@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:crushing",
+  "input": {
+    "ingredient": {
+      "item": "tothemoon:redstone_steel_alloy"
+    }
+  },
+  "output": {
+    "item": "tothemoon:redstone_steel_alloy_dust"
+  }
+}

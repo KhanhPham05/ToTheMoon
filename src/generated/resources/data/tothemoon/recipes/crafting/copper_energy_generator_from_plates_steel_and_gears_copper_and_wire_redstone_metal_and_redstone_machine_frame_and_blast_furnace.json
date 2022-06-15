@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SGS",
+    "WFW",
+    "SBS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:plates/steel"
+    },
+    "G": {
+      "tag": "forge:gears/copper"
+    },
+    "W": {
+      "tag": "forge:wire/redstone_metal"
+    },
+    "F": {
+      "item": "tothemoon:redstone_machine_frame"
+    },
+    "B": {
+      "item": "minecraft:blast_furnace"
+    }
+  },
+  "result": {
+    "item": "tothemoon:copper_energy_generator"
+  }
+}

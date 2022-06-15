@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "WMW",
+    "SGS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:plates/steel"
+    },
+    "P": {
+      "tag": "forge:plates/gold"
+    },
+    "W": {
+      "tag": "forge:wire/redstone_steel_alloy"
+    },
+    "M": {
+      "item": "tothemoon:iron_energy_generator"
+    },
+    "G": {
+      "tag": "forge:gears/gold"
+    }
+  },
+  "result": {
+    "item": "tothemoon:gold_energy_generator"
+  }
+}

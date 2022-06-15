@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -35,13 +34,13 @@ public class AppendableItemTagKey extends AbstractAppendable<Item> {
 
     /**
      * This class stores tags for a specific crafting process
-     * e.g : {@code items:forge:storage_blocks}
+     * e.g : {@code items:forge:storage_blocks/iron -> items:forge:ingots/iron}
      */
-    public static final class Processable extends AppendableItemTagKey {
+    public static final class OneWayProcessable extends AppendableItemTagKey {
 
         private final HashMap<TagKey<Item>, Supplier<? extends ItemLike>> processMap = new HashMap<>();
 
-        public Processable(TagKey<Item> mainTag) {
+        public OneWayProcessable(TagKey<Item> mainTag) {
             super(mainTag);
         }
 

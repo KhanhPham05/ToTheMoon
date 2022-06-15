@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:crafting/anti_pressure_glass_from_dusts_steel_and_glass_and_gems_quartz"
+    ]
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:crafting/anti_pressure_glass_from_dusts_steel_and_glass_and_gems_quartz"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tick",
+      "has_the_recipe"
+    ]
+  ]
+}

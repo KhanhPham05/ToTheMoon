@@ -129,11 +129,11 @@ public class ToTheMoon {
                         public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
                             return burnableBlock.getBurningTime();
                         }
-                    }.setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(burnableBlock))));
+                    }.setRegistryName(ModUtils.modLoc(ModUtils.getPath(burnableBlock))));
                 } else if (block instanceof HasCustomBlockItem item) {
                     reg.register(item.getItem(block.getRegistryName()));
                 } else
-                    reg.register(new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(block))));
+                    reg.register(new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getPath(block))));
             }
         }
 

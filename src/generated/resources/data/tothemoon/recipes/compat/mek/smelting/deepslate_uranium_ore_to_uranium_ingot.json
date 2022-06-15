@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:smelting",
+  "input": {
+    "ingredient": {
+      "item": "tothemoon:deepslate_uranium_ore"
+    }
+  },
+  "output": {
+    "item": "tothemoon:uranium_ingot"
+  }
+}

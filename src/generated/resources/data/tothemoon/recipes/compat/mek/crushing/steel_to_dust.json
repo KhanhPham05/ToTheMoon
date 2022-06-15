@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:crushing",
+  "input": {
+    "ingredient": {
+      "item": "tothemoon:steel_ingot"
+    }
+  },
+  "output": {
+    "item": "tothemoon:steel_dust"
+  }
+}

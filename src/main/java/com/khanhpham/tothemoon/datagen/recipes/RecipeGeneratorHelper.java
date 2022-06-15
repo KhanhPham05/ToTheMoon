@@ -1,15 +1,19 @@
 package com.khanhpham.tothemoon.datagen.recipes;
 
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
+import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import org.apache.commons.compress.utils.Lists;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -70,18 +74,30 @@ public class RecipeGeneratorHelper {
 
     protected void smelting(TagKey<Item> ingredient, ItemLike result, boolean includeBlasting) {
         var smeltingRecipe = new Smelting(consumer, result, ingredient, 200, includeBlasting);
-
         smeltingRecipe.save();
     }
 
-    protected void shapelessCrafting(ItemLike result, int amount, TagKey<Item> require) {
-        var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount).requires(require);
-        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", List.of(extractTag(require)), getId(result));
+    @SafeVarargs
+    protected final void shapelessCrafting(ItemLike result, int amount, TagKey<Item>... require) {
+        var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount);
+        List<String> tagStrings = new ArrayList<>();
+        for (TagKey<Item> itemTagKey : require) {
+            shapelessRecipe.requires(itemTagKey);
+            tagStrings.add(extractTag(itemTagKey));
+        }
+
+
+        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", tagStrings, getId(result));
     }
 
-    protected void shapelessCrafting(ItemLike result, int amount, ItemLike require) {
-        var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount).requires(require);
-        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", List.of(getId(require)), getId(result));
+    protected void shapelessCrafting(ItemLike result, int amount, ItemLike... require) {
+        var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount);
+        List<String> itemNames = new ArrayList<>();
+        for (ItemLike itemLike : require) {
+            itemNames.add(ModUtils.getPath(itemLike.asItem()));
+            shapelessRecipe.requires(itemLike);
+        }
+        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", itemNames, getId(result));
     }
 
 
@@ -143,6 +159,7 @@ public class RecipeGeneratorHelper {
             super.inputs.add(getId(ingredient));
             this.cookTime = cookTime;
             if (includeBlasting) (new Blasting(consumer, result, ingredient, cookTime / 2)).save();
+            ItemStackToItemStackRecipeBuilder.smelting(IngredientCreatorAccess.item().from(ingredient), new ItemStack(result.asItem())).build(consumer, ModUtils.modLoc("compat/mek/smelting/" + ModUtils.getPath(ingredient.asItem()) + "_to_" + ModUtils.getPath(result.asItem())));
         }
 
         public Smelting(Consumer<FinishedRecipe> consumer, ItemLike result, TagKey<Item> ingredient, int cookTime, boolean includeBlasting) {
@@ -151,6 +168,7 @@ public class RecipeGeneratorHelper {
             this.cookTime = cookTime;
             super.inputs.add(extractTag(ingredient));
             if (includeBlasting) (new Blasting(consumer, result, ingredient, cookTime / 2)).save();
+            ItemStackToItemStackRecipeBuilder.smelting(IngredientCreatorAccess.item().from(ingredient), new ItemStack(result.asItem())).build(consumer, ModUtils.modLoc("compat/mek/smelting/" + extractTag(ingredient) + "_to_" + ModUtils.getPath(result.asItem())));
         }
 
         @Deprecated

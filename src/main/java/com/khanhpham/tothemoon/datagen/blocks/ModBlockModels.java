@@ -34,7 +34,7 @@ public class ModBlockModels extends BlockModelProvider {
 
 
     private void cubeAll(Supplier<? extends Block> supplier) {
-        String id = ModUtils.getNameFromObject(supplier.get());
+        String id = ModUtils.getPath(supplier.get());
         super.cubeAll(id, modLoc("block/" + id));
     }
 }

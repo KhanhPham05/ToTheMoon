@@ -126,7 +126,7 @@ mixin {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.47'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.51'
     implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")
@@ -139,14 +139,14 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3810540")
+    implementation fg.deobf("curse.maven:mekanism-268560:3810540")
 
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67:api")
     //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67")
 
     //runtimeOnly fg.deobf("curse.maven:pipez-443900:3760255")
-    //runtimeOnly fg.deobf("curse.maven:create-328085:3737418")
-    //runtimeOnly fg.deobf("curse.maven:flywheel-486392:3737402")
+    //implementation fg.deobf("curse.maven:create-328085:3737418")
+    runtimeOnly fg.deobf("curse.maven:flywheel-486392:3737402")
     runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3748971")
 
     //implementation fg.deobf("curse.maven:patchouli-datagen-ptd-lib-585667:3671853")

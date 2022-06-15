@@ -57,7 +57,7 @@ public class ModUtils {
         return Registry.ITEM.getKey(item).toString();
     }
 
-    public static <T extends IForgeRegistryEntry<T>> String getNameFromObject(T object) {
+    public static <T extends IForgeRegistryEntry<T>> String getPath(T object) {
         return Objects.requireNonNull(object.getRegistryName()).getPath();
     }
 

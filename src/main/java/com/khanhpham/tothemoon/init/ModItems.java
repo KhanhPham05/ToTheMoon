@@ -1,21 +1,30 @@
 package com.khanhpham.tothemoon.init;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Table;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.GearItem;
 import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.core.items.HandheldItem;
 import com.khanhpham.tothemoon.core.items.UpgradeItem;
+import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
+import com.khanhpham.tothemoon.core.items.tool.ModToolTiers;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -37,13 +46,20 @@ public class ModItems {
     public static final RegistryObject<HammerItem> WOODEN_HAMMER = registerHammer("wooden_hammer", 16);
     public static final RegistryObject<HammerItem> STEEL_HAMMER = registerHammer("steel_hammer", 64);
     public static final RegistryObject<HammerItem> DIAMOND_HAMMER = registerHammer("diamond_hammer", 128);
-    public static final RegistryObject<HammerItem> NETHERITE_HAMMER = ITEM_DEFERRED_REGISTER.register("netherite_hammer", () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(256).fireResistant().setNoRepair()) {
+    public static final RegistryObject<HammerItem> NETHERITE_HAMMER = register("netherite_hammer", () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(256).fireResistant().setNoRepair()) {
         @Override
         @Nonnull
         public Rarity getRarity(@Nonnull ItemStack pStack) {
             return Rarity.UNCOMMON;
         }
     });
+    public static final Item.Properties GENERAL_PROPERTIES = new Item.Properties().tab(ToTheMoon.TAB);
+    /*public static final RegistryObject<PickaxeItem> STEEL_PICKAXE = register("steel_pickaxe", () -> new PickaxeItem(ModToolTiers.STEEL, 1, -2.8f, GENERAL_PROPERTIES));
+    public static final RegistryObject<HoeItem> STEEL_HOE = register("steel_hoe", () -> new HoeItem(ModToolTiers.STEEL, -2, -0.8f, GENERAL_PROPERTIES));
+    public static final RegistryObject<AxeItem> STEEL_AXE = register("steel_axe", () -> new AxeItem(ModToolTiers.STEEL, 6.0f, -2.8f, GENERAL_PROPERTIES));
+    public static final RegistryObject<SwordItem> STEEL_SWORD = register("steel_sword", () -> new SwordItem(ModToolTiers.STEEL, 3, -2.0f, GENERAL_PROPERTIES));
+    public static final RegistryObject<ShovelItem> STEEL_SHOVEL = register("steel_shovel", () -> new ShovelItem(ModToolTiers.STEEL, 1.5f, -2.8f, GENERAL_PROPERTIES));
+    */
     private static final String S = "steel";
     public static final RegistryObject<Item> STEEL_PLATE = plate(S);
     public static final RegistryObject<Item> STEEL_INGOT = item(S + "_ingot");
@@ -65,7 +81,7 @@ public class ModItems {
     public static final RegistryObject<GearItem> REDSTONE_METAL_GEAR = gear(RM);
     public static final RegistryObject<HandheldItem> REDSTONE_METAL_ROD = rod(RM);
     public static final RegistryObject<HandheldItem> REDSTONE_METAL_WIRE = wire(RM);
-    public static final RegistryObject<Item> REDSTONE_METAL_DUSTS = dust(RM);
+    public static final RegistryObject<Item> REDSTONE_METAL_DUST = dust(RM);
     private static final String UR = "uranium";
     //common crafting ingredient
     public static final RegistryObject<Item> URANIUM_INGOT = item(UR + "_ingot");
@@ -93,23 +109,46 @@ public class ModItems {
     public static final RegistryObject<HandheldItem> GOLD_ROD = rod(G);
     public static final RegistryObject<HandheldItem> GOLD_WIRE = wire(G);
 
+    public static final Table<ModToolTiers.ToolType, ForgeTier, RegistryObject<? extends TieredItem>> ALL_TOOLS = HashBasedTable.create();
+    public static final ImmutableList<RegistryObject<ArmorItem>> ARMORS;
+
     static {
+        for (ModToolTiers.ToolType toolType : ModToolTiers.ToolType.values()) {
+            for (ModToolTiers.Tier materialType : new ModToolTiers.Tier[]{ModToolTiers.STEEL, ModToolTiers.URANIUM}) {
+                String name = materialType.name().toLowerCase() + "_" + toolType.toString().toLowerCase();
+                ALL_TOOLS.put(toolType, materialType.tier(), register(name, () -> toolType.toItem(materialType.tier(), GENERAL_PROPERTIES)));
+            }
+        }
+
+        Map<String, EquipmentSlot> map = ImmutableMap.of("helmet", EquipmentSlot.HEAD, "chestplate", EquipmentSlot.CHEST, "leggings", EquipmentSlot.LEGS, "boots", EquipmentSlot.FEET);
+        ArrayList<RegistryObject<ArmorItem>> armors = new ArrayList<>();
+        for (String armor : map.keySet()) {
+            for (ModArmorMaterial armorMaterial : ModArmorMaterial.values()) {
+                armors.add(register(armorMaterial.toString().toLowerCase() + '_' + armor, () -> new ArmorItem(armorMaterial, Objects.requireNonNull(map.get(armor)), GENERAL_PROPERTIES)));
+            }
+        }
+        ARMORS = ImmutableList.copyOf(armors);
+
         for (int i = 1; i < 3; i++) {
             int level = i;
-            ITEM_DEFERRED_REGISTER.register("speed_upgrade_tier_" + i, () -> new UpgradeItem.SpeedUpgrade(level));
-            ITEM_DEFERRED_REGISTER.register("energy_upgrade_tier_" + i, () -> new UpgradeItem.EnergyUpgrade(level));
+            register("speed_upgrade_tier_" + i, () -> new UpgradeItem.SpeedUpgrade(level));
+            register("energy_upgrade_tier_" + i, () -> new UpgradeItem.EnergyUpgrade(level));
         }
     }
 
     private ModItems() {
     }
 
+    private static int itemCount = 0;
+
     public static <T extends Item> RegistryObject<T> register(String name, Supplier<T> supplier) {
+        itemCount++;
+        ModUtils.info("Registering [{}] - {}", name, supplier);
         return ITEM_DEFERRED_REGISTER.register(name, supplier);
     }
 
     public static RegistryObject<HammerItem> registerHammer(String name, int durability) {
-        return ITEM_DEFERRED_REGISTER.register(name, () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
+        return register(name, () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
     }
 
     public static RegistryObject<Item> item(String name) {
@@ -147,8 +186,5 @@ public class ModItems {
     @Nonnull
     public static ResourceLocation getRegistryName(Block block) {
         return Objects.requireNonNull(block.getRegistryName());
-    }
-
-    public static void init() {
     }
 }

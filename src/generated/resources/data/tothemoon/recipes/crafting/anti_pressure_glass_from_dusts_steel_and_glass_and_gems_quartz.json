@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SGS",
+    "GQG",
+    "SGS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:dusts/steel"
+    },
+    "G": {
+      "tag": "forge:glass"
+    },
+    "Q": {
+      "tag": "forge:gems/quartz"
+    }
+  },
+  "result": {
+    "item": "tothemoon:anti_pressure_glass",
+    "count": 4
+  }
+}

@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.51\forge-1.18.2-40.1.51-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.51\forge-1.18.2-40.1.51-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatched.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.51\forge-1.18.2-40.1.51-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.47\forge-1.18.2-40.1.47-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.51\forge-1.18.2-40.1.51-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.51\forge-1.18.2-40.1.51-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -58,6 +58,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: e6536655 Exists: true
   Reading patch com.mojang.blaze3d.vertex.BufferBuilder.binpatch
     Checksum: 32f26304 Exists: true
+  Reading patch com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator.binpatch
+    Checksum: 13163170 Exists: true
   Reading patch com.mojang.blaze3d.vertex.VertexConsumer.binpatch
     Checksum: c5adabbd Exists: true
   Reading patch com.mojang.blaze3d.vertex.VertexFormat$1.binpatch
@@ -78,6 +80,12 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 5c524ef8 Exists: true
   Reading patch com.mojang.blaze3d.vertex.VertexFormatElement.binpatch
     Checksum: 26e7dbdb Exists: true
+  Reading patch com.mojang.blaze3d.vertex.VertexMultiConsumer$Double.binpatch
+    Checksum: f5f7b772 Exists: true
+  Reading patch com.mojang.blaze3d.vertex.VertexMultiConsumer$Multiple.binpatch
+    Checksum: 3f48205b Exists: true
+  Reading patch com.mojang.blaze3d.vertex.VertexMultiConsumer.binpatch
+    Checksum: 48bbec47 Exists: true
   Reading patch com.mojang.math.Matrix3f.binpatch
     Checksum: 24c8162f Exists: true
   Reading patch com.mojang.math.Matrix4f.binpatch
@@ -468,6 +476,10 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 170b6593 Exists: true
   Reading patch net.minecraft.client.renderer.LightTexture.binpatch
     Checksum: ee5e33a3 Exists: true
+  Reading patch net.minecraft.client.renderer.OutlineBufferSource$EntityOutlineGenerator.binpatch
+    Checksum: 4777bf2c Exists: true
+  Reading patch net.minecraft.client.renderer.OutlineBufferSource.binpatch
+    Checksum: d487418 Exists: true
   Reading patch net.minecraft.client.renderer.PostChain.binpatch
     Checksum: 5072a769 Exists: true
   Reading patch net.minecraft.client.renderer.RenderType$CompositeRenderType.binpatch
@@ -490,6 +502,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: aa77036b Exists: true
   Reading patch net.minecraft.client.renderer.Sheets.binpatch
     Checksum: bf55eaf4 Exists: true
+  Reading patch net.minecraft.client.renderer.SpriteCoordinateExpander.binpatch
+    Checksum: 52a398b5 Exists: true
   Reading patch net.minecraft.client.renderer.block.BlockModelShaper.binpatch
     Checksum: 8061d75c Exists: true
   Reading patch net.minecraft.client.renderer.block.BlockRenderDispatcher$1.binpatch
@@ -2546,6 +2560,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching com/mojang/blaze3d/vertex/BufferBuilder$DrawState 1/1
   Patching com/mojang/blaze3d/vertex/BufferBuilder$SortState 1/1
   Patching com/mojang/blaze3d/vertex/BufferBuilder 1/1
+  Patching com/mojang/blaze3d/vertex/SheetedDecalTextureGenerator 1/1
   Patching com/mojang/blaze3d/vertex/VertexConsumer 1/1
   Patching com/mojang/blaze3d/vertex/VertexFormat$1 1/1
   Patching com/mojang/blaze3d/vertex/VertexFormat$IndexType 1/1
@@ -2556,6 +2571,9 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching com/mojang/blaze3d/vertex/VertexFormatElement$Usage$SetupState 1/1
   Patching com/mojang/blaze3d/vertex/VertexFormatElement$Usage 1/1
   Patching com/mojang/blaze3d/vertex/VertexFormatElement 1/1
+  Patching com/mojang/blaze3d/vertex/VertexMultiConsumer$Double 1/1
+  Patching com/mojang/blaze3d/vertex/VertexMultiConsumer$Multiple 1/1
+  Patching com/mojang/blaze3d/vertex/VertexMultiConsumer 1/1
   Patching com/mojang/math/Matrix3f 1/1
   Patching com/mojang/math/Matrix4f 1/1
   Patching com/mojang/math/Transformation 1/1
@@ -2750,6 +2768,8 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/client/renderer/LevelRenderer$TransparencyShaderException 1/1
   Patching net/minecraft/client/renderer/LevelRenderer 1/1
   Patching net/minecraft/client/renderer/LightTexture 1/1
+  Patching net/minecraft/client/renderer/OutlineBufferSource$EntityOutlineGenerator 1/1
+  Patching net/minecraft/client/renderer/OutlineBufferSource 1/1
   Patching net/minecraft/client/renderer/PostChain 1/1
   Patching net/minecraft/client/renderer/RenderType$CompositeRenderType 1/1
   Patching net/minecraft/client/renderer/RenderType$CompositeState$CompositeStateBuilder 1/1
@@ -2761,6 +2781,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/client/renderer/ShaderInstance 1/1
   Patching net/minecraft/client/renderer/Sheets$1 1/1
   Patching net/minecraft/client/renderer/Sheets 1/1
+  Patching net/minecraft/client/renderer/SpriteCoordinateExpander 1/1
   Patching net/minecraft/client/renderer/block/BlockModelShaper 1/1
   Patching net/minecraft/client/renderer/block/BlockRenderDispatcher$1 1/1
   Patching net/minecraft/client/renderer/block/BlockRenderDispatcher 1/1

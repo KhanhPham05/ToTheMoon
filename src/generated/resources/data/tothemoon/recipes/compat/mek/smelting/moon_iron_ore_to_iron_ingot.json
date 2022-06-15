@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:smelting",
+  "input": {
+    "ingredient": {
+      "item": "tothemoon:moon_iron_ore"
+    }
+  },
+  "output": {
+    "item": "minecraft:iron_ingot"
+  }
+}

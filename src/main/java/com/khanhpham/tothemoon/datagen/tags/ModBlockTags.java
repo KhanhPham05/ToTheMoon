@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.datagen.tags;
 
+import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -25,6 +26,8 @@ public class ModBlockTags {
     public static final TagKey<Block> BLOCK_REDSTONE_STEEL_STORAGE = append(BLOCK_STORAGE_BLOCKS, "redstone_steel_alloy", ModBlocks.REDSTONE_STEEL_ALLOY_BLOCK);
     public static final TagKey<Block> BLOCK_RAW_URANIUM_STORAGE = append(BLOCK_STORAGE_BLOCKS, "raw_uranium", ModBlocks.RAW_URANIUM_BLOCK);
 
+
+
     private static AppendableBlockTagKey createAppendable(ResourceLocation id) {
         return new AppendableBlockTagKey(id);
     }
@@ -36,4 +39,5 @@ public class ModBlockTags {
     private static TagKey<Block> append(AppendableBlockTagKey key, String suf, Supplier<? extends Block> block) {
         return key.append(suf, block);
     }
+
 }

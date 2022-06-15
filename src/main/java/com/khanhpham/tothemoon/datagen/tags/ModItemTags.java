@@ -9,8 +9,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 
-import java.util.function.Supplier;
-
 import static net.minecraftforge.common.Tags.Items.*;
 
 public class ModItemTags {
@@ -35,13 +33,30 @@ public class ModItemTags {
     public static final TagKey<Item> PLATES_COPPER = append(GENERAL_PLATES, "copper");
     public static final TagKey<Item> PLATES_GOLD = append(GENERAL_PLATES, "gold");
 
-    public static final AppendableItemTagKey.Processable GENERAL_DUSTS = new AppendableItemTagKey.Processable(DUSTS);
+    public static final AppendableItemTagKey GENERAL_GEARS = new AppendableItemTagKey(ItemTags.create(new ResourceLocation("forge", "gears")));
+    public static final TagKey<Item> GEARS_STEEL = GENERAL_GEARS.append("steel", ModItems.STEEL_GEAR);
+    public static final TagKey<Item> GEARS_COPPER = GENERAL_GEARS.append("copper", ModItems.COPPER_GEAR);
+    public static final TagKey<Item> GEARS_GOLD = GENERAL_GEARS.append("gold", ModItems.GOLD_GEAR);
+    public static final TagKey<Item> GEARS_REDSTONE_STEEL_ALLOY = GENERAL_GEARS.append("redstone_steel", ModItems.REDSTONE_STEEL_ALLOY_GEAR);
+    public static final TagKey<Item> GEARS_REDSTONE_METAL = GENERAL_GEARS.append("redstone_metal", ModItems.REDSTONE_METAL_GEAR);
+    public static final TagKey<Item> GEARS_IRON = GENERAL_GEARS.append("iron", ModItems.IRON_GEAR);
+
+    public static final AppendableItemTagKey GENERAL_RODS = new AppendableItemTagKey(RODS);
+    public static final TagKey<Item> RODS_COPPER = GENERAL_RODS.append("copper", ModItems.COPPER_ROD);
+    public static final TagKey<Item> RODS_IRON = GENERAL_RODS.append("copper", ModItems.IRON_ROD);
+    public static final TagKey<Item> RODS_GOLD = GENERAL_RODS.append("copper", ModItems.GOLD_ROD);
+    public static final TagKey<Item> RODS_URANIUM = GENERAL_RODS.append("copper", ModItems.URANIUM_ROD);
+    public static final TagKey<Item> RODS_STEEL = GENERAL_RODS.append("copper", ModItems.STEEL_ROD);
+    public static final TagKey<Item> RODS_REDSTONE_METAL = GENERAL_RODS.append("copper", ModItems.REDSTONE_METAL_ROD);
+    public static final TagKey<Item> RODS_REDSTONE_STEEL = GENERAL_RODS.append("copper", ModItems.REDSTONE_STEEL_ALLOY_ROD);
+
+    public static final AppendableItemTagKey.OneWayProcessable GENERAL_DUSTS = new AppendableItemTagKey.OneWayProcessable(DUSTS);
     public static final TagKey<Item> DUSTS_COAL = GENERAL_DUSTS.append("coal", ModItems.COAL_DUST);
     public static final TagKey<Item> DUSTS_GOLD = GENERAL_DUSTS.append("gold", ModItems.GOLD_DUST, () -> Items.GOLD_INGOT);
     public static final TagKey<Item> DUSTS_REDSTONE_STEEL_ALLOY = GENERAL_DUSTS.append( "redstone_steel_metal", ModItems.REDSTONE_STEEL_ALLOY_DUST, ModItems.REDSTONE_STEEL_ALLOY);
     public static final TagKey<Item> DUSTS_URANIUM = GENERAL_DUSTS.append("uranium", ModItems.URANIUM_DUST, ModItems.URANIUM_INGOT);
     public static final TagKey<Item> DUSTS_STEEL = GENERAL_DUSTS.append("steel", ModItems.STEEL_DUST, ModItems.STEEL_INGOT);
-    public static final TagKey<Item> DUSTS_REDSTONE_METAL = GENERAL_DUSTS.append("redstone_metal", ModItems.REDSTONE_METAL_DUSTS, ModItems.REDSTONE_METAL);
+    public static final TagKey<Item> DUSTS_REDSTONE_METAL = GENERAL_DUSTS.append("redstone_metal", ModItems.REDSTONE_METAL_DUST, ModItems.REDSTONE_METAL);
     public static final TagKey<Item> DUSTS_IRON = GENERAL_DUSTS.append("iron", ModItems.IRON_DUST, () -> Items.IRON_INGOT);
     public static final TagKey<Item> DUSTS_COPPER = GENERAL_DUSTS.append("copper", ModItems.COPPER_DUST, () -> Items.COPPER_INGOT);
 
