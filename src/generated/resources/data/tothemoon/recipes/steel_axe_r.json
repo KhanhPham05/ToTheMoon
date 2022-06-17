@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " AA",
+    " SA",
+    " S "
+  ],
+  "key": {
+    "A": {
+      "item": "tothemoon:steel_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "tothemoon:steel_axe"
+  }
+}

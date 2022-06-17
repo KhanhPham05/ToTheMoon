@@ -1,22 +1,16 @@
-package com.khanhpham.tothemoon.core.blocks.machines.battery.creative;
+package com.khanhpham.tothemoon.core.blocks.battery.creative;
 
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
-import com.khanhpham.tothemoon.core.items.BatteryItem;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -53,5 +47,11 @@ public class CreativeBatteryBlock extends BaseEntityBlock implements EntityBlock
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.CREATIVE_BATTERY.get(), TickableBlockEntity::staticServerTick);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
     }
 }

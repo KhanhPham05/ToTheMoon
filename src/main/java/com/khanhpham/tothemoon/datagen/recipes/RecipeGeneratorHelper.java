@@ -1,18 +1,21 @@
 package com.khanhpham.tothemoon.datagen.recipes;
 
+import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
 import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import org.apache.commons.compress.utils.Lists;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -100,6 +103,52 @@ public class RecipeGeneratorHelper {
         saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", itemNames, getId(result));
     }
 
+    public void armor() {
+        ModItems.ARMORS.stream().map(Supplier::get).forEach(armorItem -> {
+            var builder = this.shaped(armorItem, 1);
+            EquipmentSlot armorSlot = armorItem.getSlot();
+            switch (armorSlot) {
+                case FEET -> builder.pattern("A A").pattern("A A");
+                case LEGS -> builder.pattern("AAA").pattern("A A").pattern("A A");
+                case HEAD -> builder.pattern("AAA").pattern("A A");
+                case CHEST -> builder.pattern("A A").pattern("AAA").pattern("AAA");
+            }
+            builder.define('A', armorItem.getCraftItem());
+            builder.save();
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    public void tools() {
+        ModItems.ALL_TOOLS.values().stream().map(Supplier::get).forEach(toolItem -> {
+            StringBuilder item = new StringBuilder(toolItem.getRegistryName().getPath());
+            item.delete(item.lastIndexOf("_"), item.length());
+            String craftItemName = item.toString();
+            Item craftItem = Registry.ITEM.get(ModUtils.modLoc(craftItemName + "_ingot"));
+
+            var builder = shaped(toolItem, 1);
+
+            @Nullable Shaped addition = null;
+            if (toolItem instanceof PickaxeItem) {
+                builder.pattern("AAA").pattern(" S ").pattern(" S ");
+            } else if (toolItem instanceof HoeItem) {
+                builder.pattern("AA ").pattern(" S ").pattern(" S ");
+                addition = shaped(toolItem, 1).pattern(" AA").pattern(" S ").pattern(" S ");
+            } else if (toolItem instanceof AxeItem) {
+                builder.pattern("AA ").pattern("AS ").pattern(" S ");
+                addition = shaped(toolItem, 1).pattern(" AA").pattern(" SA").pattern(" S ");
+            } else if (toolItem instanceof SwordItem) {
+                builder.pattern("A").pattern("A").pattern("S");
+            } else if (toolItem instanceof ShovelItem) {
+                builder.pattern("A").pattern("S").pattern("S");
+            }
+
+            if (addition != null) {
+                addition.define('A', craftItem).define('S', Items.STICK).getBuilder().save(consumer, ModUtils.modLoc(toolItem.getRegistryName().getPath() + "_r"));
+            }
+            builder.define('A', craftItem).define('S', Items.STICK).save();
+        });
+    }
 
     protected static abstract class NamedRecipeBuilder<T extends RecipeBuilder> {
 
@@ -118,6 +167,11 @@ public class RecipeGeneratorHelper {
             this.builder = builder;
             this.result = result;
             this.recipeType = recipeType;
+        }
+
+        public T getBuilder() {
+            unlockedBy(builder);
+            return builder;
         }
 
         public void save() {

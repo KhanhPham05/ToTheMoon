@@ -3,7 +3,7 @@ package com.khanhpham.tothemoon;
 import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;

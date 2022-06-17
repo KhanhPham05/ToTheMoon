@@ -182,7 +182,8 @@ public class ModRecipeProvider extends RecipeProvider {
         polished(helper, ModBlocks.SMOOTH_PURIFIED_QUARTZ_BLOCK, ModBlocks.PURIFIED_QUARTZ_BLOCK);
         polished(helper, ModBlocks.POLISHED_MOON_ROCK, ModBlocks.MOON_ROCK);
 
-        //
+        helper.armor();
+        helper.tools();
     }
 
     private void sheetBlock(final RecipeGeneratorHelper helper, Supplier<? extends Block> block, TagKey<Item> material) {

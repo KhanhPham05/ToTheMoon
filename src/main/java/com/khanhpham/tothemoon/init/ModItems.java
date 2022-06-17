@@ -6,10 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Table;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
-import com.khanhpham.tothemoon.core.items.GearItem;
-import com.khanhpham.tothemoon.core.items.HammerItem;
-import com.khanhpham.tothemoon.core.items.HandheldItem;
-import com.khanhpham.tothemoon.core.items.UpgradeItem;
+import com.khanhpham.tothemoon.core.items.*;
 import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
 import com.khanhpham.tothemoon.core.items.tool.ModToolTiers;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -110,21 +107,26 @@ public class ModItems {
     public static final RegistryObject<HandheldItem> GOLD_WIRE = wire(G);
 
     public static final Table<ModToolTiers.ToolType, ForgeTier, RegistryObject<? extends TieredItem>> ALL_TOOLS = HashBasedTable.create();
-    public static final ImmutableList<RegistryObject<ArmorItem>> ARMORS;
+    public static final ImmutableList<RegistryObject<ModArmorItem>> ARMORS;
 
     static {
         for (ModToolTiers.ToolType toolType : ModToolTiers.ToolType.values()) {
             for (ModToolTiers.Tier materialType : new ModToolTiers.Tier[]{ModToolTiers.STEEL, ModToolTiers.URANIUM}) {
                 String name = materialType.name().toLowerCase() + "_" + toolType.toString().toLowerCase();
-                ALL_TOOLS.put(toolType, materialType.tier(), register(name, () -> toolType.toItem(materialType.tier(), GENERAL_PROPERTIES)));
+                ALL_TOOLS.put(toolType, materialType.tier(), register(name, () -> toolType.toItem(materialType.tier(),  GENERAL_PROPERTIES)));
             }
         }
 
         Map<String, EquipmentSlot> map = ImmutableMap.of("helmet", EquipmentSlot.HEAD, "chestplate", EquipmentSlot.CHEST, "leggings", EquipmentSlot.LEGS, "boots", EquipmentSlot.FEET);
-        ArrayList<RegistryObject<ArmorItem>> armors = new ArrayList<>();
+        ArrayList<RegistryObject<ModArmorItem>> armors = new ArrayList<>();
         for (String armor : map.keySet()) {
             for (ModArmorMaterial armorMaterial : ModArmorMaterial.values()) {
-                armors.add(register(armorMaterial.toString().toLowerCase() + '_' + armor, () -> new ArmorItem(armorMaterial, Objects.requireNonNull(map.get(armor)), GENERAL_PROPERTIES)));
+                RegistryObject<Item> craftItem = switch (armorMaterial) {
+                    case STEEL -> STEEL_INGOT;
+                    case URANIUM -> URANIUM_INGOT;
+                    case REDSTONE_STEEL -> REDSTONE_STEEL_ALLOY;
+                };
+                armors.add(register(armorMaterial.toString().toLowerCase() + '_' + armor, () -> new ModArmorItem(craftItem.get(), armorMaterial, Objects.requireNonNull(map.get(armor)), GENERAL_PROPERTIES)));
             }
         }
         ARMORS = ImmutableList.copyOf(armors);

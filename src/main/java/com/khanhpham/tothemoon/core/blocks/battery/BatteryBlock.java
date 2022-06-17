@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.core.blocks.machines.battery;
+package com.khanhpham.tothemoon.core.blocks.battery;
 
 import com.khanhpham.tothemoon.core.blockentities.battery.AbstractBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;

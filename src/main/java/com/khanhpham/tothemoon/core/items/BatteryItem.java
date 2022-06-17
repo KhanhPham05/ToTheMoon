@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.items;
 
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 
 public class BatteryItem extends EnergyCapableItem {
     public BatteryItem(BatteryBlock block) {

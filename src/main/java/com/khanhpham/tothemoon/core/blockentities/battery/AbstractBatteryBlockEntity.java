@@ -1,9 +1,9 @@
 package com.khanhpham.tothemoon.core.blockentities.battery;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyItemCapableBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryMenu;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.creative.CreativeBatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenu;
+import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlock;
 import com.khanhpham.tothemoon.utils.energy.BatteryEnergy;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import net.minecraft.core.BlockPos;

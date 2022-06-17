@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.datagen.blocks;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.Direction;
@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;

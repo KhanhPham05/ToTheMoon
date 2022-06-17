@@ -1,13 +1,12 @@
 package com.khanhpham.tothemoon.init;
 
-import ca.weblite.objc.Proxy;
 import com.google.common.collect.ImmutableSet;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.creative.CreativeBatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.CopperEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.DiamondEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.GoldEnergyGeneratorBlock;

@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.datagen;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.items.GearItem;
 import com.khanhpham.tothemoon.core.items.HandheldItem;
 import com.khanhpham.tothemoon.init.ModBlocks;

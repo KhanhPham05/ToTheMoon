@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.datagen.loottable;
 
 import com.google.common.collect.ImmutableList;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;

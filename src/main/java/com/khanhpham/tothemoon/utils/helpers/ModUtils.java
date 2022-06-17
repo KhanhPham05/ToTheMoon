@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.utils.helpers;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
-import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryConnectionMode;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryConnectionMode;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;

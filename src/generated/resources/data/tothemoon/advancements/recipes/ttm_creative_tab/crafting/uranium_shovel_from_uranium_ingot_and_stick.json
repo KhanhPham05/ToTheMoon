@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:crafting/uranium_shovel_from_uranium_ingot_and_stick"
+    ]
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "tothemoon:crafting/uranium_shovel_from_uranium_ingot_and_stick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tick",
+      "has_the_recipe"
+    ]
+  ]
+}
