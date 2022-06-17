@@ -141,8 +141,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:mekanism-268560:3810540")
 
-    //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67:api")
-    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70")
 
     //runtimeOnly fg.deobf("curse.maven:pipez-443900:3760255")
     //implementation fg.deobf("curse.maven:create-328085:3737418")

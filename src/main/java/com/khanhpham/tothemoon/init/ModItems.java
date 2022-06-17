@@ -143,7 +143,7 @@ public class ModItems {
 
     public static <T extends Item> RegistryObject<T> register(String name, Supplier<T> supplier) {
         itemCount++;
-        ModUtils.info("Registering [{}] - {}", name, supplier);
+        ModUtils.log("Registering [{}] - {}", name, supplier);
         return ITEM_DEFERRED_REGISTER.register(name, supplier);
     }
 

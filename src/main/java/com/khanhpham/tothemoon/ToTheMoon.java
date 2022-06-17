@@ -84,7 +84,6 @@ public class ToTheMoon {
         initClasses();
         ModBlocks.BLOCK_DEFERRED_REGISTER.register(bus);
         ModItems.ITEM_DEFERRED_REGISTER.register(bus);
-        //   ModSoundEvents.SOUNDS.register(bus);
         ModBlockEntityTypes.BE_DEFERRED_REGISTER.register(bus);
 
         TTMConfigs.registerConfigs(bus, ModLoadingContext.get());
@@ -93,6 +92,7 @@ public class ToTheMoon {
     private static void initClasses() {
         ModBlocks.init();
         ModItems.start();
+        ModBlockEntityTypes.init();
     }
 
 
@@ -115,7 +115,7 @@ public class ToTheMoon {
             data.addProvider(new ModItemModels(data, fileHelper));
             data.addProvider(new ModLootTables(data));
 
-            ModTagProvider tagsProviders = new ModTagProvider(data, fileHelper);
+            new ModTagProvider(data, fileHelper);
         }
 
         @SubscribeEvent
@@ -150,8 +150,6 @@ public class ToTheMoon {
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
         }
-
-
     }
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)

@@ -167,6 +167,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         helper.shapelessCrafting(ModItems.REDSTONE_STEEL_ALLOY_DUST.get(), 1, ModItems.STEEL_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
         helper.shapelessCrafting(ModItems.REDSTONE_METAL_DUST.get(), 1, ModItems.IRON_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
+        //helper.shapelessCrafting(ModItems.STEEL_DUST.get(), 1, ModItems.IRON_DUST.get(), ModItems.COAL_DUST.get());
 
         sheetBlock(helper, ModBlocks.COPPER_SHEET_BLOCK, PLATES_COPPER);
         sheetBlock(helper, ModBlocks.GOLD_SHEET_BLOCK, PLATES_GOLD);
@@ -215,7 +216,7 @@ public class ModRecipeProvider extends RecipeProvider {
         alloy(consumer, ModItemTags.INGOTS_STEEL, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_STEEL_ALLOY, 1);
         alloy(consumer, ModItemTags.DUSTS_IRON, 1, DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
         alloy(consumer, Tags.Items.INGOTS_IRON, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
-        alloy(consumer, ModItemTags.DUSTS_COAL, 2, Tags.Items.INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
+        alloy(consumer, ModItemTags.DUSTS_COAL, 1, Tags.Items.INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
 
         metalPress(consumer, INGOTS_STEEL, PLATE_MOLD, ModItems.STEEL_PLATE);
         metalPress(consumer, INGOTS_STEEL, GEAR_MOLD, ModItems.STEEL_GEAR);

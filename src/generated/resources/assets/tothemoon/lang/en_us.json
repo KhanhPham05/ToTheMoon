@@ -20,6 +20,7 @@
   "block.tothemoon.machine_metal_place": "Machine Placed",
   "block.tothemoon.machine_metal_step": "Machine Footsteps",
   "block.tothemoon.metal_press": "Metal Press",
+  "block.tothemoon.metal_press_used": "Metal Pressed",
   "block.tothemoon.moon_dust": "Moon Dust",
   "block.tothemoon.moon_dust_break": "Moon Dust Broken",
   "block.tothemoon.moon_dust_place": "Moon Dust Placed",
@@ -139,5 +140,5 @@
   "jei.tothemoon.alloy_smelter_category": "Alloy Smelting",
   "jei.tothemoon.manual_metal_pressing": "Manual Metal Pressing",
   "jei.tothemoon.metal_press_category": "Metal Pressing",
-  "tooltip.tothemoon.energy": "Energy :%s %s / %s"
+  "tooltip.tothemoon.energy": "Energy %s %s / %s"
 }

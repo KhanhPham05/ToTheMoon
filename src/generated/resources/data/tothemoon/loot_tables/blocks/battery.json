@@ -20,11 +20,6 @@
                   "source": "energy",
                   "target": "BlockEntityTag.energy",
                   "op": "replace"
-                },
-                {
-                  "source": "capacity",
-                  "target": "BlockEntityTag.capacity",
-                  "op": "replace"
                 }
               ]
             }

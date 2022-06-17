@@ -4,7 +4,7 @@ import com.khanhpham.tothemoon.core.abstracts.EnergyItemCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.utils.energy.Energy;
-import com.khanhpham.tothemoon.utils.energy.ExtractableEnergy;
+import com.khanhpham.tothemoon.utils.energy.GeneratorEnergyStorage;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -53,8 +53,8 @@ public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapab
         super(pType, pWorldPosition, pBlockState, energy, label, INVENTORY_CAPACITY);
     }
 
-    public AbstractEnergyGeneratorBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int i, int i1, int i2, Component label) {
-        this(pType, pWorldPosition, pBlockState, new ExtractableEnergy(i, i1, i2), label);
+    public AbstractEnergyGeneratorBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int capacity, int generatingRate, Component label) {
+        this(pType, pWorldPosition, pBlockState, new GeneratorEnergyStorage(capacity, generatingRate), label);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, AbstractEnergyGeneratorBlockEntity blockEntity) {

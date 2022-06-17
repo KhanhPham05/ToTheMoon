@@ -1,13 +1,9 @@
 package com.khanhpham.tothemoon.utils.energy;
 
 public class BatteryEnergy extends Energy {
-    public BatteryEnergy(int capacity, int maxReceive, int maxExtract, BatteryEnergyType batteryType) {
-        super(capacity, maxReceive, maxExtract);
-        this.batteryType = batteryType;
-    }
 
-    public BatteryEnergy(int capacity, int maxReceive, int maxExtract) {
-        super(capacity, maxReceive, maxExtract);
+    public BatteryEnergy(int capacity) {
+        super(capacity);
         this.batteryType = BatteryEnergyType.NORMAL;
     }
 

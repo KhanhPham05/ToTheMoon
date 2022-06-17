@@ -24,5 +24,7 @@ public class ModSoundsProvider extends SoundDataProvider {
         super.add(ModSoundEvents.MOON_ROCK_STEP, SoundSource.BLOCKS, 3, "Moon Rock Footsteps");
         super.add(ModSoundEvents.MOON_ROCK_PLACE, SoundSource.BLOCKS, 3, "Moon Rock Placed");
         super.add(ModSoundEvents.MOON_ROCK_BREAK, SoundSource.BLOCKS, 3, "Moon Rock Broken");
+
+        super.add(ModSoundEvents.METAL_PRESS_USED, SoundSource.BLOCKS, 3, "Metal Pressed");
     }
 }

@@ -35,7 +35,7 @@ public class ModLanguage extends LanguageProvider {
         add(MACHINE_UPGRADE_LABELS, "Upgrades");
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
         //percentage  energy/capacity
-        add("tooltip.tothemoon.energy", "Energy :%s %s / %s");
+        add("tooltip.tothemoon.energy", "Energy %s %s / %s");
     }
 
     private void add(TranslatableComponent component, String trans) {

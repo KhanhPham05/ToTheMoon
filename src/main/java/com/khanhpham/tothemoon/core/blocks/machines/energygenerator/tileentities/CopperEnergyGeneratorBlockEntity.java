@@ -5,16 +5,14 @@ import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergy
 import com.khanhpham.tothemoon.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 
 public class CopperEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBlockEntity {
-
     public CopperEnergyGeneratorBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, @NotNull Component label) {
-        super(pType, pWorldPosition, pBlockState, 100000, 50, 200, label);
+        super(pType, pWorldPosition, pBlockState, 100000, 500, label);
     }
 
     public CopperEnergyGeneratorBlockEntity(BlockPos pos, BlockState state) {

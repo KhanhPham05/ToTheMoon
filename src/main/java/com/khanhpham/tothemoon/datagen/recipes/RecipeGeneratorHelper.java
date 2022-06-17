@@ -25,7 +25,7 @@ public class RecipeGeneratorHelper {
         this.consumer = consumer;
     }
 
-    static String extractTag(TagKey<?> tag) {
+    public static String extractTag(TagKey<?> tag) {
         return tag.location().getPath().replace('/', '_');
     }
 

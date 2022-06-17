@@ -6,7 +6,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterM
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.energy.Energy;
-import com.khanhpham.tothemoon.utils.energy.EnergyReceivable;
+import com.khanhpham.tothemoon.utils.energy.EnergyOnlyReceive;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -49,14 +49,13 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
             return 4;
         }
     };
-    private boolean flag;
 
     public EnergySmelterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
         super(pType, pWorldPosition, pBlockState, energy, label, containerSize);
     }
 
     public EnergySmelterBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityTypes.ENERGY_SMELTER.get(), pos, state, new EnergyReceivable(150000, 2000, 750), ModBlocks.ENERGY_SMELTER.get().getName(), 2);
+        this(ModBlockEntityTypes.ENERGY_SMELTER.get(), pos, state, new EnergyOnlyReceive(150000), ModBlocks.ENERGY_SMELTER.get().getName(), 2);
     }
 
     @NotNull
@@ -72,7 +71,7 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
     }
 
     public void serverTick(Level level, BlockPos pos, BlockState state) {
-        flag = false;
+        boolean flag = false;
 
         if (!items.get(0).isEmpty()) {
             SmeltingRecipe recipe = super.getRecipe(level, RecipeType.SMELTING, this);

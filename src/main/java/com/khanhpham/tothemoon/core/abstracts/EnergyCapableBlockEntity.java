@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.core.abstracts;
 
 import com.khanhpham.tothemoon.utils.energy.Energy;
-import com.khanhpham.tothemoon.utils.energy.HasEnergyCapable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,7 +13,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class EnergyCapableBlockEntity extends BlockEntity implements HasEnergyCapable {
+public abstract class EnergyCapableBlockEntity extends BlockEntity {
     public final Energy energy;
     protected final LazyOptional<IEnergyStorage> energyDataOptional;
 

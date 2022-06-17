@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.datagen.loottable;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Sets;
 import com.khanhpham.tothemoon.core.blocks.machines.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -9,7 +8,6 @@ import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.LootTableProvider;
@@ -18,14 +16,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.*;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
-import net.minecraft.world.level.storage.loot.providers.nbt.NbtProviders;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -58,7 +58,7 @@ public class ModLootTables extends LootTableProvider {
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
         map.forEach((rl, loot) -> {
             LootTables.validate(validationTracker, rl, loot);
-            ModUtils.info("validating {} - {}", rl, loot);
+            ModUtils.log("validating {} - {}", rl, loot);
         });
     }
 
@@ -70,21 +70,16 @@ public class ModLootTables extends LootTableProvider {
 
     public static final class ModBlockLoots extends BlockLoot {
         private static final ImmutableList<Supplier<? extends Block>> DROP_SELF_BLOCKS = ImmutableList.of(CREATIVE_BATTERY, ENERGY_SMELTER, REDSTONE_STEEL_ALLOY_SHEET_BLOCK, URANIUM_BLOCK, RAW_URANIUM_BLOCK, COBBLED_MOON_ROCK, COBBLED_MOON_ROCK_SLAB, COBBLED_MOON_ROCK_STAIR, DIAMOND_ENERGY_GENERATOR, GOLD_ENERGY_GENERATOR, COPPER_MACHINE_FRAME, STEEL_MACHINE_FRAME, REDSTONE_MACHINE_FRAME, ANTI_PRESSURE_GLASS, MOON_ROCK, MOON_ROCK_STAIR, MOON_ROCK_SLAB, MOON_ROCK_BRICK, MOON_ROCK_BRICK_STAIR, MOON_ROCK_BRICK_SLAB, POLISHED_MOON_ROCK, POLISHED_MOON_ROCK_STAIR, POLISHED_MOON_ROCK_SLAB, MOON_DUST, REDSTONE_METAL_BLOCK, STEEL_BLOCK, REINFORCED_WOOD, STEEL_SHEET_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, COPPER_SHEET_BLOCK, GOLD_SHEET_BLOCK, IRON_SHEET_BLOCK, PROCESSED_WOOD, PURIFIED_QUARTZ_BLOCK, SMOOTH_PURIFIED_QUARTZ_BLOCK, MOON_ROCK_BARREL, COPPER_ENERGY_GENERATOR, IRON_ENERGY_GENERATOR, ALLOY_SMELTER, METAL_PRESS);
+        private static final Set<Block> knownBlocks = BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
 
         public ModBlockLoots() {
         }
-
-        private static final Set<Block> knownBlocks = BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
-
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
             return knownBlocks;
         }
 
-        /**
-         * @see
-         */
         @Override
         protected void addTables() {
             //ModUtils.info("Creating loot tables");
@@ -94,7 +89,7 @@ public class ModLootTables extends LootTableProvider {
             this.add(MOON_QUARTZ_ORE, this::quartzDrops);
             this.add(MOON_REDSTONE_ORE, BlockLoot::createRedstoneOreDrops);
             DROP_SELF_BLOCKS.forEach(b -> super.dropSelf(b.get()));
-            super.add(BATTERY.get(), block -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energy", "BlockEntityTag.energy").copy("capacity", "BlockEntityTag.capacity")))));
+            super.add(BATTERY.get(), block -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energy", "BlockEntityTag.energy")))));
         }
 
         private LootTable.Builder quartzDrops(Block p_176051_) {

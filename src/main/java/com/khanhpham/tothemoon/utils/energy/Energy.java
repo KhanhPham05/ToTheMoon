@@ -19,10 +19,6 @@ public class Energy extends EnergyStorage {
         this.maxExtract = capacity;
     }
 
-    public int getMaxReceive() {
-        return maxReceive;
-    }
-
     public int getMaxExtract() {
         return maxExtract;
     }
@@ -41,7 +37,6 @@ public class Energy extends EnergyStorage {
 
     public void save(CompoundTag pTag) {
         pTag.putInt("energy", energy);
-        pTag.putInt("capacity", capacity);
     }
 
     public void load(CompoundTag pTag) {
