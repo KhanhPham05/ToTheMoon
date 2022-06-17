@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "tothemoon:block/creative_battery"
+    },
+    "facing=south": {
+      "model": "tothemoon:block/creative_battery",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tothemoon:block/creative_battery",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "tothemoon:block/creative_battery",
+      "y": 90
+    }
+  }
+}

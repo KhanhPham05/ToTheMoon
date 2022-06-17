@@ -50,7 +50,7 @@ public abstract class SoundDataProvider implements DataProvider {
     protected abstract void registerSounds();
 
     protected void add(SoundEvent sound, SoundSource source, String subtitleTranslate, String... sounds) {
-        String soundPath = ModUtils.getNameFromObject(sound);
+        String soundPath = ModUtils.getPath(sound);
         String soundSubtitle = source.getName() + '.' + this.modid + "." + soundPath;
         SerializedSoundEvent event = new SerializedSoundEvent(soundPath, source.getName(), soundSubtitle, sounds);
         soundLanguages.add(new CompactedLanguage(new TranslatableComponent(soundSubtitle), subtitleTranslate));
@@ -59,7 +59,7 @@ public abstract class SoundDataProvider implements DataProvider {
 
     protected void add(SoundEvent soundEvent, SoundSource source, int i, String subtitleTranslate) {
         String[] sounds = new String[i];
-        String soundPath = ModUtils.getNameFromObject(soundEvent);
+        String soundPath = ModUtils.getPath(soundEvent);
         for (int a = 1; a <= i; a++) {
             sounds[a-1] = this.modid + ':' + soundPath + a;
         }

@@ -78,5 +78,14 @@
       "tothemoon:moon_rock_break3"
     ],
     "subtitle": "block.tothemoon.moon_rock_break"
+  },
+  "metal_press_used": {
+    "category": "block",
+    "sounds": [
+      "tothemoon:metal_press_used1",
+      "tothemoon:metal_press_used2",
+      "tothemoon:metal_press_used3"
+    ],
+    "subtitle": "block.tothemoon.metal_press_used"
   }
 }

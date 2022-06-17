@@ -1,8 +1,9 @@
 package com.khanhpham.tothemoon.core.blocks.machines.metalpress;
 
+import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
-import com.khanhpham.tothemoon.utils.helpers.ModTags;
-import com.khanhpham.tothemoon.core.containers.BaseMenu;
+import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
+import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.utils.slot.MetalPressSlot;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -99,6 +100,6 @@ public class MetalPressMenu extends BaseMenu {
     }
 
     private boolean isPress(ItemStack stack) {
-        return !stack.isEmpty() && stack.is(ModTags.GENERAL_PRESS_MOLDS);
+        return !stack.isEmpty() && stack.is(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag());
     }
 }

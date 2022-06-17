@@ -24,6 +24,7 @@ public class ModSoundEvents {
     public static final SoundEvent MOON_ROCK_PLACE = register("moon_rock_place");
     public static final SoundEvent MOON_ROCK_BREAK = register("moon_rock_break");
     public static final SoundEvent MOON_ROCK_STEP = register("moon_rock_step");
+    public static final SoundEvent METAL_PRESS_USED = register("metal_press_used");
 
     private static SoundEvent register(String name) {
         ResourceLocation rl = ModUtils.modLoc(name);
@@ -34,9 +35,6 @@ public class ModSoundEvents {
 
     @SubscribeEvent
     public static void init(RegistryEvent.Register<SoundEvent> event) {
-        var reg = event.getRegistry();
-        reg.register(METAL_MACHINE_BREAK);
-        reg.register(METAL_MACHINE_PLACE);
-        reg.register(METAL_MACHINE_STEP);
+        SOUND_EVENT_SET.forEach(event.getRegistry()::register);
     }
 }

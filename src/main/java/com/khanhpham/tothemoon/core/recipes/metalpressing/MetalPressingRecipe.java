@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.recipes.metalpressing;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
-import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.ModRecipeLocations;
 import com.khanhpham.tothemoon.core.recipes.SimpleRecipeSerializer;
 import com.khanhpham.tothemoon.init.ModRecipes;
@@ -21,7 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class MetalPressingRecipe implements Recipe<MetalPressBlockEntity> {
-    public static final RecipeType<MetalPressingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModRecipeLocations.METAL_PRESSING);
+    public static final RecipeType<MetalPressingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModUtils.modLoc("metal_pressing"));
 
     private final NonNullList<Ingredient> ingredients;
     public final Ingredient ingredient;
@@ -90,10 +90,6 @@ public class MetalPressingRecipe implements Recipe<MetalPressBlockEntity> {
 
     public static final class Serializer extends SimpleRecipeSerializer<MetalPressingRecipe> {
 
-        public Serializer() {
-            super.setRegistryName(ModRecipeLocations.METAL_PRESSING);
-        }
-
 
         @Override
         public MetalPressingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
@@ -119,6 +115,11 @@ public class MetalPressingRecipe implements Recipe<MetalPressBlockEntity> {
             pRecipe.moldIngredient.toNetwork(pBuffer);
             pBuffer.writeItemStack(pRecipe.result, false);
             pBuffer.writeInt(pRecipe.pressingTime);
+        }
+
+        @Override
+        protected String getRecipeName() {
+            return "metal_pressing";
         }
     }
 }

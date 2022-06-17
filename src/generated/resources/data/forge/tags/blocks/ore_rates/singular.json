@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "tothemoon:moon_gold_ore",
+    "tothemoon:moon_quartz_ore",
+    "tothemoon:moon_iron_ore",
+    "tothemoon:moon_uranium_ore",
+    "tothemoon:deepslate_uranium_ore"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:plates/uranium"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:uranium_rod"
+  }
+}

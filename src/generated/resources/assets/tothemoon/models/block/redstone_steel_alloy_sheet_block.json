@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tothemoon:block/redstone_steel_alloy_sheet_block"
+  }
+}

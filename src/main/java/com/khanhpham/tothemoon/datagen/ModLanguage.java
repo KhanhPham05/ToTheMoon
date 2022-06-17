@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.datagen;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.core.items.EnergyCapableItem;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -19,6 +20,9 @@ public class ModLanguage extends LanguageProvider {
     }
     public static final TranslatableComponent METAL_PRESS_RECIPE_CATEGORY = create("jei", "metal_press_category");
     public static final TranslatableComponent ALLOY_SMELTER_RECIPE_CATEGORY = create("jei", "alloy_smelter_category");
+    public static final TranslatableComponent MANUAL_METAL_PRESSING_CATEGORY = create("jei", "manual_metal_pressing");
+
+    public static final TranslatableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
     @Override
     protected void addTranslations() {
         ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().forEach(this::addBlocks);
@@ -27,7 +31,11 @@ public class ModLanguage extends LanguageProvider {
         add("gui.tothemoon.metal_press", "Metal Press");
         add(METAL_PRESS_RECIPE_CATEGORY, "Metal Pressing");
         add(ALLOY_SMELTER_RECIPE_CATEGORY, "Alloy Smelting");
+        add(MANUAL_METAL_PRESSING_CATEGORY, "Manual Metal Pressing");
+        add(MACHINE_UPGRADE_LABELS, "Upgrades");
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
+        //percentage  energy/capacity
+        add("tooltip.tothemoon.energy", "Energy %s %s / %s");
     }
 
     private void add(TranslatableComponent component, String trans) {

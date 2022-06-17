@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
+    "tothemoon:polished_moon_rock_slab",
+    "tothemoon:polished_moon_rock_stair",
+    "tothemoon:polished_moon_rock",
     "tothemoon:moon_rock",
     "tothemoon:moon_rock_brick",
     "tothemoon:moon_rock_stair",

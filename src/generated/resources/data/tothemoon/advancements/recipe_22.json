@@ -1,11 +1,32 @@
 {
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "tothemoon:recipe_21"
+    ]
+  },
   "criteria": {
+    "unlock_recipe_22": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:barrier"
+            ]
+          }
+        ]
+      }
+    },
     "tick": {
       "trigger": "minecraft:tick",
       "conditions": {}
     }
   },
   "requirements": [
+    [
+      "unlock_recipe_22"
+    ],
     [
       "tick"
     ]

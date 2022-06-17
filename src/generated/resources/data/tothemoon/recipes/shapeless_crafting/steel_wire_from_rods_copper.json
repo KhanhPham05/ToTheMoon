@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:rods/copper"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:steel_wire"
+  }
+}

@@ -60,14 +60,11 @@ public class ModJeiPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
-        ModUtils.info("Registering TTM JEI Recipes");
+        ModUtils.log("Registering TTM JEI Recipes");
         registration.addRecipeCategories(new MetalPressRecipeCategory(helper));
         registration.addRecipeCategories(new AlloySmelterRecipeCategory(helper));
     }
 
-    /**
-     *
-     */
     public static final class AlloySmelterRecipeCategory implements IRecipeCategory<AlloySmeltingRecipe> {
 
         private final IDrawable background;

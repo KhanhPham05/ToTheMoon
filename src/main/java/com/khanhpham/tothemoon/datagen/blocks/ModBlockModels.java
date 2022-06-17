@@ -18,10 +18,23 @@ public class ModBlockModels extends BlockModelProvider {
     @Override
     protected void registerModels() {
         ModBlocks.SOLID_BLOCKS.forEach(this::cubeAll);
+        batteryBlockModel();
     }
 
+    private void batteryBlockModel() {
+        for (int i = 0; i <= 10; i++) {
+            orientableWithBottom("block/battery_level_" + i,
+                    modLoc("block/battery/battery_side"),
+                    modLoc("block/battery/" + "none" + '/' + i),
+                    modLoc("block/battery/battery_bottom"),
+                    modLoc("block/battery/battery_top")
+            );
+        }
+    }
+
+
     private void cubeAll(Supplier<? extends Block> supplier) {
-        String id = ModUtils.getNameFromObject(supplier.get());
-        super.cubeAll(id, ModUtils.modLoc("block/" + id));
+        String id = ModUtils.getPath(supplier.get());
+        super.cubeAll(id, modLoc("block/" + id));
     }
 }

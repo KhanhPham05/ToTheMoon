@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:smelting",
+  "input": {
+    "ingredient": {
+      "item": "tothemoon:moon_quartz_ore"
+    }
+  },
+  "output": {
+    "item": "tothemoon:purified_quartz"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:plates/redstone_steel_alloy"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:redstone_steel_alloy_rod"
+  }
+}

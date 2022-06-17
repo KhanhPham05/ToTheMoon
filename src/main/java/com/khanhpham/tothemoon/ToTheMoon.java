@@ -1,19 +1,23 @@
 package com.khanhpham.tothemoon;
 
+import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
+import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
-import com.khanhpham.tothemoon.core.blocks.processblocks.metalpressingboard.MetalPressingPlateBlockEntity;
+import com.khanhpham.tothemoon.core.config.TTMConfigs;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
+import com.khanhpham.tothemoon.datagen.ModItemModels;
 import com.khanhpham.tothemoon.datagen.ModLanguage;
-import com.khanhpham.tothemoon.datagen.ModTagProvider;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockStates;
-import com.khanhpham.tothemoon.datagen.blocks.ModItemModels;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
 import com.khanhpham.tothemoon.datagen.recipes.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
+import com.khanhpham.tothemoon.datagen.tags.ModTagProvider;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -31,9 +35,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -41,20 +46,24 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @Mod(value = Names.MOD_ID)
 public class ToTheMoon {
-
     public static final ResourceLocation THE_MOON_SKY_LOCATION = ModUtils.modLoc("textures/environment/the_moon_sky.png");
     public static final ResourceLocation MOON_EFFECTS = ModUtils.modLoc("moon_effects");
     public static final ResourceKey<Level> THE_MOON_DIMENSION = ResourceKey.create(Registry.DIMENSION_REGISTRY, ModUtils.modLoc("the_moon_dimension"));
@@ -75,14 +84,15 @@ public class ToTheMoon {
         initClasses();
         ModBlocks.BLOCK_DEFERRED_REGISTER.register(bus);
         ModItems.ITEM_DEFERRED_REGISTER.register(bus);
-        //   ModSoundEvents.SOUNDS.register(bus);
         ModBlockEntityTypes.BE_DEFERRED_REGISTER.register(bus);
+
+        TTMConfigs.registerConfigs(bus, ModLoadingContext.get());
     }
 
     private static void initClasses() {
         ModBlocks.init();
         ModItems.start();
-        // ModSoundEvents.init();
+        ModBlockEntityTypes.init();
     }
 
 
@@ -90,11 +100,6 @@ public class ToTheMoon {
     public static final class ModEvents {
 
         public ModEvents() {
-        }
-
-        @SubscribeEvent
-        public static void onItemRegistration(RegistryEvent.Register<Item> event) {
-            ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).forEach(block -> event.getRegistry().register(new BlockItem(block, new Item.Properties().tab(TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getNameFromObject(block)))));
         }
 
         @SubscribeEvent
@@ -110,8 +115,28 @@ public class ToTheMoon {
             data.addProvider(new ModItemModels(data, fileHelper));
             data.addProvider(new ModLootTables(data));
 
-            ModTagProvider tagsProviders = new ModTagProvider(data, fileHelper);
+            new ModTagProvider(data, fileHelper);
         }
+
+        @SubscribeEvent
+        public static void onItemRegistration(RegistryEvent.Register<Item> event) {
+            IForgeRegistry<Item> reg = event.getRegistry();
+            Set<? extends Block> blocks = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
+            for (Block block : blocks) {
+                if (block instanceof BurnableBlock burnableBlock) {
+                    reg.register(new BlockItem(burnableBlock, new Item.Properties().tab(ToTheMoon.TAB)) {
+                        @Override
+                        public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+                            return burnableBlock.getBurningTime();
+                        }
+                    }.setRegistryName(ModUtils.modLoc(ModUtils.getPath(burnableBlock))));
+                } else if (block instanceof HasCustomBlockItem item) {
+                    reg.register(item.getItem(block.getRegistryName()));
+                } else
+                    reg.register(new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getPath(block))));
+            }
+        }
+
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
@@ -119,14 +144,11 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorMenuScreen::new);
             MenuScreens.register(ModMenuTypes.ALLOY_SMELTER, AlloySmelterMenuScreen::new);
             MenuScreens.register(ModMenuTypes.METAL_PRESS, MetalPressMenuScreen::new);
+            MenuScreens.register(ModMenuTypes.BATTERY, BatteryMenuScreen::new);
+            MenuScreens.register(ModMenuTypes.ENERGY_SMELTER, EnergySmelterScreen::new);
 
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
-        }
-
-        @SubscribeEvent
-        public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(ModBlockEntityTypes.METAL_PRESSING_PLATE.get(), MetalPressingPlateBlockEntity.Renderer::new);
         }
     }
 

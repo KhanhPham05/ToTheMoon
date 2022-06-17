@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:dusts/redstone_steel_metal"
+  },
+  "result": "tothemoon:redstone_steel_alloy",
+  "experience": 1.0,
+  "cookingtime": 200
+}

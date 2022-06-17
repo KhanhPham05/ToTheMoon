@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath (group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true)
+        classpath(group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true)
                 { exclude group: 'org.apache.logging.log4j' }
         classpath 'org.apache.logging.log4j:log4j-api:2.11.2'
         classpath 'org.apache.logging.log4j:log4j-core:2.11.2'
@@ -19,13 +19,14 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.0'
+archivesBaseName = 'ttm'
+version = 'test-1.0-c'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2022.03.13-1.18.2'
+    mappings channel: 'parchment', version: '2022.06.05-1.18.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
@@ -124,28 +125,29 @@ mixin {
 }
 
 
-
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.0'
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3671753")
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.51'
+    implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
     runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3544525")
-    //implementation fg.deobf("curse.maven:immersive-engineering-231951:3721708")
 
-    implementation fg.deobf("curse.maven:ctm-267602:3737369")
+    //implementation fg.deobf("curse.maven:ctm-267602:3737369")
     //runtimeOnly fg.deobf("curse.maven:rubidium-574856:3749094")
 
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3743835")
+    implementation fg.deobf("curse.maven:mekanism-268560:3810540")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70")
 
-
+    //runtimeOnly fg.deobf("curse.maven:pipez-443900:3760255")
+    //implementation fg.deobf("curse.maven:create-328085:3737418")
+    runtimeOnly fg.deobf("curse.maven:flywheel-486392:3737402")
+    runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3748971")
 
     //implementation fg.deobf("curse.maven:patchouli-datagen-ptd-lib-585667:3671853")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
@@ -161,9 +163,9 @@ jar {
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "ttmsareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-                "TweakOrder": 0,
-                "MixinConfigs" : "ttm.mixin.json"
+                "TweakClass"              : "org.spongepowered.asm.launch.MixinTweaker",
+                "TweakOrder"              : 0,
+                "MixinConfigs"            : "ttm.mixin.json"
         ])
     }
 }

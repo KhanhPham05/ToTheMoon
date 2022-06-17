@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.recipes;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
-import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -23,7 +23,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity> {
-    public static RecipeType<AlloySmeltingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModRecipeLocations.ALLOY_SMELTING);
+    public static RecipeType<AlloySmeltingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModUtils.modLoc("alloy_smelting"));
 
     public final IngredientStack baseIngredient;
     public final IngredientStack secondaryIngredient;
@@ -46,7 +46,7 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
 
     @Override
     public boolean matches(AlloySmelterBlockEntity container, @Nonnull Level pLevel) {
-        return this.baseIngredient.test(container.items.get(0)) && this.secondaryIngredient.test(container.items.get(1));
+        return (this.baseIngredient.test(container.items.get(0)) && this.secondaryIngredient.test(container.items.get(1))) || this.baseIngredient.test(container.items.get(1)) && this.secondaryIngredient.test(container.items.get(0));
     }
 
     @Override
@@ -82,7 +82,11 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
     public static final class Serializer extends SimpleRecipeSerializer<AlloySmeltingRecipe> {
 
         public Serializer() {
-            super.setRegistryName(ModRecipeLocations.ALLOY_SMELTING);
+        }
+
+        @Override
+        protected String getRecipeName() {
+            return "alloy_smelting";
         }
 
         @Override

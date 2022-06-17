@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.storageblock;
 
 import com.khanhpham.tothemoon.init.ModMenuTypes;
-import com.khanhpham.tothemoon.core.containers.BaseMenu;
+import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

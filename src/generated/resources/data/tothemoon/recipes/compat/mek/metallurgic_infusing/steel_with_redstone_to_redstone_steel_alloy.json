@@ -1,0 +1,15 @@
+{
+  "type": "mekanism:metallurgic_infusing",
+  "itemInput": {
+    "ingredient": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "chemicalInput": {
+    "amount": 30,
+    "tag": "mekanism:redstone"
+  },
+  "output": {
+    "item": "tothemoon:redstone_steel_alloy"
+  }
+}

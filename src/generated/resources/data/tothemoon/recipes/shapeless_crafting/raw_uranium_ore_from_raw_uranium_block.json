@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tothemoon:raw_uranium_block"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:raw_uranium_ore",
+    "count": 9
+  }
+}

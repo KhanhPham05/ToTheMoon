@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tothemoon:block/cobbled_moon_rock"
+  }
+}

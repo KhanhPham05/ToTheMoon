@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:dusts/uranium"
+  },
+  "result": "tothemoon:uranium_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

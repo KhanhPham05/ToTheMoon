@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:smelting",
+  "input": {
+    "ingredient": {
+      "tag": "forge:dusts/redstone_metal"
+    }
+  },
+  "output": {
+    "item": "tothemoon:redstone_metal"
+  }
+}
