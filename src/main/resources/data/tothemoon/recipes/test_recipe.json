@@ -1,0 +1,7 @@
+{
+  "type": "tothemoon:high_heat_smelting",
+  "ingredient": {
+    "item" : "tothemoon:coal_dust"
+  },
+  "result" : "tothemoon:heated_coal_dust"
+}

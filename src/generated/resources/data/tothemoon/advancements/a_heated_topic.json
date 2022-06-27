@@ -1,0 +1,37 @@
+{
+  "parent": "tothemoon:anvil_crushing",
+  "display": {
+    "icon": {
+      "item": "tothemoon:netherbrick_furnace_controller"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.a_heated_topic"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.a_heated_topic.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "req": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:netherbrick_furnace_controller"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "req"
+    ]
+  ]
+}

@@ -104,7 +104,7 @@ public class RecipeGeneratorHelper {
     }
 
     public void armor() {
-        ModItems.ARMORS.stream().map(Supplier::get).forEach(armorItem -> {
+        ModItems.ALL_ARMORS.values().stream().map(Supplier::get).forEach(armorItem -> {
             var builder = this.shaped(armorItem, 1);
             EquipmentSlot armorSlot = armorItem.getSlot();
             switch (armorSlot) {

@@ -1,0 +1,6 @@
+{
+  "name" : "book.tothemoon.header",
+  "landing_text" : "book.tothemoon.header.landing_text",
+  "version" : "1",
+  "i18n": true
+}

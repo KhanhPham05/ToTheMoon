@@ -20,7 +20,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
 archivesBaseName = 'ttm'
-version = 'test-1.0-c'
+version = "test-1.0c"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -116,6 +116,10 @@ repositories {
         name = 'MelanX Maven'
         url = 'https://maven.melanx.de/'
     }
+
+    maven {
+        url = "https://maven.zerono.it/"
+    }
 }
 
 mixin {
@@ -141,13 +145,17 @@ dependencies {
 
     implementation fg.deobf("curse.maven:mekanism-268560:3810540")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1")
 
     //runtimeOnly fg.deobf("curse.maven:pipez-443900:3760255")
     //implementation fg.deobf("curse.maven:create-328085:3737418")
     runtimeOnly fg.deobf("curse.maven:flywheel-486392:3737402")
     runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3748971")
+
+    //compile group: "it.zerono.mods.zercore", name: "ZeroCore2", version: "1.18.2-2.1.17"
+
+    //implementation fg.deobf("it.zerono.mods.zerocore:ZeroCore2:1.18.2-2.1.17")
 
     //implementation fg.deobf("curse.maven:patchouli-datagen-ptd-lib-585667:3671853")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

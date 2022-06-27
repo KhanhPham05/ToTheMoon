@@ -3,12 +3,16 @@ package com.khanhpham.tothemoon.utils.helpers;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryConnectionMode;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -20,6 +24,7 @@ import java.util.Random;
 public class ModUtils {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
     public static final EnumProperty<BatteryConnectionMode> BATTERY_CONNECTION_MODE = EnumProperty.create("connect", BatteryConnectionMode.class);
+    public static final BooleanProperty MULTIBLOCK_FORMED = BooleanProperty.create("formed");
     public static final Random RANDOM = new Random();
 
     public static ResourceLocation modLoc(String loc) {
@@ -63,7 +68,7 @@ public class ModUtils {
 
     public static int roll(int whenHit, int chance) {
         int attempt = RANDOM.nextInt(100);
-        ModUtils.log("Rolling for double : {}", attempt );
         return attempt < chance ? whenHit : 0;
     }
+
 }

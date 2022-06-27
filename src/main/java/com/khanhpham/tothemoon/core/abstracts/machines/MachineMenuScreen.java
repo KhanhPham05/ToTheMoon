@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.abstracts.machines;
 
 import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
-import com.khanhpham.tothemoon.datagen.ModLanguage;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

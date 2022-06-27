@@ -17,7 +17,7 @@ public class BatteryMenu extends BaseMenu {
     private final ContainerData containerData;
 
     public BatteryMenu(Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData containerData) {
-        super(ModMenuTypes.BATTERY, externalContainer, playerInventory, pContainerId);
+        super(ModMenuTypes.BATTERY, pContainerId, playerInventory, externalContainer);
         this.containerData = containerData;
 
         addSlot(new EnergyItemSlot(externalContainer, 0, 10, 34));

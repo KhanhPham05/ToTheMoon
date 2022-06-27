@@ -30,7 +30,7 @@ public abstract class BaseEntityBlock<T extends BlockEntity & TickableBlockEntit
 
     @Nullable
     @Override
-    public final <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level pLevel, BlockState pState, BlockEntityType<A> pBlockEntityType) {
+    public <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level pLevel, BlockState pState, BlockEntityType<A> pBlockEntityType) {
         return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, getBlockEntityType(), TickableBlockEntity::staticServerTick);
     }
 
@@ -45,10 +45,10 @@ public abstract class BaseEntityBlock<T extends BlockEntity & TickableBlockEntit
             BlockEntity te = pLevel.getBlockEntity(pPos);
             if (te != null && te.getType().equals(getBlockEntityType())) {
                 pPlayer.openMenu((MenuProvider) te);
-                return InteractionResult.SUCCESS;
+                return InteractionResult.CONSUME;
             }
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
     }
 
 

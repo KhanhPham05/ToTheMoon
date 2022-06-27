@@ -11,4 +11,5 @@ public class JsonNames {
     public static final String ITEM = "item";
     public static final String PROCESS_TIME = "processTime";
     public static final String GROUP = "group";
+    public static final String MULTIBLOCK = "multiblock";
 }

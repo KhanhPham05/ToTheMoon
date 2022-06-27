@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.core.abstracts;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -7,18 +8,18 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
  * @see net.minecraft.world.inventory.AbstractFurnaceMenu
  */
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public abstract class ItemCapableTileEntity extends BaseContainerBlockEntity {
 
     protected NonNullList<ItemStack> items;
@@ -28,7 +29,6 @@ public abstract class ItemCapableTileEntity extends BaseContainerBlockEntity {
 
         this.items = NonNullList.withSize(inventorySize, ItemStack.EMPTY);
     }
-
 
 
     @Override
@@ -45,7 +45,6 @@ public abstract class ItemCapableTileEntity extends BaseContainerBlockEntity {
     public ItemStack getItem(int pIndex) {
         return items.get(pIndex);
     }
-
 
 
     @Override

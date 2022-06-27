@@ -56,5 +56,10 @@
       <option name="name" value="MelanX Maven" />
       <option name="url" value="https://maven.melanx.de/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven3" />
+      <option name="name" value="maven3" />
+      <option name="url" value="https://maven.zerono.it/" />
+    </remote-repository>
   </component>
 </project>

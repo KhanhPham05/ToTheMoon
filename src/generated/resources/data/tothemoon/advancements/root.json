@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "tothemoon:redstone_steel_alloy"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.root"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.root.description"
+    },
+    "frame": "challenge",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "tothemoon:textures/block/uranium_block.png"
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ]
+}

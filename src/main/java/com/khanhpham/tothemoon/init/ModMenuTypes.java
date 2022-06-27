@@ -8,6 +8,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterM
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
+import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerMenu;
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.event.RegistryEvent;
@@ -29,6 +30,8 @@ public class ModMenuTypes {
     public static final MenuType<MetalPressMenu> METAL_PRESS;
     public static final MenuType<BatteryMenu> BATTERY;
     public static final MenuType<EnergySmelterMenu> ENERGY_SMELTER;
+    public static final MenuType<NetherBrickFurnaceControllerMenu> NETHER_BRICK_FURNACE;
+
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
         ENERGY_GENERATOR_CONTAINER = register("energy_generator_container", EnergyGeneratorMenu::new);
@@ -36,6 +39,7 @@ public class ModMenuTypes {
         METAL_PRESS = register("metal_press_menu", MetalPressMenu::new);
         BATTERY = register("battery", BatteryMenu::new);
         ENERGY_SMELTER = register("energy_smelter", EnergySmelterMenu::new);
+        NETHER_BRICK_FURNACE = register("nether_brick_furnace", NetherBrickFurnaceControllerMenu::new);
     }
 
     private ModMenuTypes() {

@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseMachineMenu extends BaseMenu {
     protected BaseMachineMenu(@Nullable MenuType<?> pMenuType, UpgradableContainer externalContainer, Inventory playerInventory, int pContainerId) {
-        super(pMenuType, externalContainer, playerInventory, pContainerId);
+        super(pMenuType, pContainerId, playerInventory, externalContainer);
     }
 
     @Override

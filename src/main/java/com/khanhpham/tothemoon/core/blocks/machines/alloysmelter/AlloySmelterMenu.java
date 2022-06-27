@@ -17,7 +17,7 @@ public class AlloySmelterMenu extends BaseMenu {
     private final ContainerData data;
 
     protected AlloySmelterMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData data) {
-        super(pMenuType, externalContainer, playerInventory, pContainerId);
+        super(pMenuType, pContainerId, playerInventory, externalContainer);
         this.data = data;
 
         addSlot(0, 45, 19);

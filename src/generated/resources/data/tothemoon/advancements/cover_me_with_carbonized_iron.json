@@ -1,0 +1,233 @@
+{
+  "parent": "tothemoon:getting_a_true_upgrade",
+  "display": {
+    "icon": {
+      "item": "tothemoon:steel_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.cover_me_with_carbonized_iron"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.cover_me_with_carbonized_iron.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "steel_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_chestplate"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_leggings"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_boots"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "uranium_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:uranium_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_hoe"
+            ]
+          }
+        ]
+      }
+    },
+    "uranium_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:uranium_hoe"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_axe"
+            ]
+          }
+        ]
+      }
+    },
+    "uranium_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:uranium_axe"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "uranium_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:uranium_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "steel_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_sword"
+            ]
+          }
+        ]
+      }
+    },
+    "uranium_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:uranium_sword"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "steel_helmet"
+    ],
+    [
+      "steel_chestplate"
+    ],
+    [
+      "steel_leggings"
+    ],
+    [
+      "steel_boots"
+    ],
+    [
+      "steel_pickaxe"
+    ],
+    [
+      "uranium_pickaxe"
+    ],
+    [
+      "steel_hoe"
+    ],
+    [
+      "uranium_hoe"
+    ],
+    [
+      "steel_axe"
+    ],
+    [
+      "uranium_axe"
+    ],
+    [
+      "steel_shovel"
+    ],
+    [
+      "uranium_shovel"
+    ],
+    [
+      "steel_sword"
+    ],
+    [
+      "uranium_sword"
+    ]
+  ]
+}
