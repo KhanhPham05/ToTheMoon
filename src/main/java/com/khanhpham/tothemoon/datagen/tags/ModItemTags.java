@@ -52,6 +52,7 @@ public class ModItemTags {
 
     public static final AppendableItemTagKey.OneWayProcessable GENERAL_DUSTS = new AppendableItemTagKey.OneWayProcessable(DUSTS);
     public static final TagKey<Item> DUSTS_COAL = GENERAL_DUSTS.append("coal", ModItems.COAL_DUST);
+    public static final TagKey<Item> DUSTS_HEATED_COAL = GENERAL_DUSTS.append("heated_coal", ModItems.HEATED_COAL_DUST);
     public static final TagKey<Item> DUSTS_GOLD = GENERAL_DUSTS.append("gold", ModItems.GOLD_DUST, () -> Items.GOLD_INGOT);
     public static final TagKey<Item> DUSTS_REDSTONE_STEEL_ALLOY = GENERAL_DUSTS.append( "redstone_steel_metal", ModItems.REDSTONE_STEEL_ALLOY_DUST, ModItems.REDSTONE_STEEL_ALLOY);
     public static final TagKey<Item> DUSTS_URANIUM = GENERAL_DUSTS.append("uranium", ModItems.URANIUM_DUST, ModItems.URANIUM_INGOT);

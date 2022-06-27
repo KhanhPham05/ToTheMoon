@@ -1,0 +1,19 @@
+{
+  "type": "tothemoon:alloy_smelting",
+  "baseIngredient": {
+    "item": {
+      "tag": "forge:dusts/heated_coal"
+    },
+    "count": 1
+  },
+  "secondaryIngredient": {
+    "item": {
+      "tag": "forge:ingots/iron"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "tothemoon:steel_ingot",
+    "count": 1
+  }
+}

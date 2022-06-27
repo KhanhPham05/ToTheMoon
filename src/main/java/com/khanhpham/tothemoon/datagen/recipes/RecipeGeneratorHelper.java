@@ -17,7 +17,9 @@ import org.apache.commons.compress.utils.Lists;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -83,14 +85,14 @@ public class RecipeGeneratorHelper {
     @SafeVarargs
     protected final void shapelessCrafting(ItemLike result, int amount, TagKey<Item>... require) {
         var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount);
-        List<String> tagStrings = new ArrayList<>();
+        Set<String> tagStrings = new HashSet<>();
         for (TagKey<Item> itemTagKey : require) {
             shapelessRecipe.requires(itemTagKey);
             tagStrings.add(extractTag(itemTagKey));
         }
 
 
-        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", tagStrings, getId(result));
+        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", tagStrings.stream().toList(), getId(result));
     }
 
     protected void shapelessCrafting(ItemLike result, int amount, ItemLike... require) {

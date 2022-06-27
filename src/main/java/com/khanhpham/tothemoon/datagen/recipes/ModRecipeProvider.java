@@ -151,6 +151,7 @@ public class ModRecipeProvider extends RecipeProvider {
         shapelessCrafting(helper, ModItems.REDSTONE_METAL_WIRE, GENERAL_TTM_HAMMERS, RODS_REDSTONE_METAL);
         shapelessCrafting(helper, ModItems.REDSTONE_STEEL_ALLOY_WIRE, GENERAL_TTM_HAMMERS, RODS_REDSTONE_STEEL);
 
+        shapelessCrafting(helper, ModItems.STEEL_DUST, DUSTS_HEATED_COAL, DUSTS_HEATED_COAL, DUSTS_HEATED_COAL, DUSTS_IRON);
 
         helper.shaped(ModItems.COPPER_GEAR).pattern(" C ").pattern("C C").pattern(" C ").define('C', INGOTS_COPPER).save();
 
@@ -201,9 +202,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @SafeVarargs
     private void shapelessCrafting(final RecipeGeneratorHelper helper, Supplier<? extends Item> result, TagKey<Item>... ingredients) {
-        for (TagKey<Item> ingredient : ingredients) {
-            helper.shapelessCrafting(result.get(), 1, ingredient);
-        }
+        helper.shapelessCrafting(result.get(), 1, ingredients);
     }
 
     private void polished(final RecipeGeneratorHelper helper, Supplier<? extends Block> block, Supplier<? extends Block> material) {
@@ -218,6 +217,7 @@ public class ModRecipeProvider extends RecipeProvider {
         alloy(consumer, ModItemTags.DUSTS_IRON, 1, DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
         alloy(consumer, Tags.Items.INGOTS_IRON, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
         alloy(consumer, ModItemTags.DUSTS_COAL, 1, Tags.Items.INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
+        alloy(consumer, DUSTS_HEATED_COAL, 1, INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
 
         metalPress(consumer, INGOTS_STEEL, PLATE_MOLD, ModItems.STEEL_PLATE);
         metalPress(consumer, INGOTS_STEEL, GEAR_MOLD, ModItems.STEEL_GEAR);

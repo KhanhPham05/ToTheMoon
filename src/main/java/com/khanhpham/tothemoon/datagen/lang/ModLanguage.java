@@ -90,12 +90,13 @@ public class ModLanguage extends LanguageProvider {
         add(BOOK_NAME, "TTM Guide Book");
         add(BOOK_LANDING, "This guide book will show you all the features that are in this mod.");
         add(THE_BASICS, "The Basics");
-        add(THE_BASICS_DESCRIPTION, "This category will show you all $(o)the basics $()as the first steps in the mod.");
+        add(THE_BASICS_DESCRIPTION, "This category will show you all $(o)the basics$() as the first steps in the mod.");
         add(MANUAL_CRUSHING, "Manual Crushing");
         add(MANUAL_CRUSHING_PAGE_1, "Vanilla Minecraft's anvil is used to smash the raw ores and coals in to dusts (this will work for all the mods such as Mekanism or Immersive Engineering, and of course, this mod) $(br2) This method of crushing will give you 15% of getting an extra dust");
         add(MANUAL_CRUSHING_CRAFTING_PAGE, "The Crafting recipe of Anvil is shown up here.");
         add(MANUAL_CRUSHING_CRAFTING_TITLE, "Crafting Anvil");
         add(MAKING_STEEL, "Making Steel");
+        add(MAKING_STEEL_PAGE_ONE, "Before you can make steel, you need to have some $(o)some$() pieces of $(l)heated coal dusts$() first. But before that, you need something so heat the $(l:tothemoon:manual_crushing)coal dust$().$(br2) So Nether Brick Furnace is your chose");
     }
 
     private void add(TranslatableComponent component, String trans) {
