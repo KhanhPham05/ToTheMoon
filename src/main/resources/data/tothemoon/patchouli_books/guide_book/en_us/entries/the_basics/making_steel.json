@@ -10,7 +10,44 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": ""
+      "recipe": "tothemoon:crafting/netherbrick_furnace_controller",
+      "text": "book.tothemoon.making_steel.crafting_controller"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "gui.tothemoon.nether_brick_furnace",
+      "text": "book.tothemoon.making_steel.multiblock_notice",
+      "multiblock": {
+        "pattern": [
+          [
+            "SSS",
+            "SSS",
+            "SSS"
+          ],
+          [
+            "BBB",
+            "BFB",
+            "BCB"
+          ],
+          [
+            "BBB",
+            "BBB",
+            "B0B"
+          ]
+        ],
+        "mapping": {
+          "S": "tothemoon:smooth_blackstone",
+          "F": "minecraft:blast_furnace",
+          "C": "tothemoon:netherbrick_furnace_controller",
+          "B": "minecraft:nether_bricks",
+          "0": "minecraft:nether_bricks"
+        }
+      }
+    },
+    {
+      "type": "patchouli:text",
+      "text": "book.tothemoon.making_steel.multiblock",
+      "title": "book.tothemoon.how_to_use"
     }
   ]
 }

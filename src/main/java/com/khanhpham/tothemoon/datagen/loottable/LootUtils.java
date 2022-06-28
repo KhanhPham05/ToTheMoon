@@ -21,9 +21,9 @@ public class LootUtils {
     private static final String TTM_DATA = "ttmData";
 
     static {
-        LOOT_DATA_ENERGY = makeDataName("energy");
-        LOOT_DATA_FLUID = makeDataName("fluid");
-        LOOT_DATA_FLUID_AMOUNT = makeDataName("fluidAmount");
+        LOOT_DATA_ENERGY = "energy";
+        LOOT_DATA_FLUID = "fluid";
+        LOOT_DATA_FLUID_AMOUNT = "fluidAmount";
     }
 
     private LootUtils() {

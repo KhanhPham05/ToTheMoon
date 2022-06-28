@@ -61,7 +61,6 @@ public abstract class EnergyCapableItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-        //var energy = pStack.getCapability(CapabilityEnergy.ENERGY);//.map(IEnergyStorage::getEnergyStored).orElse(0);
         int energyStored = ItemStackEnergy.getNbt(pStack).getInt("energy");
         pTooltip.add(new TranslatableComponent("tooltip.tothemoon.energy", TTMConfigs.CLIENT.showsItemEnergyPercentageOnToolTip.get() ? TextUtils.showPercentage(energyStored, getMaxEnergyStored()) : "", TextUtils.energyToString(energyStored), TextUtils.energyToString(getMaxEnergyStored())).withStyle(ChatFormatting.GREEN));
     }

@@ -2,6 +2,7 @@ package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.DirectionUtils;
@@ -218,4 +219,8 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
         fluid.readFromNBT(pTag);
     }
 
+    @Override
+    public Component getDisplayName() {
+        return ModLanguage.NETHER_BRICK_FURNACE_CONTROLLER;
+    }
 }

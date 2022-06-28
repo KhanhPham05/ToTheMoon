@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -31,6 +32,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Random;
 
 public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFurnaceControllerBlockEntity> {
@@ -74,19 +76,15 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     @Override
     @SuppressWarnings("deprecation")
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        LootUtils.loadItemTagToBlockEntity(pStack, pLevel, pPos, getBlockEntityType(),
-                (tag, be) -> {
-                    if (tag.contains(LootUtils.LOOT_DATA_FLUID, LootUtils.TAG_TYPE_STRING) && tag.contains(LootUtils.LOOT_DATA_FLUID_AMOUNT, LootUtils.TAG_TYPE_INT)) {
-
-                        int amount = tag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT);
-                        Preconditions.checkState(Registry.FLUID.containsKey(new ResourceLocation(tag.getString(LootUtils.LOOT_DATA_FLUID))), new IllegalStateException("Unknown Fluid : [" + tag.getString(LootUtils.LOOT_DATA_FLUID)) + "]");
-                        Fluid fluid = Registry.FLUID.get(new ResourceLocation(tag.getString(LootUtils.LOOT_DATA_FLUID)));
-
-                        FluidStack fluidStack = new FluidStack(fluid, amount);
-                        be.fluid.setFluid(fluidStack);
-                    }
-                }
-        );
+        CompoundTag tag = pStack.getOrCreateTag();
+        if (tag.contains("ttmData", 10)) {
+            CompoundTag dataTag = tag.getCompound("ttmData");
+            int fluidAmount = dataTag.getInt("fluidAmount");
+            Fluid fluid = Registry.FLUID.get(ResourceLocation.tryParse(Objects.requireNonNull(dataTag.get("fluid")).getAsString()));
+            if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity tile) {
+                tile.fluid.setFluid(new FluidStack(fluid, fluidAmount));
+            }
+        }
     }
 
     @Override

@@ -25,6 +25,7 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
     public static final TranslatableComponent NETHER_BRICK_FURNACE_CONTROLLER = create("gui", "nether_brick_furnace");
 
+
     //PATCHOULI
     public static final TranslatableComponent BOOK_NAME = create("book", "header");
     public static final TranslatableComponent BOOK_LANDING = create("book", "header.landing_text");
@@ -37,6 +38,10 @@ public class ModLanguage extends LanguageProvider {
 
     public static final TranslatableComponent MAKING_STEEL = create("book", "making_steel");
     public static final TranslatableComponent MAKING_STEEL_PAGE_ONE = create("book", "making_steel.page_one");
+    public static final TranslatableComponent MAKING_STEEL_CRAFT_CONTROLLER = create("book", "making_steel.crafting_controller");
+    public static final TranslatableComponent MAKING_STEEL_MULTIBLOCK = create("book", "making_steel.multiblock");
+    public static final TranslatableComponent MAKING_STEEL_MULTIBLOCK_NOTICE = create("book", "making_steel.multiblock_notice");
+    public static final TranslatableComponent TEXT_HOW_TO_USE = create("book", "how_to_use");
     //ADVANCEMENTS
     public static final TranslatableComponent ROOT = create("advancement", "root");
     public static final TranslatableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
@@ -80,7 +85,6 @@ public class ModLanguage extends LanguageProvider {
         //sound
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
 
-
         //ADVANCEMENT
         add(ROOT_DESCRIPTION, "Welcome To The Moon, this advancement will show you al the things that are in this mod");
         add(ROOT, "TTM Project");
@@ -97,6 +101,10 @@ public class ModLanguage extends LanguageProvider {
         add(MANUAL_CRUSHING_CRAFTING_TITLE, "Crafting Anvil");
         add(MAKING_STEEL, "Making Steel");
         add(MAKING_STEEL_PAGE_ONE, "Before you can make steel, you need to have some $(o)some$() pieces of $(l)heated coal dusts$() first. But before that, you need something so heat the $(l:tothemoon:manual_crushing)coal dust$().$(br2) So Nether Brick Furnace is your chose");
+        add(MAKING_STEEL_CRAFT_CONTROLLER, "First of all, you need to craft a Controller for this huge furnace. This list below shows the blocks that the furnace needs for construction $(li)x1 NetherBrick Furnace Controller $(li)x15 Nether Bricks $(li)x1 Blass Furnace $(li)x9 Smooth Blackstone");
+        add(MAKING_STEEL_MULTIBLOCK_NOTICE, "$(o)Notice:$()$(br) - This multiblock requires a $(l)Blast Furnace$() at the core / centre");
+        add(MAKING_STEEL_MULTIBLOCK, "This special furnace is the key of the process, In order to produce Heated Coal Dust for steel, you need this furnace. However, to make this furnace function, you may need to have Blaze Powder af startup fuel and lava as a process maintenance, usually, the lava consumption is pretty low, at 3mB per a tick. After forming you can access the controller GUI to start making heated coal. The last thing you need is coal dust after smashing from normal coal by anvil");
+        add(TEXT_HOW_TO_USE, "How To Use");
     }
 
     private void add(TranslatableComponent component, String trans) {
