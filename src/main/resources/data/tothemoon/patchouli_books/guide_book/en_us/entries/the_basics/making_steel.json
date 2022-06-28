@@ -2,6 +2,7 @@
   "name": "book.tothemoon.making_steel",
   "icon": "tothemoon:steel_ingot",
   "category": "tothemoon:the_basics",
+  "sortnum": 1,
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -17,6 +18,7 @@
       "type": "patchouli:multiblock",
       "name": "gui.tothemoon.nether_brick_furnace",
       "text": "book.tothemoon.making_steel.multiblock_notice",
+      "enable_visualize" : false,
       "multiblock": {
         "pattern": [
           [
@@ -38,7 +40,7 @@
         "mapping": {
           "S": "tothemoon:smooth_blackstone",
           "F": "minecraft:blast_furnace",
-          "C": "tothemoon:netherbrick_furnace_controller",
+          "C": "tothemoon:netherbrick_furnace_controller[lit=true,facing=west]",
           "B": "minecraft:nether_bricks",
           "0": "minecraft:nether_bricks"
         }

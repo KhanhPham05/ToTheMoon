@@ -2,6 +2,7 @@
   "name": "book.tothemoon.manual_crushing",
   "category": "tothemoon:the_basics",
   "icon" : "minecraft:anvil",
+  "sortnum" : 0,
   "pages" : [
     {
       "type": "patchouli:spotlight",

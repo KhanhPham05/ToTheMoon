@@ -30,10 +30,6 @@ public class LootUtils {
         throw new IllegalStateException("Utilities Class");
     }
 
-    private static String makeDataName(String saveName) {
-        return "ttmData." + saveName;
-    }
-
     public static CompoundTag getBlockEntityTag(ItemStack stack) {
         CompoundTag nbt = stack.getOrCreateTag();
 
