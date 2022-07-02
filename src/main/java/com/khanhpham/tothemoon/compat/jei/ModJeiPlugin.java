@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.compat.jei;
 
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
-import com.khanhpham.tothemoon.datagen.ModLanguage;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -67,21 +67,20 @@ public class ModJeiPlugin implements IModPlugin {
 
     public static final class AlloySmelterRecipeCategory implements IRecipeCategory<AlloySmeltingRecipe> {
 
-        private final IDrawable background;
-        private final IDrawableAnimated processArrow;
-        private final IDrawable icon;
-
         public static final ItemStack ICON = new ItemStack(ModBlocks.ALLOY_SMELTER.get());
         public static final ResourceLocation TEXTURE = ModUtils.modLoc("textures/jei/alloy_smelter.png");
         public static final ResourceLocation CATEGORY_ID = ModUtils.modLoc("alloy_smelting_category");
         private static final RecipeType<AlloySmeltingRecipe> RECIPE_TYPE = new RecipeType<>(CATEGORY_ID, AlloySmeltingRecipe.class);
+        private final IDrawable background;
+        private final IDrawableAnimated processArrow;
+        private final IDrawable icon;
 
         public AlloySmelterRecipeCategory(IGuiHelper helper) {
             this.background = helper.createDrawable(TEXTURE, 0, 0, 114, 69);
 
-            IDrawableStatic staticArrow = helper.createDrawable(TEXTURE, 149, 0 , 35, 21);
+            IDrawableStatic staticArrow = helper.createDrawable(TEXTURE, 149, 0, 35, 21);
             this.processArrow = helper.createAnimatedDrawable(staticArrow, 100, IDrawableAnimated.StartDirection.LEFT, false);
-            this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ICON) ;
+            this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ICON);
         }
 
         @Override
@@ -129,9 +128,9 @@ public class ModJeiPlugin implements IModPlugin {
 
     public static final class MetalPressRecipeCategory implements IRecipeCategory<MetalPressingRecipe> {
         public static final ResourceLocation CATEGORY_ID = ModUtils.modLoc("metal_press");
-        private static final ItemStack ICON = new ItemStack(ModBlocks.METAL_PRESS.get().asItem());
         public static final RecipeType<MetalPressingRecipe> RECIPE_TYPE = new RecipeType<>(CATEGORY_ID, MetalPressingRecipe.class);
         public static final ResourceLocation TEXTURE = ModUtils.modLoc("textures/jei/metal_press.png");
+        private static final ItemStack ICON = new ItemStack(ModBlocks.METAL_PRESS.get().asItem());
         private final IDrawable background;
         private final IDrawableAnimated processArrow;
         private final IDrawable icon;

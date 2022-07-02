@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.utils.energy;
 
+import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.EnergyStorage;
@@ -14,11 +15,7 @@ public class ItemStackEnergy extends EnergyStorage {
     }
 
     public static CompoundTag getNbt(ItemStack stack) {
-        CompoundTag tag = stack.getOrCreateTag();
-        if (tag.contains("BlockEntityTag")) {
-            return tag.getCompound("BlockEntityTag");
-        }
-        return tag;
+        return LootUtils.getBlockEntityTag(stack);
     }
 
     @Override
@@ -36,9 +33,9 @@ public class ItemStackEnergy extends EnergyStorage {
     }
 
     private void updateEnergyNbt() {
-        if (blockEntityTag.contains("energy", 3)) {
-            blockEntityTag.remove("energy");
-            blockEntityTag.putInt("energy", this.energy);
+        if (blockEntityTag.contains(LootUtils.LOOT_DATA_ENERGY, LootUtils.TAG_TYPE_INT)) {
+            blockEntityTag.remove(LootUtils.LOOT_DATA_ENERGY);
+            blockEntityTag.putInt(LootUtils.LOOT_DATA_ENERGY, this.energy);
         }
     }
 

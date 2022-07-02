@@ -2,16 +2,18 @@ package com.khanhpham.tothemoon;
 
 import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
-import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
 import com.khanhpham.tothemoon.core.config.TTMConfigs;
+import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.ModItemModels;
-import com.khanhpham.tothemoon.datagen.ModLanguage;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
+import com.khanhpham.tothemoon.datagen.advancement.ModAdvancementProvider;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockStates;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
@@ -23,6 +25,7 @@ import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -81,18 +84,20 @@ public class ToTheMoon {
         DimensionSpecialEffects.EFFECTS.put(MOON_EFFECTS, new TheMoonDimensionEffect());
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        initClasses();
+        initRegistration();
         ModBlocks.BLOCK_DEFERRED_REGISTER.register(bus);
         ModItems.ITEM_DEFERRED_REGISTER.register(bus);
         ModBlockEntityTypes.BE_DEFERRED_REGISTER.register(bus);
 
         TTMConfigs.registerConfigs(bus, ModLoadingContext.get());
+        new MultiblockManager();
     }
 
-    private static void initClasses() {
+    private static void initRegistration() {
         ModBlocks.init();
         ModItems.start();
         ModBlockEntityTypes.init();
+
     }
 
 
@@ -107,6 +112,7 @@ public class ToTheMoon {
             DataGenerator data = event.getGenerator();
             ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
+            data.addProvider(new ModAdvancementProvider(data, fileHelper));
             data.addProvider(new ModSoundsProvider(data));
             data.addProvider(new ModLanguage(data));
             data.addProvider(new ModRecipeProvider(data));
@@ -137,7 +143,6 @@ public class ToTheMoon {
             }
         }
 
-
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
@@ -146,6 +151,7 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.METAL_PRESS, MetalPressMenuScreen::new);
             MenuScreens.register(ModMenuTypes.BATTERY, BatteryMenuScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_SMELTER, EnergySmelterScreen::new);
+            MenuScreens.register(ModMenuTypes.NETHER_BRICK_FURNACE, NetherBrickFurnaceControllerScreen::new);
 
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
@@ -171,6 +177,11 @@ public class ToTheMoon {
                     level.setBlock(event.getPos(), Blocks.PACKED_ICE.defaultBlockState(), 3);
                 }
             }
+        }
+
+        @SubscribeEvent
+        public static void onBlockBroken(BlockEvent.BreakEvent event) {
+           MultiblockManager.INSTANCE.checkAndRemoveMultiblocks(event.getPlayer().getLevel(), event.getPos());
         }
     }
 }

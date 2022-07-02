@@ -52,6 +52,7 @@ public class ModTagProvider {
             this.add(ModItemTags.INGOTS_REDSTONE_METAL, ModItems.REDSTONE_METAL);
             this.add(ModItemTags.INGOTS_REDSTONE_STEEL_ALLOY, ModItems.REDSTONE_STEEL_ALLOY);
             this.add(ModItemTags.DUSTS_COAL, ModItems.COAL_DUST);
+            this.add(DUSTS_HEATED_COAL, HEATED_COAL_DUST);
 
             tag(ModItemTags.GENERAL_PLATES).addTags(ModItemTags.PLATES_STEEL, ModItemTags.PLATES_IRON, PLATES_COPPER, PLATES_GOLD, PLATES_REDSTONE_STEEL_ALLOY, PLATES_REDSTONE_METAL, PLATES_URANIUM);
             add(ModItemTags.PLATES_STEEL, ModItems.STEEL_PLATE);

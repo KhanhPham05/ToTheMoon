@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "side": "tothemoon:block/netherbrick_furnace_controller_side",
+    "front": "tothemoon:block/netherbrick_furnace_controller_front_on",
+    "top": "tothemoon:block/netherbrick_furnace_controller_top"
+  }
+}

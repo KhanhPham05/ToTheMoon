@@ -17,7 +17,7 @@ public class EnergySmelterMenu extends BaseMenu {
     private final ContainerData data;
 
     public EnergySmelterMenu(Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData data) {
-        super(ModMenuTypes.ENERGY_SMELTER, externalContainer, playerInventory, pContainerId);
+        super(ModMenuTypes.ENERGY_SMELTER, pContainerId, playerInventory, externalContainer);
 
         super.addSlot(0, 41, 33);
         super.addSlot(new ResultSlot(externalContainer, 1, 106, 33));

@@ -1,0 +1,29 @@
+{
+  "parent": "tothemoon:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:anvil"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.heavy_crushing"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.heavy_crushing.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "req": {
+      "trigger": "tothemoon:anvil_crushing",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "req"
+    ]
+  ]
+}

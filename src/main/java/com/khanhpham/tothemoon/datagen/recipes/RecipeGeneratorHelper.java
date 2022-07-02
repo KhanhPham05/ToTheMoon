@@ -17,11 +17,15 @@ import org.apache.commons.compress.utils.Lists;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class RecipeGeneratorHelper {
+    private static final ArrayList<String> RECIPES = new ArrayList<>();
+    private static int recipeDuplications = 0;
     protected final Consumer<FinishedRecipe> consumer;
 
     public RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
@@ -36,20 +40,20 @@ public class RecipeGeneratorHelper {
         return ModUtils.convertRlToPath(item.asItem());
     }
 
-    static <T extends RecipeBuilder> void saveGlobal(Consumer<FinishedRecipe> consumer, T builder, String recipeType, List<String> inputs, String result) {
-        unlockedBy(builder);
-        StringBuilder recipeName = new StringBuilder(recipeType + '/' + result + "_from_" + inputs.get(0));
+    static <T extends RecipeBuilder> void saveGlobal(Consumer<FinishedRecipe> consumer, T builder, String recipeType, String result) {
+        unlock(builder);
+        String recipeName = recipeType + '/' + result;
 
-        if (inputs.size() > 1) {
-            for (int i = 1; i < inputs.size(); i++) {
-                recipeName.append("_and_").append(inputs.get(i));
-            }
+        if (RECIPES.contains(recipeName)) {
+            recipeName = recipeName + "_" + recipeDuplications;
+            recipeDuplications++;
         }
 
-        builder.save(consumer, ModUtils.modLoc(recipeName.toString()));
+        RECIPES.add(recipeName);
+        builder.save(consumer, ModUtils.modLoc(recipeName));
     }
 
-    private static void unlockedBy(RecipeBuilder builder) {
+    private static void unlock(RecipeBuilder builder) {
         builder.unlockedBy("tick", ModRecipeProvider.tick());
     }
 
@@ -59,7 +63,7 @@ public class RecipeGeneratorHelper {
 
     protected void stoneCutting(Supplier<? extends ItemLike> result, int amount, Supplier<? extends ItemLike> from) {
         var builder = SingleItemRecipeBuilder.stonecutting(Ingredient.of(from.get()), result.get(), amount);
-        saveGlobal(consumer, builder, "stonecutting", List.of(getId(from.get())), getId(result.get()));
+        saveGlobal(consumer, builder, "stonecutting", getId(result.get()));
     }
 
     protected Shaped shaped(ItemLike result, int amount) {
@@ -83,14 +87,14 @@ public class RecipeGeneratorHelper {
     @SafeVarargs
     protected final void shapelessCrafting(ItemLike result, int amount, TagKey<Item>... require) {
         var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount);
-        List<String> tagStrings = new ArrayList<>();
+        Set<String> tagStrings = new HashSet<>();
         for (TagKey<Item> itemTagKey : require) {
             shapelessRecipe.requires(itemTagKey);
             tagStrings.add(extractTag(itemTagKey));
         }
 
 
-        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", tagStrings, getId(result));
+        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", getId(result));
     }
 
     protected void shapelessCrafting(ItemLike result, int amount, ItemLike... require) {
@@ -100,11 +104,11 @@ public class RecipeGeneratorHelper {
             itemNames.add(ModUtils.getPath(itemLike.asItem()));
             shapelessRecipe.requires(itemLike);
         }
-        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", itemNames, getId(result));
+        saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", getId(result));
     }
 
     public void armor() {
-        ModItems.ARMORS.stream().map(Supplier::get).forEach(armorItem -> {
+        ModItems.ALL_ARMORS.values().stream().map(Supplier::get).forEach(armorItem -> {
             var builder = this.shaped(armorItem, 1);
             EquipmentSlot armorSlot = armorItem.getSlot();
             switch (armorSlot) {
@@ -170,12 +174,12 @@ public class RecipeGeneratorHelper {
         }
 
         public T getBuilder() {
-            unlockedBy(builder);
+            unlock(builder);
             return builder;
         }
 
         public void save() {
-            saveGlobal(consumer, builder, recipeType, inputs, result.asItem().getRegistryName().getPath());
+            saveGlobal(consumer, builder, recipeType, result.asItem().getRegistryName().getPath());
         }
     }
 
@@ -234,7 +238,7 @@ public class RecipeGeneratorHelper {
 
     protected static class Blasting extends NamedRecipeBuilder<SimpleCookingRecipeBuilder> {
         public Blasting(Consumer<FinishedRecipe> consumer, ItemLike result, Ingredient ingredient, int cookTime) {
-            super(consumer, SimpleCookingRecipeBuilder.smelting(ingredient, result, 1.0f, cookTime), result, "blasting");
+            super(consumer, SimpleCookingRecipeBuilder.blasting(ingredient, result, 1.0f, cookTime), result, "blasting");
         }
 
         public Blasting(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike ingredient, int cookTime) {

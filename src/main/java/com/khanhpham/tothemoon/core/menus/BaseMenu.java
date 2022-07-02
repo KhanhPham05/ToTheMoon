@@ -3,6 +3,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -16,8 +17,9 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     protected final Container externalContainer;
     public int playerInventorySlotStartsX;
     public int playerInventorySlotStartsY;
+    protected final ContainerLevelAccess access = ContainerLevelAccess.NULL;
 
-    protected BaseMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId) {
+    public BaseMenu(@Nullable MenuType<?> pMenuType, int pContainerId, Inventory playerInventory, Container externalContainer) {
         super(pMenuType, pContainerId);
         this.playerInventory = playerInventory;
         this.externalContainer = externalContainer;

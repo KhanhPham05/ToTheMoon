@@ -1,0 +1,37 @@
+{
+  "parent": "tothemoon:multiblock_nether_furnace",
+  "display": {
+    "icon": {
+      "item": "tothemoon:steel_ingot"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.getting_a_true_upgrade"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.getting_a_true_upgrade.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "gather_steel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "gather_steel"
+    ]
+  ]
+}

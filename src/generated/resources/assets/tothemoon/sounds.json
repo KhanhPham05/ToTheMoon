@@ -81,11 +81,7 @@
   },
   "metal_press_used": {
     "category": "block",
-    "sounds": [
-      "tothemoon:metal_press_used1",
-      "tothemoon:metal_press_used2",
-      "tothemoon:metal_press_used3"
-    ],
+    "sounds": [],
     "subtitle": "block.tothemoon.metal_press_used"
   }
 }

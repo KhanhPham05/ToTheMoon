@@ -32,9 +32,14 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
         super.imageWidth = width;
     }
 
+    protected final void setImageHeightWidth(int height, int width) {
+        this.setImageHeight(height);
+        this.setImageWidth(width);
+    }
+
 
     @Override
-    protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
+    protected final void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.setShaderTexture(0, this.texture);
@@ -51,9 +56,9 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
 
     @Override
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        super.renderBackground(pPoseStack);
+        renderBackground(pPoseStack);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        super.renderTooltip(pPoseStack, pMouseX, pMouseY);
+        renderTooltip(pPoseStack, pMouseX, pMouseY);
     }
 
     @Override
@@ -65,4 +70,5 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
 
     protected void renderExtraLabels(PoseStack poseStack) {
     }
+
 }

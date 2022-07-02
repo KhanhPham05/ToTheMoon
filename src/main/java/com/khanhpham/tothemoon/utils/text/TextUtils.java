@@ -1,5 +1,9 @@
 package com.khanhpham.tothemoon.utils.text;
 
+import com.khanhpham.tothemoon.Names;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+
 public class TextUtils {
     public static String energyToString(int energy) {
         String str = "";
@@ -28,6 +32,26 @@ public class TextUtils {
 
         return str;
     }
+    private static final String TRANSLATION_FORMAT = "%s.%s.%s";
+    private static final String FLUID_FORMAT = "%,d mB";
+
+    public static Component formatText(String pre, String suf, Object... params) {
+        return new TranslatableComponent(String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf), params);
+    }
+
+    public static Component fluidFuel(int fluid, int capacity) {
+        String fluidString = String.format(FLUID_FORMAT, fluid);
+        String capacityString = String.format(FLUID_FORMAT, capacity);
+        return formatText("tooltip", "fluid_fuel_tank", fluidString, capacityString);
+    }
+
+    public static String translateFormat(String pre, String suf) {
+        return String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf);
+    }
+
+
+
+    //private static
 
     private static String cutPos(String string, int posToCut, String extension) {
         int dotPos;

@@ -19,7 +19,7 @@ public abstract class AbstractEnergyGeneratorMenu extends BaseMenu implements Da
     private final ItemStack EMPTY = ItemStack.EMPTY;
 
     public AbstractEnergyGeneratorMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData intData) {
-        super(pMenuType, externalContainer, playerInventory, pContainerId);
+        super(pMenuType, pContainerId, playerInventory, externalContainer);
 
         super.addSlot(new BurnableSlot(externalContainer, 0, 80, 32));
         super.addPlayerInventorySlots(8, 97);

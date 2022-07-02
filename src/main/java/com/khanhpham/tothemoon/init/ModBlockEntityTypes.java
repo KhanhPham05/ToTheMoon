@@ -5,15 +5,16 @@ import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.battery.AbstractBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MoonBarrelTileEntity;
-import com.khanhpham.tothemoon.core.blockentities.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -43,6 +44,8 @@ public class ModBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<EnergySmelterBlockEntity>> ENERGY_SMELTER;
     public static final RegistryObject<BlockEntityType<CreativeBatteryBlockEntity>> CREATIVE_BATTERY;
 
+    public static final RegistryObject<BlockEntityType<NetherBrickFurnaceControllerBlockEntity>> BRICK_FURNACE;
+
     static {
         ToTheMoon.LOG.info("Registering BEs");
         MOON_STORAGE = BE_DEFERRED_REGISTER.register("moon_storage", () -> BlockEntityType.Builder.of(MoonBarrelTileEntity::new, ModBlocks.MOON_ROCK_BARREL.get()).build(null));
@@ -56,6 +59,7 @@ public class ModBlockEntityTypes {
         BATTERY = register("battery", () -> new BlockEntityType<>(BatteryBlockEntity::new, ImmutableSet.of(ModBlocks.BATTERY.get()), null));
         CREATIVE_BATTERY = register("creative_battery", () -> BlockEntityType.Builder.of(CreativeBatteryBlockEntity::new, ModBlocks.CREATIVE_BATTERY.get()).build(null));
         ENERGY_SMELTER = register("energy_smelter", () -> new BlockEntityType<>(EnergySmelterBlockEntity::new, ImmutableSet.of(ModBlocks.ENERGY_SMELTER.get()), null));
+        BRICK_FURNACE = register("brick_furnace", () -> BlockEntityType.Builder.of(NetherBrickFurnaceControllerBlockEntity::new, ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get()).build(null));
     }
 
     private ModBlockEntityTypes() {

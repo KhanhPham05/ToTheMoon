@@ -21,7 +21,7 @@ public class MoonBarrelMenu extends BaseMenu {
     private final int containerSize;
 
     protected MoonBarrelMenu(@Nullable MenuType<?> pMenuType, Container externalContainer, Inventory playerInventor, int pContainerId) {
-        super(pMenuType, externalContainer, playerInventor, pContainerId);
+        super(pMenuType, pContainerId, playerInventor, externalContainer);
         this.containerSize = externalContainer.getContainerSize();
         int a = 0;
 

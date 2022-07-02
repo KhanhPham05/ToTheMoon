@@ -1,15 +1,14 @@
 package com.khanhpham.tothemoon.core.blocks.battery;
 
 import com.khanhpham.tothemoon.core.blockentities.battery.AbstractBatteryBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.items.BatteryItem;
+import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -31,7 +30,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> implements HasCustomBlockItem {
@@ -80,8 +78,7 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-
-        if (pStack.hasTag()) {
+        /*if (pStack.hasTag()) {
             CompoundTag tag = Objects.requireNonNull(pStack.getTag());
             if (tag.contains("BlockEntityTag")) {
                 CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
@@ -91,13 +88,13 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
                     }
                 }
             }
-        }
+        }*/
 
-        /*LazyOptional<IEnergyStorage> energyStorageLazyOptional = pStack.getCapability(CapabilityEnergy.ENERGY);
-        energyStorageLazyOptional.ifPresent(energyStorage -> {
-            if (pLevel.getBlockEntity(pPos) instanceof BatteryBlockEntity battery) {
-                battery.energy.setEnergy(energyStorage.getEnergyStored());
+        LootUtils.loadItemTagToBlockEntity(pStack, pLevel, pPos, getBlockEntityType(), (tag, be) -> {
+            if (tag.contains(LootUtils.LOOT_DATA_ENERGY, LootUtils.TAG_TYPE_INT)) {
+                int energy = tag.getInt(LootUtils.LOOT_DATA_ENERGY);
+                be.energy.setEnergy(energy);
             }
-        });*/
+        });
     }
 }

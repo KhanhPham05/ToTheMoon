@@ -63,9 +63,6 @@ public class ModRecipeProvider extends RecipeProvider {
         buildRecipeCompat(consumer, helper);
     }
 
-    /**
-     * @see mekanism.common.registries.MekanismItems
-     */
     private void buildRecipeCompat(Consumer<FinishedRecipe> consumer, RecipeGeneratorHelper helper) {
         //30mB redstone + iron dust -> redstone metal dust
         ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
@@ -111,8 +108,6 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private void buildCraftingTableRecipes(final RecipeGeneratorHelper helper) {
-
-
         buildStair(helper, ModBlocks.MOON_ROCK_STAIR, ModBlocks.MOON_ROCK);
         buildStair(helper, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_BRICK);
         buildStair(helper, ModBlocks.POLISHED_MOON_ROCK_STAIR, ModBlocks.POLISHED_MOON_ROCK);
@@ -151,7 +146,7 @@ public class ModRecipeProvider extends RecipeProvider {
         shapelessCrafting(helper, ModItems.REDSTONE_METAL_WIRE, GENERAL_TTM_HAMMERS, RODS_REDSTONE_METAL);
         shapelessCrafting(helper, ModItems.REDSTONE_STEEL_ALLOY_WIRE, GENERAL_TTM_HAMMERS, RODS_REDSTONE_STEEL);
 
-
+        shapelessCrafting(helper, ModItems.STEEL_DUST, DUSTS_HEATED_COAL, DUSTS_HEATED_COAL, DUSTS_HEATED_COAL, DUSTS_IRON);
         helper.shaped(ModItems.COPPER_GEAR).pattern(" C ").pattern("C C").pattern(" C ").define('C', INGOTS_COPPER).save();
 
         helper.shaped(ModItems.CPU_CHIP).pattern("RRR").pattern("DGD").pattern("SSS").define('R', PLATES_REDSTONE_METAL).define('D', DUSTS_REDSTONE).define('G', DUSTS_GOLD).define('S', PLATES_STEEL).save();
@@ -164,10 +159,10 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.shaped(ModBlocks.COPPER_ENERGY_GENERATOR).pattern("SGS").pattern("WFW").pattern("SBS").define('S', ModItemTags.PLATES_STEEL).define('G', ModItemTags.GEARS_COPPER).define('W', WIRES_REDSTONE_METAL).define('F', ModBlocks.REDSTONE_MACHINE_FRAME.get()).define('B', Blocks.BLAST_FURNACE).save();
         helper.shaped(ModBlocks.IRON_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_IRON).define('W', WIRES_REDSTONE_METAL).define('M', ModBlocks.COPPER_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_STEEL).save();
         helper.shaped(ModBlocks.GOLD_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_GOLD).define('W', WIRES_REDSTONE_STEEL_ALLOY).define('M', ModBlocks.IRON_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_GOLD).save();
+        helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
 
         helper.shapelessCrafting(ModItems.REDSTONE_STEEL_ALLOY_DUST.get(), 1, ModItems.STEEL_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
         helper.shapelessCrafting(ModItems.REDSTONE_METAL_DUST.get(), 1, ModItems.IRON_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
-        //helper.shapelessCrafting(ModItems.STEEL_DUST.get(), 1, ModItems.IRON_DUST.get(), ModItems.COAL_DUST.get());
 
         sheetBlock(helper, ModBlocks.COPPER_SHEET_BLOCK, PLATES_COPPER);
         sheetBlock(helper, ModBlocks.GOLD_SHEET_BLOCK, PLATES_GOLD);
@@ -201,13 +196,10 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @SafeVarargs
     private void shapelessCrafting(final RecipeGeneratorHelper helper, Supplier<? extends Item> result, TagKey<Item>... ingredients) {
-        for (TagKey<Item> ingredient : ingredients) {
-            helper.shapelessCrafting(result.get(), 1, ingredient);
-        }
+        helper.shapelessCrafting(result.get(), 1, ingredients);
     }
 
     private void polished(final RecipeGeneratorHelper helper, Supplier<? extends Block> block, Supplier<? extends Block> material) {
-
         helper.shaped(block).pattern("AA").pattern("AA").define('A', material.get()).save();
         helper.stoneCutting(block, 1, material);
         //SingleItemRecipeBuilder.stonecutting(Ingredient.of(material.get()), block.get()).unlockedBy("tick", tick()).save(consumer, createRecipeId());
@@ -218,6 +210,7 @@ public class ModRecipeProvider extends RecipeProvider {
         alloy(consumer, ModItemTags.DUSTS_IRON, 1, DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
         alloy(consumer, Tags.Items.INGOTS_IRON, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
         alloy(consumer, ModItemTags.DUSTS_COAL, 1, Tags.Items.INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
+        alloy(consumer, DUSTS_HEATED_COAL, 1, INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
 
         metalPress(consumer, INGOTS_STEEL, PLATE_MOLD, ModItems.STEEL_PLATE);
         metalPress(consumer, INGOTS_STEEL, GEAR_MOLD, ModItems.STEEL_GEAR);
@@ -250,12 +243,12 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> moldTag, Supplier<? extends Item> result) {
         MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, moldTag, result.get());
-        RecipeGeneratorHelper.saveGlobal(consumer, builder, "metal_pressing", List.of(RecipeGeneratorHelper.extractTag(moldTag), RecipeGeneratorHelper.extractTag(ingredient)), RecipeGeneratorHelper.getId(result.get()));
+        RecipeGeneratorHelper.saveGlobal(consumer, builder, "metal_pressing", RecipeGeneratorHelper.getId(result.get()));
     }
 
     private void alloy(Consumer<FinishedRecipe> consumer, TagKey<Item> item1, int count1, TagKey<Item> item2, int count2, Supplier<? extends ItemLike> result, int amount) {
         var builder = AlloySmeltingRecipeBuilder.build(item1, count1, item2, count2, result.get(), amount);
-        RecipeGeneratorHelper.saveGlobal(consumer, builder, "alloying", getInputNames(item1, item2), RecipeGeneratorHelper.getId(result.get()));
+        RecipeGeneratorHelper.saveGlobal(consumer, builder, "alloying", RecipeGeneratorHelper.getId(result.get()));
     }
 
     @SafeVarargs

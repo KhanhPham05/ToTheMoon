@@ -2,6 +2,7 @@ package com.khanhpham.tothemoon.datagen.blocks;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.Direction;
@@ -38,7 +39,17 @@ public class ModBlockStates extends BlockStateProvider {
         this.stairBlock(ModBlocks.COBBLED_MOON_ROCK_STAIR.get(), ModBlocks.COBBLED_MOON_ROCK.get());
         this.slabBlock(ModBlocks.COBBLED_MOON_ROCK_SLAB.get(), ModBlocks.COBBLED_MOON_ROCK.get());
         this.horizontalFacingBlock(ModBlocks.CREATIVE_BATTERY.get());
+        specialBlocks();
+    }
+
+    private void specialBlocks() {
         batteryBlockStates();
+
+        VariantBlockStateBuilder netherbrickFurnace = super.getVariantBuilder(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get());
+        for (Direction direction : horizontalDirections) {
+            netherbrickFurnace.addModels(netherbrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, false), getModel(direction, "block/netherbrick_furnace_controller"));
+            netherbrickFurnace.addModels(netherbrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, true), getModel(direction, "block/nether_brick_furnace_controller_on"));
+        }
     }
 
     private void simpleBlock(Supplier<? extends Block> supplier) {

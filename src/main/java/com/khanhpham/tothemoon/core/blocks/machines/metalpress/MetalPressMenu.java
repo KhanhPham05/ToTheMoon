@@ -18,7 +18,7 @@ public class MetalPressMenu extends BaseMenu {
     public final ContainerData data;
 
     protected MetalPressMenu(@Nonnull MenuType<?> pMenuType, Container externalContainer, Inventory playerInventory, int pContainerId, ContainerData data) {
-        super(pMenuType, externalContainer, playerInventory, pContainerId);
+        super(pMenuType, pContainerId, playerInventory, externalContainer);
 
         super.addSlot(externalContainer, 0, 45, 19);
         super.addSlot(new MetalPressSlot(externalContainer, 1, 45, 47));

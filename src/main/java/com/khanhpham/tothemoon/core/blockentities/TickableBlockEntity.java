@@ -11,4 +11,10 @@ public interface TickableBlockEntity {
     static <T extends BlockEntity & TickableBlockEntity> void staticServerTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
         blockEntity.serverTick(level, pos, state);
     }
+
+    static <T extends BlockEntity & TickableBlockEntity> void staticClientTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
+        blockEntity.clientTick(level, pos, state);
+    }
+
+    default void clientTick(Level level, BlockPos pos, BlockState state) {}
 }
