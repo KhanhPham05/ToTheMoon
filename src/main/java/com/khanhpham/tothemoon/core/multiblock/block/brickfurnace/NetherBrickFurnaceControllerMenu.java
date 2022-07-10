@@ -4,8 +4,8 @@ import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
-import com.khanhpham.tothemoon.utils.slot.FilterSlot;
-import com.khanhpham.tothemoon.utils.slot.ResultSlot;
+import com.khanhpham.tothemoon.utils.slot.SlotPredicate;
+import com.khanhpham.tothemoon.utils.slot.ResultSlotPredicate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.Container;
@@ -30,13 +30,13 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         super(ModMenuTypes.NETHER_BRICK_FURNACE, pContainerId, playerInventory, externalContainer);
 
         //blaze powder slot
-        addSlot(new FilterSlot(externalContainer, 0, 56, 43, this::canProcess));
+        addSlot(new SlotPredicate(externalContainer, 0, 56, 43, this::canProcess));
         //input slot
-        addSlot(new FilterSlot(externalContainer, 1, 31, 43, (stack) -> stack.is(Items.BLAZE_POWDER)));
+        addSlot(new SlotPredicate(externalContainer, 1, 31, 43, (stack) -> stack.is(Items.BLAZE_POWDER)));
         //result slot
-        addSlot(new ResultSlot(externalContainer, 2, 146, 43));
+        addSlot(new ResultSlotPredicate(externalContainer, 2, 146, 43));
         //lava bucket slot
-        addSlot(new FilterSlot(externalContainer, 3, 170, 72, stack -> stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()));
+        addSlot(new SlotPredicate(externalContainer, 3, 170, 72, stack -> stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()));
 
         super.addPlayerInventorySlots(22, 95);
 

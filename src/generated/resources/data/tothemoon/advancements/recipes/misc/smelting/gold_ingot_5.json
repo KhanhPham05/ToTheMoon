@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "tothemoon:smelting/gold_ingot_9"
+      "tothemoon:smelting/gold_ingot_5"
     ]
   },
   "criteria": {
@@ -13,7 +13,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "tothemoon:smelting/gold_ingot_9"
+        "recipe": "tothemoon:smelting/gold_ingot_5"
       }
     }
   },

@@ -130,7 +130,7 @@ mixin {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.52'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.54'
     implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")

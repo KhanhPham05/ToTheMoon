@@ -1,0 +1,6 @@
+{
+  "parent": "tothemoon:block/tank_template",
+  "textures": {
+    "side": "tothemoon:block/lava_tank/sides/tank_level_7"
+  }
+}

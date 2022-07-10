@@ -15,7 +15,7 @@ public class ItemStackEnergy extends EnergyStorage {
     }
 
     public static CompoundTag getNbt(ItemStack stack) {
-        return LootUtils.getBlockEntityTag(stack);
+        return LootUtils.getDataTag(stack);
     }
 
     @Override

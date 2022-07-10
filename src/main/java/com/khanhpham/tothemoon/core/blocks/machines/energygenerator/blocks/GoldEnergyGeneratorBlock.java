@@ -4,10 +4,13 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class GoldEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<GoldEnergyGeneratorBlockEntity> {
     public GoldEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<GoldEnergyGeneratorBlockEntity> supplier) {
@@ -17,6 +20,11 @@ public class GoldEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<GoldE
     @Override
     protected BlockEntityType<GoldEnergyGeneratorBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.GOLD_ENERGY_GENERATOR_TE.get();
+    }
+
+    @Override
+    public @Nullable GoldEnergyGeneratorBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new GoldEnergyGeneratorBlockEntity(pPos, pState);
     }
 
     @Override

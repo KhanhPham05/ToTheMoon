@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public interface TickableBlockEntity {
     void serverTick(Level level, BlockPos pos, BlockState state);
 
-    static <T extends BlockEntity & TickableBlockEntity> void staticServerTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
-        blockEntity.serverTick(level, pos, state);
+    static <T extends BlockEntity> void staticServerTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
+        if (blockEntity instanceof TickableBlockEntity be) be.serverTick(level, pos, state);
     }
 
     static <T extends BlockEntity & TickableBlockEntity> void staticClientTick(Level level, BlockPos pos, BlockState state, T blockEntity) {

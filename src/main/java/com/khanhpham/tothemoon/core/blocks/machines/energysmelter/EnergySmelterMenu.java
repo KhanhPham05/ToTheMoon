@@ -3,7 +3,7 @@ package com.khanhpham.tothemoon.core.blocks.machines.energysmelter;
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.helpers.SimpleUpgradableMenu;
-import com.khanhpham.tothemoon.utils.slot.ResultSlot;
+import com.khanhpham.tothemoon.utils.slot.ResultSlotPredicate;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +20,7 @@ public class EnergySmelterMenu extends BaseMenu {
         super(ModMenuTypes.ENERGY_SMELTER, pContainerId, playerInventory, externalContainer);
 
         super.addSlot(0, 41, 33);
-        super.addSlot(new ResultSlot(externalContainer, 1, 106, 33));
+        super.addSlot(new ResultSlotPredicate(externalContainer, 1, 106, 33));
         super.addPlayerInventorySlots(8, 95);
 
         this.data = data;

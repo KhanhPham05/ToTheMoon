@@ -6,14 +6,9 @@ import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -31,7 +26,7 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public MetalPressBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<MetalPressBlockEntity> supplier) {
-        super(p_49224_.lightLevel((state) -> state.getValue(LIT) ? 15 : 0), supplier);
+        super(p_49224_.lightLevel((state) -> state.getValue(LIT) ? 15 : 0));
 
         super.registerDefaultState(super.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.FALSE));
     }
@@ -50,5 +45,10 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
     @Override
     protected BlockEntityType<MetalPressBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.METAL_PRESS.get();
+    }
+
+    @Override
+    public @Nullable MetalPressBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new MetalPressBlockEntity(pPos, pState);
     }
 }

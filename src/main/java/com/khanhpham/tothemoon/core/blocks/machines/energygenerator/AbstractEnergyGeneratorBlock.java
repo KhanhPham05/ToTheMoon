@@ -29,7 +29,7 @@ public abstract class AbstractEnergyGeneratorBlock<T extends AbstractEnergyGener
 
 
     public AbstractEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<T> supplier) {
-        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops(), supplier);
+        super(p_49224_.lightLevel(state -> state.getValue(LIT) ? 15 : 0).requiresCorrectToolForDrops());
 
         registerDefaultState(super.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)

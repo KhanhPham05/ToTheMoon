@@ -1,17 +1,14 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
-import com.google.common.base.Preconditions;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,7 +37,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public NetherBrickFurnaceBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<NetherBrickFurnaceControllerBlockEntity> supplier) {
-        super(p_49224_, supplier);
+        super(p_49224_);
         registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(FACING, Direction.NORTH));
     }
 
@@ -61,6 +58,11 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     }
 
     @Override
+    public @Nullable NetherBrickFurnaceControllerBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new NetherBrickFurnaceControllerBlockEntity(pPos, pState);
+    }
+
+    @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity be) {
@@ -74,17 +76,8 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        CompoundTag tag = pStack.getOrCreateTag();
-        if (tag.contains("ttmData", 10)) {
-            CompoundTag dataTag = tag.getCompound("ttmData");
-            int fluidAmount = dataTag.getInt("fluidAmount");
-            Fluid fluid = Registry.FLUID.get(ResourceLocation.tryParse(Objects.requireNonNull(dataTag.get("fluid")).getAsString()));
-            if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity tile) {
-                tile.fluid.setFluid(new FluidStack(fluid, fluidAmount));
-            }
-        }
+        ModUtils.loadFluidToBlock(pLevel, pPos, pStack);
     }
 
     @Override

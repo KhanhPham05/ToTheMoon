@@ -20,12 +20,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class BaseEntityBlock<T extends BlockEntity & TickableBlockEntity> extends net.minecraft.world.level.block.BaseEntityBlock {
-    private final BlockEntityType.BlockEntitySupplier<T> supplier;
+public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecraft.world.level.block.BaseEntityBlock {
 
-    public BaseEntityBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<T> supplier) {
+    public BaseEntityBlock(Properties p_49224_) {
         super(p_49224_);
-        this.supplier = supplier;
     }
 
     @Nullable
@@ -43,12 +41,12 @@ public abstract class BaseEntityBlock<T extends BlockEntity & TickableBlockEntit
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             BlockEntity te = pLevel.getBlockEntity(pPos);
-            if (te != null && te.getType().equals(getBlockEntityType())) {
+            if (te != null && te.getType().equals(getBlockEntityType()) && te instanceof MenuProvider) {
                 pPlayer.openMenu((MenuProvider) te);
                 return InteractionResult.CONSUME;
             }
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
 
 
@@ -67,7 +65,5 @@ public abstract class BaseEntityBlock<T extends BlockEntity & TickableBlockEntit
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return this.supplier.create(pPos, pState);
-    }
+    public abstract T newBlockEntity(BlockPos pPos, BlockState pState);
 }

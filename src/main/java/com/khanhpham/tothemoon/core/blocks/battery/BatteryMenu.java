@@ -42,7 +42,7 @@ public class BatteryMenu extends BaseMenu {
     @NotNull
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        ItemStack itemStack = empty();
+        ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
         if (slot.hasItem()) {
             ItemStack stack1 = slot.getItem();
@@ -50,30 +50,30 @@ public class BatteryMenu extends BaseMenu {
 
             if (index <= 1) {
                 if (!super.moveItemStackTo(stack1, 2, slots.size() - 1, true)) {
-                    return empty();
+                    return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(stack1, itemStack);
             } else {
                 if (!super.moveItemStackTo(stack1, 0, 1, false)) {
-                    return empty();
+                    return ItemStack.EMPTY;
                 } else if (index < 29) {
                     if (!super.moveItemStackTo(stack1, 29, 38, false)) {
-                        return empty();
+                        return ItemStack.EMPTY;
                     } else if (!super.moveItemStackTo(stack1, 2, 29, false)) {
-                        return empty();
+                        return ItemStack.EMPTY;
                     }
                 }
             }
 
             if (stack1.isEmpty()) {
-                slot.set(empty());
+                slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
 
             if (stack1.getCount() == itemStack.getCount()) {
-                return empty();
+                return ItemStack.EMPTY;
             }
 
             slot.onTake(player, stack1);

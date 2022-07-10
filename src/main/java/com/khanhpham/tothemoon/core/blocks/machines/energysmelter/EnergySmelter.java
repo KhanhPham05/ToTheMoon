@@ -3,6 +3,7 @@ package com.khanhpham.tothemoon.core.blocks.machines.energysmelter;
 import com.khanhpham.tothemoon.core.blockentities.others.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +24,7 @@ public class EnergySmelter extends BaseEntityBlock<EnergySmelterBlockEntity> {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public EnergySmelter(BlockBehaviour.Properties p_49224_) {
-        super(p_49224_, EnergySmelterBlockEntity::new);
+        super(p_49224_);
         super.registerDefaultState(defaultBlockState().setValue(WORKING, false).setValue(FACING, Direction.NORTH));
     }
 
@@ -42,5 +43,10 @@ public class EnergySmelter extends BaseEntityBlock<EnergySmelterBlockEntity> {
     @Override
     protected BlockEntityType<EnergySmelterBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.ENERGY_SMELTER.get();
+    }
+
+    @Override
+    public @Nullable EnergySmelterBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new EnergySmelterBlockEntity(pPos, pState);
     }
 }

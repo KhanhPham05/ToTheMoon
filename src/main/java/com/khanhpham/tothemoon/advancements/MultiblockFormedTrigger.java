@@ -24,6 +24,7 @@ public class MultiblockFormedTrigger extends SimpleCriterionTrigger<MultiblockFo
     }
 
     public void trigger(ServerPlayer player, MultiblockType multiblockType) {
+        ModUtils.log("triggering advancement [{}] for player : {}", this.getId().toString(), player.getName());
         super.trigger(player, (triggerInstance) -> triggerInstance.matches(multiblockType));
     }
 

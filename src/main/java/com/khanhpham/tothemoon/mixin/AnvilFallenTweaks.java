@@ -27,6 +27,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,6 @@ public class AnvilFallenTweaks {
         if (!fallingBlockEntity.isSilent()) {
             level.levelEvent(1031, pos, 0);
         }
-
 
 
         List<ItemEntity> items = level.getEntities(EntityType.ITEM, AABB.of(new BoundingBox(pos)), item -> !(item.getItem().getItem() instanceof BlockItem));
@@ -87,8 +87,9 @@ public class AnvilFallenTweaks {
                     }
             }
 
-            //ServerPlayer serverPlayer = (ServerPlayer) level.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 4.0d, entity -> true);
-            //ModdedTriggers.ANVIL_CRUSHING.trigger(Objects.requireNonNull(serverPlayer), items.stream().map(ItemEntity::getItem).toList());
+            if (!level.isClientSide && level.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 4.0d, entity -> entity instanceof ServerPlayer) instanceof ServerPlayer player) {
+                ModdedTriggers.ANVIL_CRUSHING.trigger(player, items.stream().map(ItemEntity::getItem).toList());
+            }
         }
     }
 }

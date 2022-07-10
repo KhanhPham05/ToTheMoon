@@ -23,11 +23,13 @@ public class TTMConfigs {
     public static final class ClientConfigs {
 
         public final ForgeConfigSpec.BooleanValue showsItemEnergyPercentageOnToolTip;
+        public final ForgeConfigSpec.BooleanValue showsFluidPercentageOnToolTip;
 
         public ClientConfigs(ForgeConfigSpec.Builder builder) {
             builder.push("client");
 
             showsItemEnergyPercentageOnToolTip = builder.define("showsItemEnergyPercentageOnToolTip", false);
+            showsFluidPercentageOnToolTip = builder.define("showsFluidPercentageOnToolTip", false);
 
             builder.pop();
         }

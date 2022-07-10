@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.battery;
 
 import com.khanhpham.tothemoon.core.blockentities.battery.AbstractBatteryBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.items.BatteryItem;
@@ -39,7 +40,7 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
     public static final ResourceLocation LOOT_CONTENT = ModUtils.modLoc("energy");
 
     public BatteryBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractBatteryBlockEntity> supplier) {
-        super(p_49224_, supplier);
+        super(p_49224_);
         super.registerDefaultState(defaultBlockState().setValue(ENERGY_LEVEL, 0).setValue(FACING, Direction.NORTH));
     }
 
@@ -47,6 +48,11 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
     @Nonnull
     protected BlockEntityType<AbstractBatteryBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.BATTERY.get();
+    }
+
+    @Override
+    public @Nullable AbstractBatteryBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new BatteryBlockEntity(pPos, pState);
     }
 
     @Override

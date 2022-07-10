@@ -2,14 +2,17 @@ package com.khanhpham.tothemoon.core.items.tool;
 
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.datagen.tags.ModToolTags;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
+import net.minecraftforge.common.TierSortingRegistry;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class ModToolTiers {
-    public static final Tier STEEL = new Tier("steel", new ForgeTier(2, 325, 6.2f, 2.3f, 15, ModToolTags.NEEDS_STEEL_TOOLS, () -> Ingredient.of(ModItemTags.INGOTS_STEEL)));
+    public static final Tier STEEL = new Tier("steel", TierSortingRegistry.registerTier(new ForgeTier(2, 325, 6.2f, 2.3f, 15, ModToolTags.NEEDS_STEEL_TOOLS, () -> Ingredient.of(ModItemTags.INGOTS_STEEL)), ModUtils.modLoc("needs_steel_tool"), List.of(Tiers.IRON), List.of(Tiers.DIAMOND)));
     public static final Tier URANIUM = new Tier("uranium", new ForgeTier(3, 535, 6.8f, 3.0f, 15, ModToolTags.NEEDS_URANIUM_TOOLS, () -> Ingredient.of(ModItemTags.INGOTS_URANIUM)));
 
 
@@ -32,7 +35,7 @@ public class ModToolTiers {
             this.attackSpeedModifier = attackSpeedModifier;
         }
 
-        public TieredItem toItem(ForgeTier tier, Item.Properties generalProperties) {
+        public TieredItem toItem(net.minecraft.world.item.Tier tier, Item.Properties generalProperties) {
             return switch (this) {
                 case PICKAXE -> new PickaxeItem(tier, (int) attackDamageModifier, attackSpeedModifier, generalProperties);
                 case HOE -> new HoeItem(tier, (int) attackDamageModifier, attackSpeedModifier, generalProperties);
@@ -43,7 +46,7 @@ public class ModToolTiers {
         }
     }
 
-    public record Tier(String name, ForgeTier tier) implements net.minecraft.world.item.Tier {
+    public record Tier(String name, net.minecraft.world.item.Tier tier) implements net.minecraft.world.item.Tier {
 
         @Override
         public int getUses() {
