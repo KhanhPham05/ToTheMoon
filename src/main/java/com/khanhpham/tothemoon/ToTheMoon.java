@@ -22,6 +22,7 @@ import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
 import com.khanhpham.tothemoon.datagen.recipes.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModTagProvider;
+import com.khanhpham.tothemoon.debug.GetCapInfoCommand;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -40,9 +41,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -50,11 +52,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -182,10 +185,15 @@ public class ToTheMoon {
         }
     }
 
-    @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    @Mod.EventBusSubscriber(modid = Names.MOD_ID)
     public static final class ForgeEvents {
 
         public ForgeEvents() {
+        }
+
+        @SubscribeEvent
+        public static void onCommandRegistration(RegisterCommandsEvent event) {
+            GetCapInfoCommand.register(event.getDispatcher());
         }
 
         @SubscribeEvent

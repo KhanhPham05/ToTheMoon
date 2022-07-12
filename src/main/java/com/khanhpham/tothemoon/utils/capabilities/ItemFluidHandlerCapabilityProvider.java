@@ -12,16 +12,20 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemFluidHandlerCapabilityProvider implements ICapabilityProvider {
     private final ItemStackFluidTank fluidHandler;
-    private final LazyOptional<IFluidHandlerItem> cap;
+    private final LazyOptional<IFluidHandlerItem> holder;
 
     public ItemFluidHandlerCapabilityProvider(ItemStack container, int capacity) {
         this.fluidHandler = new ItemStackFluidTank(container, capacity);
-        this.cap = LazyOptional.of(() -> this.fluidHandler);
+        this.holder = LazyOptional.of(() -> this.fluidHandler);
     }
 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY.orEmpty(cap, this.cap);
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY) {
+            return this.holder.cast();
+        }
+
+        return LazyOptional.empty();
     }
 }

@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.54\forge-1.18.2-40.1.54-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.54\forge-1.18.2-40.1.54-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.54\forge-1.18.2-40.1.54-binpatched.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.54\forge-1.18.2-40.1.54-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.54\forge-1.18.2-40.1.54-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -2516,10 +2516,6 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 6a41b59a Exists: true
   Reading patch net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.binpatch
     Checksum: befbe89f Exists: true
-  Reading patch net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition$Serializer.binpatch
-    Checksum: cef5dbc1 Exists: true
-  Reading patch net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition.binpatch
-    Checksum: 3da3dc21 Exists: true
   Reading patch net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition$Serializer.binpatch
     Checksum: d49c13b4 Exists: true
   Reading patch net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition.binpatch
@@ -3786,8 +3782,6 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/storage/loot/functions/SmeltItemFunction$Serializer 1/1
   Patching net/minecraft/world/level/storage/loot/functions/SmeltItemFunction 1/1
   Patching net/minecraft/world/level/storage/loot/parameters/LootContextParamSets 1/1
-  Patching net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceCondition$Serializer 1/1
-  Patching net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceCondition 1/1
   Patching net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceWithLootingCondition$Serializer 1/1
   Patching net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceWithLootingCondition 1/1
   Patching net/minecraft/world/level/storage/loot/providers/nbt/ContextNbtProvider$1 1/1

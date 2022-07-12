@@ -69,7 +69,6 @@ public class TextUtils {
         CompoundTag dataTag = LootUtils.getDataTag(pStack);
         if (dataTag.contains(LootUtils.LOOT_DATA_FLUID_AMOUNT, LootUtils.TAG_TYPE_INT) && dataTag.contains(LootUtils.LOOT_DATA_FLUID, LootUtils.TAG_TYPE_STRING)) {
             return TextUtils.translateFluidTank(getRegistry(Registry.FLUID, new ResourceLocation(dataTag.getString(LootUtils.LOOT_DATA_FLUID))), dataTag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT), capacity);
-            //return TextUtils.translateFormatText("tooltip", "item_tank", ModLanguage.convertToTranslatedText(new ResourceLocation(dataTag.getString(LootUtils.LOOT_DATA_FLUID))), String.format(FLUID_TANK_ITEM_FORMAT, dataTag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT), capacity));
         }
 
         return TextUtils.translateFormatText("tooltip", "item_tank", "Empty", "0mB");

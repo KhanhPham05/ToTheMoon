@@ -2,7 +2,8 @@
   "parent": "tothemoon:anvil_crushing",
   "display": {
     "icon": {
-      "item": "tothemoon:netherbrick_furnace_controller"
+      "item": "tothemoon:netherbrick_furnace_controller",
+      "nbt": "{Damage:0}"
     },
     "title": {
       "translate": "advancement.tothemoon.a_heated_topic"

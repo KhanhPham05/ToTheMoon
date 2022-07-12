@@ -22,6 +22,10 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ModLanguage extends LanguageProvider {
+    //UTILS
+    public static final TranslatableComponent CAP_UNKNOWN = create("command", "cap_unknown");
+    public static final TranslatableComponent CAP_FOUND = create("command", "cap_found");
+
     //JEI
     public static final TranslatableComponent METAL_PRESS_RECIPE_CATEGORY = create("jei", "metal_press_category");
     public static final TranslatableComponent ALLOY_SMELTER_RECIPE_CATEGORY = create("jei", "alloy_smelter_category");
@@ -160,6 +164,10 @@ public class ModLanguage extends LanguageProvider {
         //PATCHOULI - Basic Materials
         add(BASIC_MATERIAL_CATEGORY_DESCRIPTION, "A small but reliable category that shows you all the basic ores/metals which are important for your progress in this mod");
         add(BASIC_MATERIALS_CATEGORY, "Basic Materials");
+
+        //Utils
+        add(CAP_UNKNOWN, "Capability unknown or not found");
+        add(CAP_FOUND, "CAP FOUND !");
     }
 
     private void add(TranslatableComponent component, String trans) {

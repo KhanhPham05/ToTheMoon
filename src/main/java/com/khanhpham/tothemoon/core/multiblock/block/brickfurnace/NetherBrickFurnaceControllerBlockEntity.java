@@ -41,6 +41,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +56,8 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     public static final int CONTAINER_SIZE = 4;
     public static final int MULTIBLOCK_SIZE = 27;
     public static final int DATA_COUNT = 4;
-    final FluidTank tank = new FluidTank(10000, (fluidStack -> fluidStack.getFluid().equals(Fluids.LAVA)));
+    public static final int TANK_CAPACITY = 10000;
+    final FluidTank tank = new FluidTank(TANK_CAPACITY, (fluidStack -> fluidStack.getFluid().equals(Fluids.LAVA)));
     final LazyOptional<IFluidHandler> fluidHandler = LazyOptional.of(() -> tank);
     private final int smeltingDuration = 200;
     private final ArrayList<BlockPos> multiblockPartPositions = new ArrayList<>();
@@ -131,19 +133,20 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     public void serverTick(Level level, BlockPos pos, BlockState state) {
         checkMultiblock(level);
         final Direction controllerFacing = state.getValue(NetherBrickFurnaceBlock.FACING);
-
-        if (items.get(3).is(Items.LAVA_BUCKET)) {
-            setItem(3, new ItemStack(Items.BUCKET));
-            this.tank.fill(new FluidStack(Fluids.LAVA, 1000), IFluidHandler.FluidAction.EXECUTE);
-        } else {
-            items.get(3).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(fluid -> {
-                if (fluid.getFluidInTank(0).getFluid().isSame(Fluids.LAVA)) {
-                    this.tank.fill(fluid.drain(this.tank.getSpace(), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
-                }
-            });
-        }
-
         if (this.getMultiblock() != null) {
+            if (!getItem(3).isEmpty()) {
+                ItemStack tankItem = items.get(3);
+                if (tankItem.is(Items.LAVA_BUCKET) && this.tank.getSpace() >= 1000) {
+                    setItem(3, new ItemStack(Items.BUCKET));
+                    this.tank.fill(new FluidStack(Fluids.LAVA, 1000), IFluidHandler.FluidAction.EXECUTE);
+                } else if (this.tank.getSpace() > 0) {
+                    LazyOptional<IFluidHandlerItem> cap = tankItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+                    if (cap.isPresent())
+                        this.tank.fill(cap.map(fluid -> fluid.drain(new FluidStack(Fluids.LAVA, this.tank.getSpace()), IFluidHandler.FluidAction.EXECUTE)).get(), IFluidHandler.FluidAction.EXECUTE);
+
+                }
+            }
+
             @Nullable Recipe<Container> recipe = level.getRecipeManager().getRecipeFor(HighHeatSmelting.RECIPE_TYPE, this, level).orElse(null);
             if (recipe != null && this.smeltingTime >= this.smeltingDuration) {
                 makeResult(recipe);

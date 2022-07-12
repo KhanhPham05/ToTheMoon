@@ -87,6 +87,8 @@
   "book.tothemoon.manual_crushing.page_one": "Vanilla Minecraft's anvil is used to smash the raw ores and coals in to dusts (this will work for all the mods such as Mekanism or Immersive Engineering, and of course, this mod) $(br2) This method of crushing will give you 15% of getting an extra dust",
   "book.tothemoon.the_basics": "The Basics",
   "book.tothemoon.the_basics.description": "This category will show you all $(o)the basics$() as the first steps in the mod.",
+  "command.tothemoon.cap_found": "CAP FOUND !",
+  "command.tothemoon.cap_unknown": "Capability unknown or not found",
   "gui.tothemoon.alloy_smelter": "Alloy Smelter",
   "gui.tothemoon.insert_upgrades": "Upgrades",
   "gui.tothemoon.metal_press": "Metal Press",

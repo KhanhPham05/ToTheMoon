@@ -59,18 +59,6 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(ENERGY_LEVEL, FACING);
     }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public List<ItemStack> getDrops(BlockState pState, LootContext.Builder pBuilder) {
-        BlockEntity blockEntity = pBuilder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (blockEntity instanceof AbstractBatteryBlockEntity battery) {
-            pBuilder = pBuilder.withParameter(LootContextParams.BLOCK_ENTITY, battery);
-        }
-
-        return super.getDrops(pState, pBuilder);
-    }
-
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -84,18 +72,6 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        /*if (pStack.hasTag()) {
-            CompoundTag tag = Objects.requireNonNull(pStack.getTag());
-            if (tag.contains("BlockEntityTag")) {
-                CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
-                if (blockEntityTag.contains("energy", 3)) {
-                    if (pLevel.getBlockEntity(pPos) instanceof BatteryBlockEntity battery) {
-                        battery.energy.setEnergy(blockEntityTag.getInt("energy"));
-                    }
-                }
-            }
-        }*/
-
         LootUtils.loadItemTagToBlockEntity(pStack, pLevel, pPos, getBlockEntityType(), (tag, be) -> {
             if (tag.contains(LootUtils.LOOT_DATA_ENERGY, LootUtils.TAG_TYPE_INT)) {
                 int energy = tag.getInt(LootUtils.LOOT_DATA_ENERGY);
