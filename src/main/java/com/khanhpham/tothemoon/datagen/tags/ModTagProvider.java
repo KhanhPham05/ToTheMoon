@@ -2,6 +2,7 @@ package com.khanhpham.tothemoon.datagen.tags;
 
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModItems;
+import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -123,6 +124,7 @@ public class ModTagProvider {
             super(pGenerator, Names.MOD_ID, existingFileHelper);
         }
 
+        @SuppressWarnings("unchecked")
         @Override
         protected void addTags() {
             TagsProvider.TagAppender<Block> blockTagAppender = tag(BlockTags.MINEABLE_WITH_PICKAXE);
@@ -138,8 +140,11 @@ public class ModTagProvider {
             tag(Tags.Blocks.ORES_QUARTZ, MOON_QUARTZ_ORE);
             tag(ORES_URANIUM, DEEPSLATE_URANIUM_ORE, MOON_URANIUM_ORE);
             joinTags(BLOCK_SHEETMETALS);
+            super.tag(ModToolTags.NEEDS_STEEL_TOOLS).addTags(ORES_URANIUM);
             tag(Tags.Blocks.STONE, MOON_ROCK);
 
+            super.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(NonDeferredBlocks.FLUID_TANK_BLOCK);
+            super.tag(BlockTags.NEEDS_STONE_TOOL).add(NonDeferredBlocks.FLUID_TANK_BLOCK);
         }
 
         @SafeVarargs

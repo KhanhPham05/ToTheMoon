@@ -1,10 +1,24 @@
 package com.khanhpham.tothemoon.utils.text;
 
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
+import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
 
 public class TextUtils {
+
+    private static final String TRANSLATION_FORMAT = "%s.%s.%s";
+    private static final String FLUID_FORMAT = "%,d mB";
+    private static final String ENERGY_FORMAT = "%,d FE";
+    private static final String FLUID_TANK_ITEM_FORMAT = "%,dmB / %,dmB";
+
+    @Deprecated
     public static String energyToString(int energy) {
         String str = "";
         String fullEnergyString = Integer.toString(energy);
@@ -32,26 +46,44 @@ public class TextUtils {
 
         return str;
     }
-    private static final String TRANSLATION_FORMAT = "%s.%s.%s";
-    private static final String FLUID_FORMAT = "%,d mB";
 
-    public static Component formatText(String pre, String suf, Object... params) {
+    public static String translateEnergy(int energy) {
+        return ENERGY_FORMAT.formatted(energy);
+    }
+
+    public static TranslatableComponent translateFormatText(String pre, String suf, Object... params) {
         return new TranslatableComponent(String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf), params);
     }
 
     public static Component fluidFuel(int fluid, int capacity) {
         String fluidString = String.format(FLUID_FORMAT, fluid);
         String capacityString = String.format(FLUID_FORMAT, capacity);
-        return formatText("tooltip", "fluid_fuel_tank", fluidString, capacityString);
+        return translateFormatText("tooltip", "fluid_fuel_tank", fluidString, capacityString);
     }
 
     public static String translateFormat(String pre, String suf) {
         return String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf);
     }
 
+    public static Component translateItemFluidTank(ItemStack pStack, int capacity) {
+        CompoundTag dataTag = LootUtils.getDataTag(pStack);
+        if (dataTag.contains(LootUtils.LOOT_DATA_FLUID_AMOUNT, LootUtils.TAG_TYPE_INT) && dataTag.contains(LootUtils.LOOT_DATA_FLUID, LootUtils.TAG_TYPE_STRING)) {
+            return TextUtils.translateFluidTank(getRegistry(Registry.FLUID, new ResourceLocation(dataTag.getString(LootUtils.LOOT_DATA_FLUID))), dataTag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT), capacity);
+        }
 
+        return TextUtils.translateFormatText("tooltip", "item_tank", "Empty", "0mB");
+    }
 
-    //private static
+    public static <T> T getRegistry(Registry<T> registry, ResourceLocation location) {
+        if (registry.containsKey(location)) return registry.get(location);
+        throw new IllegalStateException("No registry represent for [" + location + "]");
+    }
+
+    public static Component translateFluidTank(Fluid fluid, int amount, int capacity) {
+        String param2 = String.format(FLUID_TANK_ITEM_FORMAT, amount, capacity);
+        String param1 = ModLanguage.convertToTranslatedText(fluid.getRegistryName());
+        return translateFormatText("tooltip", "item_tank", param1, param2);
+    }
 
     private static String cutPos(String string, int posToCut, String extension) {
         int dotPos;
@@ -73,7 +105,7 @@ public class TextUtils {
         return copy(string, 0, end);
     }
 
-    public static String showPercentage(int i, int cap) {
-        return "(" + i * 100 / cap + "%)";
+    public static String showPercentage(int value, int maxValue) {
+        return "(" + value * 100 / maxValue + "%)";
     }
 }

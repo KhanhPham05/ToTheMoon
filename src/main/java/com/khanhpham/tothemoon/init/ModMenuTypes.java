@@ -7,6 +7,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.E
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
+import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenu;
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerMenu;
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
@@ -31,6 +32,7 @@ public class ModMenuTypes {
     public static final MenuType<BatteryMenu> BATTERY;
     public static final MenuType<EnergySmelterMenu> ENERGY_SMELTER;
     public static final MenuType<NetherBrickFurnaceControllerMenu> NETHER_BRICK_FURNACE;
+    public static final MenuType<FluidTankMenu> FLUID_TANK;
 
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
@@ -40,6 +42,7 @@ public class ModMenuTypes {
         BATTERY = register("battery", BatteryMenu::new);
         ENERGY_SMELTER = register("energy_smelter", EnergySmelterMenu::new);
         NETHER_BRICK_FURNACE = register("nether_brick_furnace", NetherBrickFurnaceControllerMenu::new);
+        FLUID_TANK = register("fluid_tank_menu", FluidTankMenu::new);
     }
 
     private ModMenuTypes() {

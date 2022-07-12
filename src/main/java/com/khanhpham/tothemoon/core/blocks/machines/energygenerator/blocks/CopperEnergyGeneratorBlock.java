@@ -4,10 +4,13 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<CopperEnergyGeneratorBlockEntity> {
     public CopperEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<CopperEnergyGeneratorBlockEntity> supplier) {
@@ -18,6 +21,11 @@ public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<Cop
     @Override
     protected BlockEntityType<CopperEnergyGeneratorBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE.get();
+    }
+
+    @Override
+    public @Nullable CopperEnergyGeneratorBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new CopperEnergyGeneratorBlockEntity(pPos, pState);
     }
 
     @Override

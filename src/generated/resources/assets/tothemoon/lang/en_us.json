@@ -24,6 +24,7 @@
   "block.tothemoon.deepslate_uranium_ore": "Deepslate Uranium Ore",
   "block.tothemoon.diamond_energy_generator": "Diamond Energy Generator",
   "block.tothemoon.energy_smelter": "Energy Smelter",
+  "block.tothemoon.fluid_tank": "Fluid Tank",
   "block.tothemoon.gold_energy_generator": "Gold Energy Generator",
   "block.tothemoon.gold_sheet_block": "Gold Sheet Block",
   "block.tothemoon.iron_energy_generator": "Iron Energy Generator",
@@ -70,6 +71,8 @@
   "block.tothemoon.steel_machine_frame": "Steel Machine Frame",
   "block.tothemoon.steel_sheet_block": "Steel Sheet Block",
   "block.tothemoon.uranium_block": "Uranium Block",
+  "book.tothemoon.category_basic_materials": "Basic Materials",
+  "book.tothemoon.category_basic_materials.description": "A small but reliable category that shows you all the basic ores/metals which are important for your progress in this mod",
   "book.tothemoon.header": "TTM Guide Book",
   "book.tothemoon.header.landing_text": "This guide book will show you all the features that are in this mod.",
   "book.tothemoon.how_to_use": "How To Use",
@@ -84,6 +87,8 @@
   "book.tothemoon.manual_crushing.page_one": "Vanilla Minecraft's anvil is used to smash the raw ores and coals in to dusts (this will work for all the mods such as Mekanism or Immersive Engineering, and of course, this mod) $(br2) This method of crushing will give you 15% of getting an extra dust",
   "book.tothemoon.the_basics": "The Basics",
   "book.tothemoon.the_basics.description": "This category will show you all $(o)the basics$() as the first steps in the mod.",
+  "command.tothemoon.cap_found": "CAP FOUND !",
+  "command.tothemoon.cap_unknown": "Capability unknown or not found",
   "gui.tothemoon.alloy_smelter": "Alloy Smelter",
   "gui.tothemoon.insert_upgrades": "Upgrades",
   "gui.tothemoon.metal_press": "Metal Press",
@@ -171,5 +176,7 @@
   "jei.tothemoon.manual_metal_pressing": "Manual Metal Pressing",
   "jei.tothemoon.metal_press_category": "Metal Pressing",
   "tooltip.tothemoon.energy": "Energy %s %s / %s",
-  "tooltip.tothemoon.fluid_fuel_tank": "Fuel : %s / %s"
+  "tooltip.tothemoon.fluid_fuel_tank": "Fuel : %s / %s",
+  "tooltip.tothemoon.item_tank": "(%s): %s",
+  "tooltip.tothemoon.lava_support_only": "Can stores Lava only, more fluids will be added in future updates"
 }

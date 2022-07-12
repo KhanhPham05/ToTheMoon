@@ -1,17 +1,15 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
-import com.google.common.base.Preconditions;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
+import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
+import com.khanhpham.tothemoon.core.items.FluidCapableItem;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModItems;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,20 +25,18 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.Random;
 
-public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFurnaceControllerBlockEntity> {
+public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFurnaceControllerBlockEntity> implements HasCustomBlockItem {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public NetherBrickFurnaceBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<NetherBrickFurnaceControllerBlockEntity> supplier) {
-        super(p_49224_, supplier);
+        super(p_49224_);
         registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(FACING, Direction.NORTH));
     }
 
@@ -61,6 +57,11 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     }
 
     @Override
+    public @Nullable NetherBrickFurnaceControllerBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new NetherBrickFurnaceControllerBlockEntity(pPos, pState);
+    }
+
+    @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity be) {
@@ -74,17 +75,8 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        CompoundTag tag = pStack.getOrCreateTag();
-        if (tag.contains("ttmData", 10)) {
-            CompoundTag dataTag = tag.getCompound("ttmData");
-            int fluidAmount = dataTag.getInt("fluidAmount");
-            Fluid fluid = Registry.FLUID.get(ResourceLocation.tryParse(Objects.requireNonNull(dataTag.get("fluid")).getAsString()));
-            if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity tile) {
-                tile.fluid.setFluid(new FluidStack(fluid, fluidAmount));
-            }
-        }
+        ModUtils.loadFluidToBlock(pLevel, pPos, pStack);
     }
 
     @Override
@@ -101,6 +93,22 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
             double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
             pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
             pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    @Override
+    public NetherBrickFurnaceItem getRawItem() {
+        return new NetherBrickFurnaceItem(this);
+    }
+
+    private static final class NetherBrickFurnaceItem extends FluidCapableItem {
+        public NetherBrickFurnaceItem(Block pBlock) {
+            super(pBlock, ModItems.GENERAL_PROPERTIES);
+        }
+
+        @Override
+        protected int getFluidCapacity() {
+            return NetherBrickFurnaceControllerBlockEntity.TANK_CAPACITY;
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.utils.energy;
+package com.khanhpham.tothemoon.utils.capabilities;
 
 import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +15,7 @@ public class ItemStackEnergy extends EnergyStorage {
     }
 
     public static CompoundTag getNbt(ItemStack stack) {
-        return LootUtils.getBlockEntityTag(stack);
+        return LootUtils.getDataTag(stack);
     }
 
     @Override

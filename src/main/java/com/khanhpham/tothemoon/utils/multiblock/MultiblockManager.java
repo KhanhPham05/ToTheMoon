@@ -17,10 +17,6 @@ public class MultiblockManager {
         MULTIBLOCKS.removeIf(multiblock -> multiblock.isMultiblockDistrusted(level, pos));
     }
 
-    public boolean checkAvailable(Multiblock multiblock) {
-        return multiblock != null && MULTIBLOCKS.contains(multiblock);
-    }
-
     public Multiblock addMultiblock(Multiblock multiblock) {
         if (MULTIBLOCKS.add(multiblock)) {
             return multiblock;

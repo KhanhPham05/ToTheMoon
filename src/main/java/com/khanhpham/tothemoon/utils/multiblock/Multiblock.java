@@ -18,19 +18,13 @@ public class Multiblock {
     }
 
     public boolean isMultiblockDistrusted(Level level, BlockPos brokenPos) {
-        ModUtils.log("Checking multiblock with controller at {} because a block at {} is broken", controllerPos, brokenPos);
         if (multiblockPartPositions.containsKey(brokenPos)) {
-            ModUtils.log("Multiblock with controller at {} has been removed", controllerPos);
             if (level.getBlockEntity(controllerPos) instanceof MultiblockEntity multiblock) {
                 multiblock.setMultiblock(null);
             }
         }
 
         return false;
-    }
-
-    public boolean checkBlock(BlockPos pos) {
-        return this.multiblockPartPositions.containsKey(pos);
     }
 
     public enum PartType {
@@ -67,6 +61,12 @@ public class Multiblock {
                 map.put(multiblockPartPositions.get(i), multiblockPartType.get(i));
             }
             return new Multiblock(map, multiblockPartPositions.get(controllerAt));
+        }
+
+        public void clearAll() {
+            this.multiblockPartType.clear();
+            this.multiblockPartPositions.clear();
+            this.controllerAt = -1;
         }
     }
 }

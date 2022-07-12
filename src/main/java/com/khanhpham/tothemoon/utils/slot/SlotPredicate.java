@@ -7,12 +7,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
-public class FilterSlot extends Slot {
+public class SlotPredicate extends Slot {
     private final Predicate<ItemStack> filter;
 
-    public FilterSlot(Container itemHandler, int index, int xPosition, int yPosition, Predicate<ItemStack> filter) {
+    public SlotPredicate(Container itemHandler, int index, int xPosition, int yPosition, Predicate<ItemStack> filter) {
         super(itemHandler, index, xPosition, yPosition);
         this.filter = filter;
+    }
+
+    public SlotPredicate(Container pContainer, int pIndex, int pX, int pY) {
+        this(pContainer, pIndex, pX, pY, stack -> true);
     }
 
     @Override

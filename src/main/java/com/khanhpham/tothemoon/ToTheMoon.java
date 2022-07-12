@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon;
 
+import com.khanhpham.tothemoon.advancements.ModdedTriggers;
 import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
@@ -8,24 +9,30 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscr
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
+import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenuScreen;
 import com.khanhpham.tothemoon.core.config.TTMConfigs;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.ModItemModels;
-import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.datagen.advancement.ModAdvancementProvider;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockStates;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
 import com.khanhpham.tothemoon.datagen.recipes.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModTagProvider;
+import com.khanhpham.tothemoon.debug.GetCapInfoCommand;
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
+import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlockEntitiesTypes;
+import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
+import com.khanhpham.tothemoon.init.nondeferred.NonDeferredItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
+import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -40,12 +47,19 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -127,6 +141,8 @@ public class ToTheMoon {
         @SubscribeEvent
         public static void onItemRegistration(RegistryEvent.Register<Item> event) {
             IForgeRegistry<Item> reg = event.getRegistry();
+            NonDeferredItems.registerAll(reg);
+
             Set<? extends Block> blocks = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
             for (Block block : blocks) {
                 if (block instanceof BurnableBlock burnableBlock) {
@@ -144,6 +160,16 @@ public class ToTheMoon {
         }
 
         @SubscribeEvent
+        public static void onBlockRegistration(RegistryEvent.Register<Block> event) {
+            NonDeferredBlocks.registerAll(event.getRegistry());
+        }
+
+        @SubscribeEvent
+        public static void onBlockEntityRegistration(RegistryEvent.Register<BlockEntityType<?>> event) {
+            NonDeferredBlockEntitiesTypes.registerAll(event.getRegistry());
+        }
+
+        @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorMenuScreen::new);
@@ -152,16 +178,27 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.BATTERY, BatteryMenuScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_SMELTER, EnergySmelterScreen::new);
             MenuScreens.register(ModMenuTypes.NETHER_BRICK_FURNACE, NetherBrickFurnaceControllerScreen::new);
+            MenuScreens.register(ModMenuTypes.FLUID_TANK, FluidTankMenuScreen::new);
 
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
         }
     }
 
-    @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    @Mod.EventBusSubscriber(modid = Names.MOD_ID)
     public static final class ForgeEvents {
 
         public ForgeEvents() {
+        }
+
+        @SubscribeEvent
+        public static void onCommandRegistration(RegisterCommandsEvent event) {
+            GetCapInfoCommand.register(event.getDispatcher());
+        }
+
+        @SubscribeEvent
+        public static void onServerStarting(ServerStartingEvent serverStartingEvent) {
+            ModdedTriggers.init();
         }
 
         @SubscribeEvent
@@ -181,7 +218,16 @@ public class ToTheMoon {
 
         @SubscribeEvent
         public static void onBlockBroken(BlockEvent.BreakEvent event) {
-           MultiblockManager.INSTANCE.checkAndRemoveMultiblocks(event.getPlayer().getLevel(), event.getPos());
+            MultiblockManager.INSTANCE.checkAndRemoveMultiblocks(event.getPlayer().getLevel(), event.getPos());
+        }
+
+        @SubscribeEvent
+        public static void onBiomeLoading(BiomeLoadingEvent event) {
+            if (event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND) {
+                for (OreVeins oreVein : OreVeins.values()) {
+                    event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, oreVein.getOreFeature());
+                }
+            }
         }
     }
 }

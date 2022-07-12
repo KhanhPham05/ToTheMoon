@@ -32,6 +32,7 @@ public class CreativeBatteryBlock extends BaseEntityBlock implements EntityBlock
         return new BlockItem(this, new Item.Properties().stacksTo(1).tab(ToTheMoon.TAB));
     }
 
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {

@@ -22,6 +22,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
     public BaseMenuScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture) {
         super(pMenu, pPlayerInventory, pTitle);
         this.texture = texture;
+        setImageHeightWidth(pMenu.playerInventorySlotStartsY + 82, pMenu.playerInventorySlotStartsX + 168);
     }
 
     protected final void setImageHeight(int height) {
@@ -55,7 +56,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
     }
 
     @Override
-    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public final void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         renderBackground(pPoseStack);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pPoseStack, pMouseX, pMouseY);

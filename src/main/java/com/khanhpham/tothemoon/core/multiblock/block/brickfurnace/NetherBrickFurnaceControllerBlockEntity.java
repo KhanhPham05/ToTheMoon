@@ -1,5 +1,8 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
+import com.khanhpham.tothemoon.advancements.ModdedTriggers;
+import com.khanhpham.tothemoon.advancements.MultiblockFormedTrigger;
+import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
@@ -14,6 +17,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
@@ -21,16 +28,20 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,22 +52,24 @@ import java.util.LinkedList;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity implements TickableBlockEntity {
+public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity implements TickableBlockEntity, FluidCapableBlockEntity {
     public static final int CONTAINER_SIZE = 4;
     public static final int MULTIBLOCK_SIZE = 27;
     public static final int DATA_COUNT = 4;
-    final FluidTank fluid = new FluidTank(10000, (fluidStack -> fluidStack.getFluid().equals(Fluids.LAVA)));
-    final LazyOptional<IFluidHandler> fluidHandler = LazyOptional.of(() -> fluid);
+    public static final int TANK_CAPACITY = 10000;
+    final FluidTank tank = new FluidTank(TANK_CAPACITY, (fluidStack -> fluidStack.getFluid().equals(Fluids.LAVA)));
+    final LazyOptional<IFluidHandler> fluidHandler = LazyOptional.of(() -> tank);
     private final int smeltingDuration = 200;
     private final ArrayList<BlockPos> multiblockPartPositions = new ArrayList<>();
     private final LinkedList<Boolean> partDefinition = new LinkedList<>();
+    private final Multiblock.Builder builder = Multiblock.Builder.setup(MULTIBLOCK_SIZE);
     private int smeltingTime;
     private final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
             return switch (pIndex) {
-                case 0 -> fluid.getFluidAmount();
-                case 1 -> fluid.getCapacity();
+                case 0 -> tank.getFluidAmount();
+                case 1 -> tank.getCapacity();
                 case 2 -> smeltingTime;
                 case 3 -> smeltingDuration;
                 default -> throw new ArrayIndexOutOfBoundsException();
@@ -120,24 +133,30 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     public void serverTick(Level level, BlockPos pos, BlockState state) {
         checkMultiblock(level);
         final Direction controllerFacing = state.getValue(NetherBrickFurnaceBlock.FACING);
-
-        items.get(3).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(fluid -> {
-            if (fluid.getFluidInTank(0).getFluid().isSame(Fluids.LAVA)) {
-                this.fluid.fill(fluid.drain(this.fluid.getSpace(), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
-            }
-        });
-
         if (this.getMultiblock() != null) {
+            if (!getItem(3).isEmpty()) {
+                ItemStack tankItem = items.get(3);
+                if (tankItem.is(Items.LAVA_BUCKET) && this.tank.getSpace() >= 1000) {
+                    setItem(3, new ItemStack(Items.BUCKET));
+                    this.tank.fill(new FluidStack(Fluids.LAVA, 1000), IFluidHandler.FluidAction.EXECUTE);
+                } else if (this.tank.getSpace() > 0) {
+                    LazyOptional<IFluidHandlerItem> cap = tankItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+                    if (cap.isPresent())
+                        this.tank.fill(cap.map(fluid -> fluid.drain(new FluidStack(Fluids.LAVA, this.tank.getSpace()), IFluidHandler.FluidAction.EXECUTE)).get(), IFluidHandler.FluidAction.EXECUTE);
+
+                }
+            }
+
             @Nullable Recipe<Container> recipe = level.getRecipeManager().getRecipeFor(HighHeatSmelting.RECIPE_TYPE, this, level).orElse(null);
             if (recipe != null && this.smeltingTime >= this.smeltingDuration) {
                 makeResult(recipe);
                 state = state.setValue(NetherBrickFurnaceBlock.LIT, true);
             } else
                 //Process starts
-                if (recipe != null && this.fluid.getFluidAmount() > 0 && !items.get(0).isEmpty() && !items.get(1).isEmpty()) {
+                if (recipe != null && this.tank.getFluidAmount() > 0 && !items.get(0).isEmpty() && !items.get(1).isEmpty()) {
                     state = state.setValue(NetherBrickFurnaceBlock.LIT, true);
                     smeltingTime++;
-                    fluid.drain(3, IFluidHandler.FluidAction.EXECUTE);
+                    tank.drain(3, IFluidHandler.FluidAction.EXECUTE);
 
                 } else {
                     if (this.smeltingTime > 0) this.smeltingTime = Mth.clamp(smeltingTime - 2, 0, smeltingDuration);
@@ -173,7 +192,6 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     private void checkMultiblock(Level level) {
         if (this.multiblock == null) {
             this.partDefinition.clear();
-            Multiblock.Builder builder = Multiblock.Builder.setup(MULTIBLOCK_SIZE);
 
             for (int i = 0; i < multiblockPartPositions.size(); i++) {
                 Block block = level.getBlockState(multiblockPartPositions.get(i)).getBlock();
@@ -189,6 +207,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                             if (block.equals(ModBlocks.SMOOTH_BLACKSTONE.get())) {
                                 partDefinition.add(i, true);
                                 builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
+
                             } else partDefinition.add(i, false);
                         }
                         default -> {
@@ -202,25 +221,39 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
 
             if (!partDefinition.contains(false)) {
                 this.multiblock = MultiblockManager.INSTANCE.addMultiblock(builder.build());
-                //ModUtils.log("Multiblock with controller at {} has formed", controllerPos);
-                //ModdedTriggers.MULTIBLOCK_FORMED.trigger(ModUtils.getNearestPlayer(level, controllerPos, 15.0d), MultiblockFormedTrigger.MultiblockType.NETHER_BRICK_FURNACE);
+                if (!level.isClientSide && level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
+                    ModdedTriggers.MULTIBLOCK_FORMED.trigger(serverPlayer, MultiblockFormedTrigger.MultiblockType.NETHER_BRICK_FURNACE);
+                }
+            } else {
+                this.builder.clearAll();
             }
         }
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
-        this.fluid.writeToNBT(pTag);
+        this.tank.writeToNBT(pTag);
     }
 
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        fluid.readFromNBT(pTag);
+        tank.readFromNBT(pTag);
     }
 
     @Override
     public Component getDisplayName() {
         return ModLanguage.NETHER_BRICK_FURNACE_CONTROLLER;
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::saveWithoutMetadata);
+    }
+
+    @Override
+    public FluidTank getTank() {
+        return this.tank;
     }
 }

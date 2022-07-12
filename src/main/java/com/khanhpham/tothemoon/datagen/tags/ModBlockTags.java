@@ -27,7 +27,6 @@ public class ModBlockTags {
     public static final TagKey<Block> BLOCK_RAW_URANIUM_STORAGE = append(BLOCK_STORAGE_BLOCKS, "raw_uranium", ModBlocks.RAW_URANIUM_BLOCK);
 
 
-
     private static AppendableBlockTagKey createAppendable(ResourceLocation id) {
         return new AppendableBlockTagKey(id);
     }
@@ -39,5 +38,7 @@ public class ModBlockTags {
     private static TagKey<Block> append(AppendableBlockTagKey key, String suf, Supplier<? extends Block> block) {
         return key.append(suf, block);
     }
+
+
 
 }

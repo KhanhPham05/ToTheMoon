@@ -12,10 +12,7 @@ import com.khanhpham.tothemoon.core.items.tool.ModToolTiers;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,7 +29,7 @@ import java.util.function.Supplier;
 public class ModItems {
     public static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, Names.MOD_ID);
     public static final Item.Properties GENERAL_PROPERTIES = new Item.Properties().tab(ToTheMoon.TAB);
-    public static final Table<ModToolTiers.ToolType, ForgeTier, RegistryObject<? extends TieredItem>> ALL_TOOLS = HashBasedTable.create();
+    public static final Table<ModToolTiers.ToolType, Tier, RegistryObject<? extends TieredItem>> ALL_TOOLS = HashBasedTable.create();
     public static final HashBasedTable<EquipmentSlot, ModArmorMaterial, RegistryObject<ModArmorItem>> ALL_ARMORS;
     private static final String S = "steel";
     private static final String RSA = "redstone_steel_alloy";
@@ -106,8 +103,6 @@ public class ModItems {
     public static final RegistryObject<HandheldItem> GOLD_WIRE = wire(G);
     public static final RegistryObject<Item> HEATED_COAL_DUST = create("heated_coal_dust");
 
-    //public static final RegistryObject<Item> ILLUSTRATE_DUST = ITEM_DEFERRED_REGISTER.register("respective_dust", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
-
     static {
         for (ModToolTiers.ToolType toolType : ModToolTiers.ToolType.values()) {
             for (ModToolTiers.Tier materialType : new ModToolTiers.Tier[]{ModToolTiers.STEEL, ModToolTiers.URANIUM}) {
@@ -117,19 +112,6 @@ public class ModItems {
         }
 
         Map<String, EquipmentSlot> map = ImmutableMap.of("helmet", EquipmentSlot.HEAD, "chestplate", EquipmentSlot.CHEST, "leggings", EquipmentSlot.LEGS, "boots", EquipmentSlot.FEET);
-        /*ArrayList<RegistryObject<ModArmorItem>> armors = new ArrayList<>();
-        for (String armor : map.keySet()) {
-            for (ModArmorMaterial armorMaterial : ModArmorMaterial.values()) {
-                RegistryObject<Item> craftItem = switch (armorMaterial) {
-                    case STEEL -> STEEL_INGOT;
-                    case URANIUM -> URANIUM_INGOT;
-                    case REDSTONE_STEEL -> REDSTONE_STEEL_ALLOY;
-                };
-                armors.add(register(armorMaterial.toString().toLowerCase() + '_' + armor, () -> new ModArmorItem(craftItem.get(), armorMaterial, Objects.requireNonNull(map.get(armor)), GENERAL_PROPERTIES)));
-            }
-        }
-        ARMORS = ImmutableList.copyOf(armors);*/
-
 
         ALL_ARMORS = HashBasedTable.create();
         for (String armor : map.keySet()) {

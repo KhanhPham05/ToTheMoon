@@ -142,8 +142,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return this.lo.cast();
         }
-
-        return cap.orEmpty(CapabilityEnergy.ENERGY, super.energyDataOptional.cast()).cast();
+        return CapabilityEnergy.ENERGY.orEmpty(cap, this.energyDataOptional);
     }
 
     @Override

@@ -4,10 +4,13 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class DiamondEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<DiamondEnergyGeneratorBlockEntity> {
     public DiamondEnergyGeneratorBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<DiamondEnergyGeneratorBlockEntity> supplier) {
@@ -17,6 +20,11 @@ public class DiamondEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<Di
     @Override
     protected BlockEntityType<DiamondEnergyGeneratorBlockEntity> getBlockEntityType() {
         return ModBlockEntityTypes.DIAMOND_ENERGY_GENERATOR_TE.get();
+    }
+
+    @Override
+    public @Nullable DiamondEnergyGeneratorBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new DiamondEnergyGeneratorBlockEntity(pPos, pState);
     }
 
     @Override

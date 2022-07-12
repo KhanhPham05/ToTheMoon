@@ -19,6 +19,6 @@ public class EnergyCapabilityProvider implements ICapabilityProvider {
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return cap == CapabilityEnergy.ENERGY ? lazyOptional.cast() : LazyOptional.empty();
+        return CapabilityEnergy.ENERGY.orEmpty(cap, this.lazyOptional);
     }
 }
