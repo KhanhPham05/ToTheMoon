@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.items;
 
-import com.khanhpham.tothemoon.core.config.TTMConfigs;
+import com.khanhpham.tothemoon.config.TTMConfigs;
 import com.khanhpham.tothemoon.utils.capabilities.EnergyCapabilityProvider;
 import com.khanhpham.tothemoon.utils.capabilities.ItemStackEnergy;
 import com.khanhpham.tothemoon.utils.text.TextUtils;

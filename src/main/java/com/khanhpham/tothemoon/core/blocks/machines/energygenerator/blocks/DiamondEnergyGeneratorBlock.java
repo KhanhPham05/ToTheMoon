@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks;
 
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,7 @@ public class DiamondEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<Di
 
     @Override
     protected BlockEntityType<DiamondEnergyGeneratorBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.DIAMOND_ENERGY_GENERATOR_TE.get();
+        return ModBlockEntities.DIAMOND_ENERGY_GENERATOR_TE.get();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DiamondEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<Di
 
     @Override
     protected <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level level, BlockEntityType<A> pBlockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.DIAMOND_ENERGY_GENERATOR_TE.get(), AbstractEnergyGeneratorBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntities.DIAMOND_ENERGY_GENERATOR_TE.get(), AbstractEnergyGeneratorBlockEntity::serverTick);
     }
 
 }

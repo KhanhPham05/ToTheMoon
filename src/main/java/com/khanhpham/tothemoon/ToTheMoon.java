@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon;
 
 import com.khanhpham.tothemoon.advancements.ModdedTriggers;
+import com.khanhpham.tothemoon.config.TTMConfigs;
 import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
@@ -9,8 +10,8 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscr
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
+import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorScreen;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenuScreen;
-import com.khanhpham.tothemoon.core.config.TTMConfigs;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.ModItemModels;
@@ -23,7 +24,7 @@ import com.khanhpham.tothemoon.datagen.recipes.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModTagProvider;
 import com.khanhpham.tothemoon.debug.GetCapInfoCommand;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
@@ -52,7 +53,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -101,7 +101,7 @@ public class ToTheMoon {
         initRegistration();
         ModBlocks.BLOCK_DEFERRED_REGISTER.register(bus);
         ModItems.ITEM_DEFERRED_REGISTER.register(bus);
-        ModBlockEntityTypes.BE_DEFERRED_REGISTER.register(bus);
+        ModBlockEntities.BE_DEFERRED_REGISTER.register(bus);
 
         TTMConfigs.registerConfigs(bus, ModLoadingContext.get());
         new MultiblockManager();
@@ -110,7 +110,7 @@ public class ToTheMoon {
     private static void initRegistration() {
         ModBlocks.init();
         ModItems.start();
-        ModBlockEntityTypes.init();
+        ModBlockEntities.init();
 
     }
 
@@ -179,10 +179,13 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.ENERGY_SMELTER, EnergySmelterScreen::new);
             MenuScreens.register(ModMenuTypes.NETHER_BRICK_FURNACE, NetherBrickFurnaceControllerScreen::new);
             MenuScreens.register(ModMenuTypes.FLUID_TANK, FluidTankMenuScreen::new);
+            MenuScreens.register(ModMenuTypes.TAG_TRANSLATOR, TagTranslatorScreen::new);
 
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TAG_TRANSLATOR.get(), RenderType.cutout());
         }
+
     }
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID)

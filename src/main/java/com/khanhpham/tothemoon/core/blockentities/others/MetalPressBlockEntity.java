@@ -5,7 +5,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.IMetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModSoundEvents;
 import com.khanhpham.tothemoon.utils.energy.Energy;
@@ -13,7 +13,6 @@ import com.khanhpham.tothemoon.utils.energy.EnergyOnlyReceive;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -57,7 +56,7 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity implements I
     }
 
     public MetalPressBlockEntity(BlockPos blockPos, BlockState blockState) {
-        this(ModBlockEntityTypes.METAL_PRESS.get(), blockPos, blockState, new EnergyOnlyReceive(200000), ModBlocks.METAL_PRESS.get().getName(), MENU_SIZE);
+        this(ModBlockEntities.METAL_PRESS.get(), blockPos, blockState, new EnergyOnlyReceive(200000), ModBlocks.METAL_PRESS.get().getName(), MENU_SIZE);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState state, MetalPressBlockEntity e) {

@@ -24,6 +24,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.Tags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 
 import java.util.List;
 import java.util.Objects;
@@ -38,6 +40,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("deprecation")
 @Mixin(AnvilBlock.class)
 public class AnvilFallenTweaks {
+
     @Overwrite
     public void onLand(Level level, BlockPos pos, BlockState state, BlockState state1, FallingBlockEntity fallingBlockEntity) {
         if (!fallingBlockEntity.isSilent()) {

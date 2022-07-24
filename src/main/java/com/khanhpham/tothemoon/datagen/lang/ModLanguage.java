@@ -9,6 +9,7 @@ import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredItems;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -22,6 +23,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ModLanguage extends LanguageProvider {
+    //ITEM / BLOCK /INVENTORY
+    public static final TranslatableComponent TAG_TRANSLATOR = create("info", "tag_translator");
+
     //UTILS
     public static final TranslatableComponent CAP_UNKNOWN = create("command", "cap_unknown");
     public static final TranslatableComponent CAP_FOUND = create("command", "cap_found");
@@ -34,6 +38,13 @@ public class ModLanguage extends LanguageProvider {
     //GUI
     public static final TranslatableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
     public static final TranslatableComponent NETHER_BRICK_FURNACE_CONTROLLER = create("gui", "nether_brick_furnace");
+    public static final TranslatableComponent NEXT = create("container", "next");
+    public static final TranslatableComponent PREV = create("container", "prev");
+    public static final TranslatableComponent HOVER_TO_SHOW_TAG = create("button", "hover_show_tag");
+    public static final TranslatableComponent NO_ITEM = create("button", "no_button");
+    private static final TranslatableComponent NO_TAG = create("button", "no_tag");
+
+
 
     //TOOLTIP
     public static final TranslatableComponent TANK_ONLY_SUPPORTS_LAVA = create("tooltip", "lava_support_only");
@@ -118,6 +129,9 @@ public class ModLanguage extends LanguageProvider {
         ALL_BLOCKS.forEach(this::addBlock);
         ALL_ITEMS.forEach(this::addItem);
 
+        // item - block - inventory
+        add(TAG_TRANSLATOR, "A simple stonecutter-inspired block that convert items that has the same tag as items in this mod");
+
         //GUI - TOOLTIP
         add("gui.tothemoon.alloy_smelter", "Alloy Smelter");
         add("gui.tothemoon.metal_press", "Metal Press");
@@ -125,6 +139,11 @@ public class ModLanguage extends LanguageProvider {
         add("tooltip.tothemoon.fluid_fuel_tank", "Fuel : %s / %s");
         add("tooltip.tothemoon.item_tank", "(%s): %s");
         add(TANK_ONLY_SUPPORTS_LAVA, "Can stores Lava only, more fluids will be added in future updates");
+        add(NEXT, ">");
+        add(PREV, "<");
+        add(HOVER_TO_SHOW_TAG, "Show Tag");
+        add(NO_TAG, "No Tag");
+        add(NO_ITEM, "No Item");
 
         //JEI
         add(METAL_PRESS_RECIPE_CATEGORY, "Metal Pressing");

@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities;
 
 import com.khanhpham.tothemoon.init.ModBlocks;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -15,6 +15,6 @@ public class DiamondEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBl
     }
 
     public DiamondEnergyGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityTypes.DIAMOND_ENERGY_GENERATOR_TE.get(), pos, state, 1000000, 1000,  new TranslatableComponent(ModBlocks.DIAMOND_ENERGY_GENERATOR.get().getDescriptionId()));
+        this(ModBlockEntities.DIAMOND_ENERGY_GENERATOR_TE.get(), pos, state, 1000000, 1000,  new TranslatableComponent(ModBlocks.DIAMOND_ENERGY_GENERATOR.get().getDescriptionId()));
     }
 }

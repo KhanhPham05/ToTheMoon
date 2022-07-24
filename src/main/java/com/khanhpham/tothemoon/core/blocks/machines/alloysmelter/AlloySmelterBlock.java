@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blocks.machines.alloysmelter;
 
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -65,7 +65,7 @@ public class AlloySmelterBlock extends BaseEntityBlock<AlloySmelterBlockEntity> 
 
     @Override
     protected BlockEntityType<AlloySmelterBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.ALLOY_SMELTER.get();
+        return ModBlockEntities.ALLOY_SMELTER.get();
     }
 
     @Override

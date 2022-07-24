@@ -7,10 +7,12 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.E
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
+import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorMenu;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenu;
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerMenu;
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +35,7 @@ public class ModMenuTypes {
     public static final MenuType<EnergySmelterMenu> ENERGY_SMELTER;
     public static final MenuType<NetherBrickFurnaceControllerMenu> NETHER_BRICK_FURNACE;
     public static final MenuType<FluidTankMenu> FLUID_TANK;
-
+    public static final MenuType<TagTranslatorMenu> TAG_TRANSLATOR;
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
         ENERGY_GENERATOR_CONTAINER = register("energy_generator_container", EnergyGeneratorMenu::new);
@@ -43,12 +45,13 @@ public class ModMenuTypes {
         ENERGY_SMELTER = register("energy_smelter", EnergySmelterMenu::new);
         NETHER_BRICK_FURNACE = register("nether_brick_furnace", NetherBrickFurnaceControllerMenu::new);
         FLUID_TANK = register("fluid_tank_menu", FluidTankMenu::new);
+        TAG_TRANSLATOR = register("tag_translator_menu", TagTranslatorMenu::new);
     }
 
     private ModMenuTypes() {
     }
 
-    private static <T extends BaseMenu> MenuType<T> register(String name, MenuType.MenuSupplier<T> supplier) {
+    private static <T extends AbstractContainerMenu> MenuType<T> register(String name, MenuType.MenuSupplier<T> supplier) {
         return MENU_TYPES.register(name, supplier);
     }
 
