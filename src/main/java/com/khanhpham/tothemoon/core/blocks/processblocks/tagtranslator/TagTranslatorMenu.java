@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,14 +55,13 @@ public final class TagTranslatorMenu extends AbstractContainerMenu {
                 return false;
             }
 
-            public void onTake(Player p_150672_, ItemStack p_150673_) {
-                p_150673_.onCraftedBy(p_150672_.level, p_150672_, p_150673_.getCount());
-                resultContainer.awardUsedRecipes(p_150672_);
+            public void onTake(Player player, ItemStack item) {
+                item.onCraftedBy(player.level, player, item.getCount());
                 ItemStack itemstack = inputSlot.remove(1);
                 if (!itemstack.isEmpty()) {
                     setupResultSlot();
                 }
-                super.onTake(p_150672_, p_150673_);
+                super.onTake(player, item);
             }
         });
 
@@ -78,6 +78,7 @@ public final class TagTranslatorMenu extends AbstractContainerMenu {
         this.addDataSlot(this.selectedRecipeIndex);
         this.access = access;
         this.level = playerInventory.player.level;
+        RecipeManager recipeManager = level.getRecipeManager();
     }
 
     private void setupResultSlot() {

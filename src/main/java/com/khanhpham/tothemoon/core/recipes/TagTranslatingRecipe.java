@@ -20,9 +20,9 @@ import net.minecraft.world.level.Level;
 
 public class TagTranslatingRecipe implements Recipe<Container> {
     public static final RecipeType<TagTranslatingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModUtils.modLoc("tag_translating"));
-
     private final ResourceLocation recipeId;
     private final TagKey<Item> tag;
+
     private final ItemStack resultItem;
 
     public TagTranslatingRecipe(ResourceLocation recipeId, TagKey<Item> tag, ItemStack resultItem) {
@@ -38,7 +38,7 @@ public class TagTranslatingRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack assemble(Container pContainer) {
-        return resultItem.copy();
+        return this.resultItem.copy();
     }
 
     @Override
@@ -64,6 +64,10 @@ public class TagTranslatingRecipe implements Recipe<Container> {
     @Override
     public RecipeType<?> getType() {
         return RECIPE_TYPE;
+    }
+
+    public TagKey<Item> getTag() {
+        return tag;
     }
 
     public static final class Serializer extends SimpleRecipeSerializer<TagTranslatingRecipe> {
