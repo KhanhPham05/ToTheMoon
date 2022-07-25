@@ -5,11 +5,9 @@ import com.khanhpham.tothemoon.datagen.advancement.AdvancementComponent;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredItems;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -43,7 +41,8 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent HOVER_TO_SHOW_TAG = create("button", "hover_show_tag");
     public static final TranslatableComponent NO_ITEM = create("button", "no_button");
     private static final TranslatableComponent NO_TAG = create("button", "no_tag");
-
+    public static final TranslatableComponent FILL_TANK = create("gui", "fill_tank");
+    public static final TranslatableComponent EMPTY_TANK = create("gui", "empty_tank");
 
 
     //TOOLTIP
@@ -144,6 +143,8 @@ public class ModLanguage extends LanguageProvider {
         add(HOVER_TO_SHOW_TAG, "Show Tag");
         add(NO_TAG, "No Tag");
         add(NO_ITEM, "No Item");
+        add(FILL_TANK, "Fill Tank");
+        add(EMPTY_TANK, "Empty Tank");
 
         //JEI
         add(METAL_PRESS_RECIPE_CATEGORY, "Metal Pressing");

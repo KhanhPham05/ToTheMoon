@@ -96,6 +96,8 @@
   "container.tothemoon.next": ">",
   "container.tothemoon.prev": "<",
   "gui.tothemoon.alloy_smelter": "Alloy Smelter",
+  "gui.tothemoon.empty_tank": "Empty Tank",
+  "gui.tothemoon.fill_tank": "Fill Tank",
   "gui.tothemoon.insert_upgrades": "Upgrades",
   "gui.tothemoon.metal_press": "Metal Press",
   "gui.tothemoon.nether_brick_furnace": "Nether Bricks Furnace",

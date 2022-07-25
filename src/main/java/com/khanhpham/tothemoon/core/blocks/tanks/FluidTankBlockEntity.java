@@ -5,24 +5,24 @@ import com.khanhpham.tothemoon.core.blockentities.ImplementedContainer;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlockEntitiesTypes;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
-import com.khanhpham.tothemoon.utils.capabilities.FixedFluidTank;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -34,20 +34,25 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
+@SuppressWarnings("deprecation")
 public class FluidTankBlockEntity extends BlockEntity implements ImplementedContainer<FluidTankMenu>, TickableBlockEntity, FluidCapableBlockEntity {
-    private final NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
-    public FluidTank tank = new FixedFluidTank(Fluids.LAVA, TANK_CAPACITY);
-    public LazyOptional<IFluidHandler> tankCap = LazyOptional.of(() -> tank);
-    public LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> new InvWrapper(this));
     public static final int TANK_CAPACITY = 50000;
+    private final NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
+    public FluidTank tank = new FluidTank(TANK_CAPACITY) {
+        @Override
+        protected void onContentsChanged() {
+            fluidRegistryId = Registry.FLUID.getId(this.fluid.getFluid());
+        }
+    };
+    public int fluidRegistryId = 0;
 
-    private final ContainerData data = new ContainerData() {
+    final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
             return switch (pIndex) {
                 case 0 -> tank.getFluidAmount();
                 case 1 -> tank.getCapacity();
+                case 2 -> fluidRegistryId;
                 default -> throw new IllegalStateException("Unexpected value: " + pIndex);
             };
         }
@@ -59,9 +64,11 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     };
+    public LazyOptional<IFluidHandler> tankCap = LazyOptional.of(() -> tank);
+    public LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> new InvWrapper(this));
 
     public FluidTankBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(NonDeferredBlockEntitiesTypes.FLUID_TANK_NON_DEFERRED, pWorldPosition, pBlockState);
@@ -97,23 +104,6 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
         return NonDeferredBlocks.FLUID_TANK_BLOCK.getName();
     }
 
-    public boolean canFilledFromBucket(Fluid fluid) {
-        return this.tank.getFluidAmount() + 1000 <= this.tank.getCapacity() && fluid.isSame(this.getFluid());
-    }
-
-    public boolean isFluidSame(Fluid fluid) {
-        return fluid.isSame(Fluids.LAVA);
-
-    }
-
-    public boolean canDrainToExternal(Fluid fluid) {
-        return this.tank.getFluidAmount() >= 1000 && this.isFluidSame(fluid);
-    }
-
-    public Fluid getFluid() {
-        return this.tank.getFluid().getFluid();
-    }
-
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
@@ -133,6 +123,7 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
         super.load(pTag);
         ContainerHelper.loadAllItems(pTag, this.items);
         this.tank.readFromNBT(pTag);
+        this.fluidRegistryId = pTag.getInt("fluidId");
     }
 
     @Override
@@ -140,38 +131,57 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
         super.saveAdditional(pTag);
         ContainerHelper.saveAllItems(pTag, this.items, false);
         this.tank.writeToNBT(pTag);
+        pTag.putInt("fluidId", fluidRegistryId);
     }
 
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
-        if (!getItem(0).isEmpty()) {
-            interact(0, false);
-        } else if (!getItem(1).isEmpty()) {
-            interact(1, true);
+        /*.if (!this.items.get(0).isEmpty()) {
+            this.items.get(0).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(fluidHandler -> {
+                if (this.tank.isFluidValid(fluidHandler.getFluidInTank(1000)) && items.get(0).hasContainerItem()) {
+                    this.tank.fill(fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
+                    setItem(0, items.get(0).getContainerItem());
+                }
+            });
         }
+        */
+        this.interact(0, true);
+        this.interact(1, false);
 
-        int fluidStoreState = (this.tank.getFluid().getAmount() * 12) / this.tank.getCapacity();
-        if (state.getValue(FluidTankBlock.FLUID_LEVEL) != fluidStoreState) {
-            state = state.setValue(FluidTankBlock.FLUID_LEVEL, fluidStoreState);
-            level.setBlock(pos, state, 3);
-        }
+
 
         setChanged(level, pos, state);
     }
 
-    private void interact(int itemIndex, boolean drainToItem) {
-        ItemStack item = this.items.get(itemIndex);
-        if (item.getItem() instanceof BucketItem bucketItem) {
-            if (bucketItem.getFluid().isSame(Fluids.EMPTY) && drainToItem) {
-                this.items.set(itemIndex, new ItemStack(Items.LAVA_BUCKET));
-                this.tank.drain(new FluidStack(Fluids.LAVA, 1000), IFluidHandler.FluidAction.EXECUTE);
-            } else if (bucketItem.getFluid().isSame(Fluids.LAVA) && !drainToItem) {
-                this.items.set(itemIndex, new ItemStack(Items.BUCKET));
-                this.tank.fill(new FluidStack(Fluids.LAVA, 1000), IFluidHandler.FluidAction.EXECUTE);
-            }
+    private void interact(int index, boolean drainItem) {
+        ItemStack item = items.get(index);
+        if (!item.isEmpty() && item.hasContainerItem()) {
+            item.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(fluidHandler -> {
+                if (drainItem && this.tank.isFluidValid(fluidHandler.getFluidInTank(1000)) && item.hasContainerItem()) {
+                    this.tank.fill(fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
+                    setItem(index, item.getContainerItem());
+                } else if (!drainItem && fluidHandler.isFluidValid(1000, this.tank.getFluid())) {
+                    this.tank.drain(fluidHandler.fill(this.tank.getFluidInTank(1000), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
+                }
+            });
         }
     }
 
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::saveWithoutMetadata);
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+
+        CompoundTag tag = pkt.getTag();
+        if (tag != null && tag.contains("FluidName", 10) && tag.contains("Amount", 3)) {
+            this.tank.setFluid(FluidStack.loadFluidStackFromNBT(tag));
+        }
+    }
 
     @Override
     public FluidTank getTank() {

@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -49,7 +50,7 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
 
     //TODO : add model/texture for tank
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity fluidTank) {
+        /*if (pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity fluidTank) {
             ItemStack handItem = pPlayer.getMainHandItem();
 
             //FILL/DRAIN BUCKET ITEM
@@ -84,14 +85,10 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
 
                     return InteractionResult.sidedSuccess(pLevel.isClientSide);
                 }
-            }*/
-        }
+            }}*/
+
 
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-    }
-
-    private boolean isFluidEmpty(Fluid fluid) {
-        return fluid.isSame(Fluids.EMPTY);
     }
 
     @Override

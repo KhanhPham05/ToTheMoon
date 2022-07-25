@@ -58,8 +58,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -69,12 +68,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -86,6 +87,9 @@ public class ToTheMoon {
     public static final ResourceLocation MOON_EFFECTS = ModUtils.modLoc("moon_effects");
     public static final ResourceKey<Level> THE_MOON_DIMENSION = ResourceKey.create(Registry.DIMENSION_REGISTRY, ModUtils.modLoc("the_moon_dimension"));
     public static final Logger LOG = LogManager.getLogger(Names.MOD_ID);
+
+    //private static final String CHANNEL_VERSION = "1.0";
+    //public static final SimpleChannel SIMPLE_CHANNEL = NetworkRegistry.newSimpleChannel(ModUtils.modLoc("channel"), () -> CHANNEL_VERSION, (s) -> s.equals(CHANNEL_VERSION), (s) -> s.equals(CHANNEL_VERSION));
     public static final CreativeModeTab TAB = new CreativeModeTab("ttm_creative_tab") {
         @Nonnull
         @Override
@@ -172,6 +176,8 @@ public class ToTheMoon {
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent event) {
+            ModdedTriggers.init();
+
             MenuScreens.register(ModMenuTypes.STORAGE_BLOCK, MoonBarrelScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_GENERATOR_CONTAINER, EnergyGeneratorMenuScreen::new);
             MenuScreens.register(ModMenuTypes.ALLOY_SMELTER, AlloySmelterMenuScreen::new);
@@ -200,8 +206,9 @@ public class ToTheMoon {
         }
 
         @SubscribeEvent
-        public static void onServerStarting(ServerStartingEvent serverStartingEvent) {
-            ModdedTriggers.init();
+        public static void onServerStarted(ServerStartedEvent event) {
+            List<Item> items = Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(Tags.Items.STONE).stream().toList();
+            ModUtils.log("{} items matches tag {}, those are {}", items.size(), Tags.Items.STONE, items);
         }
 
         @SubscribeEvent

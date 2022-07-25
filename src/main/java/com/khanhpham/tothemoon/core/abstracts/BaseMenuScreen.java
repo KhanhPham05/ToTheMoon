@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -15,9 +16,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContainerScreen<T> {
-    protected int xPos = leftPos;
     protected final ResourceLocation texture;
     protected final int blackColor = 0x404040;
+    protected int xPos = leftPos;
 
     public BaseMenuScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -72,4 +73,8 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
     protected void renderExtraLabels(PoseStack poseStack) {
     }
 
+    protected void drawRightFocusedString(PoseStack pose, Component translatableText, int topRightX, int topRightY) {
+        int position = topRightX - super.font.width(translatableText.getVisualOrderText());
+        super.font.draw(pose, translatableText, position, topRightY, this.blackColor);
+    }
 }

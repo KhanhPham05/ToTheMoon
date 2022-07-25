@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.Names;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.HashSet;
@@ -19,6 +20,11 @@ public class MenuTypeRegister {
         MenuType<T> containerType = new MenuType<>(supplier);
         this.containerTypes.add(containerType.setRegistryName(new ResourceLocation(Names.MOD_ID, name)));
         return containerType;
+    }
+
+    public <T extends AbstractContainerMenu> MenuType<T> register(String name, MenuType<T> forgeMenuType) {
+        this.containerTypes.add(forgeMenuType.setRegistryName(new ResourceLocation(Names.MOD_ID, name)));
+        return forgeMenuType;
     }
 
     public void registerAll(IForgeRegistry<MenuType<?>> registry) {
