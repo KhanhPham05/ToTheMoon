@@ -24,17 +24,19 @@ public class GuiRenderingUtils {
     }
 
     //Inspired by Silent's Mechanisms
-    public static void renderFluidStack(PoseStack pose, FluidStack fluidStack, int tankCapacity, float x, float y, float width, float height) {
-        RenderSystem.enableBlend();
+    public static void renderFluidStack(PoseStack pose, FluidStack fluidStack, int tankCapacity, int x, int y, int width, int height) {
         int fluidAmount = fluidStack.getAmount();
         if (fluidStack.getFluid() != Fluids.EMPTY && fluidAmount > 0) {
-            TextureAtlasSprite fluidSprite = getStillSprite(fluidStack);
+            TextureAtlasSprite fluidSprite = getFlowingSprite(fluidStack);
             if (fluidSprite != null) {
+                y += height;
                 float renderAmount = Math.max(Math.min(height, fluidAmount * height / tankCapacity), 1);
                 float posY = y - height - renderAmount;
 
-                TEXTURE_MANAGER.bindForSetup(InventoryMenu.BLOCK_ATLAS);
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
                 Matrix4f matrix = pose.last().pose();
+
                 int fluidColor = fluidStack.getFluid().getAttributes().getColor();
                 float r = ((fluidColor >> 16) & 0xFF) / 255f;
                 float g = ((fluidColor >> 8) & 0xFF) / 255f;
@@ -55,31 +57,31 @@ public class GuiRenderingUtils {
                         float minV = fluidSprite.getV0();
                         float maxV = fluidSprite.getV1();
 
-                        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-
-                        Tesselator tesselator = Tesselator.getInstance();
-                        BufferBuilder bufferBuilder = tesselator.getBuilder();
-
                         float v = minV + (maxV - minV) * drawHeight / 16F;
                         float v1 = minU + (maxU - minU) * drawWidth / 16F;
 
+                        RenderSystem.enableBlend();
+                        Tesselator tesselator = Tesselator.getInstance();
+                        BufferBuilder bufferBuilder = tesselator.getBuilder();
                         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                         bufferBuilder.vertex(matrix, drawX, drawY + drawHeight, 0).uv(minU, v).endVertex();
                         bufferBuilder.vertex(matrix, drawX + drawWidth, drawY + drawHeight, 0).uv(v1, v).endVertex();
                         bufferBuilder.vertex(matrix, drawX + drawWidth, drawY, 0).uv(v1, minV).endVertex();
                         bufferBuilder.vertex(matrix, drawX, drawY, 0).uv(minU, minV).endVertex();
-                        tesselator.end();
+                        bufferBuilder.end();
+                        BufferUploader.end(bufferBuilder);
+                        RenderSystem.disableBlend();
                     }
                 }
             }
-        }//0987490499
+        }
 
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.disableBlend();
+        //RenderSystem.setShaderColor(1, 1, 1, 1);
+
     }
 
 
-
+    @Deprecated
     //Inspired by JEI
     //https://github.com/mezz/JustEnoughItems/blob/211ca2cc020f56f12f0bc1cf8799b731d593e7d4/Common/src/main/java/mezz/jei/common/render/FluidTankRenderer.java#L72
     public static void renderFluidStack(PoseStack pose, FluidStack fluidStack, int width, int height, int capacity) {
@@ -89,7 +91,7 @@ public class GuiRenderingUtils {
         //https://github.com/mezz/JustEnoughItems/blob/211ca2cc020f56f12f0bc1cf8799b731d593e7d4/Common/src/main/java/mezz/jei/common/render/FluidTankRenderer.java#L95
         Fluid fluid = fluidStack.getFluid();
         if (!fluid.isSame(Fluids.EMPTY)) {
-            TextureAtlasSprite sprite = getStillSprite(fluidStack);
+            TextureAtlasSprite sprite = getFlowingSprite(fluidStack);
 
             int fluidColor = getFluidColorTint(fluidStack);
 
@@ -162,17 +164,8 @@ public class GuiRenderingUtils {
         return fluidStack.getFluid().getAttributes().getColor(fluidStack);
     }
 
-    //From JEI
-    private static TextureAtlasSprite getStillSprite(FluidStack fluidStack) {
+    private static TextureAtlasSprite getFlowingSprite(FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();
-        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getAttributes().getStillTexture(fluidStack));
-    }
-
-
-    //From Silent's Mechanisms
-    @Nullable
-    private static TextureAtlasSprite getFluidSprite(FluidStack fluidStack) {
-        TextureAtlasSprite[] sprites = ForgeHooksClient.getFluidSprites(CLIENT.level, BlockPos.ZERO, fluidStack.getFluid().defaultFluidState());
-        return sprites.length > 0 ? sprites[0] : null;
+        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getAttributes().getFlowingTexture(fluidStack));
     }
 }

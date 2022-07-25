@@ -70,12 +70,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.tags.ITagManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -122,6 +122,8 @@ public class ToTheMoon {
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static final class ModEvents {
+
+        private static final ITagManager<Item> ITEM_TAG_MANAGER = ForgeRegistries.ITEMS.tags();
 
         public ModEvents() {
         }
@@ -191,12 +193,17 @@ public class ToTheMoon {
             ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TAG_TRANSLATOR.get(), RenderType.cutout());
+
+
+            TTMConfigs.COMMON_CONFIGS.allWhitelistedTags().forEach(itemTag -> {
+                var items = ITEM_TAG_MANAGER.getTag(itemTag).stream().toList();
+                ModUtils.log("{} items matches tag [{}], those are {}", items.size(), itemTag.location(), items);
+            });
         }
     }
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID)
     public static final class ForgeEvents {
-
         public ForgeEvents() {
         }
 
@@ -207,9 +214,8 @@ public class ToTheMoon {
 
         @SubscribeEvent
         public static void onServerStarted(ServerStartedEvent event) {
-            List<Item> items = Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(Tags.Items.STONE).stream().toList();
-            ModUtils.log("{} items matches tag {}, those are {}", items.size(), Tags.Items.STONE, items);
         }
+
 
         @SubscribeEvent
         public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {

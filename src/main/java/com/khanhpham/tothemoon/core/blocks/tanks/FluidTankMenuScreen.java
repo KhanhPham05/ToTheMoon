@@ -19,7 +19,7 @@ public class FluidTankMenuScreen extends BaseMenuScreen<FluidTankMenu> {
 
     @Override
     protected void renderExtra(PoseStack pPoseStack) {
-
+        GuiRenderingUtils.renderFluidStack(pPoseStack, super.menu.getFluid(), super.menu.getTankCapacity(), leftPos + 143, topPos + 84, 16, 69);
     }
 
     @Override
