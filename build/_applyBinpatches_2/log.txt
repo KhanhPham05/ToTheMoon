@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatches.lzma'
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatched.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.60\forge-1.18.2-40.1.60-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -700,6 +700,14 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: c71d6165 Exists: true
   Reading patch net.minecraft.client.server.IntegratedServer.binpatch
     Checksum: e41a951 Exists: true
+  Reading patch net.minecraft.client.server.LanServerDetection$LanServerDetector.binpatch
+    Checksum: b2383a0f Exists: true
+  Reading patch net.minecraft.client.server.LanServerDetection$LanServerList.binpatch
+    Checksum: ec4b1410 Exists: true
+  Reading patch net.minecraft.client.server.LanServerDetection.binpatch
+    Checksum: 4b9a21d5 Exists: true
+  Reading patch net.minecraft.client.server.LanServerPinger.binpatch
+    Checksum: 20bc6cef Exists: true
   Reading patch net.minecraft.client.sounds.SoundEngine$DeviceCheckState.binpatch
     Checksum: 2e17a5a0 Exists: true
   Reading patch net.minecraft.client.sounds.SoundEngine.binpatch
@@ -2876,6 +2884,10 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/client/resources/sounds/SoundInstance$Attenuation 1/1
   Patching net/minecraft/client/resources/sounds/SoundInstance 1/1
   Patching net/minecraft/client/server/IntegratedServer 1/1
+  Patching net/minecraft/client/server/LanServerDetection$LanServerDetector 1/1
+  Patching net/minecraft/client/server/LanServerDetection$LanServerList 1/1
+  Patching net/minecraft/client/server/LanServerDetection 1/1
+  Patching net/minecraft/client/server/LanServerPinger 1/1
   Patching net/minecraft/client/sounds/SoundEngine$DeviceCheckState 1/1
   Patching net/minecraft/client/sounds/SoundEngine 1/1
   Patching net/minecraft/commands/CommandSourceStack 1/1

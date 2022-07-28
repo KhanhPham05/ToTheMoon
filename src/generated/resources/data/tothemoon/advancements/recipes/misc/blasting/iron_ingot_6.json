@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "tothemoon:smelting/uranium_ingot_7"
+      "tothemoon:blasting/iron_ingot_6"
     ]
   },
   "criteria": {
@@ -13,7 +13,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "tothemoon:smelting/uranium_ingot_7"
+        "recipe": "tothemoon:blasting/iron_ingot_6"
       }
     }
   },

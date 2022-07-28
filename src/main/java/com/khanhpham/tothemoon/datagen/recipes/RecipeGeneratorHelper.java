@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.datagen.recipes;
 
+import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
@@ -26,7 +27,7 @@ import java.util.function.Supplier;
 public class RecipeGeneratorHelper {
     private static final ArrayList<String> RECIPES = new ArrayList<>();
     private static int recipeDuplications = 0;
-    protected final Consumer<FinishedRecipe> consumer;
+    public final Consumer<FinishedRecipe> consumer;
 
     public RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
         this.consumer = consumer;
@@ -36,11 +37,11 @@ public class RecipeGeneratorHelper {
         return tag.location().getPath().replace('/', '_');
     }
 
-    static String getId(ItemLike item) {
+    public static String getId(ItemLike item) {
         return ModUtils.convertRlToPath(item.asItem());
     }
 
-    static <T extends RecipeBuilder> void saveGlobal(Consumer<FinishedRecipe> consumer, T builder, String recipeType, String result) {
+    public static <T extends RecipeBuilder> void saveGlobal(Consumer<FinishedRecipe> consumer, T builder, String recipeType, String result) {
         unlock(builder);
         String recipeName = recipeType + '/' + result;
 
@@ -57,35 +58,35 @@ public class RecipeGeneratorHelper {
         builder.unlockedBy("tick", ModRecipeProvider.tick());
     }
 
-    protected void buildSlab(Supplier<SlabBlock> slabBlockSupplier, Supplier<Block> materialSupplier) {
+    public void buildSlab(Supplier<SlabBlock> slabBlockSupplier, Supplier<Block> materialSupplier) {
         new Shaped(slabBlockSupplier.get(), 6, consumer).pattern("AAA").define('A', materialSupplier.get()).save();
     }
 
-    protected void stoneCutting(Supplier<? extends ItemLike> result, int amount, Supplier<? extends ItemLike> from) {
+    public void stoneCutting(Supplier<? extends ItemLike> result, int amount, Supplier<? extends ItemLike> from) {
         var builder = SingleItemRecipeBuilder.stonecutting(Ingredient.of(from.get()), result.get(), amount);
         saveGlobal(consumer, builder, "stonecutting", getId(result.get()));
     }
 
-    protected Shaped shaped(ItemLike result, int amount) {
+    public Shaped shaped(ItemLike result, int amount) {
         return new Shaped(result, amount, consumer);
     }
 
-    protected Shaped shaped(Supplier<? extends ItemLike> result) {
+    public Shaped shaped(Supplier<? extends ItemLike> result) {
         return this.shaped(result.get(), 1);
     }
 
-    protected void smelting(ItemLike ingredient, ItemLike result, boolean includeBlasting) {
+    public void smelting(ItemLike ingredient, ItemLike result, boolean includeBlasting) {
         var smeltingRecipe = new Smelting(consumer, result, ingredient, 200, includeBlasting);
         smeltingRecipe.save();
     }
 
-    protected void smelting(TagKey<Item> ingredient, ItemLike result, boolean includeBlasting) {
+    public void smelting(TagKey<Item> ingredient, ItemLike result, boolean includeBlasting) {
         var smeltingRecipe = new Smelting(consumer, result, ingredient, 200, includeBlasting);
         smeltingRecipe.save();
     }
 
     @SafeVarargs
-    protected final void shapelessCrafting(ItemLike result, int amount, TagKey<Item>... require) {
+    public final void shapelessCrafting(ItemLike result, int amount, TagKey<Item>... require) {
         var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount);
         Set<String> tagStrings = new HashSet<>();
         for (TagKey<Item> itemTagKey : require) {
@@ -97,7 +98,7 @@ public class RecipeGeneratorHelper {
         saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", getId(result));
     }
 
-    protected void shapelessCrafting(ItemLike result, int amount, ItemLike... require) {
+    public void shapelessCrafting(ItemLike result, int amount, ItemLike... require) {
         var shapelessRecipe = ShapelessRecipeBuilder.shapeless(result, amount);
         List<String> itemNames = new ArrayList<>();
         for (ItemLike itemLike : require) {
@@ -154,11 +155,11 @@ public class RecipeGeneratorHelper {
         });
     }
 
-    protected static abstract class NamedRecipeBuilder<T extends RecipeBuilder> {
+    public static abstract class NamedRecipeBuilder<T extends RecipeBuilder> {
 
-        protected final Consumer<FinishedRecipe> consumer;
+        public final Consumer<FinishedRecipe> consumer;
 
-        protected final T builder;
+        public final T builder;
 
         final List<String> inputs = Lists.newArrayList();
 
@@ -183,7 +184,7 @@ public class RecipeGeneratorHelper {
         }
     }
 
-    protected static final class Shaped extends NamedRecipeBuilder<ShapedRecipeBuilder> {
+    public static final class Shaped extends NamedRecipeBuilder<ShapedRecipeBuilder> {
         public Shaped(ItemLike result, int amount, Consumer<FinishedRecipe> consumer) {
             super(consumer, ShapedRecipeBuilder.shaped(result, amount), result, "crafting");
         }
@@ -207,7 +208,7 @@ public class RecipeGeneratorHelper {
 
     }
 
-    protected static class Smelting extends NamedRecipeBuilder<SimpleCookingRecipeBuilder> {
+    public static class Smelting extends NamedRecipeBuilder<SimpleCookingRecipeBuilder> {
         private final Ingredient ingredient;
         private final int cookTime;
 
@@ -236,7 +237,7 @@ public class RecipeGeneratorHelper {
         }
     }
 
-    protected static class Blasting extends NamedRecipeBuilder<SimpleCookingRecipeBuilder> {
+    public static class Blasting extends NamedRecipeBuilder<SimpleCookingRecipeBuilder> {
         public Blasting(Consumer<FinishedRecipe> consumer, ItemLike result, Ingredient ingredient, int cookTime) {
             super(consumer, SimpleCookingRecipeBuilder.blasting(ingredient, result, 1.0f, cookTime), result, "blasting");
         }

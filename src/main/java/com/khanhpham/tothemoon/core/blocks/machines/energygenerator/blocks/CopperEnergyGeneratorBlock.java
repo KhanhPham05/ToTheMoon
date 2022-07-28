@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks;
 
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -20,7 +20,7 @@ public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<Cop
 
     @Override
     protected BlockEntityType<CopperEnergyGeneratorBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE.get();
+        return ModBlockEntities.COPPER_ENERGY_GENERATOR_TE.get();
     }
 
     @Override
@@ -30,6 +30,6 @@ public class CopperEnergyGeneratorBlock extends AbstractEnergyGeneratorBlock<Cop
 
     @Override
     protected <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level level, BlockEntityType<A> pBlockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE.get(), AbstractEnergyGeneratorBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntities.COPPER_ENERGY_GENERATOR_TE.get(), AbstractEnergyGeneratorBlockEntity::serverTick);
     }
 }

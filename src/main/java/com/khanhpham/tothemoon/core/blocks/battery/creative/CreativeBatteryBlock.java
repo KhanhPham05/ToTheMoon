@@ -4,7 +4,7 @@ import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
@@ -47,7 +47,7 @@ public class CreativeBatteryBlock extends BaseEntityBlock implements EntityBlock
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntityTypes.CREATIVE_BATTERY.get(), TickableBlockEntity::staticServerTick);
+        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, ModBlockEntities.CREATIVE_BATTERY.get(), TickableBlockEntity::staticServerTick);
     }
 
     @Override

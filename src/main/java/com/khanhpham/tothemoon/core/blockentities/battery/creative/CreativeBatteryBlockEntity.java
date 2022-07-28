@@ -1,13 +1,9 @@
 package com.khanhpham.tothemoon.core.blockentities.battery.creative;
 
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,7 +16,7 @@ public class CreativeBatteryBlockEntity extends BlockEntity implements TickableB
     private final HashMap<BlockEntity, Direction> energyBlockEntities = new HashMap<>();
 
     public CreativeBatteryBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntityTypes.CREATIVE_BATTERY.get(), pWorldPosition, pBlockState);
+        super(ModBlockEntities.CREATIVE_BATTERY.get(), pWorldPosition, pBlockState);
     }
 
     @Override

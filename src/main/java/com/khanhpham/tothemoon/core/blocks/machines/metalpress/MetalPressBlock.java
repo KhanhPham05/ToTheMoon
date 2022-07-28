@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blocks.machines.metalpress;
 
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -44,7 +44,7 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
 
     @Override
     protected BlockEntityType<MetalPressBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.METAL_PRESS.get();
+        return ModBlockEntities.METAL_PRESS.get();
     }
 
     @Override

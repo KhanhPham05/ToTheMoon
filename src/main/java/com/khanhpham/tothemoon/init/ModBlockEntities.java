@@ -14,7 +14,6 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
-//import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankBlockEntity;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,7 +24,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 //@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModBlockEntityTypes {
+public class ModBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Names.MOD_ID);
 
@@ -46,7 +45,8 @@ public class ModBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<CreativeBatteryBlockEntity>> CREATIVE_BATTERY;
 
     public static final RegistryObject<BlockEntityType<NetherBrickFurnaceControllerBlockEntity>> BRICK_FURNACE;
-   // public static final RegistryObject<BlockEntityType<FluidTankBlockEntity>> FLUID_TANK;
+    //public static final RegistryObject<BlockEntityType<TagTranslatorBlockEntity>> TAG_TRANSLATOR;
+    // public static final RegistryObject<BlockEntityType<FluidTankBlockEntity>> FLUID_TANK;
 
     static {
         ToTheMoon.LOG.info("Registering BEs");
@@ -62,10 +62,11 @@ public class ModBlockEntityTypes {
         CREATIVE_BATTERY = register("creative_battery", () -> BlockEntityType.Builder.of(CreativeBatteryBlockEntity::new, ModBlocks.CREATIVE_BATTERY.get()).build(null));
         ENERGY_SMELTER = register("energy_smelter", () -> new BlockEntityType<>(EnergySmelterBlockEntity::new, ImmutableSet.of(ModBlocks.ENERGY_SMELTER.get()), null));
         BRICK_FURNACE = register("brick_furnace", () -> BlockEntityType.Builder.of(NetherBrickFurnaceControllerBlockEntity::new, ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get()).build(null));
+        //TAG_TRANSLATOR = register("tag_translators", () -> BlockEntityType.Builder.of(TagTranslatorBlockEntity::new, ModBlocks.TAG_TRANSLATOR.get()).build(null));
         //FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new).build(null));
     }
 
-    private ModBlockEntityTypes() {
+    private ModBlockEntities() {
     }
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> supplier) {

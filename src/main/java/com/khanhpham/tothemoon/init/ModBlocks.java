@@ -20,6 +20,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.core.blocks.others.SmoothBlackStoneBlock;
+import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
 import com.khanhpham.tothemoon.init.sounds.ModSoundTypes;
@@ -96,6 +97,7 @@ public class ModBlocks {
     public static final RegistryObject<AlloySmelterBlock> ALLOY_SMELTER = registerBlockEntity("alloy_smelter", () -> new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ModSoundTypes.METAL_MACHINE), AlloySmelterBlockEntity::new));
     public static final RegistryObject<EnergySmelter> ENERGY_SMELTER = registerBlockEntity("energy_smelter", () -> new EnergySmelter(BlockBehaviour.Properties.copy(ALLOY_SMELTER.get())));
     public static final RegistryObject<NetherBrickFurnaceBlock> NETHER_BRICK_FURNACE_CONTROLLER = registerBlockEntity("netherbrick_furnace_controller", () -> new NetherBrickFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS), NetherBrickFurnaceControllerBlockEntity::new));
+    public static final RegistryObject<TagTranslatorBlock> TAG_TRANSLATOR = register("tag_translator", TagTranslatorBlock::new);
 
     private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
         return false;

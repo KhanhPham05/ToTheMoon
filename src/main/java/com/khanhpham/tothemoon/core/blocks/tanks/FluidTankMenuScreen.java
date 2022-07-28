@@ -1,13 +1,14 @@
 package com.khanhpham.tothemoon.core.blocks.tanks;
 
 import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
+import com.khanhpham.tothemoon.utils.GuiRenderingUtils;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.material.Fluids;
 
 public class FluidTankMenuScreen extends BaseMenuScreen<FluidTankMenu> {
     public static final ResourceLocation texture = ModUtils.modLoc("textures/gui/fluid_tank.png");
@@ -18,15 +19,20 @@ public class FluidTankMenuScreen extends BaseMenuScreen<FluidTankMenu> {
 
     @Override
     protected void renderExtra(PoseStack pPoseStack) {
-        if (menu.canRenderFluid())
-            super.blit(pPoseStack, leftPos + 82, topPos + 84 - menu.getFluidHeight(), 179, 69 - menu.getFluidHeight(), 5, menu.getFluidHeight());
+        GuiRenderingUtils.renderFluidStack(pPoseStack, super.menu.getFluid(), super.menu.getTankCapacity(), leftPos + 143, topPos + 84, 16, 69);
+    }
+
+    @Override
+    protected void renderExtraLabels(PoseStack poseStack) {
+        super.drawRightFocusedString(poseStack, ModLanguage.FILL_TANK, 73, 26);
+        super.drawRightFocusedString(poseStack, ModLanguage.EMPTY_TANK, 73, 58);
     }
 
     @Override
     protected void renderTooltip(PoseStack pPoseStack, int pX, int pY) {
         super.renderTooltip(pPoseStack, pX, pY);
-        if (isHovering(81, 14, 7, 71, pX, pY)) {
-            super.renderTooltip(pPoseStack, TextUtils.translateFluidTank(Fluids.LAVA, super.menu.getAmount(), super.menu.getCapacity()), pX, pY);
+        if (isHovering(143, 15, 16, 69, pX, pY)) {
+            super.renderTooltip(pPoseStack, TextUtils.translateFluidTank(super.menu.getFluidObject(), super.menu.getTankAmount(), super.menu.getCapacity()), pX, pY);
         }
     }
 }

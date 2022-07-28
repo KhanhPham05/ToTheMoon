@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blocks.machines.energysmelter;
 
 import com.khanhpham.tothemoon.core.blockentities.others.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -42,7 +42,7 @@ public class EnergySmelter extends BaseEntityBlock<EnergySmelterBlockEntity> {
     @Nonnull
     @Override
     protected BlockEntityType<EnergySmelterBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.ENERGY_SMELTER.get();
+        return ModBlockEntities.ENERGY_SMELTER.get();
     }
 
     @Override

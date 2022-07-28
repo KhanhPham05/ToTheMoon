@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities;
 
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -16,6 +16,6 @@ public class CopperEnergyGeneratorBlockEntity extends AbstractEnergyGeneratorBlo
     }
 
     public CopperEnergyGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityTypes.COPPER_ENERGY_GENERATOR_TE.get(), pos, state, ModBlocks.COPPER_ENERGY_GENERATOR.get().getName());
+        this(ModBlockEntities.COPPER_ENERGY_GENERATOR_TE.get(), pos, state, ModBlocks.COPPER_ENERGY_GENERATOR.get().getName());
     }
 }

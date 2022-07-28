@@ -3,7 +3,7 @@ package com.khanhpham.tothemoon.core.blockentities.others;
 import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.energy.Energy;
 import com.khanhpham.tothemoon.utils.energy.EnergyOnlyReceive;
@@ -55,7 +55,7 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
     }
 
     public EnergySmelterBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityTypes.ENERGY_SMELTER.get(), pos, state, new EnergyOnlyReceive(150000), ModBlocks.ENERGY_SMELTER.get().getName(), 2);
+        this(ModBlockEntities.ENERGY_SMELTER.get(), pos, state, new EnergyOnlyReceive(150000), ModBlocks.ENERGY_SMELTER.get().getName(), 2);
     }
 
     @NotNull

@@ -6,7 +6,7 @@ import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.DirectionUtils;
 import com.khanhpham.tothemoon.utils.multiblock.Multiblock;
@@ -88,7 +88,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     };
 
     public NetherBrickFurnaceControllerBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntityTypes.BRICK_FURNACE.get(), pWorldPosition, pBlockState, CONTAINER_SIZE);
+        super(ModBlockEntities.BRICK_FURNACE.get(), pWorldPosition, pBlockState, CONTAINER_SIZE);
         Direction controllerFacing = pBlockState.getValue(NetherBrickFurnaceBlock.FACING);
         BlockPos worldPosition = new BlockPos(pWorldPosition);
         multiblockPartPositions.clear();

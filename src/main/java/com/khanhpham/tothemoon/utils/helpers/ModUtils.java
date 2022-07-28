@@ -3,27 +3,29 @@ package com.khanhpham.tothemoon.utils.helpers;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.battery.BatteryConnectionMode;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class ModUtils {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
@@ -101,5 +103,10 @@ public class ModUtils {
                 tile.setFluid(new FluidStack(fluid, fluidAmount));
             }
         }
+    }
+
+    public static List<ItemStack> getItemsForTags(TagKey<Item> tag) {
+        return Registry.ITEM.stream().filter(item -> item.builtInRegistryHolder().containsTag(tag)).map(ItemStack::new).toList();
+        //return Registry.ITEM.getTags().filter(tagKeyNamedPair -> tagKeyNamedPair.getFirst().equals(tag)).map(Pair::getSecond).toList();
     }
 }

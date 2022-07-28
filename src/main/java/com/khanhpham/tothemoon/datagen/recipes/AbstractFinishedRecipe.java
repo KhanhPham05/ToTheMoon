@@ -1,9 +1,11 @@
 package com.khanhpham.tothemoon.datagen.recipes;
 
 import com.google.gson.JsonObject;
+import com.khanhpham.tothemoon.JsonNames;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.Nullable;
@@ -40,9 +42,14 @@ abstract class AbstractFinishedRecipe<T extends Recipe<?>> implements FinishedRe
         return advancementBuilder.serializeToJson();
     }
 
-    @Nullable
     @Override
     public final ResourceLocation getAdvancementId() {
         return advancementRecipeId;
+    }
+
+    protected JsonObject convertItemToJson(Item item) {
+        JsonObject object = new JsonObject();
+        object.addProperty(JsonNames.ITEM, item.getRegistryName().getPath());
+        return object;
     }
 }

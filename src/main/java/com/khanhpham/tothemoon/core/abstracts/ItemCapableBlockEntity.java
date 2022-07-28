@@ -14,17 +14,13 @@ import net.minecraftforge.common.util.FakePlayer;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-/**
- * @see net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen
- * @see net.minecraft.world.inventory.AbstractFurnaceMenu
- */
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class ItemCapableTileEntity extends BaseContainerBlockEntity {
+public abstract class ItemCapableBlockEntity extends BaseContainerBlockEntity {
 
     protected NonNullList<ItemStack> items;
 
-    protected ItemCapableTileEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int inventorySize) {
+    public ItemCapableBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int inventorySize) {
         super(pType, pWorldPosition, pBlockState);
 
         this.items = NonNullList.withSize(inventorySize, ItemStack.EMPTY);

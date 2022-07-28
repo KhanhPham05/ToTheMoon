@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.items;
 
-import com.khanhpham.tothemoon.core.config.TTMConfigs;
+import com.khanhpham.tothemoon.config.TTMConfigs;
 import com.khanhpham.tothemoon.utils.capabilities.EnergyCapabilityProvider;
 import com.khanhpham.tothemoon.utils.capabilities.ItemStackEnergy;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
@@ -41,6 +41,6 @@ public abstract class EnergyCapableItem extends BlockItem {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
         int energyStored = ItemStackEnergy.getNbt(pStack).getInt("energy");
-        pTooltip.add(new TranslatableComponent("tooltip.tothemoon.energy", TTMConfigs.CLIENT.showsItemEnergyPercentageOnToolTip.get() ? TextUtils.showPercentage(energyStored, getMaxEnergyStored()) : "", TextUtils.translateEnergy(energyStored), TextUtils.translateEnergy(getMaxEnergyStored())).withStyle(ChatFormatting.GREEN));
+        pTooltip.add(new TranslatableComponent("tooltip.tothemoon.energy", TTMConfigs.CLIENT_CONFIGS.showsItemEnergyPercentageOnToolTip.get() ? TextUtils.showPercentage(energyStored, getMaxEnergyStored()) : "", TextUtils.translateEnergy(energyStored), TextUtils.translateEnergy(getMaxEnergyStored())).withStyle(ChatFormatting.GREEN));
     }
 }

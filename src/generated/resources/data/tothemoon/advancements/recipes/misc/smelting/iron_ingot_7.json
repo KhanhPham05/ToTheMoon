@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "tothemoon:blasting/iron_ingot_8"
+      "tothemoon:smelting/iron_ingot_7"
     ]
   },
   "criteria": {
@@ -13,7 +13,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "tothemoon:blasting/iron_ingot_8"
+        "recipe": "tothemoon:smelting/iron_ingot_7"
       }
     }
   },

@@ -3,13 +3,12 @@ package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.items.FluidCapableItem;
-import com.khanhpham.tothemoon.init.ModBlockEntityTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -53,7 +51,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
 
     @Override
     protected BlockEntityType<NetherBrickFurnaceControllerBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.BRICK_FURNACE.get();
+        return ModBlockEntities.BRICK_FURNACE.get();
     }
 
     @Override

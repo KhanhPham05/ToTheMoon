@@ -1,5 +1,9 @@
-package com.khanhpham.tothemoon.datagen.recipes;
+package com.khanhpham.tothemoon.datagen.recipes.provider;
 
+import com.khanhpham.tothemoon.datagen.recipes.AlloySmeltingRecipeBuilder;
+import com.khanhpham.tothemoon.datagen.recipes.MetalPressRecipeBuilder;
+import com.khanhpham.tothemoon.datagen.recipes.RecipeGeneratorHelper;
+import com.khanhpham.tothemoon.datagen.recipes.TagTranslatingRecipeBuilder;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -50,7 +54,7 @@ public class ModRecipeProvider extends RecipeProvider {
         return id;
     }
 
-    static TickTrigger.TriggerInstance tick() {
+    public static TickTrigger.TriggerInstance tick() {
         return new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY);
     }
 
@@ -239,6 +243,18 @@ public class ModRecipeProvider extends RecipeProvider {
         metalPress(consumer, PLATES_COPPER, ROD_MOLD, ModItems.COPPER_ROD);
         metalPress(consumer, INGOTS_COPPER, PLATE_MOLD, ModItems.COPPER_PLATE);
         metalPress(consumer, INGOTS_COPPER, GEAR_MOLD, ModItems.COPPER_GEAR);
+
+        TagToItemRecipeHelper provider = TagToItemRecipeHelper.create(consumer);
+
+        provider.put(Tags.Items.STONE, Items.STONE, Items.DIORITE, Items.ANDESITE);
+        provider.put(DUSTS_COAL);
+
+        provider.generateRecipe(this::translateTag);
+    }
+
+    private void translateTag(Consumer<FinishedRecipe> consumer, TagKey<Item> tag, Item item) {
+        TagTranslatingRecipeBuilder builder = new TagTranslatingRecipeBuilder(item, tag);
+        builder.save(consumer, RecipeGeneratorHelper.getId(item));
     }
 
     private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> moldTag, Supplier<? extends Item> result) {
@@ -259,7 +275,6 @@ public class ModRecipeProvider extends RecipeProvider {
     private void buildSlab(RecipeGeneratorHelper helper, Supplier<SlabBlock> slabBlockSupplier, Supplier<Block> materialSupplier) {
         helper.buildSlab(slabBlockSupplier, materialSupplier);
         helper.stoneCutting(slabBlockSupplier, 2, materialSupplier);
-        //SingleItemRecipeBuilder.stonecutting(Ingredient.of(materialSupplier.get()), slabBlockSupplier.get(), 2).unlockedBy("tick", tick()).save(consumer, createRecipeId());
     }
 
     private void buildSmeltingRecipes(final RecipeGeneratorHelper helper) {

@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.core.recipes.IngredientStack;
+import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -120,4 +121,6 @@ public class AlloySmeltingRecipeBuilder implements RecipeBuilder {
             json.add(JsonNames.RESULT, result);
         }
     }
+
+
 }
