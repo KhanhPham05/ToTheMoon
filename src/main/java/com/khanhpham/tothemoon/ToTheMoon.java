@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.advancements.ModdedTriggers;
 import com.khanhpham.tothemoon.config.TTMConfigs;
 import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
+import com.khanhpham.tothemoon.core.blocks.NoBlockItem;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
@@ -12,18 +13,18 @@ import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScr
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorScreen;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchScreen;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.ModItemModels;
 import com.khanhpham.tothemoon.datagen.advancement.ModAdvancementProvider;
 import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
-import com.khanhpham.tothemoon.datagen.blocks.ModBlockStates;
+import com.khanhpham.tothemoon.datagen.blocks.ModBlockStateProvider;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModTagProvider;
-import com.khanhpham.tothemoon.debug.GetCapInfoCommand;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -40,6 +41,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -58,7 +60,6 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -68,14 +69,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.tags.ITagManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -122,9 +122,6 @@ public class ToTheMoon {
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static final class ModEvents {
-
-        private static final ITagManager<Item> ITEM_TAG_MANAGER = ForgeRegistries.ITEMS.tags();
-
         public ModEvents() {
         }
 
@@ -138,7 +135,7 @@ public class ToTheMoon {
             data.addProvider(new ModLanguage(data));
             data.addProvider(new ModRecipeProvider(data));
             data.addProvider(new ModBlockModels(data, fileHelper));
-            data.addProvider(new ModBlockStates(data, fileHelper));
+            data.addProvider(new ModBlockStateProvider(data, fileHelper));
             data.addProvider(new ModItemModels(data, fileHelper));
             data.addProvider(new ModLootTables(data));
 
@@ -150,7 +147,7 @@ public class ToTheMoon {
             IForgeRegistry<Item> reg = event.getRegistry();
             NonDeferredItems.registerAll(reg);
 
-            Set<? extends Block> blocks = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
+            Set<? extends Block> blocks = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(block -> !(block instanceof NoBlockItem)).collect(Collectors.toSet());
             for (Block block : blocks) {
                 if (block instanceof BurnableBlock burnableBlock) {
                     reg.register(new BlockItem(burnableBlock, new Item.Properties().tab(ToTheMoon.TAB)) {
@@ -164,6 +161,8 @@ public class ToTheMoon {
                 } else
                     reg.register(new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getPath(block))));
             }
+
+            reg.register(new BlockItem(ModBlocks.WORKBENCH_LEFT.get(), new Item.Properties()).setRegistryName(ModUtils.modLoc("workbench_part")));
         }
 
         @SubscribeEvent
@@ -189,16 +188,14 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.NETHER_BRICK_FURNACE, NetherBrickFurnaceControllerScreen::new);
             MenuScreens.register(ModMenuTypes.FLUID_TANK, FluidTankMenuScreen::new);
             MenuScreens.register(ModMenuTypes.TAG_TRANSLATOR, TagTranslatorScreen::new);
+            MenuScreens.register(ModMenuTypes.WORKBENCH_CRAFTING, WorkbenchScreen::new);
 
-            ModBlocks.MODDED_NON_SOLID_BLOCKS_SUPPLIER.stream().map(Supplier::get).forEach(ModBlocks::cutoutMippedRendering);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TAG_TRANSLATOR.get(), RenderType.cutout());
+            cutout(List.of(ModBlocks.TAG_TRANSLATOR, ModBlocks.WORKBENCH, ModBlocks.COPPER_MACHINE_FRAME, ModBlocks.REDSTONE_MACHINE_FRAME, ModBlocks.STEEL_MACHINE_FRAME, ModBlocks.WORKBENCH, ModBlocks.WORKBENCH_LEFT));
+        }
 
-
-            TTMConfigs.COMMON_CONFIGS.allWhitelistedTags().forEach(itemTag -> {
-                var items = ITEM_TAG_MANAGER.getTag(itemTag).stream().toList();
-                ModUtils.log("{} items matches tag [{}], those are {}", items.size(), itemTag.location(), items);
-            });
+        private static void cutout(List<Supplier<? extends Block>> blocks) {
+            blocks.stream().map(Supplier::get).forEach(b -> ItemBlockRenderTypes.setRenderLayer(b, RenderType.cutout()));
         }
     }
 
@@ -209,13 +206,8 @@ public class ToTheMoon {
 
         @SubscribeEvent
         public static void onCommandRegistration(RegisterCommandsEvent event) {
-            GetCapInfoCommand.register(event.getDispatcher());
+            //GetCapInfoCommand.register(event.getDispatcher());
         }
-
-        @SubscribeEvent
-        public static void onServerStarted(ServerStartedEvent event) {
-        }
-
 
         @SubscribeEvent
         public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {

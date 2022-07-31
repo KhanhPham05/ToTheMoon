@@ -1,7 +1,4 @@
 {
   "type": "tothemoon:tag_translating",
-  "tag": "forge:ingots/steel",
-  "result": {
-    "item": "tothemoon:steel_ingot"
-  }
+  "tag": "forge:ingots/steel"
 }

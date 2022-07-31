@@ -33,7 +33,6 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
 
     public static final IntegerProperty ENERGY_LEVEL = ModUtils.ENERGY_LEVEL;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final ResourceLocation LOOT_CONTENT = ModUtils.modLoc("energy");
 
     public BatteryBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractBatteryBlockEntity> supplier) {
         super(p_49224_);

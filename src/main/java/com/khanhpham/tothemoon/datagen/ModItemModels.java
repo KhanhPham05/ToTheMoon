@@ -10,10 +10,12 @@ import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.List;
@@ -48,6 +50,8 @@ public class ModItemModels extends ItemModelProvider {
 
     private <T extends Block> void blockItem(T block) {
         String id = ModUtils.convertRlToPath(block.asItem());
-        super.withExistingParent(id, modLoc("block/" + id));
+        if (super.existingFileHelper.exists(modLoc("block/" + id), ModelProvider.MODEL)) {
+            super.withExistingParent(id, modLoc("block/" + id));
+        }
     }
 }

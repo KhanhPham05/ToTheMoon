@@ -7,7 +7,7 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "AnvilFallenTweaks",
+    "AnvilTweaks",
     "MoonLevelRenderer"
   ],
   "minVersion": "0.8"

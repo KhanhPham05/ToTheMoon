@@ -88,6 +88,7 @@ public class ModLootTables extends LootTableProvider {
                     , GOLD_SHEET_BLOCK, IRON_SHEET_BLOCK, PROCESSED_WOOD, PURIFIED_QUARTZ_BLOCK
                     , SMOOTH_PURIFIED_QUARTZ_BLOCK, MOON_ROCK_BARREL, COPPER_ENERGY_GENERATOR
                     , IRON_ENERGY_GENERATOR, ALLOY_SMELTER, METAL_PRESS, TAG_TRANSLATOR
+                    , WORKBENCH
             );
         }
 
@@ -112,6 +113,7 @@ public class ModLootTables extends LootTableProvider {
             super.add(BATTERY.get(), block -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energy", LootUtils.SAVE_DATA_ENERGY)))));
             super.add(NETHER_BRICK_FURNACE_CONTROLLER.get(), this::createFluidTankDrop);
             super.add(NonDeferredBlocks.FLUID_TANK_BLOCK, this::createFluidTankDrop);
+            super.dropOther(WORKBENCH_LEFT.get(), WORKBENCH.get());
         }
 
         private LootTable.Builder quartzDrops(Block p_176051_) {

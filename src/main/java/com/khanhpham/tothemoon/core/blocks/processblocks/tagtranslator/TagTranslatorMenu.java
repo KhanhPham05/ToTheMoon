@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.khanhpham.tothemoon.core.recipes.TagTranslatingRecipe;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 public final class TagTranslatorMenu extends AbstractContainerMenu {
@@ -28,7 +30,8 @@ public final class TagTranslatorMenu extends AbstractContainerMenu {
     private final Level level;
     Runnable slotUpdateListener = () -> {
     };
-    private List<TagTranslatingRecipe> recipes = Lists.newArrayList();
+    private List<ItemStack> items = Lists.newArrayList();
+    private final Consumer<TagTranslatingRecipe> recipeToItemsConverter;
     private ItemStack input = ItemStack.EMPTY;
     public final Container container = new SimpleContainer(1) {
         public void setChanged() {
@@ -78,14 +81,13 @@ public final class TagTranslatorMenu extends AbstractContainerMenu {
         this.addDataSlot(this.selectedRecipeIndex);
         this.access = access;
         this.level = playerInventory.player.level;
-        RecipeManager recipeManager = level.getRecipeManager();
+        this.recipeToItemsConverter = tagTranslatingRecipe -> this.items = ModUtils.getItemsForTags(tagTranslatingRecipe.getTag(), this.inputSlot.getItem());
     }
 
     private void setupResultSlot() {
-        if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
-            TagTranslatingRecipe tagTranslatingRecipe = this.recipes.get(this.selectedRecipeIndex.get());
-            this.resultContainer.setRecipeUsed(tagTranslatingRecipe);
-            this.resultSlot.set(tagTranslatingRecipe.assemble(this.container));
+        if (!this.items.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
+            ItemStack selectedItem = this.items.get(this.selectedRecipeIndex.get());
+            this.resultSlot.set(selectedItem);
         } else {
             this.resultSlot.set(ItemStack.EMPTY);
         }
@@ -94,7 +96,7 @@ public final class TagTranslatorMenu extends AbstractContainerMenu {
     }
 
     private boolean isValidRecipeIndex(int pRecipeIndex) {
-        return pRecipeIndex >= 0 && pRecipeIndex < this.recipes.size();
+        return pRecipeIndex >= 0 && pRecipeIndex < this.items.size();
     }
 
     @Override
@@ -106,16 +108,17 @@ public final class TagTranslatorMenu extends AbstractContainerMenu {
         return this.selectedRecipeIndex.get();
     }
 
-    public List<TagTranslatingRecipe> getRecipes() {
-        return this.recipes;
+    public List<ItemStack> getPresentItems() {
+        return this.items;
     }
 
+
     public int getNumRecipes() {
-        return this.recipes.size();
+        return this.items.size();
     }
 
     public boolean hasInputItem() {
-        return this.inputSlot.hasItem() && !this.recipes.isEmpty();
+        return this.inputSlot.hasItem() && !this.items.isEmpty();
     }
 
     public boolean clickMenuButton(Player pPlayer, int pId) {
@@ -137,11 +140,11 @@ public final class TagTranslatorMenu extends AbstractContainerMenu {
     }
 
     private void setupRecipeList(Container pContainer, ItemStack pStack) {
-        this.recipes.clear();
+        this.items.clear();
         this.selectedRecipeIndex.set(-1);
         this.resultSlot.set(ItemStack.EMPTY);
         if (!pStack.isEmpty()) {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(TagTranslatingRecipe.RECIPE_TYPE, pContainer, this.level);
+            this.level.getRecipeManager().getRecipeFor(TagTranslatingRecipe.RECIPE_TYPE, pContainer, this.level).ifPresent(this.recipeToItemsConverter);
         }
     }
 

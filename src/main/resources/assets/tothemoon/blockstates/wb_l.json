@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "tothemoon:block/workbench_2"
+    },
+    "facing=south": {
+      "model": "tothemoon:block/workbench_2",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tothemoon:block/workbench_2",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "tothemoon:block/workbench_2",
+      "y": 90
+    }
+  }
+}

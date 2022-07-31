@@ -1,38 +1,22 @@
 package com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator;
 
-import com.khanhpham.tothemoon.core.recipes.TagTranslatingRecipe;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-/**
- * @see net.minecraft.world.inventory.StonecutterMenu
- * @see net.minecraft.client.gui.screens.inventory.StonecutterScreen
- */
 @ParametersAreNonnullByDefault
 public class TagTranslatorScreen extends AbstractContainerScreen<TagTranslatorMenu> {
     private static final ResourceLocation BG_LOCATION = new ResourceLocation("textures/gui/container/stonecutter.png");
-    private static final int SCROLLER_WIDTH = 12;
-    private static final int SCROLLER_HEIGHT = 15;
-    private static final int RECIPES_COLUMNS = 4;
-    private static final int RECIPES_ROWS = 3;
-    private static final int RECIPES_IMAGE_SIZE_WIDTH = 16;
-    private static final int RECIPES_IMAGE_SIZE_HEIGHT = 18;
-    private static final int SCROLLER_FULL_HEIGHT = 54;
-    private static final int RECIPES_X = 52;
-    private static final int RECIPES_Y = 14;
     private float scrollOffs;
     private boolean scrolling;
     private int startIndex;
@@ -67,7 +51,7 @@ public class TagTranslatorScreen extends AbstractContainerScreen<TagTranslatorMe
         int i = this.leftPos;
         int j = this.topPos;
         this.blit(pPoseStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
-        int k = (int)(41.0F * this.scrollOffs);
+        int k = (int) (41.0F * this.scrollOffs);
         this.blit(pPoseStack, i + 119, j + 15 + k, 176 + (this.isScrollBarActive() ? 0 : 12), 0, 12, 15);
         int l = this.leftPos + 52;
         int i1 = this.topPos + 14;
@@ -83,20 +67,19 @@ public class TagTranslatorScreen extends AbstractContainerScreen<TagTranslatorMe
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
 
-            for(int l = this.startIndex; l < k; ++l) {
+            for (int l = this.startIndex; l < k; ++l) {
                 int i1 = l - this.startIndex;
-                double d0 = pMouseX - (double)(i + i1 % 4 * 16);
-                double d1 = pMouseY - (double)(j + i1 / 4 * 18);
-                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.menu.clickMenuButton(this.minecraft.player, l)) {
-                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-                    Minecraft.getInstance().gameMode.handleInventoryButtonClick((this.menu).containerId, l);
+                double d0 = pMouseX - (double) (i + i1 % 4 * 16);
+                double d1 = pMouseY - (double) (j + i1 / 4 * 18);
+                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.menu.clickMenuButton(minecraft.player, l)) {
+                    minecraft.gameMode.handleInventoryButtonClick((this.menu).containerId, l);
                     return true;
                 }
             }
 
             i = this.leftPos + 119;
             j = this.topPos + 9;
-            if (pMouseX >= (double)i && pMouseX < (double)(i + 12) && pMouseY >= (double)j && pMouseY < (double)(j + 54)) {
+            if (pMouseX >= (double) i && pMouseX < (double) (i + 12) && pMouseY >= (double) j && pMouseY < (double) (j + 54)) {
                 this.scrolling = true;
             }
         }
@@ -109,19 +92,19 @@ public class TagTranslatorScreen extends AbstractContainerScreen<TagTranslatorMe
     }
 
     private void renderRecipes(int pLeft, int pTop, int pRecipeIndexOffsetMax) {
-        List<TagTranslatingRecipe> list = this.menu.getRecipes();
+        List<ItemStack> list = this.menu.getPresentItems();
 
-        for(int i = this.startIndex; i < pRecipeIndexOffsetMax && i < this.menu.getNumRecipes(); ++i) {
+        for (int i = this.startIndex; i < pRecipeIndexOffsetMax && i < this.menu.getNumRecipes(); ++i) {
             int j = i - this.startIndex;
             int k = pLeft + j % 4 * 16;
             int l = j / 4;
             int i1 = pTop + l * 18 + 2;
-            Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(list.get(i).getResultItem(), k, i1);
+            Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(list.get(i), k, i1);
         }
     }
 
     private void renderButtons(PoseStack pPoseStack, int pMouseX, int pMouseY, int pX, int pY, int pLastVisibleElementIndex) {
-        for(int i = this.startIndex; i < pLastVisibleElementIndex && i < this.menu.getNumRecipes(); ++i) {
+        for (int i = this.startIndex; i < pLastVisibleElementIndex && i < this.menu.getNumRecipes(); ++i) {
             int j = i - this.startIndex;
             int k = pX + j % 4 * 16;
             int l = j / 4;
@@ -136,20 +119,21 @@ public class TagTranslatorScreen extends AbstractContainerScreen<TagTranslatorMe
             this.blit(pPoseStack, k, i1 - 1, 0, j1, 16, 18);
         }
     }
+
     protected void renderTooltip(PoseStack pPoseStack, int pX, int pY) {
         super.renderTooltip(pPoseStack, pX, pY);
         if (this.displayRecipes) {
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
-            List<TagTranslatingRecipe> list = this.menu.getRecipes();
+            List<ItemStack> list = this.menu.getPresentItems();
 
-            for(int l = this.startIndex; l < k && l < this.menu.getNumRecipes(); ++l) {
+            for (int l = this.startIndex; l < k && l < this.menu.getNumRecipes(); ++l) {
                 int i1 = l - this.startIndex;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
                 if (pX >= j1 && pX < j1 + 16 && pY >= k1 && pY < k1 + 18) {
-                    this.renderTooltip(pPoseStack, list.get(l).getResultItem(), pX, pY);
+                    this.renderTooltip(pPoseStack, list.get(l), pX, pY);
                 }
             }
         }
@@ -158,12 +142,13 @@ public class TagTranslatorScreen extends AbstractContainerScreen<TagTranslatorMe
     protected int getOffscreenRows() {
         return (this.menu.getNumRecipes() + 4 - 1) / 4 - 3;
     }
+
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
         if (this.isScrollBarActive()) {
             int i = this.getOffscreenRows();
-            float f = (float)pDelta / (float)i;
+            float f = (float) pDelta / (float) i;
             this.scrollOffs = Mth.clamp(this.scrollOffs - f, 0.0F, 1.0F);
-            this.startIndex = (int)((double)(this.scrollOffs * (float)i) + 0.5D) * 4;
+            this.startIndex = (int) ((double) (this.scrollOffs * (float) i) + 0.5D) * 4;
         }
 
         return true;
@@ -173,9 +158,9 @@ public class TagTranslatorScreen extends AbstractContainerScreen<TagTranslatorMe
         if (this.scrolling && this.isScrollBarActive()) {
             int i = this.topPos + 14;
             int j = i + 54;
-            this.scrollOffs = ((float)pMouseY - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
+            this.scrollOffs = ((float) pMouseY - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
             this.scrollOffs = Mth.clamp(this.scrollOffs, 0.0F, 1.0F);
-            this.startIndex = (int)((double)(this.scrollOffs * (float)this.getOffscreenRows()) + 0.5D) * 4;
+            this.startIndex = (int) ((double) (this.scrollOffs * (float) this.getOffscreenRows()) + 0.5D) * 4;
             return true;
         } else {
             return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);

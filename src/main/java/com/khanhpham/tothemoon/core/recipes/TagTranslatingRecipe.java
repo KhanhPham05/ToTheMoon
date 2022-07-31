@@ -15,20 +15,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-public class TagTranslatingRecipe implements Recipe<Container> {
+public final class TagTranslatingRecipe implements Recipe<Container> {
     public static final RecipeType<TagTranslatingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModUtils.modLoc("tag_translating"));
     private final ResourceLocation recipeId;
     private final TagKey<Item> tag;
 
-    private final ItemStack resultItem;
-
-    public TagTranslatingRecipe(ResourceLocation recipeId, TagKey<Item> tag, ItemStack resultItem) {
+    public TagTranslatingRecipe(ResourceLocation recipeId, TagKey<Item> tag) {
         this.recipeId = recipeId;
         this.tag = tag;
-        this.resultItem = resultItem;
     }
 
     @Override
@@ -38,7 +34,7 @@ public class TagTranslatingRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack assemble(Container pContainer) {
-        return this.resultItem.copy();
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -48,7 +44,7 @@ public class TagTranslatingRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack getResultItem() {
-        return this.resultItem;
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -80,21 +76,21 @@ public class TagTranslatingRecipe implements Recipe<Container> {
         @Override
         public TagTranslatingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             String tag = GsonHelper.getAsString(pSerializedRecipe, JsonNames.TAG);
-            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT));
-            return new TagTranslatingRecipe(pRecipeId, ItemTags.create(new ResourceLocation(tag)), result);
+            //ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT));
+            return new TagTranslatingRecipe(pRecipeId, ItemTags.create(new ResourceLocation(tag)));
         }
 
         @Override
         public TagTranslatingRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
             TagKey<Item> tag = ItemTags.create(pBuffer.readResourceLocation());
-            ItemStack result = pBuffer.readItem();
-            return new TagTranslatingRecipe(pRecipeId, tag, result);
+            //ItemStack result = pBuffer.readItem();
+            return new TagTranslatingRecipe(pRecipeId, tag);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf pBuffer, TagTranslatingRecipe pRecipe) {
             pBuffer.writeResourceLocation(pRecipe.tag.location());
-            pBuffer.writeItem(pRecipe.resultItem);
+            //pBuffer.writeItem(pRecipe.resultItem);
         }
     }
 }
