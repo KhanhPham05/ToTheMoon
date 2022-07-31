@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.workbench;
 
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.NoBlockItem;
 import com.khanhpham.tothemoon.core.menus.SimpleAccessMenuProvider;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
@@ -102,7 +104,7 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
 
     @Override
     public BlockItem getRawItem() {
-        return new BlockItem(this, new Item.Properties().stacksTo(1)) {
+        return new BlockItem(this, new Item.Properties().tab(ToTheMoon.TAB).stacksTo(1)) {
             @Override
             public InteractionResult place(BlockPlaceContext pContext) {
                 return canExtendsToLeft(pContext, pContext.getLevel(), pContext.getClickedPos(), pContext.getHorizontalDirection()) ? super.place(pContext) : InteractionResult.FAIL;

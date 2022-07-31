@@ -71,6 +71,7 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent MAKING_STEEL_CRAFT_CONTROLLER = create("book", "making_steel.crafting_controller");
     public static final TranslatableComponent MAKING_STEEL_MULTIBLOCK = create("book", "making_steel.multiblock");
     public static final TranslatableComponent MAKING_STEEL_MULTIBLOCK_NOTICE = create("book", "making_steel.multiblock_notice");
+    public static final TranslatableComponent BENCH_WORKING = create("book", "bench_working.title");
     public static final TranslatableComponent TEXT_HOW_TO_USE = create("book", "how_to_use");
 
     public static final TranslatableComponent BASIC_MATERIALS_CATEGORY = create("book", "category_basic_materials");

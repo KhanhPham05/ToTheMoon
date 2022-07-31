@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.utils.helpers;
 
+import com.google.common.collect.ImmutableMap;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
@@ -13,6 +14,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -25,7 +27,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -124,4 +128,23 @@ public class ModUtils {
         return modLoc("textures/gui/" + imageNameWithPng);
     }
 
+    public static <C extends Container, R extends Recipe<C>> Map<ResourceLocation, R> getResourceRecipes(Level level, RecipeType<R> recipeType, ResourceLocation recipeLocation) {
+        var recipes = level.getRecipeManager().getAllRecipesFor(recipeType);
+        for (R recipe : recipes) {
+            if (recipe.getId().equals(recipeLocation)) return ImmutableMap.of(recipeLocation, recipe);
+        }
+        return ImmutableMap.of();
+    }
+
+    @Nullable
+    public static <C extends Container, R extends Recipe<C>> R getResourceRecipe(Level level, RecipeType<R> recipeType, String name) {
+        if (level != null) {
+            if (ResourceLocation.isValidResourceLocation(name)) {
+                ResourceLocation recipeName = new ResourceLocation(name);
+                var recipes = level.getRecipeManager().getAllRecipesFor(recipeType).stream().filter(recipe -> recipe.getId().equals(recipeName)).toList();
+                return recipes.get(0);
+            }
+        }
+        return null;
+    }
 }
