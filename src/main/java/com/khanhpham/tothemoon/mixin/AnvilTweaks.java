@@ -1,45 +1,45 @@
 package com.khanhpham.tothemoon.mixin;
 
 import com.khanhpham.tothemoon.advancements.ModdedTriggers;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @see net.minecraft.world.level.block.ConduitBlock
- * @see net.minecraft.client.ClientRecipeBook
+ * @see Items#ANVIL
  */
 @SuppressWarnings("deprecation")
 @Mixin(AnvilBlock.class)
-public class AnvilFallenTweaks {
+public class AnvilTweaks extends FallingBlock {
+    public AnvilTweaks(Properties pProperties) {
+        super(pProperties);
+    }
 
     @Overwrite
     public void onLand(Level level, BlockPos pos, BlockState state, BlockState state1, FallingBlockEntity fallingBlockEntity) {
@@ -94,5 +94,10 @@ public class AnvilFallenTweaks {
                 ModdedTriggers.ANVIL_CRUSHING.trigger(player, items.stream().map(ItemEntity::getItem).toList());
             }
         }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
+        pTooltip.add(ModLanguage.ANVIL_DESCRIPTION);
     }
 }

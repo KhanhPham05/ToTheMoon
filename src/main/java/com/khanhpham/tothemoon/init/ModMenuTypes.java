@@ -9,23 +9,15 @@ import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorMenu;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenu;
+import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchMenu;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerMenu;
-import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.tags.ITagManager;
-
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModMenuTypes {
@@ -44,6 +36,7 @@ public class ModMenuTypes {
     public static final MenuType<NetherBrickFurnaceControllerMenu> NETHER_BRICK_FURNACE;
     public static final MenuType<FluidTankMenu> FLUID_TANK;
     public static final MenuType<TagTranslatorMenu> TAG_TRANSLATOR;
+    public static final MenuType<WorkbenchMenu> WORKBENCH_CRAFTING;
 
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
@@ -55,6 +48,7 @@ public class ModMenuTypes {
         NETHER_BRICK_FURNACE = register("nether_brick_furnace", NetherBrickFurnaceControllerMenu::new);
         FLUID_TANK = MENU_TYPES.register("fluid_tank_menu", FluidTankMenu::new);
         TAG_TRANSLATOR = register("tag_translator_menu", TagTranslatorMenu::new);
+        WORKBENCH_CRAFTING = register("workbench", WorkbenchMenu::new);
     }
 
     private ModMenuTypes() {

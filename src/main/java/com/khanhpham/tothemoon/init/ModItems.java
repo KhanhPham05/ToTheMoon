@@ -50,10 +50,10 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_URANIUM_ORE = create("raw_uranium_ore");
     public static final RegistryObject<Item> CIRCUIT_BOARD = create("circuit_board");
     public static final RegistryObject<Item> CPU_CHIP = create("processor_chip");
-    public static final RegistryObject<HammerItem> WOODEN_HAMMER = registerHammer("wooden_hammer", 16);
-    public static final RegistryObject<HammerItem> STEEL_HAMMER = registerHammer("steel_hammer", 64);
-    public static final RegistryObject<HammerItem> DIAMOND_HAMMER = registerHammer("diamond_hammer", 128);
-    public static final RegistryObject<HammerItem> NETHERITE_HAMMER = register("netherite_hammer", () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(256).fireResistant().setNoRepair()) {
+    public static final RegistryObject<HammerItem> WOODEN_HAMMER = registerHammer("wooden_hammer", 8);
+    public static final RegistryObject<HammerItem> STEEL_HAMMER = registerHammer("steel_hammer", 16);
+    public static final RegistryObject<HammerItem> DIAMOND_HAMMER = registerHammer("diamond_hammer", 32);
+    public static final RegistryObject<HammerItem> NETHERITE_HAMMER = register("netherite_hammer", () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).durability(256).fireResistant()) {
         @Override
         @Nonnull
         public Rarity getRarity(@Nonnull ItemStack pStack) {

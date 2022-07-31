@@ -8,6 +8,7 @@ import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredItems;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -29,9 +30,12 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent CAP_FOUND = create("command", "cap_found");
 
     //JEI
-    public static final TranslatableComponent METAL_PRESS_RECIPE_CATEGORY = create("jei", "metal_press_category");
-    public static final TranslatableComponent ALLOY_SMELTER_RECIPE_CATEGORY = create("jei", "alloy_smelter_category");
+    public static final TranslatableComponent JEI_METAL_PRESS = create("jei", "metal_press_category");
+    public static final TranslatableComponent JEI_ALLOY_SMELTING = create("jei", "alloy_smelter_category");
+    @Deprecated
     public static final TranslatableComponent MANUAL_METAL_PRESSING_CATEGORY = create("jei", "manual_metal_pressing");
+    public static final TranslatableComponent JEI_WORKBENCH_CRAFTING = create("jei", "workbench_crafting");
+
 
     //GUI
     public static final TranslatableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
@@ -48,6 +52,8 @@ public class ModLanguage extends LanguageProvider {
     //TOOLTIP
     public static final TranslatableComponent TANK_ONLY_SUPPORTS_LAVA = create("tooltip", "lava_support_only");
     public static final TranslatableComponent TANK_AMOUNT = create("tooltip", "amount");
+    public static final TranslatableComponent ANVIL_DESCRIPTION = create("tooltip", "minecraft_anvil");
+
 
     //PATCHOULI
     public static final TranslatableComponent BOOK_NAME = create("book", "header");
@@ -145,13 +151,14 @@ public class ModLanguage extends LanguageProvider {
         add(NO_ITEM, "No Item");
         add(FILL_TANK, "Fill Tank");
         add(EMPTY_TANK, "Empty Tank");
+        add(ANVIL_DESCRIPTION, "A heavy block used to repair tools, also a reliable way to smash the raw ores into dusts by using its weight");
 
         //JEI
-        add(METAL_PRESS_RECIPE_CATEGORY, "Metal Pressing");
-        add(ALLOY_SMELTER_RECIPE_CATEGORY, "Alloy Smelting");
-        add(MANUAL_METAL_PRESSING_CATEGORY, "Manual Metal Pressing");
+        add(JEI_METAL_PRESS, "Metal Pressing");
+        add(JEI_ALLOY_SMELTING, "Alloy Smelting");
         add(MACHINE_UPGRADE_LABELS, "Upgrades");
         add(NETHER_BRICK_FURNACE_CONTROLLER, "Nether Bricks Furnace");
+        add(JEI_WORKBENCH_CRAFTING, "Workbench Crafting");
 
         //sound
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));

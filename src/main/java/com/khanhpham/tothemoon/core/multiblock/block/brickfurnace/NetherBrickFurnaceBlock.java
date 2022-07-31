@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.items.FluidCapableItem;
@@ -101,7 +102,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
 
     private static final class NetherBrickFurnaceItem extends FluidCapableItem {
         public NetherBrickFurnaceItem(Block pBlock) {
-            super(pBlock, ModItems.GENERAL_PROPERTIES);
+            super(pBlock, new Properties().stacksTo(16).tab(ToTheMoon.TAB));
         }
 
         @Override

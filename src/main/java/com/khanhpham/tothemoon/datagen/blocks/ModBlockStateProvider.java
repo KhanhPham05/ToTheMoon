@@ -20,10 +20,10 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
 
-public class ModBlockStates extends BlockStateProvider {
+public class ModBlockStateProvider extends BlockStateProvider {
     private final Direction[] horizontalDirections = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
 
-    public ModBlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
         super(gen, Names.MOD_ID, exFileHelper);
     }
 

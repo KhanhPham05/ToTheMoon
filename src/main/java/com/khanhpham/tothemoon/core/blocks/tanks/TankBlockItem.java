@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.tanks;
 
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.FluidCapableItem;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class TankBlockItem extends FluidCapableItem {
     public TankBlockItem(Block pBlock) {
-        super(pBlock, ModItems.GENERAL_PROPERTIES);
+        super(pBlock, new Properties().tab(ToTheMoon.TAB));
     }
 
     @Override

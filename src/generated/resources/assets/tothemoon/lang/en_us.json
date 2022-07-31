@@ -72,6 +72,8 @@
   "block.tothemoon.steel_sheet_block": "Steel Sheet Block",
   "block.tothemoon.tag_translator": "Tag Translator",
   "block.tothemoon.uranium_block": "Uranium Block",
+  "block.tothemoon.wb_l": "Workbench Part",
+  "block.tothemoon.workbench": "Workbench",
   "book.tothemoon.category_basic_materials": "Basic Materials",
   "book.tothemoon.category_basic_materials.description": "A small but reliable category that shows you all the basic ores/metals which are important for your progress in this mod",
   "book.tothemoon.header": "TTM Guide Book",
@@ -182,10 +184,11 @@
   "item.tothemoon.uranium_wire": "Uranium Wire",
   "item.tothemoon.wooden_hammer": "Wooden Hammer",
   "jei.tothemoon.alloy_smelter_category": "Alloy Smelting",
-  "jei.tothemoon.manual_metal_pressing": "Manual Metal Pressing",
   "jei.tothemoon.metal_press_category": "Metal Pressing",
+  "jei.tothemoon.workbench_crafting": "Workbench Crafting",
   "tooltip.tothemoon.energy": "Energy %s %s / %s",
   "tooltip.tothemoon.fluid_fuel_tank": "Fuel : %s / %s",
   "tooltip.tothemoon.item_tank": "(%s): %s",
-  "tooltip.tothemoon.lava_support_only": "Can stores Lava only, more fluids will be added in future updates"
+  "tooltip.tothemoon.lava_support_only": "Can stores Lava only, more fluids will be added in future updates",
+  "tooltip.tothemoon.minecraft_anvil": "A heavy block used to repair tools, also a reliable way to smash the raw ores into dusts by using its weight"
 }

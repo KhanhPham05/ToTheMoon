@@ -3,9 +3,11 @@ package com.khanhpham.tothemoon.utils.helpers;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
-import com.mojang.datafixers.util.Pair;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -19,13 +21,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class ModUtils {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
@@ -105,8 +108,20 @@ public class ModUtils {
         }
     }
 
-    public static List<ItemStack> getItemsForTags(TagKey<Item> tag) {
-        return Registry.ITEM.stream().filter(item -> item.builtInRegistryHolder().containsTag(tag)).map(ItemStack::new).toList();
-        //return Registry.ITEM.getTags().filter(tagKeyNamedPair -> tagKeyNamedPair.getFirst().equals(tag)).map(Pair::getSecond).toList();
+    public static List<ItemStack> getItemsForTags(TagKey<Item> tag, ItemStack slotItem) {
+        return ForgeRegistries.ITEMS.tags().getTag(tag).stream().filter(item -> !slotItem.is(item)).map(ItemStack::new).collect(Collectors.toList());
     }
+
+    public static void setupMenuScreen(AbstractContainerScreen<?> screen, String imageNameWithPng, PoseStack pose) {
+        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, getTextureId(imageNameWithPng));
+        screen.blit(pose, screen.getGuiLeft(), screen.getGuiTop(), 0, 0, screen.getXSize(), screen.getYSize());
+    }
+
+    @Nonnull
+    public static ResourceLocation getTextureId(String imageNameWithPng) {
+        return modLoc("textures/gui/" + imageNameWithPng);
+    }
+
 }

@@ -1,10 +1,10 @@
 package com.khanhpham.tothemoon.core.items;
 
-import com.khanhpham.tothemoon.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -22,8 +22,7 @@ public class DetailedBlockItem extends BlockItem {
     }
 
     public DetailedBlockItem(Block block, int maxStack, MutableComponent component) {
-        //for some reason, stackTo throws an exception during registration... so i set the durability to 0, so it won't happends
-        this(block, ModItems.GENERAL_PROPERTIES.durability(0).stacksTo(maxStack), component);
+        this(block, new Item.Properties().stacksTo(maxStack), component);
     }
 
     @Override

@@ -19,7 +19,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
-import com.khanhpham.tothemoon.core.blocks.others.SmoothBlackStoneBlock;
+import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
@@ -50,8 +50,6 @@ public class ModBlocks {
     public static final RegistryObject<MachineFrameBlock.Copper> COPPER_MACHINE_FRAME = register("copper_machine_frame", MachineFrameBlock.Copper::new);
     public static final RegistryObject<MachineFrameBlock.Steel> STEEL_MACHINE_FRAME = register("steel_machine_frame", MachineFrameBlock.Steel::new);
     public static final RegistryObject<MachineFrameBlock.Redstone> REDSTONE_MACHINE_FRAME = register("redstone_machine_frame", MachineFrameBlock.Redstone::new);
-
-    public static final ImmutableSet<RegistryObject<? extends Block>> MODDED_NON_SOLID_BLOCKS_SUPPLIER = ImmutableSet.of(COPPER_MACHINE_FRAME, STEEL_MACHINE_FRAME, REDSTONE_MACHINE_FRAME);
 
     public static final RegistryObject<GlassBlock> ANTI_PRESSURE_GLASS = register("anti_pressure_glass", () -> new GlassBlock(BlockBehaviour.Properties.of(Material.STONE, DyeColor.LIGHT_GRAY).strength(4.5f, 7).sound(SoundType.STONE).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(ModBlocks::never)));
 
@@ -91,13 +89,15 @@ public class ModBlocks {
     public static final RegistryObject<Block> URANIUM_BLOCK = register("uranium_block", BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK));
     public static final RegistryObject<Block> PURIFIED_QUARTZ_BLOCK = register("purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
     public static final RegistryObject<Block> SMOOTH_PURIFIED_QUARTZ_BLOCK = register("smooth_purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
-    public static final RegistryObject<Block> SMOOTH_BLACKSTONE = register("smooth_blackstone", SmoothBlackStoneBlock::new);
+    public static final RegistryObject<Block> SMOOTH_BLACKSTONE = register("smooth_blackstone", BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE));
     public static final ImmutableSet<RegistryObject<? extends Block>> SOLID_BLOCKS = ImmutableSet.of(SMOOTH_BLACKSTONE, RAW_URANIUM_BLOCK, PURIFIED_QUARTZ_BLOCK, POLISHED_MOON_ROCK, SMOOTH_PURIFIED_QUARTZ_BLOCK, COBBLED_MOON_ROCK, STEEL_SHEET_BLOCK, REINFORCED_WOOD, PROCESSED_WOOD, IRON_SHEET_BLOCK, GOLD_SHEET_BLOCK, COPPER_SHEET_BLOCK, REDSTONE_METAL_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, STEEL_BLOCK, ANTI_PRESSURE_GLASS, MOON_DUST, MOON_URANIUM_ORE, MOON_REDSTONE_ORE, MOON_ROCK, MOON_QUARTZ_ORE, MOON_ROCK_BRICK, DEEPSLATE_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE, URANIUM_BLOCK, REDSTONE_STEEL_ALLOY_SHEET_BLOCK);
     public static final RegistryObject<MoonRockBarrel> MOON_ROCK_BARREL = registerBlockEntity("moon_rock_barrel", () -> new MoonRockBarrel(BlockBehaviour.Properties.of(Material.STONE).strength(3.0f, 5.0f).sound(ModSoundTypes.METAL_MACHINE)));
     public static final RegistryObject<AlloySmelterBlock> ALLOY_SMELTER = registerBlockEntity("alloy_smelter", () -> new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ModSoundTypes.METAL_MACHINE), AlloySmelterBlockEntity::new));
     public static final RegistryObject<EnergySmelter> ENERGY_SMELTER = registerBlockEntity("energy_smelter", () -> new EnergySmelter(BlockBehaviour.Properties.copy(ALLOY_SMELTER.get())));
     public static final RegistryObject<NetherBrickFurnaceBlock> NETHER_BRICK_FURNACE_CONTROLLER = registerBlockEntity("netherbrick_furnace_controller", () -> new NetherBrickFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS), NetherBrickFurnaceControllerBlockEntity::new));
     public static final RegistryObject<TagTranslatorBlock> TAG_TRANSLATOR = register("tag_translator", TagTranslatorBlock::new);
+    public static final RegistryObject<WorkbenchBlock> WORKBENCH = register("workbench", () -> new WorkbenchBlock(BlockBehaviour.Properties.copy(PROCESSED_WOOD.get())));
+    public static final RegistryObject<WorkbenchBlock.LeftSide> WORKBENCH_LEFT = register("wb_l", () -> new WorkbenchBlock.LeftSide(BlockBehaviour.Properties.copy(WORKBENCH.get())));
 
     private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
         return false;

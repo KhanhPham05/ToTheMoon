@@ -1,5 +1,9 @@
 package com.khanhpham.tothemoon.compat.jei;
 
+import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
@@ -19,9 +23,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -38,6 +40,7 @@ import java.util.Objects;
 @SuppressWarnings({"removal", "unused"})
 public class ModJeiPlugin implements IModPlugin {
     public static final ResourceLocation PLUGIN_ID = ModUtils.modLoc("jei_compat_plugin");
+    public static final RecipeCategoryManager MANAGER = new RecipeCategoryManager();
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -46,13 +49,15 @@ public class ModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(MetalPressRecipeCategory.ICON, MetalPressRecipeCategory.CATEGORY_ID);
-        registration.addRecipeCatalyst(AlloySmelterRecipeCategory.ICON, AlloySmelterRecipeCategory.CATEGORY_ID);
+        MANAGER.registerCatalysts(registration);
+        registration.addRecipeCatalyst(MetalPressRecipeCategory.ICON, MetalPressRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(AlloySmelterRecipeCategory.ICON, AlloySmelterRecipeCategory.RECIPE_TYPE);
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager manager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
+        MANAGER.registerRecipes(registration, manager);
         registration.addRecipes(MetalPressRecipeCategory.RECIPE_TYPE, manager.getRecipes().parallelStream().filter(recipe -> recipe.getType().equals(MetalPressingRecipe.RECIPE_TYPE)).map(r -> (MetalPressingRecipe) r).toList());
         registration.addRecipes(AlloySmelterRecipeCategory.RECIPE_TYPE, manager.getRecipes().parallelStream().filter(recipe -> recipe.getType().equals(AlloySmeltingRecipe.RECIPE_TYPE)).map(r -> (AlloySmeltingRecipe) r).toList());
     }
@@ -61,8 +66,22 @@ public class ModJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
         ModUtils.log("Registering TTM JEI Recipes");
-        registration.addRecipeCategories(new MetalPressRecipeCategory(helper));
-        registration.addRecipeCategories(new AlloySmelterRecipeCategory(helper));
+        MANAGER.registerAllCategories(registration, helper);
+        registration.addRecipeCategories(new MetalPressRecipeCategory(helper), new AlloySmelterRecipeCategory(helper));
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        MANAGER.registerGuiHandler(registration);
+        registration.addRecipeClickArea(AlloySmelterMenuScreen.class, 61, 31, 35, 20, AlloySmelterRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeClickArea(MetalPressMenuScreen.class, 71, 33, 22, 15, MetalPressRecipeCategory.RECIPE_TYPE);
+    }
+
+    @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        MANAGER.registerRecipeTransferHandlers(registration);
+        registration.addRecipeTransferHandler(AlloySmelterMenu.class, AlloySmelterRecipeCategory.RECIPE_TYPE, 0, 2, 0, 2);
+        registration.addRecipeTransferHandler(MetalPressMenu.class, MetalPressRecipeCategory.RECIPE_TYPE, 0, 2, 0, 2);
     }
 
     public static final class AlloySmelterRecipeCategory implements IRecipeCategory<AlloySmeltingRecipe> {
@@ -76,6 +95,7 @@ public class ModJeiPlugin implements IModPlugin {
         private final IDrawable icon;
 
         public AlloySmelterRecipeCategory(IGuiHelper helper) {
+            ModUtils.log("Registering Alloy Smelter Recipe");
             this.background = helper.createDrawable(TEXTURE, 0, 0, 114, 69);
 
             IDrawableStatic staticArrow = helper.createDrawable(TEXTURE, 149, 0, 35, 21);
@@ -90,7 +110,7 @@ public class ModJeiPlugin implements IModPlugin {
 
         @Override
         public Component getTitle() {
-            return ModLanguage.ALLOY_SMELTER_RECIPE_CATEGORY;
+            return ModLanguage.JEI_ALLOY_SMELTING;
         }
 
         @Override
@@ -137,6 +157,7 @@ public class ModJeiPlugin implements IModPlugin {
 
 
         public MetalPressRecipeCategory(IGuiHelper helper) {
+            ModUtils.log("Registering Metal Press Recipe");
             this.background = helper.createDrawable(TEXTURE, 0, 0, 114, 69);
             IDrawableStatic staticArrow = helper.createDrawable(TEXTURE, 136, 0, 22, 16);
             this.processArrow = helper.createAnimatedDrawable(staticArrow, 100, IDrawableAnimated.StartDirection.LEFT, false);
@@ -150,7 +171,7 @@ public class ModJeiPlugin implements IModPlugin {
 
         @Override
         public Component getTitle() {
-            return ModLanguage.METAL_PRESS_RECIPE_CATEGORY;
+            return ModLanguage.JEI_METAL_PRESS;
         }
 
         @Override
