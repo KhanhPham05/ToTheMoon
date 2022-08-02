@@ -1,0 +1,12 @@
+{
+  "name": "book.tothemoon.bench_working.title",
+  "icon": "tothemoon:workbench",
+  "category": "tothemoon:the_basics",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "tothemoon:workbench_crafting",
+      "recipe": "tothemoon:workbench/test"
+    }
+  ]
+}
