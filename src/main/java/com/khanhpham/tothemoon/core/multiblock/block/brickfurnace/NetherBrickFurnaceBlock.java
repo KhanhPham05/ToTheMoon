@@ -4,8 +4,8 @@ import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.items.FluidCapableItem;
+import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
-import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,17 +56,28 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     }
 
     @Override
-    public @Nullable NetherBrickFurnaceControllerBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    public NetherBrickFurnaceControllerBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new NetherBrickFurnaceControllerBlockEntity(pPos, pState);
     }
 
+    /**
+     * Handling GUI and multiblock
+     *
+     * @see NetherBrickFurnaceControllerBlockEntity#checkMultiblock(Level)
+     */
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity be) {
                 if (be.getMultiblock() != null) {
-                    super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-                } else return InteractionResult.SUCCESS;
+                    //open menu
+                    return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+                } else {
+                    be.checkMultiblock(pLevel);
+                    return be.getMultiblock() != null
+                            ? super.use(pState, pLevel, pPos, pPlayer, pHand, pHit)
+                            : InteractionResult.CONSUME;
+                }
             }
         }
 
@@ -81,15 +92,15 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRandom) {
         if (pState.getValue(LIT)) {
-            double d0 = (double)pPos.getX() + 0.5D;
+            double d0 = (double) pPos.getX() + 0.5D;
             double d1 = pPos.getY();
-            double d2 = (double)pPos.getZ() + 0.5D;
+            double d2 = (double) pPos.getZ() + 0.5D;
             Direction direction = pState.getValue(FACING);
             Direction.Axis direction$axis = direction.getAxis();
             double d4 = pRandom.nextDouble() * 0.6D - 0.3D;
-            double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d4;
+            double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : d4;
             double d6 = pRandom.nextDouble() * 9.0D / 16.0D;
-            double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
+            double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : d4;
             pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
             pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
         }
@@ -102,7 +113,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
 
     private static final class NetherBrickFurnaceItem extends FluidCapableItem {
         public NetherBrickFurnaceItem(Block pBlock) {
-            super(pBlock, new Properties().stacksTo(16).tab(ToTheMoon.TAB));
+            super(pBlock, new Properties().stacksTo(1).tab(ToTheMoon.TAB));
         }
 
         @Override

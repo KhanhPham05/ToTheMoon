@@ -21,6 +21,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorBlock;
+import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.FluidAcceptorBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
 import com.khanhpham.tothemoon.init.sounds.ModSoundTypes;
@@ -106,7 +107,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> PURIFIED_QUARTZ_BLOCK = register("purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
     public static final RegistryObject<Block> SMOOTH_PURIFIED_QUARTZ_BLOCK = register("smooth_purified_quartz_block", BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK));
     public static final RegistryObject<Block> SMOOTH_BLACKSTONE = register("smooth_blackstone", BlockBehaviour.Properties.copy(Blocks.POLISHED_BLACKSTONE));
-    public static final ImmutableSet<RegistryObject<? extends Block>> SOLID_BLOCKS = ImmutableSet.of(SMOOTH_BLACKSTONE, RAW_URANIUM_BLOCK, PURIFIED_QUARTZ_BLOCK, POLISHED_MOON_ROCK, SMOOTH_PURIFIED_QUARTZ_BLOCK, COBBLED_MOON_ROCK, STEEL_SHEET_BLOCK, REINFORCED_WOOD, PROCESSED_WOOD, IRON_SHEET_BLOCK, GOLD_SHEET_BLOCK, COPPER_SHEET_BLOCK, REDSTONE_METAL_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, STEEL_BLOCK, ANTI_PRESSURE_GLASS, MOON_DUST, MOON_URANIUM_ORE, MOON_REDSTONE_ORE, MOON_ROCK, MOON_QUARTZ_ORE, MOON_ROCK_BRICK, DEEPSLATE_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE, URANIUM_BLOCK, REDSTONE_STEEL_ALLOY_SHEET_BLOCK);
+    public static final RegistryObject<FluidAcceptorBlock> BLACKSTONE_FLUID_ACCEPTOR = register("blackstone_fluid_acceptor", () -> new FluidAcceptorBlock(BlockBehaviour.Properties.copy(SMOOTH_BLACKSTONE.get())));
+    public static final RegistryObject<FluidAcceptorBlock> NETHER_BRICKS_FLUID_ACCEPTOR = register("nether_bricks_fluid_acceptor", () -> new FluidAcceptorBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICKS)));
+    public static final ImmutableSet<RegistryObject<? extends Block>> SOLID_BLOCKS = ImmutableSet.of(NETHER_BRICKS_FLUID_ACCEPTOR,BLACKSTONE_FLUID_ACCEPTOR, SMOOTH_BLACKSTONE, RAW_URANIUM_BLOCK, PURIFIED_QUARTZ_BLOCK, POLISHED_MOON_ROCK, SMOOTH_PURIFIED_QUARTZ_BLOCK, COBBLED_MOON_ROCK, STEEL_SHEET_BLOCK, REINFORCED_WOOD, PROCESSED_WOOD, IRON_SHEET_BLOCK, GOLD_SHEET_BLOCK, COPPER_SHEET_BLOCK, REDSTONE_METAL_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK, STEEL_BLOCK, ANTI_PRESSURE_GLASS, MOON_DUST, MOON_URANIUM_ORE, MOON_REDSTONE_ORE, MOON_ROCK, MOON_QUARTZ_ORE, MOON_ROCK_BRICK, DEEPSLATE_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE, URANIUM_BLOCK, REDSTONE_STEEL_ALLOY_SHEET_BLOCK);
     public static final RegistryObject<MoonRockBarrel> MOON_ROCK_BARREL = registerBlockEntity("moon_rock_barrel", () -> new MoonRockBarrel(BlockBehaviour.Properties.of(Material.STONE).strength(3.0f, 5.0f).sound(ModSoundTypes.METAL_MACHINE)));
     public static final RegistryObject<AlloySmelterBlock> ALLOY_SMELTER = registerBlockEntity("alloy_smelter", () -> new AlloySmelterBlock(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(ModSoundTypes.METAL_MACHINE), AlloySmelterBlockEntity::new));
     public static final RegistryObject<EnergySmelter> ENERGY_SMELTER = registerBlockEntity("energy_smelter", () -> new EnergySmelter(BlockBehaviour.Properties.copy(ALLOY_SMELTER.get())));

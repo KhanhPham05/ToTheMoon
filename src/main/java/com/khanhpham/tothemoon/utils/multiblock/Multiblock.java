@@ -17,7 +17,7 @@ public class Multiblock {
         this.controllerPos = controllerPos;
     }
 
-    public boolean isMultiblockDistrusted(Level level, BlockPos brokenPos) {
+    public boolean isMultiblockDisconstructed(Level level, BlockPos brokenPos) {
         if (multiblockPartPositions.containsKey(brokenPos)) {
             if (level.getBlockEntity(controllerPos) instanceof MultiblockEntity multiblock) {
                 multiblock.setMultiblock(null);

@@ -46,7 +46,7 @@ public abstract class BaseEntityBlock<T extends BlockEntity> extends net.minecra
                 return InteractionResult.CONSUME;
             }
         }
-        return InteractionResult.sidedSuccess(pLevel.isClientSide);
+        return InteractionResult.SUCCESS;
     }
 
 

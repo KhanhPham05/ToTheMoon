@@ -10,7 +10,6 @@ import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -51,12 +50,7 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
     }
 
     @Override
-    public net.minecraft.world.item.crafting.RecipeType<WorkbenchCraftingRecipe> getActualRecipeType() {
-        return WorkbenchCraftingRecipe.RECIPE_TYPE;
-    }
-
-    @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, WorkbenchCraftingRecipe recipe, IFocusGroup focuses) {
+    public void setRecipeLayout(IRecipeLayoutBuilder builder, WorkbenchCraftingRecipe recipe) {
         super.addInput(builder, recipe, 0, 1, 19);
         super.addInput(builder, recipe, 1, 1, 56);
 

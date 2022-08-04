@@ -164,6 +164,7 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.shaped(ModBlocks.IRON_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_IRON).define('W', WIRES_REDSTONE_METAL).define('M', ModBlocks.COPPER_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_STEEL).save();
         helper.shaped(ModBlocks.GOLD_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_GOLD).define('W', WIRES_REDSTONE_STEEL_ALLOY).define('M', ModBlocks.IRON_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_GOLD).save();
         helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
+        helper.shaped(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR).pattern("A").pattern("B").define('A', ModBlocks.SMOOTH_BLACKSTONE.get()).define('B', Items.BUCKET).save();
 
         helper.shapelessCrafting(ModItems.REDSTONE_STEEL_ALLOY_DUST.get(), 1, ModItems.STEEL_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
         helper.shapelessCrafting(ModItems.REDSTONE_METAL_DUST.get(), 1, ModItems.IRON_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
@@ -183,6 +184,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         helper.armor();
         helper.tools();
+        helper.stoneCutting(ModBlocks.SMOOTH_BLACKSTONE, 1, () -> Items.BLACKSTONE);
     }
 
     private void sheetBlock(final RecipeGeneratorHelper helper, Supplier<? extends Block> block, TagKey<Item> material) {

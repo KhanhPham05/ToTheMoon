@@ -41,7 +41,6 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -53,7 +52,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.MinecraftForge;
@@ -88,9 +86,6 @@ public class ToTheMoon {
     public static final ResourceLocation MOON_EFFECTS = ModUtils.modLoc("moon_effects");
     public static final ResourceKey<Level> THE_MOON_DIMENSION = ResourceKey.create(Registry.DIMENSION_REGISTRY, ModUtils.modLoc("the_moon_dimension"));
     public static final Logger LOG = LogManager.getLogger(Names.MOD_ID);
-
-    //private static final String CHANNEL_VERSION = "1.0";
-    //public static final SimpleChannel SIMPLE_CHANNEL = NetworkRegistry.newSimpleChannel(ModUtils.modLoc("channel"), () -> CHANNEL_VERSION, (s) -> s.equals(CHANNEL_VERSION), (s) -> s.equals(CHANNEL_VERSION));
     public static final CreativeModeTab TAB = new CreativeModeTab("ttm_creative_tab") {
         @Nonnull
         @Override
@@ -98,6 +93,8 @@ public class ToTheMoon {
             return new ItemStack(ModItems.URANIUM_INGOT.get());
         }
     };
+    //private static final String CHANNEL_VERSION = "1.0";
+    // public static final SimpleChannel SIMPLE_CHANNEL = NetworkRegistry.newSimpleChannel(ModUtils.modLoc("channel"), () -> CHANNEL_VERSION, (s) -> s.equals(CHANNEL_VERSION), (s) -> s.equals(CHANNEL_VERSION));
 
     public ToTheMoon() {
         MinecraftForge.EVENT_BUS.register(this);

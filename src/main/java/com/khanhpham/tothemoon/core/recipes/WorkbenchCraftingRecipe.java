@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.khanhpham.tothemoon.JsonNames;
+import com.khanhpham.tothemoon.compat.jei.DisplayRecipe;
 import com.khanhpham.tothemoon.core.menus.containers.WorkbenchCraftingContainer;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -17,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public class WorkbenchCraftingRecipe implements Recipe<WorkbenchCraftingContainer> {
+public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingContainer> {
     private static final ResourceLocation LOCATION = ModUtils.modLoc("workbench_crafting");
     public static final RecipeType<WorkbenchCraftingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(LOCATION);
     private final Ingredient hammer;
@@ -36,7 +37,7 @@ public class WorkbenchCraftingRecipe implements Recipe<WorkbenchCraftingContaine
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> ingredients = Recipe.super.getIngredients();
+        NonNullList<Ingredient> ingredients = NonNullList.create();
         ingredients.add(hammer);
         ingredients.add(extraInput);
         ingredients.addAll(this.ingredients);

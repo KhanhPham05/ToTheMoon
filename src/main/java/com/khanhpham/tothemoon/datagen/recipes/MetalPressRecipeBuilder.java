@@ -99,7 +99,7 @@ public class MetalPressRecipeBuilder implements RecipeBuilder {
             json.add(JsonNames.INGREDIENT, ingredient.toJson());
             json.add(JsonNames.MOLD, press.toJson());
             final JsonObject object = new JsonObject();
-            object.addProperty(JsonNames.ITEM, ModUtils.getNameFromItem(result));
+            object.addProperty(JsonNames.ITEM, ModUtils.getFullItemName(result));
             json.add(JsonNames.RESULT, object);
         }
     }

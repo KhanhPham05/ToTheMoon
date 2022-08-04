@@ -69,12 +69,22 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
         return defaultBlockState().setValue(FACING, facing);
     }
 
-    private Direction getLeftDirection(Direction facing) {
+    public static Direction getLeftDirection(Direction facing) {
         return switch (facing) {
             case NORTH -> Direction.WEST;
             case SOUTH -> Direction.EAST;
             case EAST -> Direction.NORTH;
             case WEST -> Direction.SOUTH;
+            default -> facing;
+        };
+    }
+
+    public static Direction getRightDirection(Direction facing) {
+        return switch (facing) {
+            case NORTH -> Direction.EAST;
+            case SOUTH -> Direction.WEST;
+            case WEST -> Direction.NORTH;
+            case EAST -> Direction.SOUTH;
             default -> facing;
         };
     }
@@ -139,15 +149,7 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
             return this.defaultBlockState().setValue(FACING, rightFacing);
         }
 
-        private Direction getRightDirection(Direction facing) {
-            return switch (facing) {
-                case NORTH -> Direction.EAST;
-                case SOUTH -> Direction.WEST;
-                case WEST -> Direction.NORTH;
-                case EAST -> Direction.SOUTH;
-                default -> facing;
-            };
-        }
+
 
         @Override
         public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {

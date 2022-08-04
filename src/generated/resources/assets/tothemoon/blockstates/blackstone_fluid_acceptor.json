@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tothemoon:block/blackstone_fluid_acceptor"
+    }
+  }
+}

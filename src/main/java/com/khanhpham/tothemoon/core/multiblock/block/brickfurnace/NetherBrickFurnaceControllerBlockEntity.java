@@ -4,7 +4,8 @@ import com.khanhpham.tothemoon.advancements.ModdedTriggers;
 import com.khanhpham.tothemoon.advancements.MultiblockFormedTrigger;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
-import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
+import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
+import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -15,16 +16,20 @@ import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
@@ -36,8 +41,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -48,7 +55,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -61,7 +67,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     final LazyOptional<IFluidHandler> fluidHandler = LazyOptional.of(() -> tank);
     private final int smeltingDuration = 200;
     private final ArrayList<BlockPos> multiblockPartPositions = new ArrayList<>();
-    private final LinkedList<Boolean> partDefinition = new LinkedList<>();
+    private final NonNullList<Boolean> partDefinition = NonNullList.withSize(MULTIBLOCK_SIZE, false);
     private final Multiblock.Builder builder = Multiblock.Builder.setup(MULTIBLOCK_SIZE);
     private int smeltingTime;
     private final ContainerData data = new ContainerData() {
@@ -129,9 +135,12 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
         return super.getCapability(cap, side);
     }
 
+    /**
+     * Multiblock checking is now moved to {@link NetherBrickFurnaceBlock#use(BlockState, Level, BlockPos, Player, InteractionHand, BlockHitResult)}
+     */
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
-        checkMultiblock(level);
+        //checkMultiblock(level);
         final Direction controllerFacing = state.getValue(NetherBrickFurnaceBlock.FACING);
         if (this.getMultiblock() != null) {
             if (!getItem(3).isEmpty()) {
@@ -147,7 +156,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                 }
             }
 
-            @Nullable Recipe<Container> recipe = level.getRecipeManager().getRecipeFor(HighHeatSmelting.RECIPE_TYPE, this, level).orElse(null);
+            @Nullable Recipe<Container> recipe = level.getRecipeManager().getRecipeFor(HighHeatSmeltingRecipe.RECIPE_TYPE, this, level).orElse(null);
             if (recipe != null && this.smeltingTime >= this.smeltingDuration) {
                 makeResult(recipe);
                 state = state.setValue(NetherBrickFurnaceBlock.LIT, true);
@@ -189,49 +198,55 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
         }
     }
 
-    private void checkMultiblock(Level level) {
-        if (this.multiblock == null) {
+
+    public void checkMultiblock(Level level) {
+        if (this.getMultiblock() == null) {
             this.partDefinition.clear();
 
             for (int i = 0; i < multiblockPartPositions.size(); i++) {
                 Block block = level.getBlockState(multiblockPartPositions.get(i)).getBlock();
                 if (i == 4 && block.equals(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())) {
-                    partDefinition.add(4, true);
+                    partDefinition.set(4, true);
                     builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.CONTROLLER);
                 } else if (i == 13 && block.equals(Blocks.BLAST_FURNACE)) {
-                    partDefinition.add(13, true);
+                    partDefinition.set(13, true);
                     builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
                 } else
                     switch (i) {
-                        case 6, 7, 8, 15, 16, 17, 24, 25, 26 -> {
-                            if (block.equals(ModBlocks.SMOOTH_BLACKSTONE.get())) {
-                                partDefinition.add(i, true);
-                                builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
+                        case 6, 8,
+                                15, 16, 17,
+                                24, 25, 26 -> check(block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
+                        case 7 ->
+                                check((block.equals(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get()) && !((FluidAcceptorBlock)block).isObstructedByOther()) || block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
 
-                            } else partDefinition.add(i, false);
-                        }
-                        default -> {
-                            if (block.equals(Blocks.NETHER_BRICKS)) {
-                                builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
-                                partDefinition.add(i, true);
-                            } else partDefinition.add(i, false);
-                        }
+                        case 1, 3, 5 ->
+                                check((block.equals(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get()) && !((FluidAcceptorBlock)block).isObstructedByOther()) || block.equals(Blocks.NETHER_BRICKS), i);
+                        default -> this.check(block.equals(Blocks.NETHER_BRICKS), i);
                     }
             }
 
             if (!partDefinition.contains(false)) {
-                this.multiblock = MultiblockManager.INSTANCE.addMultiblock(builder.build());
-                if (!level.isClientSide && level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
+                this.setMultiblock(MultiblockManager.INSTANCE.addMultiblock(builder.build()));
+                if (level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
                     ModdedTriggers.MULTIBLOCK_FORMED.trigger(serverPlayer, MultiblockFormedTrigger.MultiblockType.NETHER_BRICK_FURNACE);
                 }
+                this.setAllAcceptor(this);
             } else {
                 this.builder.clearAll();
             }
         }
     }
 
+    private void check(boolean condition, int i) {
+        if (condition) {
+            partDefinition.set(i, true);
+            builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
+        } else partDefinition.set(i, false);
+    }
+
     @Override
     protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
         this.tank.writeToNBT(pTag);
     }
 
@@ -255,5 +270,35 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     @Override
     public FluidTank getTank() {
         return this.tank;
+    }
+
+    public void fillFromBucket(Player pPlayer) {
+        if (this.tank.getSpace() >= FluidAttributes.BUCKET_VOLUME) {
+            this.tank.fill(new FluidStack(Fluids.LAVA, FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+            pPlayer.playSound(SoundEvents.BUCKET_EMPTY_LAVA, 1.0f, 1.0f);
+        }
+    }
+
+    @Override
+    public void onRemove() {
+        this.setAllAcceptor(null);
+    }
+
+    private BlockPos[] getAcceptorDirections() {
+        BlockPos[] pos = new BlockPos[4];
+        Direction facingDirection = this.getBlockState().getValue(NetherBrickFurnaceBlock.FACING).getOpposite();
+        pos[0] = super.worldPosition.above();
+        pos[1] = super.worldPosition.relative(WorkbenchBlock.getRightDirection(facingDirection));
+        pos[2] = super.worldPosition.below();
+        pos[3] = super.worldPosition.relative(WorkbenchBlock.getLeftDirection(facingDirection));
+        return pos;
+    }
+
+    private void setAllAcceptor(@Nullable NetherBrickFurnaceControllerBlockEntity be) {
+        for (BlockPos acceptorDirection : this.getAcceptorDirections()) {
+            if (this.level != null && this.level.getBlockState(acceptorDirection).getBlock() instanceof FluidAcceptorBlock fluidAcceptorBlock) {
+                fluidAcceptorBlock.setControllerBe(be);
+            }
+        }
     }
 }

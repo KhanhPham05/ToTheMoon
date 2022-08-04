@@ -14,7 +14,9 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 
@@ -23,8 +25,8 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"removal", "unchecked"})
-public abstract class RecipeCategory<T extends Recipe<?>> implements IRecipeCategory<T> {
+@SuppressWarnings({"removal"})
+public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container>> implements IRecipeCategory<T> {
     protected final IGuiHelper guiHelper;
 
     public RecipeCategory(IGuiHelper guiHelper) {
@@ -50,14 +52,8 @@ public abstract class RecipeCategory<T extends Recipe<?>> implements IRecipeCate
     public final IDrawable getIcon() {
         return guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.getCatalystIcon());
     }
-
-    public abstract net.minecraft.world.item.crafting.RecipeType<T> getActualRecipeType();
-
-    @Deprecated
-    public final List<T> getActualCraftingRecipes(RecipeManager recipeManager) {
-        var recipes = recipeManager.getRecipes().parallelStream().filter(recipe -> recipe.getType().equals(this.getActualRecipeType())).map(recipe -> (T) recipe).toList();
-        ModUtils.log("{} recipes of {} . category : {}", recipes.size(), getActualRecipeType(), getRecipeType());
-        return recipes;
+    public final <C extends Container, R extends Recipe<C>> List<R> getActualCraftingRecipes(RecipeManager recipeManager, net.minecraft.world.item.crafting.RecipeType<R> recipeType) {
+        return recipeManager.getAllRecipesFor(recipeType);
     }
 
     public abstract void registerRecipes(IRecipeRegistration registration, RecipeManager manager);
@@ -65,11 +61,19 @@ public abstract class RecipeCategory<T extends Recipe<?>> implements IRecipeCate
         //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
     //}
 
+    public abstract void setRecipeLayout(IRecipeLayoutBuilder builder, T recipe);
+
     @Override
-    public abstract void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses);
+    public final void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
+        this.setRecipeLayout(builder, recipe);
+    }
 
     protected void addInput(IRecipeLayoutBuilder builder, T recipe, int ingredientIndex, int x, int y) {
         builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(recipe.getIngredients().get(ingredientIndex));
+    }
+
+    protected void addInput(IRecipeLayoutBuilder builder, Ingredient ingredient, int x, int y) {
+        builder.addSlot(RecipeIngredientRole.INPUT,x, y).addIngredients(ingredient);
     }
 
     protected void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
@@ -83,5 +87,9 @@ public abstract class RecipeCategory<T extends Recipe<?>> implements IRecipeCate
 
     protected ResourceLocation makeLocation(String nameWithPng) {
         return ModUtils.modLoc("textures/jei/" + nameWithPng);
+    }
+
+    protected IDrawable makeBackground(String textureName, int width, int height) {
+        return this.guiHelper.createDrawable(this.makeLocation(textureName.concat(".png")), 0, 0, width, height);
     }
 }

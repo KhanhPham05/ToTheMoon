@@ -61,6 +61,8 @@ public class ModLootTables extends LootTableProvider {
             LootTables.validate(validationTracker, rl, loot);
             ModUtils.log("validating {} - {}", rl, loot);
         });
+
+        ModUtils.log("Validated {} loot tables", map.size());
     }
 
     @Override
@@ -88,7 +90,7 @@ public class ModLootTables extends LootTableProvider {
                     , GOLD_SHEET_BLOCK, IRON_SHEET_BLOCK, PROCESSED_WOOD, PURIFIED_QUARTZ_BLOCK
                     , SMOOTH_PURIFIED_QUARTZ_BLOCK, MOON_ROCK_BARREL, COPPER_ENERGY_GENERATOR
                     , IRON_ENERGY_GENERATOR, ALLOY_SMELTER, METAL_PRESS, TAG_TRANSLATOR
-                    , WORKBENCH
+                    , WORKBENCH, BLACKSTONE_FLUID_ACCEPTOR, NETHER_BRICKS_FLUID_ACCEPTOR
             );
         }
 
@@ -138,6 +140,5 @@ public class ModLootTables extends LootTableProvider {
                 add(supplier, block -> createOreDrop(block, item));
             }
         }
-
     }
 }

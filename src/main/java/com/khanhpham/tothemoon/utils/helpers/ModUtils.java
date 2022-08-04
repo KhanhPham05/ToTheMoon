@@ -61,7 +61,7 @@ public class ModUtils {
         };
     }
 
-    public static <T extends IForgeRegistryEntry<T>> String convertRlToPath(@Nonnull T entry) {
+    public static <T extends IForgeRegistryEntry<T>> String registryToPath(@Nonnull T entry) {
         return Objects.requireNonNull(entry.getRegistryName()).getPath();
     }
 
@@ -70,7 +70,7 @@ public class ModUtils {
     }
 
     @SuppressWarnings("deprecation")
-    public static String getNameFromItem(Item item) {
+    public static String getFullItemName(Item item) {
         return Registry.ITEM.getKey(item).toString();
     }
 
@@ -146,5 +146,9 @@ public class ModUtils {
             }
         }
         return null;
+    }
+
+    public static void warn(String s, Object... params) {
+        ToTheMoon.LOG.warn(s, params);
     }
 }

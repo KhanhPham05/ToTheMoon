@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
-import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
+import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.slot.SlotPlacePredicate;
@@ -50,7 +50,7 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
 
     private boolean canProcess(ItemStack stack) {
         ClientLevel level = Minecraft.getInstance().level;
-        return level != null && level.getRecipeManager().getRecipeFor(HighHeatSmelting.RECIPE_TYPE, new SimpleContainer(stack), level).isPresent();
+        return level != null && level.getRecipeManager().getRecipeFor(HighHeatSmeltingRecipe.RECIPE_TYPE, new SimpleContainer(stack), level).isPresent();
     }
 
     public int getStoredFluid() {

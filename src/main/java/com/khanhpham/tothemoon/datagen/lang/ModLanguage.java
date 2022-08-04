@@ -44,6 +44,8 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent PREV = create("container", "prev");
     public static final TranslatableComponent HOVER_TO_SHOW_TAG = create("button", "hover_show_tag");
     public static final TranslatableComponent NO_ITEM = create("button", "no_button");
+    public static final TranslatableComponent JEI_HIGH_HEAT_SMELTING = create("jei", "high_heat_smelting");
+    public static final TranslatableComponent MESSAGE_NBF_FORM_ERROR = create("message", "nbf_form_fail");
     private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     public static final TranslatableComponent FILL_TANK = create("gui", "fill_tank");
     public static final TranslatableComponent EMPTY_TANK = create("gui", "empty_tank");
@@ -135,6 +137,8 @@ public class ModLanguage extends LanguageProvider {
         ALL_BLOCKS.forEach(this::addBlock);
         ALL_ITEMS.forEach(this::addItem);
 
+        add(MESSAGE_NBF_FORM_ERROR, "Can not form Nether Brick Furnace");
+
         // item - block - inventory
         add(TAG_TRANSLATOR, "A simple stonecutter-inspired block that convert items that has the same tag as items in this mod");
 
@@ -160,6 +164,7 @@ public class ModLanguage extends LanguageProvider {
         add(MACHINE_UPGRADE_LABELS, "Upgrades");
         add(NETHER_BRICK_FURNACE_CONTROLLER, "Nether Bricks Furnace");
         add(JEI_WORKBENCH_CRAFTING, "Workbench Crafting");
+        add(JEI_HIGH_HEAT_SMELTING, "High Heat Smelting");
 
         //sound
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
