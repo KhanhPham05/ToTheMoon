@@ -27,13 +27,14 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * @see Items#ANVIL
- */
+
+@ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
 @Mixin(AnvilBlock.class)
 public class AnvilTweaks extends FallingBlock {
@@ -68,7 +69,7 @@ public class AnvilTweaks extends FallingBlock {
                             }
                             if (material != null) {
                                 ItemStack result = ItemStack.EMPTY;
-                                String modid = item.getItem().getItem().getRegistryName().getNamespace();
+                                String modid = Objects.requireNonNull(item.getItem().getItem().getRegistryName()).getNamespace();
                                 if (modid.equals("minecraft")) {
                                     result = new ItemStack(Registry.ITEM.get(ModUtils.modLoc(material + "_dust")));
                                 } else if (Registry.ITEM.containsKey(new ResourceLocation(modid, "dust_" + material))) {

@@ -217,15 +217,16 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                                 15, 16, 17,
                                 24, 25, 26 -> check(block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
                         case 7 ->
-                                check((block.equals(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get()) && !((FluidAcceptorBlock)block).isObstructedByOther()) || block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
+                                check((block.equals(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get()) && ((FluidAcceptorBlock) block).isNotObstructed()) || block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
 
                         case 1, 3, 5 ->
-                                check((block.equals(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get()) && !((FluidAcceptorBlock)block).isObstructedByOther()) || block.equals(Blocks.NETHER_BRICKS), i);
+                                check((block.equals(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get()) && ((FluidAcceptorBlock) block).isNotObstructed()) || block.equals(Blocks.NETHER_BRICKS), i);
                         default -> this.check(block.equals(Blocks.NETHER_BRICKS), i);
                     }
             }
 
-            if (!partDefinition.contains(false)) {
+            //Make sure the furnace controller is facing outside
+            if (!partDefinition.contains(false) && level.getBlockState(this.worldPosition.relative(this.getBlockState().getValue(NetherBrickFurnaceBlock.FACING))).isAir()) {
                 this.setMultiblock(MultiblockManager.INSTANCE.addMultiblock(builder.build()));
                 if (level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
                     ModdedTriggers.MULTIBLOCK_FORMED.trigger(serverPlayer, MultiblockFormedTrigger.MultiblockType.NETHER_BRICK_FURNACE);

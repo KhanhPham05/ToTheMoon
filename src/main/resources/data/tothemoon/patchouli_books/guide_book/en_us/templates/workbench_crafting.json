@@ -4,26 +4,32 @@
     {
       "type": "patchouli:image",
       "image": "tothemoon:textures/gui/workbench_overlay.png",
-      "x": 0,
-      "y": 0,
+      "x": 10,
+      "y": 20,
       "u": 0,
       "v": 0,
       "width": 86,
       "height": 120
     },
     {
+      "type": "patchouli:header",
+      "text": "#title",
+      "x": -1,
+      "y": -1
+    },
+    {
       "type": "patchouli:custom",
       "class": "com.khanhpham.tothemoon.compat.patchouli.WorkbenchComponent",
-      "x": 0,
-      "y": 0,
+      "x": 10,
+      "y": 20,
       "recipe_id": "#recipe"
     },
     {
       "type": "patchouli:item",
       "item": "#output",
       "framed": false,
-      "x": 69,
-      "y": 7
+      "x": 79,
+      "y": 27
     }
   ]
 }

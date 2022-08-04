@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.datagen.lang;
 
+import com.google.common.base.Preconditions;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.datagen.advancement.AdvancementComponent;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
@@ -8,13 +9,14 @@ import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredItems;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,42 +48,30 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent NO_ITEM = create("button", "no_button");
     public static final TranslatableComponent JEI_HIGH_HEAT_SMELTING = create("jei", "high_heat_smelting");
     public static final TranslatableComponent MESSAGE_NBF_FORM_ERROR = create("message", "nbf_form_fail");
-    private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     public static final TranslatableComponent FILL_TANK = create("gui", "fill_tank");
     public static final TranslatableComponent EMPTY_TANK = create("gui", "empty_tank");
-
-
     //TOOLTIP
     public static final TranslatableComponent TANK_ONLY_SUPPORTS_LAVA = create("tooltip", "lava_support_only");
     public static final TranslatableComponent TANK_AMOUNT = create("tooltip", "amount");
     public static final TranslatableComponent ANVIL_DESCRIPTION = create("tooltip", "minecraft_anvil");
-
-
     //PATCHOULI
     public static final TranslatableComponent BOOK_NAME = create("book", "header");
     public static final TranslatableComponent BOOK_LANDING = create("book", "header.landing_text");
-
     public static final TranslatableComponent THE_BASICS = create("book", "the_basics");
     public static final TranslatableComponent THE_BASICS_DESCRIPTION = create("book", "the_basics.description");
     public static final TranslatableComponent MANUAL_CRUSHING = create("book", "manual_crushing");
     public static final TranslatableComponent MANUAL_CRUSHING_PAGE_1 = create("book", "manual_crushing.page_one");
     public static final TranslatableComponent MANUAL_CRUSHING_CRAFTING_PAGE = create("book", "manual_crushing.crafting");
     public static final TranslatableComponent MANUAL_CRUSHING_CRAFTING_TITLE = create("book", "manual_crushing.crafting.title");
-
     public static final TranslatableComponent MAKING_STEEL = create("book", "making_steel");
-    public static final TranslatableComponent MAKING_STEEL_PAGE_ONE = create("book", "making_steel.page_one");
-    public static final TranslatableComponent MAKING_STEEL_CRAFT_CONTROLLER = create("book", "making_steel.crafting_controller");
-    public static final TranslatableComponent MAKING_STEEL_MULTIBLOCK = create("book", "making_steel.multiblock");
-    public static final TranslatableComponent MAKING_STEEL_MULTIBLOCK_NOTICE = create("book", "making_steel.multiblock_notice");
-    public static final TranslatableComponent BENCH_WORKING = create("book", "bench_working.title");
+    public static final TranslatableComponent BENCH_WORKING_TITLE = create("book", "bench_working.title");
     public static final TranslatableComponent TEXT_HOW_TO_USE = create("book", "how_to_use");
-
     public static final TranslatableComponent BASIC_MATERIALS_CATEGORY = create("book", "category_basic_materials");
     public static final TranslatableComponent BASIC_MATERIAL_CATEGORY_DESCRIPTION = create("book", "category_basic_materials.description");
-
     //ADVANCEMENTS
     public static final TranslatableComponent ROOT = create("advancement", "root");
     public static final TranslatableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
+    private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
     public static final TranslatableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft a Nether Brick Furnace Controller");
@@ -112,7 +102,8 @@ public class ModLanguage extends LanguageProvider {
         return ADVANCEMENT_COMPONENT.add(component, title, description);
     }
 
-    public static String convertToTranslatedText(ResourceLocation location) {
+    private static String convertToTranslatedText(@Nullable ResourceLocation location) {
+        Preconditions.checkNotNull(location, "Location can not be null");
         StringBuilder buffer = new StringBuilder();
         String id = location.getPath();
         buffer.append(Character.toUpperCase(id.charAt(0)));
@@ -132,12 +123,17 @@ public class ModLanguage extends LanguageProvider {
         return buffer.toString();
     }
 
+    public static <T extends IForgeRegistryEntry<?>> String getPureName(T object) {
+       return convertToTranslatedText(object.getRegistryName());
+    }
+
     @Override
     protected void addTranslations() {
         ALL_BLOCKS.forEach(this::addBlock);
         ALL_ITEMS.forEach(this::addItem);
 
         add(MESSAGE_NBF_FORM_ERROR, "Can not form Nether Brick Furnace");
+        add(create("book", "title_crafting_smt"), "Crafting %s");
 
         // item - block - inventory
         add(TAG_TRANSLATOR, "A simple stonecutter-inspired block that convert items that has the same tag as items in this mod");
@@ -176,7 +172,7 @@ public class ModLanguage extends LanguageProvider {
 
         //PATCHOULI
         add(BOOK_NAME, "TTM Guide Book");
-        add(BOOK_LANDING, "This guide book will show you all the features that are in this mod.");
+        add(BOOK_LANDING, "This guide book will show you all the features that are in this mod. $(br2) This mod is made possible by a single person who do 100% of the code, with the help of 2 texture makers");
         add(THE_BASICS, "The Basics");
         add(THE_BASICS_DESCRIPTION, "This category will show you all $(o)the basics$() as the first steps in the mod.");
 
@@ -187,13 +183,22 @@ public class ModLanguage extends LanguageProvider {
         add(MANUAL_CRUSHING_CRAFTING_TITLE, "Crafting Anvil");
 
         add(MAKING_STEEL, "Making Steel");
-        add(MAKING_STEEL_PAGE_ONE, "Before you can make steel, you need to have some $(o)some$() pieces of $(l)heated coal dusts$() first. But before that, you need something so heat the $(l:tothemoon:manual_crushing)coal dust$().$(br2) So Nether Brick Furnace is your chose");
-        add(MAKING_STEEL_CRAFT_CONTROLLER, "First of all, you need to craft a Controller for this huge furnace. This list below shows the blocks that the furnace needs for construction $(li)x1 NetherBrick Furnace Controller $(li)x15 Nether Bricks $(li)x1 Blass Furnace $(li)x9 Smooth Blackstone");
-        add(MAKING_STEEL_MULTIBLOCK_NOTICE, "$(o)Notice:$()$(br) - This multiblock requires a $(l)Blast Furnace$() at the core / centre");
-        add(MAKING_STEEL_MULTIBLOCK, "This special furnace is the key of the process, In order to produce Heated Coal Dust for steel, you need this furnace. However, to make this furnace function, you may need to have Blaze Powder af startup fuel and lava as a process maintenance, usually, the lava consumption is pretty low, at 3mB per a tick. After forming you can access the controller GUI to start making heated coal. The last thing you need is coal dust after smashing from normal coal by anvil");
+
+        add(create("book", "feeling_the_heat_title"), "Feeling The Heat");
+        add(create("book", "fth_page_1"), "Before you can make steel, you need to have some $(o)some$() pieces of $(l)heated coal dusts$() first. But before that, you need something so heat the $(l:tothemoon:manual_crushing)coal dust$().$(br2) So Nether Brick Furnace is your chose");
+        add(create("book", "fth_craft_controller"), "First of all, you need to craft a Controller for this huge furnace. This list below shows the blocks that the furnace needs for construction $(li)x1 NetherBrick Furnace Controller $(li)x16 Nether Bricks $(li)x1 Blass Furnace $(li)x9 Smooth Blackstone");
+        //add(create("book", "fth_notice"), "$(o)Notice:$()$(br) - This multiblock requires a $(l)Blast Furnace$() at the core / centre");
+        add(create("book", "fth_building_title"), "Building The Furnace");
+        add(create("book", "fth_building_1"), "Once you have finished crafting all the required ingredients, it's time to start the construction of the Nether Bricks Furnace. $(t:Recipe Type: tothemoon:high_heat_smelting)(For mod/pack makers)$(). $(br2) This is a 3 x 3 x 3 multiblock. At the very bottom, place 9 blocks of nether bricks in a 3x3 square. $(br) Now decide which side the furnace is facing to and then place it down at the middle of the face of that side. Make sure it is facing directly towards the air. After that, place a Blast Furnace behind it, that should be the core/centre of the multiblock");
+        add(create("book", "fth_building_2"), "after that, place the 7 remaining blocks with nether bricks. $(br) Finally, fill the last layer with Smooth Blackstone");
+        add(create("book", "fth_using_multiblock"), "This special furnace is the key of the process, In order to produce Heated Coal Dust for steel, you need this furnace. However, to make this furnace function, you may need to have Blaze Powder as startup fuel and lava as a process maintenance, usually, the lava consumption is pretty low, at 3mB per a tick. After forming you can access the controller GUI to start making heated coal. The last thing you need is coal dust after smashing from normal coal by anvil");
+        add(create("book", "fth_form_multiblock"), "In order to access the GUI and use it, you must right click on the controller for confirmation so other components like Fluid Acceptors can work as expected.");
+        add(create("book", "fth_form_multiblock.title"), "Last Step");
         add(TEXT_HOW_TO_USE, "How To Use");
 
-
+        add(BENCH_WORKING_TITLE, "Benchworkin'");
+        add(create("book", "bw_introduction"), "If you have every tried the Extended Crafting mod, so this must be very familiar to you. Workbench, however, has some slight differences. This is one of the key factor of the progress in TTM, Workbench is the ONLY way for you to craft the machine components as well as some essential stuff that the mod requires you to craft in Workbench. This block is a multi-part block just like the bed or door block. Workbench, on the other hand, will extends to the left and face towards you. The following image will show you exactly how it looks like. ");
+        add(create("book", "bw_demonstration"), "In addition, the crafting grid of the workbench is a 5 x 5 grid with 2 additional slots for you");
         //PATCHOULI - Basic Materials
         add(BASIC_MATERIAL_CATEGORY_DESCRIPTION, "A small but reliable category that shows you all the basic ores/metals which are important for your progress in this mod");
         add(BASIC_MATERIALS_CATEGORY, "Basic Materials");

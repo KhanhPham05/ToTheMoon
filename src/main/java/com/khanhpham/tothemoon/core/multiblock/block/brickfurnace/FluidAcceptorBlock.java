@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.commands.GameModeCommand;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -33,19 +32,23 @@ public class FluidAcceptorBlock extends Block {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             ItemStack item = pPlayer.getMainHandItem();
-            if (this.controllerBe != null && item.is(Items.LAVA_BUCKET)) {
-                controllerBe.fillFromBucket(pPlayer);
-                if (!pPlayer.isCreative()) pPlayer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BUCKET));
+            if (item.is(Items.LAVA_BUCKET)) {
+                if (controllerBe != null) {
+                    controllerBe.fillFromBucket(pPlayer);
+                    if (!pPlayer.isCreative())
+                        pPlayer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BUCKET));
+                    return InteractionResult.CONSUME;
+                }
             }
         }
-        return InteractionResult.PASS;
+        return InteractionResult.FAIL;
     }
 
     public void setControllerBe(@Nullable NetherBrickFurnaceControllerBlockEntity controllerBe) {
         this.controllerBe = controllerBe;
     }
 
-    public boolean isObstructedByOther() {
-        return this.controllerBe != null;
+    public boolean isNotObstructed() {
+        return this.controllerBe == null;
     }
 }

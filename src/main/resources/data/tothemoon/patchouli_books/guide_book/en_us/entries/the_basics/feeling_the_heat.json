@@ -1,0 +1,35 @@
+{
+  "name": "book.tothemoon.feeling_the_heat_title",
+  "icon": "tothemoon:netherbrick_furnace_controller",
+  "category": "tothemoon:the_basics",
+  "sortnum": 1,
+  "advancement": "tothemoon:anvil_crushing",
+  "pages": [
+    "book.tothemoon.fth_page_1",
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tothemoon:crafting/netherbrick_furnace_controller",
+      "text": "book.tothemoon.fth_craft_controller"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "book.tothemoon.fth_building_title",
+      "text": "book.tothemoon.fth_building_1"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "book.tothemoon.fth_building_title",
+      "text": "book.tothemoon.fth_building_2"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "book.tothemoon.fth_form_multiblock.title",
+      "text": "book.tothemoon.fth_form_multiblock"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "book.tothemoon.how_to_use",
+      "text": "book.tothemoon.fth_using_multiblock"
+    }
+  ]
+}

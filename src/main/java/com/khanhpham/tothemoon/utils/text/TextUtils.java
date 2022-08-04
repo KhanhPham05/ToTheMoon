@@ -81,7 +81,7 @@ public class TextUtils {
 
     public static Component translateFluidTank(Fluid fluid, int amount, int capacity) {
         String param2 = String.format(FLUID_TANK_ITEM_FORMAT, amount, capacity);
-        String param1 = ModLanguage.convertToTranslatedText(fluid.getRegistryName());
+        String param1 = ModLanguage.getPureName(fluid);
         return translateFormatText("tooltip", "item_tank", param1, param2);
     }
 
