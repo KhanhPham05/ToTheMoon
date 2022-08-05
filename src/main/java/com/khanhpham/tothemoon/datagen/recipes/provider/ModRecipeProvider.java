@@ -165,6 +165,8 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.shaped(ModBlocks.GOLD_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_GOLD).define('W', WIRES_REDSTONE_STEEL_ALLOY).define('M', ModBlocks.IRON_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_GOLD).save();
         helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
         helper.shaped(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR).pattern("A").pattern("B").define('A', ModBlocks.SMOOTH_BLACKSTONE.get()).define('B', Items.BUCKET).save();
+        helper.shaped(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR).pattern("A").pattern("B").define('A', Blocks.NETHER_BRICKS).define('B', Items.BUCKET).save();
+
 
         helper.shapelessCrafting(ModItems.REDSTONE_STEEL_ALLOY_DUST.get(), 1, ModItems.STEEL_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
         helper.shapelessCrafting(ModItems.REDSTONE_METAL_DUST.get(), 1, ModItems.IRON_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
@@ -248,15 +250,18 @@ public class ModRecipeProvider extends RecipeProvider {
 
         TagToItemRecipeHelper provider = TagToItemRecipeHelper.create(consumer);
 
-        provider.put(Tags.Items.STONE, Items.STONE, Items.DIORITE, Items.ANDESITE);
-        provider.put(DUSTS_COAL);
+        provider.tag(DUSTS_COAL, DUSTS_HEATED_COAL, DUSTS_GOLD, DUSTS_REDSTONE_STEEL_ALLOY, DUSTS_URANIUM, DUSTS_STEEL, DUSTS_REDSTONE_METAL, DUSTS_IRON, DUSTS_COPPER);
+        provider.tag(GENERAL_GEARS);
+        provider.tag(GENERAL_RODS);
+        provider.tag(GENERAL_SHEETMETALS);
+        provider.tag(GENERAL_STORAGE_BLOCKS);
 
         provider.generateRecipe(this::translateTag);
     }
 
-    private void translateTag(Consumer<FinishedRecipe> consumer, TagKey<Item> tag, Item item) {
-        TagTranslatingRecipeBuilder builder = new TagTranslatingRecipeBuilder(item, tag);
-        builder.save(consumer, RecipeGeneratorHelper.getId(item));
+    private void translateTag(Consumer<FinishedRecipe> consumer, TagKey<Item> tag) {
+        TagTranslatingRecipeBuilder builder = new TagTranslatingRecipeBuilder(tag);
+        builder.save(consumer, "tag_translating/" + RecipeGeneratorHelper.extractTag(tag));
     }
 
     private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> moldTag, Supplier<? extends Item> result) {

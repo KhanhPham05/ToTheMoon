@@ -1,16 +1,16 @@
 package com.khanhpham.tothemoon.datagen.tags;
 
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.function.Supplier;
 
-abstract class AbstractAppendable<T> {
+abstract class AbstractAppendableTag<T> {
     protected final TagKey<T> mainTag;
     protected final HashMap<TagKey<T>, T> map = new HashMap<>();
 
-    public AbstractAppendable(TagKey<T> mainTag) {
+    public AbstractAppendableTag(TagKey<T> mainTag) {
         this.mainTag = mainTag;
     }
 
@@ -24,5 +24,8 @@ abstract class AbstractAppendable<T> {
         return map;
     }
 
+    public Set<TagKey<T>> getAllChild() {
+        return this.map.keySet();
+    }
 
 }

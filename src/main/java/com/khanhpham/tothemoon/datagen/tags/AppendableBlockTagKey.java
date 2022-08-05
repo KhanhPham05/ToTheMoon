@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
 
-public class AppendableBlockTagKey extends AbstractAppendable<Block>{
+public class AppendableBlockTagKey extends AbstractAppendableTag<Block> {
 
     public AppendableBlockTagKey(ResourceLocation location) {
         super(BlockTags.create(location));

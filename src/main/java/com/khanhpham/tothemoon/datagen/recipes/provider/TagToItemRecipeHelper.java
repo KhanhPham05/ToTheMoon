@@ -1,27 +1,19 @@
 package com.khanhpham.tothemoon.datagen.recipes.provider;
 
+import com.khanhpham.tothemoon.datagen.tags.AppendableItemTagKey;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class TagToItemRecipeHelper {
-    private static final Map<TagKey<Item>, List<Item>> TAG_DEFINITION;
-
-    static {
-        TAG_DEFINITION = new HashMap<>();
-    }
-
+    private static final Set<TagKey<Item>> TAGS = new HashSet<>();
     private final Consumer<FinishedRecipe> consumer;
-    @Nullable
-    private TagKey<Item> itemTag;
 
     public TagToItemRecipeHelper(Consumer<FinishedRecipe> consumer) {
         this.consumer = consumer;
@@ -31,24 +23,29 @@ public class TagToItemRecipeHelper {
         return new TagToItemRecipeHelper(consumer);
     }
 
-    public TagToItemRecipeHelper tag(TagKey<Item> tag) {
-        this.itemTag = tag;
+    @SafeVarargs
+    public final TagToItemRecipeHelper tag(TagKey<Item>... tag) {
+        TAGS.addAll(Arrays.asList(tag));
         return this;
     }
 
-    public TagToItemRecipeHelper put(TagKey<Item> tag, ItemLike... item) {
-        TAG_DEFINITION.put(tag, Arrays.stream(item).map(ItemLike::asItem).toList());
+    private TagToItemRecipeHelper tag(Collection<TagKey<Item>> tags) {
+        TAGS.addAll(tags);
         return this;
+    }
+
+    public final TagToItemRecipeHelper tag(AppendableItemTagKey appendableItemTagKey) {
+        return this.tag(appendableItemTagKey.getAllChild());
     }
 
     public void generateRecipe(TagWriter writer) {
-        if (this.itemTag != null && TAG_DEFINITION.containsKey(this.itemTag)) {
-            TAG_DEFINITION.get(this.itemTag).forEach(item -> writer.generateRecipe(this.consumer, itemTag, item));
+        for (TagKey<Item> tag : TAGS) {
+            writer.generateRecipe(this.consumer, tag);
         }
     }
 
     @FunctionalInterface
     public interface TagWriter {
-        void generateRecipe(Consumer<FinishedRecipe> consumer, TagKey<Item> tag, Item item);
+        void generateRecipe(Consumer<FinishedRecipe> consumer, TagKey<Item> tag);
     }
 }
