@@ -56,7 +56,7 @@ public class ModUtils {
         return new RecipeType<>() {
             @Override
             public String toString() {
-                return location.getPath();
+                return location.toString();
             }
         };
     }

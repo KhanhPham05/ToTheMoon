@@ -137,28 +137,25 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
     runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3544525")
 
-    //implementation fg.deobf("curse.maven:ctm-267602:3737369")
-    //runtimeOnly fg.deobf("curse.maven:rubidium-574856:3749094")
-
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
+    //mekanism for compat testing
     implementation fg.deobf("curse.maven:mekanism-268560:3810540")
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1")
 
-    //runtimeOnly fg.deobf("curse.maven:pipez-443900:3760255")
-    //implementation fg.deobf("curse.maven:create-328085:3737418")
-    runtimeOnly fg.deobf("curse.maven:flywheel-486392:3737402")
     runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3748971")
 
-    //compile group: "it.zerono.mods.zercore", name: "ZeroCore2", version: "1.18.2-2.1.17"
+    //craft tweaker
+    def ct = "com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.185"
+    compileOnly(ct)
+    runtimeOnly(fg.deobf(ct))
 
-    //implementation fg.deobf("it.zerono.mods.zerocore:ZeroCore2:1.18.2-2.1.17")
-
-    //implementation fg.deobf("curse.maven:patchouli-datagen-ptd-lib-585667:3671853")
+    //APs
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors-1.18.2:2.0.0.124'
 }
 
 jar {

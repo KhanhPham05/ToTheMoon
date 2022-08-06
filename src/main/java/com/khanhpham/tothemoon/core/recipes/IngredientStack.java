@@ -65,6 +65,10 @@ public class IngredientStack implements Predicate<ItemStack> {
         return new IngredientStack(baseIngredient, amount);
     }
 
+    public static IngredientStack create(Ingredient ingredient, int amount) {
+        return new IngredientStack(ingredient, amount);
+    }
+
     public List<ItemStack> getIngredientStacks() {
         ItemStack[] stack = ingredient.getItems();
         ItemStack[] stack1 = new ItemStack[stack.length];
@@ -98,11 +102,7 @@ public class IngredientStack implements Predicate<ItemStack> {
 
     @Override
     public boolean test(ItemStack stack) {
-        if (stack != null) {
-            return ingredient.test(stack) && stack.getCount() >= this.amount;
-        }
-
-        return false;
+        return ingredient.test(stack) && stack.getCount() >= this.amount;
     }
 
     public void toNetwork(FriendlyByteBuf buffer) {
