@@ -75,13 +75,16 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent ROOT = create("advancement", "root");
     public static final TranslatableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
     public static final TranslatableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
+    public static final TranslatableComponent AUTOMATE_THE_FUEL = createAdvancement("automate_the_fuel", "Automate The Fuel", "Craft any type of Fluid Acceptor for Nether Brick Furnace");
     private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
-    public static final TranslatableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft a Nether Brick Furnace Controller");
+    public static final TranslatableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft the Nether Brick Furnace Controller");
     public static final TranslatableComponent HIGH_HEAT_SMELTING = createAdvancement("high_heat_smelting", "High Heat Smelting", "Construct A Nether Brick Furnace, see Guide Book for more information");
     public static final TranslatableComponent GETTING_A_TRUE_UPGRADE = createAdvancement("getting_a_true_upgrade", "Getting A True Upgrade", "Obtain Steel Ingot");
     public static final TranslatableComponent COVER_ME_WITH_CARBONIZED_IRON = createAdvancement("cover_me_with_carbonized_iron", "Cover Me With Carbonized Carbon", "Wear a full set of Steel Armor with all the steel tools");
+    public static final TranslatableComponent ENERGIZE_THE_FUEL = createAdvancement("energize_the_fuel", "Energize The Fuel", "Craft Copper Energy Generator");
+    public static final TranslatableComponent BENCH_WORKING = createAdvancement("bench_working", "Benchworkin'", "Craft the Workbench");
     private static final List<Block> ALL_BLOCKS;
     private static final List<Item> ALL_ITEMS;
 
@@ -206,6 +209,12 @@ public class ModLanguage extends LanguageProvider {
         add(create("book", "bw_introduction"), "If you have every tried the Extended Crafting mod, so this must be very familiar to you. Workbench, however, has some slight differences. This is the key for the progression in TTM, Workbench is the ONLY way for you to craft the machine components as well as some essential stuff that the mod requires you to craft in Workbench. This block is a multi-part block just like the bed or door block. Workbench, on the other hand, will extends to the left and face towards you. The following image will show you exactly how it looks like. ");
         add(create("book", "bw_demonstration"), "In addition, the crafting grid of the workbench is a 5 x 5 grid with 2 additional slots for crafting");
         book("bw_crafting", "The following page describes how you can craft the workbench in Crafting Table. Please do note that the recipe would be changed in the future.");
+
+        book("automate_the_fuel.title", "Automate The Fuel");
+        book("crafting_acceptors.title", "Crafting Acceptors");
+        book("atf.introduction", "$(o)Introduction :$() $(br)The Fluid Acceptors are essential to the automation of the fluid I/O for the furnace controller without having to open the screen. The following pages are the crafting recipes of it and how you can place it on the furnace. FYI, $(bold)not all$() acceptors are required as the image to make the furnace work.");
+        book("atf.illustration.title", "Acceptors Placements");
+        book("atf.illustration.note", "The type of acceptor must be corresponding to the layer of the multiblock, as shown on the image");
 
         //PATCHOULI - Basic Materials
         add(BASIC_MATERIAL_CATEGORY_DESCRIPTION, "A small but reliable category that shows you all the basic ores/metals which are important for your progress in this mod");
