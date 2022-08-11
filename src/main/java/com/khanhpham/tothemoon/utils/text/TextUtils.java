@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
+@SuppressWarnings("deprecation")
 public class TextUtils {
 
     private static final String TRANSLATION_FORMAT = "%s.%s.%s";
@@ -79,7 +80,7 @@ public class TextUtils {
         throw new IllegalStateException("No registry represent for [" + location + "]");
     }
 
-    public static Component translateFluidTank(Fluid fluid, int amount, int capacity) {
+    public static TranslatableComponent translateFluidTank(Fluid fluid, int amount, int capacity) {
         String param2 = String.format(FLUID_TANK_ITEM_FORMAT, amount, capacity);
         String param1 = ModLanguage.getPureName(fluid);
         return translateFormatText("tooltip", "item_tank", param1, param2);

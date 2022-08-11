@@ -15,13 +15,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class FluidCapableItem extends BlockItem {
-    public FluidCapableItem(Block pBlock, Properties pProperties) {
+    private final int fluidCapacity;
+
+    public FluidCapableItem(Block pBlock, Properties pProperties, int fluidCapacity) {
         super(pBlock, pProperties);
+        this.fluidCapacity = fluidCapacity;
     }
 
     @Override
     public final ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new ItemFluidHandlerCapabilityProvider(stack, this.getFluidCapacity());
+        return new ItemFluidHandlerCapabilityProvider(stack, this.fluidCapacity);
     }
 
     @Override
@@ -31,8 +34,9 @@ public abstract class FluidCapableItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        pTooltip.add(TextUtils.translateItemFluidTank(pStack, getFluidCapacity()));
+        pTooltip.add(TextUtils.translateItemFluidTank(pStack, this.fluidCapacity));
     }
 
+    @Deprecated
     protected abstract int getFluidCapacity();
 }

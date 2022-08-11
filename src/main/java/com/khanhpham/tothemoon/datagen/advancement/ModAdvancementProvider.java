@@ -5,6 +5,7 @@ import com.khanhpham.tothemoon.advancements.AnvilCrushingTrigger;
 import com.khanhpham.tothemoon.advancements.MultiblockFormedTrigger;
 import com.khanhpham.tothemoon.core.items.ModArmorItem;
 import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
+import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -68,13 +69,19 @@ public class ModAdvancementProvider extends AdvancementProvider {
         }
 
         coverMeWithCarbonizedIronBuilder.requirements(RequirementsStrategy.AND).save(consumer, loc("cover_me_with_carbonized_iron"), fileHelper);
+        this.invisibleAdvancements(consumer, fileHelper, root);
+    }
 
-
+    //I hate IntelliJ warnings. I have OCD :PP
+    @SuppressWarnings("unused")
+    private void invisibleAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper, Advancement root) {
+        Advancement ironBlock = Advancement.Builder.advancement().display(Items.IRON_BLOCK, ModLanguage.HIDDEN_ADVANCEMENT, ModLanguage.HIDDEN_ADVANCEMENT, null, FrameType.TASK, false, false, true).addCriterion("get_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_BLOCK)).parent(root).save(consumer, ModUtils.modLoc("hidden/iron_block"), fileHelper);
     }
 
     private Advancement.Builder display(ItemLike icon, TranslatableComponent advancementComponent, FrameType frame) {
         return Advancement.Builder.advancement().display(icon, advancementComponent, new TranslatableComponent(advancementComponent.getKey() + ".description"), null, frame, true, true, false);
     }
+
 
     private ResourceLocation loc(String loc) {
         return ModUtils.modLoc(loc);

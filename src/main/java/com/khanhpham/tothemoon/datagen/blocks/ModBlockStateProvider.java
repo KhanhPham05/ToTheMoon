@@ -8,7 +8,6 @@ import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SlabBlock;
@@ -51,6 +50,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         for (Direction direction : horizontalDirections) {
             netherbrickFurnace.addModels(netherbrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, false), getModel(direction, "block/netherbrick_furnace_controller"));
             netherbrickFurnace.addModels(netherbrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, true), getModel(direction, "block/nether_brick_furnace_controller_on"));
+
         }
     }
 

@@ -20,19 +20,26 @@ import java.util.function.Supplier;
 public enum OreVeins {
     URANIUM_OVERWORLD(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_URANIUM_ORE, new OreGenValues(10, 3, 0, -64));
 
-    private final Holder<ConfiguredFeature<OreConfiguration, ?>> oreConfig;
     private final Holder<PlacedFeature> oreFeature;
+    private final OreBlock ore;
+    private final OreGenValues values;
 
-    OreVeins(RuleTest oreSpawnRule, Supplier<OreBlock> deepslateUraniumOre, OreGenValues values) {
-        this.oreConfig = FeatureUtils.register("tothemoon:" + this.name().toLowerCase() + "_config", Feature.ORE, new OreConfiguration(oreSpawnRule, deepslateUraniumOre.get().defaultBlockState(), values.countInVein()));
-        this.oreFeature = PlacementUtils.register("tothemoon:" + this.name().toLowerCase() + "_feature", this.oreConfig, CountPlacement.of(values.veinsInChunk()), HeightRangePlacement.uniform(VerticalAnchor.absolute(values.maxWorldHeight()), VerticalAnchor.absolute(values.minWorldHeight())));
-    }
-
-    public Holder<ConfiguredFeature<OreConfiguration, ?>> getOreConfig() {
-        return oreConfig;
+    OreVeins(RuleTest oreSpawnRule, Supplier<? extends OreBlock> deepslateUraniumOre, OreGenValues values) {
+        ore = deepslateUraniumOre.get();
+        this.values = values;
+        Holder<ConfiguredFeature<OreConfiguration, ?>> oreConfig = FeatureUtils.register("tothemoon:" + this.name().toLowerCase() + "_config", Feature.ORE, new OreConfiguration(oreSpawnRule, deepslateUraniumOre.get().defaultBlockState(), values.countInVein()));
+        this.oreFeature = PlacementUtils.register("tothemoon:" + this.name().toLowerCase() + "_feature", oreConfig, CountPlacement.of(values.veinsInChunk()), HeightRangePlacement.uniform(VerticalAnchor.absolute(values.maxWorldHeight()), VerticalAnchor.absolute(values.minWorldHeight())));
     }
 
     public Holder<PlacedFeature> getOreFeature() {
         return oreFeature;
+    }
+
+    public OreBlock getOreBlock() {
+        return ore;
+    }
+
+    public OreGenValues getValues() {
+        return values;
     }
 }

@@ -7,7 +7,10 @@ import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredItems;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
+import com.khanhpham.tothemoon.worldgen.OreGenValues;
+import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -71,6 +74,7 @@ public class ModLanguage extends LanguageProvider {
     //ADVANCEMENTS
     public static final TranslatableComponent ROOT = create("advancement", "root");
     public static final TranslatableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
+    public static final TranslatableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
     private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
@@ -124,7 +128,7 @@ public class ModLanguage extends LanguageProvider {
     }
 
     public static <T extends IForgeRegistryEntry<?>> String getPureName(T object) {
-       return convertToTranslatedText(object.getRegistryName());
+        return convertToTranslatedText(object.getRegistryName());
     }
 
     @Override
@@ -168,6 +172,7 @@ public class ModLanguage extends LanguageProvider {
         //ADVANCEMENT
         add(ROOT_DESCRIPTION, "Welcome To The Moon, this advancement will show you al the things that are in this mod");
         add(ROOT, "TTM Project");
+        add(HIDDEN_ADVANCEMENT, "Hidden");
         ADVANCEMENT_COMPONENT.startTranslating(this);
 
         //PATCHOULI
@@ -175,6 +180,7 @@ public class ModLanguage extends LanguageProvider {
         add(BOOK_LANDING, "This guide book will show you all the features that are in this mod. $(br2) This mod is made possible by a single person who do 100% of the code, with the help of 2 texture makers");
         add(THE_BASICS, "The Basics");
         add(THE_BASICS_DESCRIPTION, "This category will show you all $(o)the basics$() as the first steps in the mod.");
+        book("title.crafting_recipe", "Crafting Recipe");
 
         //PATCHOULI - THE BASICS
         add(MANUAL_CRUSHING, "Manual Crushing");
@@ -197,11 +203,17 @@ public class ModLanguage extends LanguageProvider {
         add(TEXT_HOW_TO_USE, "How To Use");
 
         add(BENCH_WORKING_TITLE, "Benchworkin'");
-        add(create("book", "bw_introduction"), "If you have every tried the Extended Crafting mod, so this must be very familiar to you. Workbench, however, has some slight differences. This is one of the key factor of the progress in TTM, Workbench is the ONLY way for you to craft the machine components as well as some essential stuff that the mod requires you to craft in Workbench. This block is a multi-part block just like the bed or door block. Workbench, on the other hand, will extends to the left and face towards you. The following image will show you exactly how it looks like. ");
-        add(create("book", "bw_demonstration"), "In addition, the crafting grid of the workbench is a 5 x 5 grid with 2 additional slots for you");
+        add(create("book", "bw_introduction"), "If you have every tried the Extended Crafting mod, so this must be very familiar to you. Workbench, however, has some slight differences. This is the key for the progression in TTM, Workbench is the ONLY way for you to craft the machine components as well as some essential stuff that the mod requires you to craft in Workbench. This block is a multi-part block just like the bed or door block. Workbench, on the other hand, will extends to the left and face towards you. The following image will show you exactly how it looks like. ");
+        add(create("book", "bw_demonstration"), "In addition, the crafting grid of the workbench is a 5 x 5 grid with 2 additional slots for crafting");
+        book("bw_crafting", "The following page describes how you can craft the workbench in Crafting Table. Please do note that the recipe would be changed in the future.");
+
         //PATCHOULI - Basic Materials
         add(BASIC_MATERIAL_CATEGORY_DESCRIPTION, "A small but reliable category that shows you all the basic ores/metals which are important for your progress in this mod");
         add(BASIC_MATERIALS_CATEGORY, "Basic Materials");
+
+        book("ore_info_title", "Ore Information");
+        book("ore_info_1", "Ores are the most essential key for a process, therefore, you needs to find some materials by mining some ores. However, the question is that what and where are those ores can be found ? $(br2)This page will tell you all about this. $(o)Note: Not all of the information in this entry are visible, unless you enter the mod's exclusive dimension, those pageswill appears$()");
+        bookOreInfo(OreVeins.URANIUM_OVERWORLD);
 
         //Utils
         add(CAP_UNKNOWN, "Capability unknown or not found");
@@ -222,5 +234,24 @@ public class ModLanguage extends LanguageProvider {
 
     private String convertToTranslatedText(ItemLike item) {
         return convertToTranslatedText(Objects.requireNonNull(item.asItem().getRegistryName()));
+    }
+
+    private String book(String translateKey, String translation) {
+        String key = "book.tothemoon." + translateKey;
+        super.add(key, translation);
+        return key;
+    }
+
+    private void bookOreInfo(OreVeins oreVein) {
+        Block oreBlock = oreVein.getOreBlock();
+        String oreName = ModUtils.getPath(oreBlock);
+        String translation = "info_" + oreName;
+        OreGenValues values = oreVein.getValues();
+        ModUtils.log(this.book(translation,
+                String.format("$(li)Ore : %s. $(li)Generate between : Y = %s to %s",
+                        convertToTranslatedText(oreBlock.getRegistryName()),
+                        values.minWorldHeight(),
+                        values.maxWorldHeight()
+                )));
     }
 }

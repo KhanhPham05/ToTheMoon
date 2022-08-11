@@ -1,0 +1,15 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "extra": "minecraft:bucket",
+  "hammer": "tag:tothemoon:hammers",
+  "craftingPattern": [
+    "", "", "", "", "",
+    "", "", "tag:forge:plates/iron", "", "",
+    "", "tag:forge:plates/iron", "tothemoon:smooth_blackstone", "tag:forge:plates/iron", "",
+    "", "", "tag:forge:plates/iron", "", "",
+    "", "", "", "", ""
+  ],
+  "result": {
+    "item": "tothemoon:blackstone_fluid_acceptor"
+  }
+}

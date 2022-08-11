@@ -39,6 +39,7 @@ public class ModUtils {
     public static final IntegerProperty TANK_LEVEL = IntegerProperty.create("fluid_level", 0, 12);
     public static final Random RANDOM = new Random();
 
+
     public static ResourceLocation modLoc(String loc) {
         return new ResourceLocation(Names.MOD_ID, loc);
     }
@@ -85,7 +86,7 @@ public class ModUtils {
 
     @SuppressWarnings("deprecation")
     public static ItemStack getBucketItem(Fluid fluid) {
-        String namespace = fluid.getRegistryName().getNamespace();
+        String namespace = Objects.requireNonNull(fluid.getRegistryName()).getNamespace();
         String path = fluid.getRegistryName().getPath();
 
         ResourceLocation bucketItem = new ResourceLocation(namespace, path + "_bucket");
@@ -142,7 +143,9 @@ public class ModUtils {
             if (ResourceLocation.isValidResourceLocation(name)) {
                 ResourceLocation recipeName = new ResourceLocation(name);
                 var recipes = level.getRecipeManager().getAllRecipesFor(recipeType).stream().filter(recipe -> recipe.getId().equals(recipeName)).toList();
-                return recipes.get(0);
+                if (recipes.size() > 0) return recipes.get(0);
+                else
+                    throw new IllegalStateException(String.format("Recipe with id %s is not present", recipeName));
             }
         }
         return null;

@@ -10,10 +10,10 @@ import net.minecraft.world.inventory.Slot;
 public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchMenu> {
     public WorkbenchScreen(WorkbenchMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-        this.imageWidth = 194;
+        this.imageWidth = 190;
         this.imageHeight = 209;
 
-        this.inventoryLabelX = 18;
+        this.inventoryLabelX = 11;
         this.inventoryLabelY = 113;
 
         this.titleLabelX = 8;
@@ -23,11 +23,6 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchMenu> {
     @Override
     protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
         ModUtils.setupMenuScreen(this, "workbench_crafting.png", pPoseStack);
-        /* Just for slot position testing
-        for (int i = 0; i < menu.getSlotSize(); i++) {
-            Slot slot = menu.getSlot(i);
-            font.draw(pPoseStack, Integer.toString(i), slot.x, slot.y, 0x404040);
-        }*/
     }
 
     @Override

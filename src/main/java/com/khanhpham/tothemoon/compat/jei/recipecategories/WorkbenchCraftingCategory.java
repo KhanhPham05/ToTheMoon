@@ -46,28 +46,28 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     @Override
     public IDrawable getBackground() {
-        return super.guiHelper.createDrawable(super.makeLocation("workbench_crafting.png"), 0, 0, 159, 90);
+        return super.makeBackground("workbench_crafting.png", 159, 98);
     }
 
     @Override
     public void setRecipeLayout(IRecipeLayoutBuilder builder, WorkbenchCraftingRecipe recipe) {
-        super.addInput(builder, recipe, 0, 1, 19);
-        super.addInput(builder, recipe, 1, 1, 56);
+        super.addInput(builder, recipe, 0, 2, 23);
+        super.addInput(builder, recipe, 1, 2, 60);
 
         int index = 2;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                super.addInput(builder, recipe, index, 33 + j * 18, 1 + i * 18);
+                super.addInput(builder, recipe, index, 32 + j * 18 + 1, 5 + i * 18 + 1);
                 index++;
             }
         }
 
-        super.addOutput(builder, recipe.getResultItem(), 133, 34);
+        super.addOutput(builder, recipe.getResultItem(), 137, 41);
     }
 
     @Override
     public void addShowRecipeZone(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(WorkbenchScreen.class, 153, 21, 30, 27, RECIPE_CATEGORY_TYPE);
+        registration.addRecipeClickArea(WorkbenchScreen.class, 155, 13, 24, 22, RECIPE_CATEGORY_TYPE);
     }
 
     @Override

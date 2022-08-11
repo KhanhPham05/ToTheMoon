@@ -3,8 +3,8 @@ package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
+import com.khanhpham.tothemoon.core.blocks.tanks.TankBlockItem;
 import com.khanhpham.tothemoon.core.items.FluidCapableItem;
-import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -14,6 +14,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -34,7 +35,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    public NetherBrickFurnaceBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<NetherBrickFurnaceControllerBlockEntity> supplier) {
+    public NetherBrickFurnaceBlock(Properties p_49224_) {
         super(p_49224_);
         registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(FACING, Direction.NORTH));
     }
@@ -63,21 +64,23 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     /**
      * Handling GUI and multiblock
      *
-     * @see NetherBrickFurnaceControllerBlockEntity#checkMultiblock(Level)
+     * @see NetherBrickFurnaceControllerBlockEntity#checkMultiblock(Level, BlockPos, BlockState)
      */
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity be) {
                 if (be.getMultiblock() != null) {
-                    //open menu
                     return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-                } else {
-                    be.checkMultiblock(pLevel);
+                }
+
+                /* else {
+                    be.checkMultiblock(pLevel, pPos, pState);
                     return be.getMultiblock() != null
                             ? super.use(pState, pLevel, pPos, pPlayer, pHand, pHit)
                             : InteractionResult.CONSUME;
                 }
+                */
             }
         }
 
@@ -107,19 +110,8 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     }
 
     @Override
-    public NetherBrickFurnaceItem getRawItem() {
-        return new NetherBrickFurnaceItem(this);
-    }
-
-    private static final class NetherBrickFurnaceItem extends FluidCapableItem {
-        public NetherBrickFurnaceItem(Block pBlock) {
-            super(pBlock, new Properties().stacksTo(1).tab(ToTheMoon.TAB));
-        }
-
-        @Override
-        protected int getFluidCapacity() {
-            return NetherBrickFurnaceControllerBlockEntity.TANK_CAPACITY;
-        }
+    public BlockItem getRawItem() {
+        return new TankBlockItem(this, NetherBrickFurnaceControllerBlockEntity.TANK_CAPACITY);
     }
 }
 

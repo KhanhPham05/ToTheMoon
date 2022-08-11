@@ -90,6 +90,6 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
     }
 
     protected IDrawable makeBackground(String textureName, int width, int height) {
-        return this.guiHelper.createDrawable(this.makeLocation(textureName.concat(".png")), 0, 0, width, height);
+        return this.guiHelper.createDrawable(this.makeLocation(textureName.contains(".png") ? textureName : textureName.concat(".png")), 0, 0, width, height);
     }
 }

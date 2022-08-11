@@ -113,6 +113,12 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
             multiblockPartPositions.add(worldPosition.above().relative(DirectionUtils.getBlockDirectionRight(controllerFacing)));
             worldPosition = worldPosition.relative(controllerFacing.getOpposite());
         }
+        //this.checkMultiblock(this.level, this.getBlockPos(), this.getBlockState());
+    }
+
+    @Override
+    public void setLevel(Level pLevel) {
+        super.setLevel(pLevel);
     }
 
     @Override
@@ -140,7 +146,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
      */
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
-        //checkMultiblock(level);
+        //checkMultiblock(level, pos, state);
         final Direction controllerFacing = state.getValue(NetherBrickFurnaceBlock.FACING);
         if (this.getMultiblock() != null) {
             if (!getItem(3).isEmpty()) {
@@ -172,11 +178,14 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                     state = state.setValue(NetherBrickFurnaceBlock.LIT, false);
                 }
         } else {
-            // Drop all the items out.
-            if (!this.items.isEmpty()) {
-                Containers.dropContents(level, pos.relative(controllerFacing), this.items);
+            checkMultiblock(level, pos, state);
+            if (getMultiblock() == null) {
+                // Drop all the items out.
+                if (!this.items.isEmpty()) {
+                    Containers.dropContents(level, pos.relative(controllerFacing), this.items);
+                }
+                state = state.setValue(NetherBrickFurnaceBlock.LIT, false);
             }
-            state = state.setValue(NetherBrickFurnaceBlock.LIT, false);
         }
 
 
@@ -199,43 +208,48 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     }
 
 
-    public void checkMultiblock(Level level) {
-        if (this.getMultiblock() == null) {
-            this.partDefinition.clear();
+    public void checkMultiblock(@Nullable Level level, BlockPos blockPos, BlockState pState) {
+        if (level != null)
+            if (this.getMultiblock() == null) {
+                this.partDefinition.clear();
 
-            for (int i = 0; i < multiblockPartPositions.size(); i++) {
-                Block block = level.getBlockState(multiblockPartPositions.get(i)).getBlock();
-                if (i == 4 && block.equals(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())) {
-                    partDefinition.set(4, true);
-                    builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.CONTROLLER);
-                } else if (i == 13 && block.equals(Blocks.BLAST_FURNACE)) {
-                    partDefinition.set(13, true);
-                    builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
-                } else
-                    switch (i) {
-                        case 6, 8,
-                                15, 16, 17,
-                                24, 25, 26 -> check(block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
-                        case 7 ->
-                                check((block.equals(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get()) && ((FluidAcceptorBlock) block).isNotObstructed()) || block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
+                for (int i = 0; i < multiblockPartPositions.size(); i++) {
+                    Block block = level.getBlockState(multiblockPartPositions.get(i)).getBlock();
+                    if (i == 4 && block.equals(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())) {
+                        partDefinition.set(4, true);
+                        builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.CONTROLLER);
+                    } else if (i == 13 && block.equals(Blocks.BLAST_FURNACE)) {
+                        partDefinition.set(13, true);
+                        builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
+                    } else
+                        switch (i) {
+                            case 6, 8,
+                                    15, 16, 17,
+                                    24, 25, 26 -> check(block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
+                            case 7 ->
+                                    check((block.equals(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get())) || block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), 7);
 
-                        case 1, 3, 5 ->
-                                check((block.equals(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get()) && ((FluidAcceptorBlock) block).isNotObstructed()) || block.equals(Blocks.NETHER_BRICKS), i);
-                        default -> this.check(block.equals(Blocks.NETHER_BRICKS), i);
-                    }
-            }
-
-            //Make sure the furnace controller is facing outside
-            if (!partDefinition.contains(false) && level.getBlockState(this.worldPosition.relative(this.getBlockState().getValue(NetherBrickFurnaceBlock.FACING))).isAir()) {
-                this.setMultiblock(MultiblockManager.INSTANCE.addMultiblock(builder.build()));
-                if (level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
-                    ModdedTriggers.MULTIBLOCK_FORMED.trigger(serverPlayer, MultiblockFormedTrigger.MultiblockType.NETHER_BRICK_FURNACE);
+                            case 1, 3, 5 ->
+                                    check((block.equals(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get())) || block.equals(Blocks.NETHER_BRICKS), i);
+                            default -> this.check(block.equals(Blocks.NETHER_BRICKS), i);
+                        }
                 }
-                this.setAllAcceptor(this);
-            } else {
-                this.builder.clearAll();
+
+                //Make sure the furnace controller is facing outside
+                if (!partDefinition.contains(false) && level.getBlockState(this.worldPosition.relative(this.getBlockState().getValue(NetherBrickFurnaceBlock.FACING))).isAir()) {
+                    this.setMultiblock(MultiblockManager.INSTANCE.addMultiblock(builder.build()));
+                    if (level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
+                        ModdedTriggers.MULTIBLOCK_FORMED.trigger(serverPlayer, MultiblockFormedTrigger.MultiblockType.NETHER_BRICK_FURNACE);
+                    }
+                    //  pState = pState.setValue(NetherBrickFurnaceBlock.IS_FORMED, true);
+                    this.setAllAcceptor(this);
+                } else {
+                    //pState = pState.setValue(NetherBrickFurnaceBlock.IS_FORMED, false);
+                    this.builder.clearAll();
+                }
+                // level.setBlock(blockPos, pState, 3);
+                //   setChanged(level, blockPos, pState);
             }
-        }
     }
 
     private void check(boolean condition, int i) {
@@ -296,10 +310,31 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     }
 
     private void setAllAcceptor(@Nullable NetherBrickFurnaceControllerBlockEntity be) {
-        for (BlockPos acceptorDirection : this.getAcceptorDirections()) {
-            if (this.level != null && this.level.getBlockState(acceptorDirection).getBlock() instanceof FluidAcceptorBlock fluidAcceptorBlock) {
-                fluidAcceptorBlock.setControllerBe(be);
+        // Could not analyze data flow ?
+
+        // for (BlockPos acceptorDirection : this.getAcceptorDirections()) {
+        //    if (this.level != null && this.level.getBlockState(acceptorDirection).getBlock() instanceof FluidAcceptorBlock fluidAcceptorBlock) {
+        //        fluidAcceptorBlock.setControllerBe(be);
+        //    }
+        //}
+        if (level != null) {
+            BlockPos[] acceptors = this.getAcceptorDirections();
+            if (acceptors.length > 0) {
+                BlockState block = level.getBlockState(acceptors[0]);
+                if (block.is(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get())) {
+                    ((FluidAcceptorBlock) block.getBlock()).setControllerBe(be);
+                }
+                for (int i = 1; i < acceptors.length; i++) {
+                    BlockState block1 = level.getBlockState(acceptors[i]);
+                    if (block1.is(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get())) {
+                        ((FluidAcceptorBlock) block1.getBlock()).setControllerBe(be);
+                    }
+                }
             }
         }
+    }
+
+    public boolean canFillFromBucket() {
+        return this.tank.getSpace() >= FluidAttributes.BUCKET_VOLUME;
     }
 }

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:blackstone"
+  },
+  "result": "tothemoon:smooth_blackstone",
+  "experience": 1.0,
+  "cookingtime": 200
+}

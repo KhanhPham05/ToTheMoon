@@ -7,14 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.fluids.FluidStack;
-
-import javax.annotation.Nullable;
 
 public class GuiRenderingUtils {
     private static final Minecraft CLIENT = Minecraft.getInstance();
@@ -27,7 +23,7 @@ public class GuiRenderingUtils {
     public static void renderFluidStack(PoseStack pose, FluidStack fluidStack, int tankCapacity, int x, int y, int width, int height) {
         int fluidAmount = fluidStack.getAmount();
         if (fluidStack.getFluid() != Fluids.EMPTY && fluidAmount > 0) {
-            TextureAtlasSprite fluidSprite = getFlowingSprite(fluidStack);
+            TextureAtlasSprite fluidSprite = stillSprite(fluidStack);
             if (fluidSprite != null) {
                 y += height;
                 float renderAmount = Math.max(Math.min(height, fluidAmount * height / tankCapacity), 1);
@@ -91,7 +87,7 @@ public class GuiRenderingUtils {
         //https://github.com/mezz/JustEnoughItems/blob/211ca2cc020f56f12f0bc1cf8799b731d593e7d4/Common/src/main/java/mezz/jei/common/render/FluidTankRenderer.java#L95
         Fluid fluid = fluidStack.getFluid();
         if (!fluid.isSame(Fluids.EMPTY)) {
-            TextureAtlasSprite sprite = getFlowingSprite(fluidStack);
+            TextureAtlasSprite sprite = stillSprite(fluidStack);
 
             int fluidColor = getFluidColorTint(fluidStack);
 
@@ -164,8 +160,8 @@ public class GuiRenderingUtils {
         return fluidStack.getFluid().getAttributes().getColor(fluidStack);
     }
 
-    private static TextureAtlasSprite getFlowingSprite(FluidStack fluidStack) {
+    private static TextureAtlasSprite stillSprite(FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();
-        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getAttributes().getFlowingTexture(fluidStack));
+        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getAttributes().getStillTexture(fluidStack));
     }
 }

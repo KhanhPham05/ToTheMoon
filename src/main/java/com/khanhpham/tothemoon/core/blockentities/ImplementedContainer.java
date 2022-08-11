@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.core.blockentities;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
@@ -12,7 +13,10 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public interface ImplementedContainer<T extends AbstractContainerMenu> extends Container, MenuProvider, Nameable {
     NonNullList<ItemStack> getItems();
 
@@ -33,7 +37,9 @@ public interface ImplementedContainer<T extends AbstractContainerMenu> extends C
 
     @Override
     default ItemStack removeItem(int pIndex, int pCount) {
-        return ContainerHelper.removeItem(getItems(), pIndex, pCount);
+        ItemStack stack = ContainerHelper.removeItem(getItems(), pIndex, pCount);
+        if (!stack.isEmpty()) this.setChanged();
+        return stack;
     }
 
     @Override
@@ -44,6 +50,7 @@ public interface ImplementedContainer<T extends AbstractContainerMenu> extends C
     @Override
     default void setItem(int pIndex, ItemStack pStack) {
         getItems().set(pIndex, pStack);
+        setChanged();
     }
 
     @Override
@@ -57,6 +64,7 @@ public interface ImplementedContainer<T extends AbstractContainerMenu> extends C
     @Override
     default void clearContent() {
         this.getItems().clear();
+        this.setChanged();
     }
 
     @Nonnull

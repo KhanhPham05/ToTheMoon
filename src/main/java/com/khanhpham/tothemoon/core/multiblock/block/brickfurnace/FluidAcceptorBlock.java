@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 
 
 @SuppressWarnings("deprecation")
-public class FluidAcceptorBlock extends Block {
+public final class FluidAcceptorBlock extends Block {
     /*controller perspective:
      *   x -> controller
      *      0
@@ -31,18 +31,28 @@ public class FluidAcceptorBlock extends Block {
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
-            ItemStack item = pPlayer.getMainHandItem();
+            ItemStack item = pPlayer.getItemInHand(pHand);
             if (item.is(Items.LAVA_BUCKET)) {
-                if (controllerBe != null) {
-                    controllerBe.fillFromBucket(pPlayer);
-                    if (!pPlayer.isCreative())
-                        pPlayer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BUCKET));
-                    return InteractionResult.CONSUME;
+                if (this.controllerBe != null) {
+                    if (this.controllerBe.getMultiblock() != null) {
+                        this.contactToFurnace(pPlayer, pHand);
+                    }
                 }
             }
         }
-        return InteractionResult.FAIL;
+
+        return InteractionResult.SUCCESS;
     }
+
+    //FIXME
+    private void contactToFurnace(Player pPlayer, InteractionHand pHand) {
+        if (this.controllerBe != null && this.controllerBe.canFillFromBucket()) {
+            this.controllerBe.fillFromBucket(pPlayer);
+            if (!pPlayer.isCreative())
+                pPlayer.setItemInHand(pHand, new ItemStack(Items.BUCKET));
+        }
+    }
+
 
     public void setControllerBe(@Nullable NetherBrickFurnaceControllerBlockEntity controllerBe) {
         this.controllerBe = controllerBe;

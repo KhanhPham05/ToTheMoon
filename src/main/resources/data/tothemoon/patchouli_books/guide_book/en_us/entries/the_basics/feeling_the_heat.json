@@ -8,6 +8,7 @@
     "book.tothemoon.fth_page_1",
     {
       "type": "patchouli:crafting",
+      "title": "Crafting Recipe",
       "recipe": "tothemoon:crafting/netherbrick_furnace_controller",
       "text": "book.tothemoon.fth_craft_controller"
     },
