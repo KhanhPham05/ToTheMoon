@@ -11,7 +11,9 @@ on:
   push:
     branches: [ "1.18" ]
   pull_request:
+    type: [opened, reopened]
     branches: [ "1.18" ]
+  
 
 permissions:
   contents: read
@@ -33,3 +35,6 @@ jobs:
       
     - name : Executing Gradle Build
       run: ./gradlew compileJava
+      
+    - name : Check runData
+      run: ./gradlew runData
