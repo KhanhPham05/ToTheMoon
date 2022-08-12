@@ -32,6 +32,14 @@
       "title": "book.tothemoon.how_to_use",
       "text": "book.tothemoon.fth_using_multiblock"
     },
-    ""
+    "book.tothemoon.fth_multiblock_illustration",
+    {
+      "type": "patchouli:image",
+      "images": [
+        "tothemoon:textures/guide_book/furnace_build_1.png",
+        "tothemoon:textures/guide_book/furnace_build_2.png",
+        "tothemoon:textures/guide_book/furnace_build_finish.png"
+      ]
+    }
   ]
 }

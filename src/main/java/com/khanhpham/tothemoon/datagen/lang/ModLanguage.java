@@ -27,22 +27,16 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ModLanguage extends LanguageProvider {
-    //ITEM / BLOCK /INVENTORY
-    private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent TAG_TRANSLATOR = create("info", "tag_translator");
-
     //UTILS
     public static final TranslatableComponent CAP_UNKNOWN = create("command", "cap_unknown");
     public static final TranslatableComponent CAP_FOUND = create("command", "cap_found");
-
     //JEI
     public static final TranslatableComponent JEI_METAL_PRESS = create("jei", "metal_press_category");
     public static final TranslatableComponent JEI_ALLOY_SMELTING = create("jei", "alloy_smelter_category");
     @Deprecated
     public static final TranslatableComponent MANUAL_METAL_PRESSING_CATEGORY = create("jei", "manual_metal_pressing");
     public static final TranslatableComponent JEI_WORKBENCH_CRAFTING = create("jei", "workbench_crafting");
-
-
     //GUI
     public static final TranslatableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
     public static final TranslatableComponent NETHER_BRICK_FURNACE_CONTROLLER = create("gui", "nether_brick_furnace");
@@ -76,8 +70,9 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent ROOT = create("advancement", "root");
     public static final TranslatableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
     public static final TranslatableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
+    //ITEM / BLOCK /INVENTORY
+    private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent AUTOMATE_THE_FUEL = createAdvancement("automate_the_fuel", "Automate The Fuel", "Craft any type of Fluid Acceptor for Nether Brick Furnace");
-    private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     public static final TranslatableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
     public static final TranslatableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft the Nether Brick Furnace Controller");
     public static final TranslatableComponent HIGH_HEAT_SMELTING = createAdvancement("high_heat_smelting", "High Heat Smelting", "Construct A Nether Brick Furnace, see Guide Book for more information");
@@ -91,6 +86,7 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent VERY_SERIOUS_DEDICATION = createAdvancement("very_serious_dedication", "A Very Serious Dedication", "You just broke the Netherite Hoe");
     public static final TranslatableComponent BURNING_ENERGY = createAdvancement("burning_energy", "Burning Energy", "Craft and use the Energy Smelter");
     public static final TranslatableComponent MACHINE_EXOSKELETON = createAdvancement("machine_exoskeleton", "Machine ExoSkeleton", "Craft a Copper Machine Frame.");
+    private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     private static final List<Block> ALL_BLOCKS;
     private static final List<Item> ALL_ITEMS;
 
@@ -202,13 +198,13 @@ public class ModLanguage extends LanguageProvider {
         add(create("book", "feeling_the_heat_title"), "Feeling The Heat");
         add(create("book", "fth_page_1"), "Before you can make steel, you need to have some $(o)some$() pieces of $(l)heated coal dusts$() first. But before that, you need something so heat the $(l:tothemoon:manual_crushing)coal dust$().$(br2) So Nether Brick Furnace is your chose");
         add(create("book", "fth_craft_controller"), "First of all, you need to craft a Controller for this huge furnace. This list below shows the blocks that the furnace needs for construction $(li)x1 NetherBrick Furnace Controller $(li)x16 Nether Bricks $(li)x1 Blass Furnace $(li)x9 Smooth Blackstone");
-        //add(create("book", "fth_notice"), "$(o)Notice:$()$(br) - This multiblock requires a $(l)Blast Furnace$() at the core / centre");
         add(create("book", "fth_building_title"), "Building The Furnace");
         add(create("book", "fth_building_1"), "Once you have finished crafting all the required ingredients, it's time to start the construction of the Nether Bricks Furnace. $(t:Recipe Type: tothemoon:high_heat_smelting)(For mod/pack makers)$(). $(br2) This is a 3 x 3 x 3 multiblock. At the very bottom, place 9 blocks of nether bricks in a 3x3 square. $(br) Now decide which side the furnace is facing to and then place it down at the middle of the face of that side. Make sure it is facing directly towards the air. After that, place a Blast Furnace behind it, that should be the core/centre of the multiblock");
         add(create("book", "fth_building_2"), "after that, place the 7 remaining blocks with nether bricks. $(br) Finally, fill the last layer with Smooth Blackstone");
         add(create("book", "fth_using_multiblock"), "This special furnace is the key of the process, In order to produce Heated Coal Dust for steel, you need this furnace. However, to make this furnace function, you may need to have Blaze Powder as startup fuel and lava as a process maintenance, usually, the lava consumption is pretty low, at 3mB per a tick. After forming you can access the controller GUI to start making heated coal. The last thing you need is coal dust after smashing from normal coal by anvil");
         add(create("book", "fth_form_multiblock"), "In order to access the GUI and use it, you must right click on the controller for confirmation so other components like Fluid Acceptors can work as expected.");
         add(create("book", "fth_form_multiblock.title"), "Last Step");
+        book("fth_multiblock_illustration", "I can not let you see the multiblock page right now be cause it might looks pretty ugly. SO in order for you to understand it easily, there are the illustration images that you can have a look at");
         add(TEXT_HOW_TO_USE, "How To Use");
 
         add(BENCH_WORKING_TITLE, "Benchworkin'");

@@ -38,7 +38,7 @@ a91bd7033ed62f3cf91b8589ebab696aa7c6f4ee assets/tothemoon/blockstates/raw_uraniu
 31326ae37d8433e2db02b978d664b7a1ec55a138 assets/tothemoon/blockstates/steel_block.json
 36b4193e61f6dcf4085a0eaf93f1278f0856e2c2 assets/tothemoon/blockstates/steel_sheet_block.json
 0e4962c034adfced923df406f502baa36fc6a1d6 assets/tothemoon/blockstates/uranium_block.json
-74132e58f61f836667d4f42852e8903bdc4003b8 assets/tothemoon/lang/en_us.json
+a30c05d77d0743cfe9460b3a07238078ab1f6471 assets/tothemoon/lang/en_us.json
 0a595220fdc9162b5120ec88d64e419b8f916c2f assets/tothemoon/models/block/anti_pressure_glass.json
 78ee5abf59ff5ccc55acd9268289c36089e0c8c3 assets/tothemoon/models/block/battery_level_0.json
 7d442af3b132c46bc0c0cf140bd429563605c2e0 assets/tothemoon/models/block/battery_level_1.json
@@ -228,7 +228,7 @@ dc2af1e635fa8aac4dc3b60a57933584afac20c7 assets/tothemoon/models/item/uranium_ro
 d1a849908d6561ae9d842c6ef972ad47348a51b1 data/forge/tags/blocks/ore_rates/singular.json
 5da9e59383021e3531c4c2e321bd647ded0ecfbf data/forge/tags/blocks/ores/quartz.json
 3b3e3a64c2549a54fd10abf6aadd19bb262cc6df data/forge/tags/blocks/ores/uranium.json
-87a5bf33c945dfe5b0c9c5799c135862e1b0cee2 data/forge/tags/blocks/sheetmetals.json
+76a6f95f36a3a768797219be0ce64e31ebf71d55 data/forge/tags/blocks/sheetmetals.json
 e1188083f462e6850dcd6392f5009dafe36f6a09 data/forge/tags/blocks/sheetmetals/copper.json
 1423883a20bc9c06e3ad7f5602ab079fa02b3b56 data/forge/tags/blocks/sheetmetals/gold.json
 4184cd658d5a6715138ce16727a77c656d5ebac8 data/forge/tags/blocks/sheetmetals/iron.json
