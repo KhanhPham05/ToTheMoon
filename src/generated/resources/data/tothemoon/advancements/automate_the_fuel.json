@@ -1,0 +1,42 @@
+{
+  "parent": "tothemoon:a_heated_topic",
+  "display": {
+    "icon": {
+      "item": "tothemoon:nether_bricks_fluid_acceptor"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.automate_the_fuel"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.automate_the_fuel.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "req": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:nether_bricks_fluid_acceptor"
+            ]
+          },
+          {
+            "items": [
+              "tothemoon:blackstone_fluid_acceptor"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "req"
+    ]
+  ]
+}

@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.datagen.recipes.provider;
 
+import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.datagen.recipes.*;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -164,6 +165,12 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
         helper.shaped(ModBlocks.WORKBENCH).pattern("PPH").pattern("WWW").pattern("F F").define('F', FENCES).define('P', Items.PAPER).define('W', ItemTags.PLANKS).define('H', ModItems.WOODEN_HAMMER.get()).save();
 
+        //hammers
+        this.hammer(helper, ModItems.WOODEN_HAMMER, ItemTags.PLANKS);
+        this.hammer(helper, ModItems.STEEL_HAMMER, PLATES_STEEL);
+        this.hammer(helper, ModItems.DIAMOND_HAMMER, GEMS_DIAMOND);
+        this.hammer(helper, ModItems.NETHERITE_HAMMER, INGOTS_NETHERITE);
+
         helper.shapelessCrafting(ModItems.REDSTONE_STEEL_ALLOY_DUST.get(), 1, ModItems.STEEL_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
         helper.shapelessCrafting(ModItems.REDSTONE_METAL_DUST.get(), 1, ModItems.IRON_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
 
@@ -185,6 +192,10 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.stoneCutting(ModBlocks.POLISHED_MOON_ROCK, 1, ModBlocks.MOON_ROCK);
         helper.stoneCutting(ModBlocks.SMOOTH_BLACKSTONE, 1, () -> Items.BLACKSTONE);
         helper.smelting(Items.BLACKSTONE, ModBlocks.SMOOTH_BLACKSTONE.get(), false);
+    }
+
+    private void hammer(RecipeGeneratorHelper helper, Supplier<HammerItem> result, TagKey<Item> from) {
+        helper.shaped(result).pattern(" F ").pattern(" SF").pattern("S  ").define('S', RODS_WOODEN).define('F', from).save();
     }
 
     private void sheetBlock(final RecipeGeneratorHelper helper, Supplier<? extends Block> block, TagKey<Item> material) {

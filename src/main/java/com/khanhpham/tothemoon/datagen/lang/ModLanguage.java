@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 public class ModLanguage extends LanguageProvider {
     //ITEM / BLOCK /INVENTORY
+    private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent TAG_TRANSLATOR = create("info", "tag_translator");
 
     //UTILS
@@ -77,7 +78,6 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
     public static final TranslatableComponent AUTOMATE_THE_FUEL = createAdvancement("automate_the_fuel", "Automate The Fuel", "Craft any type of Fluid Acceptor for Nether Brick Furnace");
     private static final TranslatableComponent NO_TAG = create("button", "no_tag");
-    private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
     public static final TranslatableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft the Nether Brick Furnace Controller");
     public static final TranslatableComponent HIGH_HEAT_SMELTING = createAdvancement("high_heat_smelting", "High Heat Smelting", "Construct A Nether Brick Furnace, see Guide Book for more information");
@@ -85,6 +85,12 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent COVER_ME_WITH_CARBONIZED_IRON = createAdvancement("cover_me_with_carbonized_iron", "Cover Me With Carbonized Carbon", "Wear a full set of Steel Armor with all the steel tools");
     public static final TranslatableComponent ENERGIZE_THE_FUEL = createAdvancement("energize_the_fuel", "Energize The Fuel", "Craft Copper Energy Generator");
     public static final TranslatableComponent BENCH_WORKING = createAdvancement("bench_working", "Benchworkin'", "Craft the Workbench");
+    public static final TranslatableComponent FULLY_ENERGIZED = createAdvancement("fully_energized", "Fully Energized", "Craft and place down the Diamond Energy Generator");
+    public static final TranslatableComponent RADIATION_PROTECTED = createAdvancement("radiation_protected", "Radiation Protected", "Obtain a full set of Uranium Armor.");
+    public static final TranslatableComponent ISNT_THIS_STEEL_PICKAXE = createAdvancement("isnt_this_steel_pickaxe", "Isn't This Steel Pickaxe ?", "Craft Steel Pickaxe");
+    public static final TranslatableComponent VERY_SERIOUS_DEDICATION = createAdvancement("very_serious_dedication", "A Very Serious Dedication", "You just broke the Netherite Hoe");
+    public static final TranslatableComponent BURNING_ENERGY = createAdvancement("burning_energy", "Burning Energy", "Craft and use the Energy Smelter");
+    public static final TranslatableComponent MACHINE_EXOSKELETON = createAdvancement("machine_exoskeleton", "Machine ExoSkeleton", "Craft a Copper Machine Frame.");
     private static final List<Block> ALL_BLOCKS;
     private static final List<Item> ALL_ITEMS;
 

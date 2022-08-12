@@ -205,7 +205,6 @@ public class RecipeGeneratorHelper {
             builder.define(c, tag);
             return this;
         }
-
     }
 
     public static class Smelting extends NamedRecipeBuilder<SimpleCookingRecipeBuilder> {
