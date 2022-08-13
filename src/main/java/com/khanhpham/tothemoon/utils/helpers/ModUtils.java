@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -39,6 +40,9 @@ public class ModUtils {
     public static final IntegerProperty TANK_LEVEL = IntegerProperty.create("fluid_level", 0, 12);
     public static final Random RANDOM = new Random();
 
+    private ModUtils() {
+        throw new IllegalStateException("Utilities Class");
+    }
 
     public static ResourceLocation modLoc(String loc) {
         return new ResourceLocation(Names.MOD_ID, loc);
@@ -149,6 +153,10 @@ public class ModUtils {
             }
         }
         return null;
+    }
+
+    public static boolean checkForMod(String modid) {
+        return ModList.get().isLoaded(modid);
     }
 
     public static void warn(String s, Object... params) {

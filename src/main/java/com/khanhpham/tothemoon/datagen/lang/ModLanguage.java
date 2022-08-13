@@ -86,6 +86,7 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent VERY_SERIOUS_DEDICATION = createAdvancement("very_serious_dedication", "A Very Serious Dedication", "You just broke the Netherite Hoe");
     public static final TranslatableComponent BURNING_ENERGY = createAdvancement("burning_energy", "Burning Energy", "Craft and use the Energy Smelter");
     public static final TranslatableComponent MACHINE_EXOSKELETON = createAdvancement("machine_exoskeleton", "Machine ExoSkeleton", "Craft a Copper Machine Frame.");
+    public static final TranslatableComponent COMBINING_MATERIALS = createAdvancement("combining_materials", "Combining Materials", "Alloy Smelter allows you to combine materials together");
     private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     private static final List<Block> ALL_BLOCKS;
     private static final List<Item> ALL_ITEMS;
@@ -206,6 +207,7 @@ public class ModLanguage extends LanguageProvider {
         add(create("book", "fth_form_multiblock.title"), "Last Step");
         book("fth_multiblock_illustration", "I can not let you see the multiblock page right now be cause it might looks pretty ugly. SO in order for you to understand it easily, there are the illustration images that you can have a look at");
         add(TEXT_HOW_TO_USE, "How To Use");
+        book("note", "Note");
 
         add(BENCH_WORKING_TITLE, "Benchworkin'");
         add(create("book", "bw_introduction"), "If you have every tried the Extended Crafting mod, so this must be very familiar to you. Workbench, however, has some slight differences. This is the key for the progression in TTM, Workbench is the ONLY way for you to craft the machine components as well as some essential stuff that the mod requires you to craft in Workbench. This block is a multi-part block just like the bed or door block. Workbench, on the other hand, will extends to the left and face towards you. The following image will show you exactly how it looks like. ");

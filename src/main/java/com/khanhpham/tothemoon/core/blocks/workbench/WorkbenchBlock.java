@@ -49,12 +49,12 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
 
     @Override
     public final InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && !pPlayer.getMainHandItem().is(ModBlocks.WORKBENCH.get().asItem())) {
+        if (!pLevel.isClientSide) {
             pPlayer.openMenu(new SimpleAccessMenuProvider(WorkbenchMenu::new, this, pPos, ModBlocks.WORKBENCH.get().getName()));
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
         }
 
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override

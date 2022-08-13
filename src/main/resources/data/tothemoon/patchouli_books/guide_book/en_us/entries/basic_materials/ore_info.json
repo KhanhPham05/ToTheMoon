@@ -1,11 +1,10 @@
 {
   "name": "book.tothemoon.ore_info_title",
-  "icon": "tothemoon:uranium_deepslate_ore",
+  "icon": "tothemoon:deepslate_uranium_ore",
   "category": "tothemoon:basic_materials",
   "sortnum": 0,
   "advancement": "minecraft:story/iron_tools",
   "pages": [
-
     {
       "type": "patchouli:spotlight",
       "item": "tothemoon:deepslate_uranium_ore",

@@ -7,8 +7,10 @@ import com.khanhpham.tothemoon.core.recipes.WorkbenchCraftingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -67,7 +69,7 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     @Override
     public void addShowRecipeZone(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(WorkbenchScreen.class, 155, 13, 24, 22, RECIPE_CATEGORY_TYPE);
+        registration.addRecipeClickArea(WorkbenchScreen.class, 155, 83, 20, 18, RECIPE_CATEGORY_TYPE);
     }
 
     @Override

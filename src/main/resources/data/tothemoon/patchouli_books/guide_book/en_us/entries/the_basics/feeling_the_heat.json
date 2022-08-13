@@ -23,16 +23,10 @@
       "text": "book.tothemoon.fth_building_2"
     },
     {
-      "type": "patchouli:text",
-      "title": "book.tothemoon.fth_form_multiblock.title",
-      "text": "book.tothemoon.fth_form_multiblock"
+      "type" : "patchouli:text",
+      "text": "book.tothemoon.fth_multiblock_illustration",
+      "title": "book.tothemoon.note"
     },
-    {
-      "type": "patchouli:text",
-      "title": "book.tothemoon.how_to_use",
-      "text": "book.tothemoon.fth_using_multiblock"
-    },
-    "book.tothemoon.fth_multiblock_illustration",
     {
       "type": "patchouli:image",
       "images": [
@@ -40,6 +34,15 @@
         "tothemoon:textures/guide_book/furnace_build_2.png",
         "tothemoon:textures/guide_book/furnace_build_finish.png"
       ]
+    },
+    {
+      "type": "patchouli:text",
+      "title": "book.tothemoon.how_to_use",
+      "text": "book.tothemoon.fth_using_multiblock"
+    },
+    {
+      "type": "patchouli:empty",
+      "draw_filter": false
     }
   ]
 }

@@ -1,5 +1,4 @@
 {
-  "processor": "com.khanhpham.tothemoon.compat.patchouli.WorkbenchTemplateProcessor",
   "components": [
     {
       "type": "patchouli:image",
@@ -8,28 +7,22 @@
       "y": 20,
       "u": 0,
       "v": 0,
-      "width": 86,
-      "height": 120
+      "width": 101,
+      "height": 123
     },
     {
       "type": "patchouli:header",
-      "text": "#title",
+      "text": "book.tothemoon.title.crafting_recipe",
       "x": -1,
-      "y": -1
+      "y": -1,
+      "scale": 0.85
     },
     {
       "type": "patchouli:custom",
-      "class": "com.khanhpham.tothemoon.compat.patchouli.WorkbenchComponent",
+      "class": "com.khanhpham.tothemoon.compat.patchouli.workbench.WorkbenchComponent",
       "x": 10,
       "y": 20,
       "recipe_id": "#recipe"
-    },
-    {
-      "type": "patchouli:item",
-      "item": "#output",
-      "framed": false,
-      "x": 79,
-      "y": 27
     }
   ]
 }
