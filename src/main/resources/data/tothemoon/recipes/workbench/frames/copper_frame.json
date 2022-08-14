@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "craftingPattern": [
+    "","tag:forge:plates/copper","tag:forge:plates/copper","tag:forge:plates/copper","",
+    "tag:forge:rods/copper","tag:stone_crafting_materials",  "tag:stone_crafting_materials",   "tag:stone_crafting_materials","tag:forge:rods/copper",
+    "tag:forge:rods/copper","tag:stone_crafting_materials","tag:forge:storage_blocks/redstone","tag:stone_crafting_materials","tag:forge:rods/copper",
+    "tag:forge:rods/copper","tag:stone_crafting_materials",  "tag:stone_crafting_materials",   "tag:stone_crafting_materials","tag:forge:rods/copper",
+    "","tag:forge:plates/copper","tag:forge:plates/copper","tag:forge:plates/copper",""
+  ],
+  "result": {
+    "item": "tothemoon:copper_machine_frame"
+  }
+}

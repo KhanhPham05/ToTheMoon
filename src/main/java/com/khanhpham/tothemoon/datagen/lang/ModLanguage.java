@@ -72,6 +72,7 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
     //ITEM / BLOCK /INVENTORY
     private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
+    public static final TranslatableComponent HARDEN_FRAMED = createAdvancement("harden_framed", "Craft a higher tier of machine frame - Steel Frame.");
     public static final TranslatableComponent AUTOMATE_THE_FUEL = createAdvancement("automate_the_fuel", "Automate The Fuel", "Craft any type of Fluid Acceptor for Nether Brick Furnace");
     public static final TranslatableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
     public static final TranslatableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft the Nether Brick Furnace Controller");
@@ -85,8 +86,10 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent ISNT_THIS_STEEL_PICKAXE = createAdvancement("isnt_this_steel_pickaxe", "Isn't This Steel Pickaxe ?", "Craft Steel Pickaxe");
     public static final TranslatableComponent VERY_SERIOUS_DEDICATION = createAdvancement("very_serious_dedication", "A Very Serious Dedication", "You just broke the Netherite Hoe");
     public static final TranslatableComponent BURNING_ENERGY = createAdvancement("burning_energy", "Burning Energy", "Craft and use the Energy Smelter");
+    public static final TranslatableComponent THIS_IS_FINE = createAdvancement("this_is_fine", "This is fine ! Too much energy from §o burnt fuel");
     public static final TranslatableComponent MACHINE_EXOSKELETON = createAdvancement("machine_exoskeleton", "Machine ExoSkeleton", "Craft a Copper Machine Frame.");
     public static final TranslatableComponent COMBINING_MATERIALS = createAdvancement("combining_materials", "Combining Materials", "Alloy Smelter allows you to combine materials together");
+    public static final TranslatableComponent STORING_ENERGY = createAdvancement("storing_energy", "Craft and place down the Battery to store power !");
     private static final TranslatableComponent NO_TAG = create("button", "no_tag");
     private static final List<Block> ALL_BLOCKS;
     private static final List<Item> ALL_ITEMS;
@@ -114,17 +117,22 @@ public class ModLanguage extends LanguageProvider {
 
     private static String convertToTranslatedText(@Nullable ResourceLocation location) {
         Preconditions.checkNotNull(location, "Location can not be null");
-        StringBuilder buffer = new StringBuilder();
         String id = location.getPath();
-        buffer.append(Character.toUpperCase(id.charAt(0)));
+        return convertToSpacedText(id);
+    }
 
-        for (int i = 1; i < id.length(); i++) {
-            char c = id.charAt(i);
+
+    private static String convertToSpacedText(String string) {
+        StringBuilder buffer = new StringBuilder();
+        buffer.append(Character.toUpperCase(string.charAt(0)));
+
+        for (int i = 1; i < string.length(); i++) {
+            char c = string.charAt(i);
 
             if (c == '_') {
                 buffer.append(' ');
-            } else if (id.charAt(i - 1) == ' ' || id.charAt(i - 1) == '_') {
-                buffer.append(Character.toUpperCase(id.charAt(i)));
+            } else if (string.charAt(i - 1) == ' ' || string.charAt(i - 1) == '_') {
+                buffer.append(Character.toUpperCase(string.charAt(i)));
             } else {
                 buffer.append(c);
             }
@@ -135,6 +143,7 @@ public class ModLanguage extends LanguageProvider {
 
     public static <T extends IForgeRegistryEntry<?>> String getPureName(T object) {
         return convertToTranslatedText(object.getRegistryName());
+
     }
 
     @Override
@@ -266,5 +275,9 @@ public class ModLanguage extends LanguageProvider {
                         values.minWorldHeight(),
                         values.maxWorldHeight()
                 )));
+    }
+
+    private static TranslatableComponent createAdvancement(String key, String description) {
+        return createAdvancement(key, convertToSpacedText(key), description);
     }
 }

@@ -66,6 +66,7 @@ public class HighHeatSmeltingCategory extends RecipeCategory<HighHeatSmeltingRec
     public void setRecipeLayout(IRecipeLayoutBuilder builder, HighHeatSmeltingRecipe recipe) {
         super.addInput(builder, Ingredient.of(Items.BLAZE_POWDER), 1, 31);
         super.addInput(builder, recipe, 0, 26, 31);
+        super.addOutput(builder, recipe.getResultItem(), 116, 31);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 159, 1).setFluidRenderer(1000, false, 5, 75).addIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.LAVA, FluidAttributes.BUCKET_VOLUME));
     }
 

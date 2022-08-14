@@ -128,10 +128,6 @@ public class ModBlocks {
         return BLOCK_DEFERRED_REGISTER.register(name, o);
     }
 
-    public static void cutoutMippedRendering(Block block) {
-        ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutoutMipped());
-    }
-
     private static <T extends Block & EntityBlock> RegistryObject<T> registerBlockEntity(String name, Supplier<T> block) {
         return BLOCK_DEFERRED_REGISTER.register(name, block);
     }

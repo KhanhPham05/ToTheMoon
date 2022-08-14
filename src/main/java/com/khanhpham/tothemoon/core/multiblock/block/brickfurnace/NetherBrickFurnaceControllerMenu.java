@@ -30,7 +30,7 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         super(ModMenuTypes.NETHER_BRICK_FURNACE, pContainerId, playerInventory, externalContainer);
 
         //blaze powder slot
-        addSlot(new SlotPlacePredicate(externalContainer, 0, 56, 43, this::canProcess));
+        addSlot(new SlotPlacePredicate(externalContainer, 0, 56, 43));
         //input slot
         addSlot(new SlotPlacePredicate(externalContainer, 1, 31, 43, (stack) -> stack.is(Items.BLAZE_POWDER)));
         //result slot
@@ -48,11 +48,6 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         this(pContainerId, playerInventory, new SimpleContainer(NetherBrickFurnaceControllerBlockEntity.CONTAINER_SIZE), new SimpleContainerData(NetherBrickFurnaceControllerBlockEntity.DATA_COUNT));
     }
 
-    private boolean canProcess(ItemStack stack) {
-        ClientLevel level = Minecraft.getInstance().level;
-        return level != null && level.getRecipeManager().getRecipeFor(HighHeatSmeltingRecipe.RECIPE_TYPE, new SimpleContainer(stack), level).isPresent();
-    }
-
     public int getStoredFluid() {
         return this.data.get(0);
     }
@@ -65,6 +60,10 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         int store = data.get(0);
         int capacity = data.get(1);
         return capacity != 0 ? store * 75 / capacity : 0;
+    }
+
+    public int getBlazeFuel() {
+        return data.get(4);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,9 +26,14 @@ public final class NetherBrickFurnaceControllerScreen extends BaseMenuScreen<Net
     @Override
     protected void renderExtra(PoseStack pPoseStack) {
         int k = super.menu.getFluidAmount();
-        blit(pPoseStack, leftPos + 189, topPos + 88 - k, 219, 104 - k, 5, k);
+        super.blit(pPoseStack, leftPos + 189, topPos + 88 - k, 219, 104 - k, 5, k);
+
         int l = super.menu.getBurningProcess();
-        blit(pPoseStack, leftPos + 84, topPos + 42, 202, 11, l, 16);
+        super.blit(pPoseStack, leftPos + 84, topPos + 42, 202, 11, l, 16);
+
+        int m = super.menu.getBlazeFuel();
+        int n = Mth.clamp((18 * m + 19) / 20, 0, 18);
+        if (n > 0) super.blit(pPoseStack, topPos + 30, topPos + 62, 202, 0, n, 4);
     }
 
     @Override

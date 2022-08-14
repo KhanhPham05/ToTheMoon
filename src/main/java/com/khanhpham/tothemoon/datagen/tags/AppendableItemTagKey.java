@@ -31,9 +31,6 @@ public class AppendableItemTagKey extends AbstractAppendableTag<Item> {
         return child;
     }
 
-
-    public final LinkedList<Supplier<? extends Item>> perspectiveItems = new LinkedList<>();
-
     /**
      * This class stores tags for a specific crafting process
      * e.g : {@code items:forge:storage_blocks/iron -> items:forge:ingots/iron}

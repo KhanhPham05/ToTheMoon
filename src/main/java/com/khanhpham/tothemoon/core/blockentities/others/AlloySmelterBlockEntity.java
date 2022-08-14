@@ -5,8 +5,8 @@ import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlo
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
-import com.khanhpham.tothemoon.utils.energy.Energy;
-import com.khanhpham.tothemoon.utils.energy.EnergyOnlyReceive;
+import com.khanhpham.tothemoon.core.energy.Energy;
+import com.khanhpham.tothemoon.core.energy.EnergyOnlyReceive;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;

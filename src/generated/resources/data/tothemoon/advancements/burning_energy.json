@@ -1,5 +1,5 @@
 {
-  "parent": "tothemoon:energize_the_fuel",
+  "parent": "tothemoon:harden_framed",
   "display": {
     "icon": {
       "item": "tothemoon:energy_smelter"

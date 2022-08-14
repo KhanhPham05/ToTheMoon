@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.utils.energy;
+package com.khanhpham.tothemoon.core.energy;
 
 /**
  * This class indicate an EnergyStorage but can not be extracted !

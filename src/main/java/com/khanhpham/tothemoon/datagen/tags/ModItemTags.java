@@ -11,6 +11,7 @@ import net.minecraft.world.item.Items;
 
 import static net.minecraftforge.common.Tags.Items.*;
 
+@SuppressWarnings("unused")
 public class ModItemTags {
     public static final AppendableItemTagKey GENERAL_PRESS_MOLDS = createAppendable(modLoc("metal_press_molds"));
     public static final TagKey<Item> PLATE_MOLD = mod("metal_press_molds/plate");

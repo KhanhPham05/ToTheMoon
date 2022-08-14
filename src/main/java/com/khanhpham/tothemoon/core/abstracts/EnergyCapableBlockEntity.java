@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.abstracts;
 
-import com.khanhpham.tothemoon.utils.energy.Energy;
+import com.khanhpham.tothemoon.core.energy.Energy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;

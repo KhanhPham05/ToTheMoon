@@ -6,20 +6,26 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.khanhpham.tothemoon.JsonNames;
 import com.khanhpham.tothemoon.compat.jei.DisplayRecipe;
+import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.core.menus.containers.WorkbenchCraftingContainer;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
+import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
+
+import java.util.Optional;
 
 public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingContainer> {
     private static final ResourceLocation LOCATION = ModUtils.modLoc("workbench_crafting");
@@ -91,23 +97,29 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
 
         @Override
         public WorkbenchCraftingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            Ingredient hammer = this.getHammerIngredient(pRecipeId, pSerializedRecipe);
+            Ingredient hammer = this.getHammerIngredient(pSerializedRecipe);
             Ingredient extraRequirement = super.getIngredientSpecial(GsonHelper.getAsString(pSerializedRecipe, "extra", ""));
             NonNullList<Ingredient> nonNullList = this.extractJsonToArray(pSerializedRecipe.getAsJsonArray("craftingPattern"));
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT));
             return new WorkbenchCraftingRecipe(pRecipeId, nonNullList, result, hammer, extraRequirement);
         }
 
-        private Ingredient getHammerIngredient(ResourceLocation recipeId, JsonObject pSerializedJson) {
+        private Ingredient getHammerIngredient(JsonObject pSerializedJson) {
             if (pSerializedJson.has("hammer")) {
                 if (pSerializedJson.get("hammer").isJsonPrimitive()) {
-                    return super.getIngredientSpecial(pSerializedJson, "hammer");
-                } else {
-                    ModUtils.warn("[{}] Json Primitive is expected, replacing with tag:{}", recipeId, ModItemTags.GENERAL_TTM_HAMMERS.location());
-                    return Ingredient.of(ModItemTags.GENERAL_TTM_HAMMERS);
+                    String hammerName = pSerializedJson.get("hammer").getAsString();
+                    return super.isTag(hammerName) ? super.getIngredientSpecial(hammerName) : this.getHammers(hammerName);
                 }
             }
-            throw new JsonSyntaxException("Missing Hammer");
+            return Ingredient.of(HammerItem.getStrongerHammers(ModItems.WOODEN_HAMMER.get()));
+        }
+
+        private Ingredient getHammers(String hammerName) {
+            Optional<Item> hammerItem = Registry.ITEM.getOptional(new ResourceLocation(hammerName));
+            if (hammerItem.isPresent()) {
+                return Ingredient.of(HammerItem.getStrongerHammers(hammerItem.get()));
+            }
+            throw new JsonSyntaxException(hammerName + " is not a valid item name");
         }
 
         private NonNullList<Ingredient> extractJsonToArray(JsonElement jsonObject) {

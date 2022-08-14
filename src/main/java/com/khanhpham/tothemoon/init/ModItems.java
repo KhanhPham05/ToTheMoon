@@ -142,7 +142,7 @@ public class ModItems {
     }
 
     public static RegistryObject<HammerItem> registerHammer(String name, int durability) {
-        return register(name, () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
+        return register(name, () -> new HammerItem(durability));
     }
 
     public static RegistryObject<Item> create(String name) {

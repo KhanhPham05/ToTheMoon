@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blockentities.battery;
 
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
-import com.khanhpham.tothemoon.utils.energy.BatteryEnergy;
+import com.khanhpham.tothemoon.core.energy.BatteryEnergy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 

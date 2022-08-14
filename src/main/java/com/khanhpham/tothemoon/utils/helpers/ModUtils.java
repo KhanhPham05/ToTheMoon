@@ -141,7 +141,9 @@ public class ModUtils {
         return ImmutableMap.of();
     }
 
+    //Will leave this method unused but ot remove. Who knows one day I need it.
     @Nullable
+    @SuppressWarnings("unused")
     public static <C extends Container, R extends Recipe<C>> R getResourceRecipe(Level level, RecipeType<R> recipeType, String name) {
         if (level != null) {
             if (ResourceLocation.isValidResourceLocation(name)) {
@@ -153,13 +155,5 @@ public class ModUtils {
             }
         }
         return null;
-    }
-
-    public static boolean checkForMod(String modid) {
-        return ModList.get().isLoaded(modid);
-    }
-
-    public static void warn(String s, Object... params) {
-        ToTheMoon.LOG.warn(s, params);
     }
 }

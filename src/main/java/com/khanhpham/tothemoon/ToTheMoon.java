@@ -108,6 +108,7 @@ public class ToTheMoon {
 
         TTMConfigs.registerConfigs(bus, ModLoadingContext.get());
         new MultiblockManager();
+        ModUtils.log("Jei is {} ", IS_JEI_LOADED ? "loaded" : "not loaded");
     }
 
     private static void initRegistration() {

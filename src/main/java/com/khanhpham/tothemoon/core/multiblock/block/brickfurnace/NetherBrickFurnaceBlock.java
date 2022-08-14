@@ -1,10 +1,8 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
-import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.tanks.TankBlockItem;
-import com.khanhpham.tothemoon.core.items.FluidCapableItem;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -64,7 +62,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     /**
      * Handling GUI and multiblock
      *
-     * @see NetherBrickFurnaceControllerBlockEntity#checkMultiblock(Level, BlockPos, BlockState)
+     * @see #checkMultiblock(Level, BlockState)
      */
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

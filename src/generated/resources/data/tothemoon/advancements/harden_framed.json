@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "tothemoon:steel_machine_frame"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.harden_framed"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.harden_framed.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "craft": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:steel_machine_frame"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "craft"
+    ]
+  ]
+}

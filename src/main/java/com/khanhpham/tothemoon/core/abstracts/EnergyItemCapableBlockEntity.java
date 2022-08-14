@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.abstracts;
 
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
-import com.khanhpham.tothemoon.utils.energy.Energy;
+import com.khanhpham.tothemoon.core.energy.Energy;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

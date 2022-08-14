@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.abstracts.machines;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.items.UpgradeItem;
-import com.khanhpham.tothemoon.utils.energy.Energy;
+import com.khanhpham.tothemoon.core.energy.Energy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;

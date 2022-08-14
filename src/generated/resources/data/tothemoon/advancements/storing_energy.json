@@ -1,0 +1,44 @@
+{
+  "parent": "tothemoon:energize_the_fuel",
+  "display": {
+    "icon": {
+      "item": "tothemoon:battery"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.storing_energy"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.storing_energy.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "craft": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:battery"
+            ]
+          }
+        ]
+      }
+    },
+    "place": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "tothemoon:battery"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "craft",
+      "place"
+    ]
+  ]
+}

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "tothemoon:crafting/gold_energy_generator"
+      "tothemoon:blasting/uranium_ingot_8"
     ]
   },
   "criteria": {
@@ -13,7 +13,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "tothemoon:crafting/gold_energy_generator"
+        "recipe": "tothemoon:blasting/uranium_ingot_8"
       }
     }
   },

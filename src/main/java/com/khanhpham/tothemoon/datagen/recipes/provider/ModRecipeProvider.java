@@ -11,11 +11,13 @@ import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
 import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
 import mekanism.common.tags.MekanismTags;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.TickTrigger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -25,17 +27,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import static com.khanhpham.tothemoon.datagen.tags.ModItemTags.*;
 import static net.minecraftforge.common.Tags.Items.*;
@@ -62,7 +60,7 @@ public class ModRecipeProvider extends RecipeProvider {
         final RecipeGeneratorHelper helper = new RecipeGeneratorHelper(consumer);
         buildSmeltingRecipes(helper);
         buildModdedRecipes(consumer);
-        buildCraftingTableRecipes(helper);
+        buildCraftingTableRecipes(consumer, helper);
         buildRecipeCompat(consumer, helper);
     }
 
@@ -110,7 +108,7 @@ public class ModRecipeProvider extends RecipeProvider {
         return ModUtils.modLoc(saveLoc);
     }
 
-    private void buildCraftingTableRecipes(final RecipeGeneratorHelper helper) {
+    private void buildCraftingTableRecipes(Consumer<FinishedRecipe> consumer, final RecipeGeneratorHelper helper) {
         buildStair(helper, ModBlocks.MOON_ROCK_STAIR, ModBlocks.MOON_ROCK);
         buildStair(helper, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_BRICK);
         buildStair(helper, ModBlocks.POLISHED_MOON_ROCK_STAIR, ModBlocks.POLISHED_MOON_ROCK);
@@ -159,17 +157,17 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.shaped(ModBlocks.ANTI_PRESSURE_GLASS.get(), 4).pattern("SGS").pattern("GQG").pattern("SGS").define('S', DUSTS_STEEL).define('G', Tags.Items.GLASS).define('Q', GEMS_QUARTZ).save();
         helper.shaped(ModBlocks.METAL_PRESS).pattern("SSS").pattern("WFW").pattern("SBS").define('S', PLATES_STEEL).define('W', WIRES_STEEL).define('F', ModBlocks.COPPER_MACHINE_FRAME.get()).define('B', STORAGE_BLOCKS_IRON);
 
-        helper.shaped(ModBlocks.COPPER_ENERGY_GENERATOR).pattern("SGS").pattern("WFW").pattern("SBS").define('S', ModItemTags.PLATES_STEEL).define('G', ModItemTags.GEARS_COPPER).define('W', WIRES_REDSTONE_METAL).define('F', ModBlocks.REDSTONE_MACHINE_FRAME.get()).define('B', Blocks.BLAST_FURNACE).save();
-        helper.shaped(ModBlocks.IRON_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_IRON).define('W', WIRES_REDSTONE_METAL).define('M', ModBlocks.COPPER_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_STEEL).save();
-        helper.shaped(ModBlocks.GOLD_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_GOLD).define('W', WIRES_REDSTONE_STEEL_ALLOY).define('M', ModBlocks.IRON_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_GOLD).save();
-        helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
+        //helper.shaped(ModBlocks.COPPER_ENERGY_GENERATOR).pattern("SGS").pattern("WFW").pattern("SBS").define('S', ModItemTags.PLATES_STEEL).define('G', ModItemTags.GEARS_COPPER).define('W', WIRES_REDSTONE_METAL).define('F', ModBlocks.REDSTONE_MACHINE_FRAME.get()).define('B', Blocks.BLAST_FURNACE).save();
+        //helper.shaped(ModBlocks.IRON_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_IRON).define('W', WIRES_REDSTONE_METAL).define('M', ModBlocks.COPPER_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_STEEL).save();
+        //helper.shaped(ModBlocks.GOLD_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_GOLD).define('W', WIRES_REDSTONE_STEEL_ALLOY).define('M', ModBlocks.IRON_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_GOLD).save();
+        //helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
         helper.shaped(ModBlocks.WORKBENCH).pattern("PPH").pattern("WWW").pattern("F F").define('F', FENCES).define('P', Items.PAPER).define('W', ItemTags.PLANKS).define('H', ModItems.WOODEN_HAMMER.get()).save();
 
         //hammers
         this.hammer(helper, ModItems.WOODEN_HAMMER, ItemTags.PLANKS);
         this.hammer(helper, ModItems.STEEL_HAMMER, PLATES_STEEL);
         this.hammer(helper, ModItems.DIAMOND_HAMMER, GEMS_DIAMOND);
-        this.hammer(helper, ModItems.NETHERITE_HAMMER, INGOTS_NETHERITE);
+        UpgradeRecipeBuilder.smithing(Ingredient.of(ModItems.DIAMOND_HAMMER.get()), Ingredient.of(INGOTS_NETHERITE), ModItems.NETHERITE_HAMMER.get()).unlocks("unlock", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.DIAMOND_HAMMER.get())).save(consumer, ModUtils.modLoc("upgrading/netherite_hammer"));
 
         helper.shapelessCrafting(ModItems.REDSTONE_STEEL_ALLOY_DUST.get(), 1, ModItems.STEEL_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
         helper.shapelessCrafting(ModItems.REDSTONE_METAL_DUST.get(), 1, ModItems.IRON_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
