@@ -65,7 +65,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
 
     @Override
     protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
-        super.font.draw(pPoseStack, super.playerInventoryTitle, menu.playerInventorySlotStartsX - 1, menu.playerInventorySlotStartsY - 11, this.blackFontColor);
+        super.font.draw(pPoseStack, super.playerInventoryTitle, menu.playerInventorySlotStartsX - 1, menu.playerInventorySlotStartsY - 11, blackFontColor);
         super.font.draw(pPoseStack, super.title, xPos + 7, 8, blackFontColor);
         renderExtraLabels(pPoseStack);
     }
@@ -75,6 +75,11 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
 
     protected void drawRightFocusedString(PoseStack pose, Component translatableText, int topRightX, int topRightY) {
         int position = topRightX - super.font.width(translatableText.getVisualOrderText());
-        super.font.draw(pose, translatableText, position, topRightY, this.blackFontColor);
+        super.font.draw(pose, translatableText, position, topRightY, blackFontColor);
+    }
+
+    @Override
+    public boolean isHovering(int pX, int pY, int pWidth, int pHeight, double pMouseX, double pMouseY) {
+        return super.isHovering(pX, pY, pWidth, pHeight, pMouseX, pMouseY);
     }
 }

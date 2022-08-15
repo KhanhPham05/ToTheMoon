@@ -29,9 +29,9 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
     public NetherBrickFurnaceControllerMenu(int pContainerId, Inventory playerInventory, Container externalContainer, ContainerData data) {
         super(ModMenuTypes.NETHER_BRICK_FURNACE, pContainerId, playerInventory, externalContainer);
 
-        //blaze powder slot
-        addSlot(new SlotPlacePredicate(externalContainer, 0, 56, 43));
         //input slot
+        addSlot(new SlotPlacePredicate(externalContainer, 0, 56, 43));
+        //blaze powder slot
         addSlot(new SlotPlacePredicate(externalContainer, 1, 31, 43, (stack) -> stack.is(Items.BLAZE_POWDER)));
         //result slot
         addSlot(new ResultSlotPredicate(externalContainer, 2, 146, 43));
@@ -123,5 +123,9 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         int time = data.get(2);
         int duration = data.get(3);
         return duration != 0 && time != 0 ? time * 50 / duration : 0;
+    }
+
+    public int getBlazeFuelCapacity() {
+        return this.data.get(5);
     }
 }

@@ -152,9 +152,9 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
         final Direction controllerFacing = state.getValue(NetherBrickFurnaceBlock.FACING);
         if (this.getMultiblock() != null) {
             if (this.blazeFuel <= 0) {
-                if (!getItem(0).isEmpty()) {
+                if (!getItem(1).isEmpty()) {
                     this.blazeFuel = blazeFuelCapacity;
-                     getItem(0).shrink(1);
+                     getItem(1).shrink(1);
                 }
             }
 
@@ -176,7 +176,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                 state = state.setValue(NetherBrickFurnaceBlock.LIT, true);
             } else
                 //Process starts
-                if (recipe != null && this.tank.getFluidAmount() > 0 && !items.get(0).isEmpty() && !items.get(1).isEmpty() && this.blazeFuel > 0) {
+                if (recipe != null && this.tank.getFluidAmount() > 0 && !items.get(0).isEmpty() && this.blazeFuel > 0) {
                     state = state.setValue(NetherBrickFurnaceBlock.LIT, true);
                     smeltingTime++;
                     blazeFuel--;
@@ -209,7 +209,6 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                 items.get(2).grow(1);
             }
             items.get(0).shrink(1);
-            items.get(1).shrink(1);
             this.smeltingTime = 0;
         }
     }
@@ -335,5 +334,9 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
 
     public boolean canFillFromBucket() {
         return this.tank.getSpace() >= FluidAttributes.BUCKET_VOLUME;
+    }
+
+    public void loadBlazeFuel(int blazeFuel) {
+        this.blazeFuel = blazeFuel;
     }
 }

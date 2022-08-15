@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
@@ -105,7 +106,7 @@ public class ModUtils {
         throw new IllegalStateException("The fluid have no representative bucket");
     }
 
-    public static void loadFluidToBlock(Level pLevel, BlockPos pPos, ItemStack pStack) {
+    public static CompoundTag loadFluidToBlock(Level pLevel, BlockPos pPos, ItemStack pStack) {
         CompoundTag tag = pStack.getOrCreateTag();
         if (tag.contains("ttmData", 10)) {
             CompoundTag dataTag = tag.getCompound("ttmData");
@@ -114,7 +115,11 @@ public class ModUtils {
             if (pLevel.getBlockEntity(pPos) instanceof FluidCapableBlockEntity tile) {
                 tile.setFluid(new FluidStack(fluid, fluidAmount));
             }
+
+            return dataTag;
         }
+
+        return tag;
     }
 
     public static List<ItemStack> getItemsForTags(TagKey<Item> tag, ItemStack slotItem) {

@@ -16,13 +16,11 @@
     },
     {
       "type": "tothemoon:workbench_crafting",
-      "recipe": "tothemoon:workbench/stone_acceptor",
-      "title": "book.tothemoon.crafting_acceptors.title"
+      "recipe": "tothemoon:workbench/stone_acceptor"
     },
     {
       "type": "tothemoon:workbench_crafting",
-      "recipe": "tothemoon:workbench/nether_brick_acceptor",
-      "title": "book.tothemoon.crafting_acceptors.title"
+      "recipe": "tothemoon:workbench/nether_brick_acceptor"
     }
   ]
 }

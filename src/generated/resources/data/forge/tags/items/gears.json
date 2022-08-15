@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "#forge:gears/iron",
-    "#forge:gears/redstone_metal",
-    "#forge:gears/steel",
-    "#forge:gears/redstone_steel",
+    "#forge:gears/copper",
     "#forge:gears/gold",
-    "#forge:gears/copper"
+    "#forge:gears/redstone_metal",
+    "#forge:gears/redstone_steel",
+    "#forge:gears/iron",
+    "#forge:gears/steel"
   ]
 }

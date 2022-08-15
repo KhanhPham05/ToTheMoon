@@ -113,7 +113,15 @@ public class ModLootTables extends LootTableProvider {
             this.add(MOON_REDSTONE_ORE, BlockLoot::createRedstoneOreDrops);
             DROP_SELF_BLOCKS.forEach(b -> super.dropSelf(b.get()));
             super.add(BATTERY.get(), block -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energy", LootUtils.SAVE_DATA_ENERGY)))));
-            super.add(NETHER_BRICK_FURNACE_CONTROLLER.get(), this::createFluidTankDrop);
+            super.add(NETHER_BRICK_FURNACE_CONTROLLER.get(), block -> LootTable.lootTable()
+                    .withPool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1))
+                            .add(LootItem.lootTableItem(block)
+                                    .apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
+                                    .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                            .copy("FluidName", LootUtils.SAVE_DATA_FLUID_NAME)
+                                            .copy("Amount", LootUtils.SAVE_DATA_FLUID_AMOUNT)
+                                            .copy("blazeFuel", LootUtils.SAVE_DATA_BLAZE_FUEL)))));
             super.add(NonDeferredBlocks.FLUID_TANK_BLOCK, this::createFluidTankDrop);
             super.dropOther(WORKBENCH_LEFT.get(), WORKBENCH.get());
         }

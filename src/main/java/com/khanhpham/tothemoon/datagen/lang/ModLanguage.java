@@ -240,6 +240,8 @@ public class ModLanguage extends LanguageProvider {
         //Utils
         add(CAP_UNKNOWN, "Capability unknown or not found");
         add(CAP_FOUND, "CAP FOUND !");
+
+        add(create("gui", "blaze_fuel"), "Blaze Fuel: %s / %s");
     }
 
     private void add(TranslatableComponent component, String trans) {

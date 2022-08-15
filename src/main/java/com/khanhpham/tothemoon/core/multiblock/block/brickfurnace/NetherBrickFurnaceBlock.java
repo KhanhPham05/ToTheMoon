@@ -3,11 +3,13 @@ package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.tanks.TankBlockItem;
+import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -59,11 +61,6 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
         return new NetherBrickFurnaceControllerBlockEntity(pPos, pState);
     }
 
-    /**
-     * Handling GUI and multiblock
-     *
-     * @see #checkMultiblock(Level, BlockState)
-     */
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
@@ -71,14 +68,6 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
                 if (be.getMultiblock() != null) {
                     return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 }
-
-                /* else {
-                    be.checkMultiblock(pLevel, pPos, pState);
-                    return be.getMultiblock() != null
-                            ? super.use(pState, pLevel, pPos, pPlayer, pHand, pHit)
-                            : InteractionResult.CONSUME;
-                }
-                */
             }
         }
 
@@ -87,7 +76,11 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        ModUtils.loadFluidToBlock(pLevel, pPos, pStack);
+        CompoundTag dataTag = ModUtils.loadFluidToBlock(pLevel, pPos, pStack);
+        if (dataTag.contains(LootUtils.LOOT_DATA_BLAZE_FUEL, LootUtils.TAG_TYPE_INT) && pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity blockEntity) {
+            int blazeFuel = dataTag.getInt(LootUtils.LOOT_DATA_BLAZE_FUEL);
+            blockEntity.loadBlazeFuel(blazeFuel);
+        }
     }
 
     @Override

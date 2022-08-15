@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.utils;
 
+import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
@@ -7,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -163,5 +165,10 @@ public class GuiRenderingUtils {
     private static TextureAtlasSprite stillSprite(FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();
         return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getAttributes().getStillTexture(fluidStack));
+    }
+
+    public static void renderToolTip(BaseMenuScreen<?> screen, PoseStack pPoseStack, int x, int y, int width, int height, int mouseX, int mouseY, Component component) {
+        if (screen.isHovering(x, y, width, height, mouseX, mouseY))
+            screen.renderTooltip(pPoseStack, component, mouseX, mouseY);
     }
 }

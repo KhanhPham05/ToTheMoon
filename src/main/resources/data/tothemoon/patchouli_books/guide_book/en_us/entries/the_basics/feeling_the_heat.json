@@ -6,11 +6,10 @@
   "advancement": "tothemoon:anvil_crushing",
   "pages": [
     "book.tothemoon.fth_page_1",
+    "book.tothemoon.fth_craft_controller",
     {
-      "type": "patchouli:crafting",
-      "title": "Crafting Recipe",
-      "recipe": "tothemoon:crafting/netherbrick_furnace_controller",
-      "text": "book.tothemoon.fth_craft_controller"
+      "type": "tothemoon:workbench_crafting",
+      "recipe": "tothemoon:workbench/nether_furnace"
     },
     {
       "type": "patchouli:text",
@@ -39,10 +38,6 @@
       "type": "patchouli:text",
       "title": "book.tothemoon.how_to_use",
       "text": "book.tothemoon.fth_using_multiblock"
-    },
-    {
-      "type": "patchouli:empty",
-      "draw_filter": false
     }
   ]
 }

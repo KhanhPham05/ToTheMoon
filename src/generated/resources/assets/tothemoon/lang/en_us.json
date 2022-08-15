@@ -148,6 +148,7 @@
   "container.tothemoon.next": ">",
   "container.tothemoon.prev": "<",
   "gui.tothemoon.alloy_smelter": "Alloy Smelter",
+  "gui.tothemoon.blaze_fuel": "Blaze Fuel: %s / %s",
   "gui.tothemoon.empty_tank": "Empty Tank",
   "gui.tothemoon.fill_tank": "Fill Tank",
   "gui.tothemoon.insert_upgrades": "Upgrades",
