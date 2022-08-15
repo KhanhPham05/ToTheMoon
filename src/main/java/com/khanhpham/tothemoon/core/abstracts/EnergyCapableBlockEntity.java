@@ -30,8 +30,6 @@ public abstract class EnergyCapableBlockEntity extends BlockEntity {
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        LazyOptional<T> lo;
-        lo = cap.orEmpty(CapabilityEnergy.ENERGY, energyDataOptional.cast()).cast();
-        return lo;
+        return cap.orEmpty(CapabilityEnergy.ENERGY, energyDataOptional.cast()).cast();
     }
 }

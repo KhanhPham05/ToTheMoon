@@ -68,23 +68,29 @@ public class AnvilTweaks extends FallingBlock {
                                 }
                             }
                             if (material != null) {
-                                ItemStack result = ItemStack.EMPTY;
+                                ItemStack resultStack = ItemStack.EMPTY;
                                 String modid = Objects.requireNonNull(item.getItem().getItem().getRegistryName()).getNamespace();
                                 if (modid.equals("minecraft")) {
-                                    result = new ItemStack(Registry.ITEM.get(ModUtils.modLoc(material + "_dust")));
+                                    resultStack = new ItemStack(Registry.ITEM.get(ModUtils.modLoc(material + "_dust")));
                                 } else if (Registry.ITEM.containsKey(new ResourceLocation(modid, "dust_" + material))) {
-                                    result = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, "dust_" + material)));
+                                    resultStack = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, "dust_" + material)));
                                 } else if (Registry.ITEM.containsKey(new ResourceLocation(modid, material + "_dust"))) {
-                                    result = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, material + "_dust")));
+                                    resultStack = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, material + "_dust")));
+
                                 } else if (Registry.ITEM.containsKey(new ResourceLocation(modid, "grit_" + material))) {
-                                    result = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, "grit_" + material)));
+                                    resultStack = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, "grit_" + material)));
                                 } else if (Registry.ITEM.containsKey(new ResourceLocation(modid, material + "_grit"))) {
-                                    result = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, material + "_grit")));
+                                    resultStack = new ItemStack(Registry.ITEM.get(new ResourceLocation(modid, material + "_grit")));
                                 }
 
-                                if (!result.isEmpty()) {
-                                    result.setCount(item.getItem().getCount() + ModUtils.roll(1, 15));
-                                    item.setItem(result);
+                                if (!resultStack.isEmpty()) {
+                                    ItemStack crushedStack = item.getItem();
+                                    int totalDustAmount = 0;
+                                    for (int i = 0; i < crushedStack.getCount(); i++) {
+                                        totalDustAmount += 1 + ModUtils.roll(1, 15);
+                                    }
+                                    resultStack.setCount(totalDustAmount);
+                                    item.setItem(resultStack);
                                 }
                             }
                         });

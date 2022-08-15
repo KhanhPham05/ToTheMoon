@@ -52,13 +52,14 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
     public final IDrawable getIcon() {
         return guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.getCatalystIcon());
     }
+
     public final <C extends Container, R extends Recipe<C>> List<R> getActualCraftingRecipes(RecipeManager recipeManager, net.minecraft.world.item.crafting.RecipeType<R> recipeType) {
         return recipeManager.getAllRecipesFor(recipeType);
     }
 
     public abstract void registerRecipes(IRecipeRegistration registration, RecipeManager manager);
     //{
-        //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
+    //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
     //}
 
     public abstract void setRecipeLayout(IRecipeLayoutBuilder builder, T recipe);
@@ -73,7 +74,7 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
     }
 
     protected void addInput(IRecipeLayoutBuilder builder, Ingredient ingredient, int x, int y) {
-        builder.addSlot(RecipeIngredientRole.INPUT,x, y).addIngredients(ingredient);
+        builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ingredient);
     }
 
     protected void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {

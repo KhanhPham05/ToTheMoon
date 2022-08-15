@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -41,11 +42,15 @@ public final class NetherBrickFurnaceControllerScreen extends BaseMenuScreen<Net
             renderTooltip(pPoseStack, text, pX, pY);
         }
 
-        GuiRenderingUtils.renderToolTip(this,  pPoseStack, 29, 61, 20, 6, pX, pY, this.translateBlazeFuel());
+        pPoseStack.pushPose();
+            pPoseStack.scale(.8f, .8f, .8f);
+            GuiRenderingUtils.renderToolTip(this, pPoseStack, 29, 61, 20, 6, pX, pY, this.translateBlazeFuel());
+        pPoseStack.popPose();
+
         super.renderTooltip(pPoseStack, pX, pY);
     }
 
     private Component translateBlazeFuel() {
-        return TextUtils.translateFormatText("gui", "blaze_fuel", this.menu.getBlazeFuel(), this.menu.getBlazeFuelCapacity());
+        return TextUtils.translateFormatText("gui", "blaze_fuel", this.menu.getBlazeFuel(), this.menu.getBlazeFuelCapacity()).withStyle(Style.EMPTY.withColor(0xE57A00));
     }
 }

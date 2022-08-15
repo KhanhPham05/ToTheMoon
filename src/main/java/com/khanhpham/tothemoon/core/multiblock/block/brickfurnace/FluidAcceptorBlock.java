@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 
@@ -44,7 +45,6 @@ public final class FluidAcceptorBlock extends Block {
         return InteractionResult.SUCCESS;
     }
 
-    //FIXME
     private void contactToFurnace(Player pPlayer, InteractionHand pHand) {
         if (this.controllerBe != null && this.controllerBe.canFillFromBucket()) {
             this.controllerBe.fillFromBucket(pPlayer);
@@ -54,11 +54,8 @@ public final class FluidAcceptorBlock extends Block {
     }
 
 
+
     public void setControllerBe(@Nullable NetherBrickFurnaceControllerBlockEntity controllerBe) {
         this.controllerBe = controllerBe;
-    }
-
-    public boolean isNotObstructed() {
-        return this.controllerBe == null;
     }
 }
