@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens;
 
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
-import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorMenuScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;

@@ -88,6 +88,14 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
         return RECIPE_TYPE;
     }
 
+    public Ingredient getHammerIngredient() {
+        return this.hammer;
+    }
+
+    public Ingredient getExtraIngredient() {
+        return this.extraInput;
+    }
+
 
     public static final class Serializer extends SimpleRecipeSerializer<WorkbenchCraftingRecipe> {
         @Override

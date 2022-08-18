@@ -39,10 +39,10 @@ public class ModTagProvider {
         @SuppressWarnings("unchecked")
         @Override
         protected void addTags() {
-            tag(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag()).addTags(ModItemTags.PLATE_MOLD, ModItemTags.ROD_MOLD, ModItemTags.GEAR_MOLD);
-            tag(ModItemTags.GEAR_MOLD).add(ModItems.GEAR_MOLD.get());
-            tag(ModItemTags.ROD_MOLD).add(ModItems.ROD_MOLD.get());
-            tag(ModItemTags.PLATE_MOLD).add(ModItems.PLATE_MOLD.get());
+            //tag(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag()).addTags(ModItemTags.PLATE_MOLD, ModItemTags.ROD_MOLD, ModItemTags.GEAR_MOLD);
+            //tag(ModItemTags.GEAR_MOLD).add(ModItems.GEAR_MOLD.get());
+            //tag(ModItemTags.ROD_MOLD).add(ModItems.ROD_MOLD.get());
+            //tag(ModItemTags.PLATE_MOLD).add(ModItems.PLATE_MOLD.get());
 
             this.add(Tags.Items.INGOTS, ModItems.STEEL_INGOT, ModItems.URANIUM_INGOT, ModItems.REDSTONE_METAL, ModItems.REDSTONE_STEEL_ALLOY);
             this.add(ModItemTags.INGOTS_URANIUM, ModItems.URANIUM_INGOT);
@@ -84,6 +84,7 @@ public class ModTagProvider {
             add(GENERAL_RODS);
             add(GENERAL_GEARS);
             add(GENERAL_DUSTS);
+            add(GENERAL_PRESS_MOLDS);
         }
 
         @SafeVarargs

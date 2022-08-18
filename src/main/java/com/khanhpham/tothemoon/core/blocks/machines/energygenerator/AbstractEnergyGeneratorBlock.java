@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator;
 
-import com.khanhpham.tothemoon.core.blockentities.energygenerator.AbstractEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.AbstractEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

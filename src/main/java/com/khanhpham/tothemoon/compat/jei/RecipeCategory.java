@@ -1,5 +1,7 @@
 package com.khanhpham.tothemoon.compat.jei;
 
+import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -31,6 +33,10 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
 
     public RecipeCategory(IGuiHelper guiHelper) {
         this.guiHelper = guiHelper;
+    }
+
+    public static void addOutput(IRecipeLayoutBuilder builder, Recipe<?> recipe, int x, int y) {
+        addOutput(builder, recipe.getResultItem(), x, y);
     }
 
     public abstract ItemStack getCatalystIcon();
@@ -69,15 +75,15 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
         this.setRecipeLayout(builder, recipe);
     }
 
-    protected void addInput(IRecipeLayoutBuilder builder, T recipe, int ingredientIndex, int x, int y) {
+    public static <R extends Recipe<? extends Container>> void addInput(IRecipeLayoutBuilder builder, R recipe, int ingredientIndex, int x, int y) {
         builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(recipe.getIngredients().get(ingredientIndex));
     }
 
-    protected void addInput(IRecipeLayoutBuilder builder, Ingredient ingredient, int x, int y) {
+    public static void addInput(IRecipeLayoutBuilder builder, Ingredient ingredient, int x, int y) {
         builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ingredient);
     }
 
-    protected void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
+    private static void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
         builder.addSlot(RecipeIngredientRole.OUTPUT, x, y).addItemStack(output);
     }
 

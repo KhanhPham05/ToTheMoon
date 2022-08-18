@@ -1,6 +1,5 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energysmelter;
 
-import com.khanhpham.tothemoon.core.blockentities.others.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;

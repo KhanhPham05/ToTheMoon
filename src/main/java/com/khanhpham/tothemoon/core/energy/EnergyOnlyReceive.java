@@ -5,7 +5,11 @@ package com.khanhpham.tothemoon.core.energy;
  */
 public class EnergyOnlyReceive extends Energy {
     public EnergyOnlyReceive(int capacity) {
-        super(capacity);
+        this(capacity, 300);
+    }
+
+    public EnergyOnlyReceive(int capacity, int workingEnergyCost) {
+        super(capacity, capacity, workingEnergyCost);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import io.netty.buffer.ByteBuf;
 import mekanism.api.datagen.recipe.builder.ItemStackChemicalToItemStackRecipeBuilder;
 import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
 import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
@@ -18,6 +19,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.data.recipes.UpgradeRecipeBuilder;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -190,6 +192,9 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.stoneCutting(ModBlocks.POLISHED_MOON_ROCK, 1, ModBlocks.MOON_ROCK);
         helper.stoneCutting(ModBlocks.SMOOTH_BLACKSTONE, 1, () -> Items.BLACKSTONE);
         helper.smelting(Items.BLACKSTONE, ModBlocks.SMOOTH_BLACKSTONE.get(), false);
+
+        helper.shaped(ModItems.COPPER_GEAR).pattern(" P ").pattern("PIP").pattern(" P ").define('P', PLATES_COPPER).define('I', INGOTS_COPPER);
+        helper.shaped(ModItems.IRON_GEAR).pattern(" P ").pattern("PIP").pattern(" P ").define('P', PLATES_IRON).define('I', INGOTS_IRON);
     }
 
     private void hammer(RecipeGeneratorHelper helper, Supplier<HammerItem> result, TagKey<Item> from) {
@@ -220,6 +225,7 @@ public class ModRecipeProvider extends RecipeProvider {
         //SingleItemRecipeBuilder.stonecutting(Ingredient.of(material.get()), block.get()).unlockedBy("tick", tick()).save(consumer, createRecipeId());
     }
 
+    //FIXME : stabilize metal press recipe
     private void buildModdedRecipes(Consumer<FinishedRecipe> consumer) {
         alloy(consumer, ModItemTags.INGOTS_STEEL, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_STEEL_ALLOY, 1);
         alloy(consumer, ModItemTags.DUSTS_IRON, 1, DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
@@ -229,31 +235,36 @@ public class ModRecipeProvider extends RecipeProvider {
 
         metalPress(consumer, INGOTS_STEEL, PLATE_MOLD, ModItems.STEEL_PLATE);
         metalPress(consumer, INGOTS_STEEL, GEAR_MOLD, ModItems.STEEL_GEAR);
-        metalPress(consumer, PLATES_STEEL, ROD_MOLD, ModItems.STEEL_ROD);
+        metalPress(consumer, INGOTS_STEEL, ROD_MOLD, new ItemStack(ModItems.STEEL_ROD.get(), 2));
 
         metalPress(consumer, INGOTS_URANIUM, PLATE_MOLD, ModItems.URANIUM_PLATE);
         metalPress(consumer, INGOTS_URANIUM, GEAR_MOLD, ModItems.URANIUM_GEAR);
-        metalPress(consumer, PLATES_URANIUM, ROD_MOLD, ModItems.URANIUM_ROD);
+        metalPress(consumer, INGOTS_URANIUM, ROD_MOLD, new ItemStack(ModItems.URANIUM_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_REDSTONE_METAL, PLATE_MOLD, ModItems.REDSTONE_METAL_PLATE);
-        metalPress(consumer, PLATES_REDSTONE_METAL, ROD_MOLD, ModItems.REDSTONE_METAL_ROD);
         metalPress(consumer, INGOTS_REDSTONE_METAL, GEAR_MOLD, ModItems.REDSTONE_METAL_GEAR);
+        metalPress(consumer, INGOTS_REDSTONE_METAL, ROD_MOLD, new ItemStack(ModItems.REDSTONE_METAL_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_REDSTONE_STEEL_ALLOY, PLATE_MOLD, ModItems.REDSTONE_STEEL_ALLOY_PLATE);
-        metalPress(consumer, PLATES_REDSTONE_STEEL_ALLOY, ROD_MOLD, ModItems.REDSTONE_STEEL_ALLOY_ROD);
         metalPress(consumer, INGOTS_REDSTONE_STEEL_ALLOY, GEAR_MOLD, ModItems.REDSTONE_STEEL_ALLOY_GEAR);
+        metalPress(consumer, INGOTS_REDSTONE_STEEL_ALLOY, ROD_MOLD, new ItemStack(ModItems.REDSTONE_STEEL_ALLOY_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_IRON, PLATE_MOLD, ModItems.IRON_PLATE);
-        metalPress(consumer, PLATES_IRON, ROD_MOLD, ModItems.IRON_ROD);
         metalPress(consumer, INGOTS_IRON, GEAR_MOLD, ModItems.IRON_GEAR);
+        metalPress(consumer, INGOTS_IRON, ROD_MOLD, new ItemStack(ModItems.IRON_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_GOLD, GEAR_MOLD, ModItems.GOLD_GEAR);
         metalPress(consumer, INGOTS_GOLD, PLATE_MOLD, ModItems.GOLD_PLATE);
-        metalPress(consumer, PLATES_GOLD, ROD_MOLD, ModItems.GOLD_ROD);
+        metalPress(consumer, INGOTS_GOLD, ROD_MOLD, new ItemStack(ModItems.GOLD_ROD.get(), 2));
 
-        metalPress(consumer, PLATES_COPPER, ROD_MOLD, ModItems.COPPER_ROD);
         metalPress(consumer, INGOTS_COPPER, PLATE_MOLD, ModItems.COPPER_PLATE);
         metalPress(consumer, INGOTS_COPPER, GEAR_MOLD, ModItems.COPPER_GEAR);
+        metalPress(consumer, INGOTS_COPPER, ROD_MOLD, new ItemStack(ModItems.COPPER_ROD.get(), 2));
+
 
         TagToItemRecipeHelper provider = TagToItemRecipeHelper.create(consumer);
 
@@ -266,13 +277,18 @@ public class ModRecipeProvider extends RecipeProvider {
         provider.generateRecipe(this::translateTag);
     }
 
+    private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> mold, ItemStack result) {
+        MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, mold, result);
+        RecipeGeneratorHelper.saveGlobal(consumer, builder, "metal_pressing", RecipeGeneratorHelper.getId(result.getItem()));
+    }
+
     private void translateTag(Consumer<FinishedRecipe> consumer, TagKey<Item> tag) {
         TagTranslatingRecipeBuilder builder = new TagTranslatingRecipeBuilder(tag);
         builder.save(consumer, "tag_translating/" + RecipeGeneratorHelper.extractTag(tag));
     }
 
     private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> moldTag, Supplier<? extends Item> result) {
-        MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, moldTag, result.get());
+        MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, moldTag, new ItemStack(result.get()));
         RecipeGeneratorHelper.saveGlobal(consumer, builder, "metal_pressing", RecipeGeneratorHelper.getId(result.get()));
     }
 

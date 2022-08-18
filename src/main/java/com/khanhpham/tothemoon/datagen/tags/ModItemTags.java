@@ -14,9 +14,10 @@ import static net.minecraftforge.common.Tags.Items.*;
 @SuppressWarnings("unused")
 public class ModItemTags {
     public static final AppendableItemTagKey GENERAL_PRESS_MOLDS = createAppendable(modLoc("metal_press_molds"));
-    public static final TagKey<Item> PLATE_MOLD = mod("metal_press_molds/plate");
-    public static final TagKey<Item> ROD_MOLD = mod("metal_press_molds/rod");
-    public static final TagKey<Item> GEAR_MOLD = mod("metal_press_molds/gear");
+    public static final TagKey<Item> PLATE_MOLD = GENERAL_PRESS_MOLDS.append("plate", ModItems.PLATE_MOLD);
+    public static final TagKey<Item> ROD_MOLD = GENERAL_PRESS_MOLDS.append("rod", ModItems.ROD_MOLD);
+    public static final TagKey<Item> GEAR_MOLD = GENERAL_PRESS_MOLDS.append("gear", ModItems.GEAR_MOLD);
+    public static final TagKey<Item> BLANK_MOLD = GENERAL_PRESS_MOLDS.append("blank", ModItems.BLANK_MOLD);
 
     public static final TagKey<Item> INGOTS_STEEL = forge("ingots/steel");
     public static final TagKey<Item> INGOTS_URANIUM = forge("ingots/uranium");

@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.ImmutableSet;
-import com.khanhpham.tothemoon.core.blockentities.battery.BatteryBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
@@ -24,8 +24,6 @@ import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.FluidAcceptorBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.init.sounds.ModSoundTypes;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.UniformInt;

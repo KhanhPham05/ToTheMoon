@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.core.blockentities.battery.creative;
+package com.khanhpham.tothemoon.core.blocks.battery.creative;
 
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.init.ModBlockEntities;

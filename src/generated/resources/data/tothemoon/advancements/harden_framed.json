@@ -1,4 +1,5 @@
 {
+  "parent": "tothemoon:machine_exoskeleton",
   "display": {
     "icon": {
       "item": "tothemoon:steel_machine_frame"

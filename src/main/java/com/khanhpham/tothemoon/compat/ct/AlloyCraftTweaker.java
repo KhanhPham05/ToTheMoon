@@ -5,6 +5,7 @@ import com.blamejared.crafttweaker.api.CraftTweakerConstants;
 import com.blamejared.crafttweaker.api.action.recipe.ActionAddRecipe;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.ingredient.IIngredient;
+import com.blamejared.crafttweaker.api.ingredient.IIngredientWithAmount;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.recipe.handler.IRecipeHandler;
 import com.blamejared.crafttweaker.api.recipe.handler.IRecipeHandlerRegistry;
@@ -34,13 +35,13 @@ public class AlloyCraftTweaker implements IRecipeHandler<AlloySmeltingRecipe>, I
     //result, base, extra, alloyTime
     @Override
     public String dumpToCommandString(IRecipeManager manager, AlloySmeltingRecipe recipe) {
-        return String.format("Recipe: %s | ttmAlloying.addRecipe(%s, %s, %s, %s, %s);",
+        return String.format("Recipe: [%s] | <recipetype:tothemoon:alloy_smelting>.addRecipe(%s, %s, %s, %s, %d);",
                 recipe.getId(),
                 StringUtil.quoteAndEscape(recipe.getId().getPath()),
                 ItemStackUtil.getCommandString(recipe.getResultItem()),
-                IIngredient.fromIngredient(recipe.baseIngredient.ingredient),
-                IIngredient.fromIngredient(recipe.secondaryIngredient.ingredient),
-                StringUtil.quoteAndEscape(String.valueOf(recipe.getAlloyingTime()))
+                fromIngredientWithAmount(recipe.baseIngredient),
+                fromIngredientWithAmount(recipe.secondaryIngredient),
+                recipe.getAlloyingTime()
         );
     }
 
@@ -49,7 +50,11 @@ public class AlloyCraftTweaker implements IRecipeHandler<AlloySmeltingRecipe>, I
         return AlloySmeltingRecipe.RECIPE_TYPE;
     }
 
-    @ZenCodeType.Method
+    private String fromIngredientWithAmount(IngredientStack ingredient) {
+        return String.format("(%s) * %d", IIngredient.fromIngredient(ingredient.ingredient).getCommandString(), ingredient.amount);
+    }
+
+    /*@ZenCodeType.Method
     public void addRecipe(String recipeName, IItemStack result, IIngredient base, int baseAmount, IIngredient extra, int alloyTime) {
         addRecipe(recipeName, result, base, baseAmount, extra, 1, alloyTime);
     }
@@ -62,13 +67,13 @@ public class AlloyCraftTweaker implements IRecipeHandler<AlloySmeltingRecipe>, I
     @ZenCodeType.Method
     public void addRecipe(String recipeName, IItemStack result, IIngredient base, IIngredient extra, int alloyTime) {
         addRecipe(recipeName, result, base, 1, extra, 1, alloyTime);
-    }
+    }*/
 
     @ZenCodeType.Method
-    public void addRecipe(String recipeName, IItemStack result, IIngredient base, int baseAmount, IIngredient extra, int extraAmount, int alloyTime) {
+    public void addRecipe(String recipeName, IItemStack result, IIngredientWithAmount baseIngredient, IIngredientWithAmount extraIngredient, int alloyTime) {
         recipeName = this.fixRecipeName(recipeName);
         ResourceLocation resourceLocation = new ResourceLocation(CraftTweakerConstants.MOD_ID, recipeName);
-        CraftTweakerAPI.apply(new ActionAddRecipe<>(this, new AlloySmeltingRecipe(IngredientStack.create(base.asVanillaIngredient(), baseAmount), IngredientStack.create(extra.asVanillaIngredient(), extraAmount), result.getInternal(), alloyTime, resourceLocation)));
+        CraftTweakerAPI.apply(new ActionAddRecipe<>(this, new AlloySmeltingRecipe(IngredientStack.create(baseIngredient.getIngredient().asVanillaIngredient(), baseIngredient.getAmount()), IngredientStack.create(extraIngredient.getIngredient().asVanillaIngredient(), extraIngredient.getAmount()), result.getInternal(), alloyTime, resourceLocation)));
     }
 
     @Override

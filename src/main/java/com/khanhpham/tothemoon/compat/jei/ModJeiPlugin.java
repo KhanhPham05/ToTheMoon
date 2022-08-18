@@ -24,6 +24,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.*;
+import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -80,8 +81,10 @@ public class ModJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         MANAGER.registerRecipeTransferHandlers(registration);
-        registration.addRecipeTransferHandler(AlloySmelterMenu.class, AlloySmelterRecipeCategory.RECIPE_TYPE, 0, 2, 0, 2);
-        registration.addRecipeTransferHandler(MetalPressMenu.class, MetalPressRecipeCategory.RECIPE_TYPE, 0, 2, 0, 2);
+        registration.addRecipeTransferHandler(AlloySmelterMenu.class, AlloySmelterRecipeCategory.RECIPE_TYPE, 0, 2, 3, 36);
+
+        //FIXME
+        registration.addRecipeTransferHandler(MetalPressMenu.class, MetalPressRecipeCategory.RECIPE_TYPE, 0, 2, 3, 36);
     }
 
     public static final class AlloySmelterRecipeCategory implements IRecipeCategory<AlloySmeltingRecipe> {
@@ -165,8 +168,16 @@ public class ModJeiPlugin implements IModPlugin {
         }
 
         @Override
-        public void draw(MetalPressingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-            processArrow.draw(stack, 43, 25);
+        public void draw(MetalPressingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack pose, double mouseX, double mouseY) {
+            processArrow.draw(pose, 43, 25);
+
+            if (recipe.isConsumeMold()) {
+                pose.pushPose();
+                pose.scale(.9f, .9f, .9f);
+                //noinspection ConstantConditions
+                Minecraft.getInstance().font.draw(pose, ModLanguage.JEI_METAL_PRESS_CONSUME_MOLD, 0, 58, ChatFormatting.RED.getColor());
+                pose.popPose();
+            }
         }
 
         @Override
@@ -200,11 +211,12 @@ public class ModJeiPlugin implements IModPlugin {
             return MetalPressingRecipe.class;
         }
 
+        //FIXME
         @Override
         public void setRecipe(IRecipeLayoutBuilder builder, MetalPressingRecipe recipe, IFocusGroup focuses) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 17, 40).addIngredients(recipe.getIngredients().get(0));
-            builder.addSlot(RecipeIngredientRole.INPUT, 17, 12).addIngredients(recipe.getIngredients().get(1));
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 27).addIngredients(recipe.getIngredients().get(2));
+            RecipeCategory.addInput(builder, recipe, 0, 17, 12);
+            RecipeCategory.addInput(builder, recipe, 1, 17, 40);
+            RecipeCategory.addOutput(builder, recipe, 79, 26);
         }
     }
 }

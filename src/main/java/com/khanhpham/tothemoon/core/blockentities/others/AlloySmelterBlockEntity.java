@@ -3,10 +3,10 @@ package com.khanhpham.tothemoon.core.blockentities.others;
 import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
-import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
-import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.core.energy.Energy;
 import com.khanhpham.tothemoon.core.energy.EnergyOnlyReceive;
+import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -17,9 +17,15 @@ import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -54,7 +60,6 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements
             return 4;
         }
     };
-
     public AlloySmelterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
         super(pType, pWorldPosition, pBlockState, energy, label, containerSize);
     }
@@ -66,7 +71,6 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements
     public static void serverTick(Level level, BlockPos pos, BlockState state, AlloySmelterBlockEntity blockEntity) {
         blockEntity.serverTick(level, pos, state);
     }
-
 
     public void serverTick(Level level, BlockPos pos, BlockState state) {
         if (!super.isEmpty(0) || !super.isEmpty(1)) {
@@ -118,5 +122,15 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements
     @Override
     public int[] getSlotsForFace(Direction pSide) {
         return pSide == Direction.DOWN ? new int[]{2} : new int[]{0, 1};
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, Direction pDirection) {
+        return pDirection != Direction.DOWN;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
+        return pDirection == Direction.DOWN;
     }
 }

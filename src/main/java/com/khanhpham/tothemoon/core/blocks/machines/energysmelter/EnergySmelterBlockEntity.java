@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.core.blockentities.others;
+package com.khanhpham.tothemoon.core.blocks.machines.energysmelter;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
@@ -14,6 +14,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
@@ -21,6 +22,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,10 +68,14 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
         return new EnergySmelterMenu(containerId, playerInventory, this, this.data);
     }
 
-    @Nonnull
     @Override
-    public int[] getSlotsForFace(Direction pSide) {
-        return pSide == Direction.DOWN ? new int[1] : new int[0];
+    public boolean canPlaceItem(int pIndex, ItemStack pStack) {
+        return pIndex == 0;
+    }
+
+    @Override
+    protected boolean canTakeItem(int index) {
+        return index == 1;
     }
 
     public void serverTick(Level level, BlockPos pos, BlockState state) {
@@ -81,7 +89,7 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
                 flag = true;
                 if (workingTime >= workingDuration) {
                     workingTime = 0;
-                    workingDuration = recipe.getCookingTime();
+                    workingDuration = recipe.getCookingTime() / 2;
                     burn(recipe);
                 }
             } else {
@@ -104,10 +112,5 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
         }
 
         items.get(0).shrink(1);
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return super.getCapability(cap, side);
     }
 }

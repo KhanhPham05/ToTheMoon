@@ -82,4 +82,12 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
     public boolean isHovering(int pX, int pY, int pWidth, int pHeight, double pMouseX, double pMouseY) {
         return super.isHovering(pX, pY, pWidth, pHeight, pMouseX, pMouseY);
     }
+
+    protected void drawCenterFocusedString(PoseStack pose, Component translatableText, int xMiddle, int yMiddle, int fontColor, float scale) {
+        int textMiddleLeft = this.font.width(translatableText) / 2;
+        pose.pushPose();
+        pose.scale(scale, scale, scale);
+        font.draw(pose, translatableText, (leftPos + xMiddle - textMiddleLeft) * scale, (topPos + yMiddle) * scale, fontColor);
+        pose.popPose();
+    }
 }

@@ -1,13 +1,8 @@
 package com.khanhpham.tothemoon.core.energy;
 
 public class GeneratorEnergyStorage extends Energy{
-    @Deprecated
-    public GeneratorEnergyStorage(int capacity, int maxReceive, int maxExtract) {
-        super(capacity, maxReceive, maxExtract);
-    }
-
     public GeneratorEnergyStorage(int capacity, int generateRate) {
-        super(capacity);
+        super(capacity, generateRate, capacity);
     }
 
     @Override

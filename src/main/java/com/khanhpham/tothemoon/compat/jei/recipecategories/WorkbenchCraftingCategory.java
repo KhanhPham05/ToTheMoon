@@ -53,18 +53,18 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     @Override
     public void setRecipeLayout(IRecipeLayoutBuilder builder, WorkbenchCraftingRecipe recipe) {
-        super.addInput(builder, recipe, 0, 2, 23);
-        super.addInput(builder, recipe, 1, 2, 60);
+        addInput(builder, recipe, 0, 2, 23);
+        addInput(builder, recipe, 1, 2, 60);
 
         int index = 2;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                super.addInput(builder, recipe, index, 32 + j * 18 + 1, 5 + i * 18 + 1);
+                addInput(builder, recipe, index, 32 + j * 18 + 1, 5 + i * 18 + 1);
                 index++;
             }
         }
 
-        super.addOutput(builder, recipe.getResultItem(), 137, 41);
+        addOutput(builder, recipe, 137, 41);
     }
 
     @Override

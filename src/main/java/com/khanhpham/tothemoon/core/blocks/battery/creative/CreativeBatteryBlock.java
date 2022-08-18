@@ -2,7 +2,6 @@ package com.khanhpham.tothemoon.core.blocks.battery.creative;
 
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;

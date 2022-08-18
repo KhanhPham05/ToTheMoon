@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:gears/copper"
+  },
+  "mold": {
+    "item": "tothemoon:blank_mold"
+  },
+  "consume_mold": true,
+  "result": {
+    "item": "tothemoon:gear_mold"
+  }
+}

@@ -24,6 +24,7 @@ public abstract class BaseMachineBlockEntity extends EnergyProcessBlockEntity im
         normalContainerSize = containerSize;
     }
 
+    @Deprecated
     public static <T extends BaseMachineBlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
         //Collecting upgrades from upgrade slots
         int j = 0;

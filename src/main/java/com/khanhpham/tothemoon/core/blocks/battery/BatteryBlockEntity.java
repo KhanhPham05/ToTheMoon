@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.core.blockentities.battery;
+package com.khanhpham.tothemoon.core.blocks.battery;
 
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;

@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.core.blockentities.energygenerator;
+package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyItemCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
@@ -61,29 +61,34 @@ public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapab
         blockEntity.serverTick(level, blockPos, blockState);
     }
 
-    public void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
-        ItemStack item = items.get(0);
-        if (!energy.isFull()) {
-            if (burningTime <= 0) {
-                if (!item.isEmpty()) {
-                    burningTime = ForgeHooks.getBurnTime(item, null);
-                    burningDuration = burningTime;
-                    item.shrink(1);
-                    blockState = setNewBlockState(level, blockPos, blockState, AbstractEnergyGeneratorBlock.LIT, Boolean.TRUE);
-                }
-            } else {
-                burningTime--;
-                energy.receiveEnergyIgnoreCondition();
-            }
-        }
+    @Override
+    protected boolean canTakeItem(int index) {
+        return true;
+    }
 
-        if (burningTime <= 0) {
-            blockState = setNewBlockState(level, blockPos, blockState, AbstractEnergyGeneratorBlock.LIT, Boolean.FALSE);
-        }
+    @Override
+    public boolean canPlaceItem(int pIndex, ItemStack pStack) {
+        return ForgeHooks.getBurnTime(pStack, null) > 0;
+    }
 
-        collectBlockEntities(level, blockPos);
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
+        if (this.burningTime > 0) {
+            this.burningTime--;
+            energy.generateEnergy();
+            state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, true);
+        } else if (!this.energy.isFull() && !items.get(0).isEmpty()) {
+            int burnTime = ForgeHooks.getBurnTime(items.get(0), null);
+            if (burnTime > 0) {
+                items.get(0).shrink(1);
+                burningDuration = burnTime;
+                burningTime = burningDuration;
+                state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, true);
+            } else state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, false);
+        } else state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, false);
+
+        collectBlockEntities(level, pos);
         transferEnergy();
-        setChanged(level, blockPos, blockState);
+        setChanged(level, pos, state);
     }
 
     @NotNull

@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -50,6 +51,10 @@ public class TextUtils {
 
     public static String translateEnergy(int energy) {
         return ENERGY_FORMAT.formatted(energy);
+    }
+
+    public static TranslatableComponent translateEnergyStorage(int stored, int capacity) {
+        return translateFormatText("tooltip", "energy", translateEnergy(stored), translateEnergy(capacity));
     }
 
     public static TranslatableComponent translateFormatText(String pre, String suf, Object... params) {

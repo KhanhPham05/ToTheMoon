@@ -72,7 +72,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
         Advancement energizeTheFuel = this.display(ModBlocks.COPPER_ENERGY_GENERATOR.get(), ENERGIZE_THE_FUEL, FrameType.GOAL).parent(machineExoskeleton).addCriterion("energize_the_fuel", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.COPPER_MACHINE_FRAME.get())).save(consumer, ModUtils.modLoc("energize_the_fuel"), fileHelper);
         Advancement storingEnergy = this.display(ModBlocks.BATTERY.get(), STORING_ENERGY, FrameType.TASK).parent(energizeTheFuel).addCriterion("craft", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.BATTERY.get())).addCriterion("place", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.BATTERY.get())).requirements(RequirementsStrategy.OR).save(consumer, loc("storing_energy"), fileHelper);
 
-        Advancement hardenFramed = this.display(ModBlocks.STEEL_MACHINE_FRAME.get(), ModLanguage.HARDEN_FRAMED, FrameType.GOAL).addCriterion("craft", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.STEEL_MACHINE_FRAME.get())).save(consumer, loc("harden_framed"), fileHelper);
+        Advancement hardenFramed = this.display(ModBlocks.STEEL_MACHINE_FRAME.get(), ModLanguage.HARDEN_FRAMED, FrameType.GOAL).parent(machineExoskeleton).addCriterion("craft", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.STEEL_MACHINE_FRAME.get())).save(consumer, loc("harden_framed"), fileHelper);
         Advancement burningEnergy = this.display(ModBlocks.ENERGY_SMELTER.get(), BURNING_ENERGY, FrameType.GOAL).parent(hardenFramed).addCriterion("req", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.ENERGY_SMELTER.get())).save(consumer, loc("burning_energy"), fileHelper);
 
         Advancement combiningMaterials = this.display(ModBlocks.ALLOY_SMELTER.get(), COMBINING_MATERIALS, FrameType.GOAL).parent(burningEnergy).addCriterion("req", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.ALLOY_SMELTER.get())).save(consumer, loc("combining_materials"),fileHelper);
@@ -84,7 +84,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
 
 
     private void invisibleAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper, Advancement root) {
-        Advancement ironBlock = Advancement.Builder.advancement().display(Items.IRON_BLOCK, ModLanguage.HIDDEN_ADVANCEMENT, ModLanguage.HIDDEN_ADVANCEMENT, null, FrameType.TASK, false, false, true).addCriterion("get_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_BLOCK)).parent(root).save(consumer, ModUtils.modLoc("hidden/iron_block"), fileHelper);
+        Advancement ironBlock = Advancement.Builder.advancement().addCriterion("get_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_BLOCK)).parent(root).save(consumer, ModUtils.modLoc("hidden/iron_block"), fileHelper);
     }
 
     private Advancement.Builder display(ItemLike icon, TranslatableComponent advancementComponent, FrameType frame) {

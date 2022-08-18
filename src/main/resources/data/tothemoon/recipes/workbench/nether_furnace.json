@@ -3,9 +3,9 @@
   "extra": "minecraft:soul_soil",
   "craftingPattern": [
                 "",               "tothemoon:smooth_blackstone", "tothemoon:smooth_blackstone", "tothemoon:smooth_blackstone",          "",
-    "tothemoon:smooth_blackstone",  "minecraft:nether_bricks",    "minecraft:nether_bricks",     "minecraft:nether_bricks",   "tothemoon:smooth_blackstone",
-    "tothemoon:smooth_blackstone",  "minecraft:nether_bricks",     "minecraft:furnace",          "minecraft:nether_bricks",   "tothemoon:smooth_blackstone",
-    "tothemoon:smooth_blackstone",  "minecraft:nether_bricks",    "minecraft:nether_bricks",     "minecraft:nether_bricks",   "tothemoon:smooth_blackstone",
+    "tothemoon:smooth_blackstone",  "minecraft:nether_bricks",    "tag:coals",     "minecraft:nether_bricks",   "tothemoon:smooth_blackstone",
+    "tothemoon:smooth_blackstone",  "tag:coals",     "minecraft:furnace",          "tag:coals",   "tothemoon:smooth_blackstone",
+    "tothemoon:smooth_blackstone",  "minecraft:nether_bricks",    "tag:coals",     "minecraft:nether_bricks",   "tothemoon:smooth_blackstone",
                 "",               "tothemoon:smooth_blackstone", "tothemoon:smooth_blackstone","tothemoon:smooth_blackstone",           ""
   ],
   "result": {

@@ -7,15 +7,17 @@
     "book.tothemoon.bw_introduction",
     {
       "type": "patchouli:image",
-      "images": ["tothemoon:textures/guide_book/benchworking_demonstration.png"],
+      "images": [
+        "tothemoon:textures/guide_book/benchworking_demonstration.png"
+      ],
       "border": true,
       "text": "book.tothemoon.bw_demonstration"
     },
-    "book.tothemoon.bw_crafting",
     {
       "type": "patchouli:crafting",
       "title": "book.tothemoon.title.crafting_recipe",
-      "recipe": "tothemoon:crafting/workbench"
+      "recipe": "tothemoon:crafting/workbench",
+      "text": "book.tothemoon.bw_crafting"
     }
   ]
 }

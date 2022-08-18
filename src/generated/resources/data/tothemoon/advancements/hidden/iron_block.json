@@ -1,20 +1,5 @@
 {
   "parent": "tothemoon:root",
-  "display": {
-    "icon": {
-      "item": "minecraft:iron_block"
-    },
-    "title": {
-      "translate": "advancement.tothemoon.hidden"
-    },
-    "description": {
-      "translate": "advancement.tothemoon.hidden"
-    },
-    "frame": "task",
-    "show_toast": false,
-    "announce_to_chat": false,
-    "hidden": true
-  },
   "criteria": {
     "get_item": {
       "trigger": "minecraft:inventory_changed",

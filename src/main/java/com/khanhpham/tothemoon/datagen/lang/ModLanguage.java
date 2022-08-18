@@ -12,6 +12,7 @@ import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.khanhpham.tothemoon.worldgen.OreGenValues;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -37,6 +38,8 @@ public class ModLanguage extends LanguageProvider {
     @Deprecated
     public static final TranslatableComponent MANUAL_METAL_PRESSING_CATEGORY = create("jei", "manual_metal_pressing");
     public static final TranslatableComponent JEI_WORKBENCH_CRAFTING = create("jei", "workbench_crafting");
+    public static final TranslatableComponent JEI_METAL_PRESS_CONSUME_MOLD = create("jei", "recipe_consume_mold");
+
     //GUI
     public static final TranslatableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
     public static final TranslatableComponent NETHER_BRICK_FURNACE_CONTROLLER = create("gui", "nether_brick_furnace");
@@ -160,7 +163,7 @@ public class ModLanguage extends LanguageProvider {
         //GUI - TOOLTIP
         add("gui.tothemoon.alloy_smelter", "Alloy Smelter");
         add("gui.tothemoon.metal_press", "Metal Press");
-        add("tooltip.tothemoon.energy", "Energy %s %s / %s");
+        add("tooltip.tothemoon.energy", "Energy %s / %s");
         add("tooltip.tothemoon.fluid_fuel_tank", "Fuel : %s / %s");
         add("tooltip.tothemoon.item_tank", "(%s): %s");
         add(TANK_ONLY_SUPPORTS_LAVA, "Can stores Lava only, more fluids will be added in future updates");
@@ -180,6 +183,7 @@ public class ModLanguage extends LanguageProvider {
         add(NETHER_BRICK_FURNACE_CONTROLLER, "Nether Bricks Furnace");
         add(JEI_WORKBENCH_CRAFTING, "Workbench Crafting");
         add(JEI_HIGH_HEAT_SMELTING, "High Heat Smelting");
+        add(JEI_METAL_PRESS_CONSUME_MOLD, "Consume Mold");
 
         //sound
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
