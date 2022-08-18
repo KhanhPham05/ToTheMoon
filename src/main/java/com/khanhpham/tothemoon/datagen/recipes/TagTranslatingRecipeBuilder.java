@@ -15,17 +15,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class TagTranslatingRecipeBuilder implements RecipeBuilder {
     private final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();
-    private final Item result;
     private final TagKey<Item> itemTag;
 
-    public TagTranslatingRecipeBuilder(Item result, TagKey<Item> itemTag) {
-        this.result = result;
+    public TagTranslatingRecipeBuilder(TagKey<Item> itemTag) {
         this.itemTag = itemTag;
     }
 
@@ -46,7 +46,7 @@ public class TagTranslatingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public Item getResult() {
-        return this.result;
+        return Items.AIR;
     }
 
     public TagKey<Item> getItemTag() {
@@ -74,7 +74,7 @@ public class TagTranslatingRecipeBuilder implements RecipeBuilder {
         @Override
         public void serializeRecipeData(JsonObject pJson) {
             pJson.addProperty("tag", recipeBuilder.getItemTag().location().toString());
-            pJson.add(JsonNames.RESULT, super.convertItemToJson(recipeBuilder.result));
+            //pJson.add(JsonNames.RESULT, super.convertItemToJson(recipeBuilder.result));
         }
     }
 }

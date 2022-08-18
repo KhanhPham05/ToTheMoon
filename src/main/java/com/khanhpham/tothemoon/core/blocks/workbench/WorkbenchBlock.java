@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.core.blocks.workbench;
 
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.NoBlockItem;
 import com.khanhpham.tothemoon.core.menus.SimpleAccessMenuProvider;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
@@ -47,12 +49,12 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
 
     @Override
     public final InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && !pPlayer.getMainHandItem().is(ModBlocks.WORKBENCH.get().asItem())) {
+        if (!pLevel.isClientSide) {
             pPlayer.openMenu(new SimpleAccessMenuProvider(WorkbenchMenu::new, this, pPos, ModBlocks.WORKBENCH.get().getName()));
-            return InteractionResult.SUCCESS;
+            return InteractionResult.CONSUME;
         }
 
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -67,12 +69,22 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
         return defaultBlockState().setValue(FACING, facing);
     }
 
-    private Direction getLeftDirection(Direction facing) {
+    public static Direction getLeftDirection(Direction facing) {
         return switch (facing) {
             case NORTH -> Direction.WEST;
             case SOUTH -> Direction.EAST;
             case EAST -> Direction.NORTH;
             case WEST -> Direction.SOUTH;
+            default -> facing;
+        };
+    }
+
+    public static Direction getRightDirection(Direction facing) {
+        return switch (facing) {
+            case NORTH -> Direction.EAST;
+            case SOUTH -> Direction.WEST;
+            case WEST -> Direction.NORTH;
+            case EAST -> Direction.SOUTH;
             default -> facing;
         };
     }
@@ -102,7 +114,7 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
 
     @Override
     public BlockItem getRawItem() {
-        return new BlockItem(this, new Item.Properties().stacksTo(1)) {
+        return new BlockItem(this, new Item.Properties().tab(ToTheMoon.TAB).stacksTo(1)) {
             @Override
             public InteractionResult place(BlockPlaceContext pContext) {
                 return canExtendsToLeft(pContext, pContext.getLevel(), pContext.getClickedPos(), pContext.getHorizontalDirection()) ? super.place(pContext) : InteractionResult.FAIL;
@@ -137,15 +149,7 @@ public class WorkbenchBlock extends Block implements HasCustomBlockItem {
             return this.defaultBlockState().setValue(FACING, rightFacing);
         }
 
-        private Direction getRightDirection(Direction facing) {
-            return switch (facing) {
-                case NORTH -> Direction.EAST;
-                case SOUTH -> Direction.WEST;
-                case WEST -> Direction.NORTH;
-                case EAST -> Direction.SOUTH;
-                default -> facing;
-            };
-        }
+
 
         @Override
         public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {

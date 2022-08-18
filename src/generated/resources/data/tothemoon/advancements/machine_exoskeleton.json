@@ -1,0 +1,37 @@
+{
+  "parent": "tothemoon:bench_working",
+  "display": {
+    "icon": {
+      "item": "tothemoon:copper_machine_frame"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.machine_exoskeleton"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.machine_exoskeleton.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "req": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:copper_machine_frame"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "req"
+    ]
+  ]
+}

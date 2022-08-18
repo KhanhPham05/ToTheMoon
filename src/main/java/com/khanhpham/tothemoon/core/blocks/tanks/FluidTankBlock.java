@@ -5,11 +5,8 @@ import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlockEntitiesTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -22,9 +19,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
@@ -48,8 +44,17 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
         return NonDeferredBlockEntitiesTypes.FLUID_TANK_NON_DEFERRED;
     }
 
-    //TODO : add model/texture for tank
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (!pLevel.isClientSide) {
+            ItemStack handItem = pPlayer.getItemInHand(pHand);
+            if (handItem.is(Items.BUCKET) && handItem.getItem() instanceof BucketItem) {
+                if (pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity fluidTank) {
+                    fluidTank.tank.fill(new FluidStack(((BucketItem) handItem.getItem()).getFluid(), FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+                    if (!pPlayer.isCreative()) pPlayer.setItemInHand(pHand, new ItemStack(Items.BUCKET));
+                    return InteractionResult.SUCCESS;
+                }
+            }
+        }
         /*if (pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity fluidTank) {
             ItemStack handItem = pPlayer.getMainHandItem();
 
@@ -91,6 +96,8 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
+
+
     @Override
     public @Nullable FluidTankBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new FluidTankBlockEntity(pPos, pState);
@@ -98,7 +105,7 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
 
     @Override
     public BlockItem getRawItem() {
-        return new TankBlockItem(this);
+        return new TankBlockItem(this, FluidTankBlockEntity.TANK_CAPACITY);
     }
 
     @Override

@@ -1,0 +1,37 @@
+{
+  "parent": "tothemoon:harden_framed",
+  "display": {
+    "icon": {
+      "item": "tothemoon:energy_smelter"
+    },
+    "title": {
+      "translate": "advancement.tothemoon.burning_energy"
+    },
+    "description": {
+      "translate": "advancement.tothemoon.burning_energy.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "req": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:energy_smelter"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "req"
+    ]
+  ]
+}

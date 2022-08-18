@@ -81,7 +81,7 @@ public class WorkbenchCraftingContainer extends SimpleContainer implements Stack
         int index = 2;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                menu.addSlot(new Slot(this, index, 57 + j * 18, 22 + i * 18));
+                menu.addSlot(new Slot(this, index, 53 + j * 18, 19 + i * 18));
                 index++;
             }
         }

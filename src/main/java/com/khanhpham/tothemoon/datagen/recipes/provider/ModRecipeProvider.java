@@ -1,24 +1,27 @@
 package com.khanhpham.tothemoon.datagen.recipes.provider;
 
-import com.khanhpham.tothemoon.datagen.recipes.AlloySmeltingRecipeBuilder;
-import com.khanhpham.tothemoon.datagen.recipes.MetalPressRecipeBuilder;
-import com.khanhpham.tothemoon.datagen.recipes.RecipeGeneratorHelper;
-import com.khanhpham.tothemoon.datagen.recipes.TagTranslatingRecipeBuilder;
+import com.khanhpham.tothemoon.core.items.HammerItem;
+import com.khanhpham.tothemoon.datagen.recipes.*;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import io.netty.buffer.ByteBuf;
 import mekanism.api.datagen.recipe.builder.ItemStackChemicalToItemStackRecipeBuilder;
 import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
 import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
 import mekanism.common.tags.MekanismTags;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.TickTrigger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.recipes.UpgradeRecipeBuilder;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,17 +29,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import static com.khanhpham.tothemoon.datagen.tags.ModItemTags.*;
 import static net.minecraftforge.common.Tags.Items.*;
@@ -63,7 +62,7 @@ public class ModRecipeProvider extends RecipeProvider {
         final RecipeGeneratorHelper helper = new RecipeGeneratorHelper(consumer);
         buildSmeltingRecipes(helper);
         buildModdedRecipes(consumer);
-        buildCraftingTableRecipes(helper);
+        buildCraftingTableRecipes(consumer, helper);
         buildRecipeCompat(consumer, helper);
     }
 
@@ -111,7 +110,7 @@ public class ModRecipeProvider extends RecipeProvider {
         return ModUtils.modLoc(saveLoc);
     }
 
-    private void buildCraftingTableRecipes(final RecipeGeneratorHelper helper) {
+    private void buildCraftingTableRecipes(Consumer<FinishedRecipe> consumer, final RecipeGeneratorHelper helper) {
         buildStair(helper, ModBlocks.MOON_ROCK_STAIR, ModBlocks.MOON_ROCK);
         buildStair(helper, ModBlocks.MOON_ROCK_BRICK_STAIR, ModBlocks.MOON_ROCK_BRICK);
         buildStair(helper, ModBlocks.POLISHED_MOON_ROCK_STAIR, ModBlocks.POLISHED_MOON_ROCK);
@@ -160,10 +159,17 @@ public class ModRecipeProvider extends RecipeProvider {
         helper.shaped(ModBlocks.ANTI_PRESSURE_GLASS.get(), 4).pattern("SGS").pattern("GQG").pattern("SGS").define('S', DUSTS_STEEL).define('G', Tags.Items.GLASS).define('Q', GEMS_QUARTZ).save();
         helper.shaped(ModBlocks.METAL_PRESS).pattern("SSS").pattern("WFW").pattern("SBS").define('S', PLATES_STEEL).define('W', WIRES_STEEL).define('F', ModBlocks.COPPER_MACHINE_FRAME.get()).define('B', STORAGE_BLOCKS_IRON);
 
-        helper.shaped(ModBlocks.COPPER_ENERGY_GENERATOR).pattern("SGS").pattern("WFW").pattern("SBS").define('S', ModItemTags.PLATES_STEEL).define('G', ModItemTags.GEARS_COPPER).define('W', WIRES_REDSTONE_METAL).define('F', ModBlocks.REDSTONE_MACHINE_FRAME.get()).define('B', Blocks.BLAST_FURNACE).save();
-        helper.shaped(ModBlocks.IRON_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_IRON).define('W', WIRES_REDSTONE_METAL).define('M', ModBlocks.COPPER_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_STEEL).save();
-        helper.shaped(ModBlocks.GOLD_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_GOLD).define('W', WIRES_REDSTONE_STEEL_ALLOY).define('M', ModBlocks.IRON_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_GOLD).save();
-        helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
+        //helper.shaped(ModBlocks.COPPER_ENERGY_GENERATOR).pattern("SGS").pattern("WFW").pattern("SBS").define('S', ModItemTags.PLATES_STEEL).define('G', ModItemTags.GEARS_COPPER).define('W', WIRES_REDSTONE_METAL).define('F', ModBlocks.REDSTONE_MACHINE_FRAME.get()).define('B', Blocks.BLAST_FURNACE).save();
+        //helper.shaped(ModBlocks.IRON_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_IRON).define('W', WIRES_REDSTONE_METAL).define('M', ModBlocks.COPPER_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_STEEL).save();
+        //helper.shaped(ModBlocks.GOLD_ENERGY_GENERATOR).pattern("SPS").pattern("WMW").pattern("SGS").define('S', ModItemTags.PLATES_STEEL).define('P', PLATES_GOLD).define('W', WIRES_REDSTONE_STEEL_ALLOY).define('M', ModBlocks.IRON_ENERGY_GENERATOR.get()).define('G', ModItemTags.GEARS_GOLD).save();
+        //helper.shaped(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER).pattern("SSS").pattern("BFB").pattern("BAB").define('S', ModBlocks.SMOOTH_BLACKSTONE.get()).define('F', Items.FURNACE).define('B', Items.NETHER_BRICKS).define('A', Items.SOUL_SOIL).save();
+        helper.shaped(ModBlocks.WORKBENCH).pattern("PPH").pattern("WWW").pattern("F F").define('F', FENCES).define('P', Items.PAPER).define('W', ItemTags.PLANKS).define('H', ModItems.WOODEN_HAMMER.get()).save();
+
+        //hammers
+        this.hammer(helper, ModItems.WOODEN_HAMMER, ItemTags.PLANKS);
+        this.hammer(helper, ModItems.STEEL_HAMMER, PLATES_STEEL);
+        this.hammer(helper, ModItems.DIAMOND_HAMMER, GEMS_DIAMOND);
+        UpgradeRecipeBuilder.smithing(Ingredient.of(ModItems.DIAMOND_HAMMER.get()), Ingredient.of(INGOTS_NETHERITE), ModItems.NETHERITE_HAMMER.get()).unlocks("unlock", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.DIAMOND_HAMMER.get())).save(consumer, ModUtils.modLoc("upgrading/netherite_hammer"));
 
         helper.shapelessCrafting(ModItems.REDSTONE_STEEL_ALLOY_DUST.get(), 1, ModItems.STEEL_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
         helper.shapelessCrafting(ModItems.REDSTONE_METAL_DUST.get(), 1, ModItems.IRON_DUST.get(), Items.REDSTONE, Items.REDSTONE, Items.REDSTONE);
@@ -183,6 +189,16 @@ public class ModRecipeProvider extends RecipeProvider {
 
         helper.armor();
         helper.tools();
+        helper.stoneCutting(ModBlocks.POLISHED_MOON_ROCK, 1, ModBlocks.MOON_ROCK);
+        helper.stoneCutting(ModBlocks.SMOOTH_BLACKSTONE, 1, () -> Items.BLACKSTONE);
+        helper.smelting(Items.BLACKSTONE, ModBlocks.SMOOTH_BLACKSTONE.get(), false);
+
+        helper.shaped(ModItems.COPPER_GEAR).pattern(" P ").pattern("PIP").pattern(" P ").define('P', PLATES_COPPER).define('I', INGOTS_COPPER);
+        helper.shaped(ModItems.IRON_GEAR).pattern(" P ").pattern("PIP").pattern(" P ").define('P', PLATES_IRON).define('I', INGOTS_IRON);
+    }
+
+    private void hammer(RecipeGeneratorHelper helper, Supplier<HammerItem> result, TagKey<Item> from) {
+        helper.shaped(result).pattern(" F ").pattern(" SF").pattern("S  ").define('S', RODS_WOODEN).define('F', from).save();
     }
 
     private void sheetBlock(final RecipeGeneratorHelper helper, Supplier<? extends Block> block, TagKey<Item> material) {
@@ -209,6 +225,7 @@ public class ModRecipeProvider extends RecipeProvider {
         //SingleItemRecipeBuilder.stonecutting(Ingredient.of(material.get()), block.get()).unlockedBy("tick", tick()).save(consumer, createRecipeId());
     }
 
+    //FIXME : stabilize metal press recipe
     private void buildModdedRecipes(Consumer<FinishedRecipe> consumer) {
         alloy(consumer, ModItemTags.INGOTS_STEEL, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_STEEL_ALLOY, 1);
         alloy(consumer, ModItemTags.DUSTS_IRON, 1, DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
@@ -218,58 +235,66 @@ public class ModRecipeProvider extends RecipeProvider {
 
         metalPress(consumer, INGOTS_STEEL, PLATE_MOLD, ModItems.STEEL_PLATE);
         metalPress(consumer, INGOTS_STEEL, GEAR_MOLD, ModItems.STEEL_GEAR);
-        metalPress(consumer, PLATES_STEEL, ROD_MOLD, ModItems.STEEL_ROD);
+        metalPress(consumer, INGOTS_STEEL, ROD_MOLD, new ItemStack(ModItems.STEEL_ROD.get(), 2));
 
         metalPress(consumer, INGOTS_URANIUM, PLATE_MOLD, ModItems.URANIUM_PLATE);
         metalPress(consumer, INGOTS_URANIUM, GEAR_MOLD, ModItems.URANIUM_GEAR);
-        metalPress(consumer, PLATES_URANIUM, ROD_MOLD, ModItems.URANIUM_ROD);
+        metalPress(consumer, INGOTS_URANIUM, ROD_MOLD, new ItemStack(ModItems.URANIUM_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_REDSTONE_METAL, PLATE_MOLD, ModItems.REDSTONE_METAL_PLATE);
-        metalPress(consumer, PLATES_REDSTONE_METAL, ROD_MOLD, ModItems.REDSTONE_METAL_ROD);
         metalPress(consumer, INGOTS_REDSTONE_METAL, GEAR_MOLD, ModItems.REDSTONE_METAL_GEAR);
+        metalPress(consumer, INGOTS_REDSTONE_METAL, ROD_MOLD, new ItemStack(ModItems.REDSTONE_METAL_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_REDSTONE_STEEL_ALLOY, PLATE_MOLD, ModItems.REDSTONE_STEEL_ALLOY_PLATE);
-        metalPress(consumer, PLATES_REDSTONE_STEEL_ALLOY, ROD_MOLD, ModItems.REDSTONE_STEEL_ALLOY_ROD);
         metalPress(consumer, INGOTS_REDSTONE_STEEL_ALLOY, GEAR_MOLD, ModItems.REDSTONE_STEEL_ALLOY_GEAR);
+        metalPress(consumer, INGOTS_REDSTONE_STEEL_ALLOY, ROD_MOLD, new ItemStack(ModItems.REDSTONE_STEEL_ALLOY_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_IRON, PLATE_MOLD, ModItems.IRON_PLATE);
-        metalPress(consumer, PLATES_IRON, ROD_MOLD, ModItems.IRON_ROD);
         metalPress(consumer, INGOTS_IRON, GEAR_MOLD, ModItems.IRON_GEAR);
+        metalPress(consumer, INGOTS_IRON, ROD_MOLD, new ItemStack(ModItems.IRON_ROD.get(), 2));
+
 
         metalPress(consumer, INGOTS_GOLD, GEAR_MOLD, ModItems.GOLD_GEAR);
         metalPress(consumer, INGOTS_GOLD, PLATE_MOLD, ModItems.GOLD_PLATE);
-        metalPress(consumer, PLATES_GOLD, ROD_MOLD, ModItems.GOLD_ROD);
+        metalPress(consumer, INGOTS_GOLD, ROD_MOLD, new ItemStack(ModItems.GOLD_ROD.get(), 2));
 
-        metalPress(consumer, PLATES_COPPER, ROD_MOLD, ModItems.COPPER_ROD);
         metalPress(consumer, INGOTS_COPPER, PLATE_MOLD, ModItems.COPPER_PLATE);
         metalPress(consumer, INGOTS_COPPER, GEAR_MOLD, ModItems.COPPER_GEAR);
+        metalPress(consumer, INGOTS_COPPER, ROD_MOLD, new ItemStack(ModItems.COPPER_ROD.get(), 2));
+
 
         TagToItemRecipeHelper provider = TagToItemRecipeHelper.create(consumer);
 
-        provider.put(Tags.Items.STONE, Items.STONE, Items.DIORITE, Items.ANDESITE);
-        provider.put(DUSTS_COAL);
+        provider.tag(DUSTS_COAL, DUSTS_HEATED_COAL, DUSTS_GOLD, DUSTS_REDSTONE_STEEL_ALLOY, DUSTS_URANIUM, DUSTS_STEEL, DUSTS_REDSTONE_METAL, DUSTS_IRON, DUSTS_COPPER);
+        provider.tag(GENERAL_GEARS);
+        provider.tag(GENERAL_RODS);
+        provider.tag(GENERAL_SHEETMETALS);
+        provider.tag(GENERAL_STORAGE_BLOCKS);
 
         provider.generateRecipe(this::translateTag);
     }
 
-    private void translateTag(Consumer<FinishedRecipe> consumer, TagKey<Item> tag, Item item) {
-        TagTranslatingRecipeBuilder builder = new TagTranslatingRecipeBuilder(item, tag);
-        builder.save(consumer, RecipeGeneratorHelper.getId(item));
+    private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> mold, ItemStack result) {
+        MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, mold, result);
+        RecipeGeneratorHelper.saveGlobal(consumer, builder, "metal_pressing", RecipeGeneratorHelper.getId(result.getItem()));
+    }
+
+    private void translateTag(Consumer<FinishedRecipe> consumer, TagKey<Item> tag) {
+        TagTranslatingRecipeBuilder builder = new TagTranslatingRecipeBuilder(tag);
+        builder.save(consumer, "tag_translating/" + RecipeGeneratorHelper.extractTag(tag));
     }
 
     private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> moldTag, Supplier<? extends Item> result) {
-        MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, moldTag, result.get());
+        MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, moldTag, new ItemStack(result.get()));
         RecipeGeneratorHelper.saveGlobal(consumer, builder, "metal_pressing", RecipeGeneratorHelper.getId(result.get()));
     }
 
     private void alloy(Consumer<FinishedRecipe> consumer, TagKey<Item> item1, int count1, TagKey<Item> item2, int count2, Supplier<? extends ItemLike> result, int amount) {
         var builder = AlloySmeltingRecipeBuilder.build(item1, count1, item2, count2, result.get(), amount);
         RecipeGeneratorHelper.saveGlobal(consumer, builder, "alloying", RecipeGeneratorHelper.getId(result.get()));
-    }
-
-    @SafeVarargs
-    private List<String> getInputNames(TagKey<Item>... tags) {
-        return Arrays.stream(tags).map(RecipeGeneratorHelper::extractTag).collect(Collectors.toList());
     }
 
     private void buildSlab(RecipeGeneratorHelper helper, Supplier<SlabBlock> slabBlockSupplier, Supplier<Block> materialSupplier) {
@@ -311,8 +336,6 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private void oreSmelting(final RecipeGeneratorHelper helper, ItemLike ingredient, ItemLike result) {
         helper.smelting(ingredient, result, true);
-        //SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient), result, 1.0f, 200).unlockedBy("tick", tick()).save(consumer, createRecipeId());
-        //SimpleCookingRecipeBuilder.blasting(Ingredient.of(ingredient), result, 1.0f, 100).unlockedBy("tick", tick()).save(consumer, createRecipeId());
     }
 
     private void buildStair(final RecipeGeneratorHelper helper, Supplier<? extends StairBlock> resultSupplier, Supplier<? extends Block> materialSupplier) {

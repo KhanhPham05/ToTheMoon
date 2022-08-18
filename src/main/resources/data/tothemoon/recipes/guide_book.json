@@ -1,0 +1,15 @@
+{
+  "type": "patchouli:shaped_book_recipe",
+  "pattern": [
+    "BH"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "H": {
+      "tag": "tothemoon:hammers"
+    }
+  },
+  "book": "tothemoon:guide_book"
+}

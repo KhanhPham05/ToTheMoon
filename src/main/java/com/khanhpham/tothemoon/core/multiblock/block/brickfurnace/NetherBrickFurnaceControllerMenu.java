@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
-import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
+import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.slot.SlotPlacePredicate;
@@ -29,9 +29,9 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
     public NetherBrickFurnaceControllerMenu(int pContainerId, Inventory playerInventory, Container externalContainer, ContainerData data) {
         super(ModMenuTypes.NETHER_BRICK_FURNACE, pContainerId, playerInventory, externalContainer);
 
-        //blaze powder slot
-        addSlot(new SlotPlacePredicate(externalContainer, 0, 56, 43, this::canProcess));
         //input slot
+        addSlot(new SlotPlacePredicate(externalContainer, 0, 56, 43));
+        //blaze powder slot
         addSlot(new SlotPlacePredicate(externalContainer, 1, 31, 43, (stack) -> stack.is(Items.BLAZE_POWDER)));
         //result slot
         addSlot(new ResultSlotPredicate(externalContainer, 2, 146, 43));
@@ -48,11 +48,6 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         this(pContainerId, playerInventory, new SimpleContainer(NetherBrickFurnaceControllerBlockEntity.CONTAINER_SIZE), new SimpleContainerData(NetherBrickFurnaceControllerBlockEntity.DATA_COUNT));
     }
 
-    private boolean canProcess(ItemStack stack) {
-        ClientLevel level = Minecraft.getInstance().level;
-        return level != null && level.getRecipeManager().getRecipeFor(HighHeatSmelting.RECIPE_TYPE, new SimpleContainer(stack), level).isPresent();
-    }
-
     public int getStoredFluid() {
         return this.data.get(0);
     }
@@ -65,6 +60,10 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         int store = data.get(0);
         int capacity = data.get(1);
         return capacity != 0 ? store * 75 / capacity : 0;
+    }
+
+    public int getBlazeFuel() {
+        return data.get(4);
     }
 
     @Override
@@ -124,5 +123,9 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         int time = data.get(2);
         int duration = data.get(3);
         return duration != 0 && time != 0 ? time * 50 / duration : 0;
+    }
+
+    public int getBlazeFuelCapacity() {
+        return this.data.get(5);
     }
 }

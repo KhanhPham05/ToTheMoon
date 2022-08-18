@@ -2,8 +2,10 @@ package com.khanhpham.tothemoon.utils.multiblock;
 
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,10 +19,10 @@ public class Multiblock {
         this.controllerPos = controllerPos;
     }
 
-    public boolean isMultiblockDistrusted(Level level, BlockPos brokenPos) {
+    public boolean isMultiblockDisconstructed(Level level, BlockPos brokenPos) {
         if (multiblockPartPositions.containsKey(brokenPos)) {
             if (level.getBlockEntity(controllerPos) instanceof MultiblockEntity multiblock) {
-                multiblock.setMultiblock(null);
+                multiblock.removeMultiblock();
             }
         }
 

@@ -1,19 +1,20 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
-import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
-import com.khanhpham.tothemoon.core.items.FluidCapableItem;
+import com.khanhpham.tothemoon.core.blocks.tanks.TankBlockItem;
+import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
-import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -34,7 +35,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    public NetherBrickFurnaceBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<NetherBrickFurnaceControllerBlockEntity> supplier) {
+    public NetherBrickFurnaceBlock(Properties p_49224_) {
         super(p_49224_);
         registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(FACING, Direction.NORTH));
     }
@@ -56,7 +57,7 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
     }
 
     @Override
-    public @Nullable NetherBrickFurnaceControllerBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    public NetherBrickFurnaceControllerBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new NetherBrickFurnaceControllerBlockEntity(pPos, pState);
     }
 
@@ -65,8 +66,8 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity be) {
                 if (be.getMultiblock() != null) {
-                    super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-                } else return InteractionResult.SUCCESS;
+                    return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+                }
             }
         }
 
@@ -75,40 +76,33 @@ public final class NetherBrickFurnaceBlock extends BaseEntityBlock<NetherBrickFu
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        ModUtils.loadFluidToBlock(pLevel, pPos, pStack);
+        CompoundTag dataTag = ModUtils.loadFluidToBlock(pLevel, pPos, pStack);
+        if (dataTag.contains(LootUtils.LOOT_DATA_BLAZE_FUEL, LootUtils.TAG_TYPE_INT) && pLevel.getBlockEntity(pPos) instanceof NetherBrickFurnaceControllerBlockEntity blockEntity) {
+            int blazeFuel = dataTag.getInt(LootUtils.LOOT_DATA_BLAZE_FUEL);
+            blockEntity.loadBlazeFuel(blazeFuel);
+        }
     }
 
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRandom) {
         if (pState.getValue(LIT)) {
-            double d0 = (double)pPos.getX() + 0.5D;
+            double d0 = (double) pPos.getX() + 0.5D;
             double d1 = pPos.getY();
-            double d2 = (double)pPos.getZ() + 0.5D;
+            double d2 = (double) pPos.getZ() + 0.5D;
             Direction direction = pState.getValue(FACING);
             Direction.Axis direction$axis = direction.getAxis();
             double d4 = pRandom.nextDouble() * 0.6D - 0.3D;
-            double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d4;
+            double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : d4;
             double d6 = pRandom.nextDouble() * 9.0D / 16.0D;
-            double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
+            double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : d4;
             pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
             pLevel.addParticle(ParticleTypes.SOUL_FIRE_FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
         }
     }
 
     @Override
-    public NetherBrickFurnaceItem getRawItem() {
-        return new NetherBrickFurnaceItem(this);
-    }
-
-    private static final class NetherBrickFurnaceItem extends FluidCapableItem {
-        public NetherBrickFurnaceItem(Block pBlock) {
-            super(pBlock, new Properties().stacksTo(16).tab(ToTheMoon.TAB));
-        }
-
-        @Override
-        protected int getFluidCapacity() {
-            return NetherBrickFurnaceControllerBlockEntity.TANK_CAPACITY;
-        }
+    public BlockItem getRawItem() {
+        return new TankBlockItem(this, NetherBrickFurnaceControllerBlockEntity.TANK_CAPACITY);
     }
 }
 

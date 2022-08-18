@@ -1,5 +1,5 @@
-Java Launcher: C:\Program Files\Java\jdk-17.0.2\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatches.lzma'
+Java Launcher: C:\Program Files\Java\jdk-17.0.4\bin\java.exe
+Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.73\forge-1.18.2-40.1.73-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.73\forge-1.18.2-40.1.73-binpatches.lzma'
 Classpath:
  - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.0.12\binarypatcher-1.0.12-fatjar.jar
 Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
@@ -7,11 +7,11 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.18.2-20220404.173914\joined-1.18.2-20220404.173914-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatched.jar
+  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.73\forge-1.18.2-40.1.73-binpatched.jar
   KeepData:  false
   Unpatched: false
-  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatches.lzma
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.68\forge-1.18.2-40.1.68-binpatches.lzma
+  Patches:   H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.73\forge-1.18.2-40.1.73-binpatches.lzma
+Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.18.2-40.1.73\forge-1.18.2-40.1.73-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: c9bb7d14 Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -1192,6 +1192,12 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 4f20184f Exists: true
   Reading patch net.minecraft.server.packs.repository.PackRepository.binpatch
     Checksum: b7f207ec Exists: true
+  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager$LeakedResourceWarningInputStream.binpatch
+    Checksum: 5af293f3 Exists: true
+  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager.binpatch
+    Checksum: 88feac7b Exists: true
+  Reading patch net.minecraft.server.packs.resources.MultiPackResourceManager.binpatch
+    Checksum: be60c93a Exists: true
   Reading patch net.minecraft.server.packs.resources.ReloadableResourceManager.binpatch
     Checksum: 5794dc5 Exists: true
   Reading patch net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener.binpatch
@@ -1844,6 +1850,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: b604d7a0 Exists: true
   Reading patch net.minecraft.world.item.CreativeModeTab.binpatch
     Checksum: 9e163eb5 Exists: true
+  Reading patch net.minecraft.world.item.CrossbowItem.binpatch
+    Checksum: e5089123 Exists: true
   Reading patch net.minecraft.world.item.DiggerItem.binpatch
     Checksum: 300f5dbe Exists: true
   Reading patch net.minecraft.world.item.DyeColor.binpatch
@@ -3130,6 +3138,9 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/server/packs/repository/Pack 1/1
   Patching net/minecraft/server/packs/repository/PackCompatibility 1/1
   Patching net/minecraft/server/packs/repository/PackRepository 1/1
+  Patching net/minecraft/server/packs/resources/FallbackResourceManager$LeakedResourceWarningInputStream 1/1
+  Patching net/minecraft/server/packs/resources/FallbackResourceManager 1/1
+  Patching net/minecraft/server/packs/resources/MultiPackResourceManager 1/1
   Patching net/minecraft/server/packs/resources/ReloadableResourceManager 1/1
   Patching net/minecraft/server/packs/resources/SimpleJsonResourceReloadListener 1/1
   Patching net/minecraft/server/players/PlayerList$1 1/1
@@ -3456,6 +3467,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/item/CreativeModeTab$8 1/1
   Patching net/minecraft/world/item/CreativeModeTab$9 1/1
   Patching net/minecraft/world/item/CreativeModeTab 1/1
+  Patching net/minecraft/world/item/CrossbowItem 1/1
   Patching net/minecraft/world/item/DiggerItem 1/1
   Patching net/minecraft/world/item/DyeColor 1/1
   Patching net/minecraft/world/item/DyeableHorseArmorItem 1/1

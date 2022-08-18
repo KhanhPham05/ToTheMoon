@@ -1,10 +1,12 @@
 package com.khanhpham.tothemoon.utils.helpers;
 
+import com.google.common.collect.ImmutableMap;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
@@ -13,6 +15,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -21,11 +24,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -34,6 +40,10 @@ public class ModUtils {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
     public static final IntegerProperty TANK_LEVEL = IntegerProperty.create("fluid_level", 0, 12);
     public static final Random RANDOM = new Random();
+
+    private ModUtils() {
+        throw new IllegalStateException("Utilities Class");
+    }
 
     public static ResourceLocation modLoc(String loc) {
         return new ResourceLocation(Names.MOD_ID, loc);
@@ -52,12 +62,12 @@ public class ModUtils {
         return new RecipeType<>() {
             @Override
             public String toString() {
-                return location.getPath();
+                return location.toString();
             }
         };
     }
 
-    public static <T extends IForgeRegistryEntry<T>> String convertRlToPath(@Nonnull T entry) {
+    public static <T extends IForgeRegistryEntry<T>> String registryToPath(@Nonnull T entry) {
         return Objects.requireNonNull(entry.getRegistryName()).getPath();
     }
 
@@ -66,7 +76,7 @@ public class ModUtils {
     }
 
     @SuppressWarnings("deprecation")
-    public static String getNameFromItem(Item item) {
+    public static String getFullItemName(Item item) {
         return Registry.ITEM.getKey(item).toString();
     }
 
@@ -81,7 +91,7 @@ public class ModUtils {
 
     @SuppressWarnings("deprecation")
     public static ItemStack getBucketItem(Fluid fluid) {
-        String namespace = fluid.getRegistryName().getNamespace();
+        String namespace = Objects.requireNonNull(fluid.getRegistryName()).getNamespace();
         String path = fluid.getRegistryName().getPath();
 
         ResourceLocation bucketItem = new ResourceLocation(namespace, path + "_bucket");
@@ -96,7 +106,7 @@ public class ModUtils {
         throw new IllegalStateException("The fluid have no representative bucket");
     }
 
-    public static void loadFluidToBlock(Level pLevel, BlockPos pPos, ItemStack pStack) {
+    public static CompoundTag loadFluidToBlock(Level pLevel, BlockPos pPos, ItemStack pStack) {
         CompoundTag tag = pStack.getOrCreateTag();
         if (tag.contains("ttmData", 10)) {
             CompoundTag dataTag = tag.getCompound("ttmData");
@@ -105,7 +115,11 @@ public class ModUtils {
             if (pLevel.getBlockEntity(pPos) instanceof FluidCapableBlockEntity tile) {
                 tile.setFluid(new FluidStack(fluid, fluidAmount));
             }
+
+            return dataTag;
         }
+
+        return tag;
     }
 
     public static List<ItemStack> getItemsForTags(TagKey<Item> tag, ItemStack slotItem) {
@@ -124,4 +138,27 @@ public class ModUtils {
         return modLoc("textures/gui/" + imageNameWithPng);
     }
 
+    public static <C extends Container, R extends Recipe<C>> Map<ResourceLocation, R> getResourceRecipes(Level level, RecipeType<R> recipeType, ResourceLocation recipeLocation) {
+        var recipes = level.getRecipeManager().getAllRecipesFor(recipeType);
+        for (R recipe : recipes) {
+            if (recipe.getId().equals(recipeLocation)) return ImmutableMap.of(recipeLocation, recipe);
+        }
+        return ImmutableMap.of();
+    }
+
+    //Will leave this method unused but ot remove. Who knows one day I need it.
+    @Nullable
+    @SuppressWarnings("unused")
+    public static <C extends Container, R extends Recipe<C>> R getResourceRecipe(Level level, RecipeType<R> recipeType, String name) {
+        if (level != null) {
+            if (ResourceLocation.isValidResourceLocation(name)) {
+                ResourceLocation recipeName = new ResourceLocation(name);
+                var recipes = level.getRecipeManager().getAllRecipesFor(recipeType).stream().filter(recipe -> recipe.getId().equals(recipeName)).toList();
+                if (recipes.size() > 0) return recipes.get(0);
+                else
+                    throw new IllegalStateException(String.format("Recipe with id %s is not present", recipeName));
+            }
+        }
+        return null;
+    }
 }

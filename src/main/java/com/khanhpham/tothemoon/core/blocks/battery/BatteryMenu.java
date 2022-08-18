@@ -81,6 +81,15 @@ public class BatteryMenu extends BaseMenu {
 
         return itemStack;
     }
+
+    public int getEnergyStored() {
+        return containerData.get(0);
+    }
+
+    public int getEnergyCapacity() {
+        return containerData.get(1);
+    }
+
 }
 
 

@@ -41,7 +41,6 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -64,6 +63,7 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -87,9 +87,6 @@ public class ToTheMoon {
     public static final ResourceLocation MOON_EFFECTS = ModUtils.modLoc("moon_effects");
     public static final ResourceKey<Level> THE_MOON_DIMENSION = ResourceKey.create(Registry.DIMENSION_REGISTRY, ModUtils.modLoc("the_moon_dimension"));
     public static final Logger LOG = LogManager.getLogger(Names.MOD_ID);
-
-    //private static final String CHANNEL_VERSION = "1.0";
-    //public static final SimpleChannel SIMPLE_CHANNEL = NetworkRegistry.newSimpleChannel(ModUtils.modLoc("channel"), () -> CHANNEL_VERSION, (s) -> s.equals(CHANNEL_VERSION), (s) -> s.equals(CHANNEL_VERSION));
     public static final CreativeModeTab TAB = new CreativeModeTab("ttm_creative_tab") {
         @Nonnull
         @Override
@@ -97,6 +94,7 @@ public class ToTheMoon {
             return new ItemStack(ModItems.URANIUM_INGOT.get());
         }
     };
+    public static final boolean IS_JEI_LOADED = ModList.get().isLoaded("jei");
 
     public ToTheMoon() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -110,6 +108,7 @@ public class ToTheMoon {
 
         TTMConfigs.registerConfigs(bus, ModLoadingContext.get());
         new MultiblockManager();
+        ModUtils.log("Jei is {} ", IS_JEI_LOADED ? "loaded" : "not loaded");
     }
 
     private static void initRegistration() {
@@ -118,7 +117,6 @@ public class ToTheMoon {
         ModBlockEntities.init();
 
     }
-
 
     @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static final class ModEvents {

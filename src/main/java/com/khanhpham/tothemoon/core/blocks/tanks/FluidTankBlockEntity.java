@@ -5,6 +5,7 @@ import com.khanhpham.tothemoon.core.blockentities.ImplementedContainer;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlockEntitiesTypes;
 import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -19,33 +20,49 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 @SuppressWarnings("deprecation")
 public class FluidTankBlockEntity extends BlockEntity implements ImplementedContainer<FluidTankMenu>, TickableBlockEntity, FluidCapableBlockEntity {
     public static final int TANK_CAPACITY = 50000;
     private final NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
+    public int fluidRegistryId = 0;
     public FluidTank tank = new FluidTank(TANK_CAPACITY) {
         @Override
         protected void onContentsChanged() {
             fluidRegistryId = Registry.FLUID.getId(this.fluid.getFluid());
         }
-    };
-    public int fluidRegistryId = 0;
 
+        @Override
+        public void setFluid(FluidStack stack) {
+            super.setFluid(stack);
+            onContentsChanged();
+        }
+
+        @Override
+        public boolean isFluidValid(FluidStack stack) {
+            return stack.isEmpty() || this.fluid.isEmpty() || stack.getFluid().isSame(fluid.getFluid());
+        }
+    };
     final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -136,35 +153,42 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
 
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
-        /*.if (!this.items.get(0).isEmpty()) {
-            this.items.get(0).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(fluidHandler -> {
-                if (this.tank.isFluidValid(fluidHandler.getFluidInTank(1000)) && items.get(0).hasContainerItem()) {
-                    this.tank.fill(fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
-                    setItem(0, items.get(0).getContainerItem());
-                }
-            });
+        ItemStack item = getItem(0);
+        if (item.getItem() instanceof BucketItem bucketItem) {
+            Fluid fluid = bucketItem.getFluid();
+            this.tank.fill(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+            setItem(0, new ItemStack(Items.BUCKET));
+        } else {
+            LazyOptional<IFluidHandlerItem> cap = item.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+            if (cap.isPresent()) {
+                this.tank.fill(
+                        cap.map(fluid -> {
+                            if (this.tank.isEmpty())
+                                return fluid.drain(this.tank.getSpace(), IFluidHandler.FluidAction.EXECUTE);
+                            else
+                                return fluid.drain(new FluidStack(this.tank.getFluid().getFluid(), this.tank.getSpace()), IFluidHandler.FluidAction.EXECUTE);
+                        }).get()
+                        , IFluidHandler.FluidAction.EXECUTE);
+            }
         }
-        */
-        this.interact(0, true);
-        this.interact(1, false);
 
-
+        ItemStack stack1 = getItem(1);
+        if (stack1.is(Items.BUCKET)) {
+            setItem(1, ModUtils.getBucketItem(this.tank.getFluid().getFluid()));
+            this.tank.drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+        } else {
+            LazyOptional<IFluidHandlerItem> tankCap = stack1.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+            if (tankCap.isPresent()) {
+                this.tank.drain(tankCap.map(fluid -> {
+                    FluidStack fluidInTank = fluid.getFluidInTank(this.tank.getSpace());
+                    if (!this.tank.isEmpty() && this.tank.isFluidValid(fluidInTank)) {
+                        return this.tank.fill(fluidInTank, IFluidHandler.FluidAction.EXECUTE);
+                    } else return 0;
+                }).get(), IFluidHandler.FluidAction.EXECUTE);
+            }
+        }
 
         setChanged(level, pos, state);
-    }
-
-    private void interact(int index, boolean drainItem) {
-        ItemStack item = items.get(index);
-        if (!item.isEmpty() && item.hasContainerItem()) {
-            item.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresent(fluidHandler -> {
-                if (drainItem && this.tank.isFluidValid(fluidHandler.getFluidInTank(1000)) && item.hasContainerItem()) {
-                    this.tank.fill(fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
-                    setItem(index, item.getContainerItem());
-                } else if (!drainItem && fluidHandler.isFluidValid(1000, this.tank.getFluid())) {
-                    this.tank.drain(fluidHandler.fill(this.tank.getFluidInTank(1000), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
-                }
-            });
-        }
     }
 
     @Nullable

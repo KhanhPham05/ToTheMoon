@@ -38,7 +38,7 @@ public class RecipeGeneratorHelper {
     }
 
     public static String getId(ItemLike item) {
-        return ModUtils.convertRlToPath(item.asItem());
+        return ModUtils.registryToPath(item.asItem());
     }
 
     public static <T extends RecipeBuilder> void saveGlobal(Consumer<FinishedRecipe> consumer, T builder, String recipeType, String result) {
@@ -195,7 +195,7 @@ public class RecipeGeneratorHelper {
         }
 
         public Shaped define(char c, ItemLike item) {
-            this.inputs.add(ModUtils.convertRlToPath(item.asItem()));
+            this.inputs.add(ModUtils.registryToPath(item.asItem()));
             builder.define(c, item);
             return this;
         }
@@ -205,7 +205,6 @@ public class RecipeGeneratorHelper {
             builder.define(c, tag);
             return this;
         }
-
     }
 
     public static class Smelting extends NamedRecipeBuilder<SimpleCookingRecipeBuilder> {

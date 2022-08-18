@@ -4,7 +4,7 @@ import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
-import com.khanhpham.tothemoon.utils.slot.MetalPressSlot;
+import com.khanhpham.tothemoon.utils.slot.SlotPlacePredicate;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,7 +21,7 @@ public class MetalPressMenu extends BaseMenu {
         super(pMenuType, pContainerId, playerInventory, externalContainer);
 
         super.addSlot(externalContainer, 0, 45, 19);
-        super.addSlot(new MetalPressSlot(externalContainer, 1, 45, 47));
+        super.addSlot(new SlotPlacePredicate(externalContainer, 1, 45, 47, (stack) -> stack.is(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag())));
         super.addSlot(new FurnaceResultSlot(playerInventory.player, externalContainer, 2, 107, 33));
 
         super.addPlayerInventorySlots(8, 95);

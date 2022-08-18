@@ -45,12 +45,11 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
     }
 
     protected Ingredient getIngredientSpecial(String name) {
-        if (name.equalsIgnoreCase("empty")) {
+        if (name.equalsIgnoreCase("")) {
             return Ingredient.EMPTY;
         } else if (name.contains("tag:")) {
             String tagName = name.replace("tag:", "");
-            TagKey<Item> tag = ItemTags.create(new ResourceLocation(tagName));
-            ModUtils.log("{}", tag.toString());
+            TagKey<Item> tag = ItemTags.create(new ResourceLocation(this.clearRedundantSpaces(tagName)));
             return Ingredient.of(tag);
         } else {
             Optional<Item> item = Registry.ITEM.getOptional(new ResourceLocation(name));
@@ -60,5 +59,17 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
         }
 
         throw new IllegalStateException("Unknown tag or item | " + name);
+    }
+
+    protected Ingredient getIngredientSpecial(JsonObject json, String name) {
+        return getIngredientSpecial(GsonHelper.getAsString(json, name));
+    }
+
+    private String  clearRedundantSpaces(String string) {
+        return string.replace(" ", "");
+    }
+
+    protected boolean isTag(String value) {
+        return value.contains("tag:");
     }
 }

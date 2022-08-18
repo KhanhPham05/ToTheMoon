@@ -7,6 +7,7 @@
     "tag": "tothemoon:metal_press_molds/plate"
   },
   "result": {
-    "item": "tothemoon:gold_plate"
+    "item": "tothemoon:gold_plate",
+    "count": 1
   }
 }

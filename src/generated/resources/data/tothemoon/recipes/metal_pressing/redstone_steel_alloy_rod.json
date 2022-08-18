@@ -1,12 +1,13 @@
 {
   "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:plates/redstone_steel_alloy"
+    "tag": "forge:ingots/redstone_steel_alloy"
   },
   "mold": {
     "tag": "tothemoon:metal_press_molds/rod"
   },
   "result": {
-    "item": "tothemoon:redstone_steel_alloy_rod"
+    "item": "tothemoon:redstone_steel_alloy_rod",
+    "count": 2
   }
 }

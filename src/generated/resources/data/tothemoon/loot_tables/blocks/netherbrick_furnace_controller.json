@@ -25,6 +25,11 @@
                   "source": "Amount",
                   "target": "ttmData.fluidAmount",
                   "op": "replace"
+                },
+                {
+                  "source": "blazeFuel",
+                  "target": "ttmData.blazeFuel",
+                  "op": "replace"
                 }
               ]
             }

@@ -6,11 +6,13 @@ import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
+@SuppressWarnings("deprecation")
 public class TextUtils {
 
     private static final String TRANSLATION_FORMAT = "%s.%s.%s";
@@ -51,6 +53,10 @@ public class TextUtils {
         return ENERGY_FORMAT.formatted(energy);
     }
 
+    public static TranslatableComponent translateEnergyStorage(int stored, int capacity) {
+        return translateFormatText("tooltip", "energy", translateEnergy(stored), translateEnergy(capacity));
+    }
+
     public static TranslatableComponent translateFormatText(String pre, String suf, Object... params) {
         return new TranslatableComponent(String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf), params);
     }
@@ -79,9 +85,9 @@ public class TextUtils {
         throw new IllegalStateException("No registry represent for [" + location + "]");
     }
 
-    public static Component translateFluidTank(Fluid fluid, int amount, int capacity) {
+    public static TranslatableComponent translateFluidTank(Fluid fluid, int amount, int capacity) {
         String param2 = String.format(FLUID_TANK_ITEM_FORMAT, amount, capacity);
-        String param1 = ModLanguage.convertToTranslatedText(fluid.getRegistryName());
+        String param1 = ModLanguage.getPureName(fluid);
         return translateFormatText("tooltip", "item_tank", param1, param2);
     }
 

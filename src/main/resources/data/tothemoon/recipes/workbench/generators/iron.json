@@ -1,0 +1,15 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "extra": "tothemoon:copper_machine_frame",
+  "hammer": "tothemoon:steel_hammer",
+  "craftingPattern": [
+    "tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel",
+    "tag:forge:plates/steel","tag:forge:plates/copper","redstone","tag:forge:plates/copper","tag:forge:plates/steel",
+    "tag:forge:plates/steel","redstone","blast_furnace","redstone","tag:forge:plates/steel",
+    "tag:forge:plates/steel","tag:forge:plates/copper","tag:forge:gears/iron","tag:forge:plates/copper","tag:forge:plates/steel",
+    "tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel"
+  ],
+  "result": {
+    "item": "tothemoon:iron_energy_generator"
+  }
+}

@@ -12,10 +12,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.function.Supplier;
 
-public class AppendableItemTagKey extends AbstractAppendable<Item> {
+public class AppendableItemTagKey extends AbstractAppendableTag<Item> {
 
     public AppendableItemTagKey(TagKey<Item> mainTag) {
         super(mainTag);
+    }
+
+    public TagKey<Item> append(String name, ItemLike block) {
+        TagKey<Item> child = ItemTags.create(ModUtils.append(super.mainTag.location(), "/" + name));
+        super.map.put(child, block.asItem());
+        return child;
     }
 
     @Override
@@ -23,13 +29,6 @@ public class AppendableItemTagKey extends AbstractAppendable<Item> {
         TagKey<Item> child = ItemTags.create(ModUtils.append(super.mainTag.location(), "/" + name));
         super.map.put(child, supplier.get());
         return child;
-    }
-
-    public final LinkedList<Supplier<? extends Item>> perspectiveItems = new LinkedList<>();
-
-    public final <T extends Item> AppendableItemTagKey putItemsToTag(Collection<RegistryObject<T>> suppliers) {
-        perspectiveItems.addAll(suppliers);
-        return this;
     }
 
     /**

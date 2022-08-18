@@ -7,10 +7,11 @@ import com.khanhpham.tothemoon.core.recipes.WorkbenchCraftingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -47,33 +48,28 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     @Override
     public IDrawable getBackground() {
-        return super.guiHelper.createDrawable(super.makeLocation("workbench_crafting.png"), 0, 0, 159, 90);
+        return super.makeBackground("workbench_crafting.png", 159, 98);
     }
 
     @Override
-    public net.minecraft.world.item.crafting.RecipeType<WorkbenchCraftingRecipe> getActualRecipeType() {
-        return WorkbenchCraftingRecipe.RECIPE_TYPE;
-    }
-
-    @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, WorkbenchCraftingRecipe recipe, IFocusGroup focuses) {
-        super.addInput(builder, recipe, 0, 1, 19);
-        super.addInput(builder, recipe, 1, 1, 56);
+    public void setRecipeLayout(IRecipeLayoutBuilder builder, WorkbenchCraftingRecipe recipe) {
+        addInput(builder, recipe, 0, 2, 23);
+        addInput(builder, recipe, 1, 2, 60);
 
         int index = 2;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                super.addInput(builder, recipe, index, 33 + j * 18, 1 + i * 18);
+                addInput(builder, recipe, index, 32 + j * 18 + 1, 5 + i * 18 + 1);
                 index++;
             }
         }
 
-        super.addOutput(builder, recipe.getResultItem(), 133, 34);
+        addOutput(builder, recipe, 137, 41);
     }
 
     @Override
     public void addShowRecipeZone(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(WorkbenchScreen.class, 153, 21, 30, 27, RECIPE_CATEGORY_TYPE);
+        registration.addRecipeClickArea(WorkbenchScreen.class, 155, 83, 20, 18, RECIPE_CATEGORY_TYPE);
     }
 
     @Override

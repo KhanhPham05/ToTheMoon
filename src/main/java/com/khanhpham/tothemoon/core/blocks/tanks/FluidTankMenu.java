@@ -26,7 +26,7 @@ public class FluidTankMenu extends BaseMenu {
     public FluidTankMenu(int pContainerId, Inventory playerInventory, Container externalContainer, ContainerData data) {
         super(ModMenuTypes.FLUID_TANK, pContainerId, playerInventory, externalContainer);
         super.addSlot(new FluidHandlerSlot(externalContainer, 0, 79, 24));
-        super.addSlot(new FluidHandlerSlot(externalContainer, 1, 79, 56));
+        super.addSlot(new Slot(externalContainer, 1, 79, 56));
 
         this.data = data;
 

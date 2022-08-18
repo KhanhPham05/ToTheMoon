@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:rods/uranium",
+    "#forge:rods/iron",
+    "#forge:rods/copper",
+    "#forge:rods/gold",
+    "#forge:rods/steel",
+    "#forge:rods/redstone_metal",
+    "#forge:rods/redstone_steel"
+  ]
+}

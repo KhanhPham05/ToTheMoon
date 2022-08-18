@@ -17,8 +17,8 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,20 +29,20 @@ import java.util.function.Consumer;
 public class MetalPressRecipeBuilder implements RecipeBuilder {
     private final Ingredient ingredient;
     private final Ingredient press;
-    private final Item result;
+    private final ItemStack result;
     private final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();
     private final ResourceLocation recipeId = ModRecipeProvider.createRecipeId();
     private String group;
 
-    public MetalPressRecipeBuilder(Ingredient ingredient, Ingredient press, Item result) {
+    public MetalPressRecipeBuilder(Ingredient ingredient, Ingredient press, ItemStack result) {
         this.ingredient = ingredient;
         this.press = press;
         this.result = result;
         this.unlock();
     }
 
-    public static MetalPressRecipeBuilder press(TagKey<Item> ingredientTag, TagKey<Item> moldTag, ItemLike result) {
-        return new MetalPressRecipeBuilder(Ingredient.of(ingredientTag), Ingredient.of(moldTag), result.asItem());
+    public static MetalPressRecipeBuilder press(TagKey<Item> ingredientTag, TagKey<Item> moldTag, ItemStack result) {
+        return new MetalPressRecipeBuilder(Ingredient.of(ingredientTag), Ingredient.of(moldTag), result);
     }
 
     public void unlock() {
@@ -65,7 +65,7 @@ public class MetalPressRecipeBuilder implements RecipeBuilder {
 
     @Override
     public Item getResult() {
-        return this.result;
+        return this.result.getItem();
     }
 
     @Override
@@ -82,10 +82,10 @@ public class MetalPressRecipeBuilder implements RecipeBuilder {
 
         private final Ingredient ingredient;
         private final Ingredient press;
-        private final Item result;
+        private final ItemStack result;
         private final String group;
 
-        public Finished(ResourceLocation recipeId, Ingredient ingredient, Ingredient press, Item result, ResourceLocation advancementRecipeId, Advancement.Builder advancementBuilder, String group) {
+        public Finished(ResourceLocation recipeId, Ingredient ingredient, Ingredient press, ItemStack result, ResourceLocation advancementRecipeId, Advancement.Builder advancementBuilder, String group) {
             super(recipeId, ModRecipes.METAL_PRESSING_RECIPE_SERIALIZER, advancementBuilder, advancementRecipeId);
             this.press = press;
             this.ingredient = ingredient;
@@ -99,7 +99,8 @@ public class MetalPressRecipeBuilder implements RecipeBuilder {
             json.add(JsonNames.INGREDIENT, ingredient.toJson());
             json.add(JsonNames.MOLD, press.toJson());
             final JsonObject object = new JsonObject();
-            object.addProperty(JsonNames.ITEM, ModUtils.getNameFromItem(result));
+                object.addProperty(JsonNames.ITEM, ModUtils.getFullItemName(result.getItem()));
+                object.addProperty("count", result.getCount());
             json.add(JsonNames.RESULT, object);
         }
     }

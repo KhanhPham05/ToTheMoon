@@ -15,25 +15,25 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import java.util.function.BiConsumer;
 
-/**
- * @see net.minecraftforge.fluids.capability.ItemFluidContainer
- */
 public class LootUtils {
     public static final String LOOT_DATA_ENERGY;
     public static final String LOOT_DATA_FLUID;
     public static final String LOOT_DATA_FLUID_AMOUNT;
+    public static final String LOOT_DATA_BLAZE_FUEL;
     public static final int TAG_TYPE_INT = Tag.TAG_INT;
     public static final int TAG_TYPE_STRING = Tag.TAG_STRING;
     public static final int TAG_TYPE_COMPOUND = Tag.TAG_COMPOUND;
     protected static final String SAVE_DATA_ENERGY = "ttmData.energy";
     protected static final String SAVE_DATA_FLUID_NAME = "ttmData.fluid";
     protected static final String SAVE_DATA_FLUID_AMOUNT = "ttmData.fluidAmount";
+    protected static final String SAVE_DATA_BLAZE_FUEL = "ttmData.blazeFuel";
     private static final String TTM_DATA = "ttmData";
 
     static {
         LOOT_DATA_ENERGY = "energy";
         LOOT_DATA_FLUID = "fluid";
         LOOT_DATA_FLUID_AMOUNT = "fluidAmount";
+        LOOT_DATA_BLAZE_FUEL = "blazeFuel";
     }
 
     private LootUtils() {

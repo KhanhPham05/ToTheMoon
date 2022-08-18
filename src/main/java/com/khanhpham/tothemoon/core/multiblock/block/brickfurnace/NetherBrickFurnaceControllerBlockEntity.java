@@ -4,7 +4,8 @@ import com.khanhpham.tothemoon.advancements.ModdedTriggers;
 import com.khanhpham.tothemoon.advancements.MultiblockFormedTrigger;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
-import com.khanhpham.tothemoon.core.recipes.HighHeatSmelting;
+import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
+import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -15,16 +16,21 @@ import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
@@ -36,8 +42,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -48,22 +56,24 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity implements TickableBlockEntity, FluidCapableBlockEntity {
+    public static final int lavaDrainSpeed = 3;
     public static final int CONTAINER_SIZE = 4;
     public static final int MULTIBLOCK_SIZE = 27;
-    public static final int DATA_COUNT = 4;
+    public static final int DATA_COUNT = 6;
     public static final int TANK_CAPACITY = 10000;
     final FluidTank tank = new FluidTank(TANK_CAPACITY, (fluidStack -> fluidStack.getFluid().equals(Fluids.LAVA)));
     final LazyOptional<IFluidHandler> fluidHandler = LazyOptional.of(() -> tank);
-    private final int smeltingDuration = 200;
+    private static final int smeltingDuration = 200;
     private final ArrayList<BlockPos> multiblockPartPositions = new ArrayList<>();
-    private final LinkedList<Boolean> partDefinition = new LinkedList<>();
+    private final NonNullList<Boolean> partDefinition = NonNullList.withSize(MULTIBLOCK_SIZE, false);
     private final Multiblock.Builder builder = Multiblock.Builder.setup(MULTIBLOCK_SIZE);
     private int smeltingTime;
+    private static final int blazeFuelCapacity = 1000;
+    private int blazeFuel;
     private final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -72,6 +82,8 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                 case 1 -> tank.getCapacity();
                 case 2 -> smeltingTime;
                 case 3 -> smeltingDuration;
+                case 4 -> blazeFuel;
+                case 5 -> blazeFuelCapacity;
                 default -> throw new ArrayIndexOutOfBoundsException();
             };
         }
@@ -107,6 +119,12 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
             multiblockPartPositions.add(worldPosition.above().relative(DirectionUtils.getBlockDirectionRight(controllerFacing)));
             worldPosition = worldPosition.relative(controllerFacing.getOpposite());
         }
+        //this.checkMultiblock(this.level, this.getBlockPos(), this.getBlockState());
+    }
+
+    @Override
+    public void setLevel(Level pLevel) {
+        super.setLevel(pLevel);
     }
 
     @Override
@@ -131,9 +149,15 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
 
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
-        checkMultiblock(level);
         final Direction controllerFacing = state.getValue(NetherBrickFurnaceBlock.FACING);
         if (this.getMultiblock() != null) {
+            if (this.blazeFuel <= 0) {
+                if (!getItem(1).isEmpty()) {
+                    this.blazeFuel = blazeFuelCapacity;
+                     getItem(1).shrink(1);
+                }
+            }
+
             if (!getItem(3).isEmpty()) {
                 ItemStack tankItem = items.get(3);
                 if (tankItem.is(Items.LAVA_BUCKET) && this.tank.getSpace() >= 1000) {
@@ -143,31 +167,32 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                     LazyOptional<IFluidHandlerItem> cap = tankItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
                     if (cap.isPresent())
                         this.tank.fill(cap.map(fluid -> fluid.drain(new FluidStack(Fluids.LAVA, this.tank.getSpace()), IFluidHandler.FluidAction.EXECUTE)).get(), IFluidHandler.FluidAction.EXECUTE);
-
                 }
             }
 
-            @Nullable Recipe<Container> recipe = level.getRecipeManager().getRecipeFor(HighHeatSmelting.RECIPE_TYPE, this, level).orElse(null);
-            if (recipe != null && this.smeltingTime >= this.smeltingDuration) {
+            @Nullable Recipe<Container> recipe = level.getRecipeManager().getRecipeFor(HighHeatSmeltingRecipe.RECIPE_TYPE, this, level).orElse(null);
+            if (recipe != null && this.smeltingTime >= smeltingDuration) {
                 makeResult(recipe);
                 state = state.setValue(NetherBrickFurnaceBlock.LIT, true);
             } else
                 //Process starts
-                if (recipe != null && this.tank.getFluidAmount() > 0 && !items.get(0).isEmpty() && !items.get(1).isEmpty()) {
+                if (recipe != null && this.tank.getFluidAmount() > 0 && !items.get(0).isEmpty() && this.blazeFuel > 0) {
                     state = state.setValue(NetherBrickFurnaceBlock.LIT, true);
                     smeltingTime++;
-                    tank.drain(3, IFluidHandler.FluidAction.EXECUTE);
-
+                    blazeFuel--;
+                    tank.drain(lavaDrainSpeed, IFluidHandler.FluidAction.EXECUTE);
                 } else {
                     if (this.smeltingTime > 0) this.smeltingTime = Mth.clamp(smeltingTime - 2, 0, smeltingDuration);
                     state = state.setValue(NetherBrickFurnaceBlock.LIT, false);
                 }
         } else {
-            // Drop all the items out.
-            if (!this.items.isEmpty()) {
-                Containers.dropContents(level, pos.relative(controllerFacing), this.items);
+            checkMultiblock(level);
+            if (getMultiblock() == null) {
+                if (!this.items.isEmpty()) {
+                    Containers.dropContents(level, pos.relative(controllerFacing), this.items);
+                }
+                state = state.setValue(NetherBrickFurnaceBlock.LIT, false);
             }
-            state = state.setValue(NetherBrickFurnaceBlock.LIT, false);
         }
 
 
@@ -184,61 +209,71 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                 items.get(2).grow(1);
             }
             items.get(0).shrink(1);
-            items.get(1).shrink(1);
             this.smeltingTime = 0;
         }
     }
 
-    private void checkMultiblock(Level level) {
-        if (this.multiblock == null) {
+
+    public void checkMultiblock(Level level) {
+        if (this.getMultiblock() == null) {
             this.partDefinition.clear();
 
             for (int i = 0; i < multiblockPartPositions.size(); i++) {
                 Block block = level.getBlockState(multiblockPartPositions.get(i)).getBlock();
                 if (i == 4 && block.equals(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())) {
-                    partDefinition.add(4, true);
+                    partDefinition.set(4, true);
                     builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.CONTROLLER);
                 } else if (i == 13 && block.equals(Blocks.BLAST_FURNACE)) {
-                    partDefinition.add(13, true);
+                    partDefinition.set(13, true);
                     builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
                 } else
                     switch (i) {
-                        case 6, 7, 8, 15, 16, 17, 24, 25, 26 -> {
-                            if (block.equals(ModBlocks.SMOOTH_BLACKSTONE.get())) {
-                                partDefinition.add(i, true);
-                                builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
+                        case 6, 8,
+                                15, 16, 17,
+                                24, 25, 26 -> check(block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), i);
+                        case 7 ->
+                                check((block.equals(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get())) || block.equals(ModBlocks.SMOOTH_BLACKSTONE.get()), 7);
 
-                            } else partDefinition.add(i, false);
-                        }
-                        default -> {
-                            if (block.equals(Blocks.NETHER_BRICKS)) {
-                                builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
-                                partDefinition.add(i, true);
-                            } else partDefinition.add(i, false);
-                        }
+                        case 1, 3, 5 ->
+                                check((block.equals(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get())) || block.equals(Blocks.NETHER_BRICKS), i);
+                        default -> this.check(block.equals(Blocks.NETHER_BRICKS), i);
                     }
             }
 
-            if (!partDefinition.contains(false)) {
-                this.multiblock = MultiblockManager.INSTANCE.addMultiblock(builder.build());
-                if (!level.isClientSide && level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
+            //Make sure the furnace controller is facing outside
+            if (!partDefinition.contains(false) && level.getBlockState(this.worldPosition.relative(this.getBlockState().getValue(NetherBrickFurnaceBlock.FACING))).isAir()) {
+                this.setMultiblock(MultiblockManager.INSTANCE.addMultiblock(builder.build()));
+                if (level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 10d, (entity) -> entity instanceof ServerPlayer) instanceof ServerPlayer serverPlayer) {
                     ModdedTriggers.MULTIBLOCK_FORMED.trigger(serverPlayer, MultiblockFormedTrigger.MultiblockType.NETHER_BRICK_FURNACE);
                 }
+                this.setAllAcceptor(this);
             } else {
                 this.builder.clearAll();
             }
         }
     }
 
+    private void check(boolean condition, int i) {
+        if (condition) {
+            partDefinition.set(i, true);
+            builder.addPart(multiblockPartPositions.get(i), Multiblock.PartType.PART);
+        } else partDefinition.set(i, false);
+    }
+
     @Override
     protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
         this.tank.writeToNBT(pTag);
+        pTag.putInt("blazeFuel", this.blazeFuel);
+        pTag.putInt("smeltingTime", this.smeltingTime);
     }
 
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
         tank.readFromNBT(pTag);
+        this.blazeFuel = pTag.getInt("blazeFuel");
+        this.smeltingTime = pTag.getInt("smeltingTime");
     }
 
     @Override
@@ -255,5 +290,53 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     @Override
     public FluidTank getTank() {
         return this.tank;
+    }
+
+    public void fillFromBucket(Player pPlayer) {
+        if (this.tank.getSpace() >= FluidAttributes.BUCKET_VOLUME) {
+            this.tank.fill(new FluidStack(Fluids.LAVA, FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+            pPlayer.playSound(SoundEvents.BUCKET_EMPTY_LAVA, 1.0f, 1.0f);
+        }
+    }
+
+    @Override
+    public void onRemove() {
+        this.setAllAcceptor(null);
+    }
+
+    private BlockPos[] getAcceptorDirections() {
+        BlockPos[] pos = new BlockPos[4];
+        Direction facingDirection = this.getBlockState().getValue(NetherBrickFurnaceBlock.FACING).getOpposite();
+        pos[0] = super.worldPosition.above();
+        pos[1] = super.worldPosition.relative(WorkbenchBlock.getRightDirection(facingDirection));
+        pos[2] = super.worldPosition.below();
+        pos[3] = super.worldPosition.relative(WorkbenchBlock.getLeftDirection(facingDirection));
+        return pos;
+    }
+
+    private void setAllAcceptor(@Nullable NetherBrickFurnaceControllerBlockEntity be) {
+        if (level != null) {
+            BlockPos[] acceptors = this.getAcceptorDirections();
+            if (acceptors.length > 0) {
+                BlockState block = level.getBlockState(acceptors[0]);
+                if (block.is(ModBlocks.BLACKSTONE_FLUID_ACCEPTOR.get())) {
+                    ((FluidAcceptorBlock) block.getBlock()).setControllerBe(be);
+                }
+                for (int i = 1; i < acceptors.length; i++) {
+                    BlockState block1 = level.getBlockState(acceptors[i]);
+                    if (block1.is(ModBlocks.NETHER_BRICKS_FLUID_ACCEPTOR.get())) {
+                        ((FluidAcceptorBlock) block1.getBlock()).setControllerBe(be);
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean canFillFromBucket() {
+        return this.tank.getSpace() >= FluidAttributes.BUCKET_VOLUME;
+    }
+
+    public void loadBlazeFuel(int blazeFuel) {
+        this.blazeFuel = blazeFuel;
     }
 }

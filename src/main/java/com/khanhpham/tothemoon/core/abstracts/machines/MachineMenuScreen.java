@@ -15,6 +15,6 @@ public abstract class MachineMenuScreen<T extends BaseMachineMenu> extends BaseM
 
     @Override
     protected void renderExtraLabels(PoseStack poseStack) {
-        font.draw(poseStack, ModLanguage.MACHINE_UPGRADE_LABELS, 12, 8, blackColor);
+        font.draw(poseStack, ModLanguage.MACHINE_UPGRADE_LABELS, 12, 8, blackFontColor);
     }
 }

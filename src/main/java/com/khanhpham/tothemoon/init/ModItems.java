@@ -107,7 +107,7 @@ public class ModItems {
         for (ModToolTiers.ToolType toolType : ModToolTiers.ToolType.values()) {
             for (ModToolTiers.Tier materialType : new ModToolTiers.Tier[]{ModToolTiers.STEEL, ModToolTiers.URANIUM}) {
                 String name = materialType.name().toLowerCase() + "_" + toolType.toString().toLowerCase();
-                ALL_TOOLS.put(toolType, materialType.tier(), register(name, () -> toolType.toItem(materialType.tier(), GENERAL_PROPERTIES)));
+                ALL_TOOLS.put(toolType, materialType.tier(), register(name, () -> toolType.toItem(materialType.tier(), new Item.Properties().tab(ToTheMoon.TAB).stacksTo(1))));
             }
         }
 
@@ -142,7 +142,7 @@ public class ModItems {
     }
 
     public static RegistryObject<HammerItem> registerHammer(String name, int durability) {
-        return register(name, () -> new HammerItem(new Item.Properties().tab(ToTheMoon.TAB).defaultDurability(durability).setNoRepair()));
+        return register(name, () -> new HammerItem(durability));
     }
 
     public static RegistryObject<Item> create(String name) {

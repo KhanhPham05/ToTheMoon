@@ -6,6 +6,15 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/6d1c8bf4c28e697f472a83bd6add76ec4951734/mixin-0.8.5-processor.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.blamejared.crafttweaker/Crafttweaker_Annotation_Processors-1.18.2/2.0.0.124/7efde90bdda4b7f4858d6acb4345572e99afde76/Crafttweaker_Annotation_Processors-1.18.2-2.0.0.124.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.blamejared.crafttweaker/Crafttweaker_Annotation-1.18.2/2.0.0.124/c0f26714adb5207a17fbfec2a67a82ec6a97b4a7/Crafttweaker_Annotation-1.18.2-2.0.0.124.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openzen.zencode/JavaAnnotations/0.3.8/84c59b71001a10d0c43da2e29cfce0cbe57df789/JavaAnnotations-0.3.8.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/22.0.0/fb9bebc90794c7602e73d6ed0cb165a0c650be62/annotations-22.0.0.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.reflections/reflections/0.10.2/b638d7ca0e0fe0146b60a0e7ba232ad852a73b31/reflections-0.10.2.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.9/8a432c1d6825781e21a02db2e2c33c5fde2833b9/gson-2.8.9.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.28.0-GA/9a958811a88381bb159cc2f5ed79c34a45c4af7a/javassist-3.28.0-GA.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.32/cdcff33940d9f2de763bc41ea05a0be5941176c3/slf4j-api-1.7.32.jar" />
         </processorPath>
         <module name="ToTheMoon__NEW.main" />
       </profile>

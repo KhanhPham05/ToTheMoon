@@ -31,9 +31,6 @@ public class ModTagProvider {
         data.addProvider(provider);
     }
 
-    /**
-     * @see Tags.Items
-     */
     public static final class ModItemTagsProvider extends ItemTagsProvider {
         public ModItemTagsProvider(DataGenerator pGenerator, BlockTagsProvider pBlockTagsProvider, ExistingFileHelper existingFileHelper) {
             super(pGenerator, pBlockTagsProvider, Names.MOD_ID, existingFileHelper);
@@ -42,18 +39,16 @@ public class ModTagProvider {
         @SuppressWarnings("unchecked")
         @Override
         protected void addTags() {
-            tag(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag()).addTags(ModItemTags.PLATE_MOLD, ModItemTags.ROD_MOLD, ModItemTags.GEAR_MOLD);
-            tag(ModItemTags.GEAR_MOLD).add(ModItems.GEAR_MOLD.get());
-            tag(ModItemTags.ROD_MOLD).add(ModItems.ROD_MOLD.get());
-            tag(ModItemTags.PLATE_MOLD).add(ModItems.PLATE_MOLD.get());
+            //tag(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag()).addTags(ModItemTags.PLATE_MOLD, ModItemTags.ROD_MOLD, ModItemTags.GEAR_MOLD);
+            //tag(ModItemTags.GEAR_MOLD).add(ModItems.GEAR_MOLD.get());
+            //tag(ModItemTags.ROD_MOLD).add(ModItems.ROD_MOLD.get());
+            //tag(ModItemTags.PLATE_MOLD).add(ModItems.PLATE_MOLD.get());
 
             this.add(Tags.Items.INGOTS, ModItems.STEEL_INGOT, ModItems.URANIUM_INGOT, ModItems.REDSTONE_METAL, ModItems.REDSTONE_STEEL_ALLOY);
             this.add(ModItemTags.INGOTS_URANIUM, ModItems.URANIUM_INGOT);
             this.add(ModItemTags.INGOTS_STEEL, ModItems.STEEL_INGOT);
             this.add(ModItemTags.INGOTS_REDSTONE_METAL, ModItems.REDSTONE_METAL);
             this.add(ModItemTags.INGOTS_REDSTONE_STEEL_ALLOY, ModItems.REDSTONE_STEEL_ALLOY);
-            this.add(ModItemTags.DUSTS_COAL, ModItems.COAL_DUST);
-            this.add(DUSTS_HEATED_COAL, HEATED_COAL_DUST);
 
             tag(ModItemTags.GENERAL_PLATES).addTags(ModItemTags.PLATES_STEEL, ModItemTags.PLATES_IRON, PLATES_COPPER, PLATES_GOLD, PLATES_REDSTONE_STEEL_ALLOY, PLATES_REDSTONE_METAL, PLATES_URANIUM);
             add(ModItemTags.PLATES_STEEL, ModItems.STEEL_PLATE);
@@ -64,28 +59,10 @@ public class ModTagProvider {
             add(PLATES_IRON, ModItems.IRON_PLATE);
             add(PLATES_GOLD, ModItems.GOLD_PLATE);
             add(GENERAL_TTM_HAMMERS, ModItems.DIAMOND_HAMMER, ModItems.NETHERITE_HAMMER, ModItems.STEEL_HAMMER, ModItems.WOODEN_HAMMER);
-            add(DUSTS_GOLD, ModItems.GOLD_DUST);
-            add(DUSTS_REDSTONE_STEEL_ALLOY, ModItems.REDSTONE_STEEL_ALLOY_DUST);
             add(Tags.Items.ORES, DEEPSLATE_URANIUM_ORE, MOON_GOLD_ORE, MOON_IRON_ORE, MOON_QUARTZ_ORE, MOON_REDSTONE_ORE, MOON_URANIUM_ORE);
-            tag(SHEETMETALS).addTags(SHEETMETAL_COPPER, SHEETMETAL_GOLD, SHEETMETAL_IRON, SHEETMETAL_STEEL);
-            add(SHEETMETAL_COPPER, COPPER_SHEET_BLOCK);
-            add(SHEETMETAL_IRON, IRON_SHEET_BLOCK);
-            add(SHEETMETAL_GOLD, GOLD_SHEET_BLOCK);
-            add(SHEETMETAL_STEEL, STEEL_SHEET_BLOCK);
             add(Tags.Items.STONE, MOON_ROCK);
             add(URANIUM_RAW_MATERIAL, RAW_URANIUM_ORE);
-            add(DUSTS_URANIUM, URANIUM_DUST);
-            add(DUSTS_STEEL, STEEL_DUST);
-            add(DUSTS_REDSTONE_METAL, REDSTONE_METAL);
-            add(DUSTS_IRON, IRON_DUST);
-            add(DUSTS_COPPER, COPPER_DUST);
-            add(STEEL_STORAGE_BLOCK, STEEL_BLOCK);
-            add(REDSTONE_METAL_STORAGE_BLOCK, REDSTONE_METAL_BLOCK);
-            add(REDSTONE_STEEL_STORAGE_BLOCK, REDSTONE_STEEL_ALLOY_BLOCK);
-            add(RAW_URANIUM_STORAGE_BLOCK, RAW_URANIUM_BLOCK);
-            add(URANIUM_STORAGE_BLOCK, URANIUM_BLOCK);
             add(GEMS_PURIFIED_QUARTZ, PURIFIED_QUARTZ);
-            add(PURIFIED_QUARTZ_STORAGE_BLOCK, PURIFIED_QUARTZ_BLOCK);
             add(GLASS_DARK, ANTI_PRESSURE_GLASS);
             tag(WIRES).addTags(WIRES_COPPER, WIRES_GOLD, WIRES_IRON, WIRES_STEEL, WIRES_REDSTONE_STEEL_ALLOY, WIRES_REDSTONE_METAL, WIRES_URANIUM);
             add(WIRES_COPPER, COPPER_WIRE);
@@ -101,6 +78,13 @@ public class ModTagProvider {
             add(ORE_RATES_DENSE, MOON_REDSTONE_ORE);
             add(ORES_IN_MOON_ROCK, MOON_REDSTONE_ORE, MOON_URANIUM_ORE, MOON_IRON_ORE, MOON_GOLD_ORE);
             add(ORES_IN_MOON_DUST, MOON_QUARTZ_ORE);
+
+            add(GENERAL_SHEETMETALS);
+            add(GENERAL_STORAGE_BLOCKS);
+            add(GENERAL_RODS);
+            add(GENERAL_GEARS);
+            add(GENERAL_DUSTS);
+            add(GENERAL_PRESS_MOLDS);
         }
 
         @SafeVarargs
@@ -111,10 +95,16 @@ public class ModTagProvider {
             }
         }
 
+        @SuppressWarnings("unchecked")
         private void add(AppendableItemTagKey tag) {
-            for (Supplier<? extends Item> perspectiveItem : tag.perspectiveItems) {
-                this.add(tag.getMainTag(), perspectiveItem);
-            }
+            TagKey<Item> main = tag.getMainTag();
+            super.tag(main).addTags(tag.getMap().keySet().toArray(TagKey[]::new));
+            tag.getMap().forEach((tagC, item) -> super.tag(tagC).add(item));
+        }
+
+        @Override
+        public String getName() {
+            return "TTM Item Tags";
         }
     }
 

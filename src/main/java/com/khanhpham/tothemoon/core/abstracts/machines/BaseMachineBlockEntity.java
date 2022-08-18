@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.abstracts.machines;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.items.UpgradeItem;
-import com.khanhpham.tothemoon.utils.energy.Energy;
+import com.khanhpham.tothemoon.core.energy.Energy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -24,6 +24,7 @@ public abstract class BaseMachineBlockEntity extends EnergyProcessBlockEntity im
         normalContainerSize = containerSize;
     }
 
+    @Deprecated
     public static <T extends BaseMachineBlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
         //Collecting upgrades from upgrade slots
         int j = 0;

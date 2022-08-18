@@ -14,7 +14,7 @@ public class MultiblockManager {
     }
 
     public void checkAndRemoveMultiblocks(Level level, BlockPos pos) {
-        MULTIBLOCKS.removeIf(multiblock -> multiblock.isMultiblockDistrusted(level, pos));
+        MULTIBLOCKS.removeIf(multiblock -> multiblock.isMultiblockDisconstructed(level, pos));
     }
 
     public Multiblock addMultiblock(Multiblock multiblock) {

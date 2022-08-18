@@ -30,7 +30,8 @@ public final class WorkbenchMenu extends AbstractContainerMenu {
     private static final int RESULT_INDEX = 0;
     public final Player player;
     public final WorkbenchCraftingContainer workbenchContainer;
-    private final ContainerLevelAccess access;    public final ResultContainer resultContainer = new ResultContainer() {
+    private final ContainerLevelAccess access;
+    public final ResultContainer resultContainer = new ResultContainer() {
         @Override
         public void setChanged() {
             WorkbenchMenu.craftingSlotsChanged(WorkbenchMenu.this);
@@ -50,24 +51,24 @@ public final class WorkbenchMenu extends AbstractContainerMenu {
         this.player = pPlayerInventory.player;
 
         //result
-        super.addSlot(new WorkbenchResultSlot(this, this.resultContainer, 0, 161, 59));
+        super.addSlot(new WorkbenchResultSlot(this, this.resultContainer, 0, 156, 54));
 
         //hammer
-        this.addSlot(new SlotPlacePredicate(this.workbenchContainer, 0, 25, 40, stack -> stack.is(ModItemTags.GENERAL_TTM_HAMMERS)));
+        this.addSlot(new SlotPlacePredicate(this.workbenchContainer, 0, 22, 36, stack -> stack.is(ModItemTags.GENERAL_TTM_HAMMERS)));
         //extra
-        this.addSlot(new Slot(this.workbenchContainer, 1, 25, 77));
+        this.addSlot(new Slot(this.workbenchContainer, 1, 22, 73));
 
 
         this.workbenchContainer.addCraftingGrid(this);
 
         for (int k = 0; k < 3; ++k) {
             for (int i1 = 0; i1 < 9; ++i1) {
-                this.addSlot(new Slot(pPlayerInventory, i1 + k * 9 + 9, 19 + i1 * 18, 127 + k * 18));
+                this.addSlot(new Slot(pPlayerInventory, i1 + k * 9 + 9, 15 + i1 * 18, 127 + k * 18));
             }
         }
 
         for (int l = 0; l < 9; ++l) {
-            this.addSlot(new Slot(pPlayerInventory, l, 19 + l * 18, 185));
+            this.addSlot(new Slot(pPlayerInventory, l, 15 + l * 18, 185));
         }
     }
 

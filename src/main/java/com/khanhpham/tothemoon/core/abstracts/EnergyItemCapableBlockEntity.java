@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.abstracts;
 
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
-import com.khanhpham.tothemoon.utils.energy.Energy;
+import com.khanhpham.tothemoon.core.energy.Energy;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +29,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,12 +39,18 @@ import java.util.HashMap;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEntity implements TickableBlockEntity, IItemHandler, Container, MenuProvider, Nameable {
+public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEntity implements TickableBlockEntity, Container, MenuProvider, Nameable {
     protected final HashMap<BlockPos, IEnergyStorage> energyStorages = new HashMap<>();
     protected final Component label;
     protected final int containerSize;
-    private final LazyOptional<IItemHandler> lo = LazyOptional.of(() -> this);
     public NonNullList<ItemStack> items;
+    private LazyOptional<IItemHandler> lo = LazyOptional.of(() -> new InvWrapper(this) {
+        @NotNull
+        @Override
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return canTakeItem(slot) ? super.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
+        }
+    });
 
     public EnergyItemCapableBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @Nonnull Component label, final int containerSize) {
         super(pType, pWorldPosition, pBlockState, energy);
@@ -53,88 +59,8 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
         this.items = NonNullList.withSize(containerSize, ItemStack.EMPTY);
     }
 
-    @Override
-    public int getSlots() {
-        return items.size();
-    }
-
-    @NotNull
-    @Override
-    public ItemStack getStackInSlot(int slot) {
-        return items.get(slot);
-    }
-
-    @NotNull
-    @Override
-    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-        if (stack.isEmpty())
-            return ItemStack.EMPTY;
-
-        if (!isItemValid(slot, stack))
-            return stack;
-
-        ensureValidSlotIndex(slot);
-
-        ItemStack existing = this.items.get(slot);
-
-        int limit = Math.min(64, stack.getMaxStackSize());
-
-        if (!existing.isEmpty()) {
-            if (!ItemHandlerHelper.canItemStacksStack(stack, existing))
-                return stack;
-
-            limit -= existing.getCount();
-        }
-
-        if (limit <= 0)
-            return stack;
-
-        boolean reachedLimit = stack.getCount() > limit;
-
-        if (!simulate) {
-            if (existing.isEmpty()) {
-                this.items.set(slot, reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
-            } else {
-                existing.grow(reachedLimit ? limit : stack.getCount());
-            }
-        }
-        return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
-    }
-
-    private void ensureValidSlotIndex(int slot) {
-        if (!(slot >= 0 && slot < this.items.size())) {
-            throw new IllegalStateException();
-        }
-    }
-
-    @Nonnull
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        if (amount == 0)
-            return ItemStack.EMPTY;
-
-        ensureValidSlotIndex(slot);
-
-        ItemStack existing = this.items.get(slot);
-
-        if (existing.isEmpty())
-            return ItemStack.EMPTY;
-
-        int toExtract = Math.min(amount, existing.getMaxStackSize());
-
-        if (existing.getCount() <= toExtract) {
-            if (!simulate) {
-                this.items.set(slot, ItemStack.EMPTY);
-                return existing;
-            } else {
-                return existing.copy();
-            }
-        } else {
-            if (!simulate) {
-                this.items.set(slot, ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract));
-            }
-
-            return ItemHandlerHelper.copyStackWithSize(existing, toExtract);
-        }
+    protected boolean canTakeItem(int index) {
+        return true;
     }
 
     @Override
@@ -142,17 +68,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return this.lo.cast();
         }
-        return CapabilityEnergy.ENERGY.orEmpty(cap, this.energyDataOptional);
-    }
-
-    @Override
-    public int getSlotLimit(int slot) {
-        return 64;
-    }
-
-    @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return true;
+        return CapabilityEnergy.ENERGY.orEmpty(cap, this.energyHolder);
     }
 
     @Override
@@ -178,7 +94,6 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
     public ItemStack removeItem(int pIndex, int pCount) {
         return ContainerHelper.removeItem(this.items, pIndex, pCount);
     }
-
     @Override
     public ItemStack removeItemNoUpdate(int pIndex) {
         return ContainerHelper.takeItem(this.items, pIndex);
@@ -253,7 +168,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
     protected void transferEnergy() {
         for (IEnergyStorage energyStorage : energyStorages.values()) {
             if (!energy.isEmpty() && energy.canExtract() && energyStorage.canReceive() && !isEnergyStorageFull(energyStorage)) {
-                this.energy.extractEnergy(energyStorage.receiveEnergy(energy.getMaxExtract(), false), false);
+                energyStorage.receiveEnergy(this.energy.extractEnergy(this.energy.getMaxExtract(), false), false);
             }
         }
     }
@@ -274,5 +189,16 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
             level.setBlock(pos, state, 3);
         }
         return state;
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        this.lo.invalidate();
+    }
+
+    @Override
+    public void reviveCaps() {
+        this.lo = LazyOptional.of(() -> new InvWrapper(this));
     }
 }

@@ -20,13 +20,13 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
 archivesBaseName = 'ttm'
-version = "test-1.0c"
+version = "v.0.1-survival-test"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2022.07.17-1.18.2'
+    mappings channel: 'parchment', version: '2022.08.02-1.18.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
@@ -130,35 +130,32 @@ mixin {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.68'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.73'
     implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
     runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3544525")
 
-    //implementation fg.deobf("curse.maven:ctm-267602:3737369")
-    //runtimeOnly fg.deobf("curse.maven:rubidium-574856:3749094")
-
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
+    //mekanism for compat testing
     implementation fg.deobf("curse.maven:mekanism-268560:3810540")
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1")
 
-    //runtimeOnly fg.deobf("curse.maven:pipez-443900:3760255")
-    //implementation fg.deobf("curse.maven:create-328085:3737418")
-    runtimeOnly fg.deobf("curse.maven:flywheel-486392:3737402")
     runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3748971")
 
-    //compile group: "it.zerono.mods.zercore", name: "ZeroCore2", version: "1.18.2-2.1.17"
+    //craft tweaker
+    def ct = "com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.185"
+    compileOnly(ct)
+    runtimeOnly(fg.deobf(ct))
 
-    //implementation fg.deobf("it.zerono.mods.zerocore:ZeroCore2:1.18.2-2.1.17")
-
-    //implementation fg.deobf("curse.maven:patchouli-datagen-ptd-lib-585667:3671853")
+    //APs
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors-1.18.2:2.0.0.124'
 }
 
 jar {
@@ -180,3 +177,5 @@ jar {
 
 
 jar.finalizedBy('reobfJar')
+
+java { withSourcesJar() }

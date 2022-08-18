@@ -1,23 +1,33 @@
 package com.khanhpham.tothemoon.core.recipes;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.khanhpham.tothemoon.JsonNames;
+import com.khanhpham.tothemoon.compat.jei.DisplayRecipe;
+import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.core.menus.containers.WorkbenchCraftingContainer;
+import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
+import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-public class WorkbenchCraftingRecipe implements Recipe<WorkbenchCraftingContainer> {
+import java.util.Optional;
+
+public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingContainer> {
     private static final ResourceLocation LOCATION = ModUtils.modLoc("workbench_crafting");
     public static final RecipeType<WorkbenchCraftingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(LOCATION);
     private final Ingredient hammer;
@@ -36,7 +46,7 @@ public class WorkbenchCraftingRecipe implements Recipe<WorkbenchCraftingContaine
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> ingredients = Recipe.super.getIngredients();
+        NonNullList<Ingredient> ingredients = NonNullList.create();
         ingredients.add(hammer);
         ingredients.add(extraInput);
         ingredients.addAll(this.ingredients);
@@ -78,6 +88,14 @@ public class WorkbenchCraftingRecipe implements Recipe<WorkbenchCraftingContaine
         return RECIPE_TYPE;
     }
 
+    public Ingredient getHammerIngredient() {
+        return this.hammer;
+    }
+
+    public Ingredient getExtraIngredient() {
+        return this.extraInput;
+    }
+
 
     public static final class Serializer extends SimpleRecipeSerializer<WorkbenchCraftingRecipe> {
         @Override
@@ -88,7 +106,7 @@ public class WorkbenchCraftingRecipe implements Recipe<WorkbenchCraftingContaine
         @Override
         public WorkbenchCraftingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             Ingredient hammer = this.getHammerIngredient(pSerializedRecipe);
-            Ingredient extraRequirement = super.getIngredientSpecial(GsonHelper.getAsString(pSerializedRecipe, "extra", "empty"));
+            Ingredient extraRequirement = super.getIngredientSpecial(GsonHelper.getAsString(pSerializedRecipe, "extra", ""));
             NonNullList<Ingredient> nonNullList = this.extractJsonToArray(pSerializedRecipe.getAsJsonArray("craftingPattern"));
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT));
             return new WorkbenchCraftingRecipe(pRecipeId, nonNullList, result, hammer, extraRequirement);
@@ -96,11 +114,20 @@ public class WorkbenchCraftingRecipe implements Recipe<WorkbenchCraftingContaine
 
         private Ingredient getHammerIngredient(JsonObject pSerializedJson) {
             if (pSerializedJson.has("hammer")) {
-                if (pSerializedJson.get("hammer").isJsonObject()) {
-                    return Ingredient.fromJson(pSerializedJson.getAsJsonObject("hammer"));
+                if (pSerializedJson.get("hammer").isJsonPrimitive()) {
+                    String hammerName = pSerializedJson.get("hammer").getAsString();
+                    return super.isTag(hammerName) ? super.getIngredientSpecial(hammerName) : this.getHammers(hammerName);
                 }
-                throw new JsonSyntaxException("Expecting to find a JsonObject for hammer");
-            } throw new JsonSyntaxException("Missing Hammer");
+            }
+            return Ingredient.of(HammerItem.getStrongerHammers(ModItems.WOODEN_HAMMER.get()));
+        }
+
+        private Ingredient getHammers(String hammerName) {
+            Optional<Item> hammerItem = Registry.ITEM.getOptional(new ResourceLocation(hammerName));
+            if (hammerItem.isPresent()) {
+                return Ingredient.of(HammerItem.getStrongerHammers(hammerItem.get()));
+            }
+            throw new JsonSyntaxException(hammerName + " is not a valid item name");
         }
 
         private NonNullList<Ingredient> extractJsonToArray(JsonElement jsonObject) {

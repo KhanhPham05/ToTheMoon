@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:smelting",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:blackstone"
+    }
+  },
+  "output": {
+    "item": "tothemoon:smooth_blackstone"
+  }
+}

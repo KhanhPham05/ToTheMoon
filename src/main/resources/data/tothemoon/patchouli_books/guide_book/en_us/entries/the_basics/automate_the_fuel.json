@@ -1,0 +1,26 @@
+{
+  "name": "book.tothemoon.automate_the_fuel.title",
+  "icon": "tothemoon:blackstone_fluid_acceptor",
+  "category": "tothemoon:the_basics",
+  "sortnum": 3,
+  "advancement": "tothemoon:multiblock_nether_furnace",
+  "pages": [
+    "book.tothemoon.atf.introduction",
+    {
+      "type": "patchouli:image",
+      "images": [
+        "tothemoon:textures/guide_book/acceptor_illustration.png"
+      ],
+      "title": "book.tothemoon.atf.illustration.title",
+      "text": "book.tothemoon.atf.illustration.note"
+    },
+    {
+      "type": "tothemoon:workbench_crafting",
+      "recipe": "tothemoon:workbench/stone_acceptor"
+    },
+    {
+      "type": "tothemoon:workbench_crafting",
+      "recipe": "tothemoon:workbench/nether_brick_acceptor"
+    }
+  ]
+}

@@ -112,7 +112,7 @@ public class AlloySmeltingRecipeBuilder implements RecipeBuilder {
 
 
             JsonObject result = new JsonObject();
-            result.addProperty(JsonNames.ITEM, ModUtils.getNameFromItem(this.result));
+            result.addProperty(JsonNames.ITEM, ModUtils.getFullItemName(this.result));
             result.addProperty(JsonNames.COUNT, this.count);
 
             json.addProperty(JsonNames.GROUP, this.group);

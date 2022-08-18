@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.abstracts;
 
-import com.khanhpham.tothemoon.utils.energy.Energy;
+import com.khanhpham.tothemoon.core.energy.Energy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class EnergyCapableBlockEntity extends BlockEntity {
     public final Energy energy;
-    protected final LazyOptional<IEnergyStorage> energyDataOptional;
+    protected LazyOptional<IEnergyStorage> energyHolder;
 
     public Energy getEnergy() {
         return energy;
@@ -24,14 +24,23 @@ public abstract class EnergyCapableBlockEntity extends BlockEntity {
     public EnergyCapableBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy) {
         super(pType, pWorldPosition, pBlockState);
         this.energy = energy;
-        this.energyDataOptional = LazyOptional.of(() -> energy);
+        this.energyHolder = LazyOptional.of(() -> energy);
     }
 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        LazyOptional<T> lo;
-        lo = cap.orEmpty(CapabilityEnergy.ENERGY, energyDataOptional.cast()).cast();
-        return lo;
+        return cap.orEmpty(CapabilityEnergy.ENERGY, energyHolder.cast()).cast();
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        this.energyHolder.invalidate();
+    }
+
+    @Override
+    public void reviveCaps() {
+        this.energyHolder = LazyOptional.of(() -> this.energy);
     }
 }
