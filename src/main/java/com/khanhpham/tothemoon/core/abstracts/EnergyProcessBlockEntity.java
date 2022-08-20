@@ -17,7 +17,7 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
     @Deprecated
     public int workingSpeedModify = 1;
     protected int workingTime;
-    protected int workingDuration = 200;
+    protected int workingDuration = 100;
 
 
     public EnergyProcessBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
