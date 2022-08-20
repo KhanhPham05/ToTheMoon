@@ -98,9 +98,8 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity implements I
     }
 
     @Override
-    public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-        if (pIndex == 1) return pStack.is(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag());
-        return pIndex == 0;
+    public boolean canPlaceItem(int pIndex,@Nonnull ItemStack pStack) {
+        return pIndex == 1 ? pStack.is(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag()) : pIndex == 0 && !pStack.is(ModItemTags.GENERAL_PRESS_MOLDS.getMainTag());
     }
 
     private BlockState turnOff(Level level, BlockPos pos, BlockState state) {
