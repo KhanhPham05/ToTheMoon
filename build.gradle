@@ -20,7 +20,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
 archivesBaseName = 'ttm'
-version = "0.1.1"
+version = "0.1.2"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -161,7 +161,7 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "tothemoon",
-                "Specification-Vendor"    : "tothemoonsareus",
+                "Specification-Vendor"    : "khanhpham05",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,

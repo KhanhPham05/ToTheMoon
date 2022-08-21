@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "tothemoon:steel_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "tothemoon:steel_plate"
+    }
+  ]
+}

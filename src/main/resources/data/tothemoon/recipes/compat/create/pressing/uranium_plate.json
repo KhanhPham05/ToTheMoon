@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "tothemoon:uranium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "tothemoon:uranium_plate"
+    }
+  ]
+}
