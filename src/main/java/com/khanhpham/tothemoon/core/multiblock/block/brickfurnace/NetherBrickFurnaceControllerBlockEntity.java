@@ -72,7 +72,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     private final NonNullList<Boolean> partDefinition = NonNullList.withSize(MULTIBLOCK_SIZE, false);
     private final Multiblock.Builder builder = Multiblock.Builder.setup(MULTIBLOCK_SIZE);
     private int smeltingTime;
-    private static final int blazeFuelCapacity = 1000;
+    static final int blazeFuelCapacity = 1000;
     private int blazeFuel;
     private final ContainerData data = new ContainerData() {
         @Override

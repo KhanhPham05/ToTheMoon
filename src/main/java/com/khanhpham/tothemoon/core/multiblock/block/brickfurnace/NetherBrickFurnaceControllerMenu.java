@@ -126,6 +126,6 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
     }
 
     public int getBlazeFuelCapacity() {
-        return this.data.get(5);
+        return data.get(5) == 0 ? NetherBrickFurnaceControllerBlockEntity.blazeFuelCapacity : data.get(5);
     }
 }
