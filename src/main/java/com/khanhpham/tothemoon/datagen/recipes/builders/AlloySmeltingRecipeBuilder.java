@@ -71,7 +71,7 @@ public class AlloySmeltingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pRecipeId) {
-        save(pFinishedRecipeConsumer, ModUtils.modLoc("alloying" + pRecipeId));
+        save(pFinishedRecipeConsumer, ModUtils.modLoc("alloying/" + pRecipeId));
     }
 
     @Override

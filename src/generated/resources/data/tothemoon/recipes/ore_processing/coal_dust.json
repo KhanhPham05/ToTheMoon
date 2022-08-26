@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:ore_processing",
+  "ingredient": "minecraft:coal",
+  "result": {
+    "item": "tothemoon:coal_dust",
+    "count": 2
+  },
+  "processing_time": 100,
+  "extra_result": {
+    "item": "tothemoon:coal_dust",
+    "chance": 50
+  }
+}

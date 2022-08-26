@@ -1,0 +1,10 @@
+{
+  "type": "tothemoon:ore_processing",
+  "ingredient": "tag:forge:ores/netherite_scrap",
+  "result": "minecraft:netherite_scrap",
+  "processing_time": 100,
+  "extra_result": {
+    "item": "minecraft:netherite_scrap",
+    "chance": 40
+  }
+}

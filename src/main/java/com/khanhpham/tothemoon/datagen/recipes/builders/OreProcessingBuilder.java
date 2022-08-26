@@ -20,8 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Consumer;
 
 public class OreProcessingBuilder implements RecipeBuilder {
-    public static final int DEFAULT_RAW_ORE_DOUBLE_CHANCE = 50;
-    public static final int DEFAULT_ORE_DOUBLE_CHANCE = 30;
+    public static final int DEFAULT_RAW_ORE_DOUBLE_CHANCE = 30;
+    public static final int DEFAULT_ORE_DOUBLE_CHANCE = 50;
     private final ItemStack result;
     private final ShortenIngredient ingredient;
     private final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();

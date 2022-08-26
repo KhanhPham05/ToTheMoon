@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:ore_processing",
+  "ingredient": "tag:forge:ores/gold",
+  "result": {
+    "item": "tothemoon:gold_dust",
+    "count": 2
+  },
+  "processing_time": 100,
+  "extra_result": {
+    "item": "tothemoon:gold_dust",
+    "chance": 50
+  }
+}

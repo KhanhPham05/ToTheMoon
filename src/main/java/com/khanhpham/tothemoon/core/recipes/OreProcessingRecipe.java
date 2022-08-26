@@ -2,16 +2,17 @@ package com.khanhpham.tothemoon.core.recipes;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
+import com.khanhpham.tothemoon.compat.jei.DisplayRecipe;
 import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.elements.ChancedResult;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -19,7 +20,7 @@ import net.minecraft.world.level.Level;
 import java.util.Arrays;
 
 
-public class OreProcessingRecipe implements Recipe<OreProcessorBlockEntity> {
+public class OreProcessingRecipe implements DisplayRecipe<OreProcessorBlockEntity> {
     public static final RecipeType<OreProcessingRecipe> RECIPE_TYPE = ModUtils.registerRecipeType(ModUtils.modLoc("ore_processing"));
     private final ItemStack result;
     private final Ingredient ingredient;
@@ -86,8 +87,19 @@ public class OreProcessingRecipe implements Recipe<OreProcessorBlockEntity> {
                 ", ingredient=" + Arrays.toString(ingredient.getItems()) +
                 ", processingTime=" + processingTime +
                 ", recipeId=" + recipeId +
-                ", chancedResult=" + chancedResult.toString() +
+                ", chancedResult=" + chancedResult +
                 '}';
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> ingredients = NonNullList.withSize(1, Ingredient.EMPTY);
+        ingredients.set(0, ingredient);
+        return ingredients;
+    }
+
+    public ChancedResult getExtraResult() {
+        return this.chancedResult;
     }
 
     public static final class Serializer extends SimpleRecipeSerializer<OreProcessingRecipe> {

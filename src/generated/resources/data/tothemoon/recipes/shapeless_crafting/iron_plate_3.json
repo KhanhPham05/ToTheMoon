@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tothemoon:iron_sheet_block"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:iron_plate",
+    "count": 8
+  }
+}

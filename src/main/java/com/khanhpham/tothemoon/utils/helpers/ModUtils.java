@@ -18,6 +18,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -180,5 +181,19 @@ public class ModUtils {
     @Nullable
     public static <C extends Container, R extends Recipe<C>> R getRecipe(Level level, RecipeType<R> recipeType, C container) {
         return level.getRecipeManager().getRecipeFor(recipeType, container, level).orElse(null);
+    }
+
+    @SafeVarargs
+    public static Ingredient multiTagsIngredient(TagKey<Item>... tags) {
+        LinkedList<Ingredient.TagValue> values = new LinkedList<>();
+        for (TagKey<Item> tag : tags) {
+            values.add(new Ingredient.TagValue(tag));
+        }
+
+        return Ingredient.fromValues(values.stream());
+    }
+
+    public static int rollIntRange(int from, int to) {
+        return from == to ? from : RANDOM.nextInt(from, to);
     }
 }

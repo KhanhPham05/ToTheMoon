@@ -92,8 +92,8 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
         @Override
         public AlloySmeltingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT), false);
-            IngredientStack baseIngredient = IngredientStack.fromJson(pSerializedRecipe.get(JsonNames.BASE_INGREDIENT));
-            IngredientStack secondaryIngredient = IngredientStack.fromJson(pSerializedRecipe.get(JsonNames.SECONDARY_INGREDIENT));
+            IngredientStack baseIngredient = IngredientStack.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.BASE_INGREDIENT));
+            IngredientStack secondaryIngredient = IngredientStack.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.SECONDARY_INGREDIENT));
             int processTime = GsonHelper.getAsInt(pSerializedRecipe, JsonNames.PROCESS_TIME, 200);
             return new AlloySmeltingRecipe(baseIngredient, secondaryIngredient, result, processTime, pRecipeId);
         }

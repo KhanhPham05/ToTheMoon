@@ -46,7 +46,7 @@ public class ChancedResult {
     }
 
     public ItemStack tryGiveExtra() {
-        return this != NO_EXTRA ? ModUtils.roll(this.item.copy(), this.chance, ItemStack.EMPTY) : ItemStack.EMPTY;
+        return this != NO_EXTRA ? ModUtils.roll(new ItemStack(this.item.getItem(), ModUtils.rollIntRange(1, this.item.getCount())), this.chance, ItemStack.EMPTY) : ItemStack.EMPTY;
     }
 
     public JsonObject toJson() {
@@ -63,5 +63,14 @@ public class ChancedResult {
                 "item=" + item +
                 ", chance=" + chance +
                 '}';
+    }
+
+    public ItemStack getRenderableItem() {
+        return this.item;
+    }
+
+
+    public int getChance() {
+        return chance;
     }
 }

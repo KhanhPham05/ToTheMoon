@@ -144,7 +144,7 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
             }
 
             if (addition != null) {
-                addition.define('A', craftItem).define('S', Items.STICK).getBuilder().save(consumer, ModUtils.modLoc(toolItem.getRegistryName().getPath() + "_r"));
+                addition.define('A', craftItem).define('S', Items.STICK).getBuilder().unlockedBy("tick", ModRecipeProvider.tick()).save(consumer, ModUtils.modLoc(toolItem.getRegistryName().getPath() + "_r"));
             }
             builder.define('A', craftItem).define('S', Items.STICK).save();
         });
@@ -170,12 +170,12 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
         }
 
         public T getBuilder() {
-            unlock(builder);
             return builder;
         }
 
         public void save() {
-            saveGlobal(consumer, builder, recipeType, result.asItem().getRegistryName().getPath());
+            unlock(this.getBuilder());
+            this.builder.save(consumer, "tothemoon:" + recipeType + '/' + ModUtils.getPath(result.asItem()));
         }
     }
 

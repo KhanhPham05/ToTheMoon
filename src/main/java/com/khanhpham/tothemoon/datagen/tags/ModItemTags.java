@@ -103,6 +103,7 @@ public class ModItemTags {
     public static final TagKey<Item> WIRES_URANIUM = append(WIRES, "uranium");
 
     public static final TagKey<Item> TREATED_WOOD = forge("treated_wood");
+    public static final TagKey<Item> ORES_URANIUM = forge("ores/uranium");
 
 
     private static TagKey<Item> mod(final String name) {

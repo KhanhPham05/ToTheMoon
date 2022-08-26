@@ -1,0 +1,14 @@
+{
+  "type": "tothemoon:ore_processing",
+  "ingredient": "tag:forge:ores/quartz",
+  "result": {
+    "item": "minecraft:quartz",
+    "count": 4
+  },
+  "processing_time": 100,
+  "extra_result": {
+    "item": "tothemoon:purified_quartz",
+    "chance": 10,
+    "count": 3
+  }
+}
