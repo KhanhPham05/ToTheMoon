@@ -1,5 +1,7 @@
 package com.khanhpham.tothemoon.core.recipes;
 
+import com.google.common.base.Preconditions;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
@@ -33,22 +35,17 @@ public class IngredientStack implements Predicate<ItemStack> {
         this.amount = amount;
     }
 
-    public static IngredientStack fromJson(JsonElement ingredientElement) {
-        if (ingredientElement.isJsonObject()) {
-
-            JsonObject ingredientObject = ingredientElement.getAsJsonObject();
-            if (ingredientObject.has(JsonNames.ITEM)) {
-
-                Ingredient item = Ingredient.fromJson(ingredientObject.get(JsonNames.ITEM));
-                int amount = GsonHelper.getAsInt(ingredientObject, JsonNames.COUNT, 1);
-
-                return new IngredientStack(item, amount);
-            } else {
-                throw new IllegalStateException("No item definition found");
-            }
+    public static IngredientStack fromJson(JsonObject ingredientObject) {
+        JsonElement ingredientElement = ingredientObject.get("ingredient");
+        Ingredient ingredient = Ingredient.EMPTY;
+        if (ingredientElement.isJsonArray()) {
+            ingredient = SimpleRecipeSerializer.getIngredientsFromArray(ingredientElement.getAsJsonArray());
+        } else if (ingredientElement.isJsonPrimitive()) {
+            ingredient = SimpleRecipeSerializer.getShortenIngredient(ingredientElement.getAsJsonPrimitive().getAsString());
         }
 
-        throw new IllegalStateException("Ingredient should follow the correct syntax");
+        Preconditions.checkState(ingredient != Ingredient.EMPTY, "Ingredient is not present");
+        return new IngredientStack(ingredient, GsonHelper.getAsInt(ingredientObject, "count", 1));
     }
 
     public static IngredientStack create(ItemLike item, int count) {

@@ -1,0 +1,13 @@
+{
+  "criteria": {
+    "auto_trigger": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "auto_trigger"
+    ]
+  ]
+}

@@ -35,6 +35,8 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
         this.guiHelper = guiHelper;
     }
 
+
+
     public static void addOutput(IRecipeLayoutBuilder builder, Recipe<?> recipe, int x, int y) {
         addOutput(builder, recipe.getResultItem(), x, y);
     }
@@ -83,7 +85,7 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
         builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ingredient);
     }
 
-    private static void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
+    public static void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
         builder.addSlot(RecipeIngredientRole.OUTPUT, x, y).addItemStack(output);
     }
 

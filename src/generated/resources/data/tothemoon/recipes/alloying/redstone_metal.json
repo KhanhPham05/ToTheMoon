@@ -1,0 +1,17 @@
+{
+  "type": "tothemoon:alloy_smelting",
+  "baseIngredient": {
+    "ingredient": [
+      "tag:forge:dusts/iron",
+      "tag:forge:ingots/iron"
+    ]
+  },
+  "secondaryIngredient": {
+    "ingredient": "tag:forge:dusts/redstone",
+    "count": 3
+  },
+  "result": {
+    "item": "tothemoon:redstone_metal",
+    "count": 1
+  }
+}

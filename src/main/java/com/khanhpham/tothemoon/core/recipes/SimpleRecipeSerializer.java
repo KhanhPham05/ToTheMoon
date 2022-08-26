@@ -45,12 +45,12 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
         throw new JsonSyntaxException("No result was found");
     }
 
-    protected Ingredient getShortenIngredient(String name) {
+    public static Ingredient getShortenIngredient(String name) {
         if (name.equalsIgnoreCase("")) {
             return Ingredient.EMPTY;
         } else if (name.contains("tag:")) {
             String tagName = name.replace("tag:", "");
-            TagKey<Item> tag = ItemTags.create(new ResourceLocation(this.clearRedundantSpaces(tagName)));
+            TagKey<Item> tag = ItemTags.create(new ResourceLocation(clearRedundantSpaces(tagName)));
             return Ingredient.of(tag);
         } else {
             return Ingredient.of(ModUtils.getItemFromName(name));
@@ -61,22 +61,22 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
         if (json.has(name)) {
             JsonElement jsonElement = json.get(name);
             if (jsonElement.isJsonPrimitive()) {
-                return this.getShortenIngredient(jsonElement.getAsString());
+                return getShortenIngredient(jsonElement.getAsString());
             } else if (jsonElement.isJsonArray()) {
-                return this.getIngredientsFromArray(jsonElement.getAsJsonArray());
+                return getIngredientsFromArray(jsonElement.getAsJsonArray());
             } else Ingredient.fromJson(jsonElement);
         }
 
         throw new JsonSyntaxException("Missing ingredient");
     }
 
-    private Ingredient getIngredientsFromArray(JsonArray array) {
+    public static Ingredient getIngredientsFromArray(JsonArray array) {
         LinkedList<Ingredient.Value> values = new LinkedList<>();
         for (JsonElement jsonElement : array) {
             if (jsonElement.isJsonPrimitive()) {
                 String name = jsonElement.getAsString();
-                if (this.isTag(name)) {
-                    TagKey<Item> tag = ItemTags.create(new ResourceLocation(this.clearRedundantSpaces(name.replace("tag:", ""))));
+                if (isTag(name)) {
+                    TagKey<Item> tag = ItemTags.create(new ResourceLocation(clearRedundantSpaces(name.replace("tag:", ""))));
                     //ModUtils.log("Tag [{}]", tag.location());
                     values.add(new Ingredient.TagValue(tag));
                 } else {
@@ -88,11 +88,11 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
         return Ingredient.fromValues(values.stream());
     }
 
-    private String clearRedundantSpaces(String string) {
+    private static String clearRedundantSpaces(String string) {
         return string.replace(" ", "");
     }
 
-    protected boolean isTag(String value) {
+    protected static boolean isTag(String value) {
         return value.contains("tag:");
     }
 

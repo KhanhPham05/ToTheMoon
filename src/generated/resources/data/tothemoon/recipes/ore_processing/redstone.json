@@ -1,0 +1,9 @@
+{
+  "type": "tothemoon:ore_processing",
+  "ingredient": "tag:forge:ores/redstone",
+  "result": {
+    "item": "minecraft:redstone",
+    "count": 10
+  },
+  "processing_time": 100
+}

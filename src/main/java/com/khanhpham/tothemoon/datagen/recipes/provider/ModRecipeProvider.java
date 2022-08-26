@@ -1,10 +1,10 @@
 package com.khanhpham.tothemoon.datagen.recipes.provider;
 
 import com.khanhpham.tothemoon.core.items.HammerItem;
-import com.khanhpham.tothemoon.core.recipes.IngredientStack;
 import com.khanhpham.tothemoon.datagen.recipes.builders.*;
 import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredient;
 import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredientStack;
+import com.khanhpham.tothemoon.datagen.tags.ModBlockTags;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -17,10 +17,7 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.TickTrigger;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
-import net.minecraft.data.recipes.UpgradeRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -277,13 +274,19 @@ public class ModRecipeProvider extends RecipeProvider {
 
         provider.generateRecipe(this::translateTag);
 
-        OreProcessingBuilder.process(ModItems.IRON_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_IRON)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer);
-        OreProcessingBuilder.process(ModItems.COPPER_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_COPPER)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer);
-        OreProcessingBuilder.process(ModItems.GOLD_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_GOLD)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer);
+        OreProcessingBuilder.process(ModItems.IRON_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_IRON)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer, "iron_from_raw");
+        OreProcessingBuilder.process(ModItems.COPPER_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_COPPER)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer, "copper_from_raw");
+        OreProcessingBuilder.process(ModItems.GOLD_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_GOLD)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer, "gold_from_raw");
 
-        OreProcessingBuilder.process(new ItemStack(ModItems.COAL_DUST.get(), 2), ShortenIngredient.create().add(Items.COAL)).save(consumer);
-        OreProcessingBuilder.process(new ItemStack(Items.REDSTONE, 10), ShortenIngredient.create().add(ORES_REDSTONE)).save(consumer);
-        OreProcessingBuilder.process(new ItemStack(Items.LAPIS_LAZULI, 12), ShortenIngredient.create().add(ORES_LAPIS)).save(consumer);
+        OreProcessingBuilder.process(ModItems.IRON_DUST.get(), 2, ShortenIngredient.create().add(ORES_IRON)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer, "iron_from_ore");
+        OreProcessingBuilder.process(ModItems.COPPER_DUST.get(), 2, ShortenIngredient.create().add(ORES_COPPER)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer, "copper_from_ore");
+        OreProcessingBuilder.process(ModItems.GOLD_DUST.get(), 2, ShortenIngredient.create().add(ORES_GOLD)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer, "gold_from_ore");
+
+        OreProcessingBuilder.process(ModItems.COAL_DUST.get(), 2, ShortenIngredient.create().add(Items.COAL)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer);
+        OreProcessingBuilder.process(Items.REDSTONE, 10, ShortenIngredient.create().add(ORES_REDSTONE)).save(consumer);
+        OreProcessingBuilder.process(Items.LAPIS_LAZULI, 12, ShortenIngredient.create().add(ORES_LAPIS)).save(consumer);
+        OreProcessingBuilder.process(Items.QUARTZ, 4, ShortenIngredient.create().add(ORES_QUARTZ)).extraOutput(new ItemStack(ModItems.PURIFIED_QUARTZ.get(), 3), 10).save(consumer);
+        OreProcessingBuilder.process(Items.NETHERITE_SCRAP, 1, ShortenIngredient.create().add(ORES_NETHERITE_SCRAP)).doubleChance(40).save(consumer);
 
      }
 
@@ -308,39 +311,17 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private void buildSmeltingRecipes(final RecipeGeneratorHelper helper) {
-        this.oreSmelting(helper, ModBlocks.DEEPSLATE_URANIUM_ORE, ModItems.URANIUM_INGOT);
-        this.oreSmelting(helper, ModBlocks.MOON_GOLD_ORE, Items.GOLD_INGOT);
-        this.oreSmelting(helper, ModBlocks.MOON_IRON_ORE, Items.IRON_INGOT);
-        this.oreSmelting(helper, ModBlocks.MOON_QUARTZ_ORE, ModItems.PURIFIED_QUARTZ);
-        this.oreSmelting(helper, ModBlocks.MOON_URANIUM_ORE, ModItems.URANIUM_INGOT);
-        this.oreSmelting(helper, URANIUM_RAW_MATERIAL, ModItems.URANIUM_INGOT);
-        this.rawOreSmelting(helper, RAW_URANIUM_STORAGE_BLOCK, ModBlocks.URANIUM_BLOCK, 200 * 9);
-        this.dustSmelting(helper);
+        Consumer<FinishedRecipe> consumer = helper.consumer();
+        this.oreSmelting(consumer, ModUtils.multiTagsIngredient(ORES_URANIUM, URANIUM_RAW_MATERIAL, DUSTS_URANIUM), ModItems.URANIUM_INGOT.get(), "uranium_ingot");
+        this.oreSmelting(consumer, Ingredient.of(ModBlocks.MOON_QUARTZ_ORE.get()), ModItems.PURIFIED_QUARTZ.get(), "purified_quartz");
+        this.oreSmelting(consumer, Ingredient.of(DUSTS_IRON), Items.IRON_INGOT, "iron_from_dust");
+        this.oreSmelting(consumer, Ingredient.of(DUSTS_GOLD), Items.GOLD_INGOT, "gold_from_dust");
     }
 
-    private void dustSmelting(final RecipeGeneratorHelper helper) {
-        GENERAL_DUSTS.getProcessMap().forEach((tag, item) -> this.oreSmelting(helper, tag, item));
-    }
+    private void oreSmelting(Consumer<FinishedRecipe> finishedRecipe, Ingredient ingredient, ItemLike result, String recipeId) {
+        SimpleCookingRecipeBuilder.smelting(ingredient, result, 1.0f, 200).unlockedBy("tick", tick()).save(finishedRecipe, "tothemoon:smelting/" + recipeId);
+        SimpleCookingRecipeBuilder.blasting(ingredient, result, 1.0f, 100).unlockedBy("tick", tick()).save(finishedRecipe, "tothemoon:blasting/" + recipeId);
 
-    private void rawOreSmelting(final RecipeGeneratorHelper helper, TagKey<Item> tag, Supplier<? extends ItemLike> result, int cookTime) {
-        var smeltingRecipe = new RecipeGeneratorHelper.Smelting(helper.consumer(), result.get(), tag, cookTime, true);
-        smeltingRecipe.save();
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, TagKey<Item> tag, Supplier<? extends ItemLike> sup) {
-        helper.smelting(tag, sup.get(), true);
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, Supplier<? extends ItemLike> ingredient, Supplier<? extends Item> resultSupplier) {
-        this.oreSmelting(helper, ingredient.get(), resultSupplier.get());
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, Supplier<? extends ItemLike> ingredient, Item result) {
-        this.oreSmelting(helper, ingredient.get(), result);
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, ItemLike ingredient, ItemLike result) {
-        helper.smelting(ingredient, result, true);
     }
 
     private void buildStair(final RecipeGeneratorHelper helper, Supplier<? extends StairBlock> resultSupplier, Supplier<? extends Block> materialSupplier) {

@@ -73,6 +73,7 @@ public class ModLanguage extends LanguageProvider {
     public static final TranslatableComponent ROOT = create("advancement", "root");
     public static final TranslatableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
     public static final TranslatableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
+    public static final TranslatableComponent ORE_PROCESSING = create("jei", "ore_processing");
     //ITEM / BLOCK /INVENTORY
     private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final TranslatableComponent HARDEN_FRAMED = createAdvancement("harden_framed", "Craft a higher tier of machine frame - Steel Frame.");
@@ -184,6 +185,7 @@ public class ModLanguage extends LanguageProvider {
         add(JEI_WORKBENCH_CRAFTING, "Workbench Crafting");
         add(JEI_HIGH_HEAT_SMELTING, "High Heat Smelting");
         add(JEI_METAL_PRESS_CONSUME_MOLD, "Consume Mold");
+        add(ORE_PROCESSING, "Ore Processing");
 
         //sound
         ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));

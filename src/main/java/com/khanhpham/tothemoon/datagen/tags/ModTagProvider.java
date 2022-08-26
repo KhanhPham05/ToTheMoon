@@ -73,6 +73,7 @@ public class ModTagProvider {
             add(WIRES_STEEL, COPPER_WIRE);
             add(WIRES_URANIUM, COPPER_WIRE);
             add(TREATED_WOOD, PROCESSED_WOOD);
+            add(ModItemTags.ORES_URANIUM, DEEPSLATE_URANIUM_ORE);
             add(ORE_BEARING_GROUND_STONE, MOON_ROCK);
             add(ORE_RATES_SINGULAR, MOON_GOLD_ORE, MOON_QUARTZ_ORE, MOON_IRON_ORE, MOON_URANIUM_ORE, DEEPSLATE_URANIUM_ORE);
             add(ORE_RATES_DENSE, MOON_REDSTONE_ORE);
@@ -128,9 +129,9 @@ public class ModTagProvider {
             tag(Tags.Blocks.ORE_RATES_SINGULAR, MOON_GOLD_ORE, MOON_QUARTZ_ORE, MOON_IRON_ORE, MOON_URANIUM_ORE, DEEPSLATE_URANIUM_ORE);
             tag(Tags.Blocks.ORE_RATES_DENSE, MOON_REDSTONE_ORE);
             tag(Tags.Blocks.ORES_QUARTZ, MOON_QUARTZ_ORE);
-            tag(ORES_URANIUM, DEEPSLATE_URANIUM_ORE, MOON_URANIUM_ORE);
+            tag(ModBlockTags.ORES_URANIUM, DEEPSLATE_URANIUM_ORE, MOON_URANIUM_ORE);
             joinTags(BLOCK_SHEETMETALS);
-            super.tag(ModToolTags.NEEDS_STEEL_TOOLS).addTags(ORES_URANIUM);
+            super.tag(ModToolTags.NEEDS_STEEL_TOOLS).addTags(ModBlockTags.ORES_URANIUM);
             tag(Tags.Blocks.STONE, MOON_ROCK);
 
             super.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(NonDeferredBlocks.FLUID_TANK_BLOCK);

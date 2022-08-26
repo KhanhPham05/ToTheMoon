@@ -1,0 +1,15 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "extra": "tothemoon:steel_machine_frame",
+  "hammer": "tothemoon:diamond_hammer",
+  "craftingPattern": [
+    "tothemoon:redstone_metal_plate", "tag:forge:plates/steel", "tag:forge:plates/steel", "tag:forge:plates/steel", "tothemoon:redstone_metal_plate",
+    "tag:forge:plates/steel","redstone","redstone","redstone","tag:forge:plates/steel",
+    "tag:forge:plates/steel","tag:forge:gears/steel","tag:forge:gears/steel","tag:forge:gears/steel","tag:forge:plates/steel",
+    "tag:forge:plates/steel","redstone","redstone","redstone","tag:forge:plates/steel",
+    "tothemoon:redstone_metal_plate", "tag:forge:plates/steel", "tag:forge:plates/steel", "tag:forge:plates/steel", "tothemoon:redstone_metal_plate"
+  ],
+  "result": {
+    "item": "tothemoon:ore_processor"
+  }
+}
