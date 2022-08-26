@@ -1,13 +1,10 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
-import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.slot.SlotPlacePredicate;
 import com.khanhpham.tothemoon.utils.slot.ResultSlotPredicate;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.core.recipes;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -19,7 +20,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-import java.util.Optional;
+import java.util.LinkedList;
 
 @SuppressWarnings("deprecation")
 
@@ -44,7 +45,7 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
         throw new JsonSyntaxException("No result was found");
     }
 
-    protected Ingredient getIngredientSpecial(String name) {
+    protected Ingredient getShortenIngredient(String name) {
         if (name.equalsIgnoreCase("")) {
             return Ingredient.EMPTY;
         } else if (name.contains("tag:")) {
@@ -52,24 +53,59 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
             TagKey<Item> tag = ItemTags.create(new ResourceLocation(this.clearRedundantSpaces(tagName)));
             return Ingredient.of(tag);
         } else {
-            Optional<Item> item = Registry.ITEM.getOptional(new ResourceLocation(name));
-            if (item.isPresent()) {
-                return Ingredient.of(item.get());
+            return Ingredient.of(ModUtils.getItemFromName(name));
+        }
+    }
+
+    protected Ingredient getShortenIngredient(JsonObject json, String name) {
+        if (json.has(name)) {
+            JsonElement jsonElement = json.get(name);
+            if (jsonElement.isJsonPrimitive()) {
+                return this.getShortenIngredient(jsonElement.getAsString());
+            } else if (jsonElement.isJsonArray()) {
+                return this.getIngredientsFromArray(jsonElement.getAsJsonArray());
+            } else Ingredient.fromJson(jsonElement);
+        }
+
+        throw new JsonSyntaxException("Missing ingredient");
+    }
+
+    private Ingredient getIngredientsFromArray(JsonArray array) {
+        LinkedList<Ingredient.Value> values = new LinkedList<>();
+        for (JsonElement jsonElement : array) {
+            if (jsonElement.isJsonPrimitive()) {
+                String name = jsonElement.getAsString();
+                if (this.isTag(name)) {
+                    TagKey<Item> tag = ItemTags.create(new ResourceLocation(this.clearRedundantSpaces(name.replace("tag:", ""))));
+                    //ModUtils.log("Tag [{}]", tag.location());
+                    values.add(new Ingredient.TagValue(tag));
+                } else {
+                    values.add(new Ingredient.ItemValue(ModUtils.getItemStackFromName(name)));
+                }
             }
         }
 
-        throw new IllegalStateException("Unknown tag or item | " + name);
+        return Ingredient.fromValues(values.stream());
     }
 
-    protected Ingredient getIngredientSpecial(JsonObject json, String name) {
-        return getIngredientSpecial(GsonHelper.getAsString(json, name));
-    }
-
-    private String  clearRedundantSpaces(String string) {
+    private String clearRedundantSpaces(String string) {
         return string.replace(" ", "");
     }
 
     protected boolean isTag(String value) {
         return value.contains("tag:");
+    }
+
+    protected ItemStack getShortenOutput(JsonObject pSerializedRecipe) {
+        if (pSerializedRecipe.has(JsonNames.RESULT)) {
+            JsonElement resultElement = pSerializedRecipe.get(JsonNames.RESULT);
+            if (resultElement.isJsonObject()) {
+                return ShapedRecipe.itemStackFromJson(resultElement.getAsJsonObject());
+            } else if (resultElement.isJsonPrimitive()) {
+                return new ItemStack(ModUtils.getItemFromName(resultElement.getAsJsonPrimitive().getAsString()));
+            } else
+                throw new JsonSyntaxException("result JsonObject or JsonPrimitive is expected, but " + resultElement.getClass().getSimpleName() + " was found.");
+        }
+        throw new JsonSyntaxException("Result is expected, but missing");
     }
 }

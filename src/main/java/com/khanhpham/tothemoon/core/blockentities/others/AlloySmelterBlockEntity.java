@@ -82,7 +82,7 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements
                         this.energy.consumeEnergyIgnoreCondition();
                     } else if (super.workingDuration != 0) this.exchangeInputsWithOutput(recipe);
 
-                    if (this.isIdle() & super.isResultSlotFreeForProcess(this.items.get(2), recipe)) {
+                    if (this.isIdle() & super.isResultSlotFreeForProcess(2, recipe)) {
                         if (recipe.matches(this, level)) {
                             this.workingTime = 0;
                             this.workingDuration = recipe.getAlloyingTime();
