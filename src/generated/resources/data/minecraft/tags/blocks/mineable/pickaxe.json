@@ -54,6 +54,7 @@
     "tothemoon:battery",
     "tothemoon:creative_battery",
     "tothemoon:diamond_energy_generator",
+    "tothemoon:ore_processor",
     "tothemoon:fluid_tank"
   ]
 }

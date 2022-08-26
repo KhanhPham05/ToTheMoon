@@ -87,7 +87,7 @@ public class AnvilTweaks extends FallingBlock {
                                     ItemStack crushedStack = item.getItem();
                                     int totalDustAmount = 0;
                                     for (int i = 0; i < crushedStack.getCount(); i++) {
-                                        totalDustAmount += 1 + ModUtils.roll(1, 15);
+                                        totalDustAmount += 1 + ModUtils.roll(1, 15, 0);
                                     }
                                     resultStack.setCount(totalDustAmount);
                                     item.setItem(resultStack);

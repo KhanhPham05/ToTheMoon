@@ -23,7 +23,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
     public BaseMenuScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture) {
         super(pMenu, pPlayerInventory, pTitle);
         this.texture = texture;
-        setImageHeightWidth(pMenu.playerInventorySlotStartsY + 82, pMenu.playerInventorySlotStartsX + 168);
+        //setImageHeightWidth(pMenu.playerInventorySlotStartsY + 82, pMenu.playerInventorySlotStartsX + 168);
     }
 
     protected final void setImageHeight(int height) {

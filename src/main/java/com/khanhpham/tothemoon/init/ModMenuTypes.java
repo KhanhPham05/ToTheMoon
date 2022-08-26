@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
@@ -37,6 +38,7 @@ public class ModMenuTypes {
     public static final MenuType<FluidTankMenu> FLUID_TANK;
     public static final MenuType<TagTranslatorMenu> TAG_TRANSLATOR;
     public static final MenuType<WorkbenchMenu> WORKBENCH_CRAFTING;
+    public static final MenuType<OreProcessorMenu> ENERGY_PROCESSOR;
 
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
@@ -49,6 +51,7 @@ public class ModMenuTypes {
         FLUID_TANK = MENU_TYPES.register("fluid_tank_menu", FluidTankMenu::new);
         TAG_TRANSLATOR = register("tag_translator_menu", TagTranslatorMenu::new);
         WORKBENCH_CRAFTING = register("workbench", WorkbenchMenu::new);
+        ENERGY_PROCESSOR = register("energy_processor", OreProcessorMenu::new);
     }
 
     private ModMenuTypes() {

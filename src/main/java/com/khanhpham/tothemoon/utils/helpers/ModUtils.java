@@ -6,7 +6,6 @@ import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
@@ -14,6 +13,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
@@ -24,17 +24,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
+
+@SuppressWarnings("deprecation")
 
 public class ModUtils {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
@@ -68,14 +66,13 @@ public class ModUtils {
     }
 
     public static <T extends IForgeRegistryEntry<T>> String registryToPath(@Nonnull T entry) {
-        return Objects.requireNonNull(entry.getRegistryName()).getPath();
+        return getPath(entry);
     }
 
     public static void log(String message, Object... arguments) {
         ToTheMoon.LOG.info(message, arguments);
     }
 
-    @SuppressWarnings("deprecation")
     public static String getFullItemName(Item item) {
         return Registry.ITEM.getKey(item).toString();
     }
@@ -84,12 +81,12 @@ public class ModUtils {
         return Objects.requireNonNull(object.getRegistryName()).getPath();
     }
 
-    public static int roll(int whenHit, int chance) {
+
+    public static <T> T roll(T whenHit, int chance, T ifNot) {
         int attempt = RANDOM.nextInt(100);
-        return attempt < chance ? whenHit : 0;
+        return attempt < chance ? whenHit : ifNot;
     }
 
-    @SuppressWarnings("deprecation")
     public static ItemStack getBucketItem(Fluid fluid) {
         String namespace = Objects.requireNonNull(fluid.getRegistryName()).getNamespace();
         String path = fluid.getRegistryName().getPath();
@@ -123,7 +120,11 @@ public class ModUtils {
     }
 
     public static List<ItemStack> getItemsForTags(TagKey<Item> tag, ItemStack slotItem) {
-        return ForgeRegistries.ITEMS.tags().getTag(tag).stream().filter(item -> !slotItem.is(item)).map(ItemStack::new).collect(Collectors.toList());
+        return Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(tag).stream().filter(item -> !slotItem.is(item)).map(ItemStack::new).collect(Collectors.toList());
+    }
+
+    public static List<Item> getItemsForTags(String tagName) {
+        return ForgeRegistries.ITEMS.tags().getTag(ItemTags.create(new ResourceLocation(tagName))).stream().toList();
     }
 
     public static void setupMenuScreen(AbstractContainerScreen<?> screen, String imageNameWithPng, PoseStack pose) {
@@ -160,5 +161,24 @@ public class ModUtils {
             }
         }
         return null;
+    }
+
+    public static Item getItemFromName(String itemName) {
+        Optional<Item> optionalItem = Registry.ITEM.getOptional(new ResourceLocation(itemName));
+        return optionalItem.orElseThrow(() -> new IllegalStateException("No Item For Id [" + itemName + "] Was Found"));
+    }
+
+    public static ItemStack getItemStackFromName(String name) {
+        return new ItemStack(getItemFromName(name));
+    }
+
+    public static boolean isSlotFree(Container container, int slotIndex, ItemStack queueStack) {
+        ItemStack slot = container.getItem(slotIndex);
+        return slot.isEmpty() || (slot.sameItem(queueStack) && slot.getCount() + queueStack.getCount() <= container.getMaxStackSize());
+    }
+
+    @Nullable
+    public static <C extends Container, R extends Recipe<C>> R getRecipe(Level level, RecipeType<R> recipeType, C container) {
+        return level.getRecipeManager().getRecipeFor(recipeType, container, level).orElse(null);
     }
 }

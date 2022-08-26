@@ -1,10 +1,7 @@
 package com.khanhpham.tothemoon.init;
 
 import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
-import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
-import com.khanhpham.tothemoon.core.recipes.TagTranslatingRecipe;
-import com.khanhpham.tothemoon.core.recipes.WorkbenchCraftingRecipe;
+import com.khanhpham.tothemoon.core.recipes.*;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +21,7 @@ public class ModRecipes {
     public static final RecipeSerializer<HighHeatSmeltingRecipe> BRICK_FURNACE_SMELTING = new HighHeatSmeltingRecipe.Serializer();
     public static final RecipeSerializer<TagTranslatingRecipe> TAG_TRANSLATING = new TagTranslatingRecipe.Serializer();
     public static final RecipeSerializer<WorkbenchCraftingRecipe> WORKBENCH_CRAFTING = new WorkbenchCraftingRecipe.Serializer();
+    public static final RecipeSerializer<OreProcessingRecipe> ORE_PROCESSING = new OreProcessingRecipe.Serializer();
 
     public ModRecipes() {
     }
@@ -35,6 +33,7 @@ public class ModRecipes {
         register(event, HighHeatSmeltingRecipe.RECIPE_TYPE, BRICK_FURNACE_SMELTING);
         register(event, TagTranslatingRecipe.RECIPE_TYPE, TAG_TRANSLATING);
         register(event, WorkbenchCraftingRecipe.RECIPE_TYPE, WORKBENCH_CRAFTING);
+        register(event, OreProcessingRecipe.RECIPE_TYPE, ORE_PROCESSING);
     }
 
     private static <T extends Recipe<?>> void register(RegistryEvent.Register<RecipeSerializer<?>> event, RecipeType<T> recipeType, RecipeSerializer<T> serializer) {

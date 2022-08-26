@@ -74,7 +74,7 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity implements I
 
         if (!energy.isEmpty()) {
             @Nullable MetalPressingRecipe recipe = level.getRecipeManager().getRecipeFor(MetalPressingRecipe.RECIPE_TYPE, this, level).orElse(null);
-            if (recipe != null && super.isResultSlotFreeForProcess(this.items.get(2), recipe)) {
+            if (recipe != null && super.isResultSlotFreeForProcess(2, recipe)) {
                 if (workingDuration > 0) {
                     if (workingTime < workingDuration) {
                         this.workingTime++;

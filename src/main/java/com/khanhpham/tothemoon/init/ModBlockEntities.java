@@ -7,6 +7,7 @@ import com.khanhpham.tothemoon.core.blocks.battery.AbstractBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
@@ -40,6 +41,7 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<CreativeBatteryBlockEntity>> CREATIVE_BATTERY;
 
     public static final RegistryObject<BlockEntityType<NetherBrickFurnaceControllerBlockEntity>> BRICK_FURNACE;
+    public static final RegistryObject<BlockEntityType<OreProcessorBlockEntity>> ENERGY_PROCESSOR;
     //public static final RegistryObject<BlockEntityType<TagTranslatorBlockEntity>> TAG_TRANSLATOR;
 
     static {
@@ -55,6 +57,7 @@ public class ModBlockEntities {
         CREATIVE_BATTERY = register("creative_battery", () -> BlockEntityType.Builder.of(CreativeBatteryBlockEntity::new, ModBlocks.CREATIVE_BATTERY.get()).build(null));
         ENERGY_SMELTER = register("energy_smelter", () -> new BlockEntityType<>(EnergySmelterBlockEntity::new, ImmutableSet.of(ModBlocks.ENERGY_SMELTER.get()), null));
         BRICK_FURNACE = register("brick_furnace", () -> BlockEntityType.Builder.of(NetherBrickFurnaceControllerBlockEntity::new, ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get()).build(null));
+        ENERGY_PROCESSOR = register("energy_processor", () -> BlockEntityType.Builder.of(OreProcessorBlockEntity::new, ModBlocks.ORE_PROCESSOR.get()).build(null));
         //TAG_TRANSLATOR = register("tag_translators", () -> BlockEntityType.Builder.of(TagTranslatorBlockEntity::new, ModBlocks.TAG_TRANSLATOR.get()).build(null));
         //FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new).build(null));
     }

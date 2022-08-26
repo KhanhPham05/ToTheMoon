@@ -91,6 +91,7 @@ public class ModLootTables extends LootTableProvider {
                     , SMOOTH_PURIFIED_QUARTZ_BLOCK, MOON_ROCK_BARREL, COPPER_ENERGY_GENERATOR
                     , IRON_ENERGY_GENERATOR, ALLOY_SMELTER, METAL_PRESS, TAG_TRANSLATOR
                     , WORKBENCH, BLACKSTONE_FLUID_ACCEPTOR, NETHER_BRICKS_FLUID_ACCEPTOR
+                    , ORE_PROCESSOR
             );
         }
 

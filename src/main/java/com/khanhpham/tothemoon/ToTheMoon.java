@@ -8,6 +8,7 @@ import com.khanhpham.tothemoon.core.blocks.NoBlockItem;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
@@ -155,7 +156,7 @@ public class ToTheMoon {
                         }
                     }.setRegistryName(ModUtils.modLoc(ModUtils.getPath(burnableBlock))));
                 } else if (block instanceof HasCustomBlockItem item) {
-                    reg.register(item.getItem(block.getRegistryName()));
+                    reg.register(item.getItem(Objects.requireNonNull(block.getRegistryName())));
                 } else
                     reg.register(new BlockItem(block, new Item.Properties().tab(ToTheMoon.TAB)).setRegistryName(ModUtils.modLoc(ModUtils.getPath(block))));
             }
@@ -187,6 +188,7 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.FLUID_TANK, FluidTankMenuScreen::new);
             MenuScreens.register(ModMenuTypes.TAG_TRANSLATOR, TagTranslatorScreen::new);
             MenuScreens.register(ModMenuTypes.WORKBENCH_CRAFTING, WorkbenchScreen::new);
+            MenuScreens.register(ModMenuTypes.ENERGY_PROCESSOR, OreProcessorScreen::new);
 
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ANTI_PRESSURE_GLASS.get(), RenderType.translucent());
             cutout(List.of(ModBlocks.TAG_TRANSLATOR, ModBlocks.WORKBENCH, ModBlocks.COPPER_MACHINE_FRAME, ModBlocks.REDSTONE_MACHINE_FRAME, ModBlocks.STEEL_MACHINE_FRAME, ModBlocks.WORKBENCH, ModBlocks.WORKBENCH_LEFT));
