@@ -3,9 +3,9 @@
   "values": [
     "#forge:gears/copper",
     "#forge:gears/iron",
-    "#forge:gears/steel",
-    "#forge:gears/redstone_steel",
+    "#forge:gears/redstone_metal",
     "#forge:gears/gold",
-    "#forge:gears/redstone_metal"
+    "#forge:gears/steel",
+    "#forge:gears/redstone_steel"
   ]
 }

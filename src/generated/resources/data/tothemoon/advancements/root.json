@@ -13,7 +13,7 @@
     "show_toast": false,
     "announce_to_chat": false,
     "hidden": false,
-    "background": "tothemoon:textures/block/uranium_block.png"
+    "background": "tothemoon:textures/block/steel_sheet_block.png"
   },
   "criteria": {
     "tick": {
