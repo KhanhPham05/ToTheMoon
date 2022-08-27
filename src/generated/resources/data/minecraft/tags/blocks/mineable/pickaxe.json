@@ -47,14 +47,16 @@
     "tothemoon:energy_smelter",
     "tothemoon:netherbrick_furnace_controller",
     "tothemoon:tag_translator",
+    "tothemoon:diamond_energy_generator",
+    "tothemoon:battery",
+    "tothemoon:steel_battery",
+    "tothemoon:redstone_battery",
+    "tothemoon:creative_battery",
+    "tothemoon:ore_processor",
     "tothemoon:gold_energy_generator",
     "tothemoon:copper_energy_generator",
     "tothemoon:iron_energy_generator",
     "tothemoon:metal_press",
-    "tothemoon:battery",
-    "tothemoon:creative_battery",
-    "tothemoon:diamond_energy_generator",
-    "tothemoon:ore_processor",
     "tothemoon:fluid_tank"
   ]
 }

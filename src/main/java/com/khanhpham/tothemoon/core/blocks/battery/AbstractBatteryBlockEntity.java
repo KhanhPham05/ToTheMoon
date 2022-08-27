@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -20,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
     protected static final int CONTAINER_SIZE = 2;
+    public static final int REDSTONE_TIER_ENERGY = 750_000;
+    public static final int STEEL_TIER_CAPACITY = 500_000;
     public final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -41,10 +44,13 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
         }
     };
 
-    public AbstractBatteryBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
-        super(pType, pWorldPosition, pBlockState, energy, label, containerSize);
+    public AbstractBatteryBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, BatteryEnergy energy, Block block) {
+        this(pType, pWorldPosition, pBlockState, energy, block.getName());
     }
 
+    public AbstractBatteryBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, BatteryEnergy energy, @NotNull Component label) {
+        super(pType, pWorldPosition, pBlockState, energy, label, CONTAINER_SIZE);
+    }
     public static <T extends AbstractBatteryBlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T e) {
         e.serverTick(level, blockPos, blockState);
     }

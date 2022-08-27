@@ -4,18 +4,33 @@ import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 
+/**
+ *
+ */
 public class ItemStackEnergy extends EnergyStorage {
-    private final CompoundTag blockEntityTag;
+    public final CompoundTag ttmDataTag;
 
     public ItemStackEnergy(ItemStack stack, int capacity) {
         super(capacity);
-        this.blockEntityTag = getNbt(stack);
-        energy = blockEntityTag.getInt("energy");
+        this.ttmDataTag = getNbtDataTag(stack);
+        energy = ttmDataTag.getInt("energy");
     }
 
-    public static CompoundTag getNbt(ItemStack stack) {
-        return LootUtils.getDataTag(stack);
+    public static int getEnergy(ItemStack stack) {
+        return getNbtDataTag(stack).getInt(LootUtils.LOOT_DATA_ENERGY);
+    }
+
+    private static CompoundTag getNbtDataTag(ItemStack stack) {
+        CompoundTag tag = stack.getOrCreateTag();
+        if (!tag.contains("ttmData", LootUtils.TAG_TYPE_COMPOUND)) {
+            CompoundTag ttmData = new CompoundTag();
+            ttmData.putInt(LootUtils.LOOT_DATA_ENERGY, 0);
+            tag.put("ttmData", ttmData);
+            return ttmData;
+        }
+        return tag;
     }
 
     @Override
@@ -33,9 +48,8 @@ public class ItemStackEnergy extends EnergyStorage {
     }
 
     private void updateEnergyNbt() {
-        if (blockEntityTag.contains(LootUtils.LOOT_DATA_ENERGY, LootUtils.TAG_TYPE_INT)) {
-            blockEntityTag.remove(LootUtils.LOOT_DATA_ENERGY);
-            blockEntityTag.putInt(LootUtils.LOOT_DATA_ENERGY, this.energy);
+        if (ttmDataTag.contains(LootUtils.LOOT_DATA_ENERGY, LootUtils.TAG_TYPE_INT)) {
+            ttmDataTag.putInt(LootUtils.LOOT_DATA_ENERGY, this.energy);
         }
     }
 

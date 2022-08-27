@@ -1,0 +1,14 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "ctm",
+    "textures": [
+      "tothemoon:block/steel_battery_side_ctm"
+    ],
+    "extra": {
+      "connect_to": [
+        { "block": "tothemoon:steel_battery"}
+      ]
+    }
+  }
+}

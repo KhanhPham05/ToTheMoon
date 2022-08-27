@@ -30,9 +30,11 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
 
     public static final IntegerProperty ENERGY_LEVEL = ModUtils.ENERGY_LEVEL;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    private final int energyCapacity;
 
-    public BatteryBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<AbstractBatteryBlockEntity> supplier) {
+    public BatteryBlock(Properties p_49224_, int energyCapacity) {
         super(p_49224_);
+        this.energyCapacity = energyCapacity;
         super.registerDefaultState(defaultBlockState().setValue(ENERGY_LEVEL, 0).setValue(FACING, Direction.NORTH));
     }
 
@@ -59,7 +61,7 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
 
     @Override
     public BlockItem getRawItem() {
-        return new BatteryItem(this);
+        return new BatteryItem(this, this.energyCapacity);
     }
 
     @Override

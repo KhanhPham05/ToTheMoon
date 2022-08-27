@@ -7,9 +7,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BatteryBlockEntity extends AbstractBatteryBlockEntity {
-    public static final int ENERGY_CAPACITY = 250000;
+    public static final int ENERGY_CAPACITY = 250_000;
 
     public BatteryBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.BATTERY.get(), pWorldPosition, pBlockState, new BatteryEnergy(ENERGY_CAPACITY), ModBlocks.BATTERY.get().getName(), CONTAINER_SIZE);
+        super(ModBlockEntities.BATTERY.get(), pWorldPosition, pBlockState, new BatteryEnergy(ENERGY_CAPACITY), ModBlocks.BATTERY.get().getName());
     }
 }

@@ -39,7 +39,15 @@ public class ModItemModels extends ItemModelProvider {
         }
 
         ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(b -> !(b instanceof MachineFrameBlock || b instanceof BatteryBlock)).forEach(this::blockItem);
-        withExistingParent(ModUtils.registryToPath(ModBlocks.BATTERY.get()), modLoc("block/battery_level_0"));
+        //withExistingParent(ModUtils.registryToPath(ModBlocks.BATTERY.get()), modLoc("block/battery_level_0"));
+        batteryItemModel(ModBlocks.BATTERY.get());
+        batteryItemModel(ModBlocks.REDSTONE_BATTERY.get());
+        batteryItemModel(ModBlocks.STEEL_BATTERY.get());
+    }
+
+    private void batteryItemModel(BatteryBlock batteryBlock) {
+        String blockName = ModUtils.getPath(batteryBlock);
+        super.withExistingParent(blockName, modLoc("block/battery/" + blockName + "_level_0"));
     }
 
     private void simpleItem(Item item) {
