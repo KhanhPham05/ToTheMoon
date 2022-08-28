@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:wires/copper",
+    "#forge:wires/gold",
+    "#forge:wires/iron",
+    "#forge:wires/steel",
+    "#forge:wires/redstone_steel_alloy",
+    "#forge:wires/redstone_metal",
+    "#forge:wires/uranium"
+  ]
+}

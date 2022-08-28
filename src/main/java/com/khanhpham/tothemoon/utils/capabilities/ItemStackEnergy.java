@@ -15,7 +15,7 @@ public class ItemStackEnergy extends EnergyStorage {
     public ItemStackEnergy(ItemStack stack, int capacity) {
         super(capacity);
         this.ttmDataTag = getNbtDataTag(stack);
-        energy = ttmDataTag.getInt("energy");
+        energy = ttmDataTag.getInt(LootUtils.LOOT_DATA_ENERGY);
     }
 
     public static int getEnergy(ItemStack stack) {
@@ -30,7 +30,7 @@ public class ItemStackEnergy extends EnergyStorage {
             tag.put("ttmData", ttmData);
             return ttmData;
         }
-        return tag;
+        return tag.getCompound("ttmData");
     }
 
     @Override
