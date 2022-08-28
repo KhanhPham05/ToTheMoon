@@ -36,9 +36,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
 
     @Override
     protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
-        //Advancement aVerySeriousDedication = this.display(Items.NETHERITE_HOE, VERY_SERIOUS_DEDICATION, FrameType.CHALLENGE).rewards(AdvancementRewards.Builder.experience(1000)).addCriterion("req", ItemDurabilityTrigger.TriggerInstance.changedDurability(ItemPredicate.Builder.item().of(Items.NETHERITE_HOE).build(), MinMaxBounds.Ints.exactly(0))).parent(new ResourceLocation("husbandry/obtain_netherite_hoe")).save(consumer, "a_very_serious_dedication");
-
-        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_ALLOY.get(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(Names.MOD_ID, "textures/block/uranium_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY)).save(consumer, loc("root"), fileHelper);
+        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_ALLOY.get(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(Names.MOD_ID, "textures/block/steel_sheet_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY)).save(consumer, loc("root"), fileHelper);
         Advancement heavyCrushing = display(Items.ANVIL, HEAVY_CRUSHING, FrameType.GOAL).addCriterion("req", AnvilCrushingTrigger.TriggerInstance.crushItem()).parent(root).parent(root).save(consumer, loc("anvil_crushing"), fileHelper);
         Advancement aHeatedTopic = display(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get(), A_HEATED_TOPIC, FrameType.GOAL).addCriterion("req", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())).parent(heavyCrushing).save(consumer, loc("a_heated_topic"), fileHelper);
         Advancement highHeatSmelting = display(Items.NETHER_BRICK, HIGH_HEAT_SMELTING, FrameType.GOAL)

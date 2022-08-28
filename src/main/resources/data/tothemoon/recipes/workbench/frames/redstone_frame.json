@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "craftingPattern": [
+    "","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel","",
+    "tag:forge:rods/steel","tag:forge:dusts/redstone_metal",  "tag:forge:dusts/redstone_metal",   "tag:forge:dusts/redstone_metal","tag:forge:rods/steel",
+    "tag:forge:rods/steel","tag:forge:dusts/redstone_metal","tag:forge:storage_blocks/redstone_metal",  "tag:forge:dusts/redstone_metal","tag:forge:rods/steel",
+    "tag:forge:rods/steel","tag:forge:dusts/redstone_metal",  "tag:forge:dusts/redstone_metal",   "tag:forge:dusts/redstone_metal","tag:forge:rods/steel",
+    "","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel",""
+  ],
+  "result": {
+    "item": "tothemoon:redstone_machine_frame"
+  }
+}

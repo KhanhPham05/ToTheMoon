@@ -1,12 +1,15 @@
 package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.ImmutableSet;
-import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.AbstractBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlock;
+import com.khanhpham.tothemoon.core.blocks.battery.tiered.RedstoneBatteryBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.battery.tiered.SteelBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.CopperEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.blocks.DiamondEnergyGeneratorBlock;
@@ -16,9 +19,9 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
+import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorBlock;
 import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
@@ -31,12 +34,14 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.function.Supplier;
@@ -115,49 +120,59 @@ public class ModBlocks {
     public static final RegistryObject<EnergySmelter> ENERGY_SMELTER = registerBlockEntity("energy_smelter", () -> new EnergySmelter(BlockBehaviour.Properties.copy(ALLOY_SMELTER.get())));
     public static final RegistryObject<NetherBrickFurnaceBlock> NETHER_BRICK_FURNACE_CONTROLLER = registerBlockEntity("netherbrick_furnace_controller", () -> new NetherBrickFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS)));
     public static final RegistryObject<TagTranslatorBlock> TAG_TRANSLATOR = register("tag_translator", TagTranslatorBlock::new);
+    public static final RegistryObject<DiamondEnergyGeneratorBlock> DIAMOND_ENERGY_GENERATOR = registerBlockEntity("diamond_energy_generator", () -> new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), DiamondEnergyGeneratorBlockEntity::new));
+
+    //level 1
+    public static final RegistryObject<BatteryBlock> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity.ENERGY_CAPACITY));
+    //level 2
+    public static final RegistryObject<BatteryBlock> STEEL_BATTERY = registerBlockEntity("steel_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(BATTERY.get()), SteelBatteryBlockEntity.STEEL_TIER_CAPACITY) {
+        @NotNull
+        @Override
+        protected BlockEntityType<AbstractBatteryBlockEntity> getBlockEntityType() {
+            return ModBlockEntities.STEEL_BATTERY.get();
+        }
+
+        @Override
+        public AbstractBatteryBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+            return new SteelBatteryBlockEntity(pPos, pState);
+        }
+    });
+    //level 3
+    public static final RegistryObject<BatteryBlock> REDSTONE_BATTERY = register("redstone_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(BATTERY.get()), RedstoneBatteryBlockEntity.REDSTONE_TIER_ENERGY) {
+        @NotNull
+        @Override
+        protected BlockEntityType<AbstractBatteryBlockEntity> getBlockEntityType() {
+            return ModBlockEntities.REDSTONE_BATTERY.get();
+        }
+
+        @Override
+        public AbstractBatteryBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+            return new RedstoneBatteryBlockEntity(pPos, pState);
+        }
+    });
+    public static final RegistryObject<CreativeBatteryBlock> CREATIVE_BATTERY = register("creative_battery", () -> new CreativeBatteryBlock(BlockBehaviour.Properties.copy(BATTERY.get())));
+    public static final RegistryObject<OreProcessorBlock> ORE_PROCESSOR = registerBlockEntity("ore_processor", OreProcessorBlock::new);
 
     private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
     }
 
     public static void init() {
-    }
+    }    public static final RegistryObject<GoldEnergyGeneratorBlock> GOLD_ENERGY_GENERATOR = registerBlockEntity("gold_energy_generator", () -> new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), GoldEnergyGeneratorBlockEntity::new));
 
     private static <T extends Block> RegistryObject<T> registerWaterlogged(String name, Supplier<T> o) {
         return BLOCK_DEFERRED_REGISTER.register(name, o);
-    }
+    }    public static final RegistryObject<CopperEnergyGeneratorBlock> COPPER_ENERGY_GENERATOR = registerBlockEntity("copper_energy_generator", () -> new CopperEnergyGeneratorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 5).sound(ModSoundTypes.METAL_MACHINE), CopperEnergyGeneratorBlockEntity::new));
 
     private static <T extends Block & EntityBlock> RegistryObject<T> registerBlockEntity(String name, Supplier<T> block) {
         return BLOCK_DEFERRED_REGISTER.register(name, block);
-    }
+    }    public static final RegistryObject<IronEnergyGeneratorBlock> IRON_ENERGY_GENERATOR = registerBlockEntity("iron_energy_generator", () -> new IronEnergyGeneratorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), IronEnergyGeneratorBlockEntity::new));
 
     private static RegistryObject<Block> register(String name, BlockBehaviour.Properties properties) {
         return register(name, () -> new Block(properties.requiresCorrectToolForDrops()));
-    }
+    }    public static final RegistryObject<MetalPressBlock> METAL_PRESS = registerBlockEntity("metal_press", () -> new MetalPressBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 4).sound(ModSoundTypes.METAL_MACHINE), MetalPressBlockEntity::new));
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier) {
         return BLOCK_DEFERRED_REGISTER.register(name, supplier);
     }
-
-    public static final RegistryObject<GoldEnergyGeneratorBlock> GOLD_ENERGY_GENERATOR = registerBlockEntity("gold_energy_generator", () -> new GoldEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), GoldEnergyGeneratorBlockEntity::new));
-
-
-    public static final RegistryObject<CopperEnergyGeneratorBlock> COPPER_ENERGY_GENERATOR = registerBlockEntity("copper_energy_generator", () -> new CopperEnergyGeneratorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 5).sound(ModSoundTypes.METAL_MACHINE), CopperEnergyGeneratorBlockEntity::new));
-
-
-    public static final RegistryObject<IronEnergyGeneratorBlock> IRON_ENERGY_GENERATOR = registerBlockEntity("iron_energy_generator", () -> new IronEnergyGeneratorBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), IronEnergyGeneratorBlockEntity::new));
-
-
-    public static final RegistryObject<MetalPressBlock> METAL_PRESS = registerBlockEntity("metal_press", () -> new MetalPressBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 4).sound(ModSoundTypes.METAL_MACHINE), MetalPressBlockEntity::new));
-
-
-    public static final RegistryObject<BatteryBlock> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity::new));
-
-
-    public static final RegistryObject<CreativeBatteryBlock> CREATIVE_BATTERY = register("creative_battery", () -> new CreativeBatteryBlock(BlockBehaviour.Properties.copy(BATTERY.get())));
-
-
-    public static final RegistryObject<DiamondEnergyGeneratorBlock> DIAMOND_ENERGY_GENERATOR = registerBlockEntity("diamond_energy_generator", () -> new DiamondEnergyGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), DiamondEnergyGeneratorBlockEntity::new));
-
-    public static final RegistryObject<OreProcessorBlock> ORE_PROCESSOR = registerBlockEntity("ore_processor", OreProcessorBlock::new);
 }

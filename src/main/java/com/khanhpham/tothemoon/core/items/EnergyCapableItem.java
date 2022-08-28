@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.items;
 
 import com.khanhpham.tothemoon.config.TTMConfigs;
-import com.khanhpham.tothemoon.utils.capabilities.EnergyCapabilityProvider;
+import com.khanhpham.tothemoon.utils.capabilities.ItemEnergyCapabilityProvider;
 import com.khanhpham.tothemoon.utils.capabilities.ItemStackEnergy;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import net.minecraft.ChatFormatting;
@@ -29,7 +29,7 @@ public abstract class EnergyCapableItem extends BlockItem {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new EnergyCapabilityProvider(new ItemStackEnergy(stack, getMaxEnergyStored()));
+        return new ItemEnergyCapabilityProvider(new ItemStackEnergy(stack, getMaxEnergyStored()));
     }
 
     @Override
@@ -40,7 +40,10 @@ public abstract class EnergyCapableItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-        int energyStored = ItemStackEnergy.getNbt(pStack).getInt("energy");
-        pTooltip.add(new TranslatableComponent("tooltip.tothemoon.energy", TTMConfigs.CLIENT_CONFIGS.showsItemEnergyPercentageOnToolTip.get() ? TextUtils.showPercentage(energyStored, getMaxEnergyStored()) : "", TextUtils.translateEnergy(energyStored), TextUtils.translateEnergy(getMaxEnergyStored())).withStyle(ChatFormatting.GREEN));
+        int energyStored = ItemStackEnergy.getEnergy(pStack);
+        pTooltip.add(new TranslatableComponent("tooltip.tothemoon.energy",
+                TTMConfigs.CLIENT_CONFIGS.showsItemEnergyPercentageOnToolTip.get() ? TextUtils.showPercentage(energyStored, getMaxEnergyStored()) : "",
+                TextUtils.translateEnergy(energyStored),
+                TextUtils.translateEnergy(getMaxEnergyStored())).withStyle(ChatFormatting.GREEN));
     }
 }

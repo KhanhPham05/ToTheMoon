@@ -3,24 +3,30 @@ package com.khanhpham.tothemoon.init;
 import com.google.common.collect.ImmutableSet;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
+import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.AbstractBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.battery.tiered.RedstoneBatteryBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.battery.tiered.SteelBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlockEntity;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Collections;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class ModBlockEntities {
@@ -36,12 +42,14 @@ public class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<MetalPressBlockEntity>> METAL_PRESS;
 
-   public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> BATTERY;
+    public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> BATTERY;
     public static final RegistryObject<BlockEntityType<EnergySmelterBlockEntity>> ENERGY_SMELTER;
     public static final RegistryObject<BlockEntityType<CreativeBatteryBlockEntity>> CREATIVE_BATTERY;
 
     public static final RegistryObject<BlockEntityType<NetherBrickFurnaceControllerBlockEntity>> BRICK_FURNACE;
     public static final RegistryObject<BlockEntityType<OreProcessorBlockEntity>> ENERGY_PROCESSOR;
+    public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> REDSTONE_BATTERY;
+    public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> STEEL_BATTERY;
     //public static final RegistryObject<BlockEntityType<TagTranslatorBlockEntity>> TAG_TRANSLATOR;
 
     static {
@@ -53,13 +61,15 @@ public class ModBlockEntities {
         ALLOY_SMELTER = register("alloy_smelter", () -> BlockEntityType.Builder.of(AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER.get()).build(null));
         METAL_PRESS = register("metal_press", () -> BlockEntityType.Builder.of(MetalPressBlockEntity::new, ModBlocks.METAL_PRESS.get()).build(null));
         //METAL_PRESSING_PLATE = register("metal_pressing_plate", () -> BlockEntityType.Builder.of(MetalPressingPlateBlockEntity::new, ModBlocks.METAL_PRESSING_PLATE.get()).build(null));
-        BATTERY = register("battery", () -> new BlockEntityType<>(BatteryBlockEntity::new, ImmutableSet.of(ModBlocks.BATTERY.get()), null));
+        BATTERY = register("battery", () -> new BlockEntityType<>(BatteryBlockEntity::new, Collections.singleton(ModBlocks.BATTERY.get()), null));
         CREATIVE_BATTERY = register("creative_battery", () -> BlockEntityType.Builder.of(CreativeBatteryBlockEntity::new, ModBlocks.CREATIVE_BATTERY.get()).build(null));
         ENERGY_SMELTER = register("energy_smelter", () -> new BlockEntityType<>(EnergySmelterBlockEntity::new, ImmutableSet.of(ModBlocks.ENERGY_SMELTER.get()), null));
         BRICK_FURNACE = register("brick_furnace", () -> BlockEntityType.Builder.of(NetherBrickFurnaceControllerBlockEntity::new, ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get()).build(null));
         ENERGY_PROCESSOR = register("energy_processor", () -> BlockEntityType.Builder.of(OreProcessorBlockEntity::new, ModBlocks.ORE_PROCESSOR.get()).build(null));
         //TAG_TRANSLATOR = register("tag_translators", () -> BlockEntityType.Builder.of(TagTranslatorBlockEntity::new, ModBlocks.TAG_TRANSLATOR.get()).build(null));
         //FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new).build(null));
+        REDSTONE_BATTERY = register("redstone_battery", () -> new BlockEntityType<>(RedstoneBatteryBlockEntity::new, Collections.singleton(ModBlocks.REDSTONE_BATTERY.get()), null));
+        STEEL_BATTERY = register("steel_battery", () -> new BlockEntityType<>(SteelBatteryBlockEntity::new, Collections.singleton(ModBlocks.STEEL_BATTERY.get()),null));
     }
 
     private ModBlockEntities() {

@@ -5,12 +5,15 @@ import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import net.minecraft.world.level.block.Block;
 
 public class BatteryItem extends EnergyCapableItem {
-    public BatteryItem(Block block) {
+    private final int energyCapacity;
+
+    public BatteryItem(Block block, int energyCapacity) {
         super(block, new Properties().tab(ToTheMoon.TAB));
+        this.energyCapacity = energyCapacity;
     }
 
     @Override
     protected int getMaxEnergyStored() {
-        return BatteryBlockEntity.ENERGY_CAPACITY;
+        return this.energyCapacity;
     }
 }

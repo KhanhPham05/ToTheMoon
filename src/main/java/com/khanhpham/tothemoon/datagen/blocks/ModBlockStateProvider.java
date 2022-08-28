@@ -44,7 +44,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
     private void specialBlocks() {
-        batteryBlockStates();
+        batteryBlockStates(ModBlocks.BATTERY.get());
+        batteryBlockStates(ModBlocks.REDSTONE_BATTERY.get());
+        batteryBlockStates(ModBlocks.STEEL_BATTERY.get());
 
         VariantBlockStateBuilder netherbrickFurnace = super.getVariantBuilder(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get());
         for (Direction direction : horizontalDirections) {
@@ -64,16 +66,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock(block, rl, rl);
     }
 
-    private void batteryBlockStates() {
-        var builder = super.getVariantBuilder(ModBlocks.BATTERY.get());
-
+    private void batteryBlockStates(BatteryBlock batteryBlock) {
+        var builder = super.getVariantBuilder(batteryBlock);
+        String batteryName = ModUtils.getPath(batteryBlock);
 
         for (int i = 0; i <= 10; i++) {
             for (Direction direction : horizontalDirections) {
-                builder.addModels(builder.partialState().with(BatteryBlock.FACING, direction).with(BatteryBlock.ENERGY_LEVEL, i), getModel(direction, "block/battery_level_" + i));
+                builder.addModels(builder.partialState().with(BatteryBlock.FACING, direction).with(BatteryBlock.ENERGY_LEVEL, i), getModel(direction, "block/battery/" + batteryName + "_level_" + i));
             }
         }
-
     }
 
     private void horizontalFacingBlock(Block block) {

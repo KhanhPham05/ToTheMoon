@@ -164,7 +164,7 @@ public class ModLanguage extends LanguageProvider {
         //GUI - TOOLTIP
         add("gui.tothemoon.alloy_smelter", "Alloy Smelter");
         add("gui.tothemoon.metal_press", "Metal Press");
-        add("tooltip.tothemoon.energy", "Energy %s / %s");
+        add("tooltip.tothemoon.energy", "Energy %s %s / %s");
         add("tooltip.tothemoon.fluid_fuel_tank", "Fuel : %s / %s");
         add("tooltip.tothemoon.item_tank", "(%s): %s");
         add(TANK_ONLY_SUPPORTS_LAVA, "Can stores Lava only, more fluids will be added in future updates");

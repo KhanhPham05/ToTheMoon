@@ -70,6 +70,7 @@ public class ModItemTags {
     public static final TagKey<Item> SHEETMETAL_STEEL = GENERAL_SHEETMETALS.append("steel", ModBlocks.STEEL_SHEET_BLOCK.get());
     public static final TagKey<Item> SHEETMETAL_GOLD = GENERAL_SHEETMETALS.append("gold", ModBlocks.GOLD_SHEET_BLOCK.get());
     public static final TagKey<Item> SHEETMETAL_IRON = GENERAL_SHEETMETALS.append("iron", ModBlocks.IRON_SHEET_BLOCK.get());
+    //public static final TagKey<Item> SHEETMETAL_REDSTONE_METAL = GENERAL_SHEETMETALS.append("redstone_metal", ModBlocks.REDSTONE_METAL_)
 
     public static final TagKey<Item> URANIUM_RAW_MATERIAL = append(RAW_MATERIALS, "uranium");
 
@@ -93,7 +94,7 @@ public class ModItemTags {
     //ORE_RATES_DENSE / SINGULAR
     //ORE_IN_GROUND
 
-    public static final TagKey<Item> WIRES = forge("wire");
+    public static final TagKey<Item> WIRES = forge("wires");
     public static final TagKey<Item> WIRES_COPPER = append(WIRES, "copper");
     public static final TagKey<Item> WIRES_GOLD = append(WIRES, "gold");
     public static final TagKey<Item> WIRES_IRON = append(WIRES, "iron");
