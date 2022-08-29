@@ -10,7 +10,7 @@
       "item": "tothemoon:uranium_ingot"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/steel"
     }
   },
   "result": {

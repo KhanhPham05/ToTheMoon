@@ -15,6 +15,7 @@ public class FluidTankMenuScreen extends BaseMenuScreen<FluidTankMenu> {
 
     public FluidTankMenuScreen(FluidTankMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle, texture);
+        super.setImageSize(176, 186);
     }
 
     @Override

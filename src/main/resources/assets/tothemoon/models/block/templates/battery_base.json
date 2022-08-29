@@ -1,0 +1,36 @@
+{
+  "parent":"minecraft:block/cube",
+  "textures": {
+    "0": "#side",
+    "1": "#top",
+    "2": "#bottom",
+    "3": "#battery_front",
+    "particle": "#side"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#3"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#3"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#0"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#2"}
+      }
+    },
+    {
+      "from": [4, 16, 4],
+      "to": [12, 18, 12],
+      "faces": {
+        "north": {"uv": [4, 12, 14, 14], "texture": "#1"},
+        "east": {"uv": [4, 12, 14, 14], "texture": "#1"},
+        "south": {"uv": [4, 12, 14, 14], "texture": "#1"},
+        "west": {"uv": [4, 12, 14, 14], "texture": "#1"},
+        "up": {"uv": [3, 3, 13, 13], "texture": "#1"},
+        "down": {"uv": [4, 4, 12, 12], "texture": "#2"}
+      }
+    }
+  ]
+}

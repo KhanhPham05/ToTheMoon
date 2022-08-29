@@ -21,7 +21,7 @@ public class ModBlockModels extends BlockModelProvider {
         batteryBlockModel(ModBlocks.BATTERY.get());
         batteryBlockModel(ModBlocks.STEEL_BATTERY.get());
         batteryBlockModel(ModBlocks.REDSTONE_BATTERY.get());
-
+        this.batteryBase("fluid_tank", "block/fluid_tank_side", "block/fluid_tank_top", "block/fluid_tank_bottom", "block/fluid_tank_side");
 
         orientable("block/netherbrick_furnace_controller", modLoc("block/netherbrick_furnace_controller_side"), modLoc("block/netherbrick_furnace_controller_front"), modLoc("block/netherbrick_furnace_controller_top"));
         orientable("block/nether_brick_furnace_controller_on", modLoc("block/netherbrick_furnace_controller_side"), modLoc("block/netherbrick_furnace_controller_front_on"), modLoc("block/netherbrick_furnace_controller_top"));
@@ -33,15 +33,26 @@ public class ModBlockModels extends BlockModelProvider {
         String batteryName = ModUtils.getPath(batteryBlock);
         final String batteryModelFormat = "block/battery/" + batteryName + "%s";
         for (int i = 0; i <= 10; i++) {
-            orientableWithBottom(batteryModelFormat.formatted("_level_" + i),
-                    modLoc(batteryModelFormat.formatted("_side")),
-                    modLoc(batteryModelFormat.formatted("/" + i)),
-                    modLoc(batteryModelFormat.formatted("_bottom")),
-                    modLoc(batteryModelFormat.formatted("_top"))
+            this.batteryBase(
+                    //saveName
+                    batteryModelFormat.formatted("_level_" + i),
+
+                    batteryModelFormat.formatted("_side"),
+                    batteryModelFormat.formatted("_top"),
+                    batteryModelFormat.formatted("_bottom"),
+                    batteryModelFormat.formatted("/" + i)
             );
         }
     }
 
+    private void batteryBase(String saveName, String side, String top, String bottom, String front) {
+        super.withExistingParent(saveName, super.modLoc("block/templates/battery_base"))
+                .texture("side", modLoc(side))
+                .texture("top", modLoc(top))
+                .texture("bottom", modLoc(bottom))
+                .texture("battery_front", modLoc(front))
+        ;
+    }
 
     private void cubeAll(RegistryObject<? extends Block> supplier) {
         String id = ModUtils.getPath(supplier.get());

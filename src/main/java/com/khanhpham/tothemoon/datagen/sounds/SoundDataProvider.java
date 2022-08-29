@@ -22,11 +22,10 @@ import java.util.ArrayList;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public abstract class SoundDataProvider implements DataProvider {
+    public static final ArrayList<CompactedLanguage> soundLanguages = new ArrayList<>();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private final DataGenerator dataProvider;
     private final String modid;
-
-    public static final ArrayList<CompactedLanguage> soundLanguages = new ArrayList<>();
     private final ArrayList<SerializedSoundEvent> sounds = new ArrayList<>();
 
     public SoundDataProvider(DataGenerator dataProvider, String modid) {
@@ -49,7 +48,11 @@ public abstract class SoundDataProvider implements DataProvider {
 
     protected abstract void registerSounds();
 
-    protected void add(SoundEvent sound, SoundSource source, String subtitleTranslate, String... sounds) {
+    protected void add(SoundEvent sound, SoundSource source, String subtitleTranslate) {
+        add(sound, source, subtitleTranslate, modLoc(sound.getLocation().getPath()));
+    }
+
+    private void add(SoundEvent sound, SoundSource source, String subtitleTranslate, String... sounds) {
         String soundPath = ModUtils.getPath(sound);
         String soundSubtitle = source.getName() + '.' + this.modid + "." + soundPath;
         SerializedSoundEvent event = new SerializedSoundEvent(soundPath, source.getName(), soundSubtitle, sounds);
@@ -61,10 +64,14 @@ public abstract class SoundDataProvider implements DataProvider {
         String[] sounds = new String[i];
         String soundPath = ModUtils.getPath(soundEvent);
         for (int a = 1; a <= i; a++) {
-            sounds[a-1] = this.modid + ':' + soundPath + a;
+            sounds[a - 1] = modLoc(soundPath + a);
         }
 
         this.add(soundEvent, source, subtitleTranslate, sounds);
+    }
+
+    private String modLoc(String path) {
+        return this.modid + ":" + path;
     }
 
     @Override
