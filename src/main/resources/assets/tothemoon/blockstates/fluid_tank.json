@@ -1,43 +1,7 @@
 {
   "variants": {
-    "fluid_level=0": {
-      "model": "tothemoon:block/lava_level_0"
-    },
-    "fluid_level=1": {
-      "model": "tothemoon:block/lava_level_1"
-    },
-    "fluid_level=2": {
-      "model": "tothemoon:block/lava_level_2"
-    },
-    "fluid_level=3": {
-      "model": "tothemoon:block/lava_level_3"
-    },
-    "fluid_level=4": {
-      "model": "tothemoon:block/lava_level_4"
-    },
-    "fluid_level=5": {
-      "model": "tothemoon:block/lava_level_5"
-    },
-    "fluid_level=6": {
-      "model": "tothemoon:block/lava_level_6"
-    },
-    "fluid_level=7": {
-      "model": "tothemoon:block/lava_level_7"
-    },
-    "fluid_level=8": {
-      "model": "tothemoon:block/lava_level_8"
-    },
-    "fluid_level=9": {
-      "model": "tothemoon:block/lava_level_9"
-    },
-    "fluid_level=10": {
-      "model": "tothemoon:block/lava_level_10"
-    },
-    "fluid_level=11": {
-      "model": "tothemoon:block/lava_level_11"
-    },
-    "fluid_level=12": {
-      "model": "tothemoon:block/lava_level_12"
+    "": {
+      "model": "tothemoon:block/fluid_tank"
     }
   }
 }

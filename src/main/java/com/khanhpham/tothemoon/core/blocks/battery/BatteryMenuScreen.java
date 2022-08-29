@@ -12,11 +12,11 @@ import net.minecraft.world.entity.player.Inventory;
 import java.util.Objects;
 
 public class BatteryMenuScreen extends BaseMenuScreen<BatteryMenu> {
-    public static final ResourceLocation GUI = ModUtils.modLoc("textures/gui/energy_bank.png");
+    public static final ResourceLocation GUI = ModUtils.modLoc("textures/gui/battery.png");
 
     public BatteryMenuScreen(BatteryMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle, GUI);
-        setImageHeight(177);
+        setImageSize(176, 183);
     }
 
     @Override

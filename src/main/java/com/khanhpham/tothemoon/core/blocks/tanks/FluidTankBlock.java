@@ -14,11 +14,8 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -27,16 +24,9 @@ import org.jetbrains.annotations.Nullable;
 
 //NOTE: Fluid tank is now only supports
 public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implements HasCustomBlockItem {
-    public static final IntegerProperty FLUID_LEVEL = ModUtils.TANK_LEVEL;
 
     public FluidTankBlock(Properties p_49224_) {
         super(p_49224_);
-        super.registerDefaultState(defaultBlockState().setValue(FLUID_LEVEL, 0));
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FLUID_LEVEL);
     }
 
     @Override
@@ -95,7 +85,6 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
 
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
-
 
 
     @Override

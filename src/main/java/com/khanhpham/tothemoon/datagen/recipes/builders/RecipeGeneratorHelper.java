@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.datagen.recipes.builders;
 
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
+import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
@@ -144,9 +145,9 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
             }
 
             if (addition != null) {
-                addition.define('A', craftItem).define('S', Items.STICK).getBuilder().unlockedBy("tick", ModRecipeProvider.tick()).save(consumer, ModUtils.modLoc(toolItem.getRegistryName().getPath() + "_r"));
+                addition.define('A', craftItem).define('S', ModItemTags.RODS_STEEL).getBuilder().unlockedBy("tick", ModRecipeProvider.tick()).save(consumer, ModUtils.modLoc("crafting/" + toolItem.getRegistryName().getPath() + "_r"));
             }
-            builder.define('A', craftItem).define('S', Items.STICK).save();
+            builder.define('A', craftItem).define('S', ModItemTags.RODS_STEEL).save();
         });
     }
 

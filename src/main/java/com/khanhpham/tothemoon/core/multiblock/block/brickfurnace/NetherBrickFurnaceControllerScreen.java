@@ -19,7 +19,7 @@ public final class NetherBrickFurnaceControllerScreen extends BaseMenuScreen<Net
 
     public NetherBrickFurnaceControllerScreen(NetherBrickFurnaceControllerMenu pMenu, Inventory pPlayerInventory, Component title) {
         super(pMenu, pPlayerInventory, title, GUI);
-        super.setImageHeightWidth(177, 201);
+        super.setImageSize(201, 177);
     }
 
     @Override
