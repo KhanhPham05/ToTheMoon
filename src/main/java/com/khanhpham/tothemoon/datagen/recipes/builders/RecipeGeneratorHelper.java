@@ -4,8 +4,6 @@ import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
-import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
@@ -213,7 +211,6 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
             super.inputs.add(getId(ingredient));
             this.cookTime = cookTime;
             if (includeBlasting) (new Blasting(consumer, result, ingredient, cookTime / 2)).save();
-            ItemStackToItemStackRecipeBuilder.smelting(IngredientCreatorAccess.item().from(ingredient), new ItemStack(result.asItem())).build(consumer, ModUtils.modLoc("compat/mek/smelting/" + ModUtils.getPath(ingredient.asItem()) + "_to_" + ModUtils.getPath(result.asItem())));
         }
 
         public Smelting(Consumer<FinishedRecipe> consumer, ItemLike result, TagKey<Item> ingredient, int cookTime, boolean includeBlasting) {
@@ -222,7 +219,6 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
             this.cookTime = cookTime;
             super.inputs.add(extractTag(ingredient));
             if (includeBlasting) (new Blasting(consumer, result, ingredient, cookTime / 2)).save();
-            ItemStackToItemStackRecipeBuilder.smelting(IngredientCreatorAccess.item().from(ingredient), new ItemStack(result.asItem())).build(consumer, ModUtils.modLoc("compat/mek/smelting/" + extractTag(ingredient) + "_to_" + ModUtils.getPath(result.asItem())));
         }
 
         @Deprecated

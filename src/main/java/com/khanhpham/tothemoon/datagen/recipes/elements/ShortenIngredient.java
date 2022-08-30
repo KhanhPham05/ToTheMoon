@@ -37,7 +37,7 @@ public class ShortenIngredient {
     public JsonElement toShortenJson() {
         JsonArray jsonArray = new JsonArray();
         if (!items.isEmpty()) {
-            this.items.forEach(item -> jsonArray.add(ModUtils.getFullItemName(item)));
+            this.items.forEach(item -> jsonArray.add(ModUtils.getFullName(item)));
         }
 
         if (!tag.isEmpty()) {

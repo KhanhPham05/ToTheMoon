@@ -7,7 +7,6 @@ import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import mekanism.client.jei.FormulaicRecipeTransferInfo;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

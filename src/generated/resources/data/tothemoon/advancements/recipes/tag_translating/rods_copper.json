@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "has_tag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:rods/copper"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tag"
+    ]
+  ]
+}

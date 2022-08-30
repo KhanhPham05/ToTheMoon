@@ -20,7 +20,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
 archivesBaseName = 'ttm'
-version = "0.3.1"
+version = "${build_version}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -133,7 +133,7 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.73'
     implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
 
-    runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3672146")
+    runtimeOnly fg.deobf("curse.maven:ferritecore-429235:3767288")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
     runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3544525")
 
@@ -141,16 +141,18 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
     //mekanism for compat testing
-    implementation fg.deobf("curse.maven:mekanism-268560:3810540")
+    def mekanism = "mekanism:Mekanism:${mc_version}-${mekanism_version}"
+    runtimeOnly fg.deobf(mekanism)
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1")
+    def patchouli = "vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}"
+
+    compileOnly fg.deobf(patchouli + ":api")
+    runtimeOnly fg.deobf(patchouli)
 
     runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3748971")
     //craft tweaker
-    def ct = "com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.185"
-    compileOnly(ct)
-    runtimeOnly(fg.deobf(ct))
+    def ct = "com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${ct_version}"
+    implementation(fg.deobf(ct))
 
     //APs
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

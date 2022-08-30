@@ -4,21 +4,15 @@ import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.datagen.recipes.builders.*;
 import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredient;
 import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredientStack;
-import com.khanhpham.tothemoon.datagen.tags.ModBlockTags;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import mekanism.api.datagen.recipe.builder.ItemStackChemicalToItemStackRecipeBuilder;
-import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
-import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
-import mekanism.common.tags.MekanismTags;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.TickTrigger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -55,51 +49,11 @@ public class ModRecipeProvider extends RecipeProvider {
         buildSmeltingRecipes(helper);
         buildModdedRecipes(consumer);
         buildCraftingTableRecipes(consumer, helper);
-        buildRecipeCompat(consumer, helper);
+        buildRecipeCompat(consumer);
     }
 
-    private void buildRecipeCompat(Consumer<FinishedRecipe> consumer, RecipeGeneratorHelper helper) {
-        //30mB redstone + iron dust -> redstone metal dust
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(DUSTS_IRON),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_METAL_DUST.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/iron_dust_with_redstone_to_redstone_metal_dust"));
-
-        //30 redstone + iron INGOT -> redstone metal
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(INGOTS_IRON),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_METAL.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/iron_with_redstone_to_redstone_metal"));
-
-        //30mB redstone + steel dust -> redstone steel dust
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(DUSTS_STEEL),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_STEEL_ALLOY_DUST.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/steel_dust_with_redstone_to_redstone_steel_dust"));
-
-        //30 redstone + iron INGOT -> redstone metal
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(INGOTS_STEEL),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_STEEL_ALLOY.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/steel_with_redstone_to_redstone_steel_alloy"));
-
-        //ingots to dusts
-        ItemStackToItemStackRecipeBuilder.crushing(IngredientCreatorAccess.item().from(ModItems.STEEL_INGOT.get()), new ItemStack(ModItems.STEEL_DUST.get()))
-                .build(consumer, loc("compat/mek/crushing/steel_to_dust"));
-
-        ItemStackToItemStackRecipeBuilder.crushing(IngredientCreatorAccess.item().from(ModItems.REDSTONE_METAL.get()), new ItemStack(ModItems.REDSTONE_METAL_DUST.get()))
-                .build(consumer, loc("compat/mek/crushing/redstone_metal_to_dust"));
-
-        ItemStackToItemStackRecipeBuilder.crushing(IngredientCreatorAccess.item().from(ModItems.REDSTONE_STEEL_ALLOY.get()), new ItemStack(ModItems.REDSTONE_STEEL_ALLOY_DUST.get()))
-                .build(consumer, loc("compat/mek/crushing/redstone_steel_to_dust"));
-    }
-
-    private ResourceLocation loc(String saveLoc) {
-        return ModUtils.modLoc(saveLoc);
+    private void buildRecipeCompat(Consumer<FinishedRecipe> consumer) {
+        new MekanismCompatProvider(consumer).run();
     }
 
     private void buildCraftingTableRecipes(Consumer<FinishedRecipe> consumer, final RecipeGeneratorHelper helper) {

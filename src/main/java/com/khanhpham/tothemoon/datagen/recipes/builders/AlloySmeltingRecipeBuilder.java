@@ -3,22 +3,16 @@ package com.khanhpham.tothemoon.datagen.recipes.builders;
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
-import com.khanhpham.tothemoon.core.recipes.IngredientStack;
 import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredientStack;
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -76,6 +70,7 @@ public class AlloySmeltingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
+        if (this.advancementBuilder.getCriteria().isEmpty()) this.unlockedBy("tick", ModRecipeProvider.tick());
         pFinishedRecipeConsumer.accept(new Finished(pRecipeId, base, secondary, result, count, advancementBuilder, pRecipeId, group));
     }
 
@@ -104,7 +99,7 @@ public class AlloySmeltingRecipeBuilder implements RecipeBuilder {
 
 
             JsonObject result = new JsonObject();
-            result.addProperty(JsonNames.ITEM, ModUtils.getFullItemName(this.result));
+            result.addProperty(JsonNames.ITEM, ModUtils.getFullName(this.result));
             result.addProperty(JsonNames.COUNT, this.count);
 
             json.addProperty(JsonNames.GROUP, this.group);

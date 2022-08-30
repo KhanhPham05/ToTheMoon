@@ -28,7 +28,7 @@ public class TagTranslatingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public RecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
-        return this.setUnlockCondition();
+        return this;
     }
 
     private RecipeBuilder setUnlockCondition() {
@@ -52,8 +52,8 @@ public class TagTranslatingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
-        pFinishedRecipeConsumer.accept(new Finished(pRecipeId, this, ModUtils.modLoc("recipes/tag_translating/" + pRecipeId.getPath())));
-        ModUtils.log("Saving recipe [{}]", pRecipeId);
+        this.setUnlockCondition();
+        pFinishedRecipeConsumer.accept(new Finished(pRecipeId, this, ModUtils.modLoc("recipes/" + pRecipeId.getPath())));
     }
 
     @Override
@@ -71,7 +71,6 @@ public class TagTranslatingRecipeBuilder implements RecipeBuilder {
         @Override
         public void serializeRecipeData(JsonObject pJson) {
             pJson.addProperty("tag", recipeBuilder.getItemTag().location().toString());
-            //pJson.add(JsonNames.RESULT, super.convertItemToJson(recipeBuilder.result));
         }
     }
 }

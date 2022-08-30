@@ -17,12 +17,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.Nullable;
 
-//NOTE: Fluid tank is now only supports
 public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implements HasCustomBlockItem {
 
     public FluidTankBlock(Properties p_49224_) {
@@ -35,13 +37,19 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide) {
+        if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity fluidTank) {
             ItemStack handItem = pPlayer.getItemInHand(pHand);
-            if (handItem.is(Items.BUCKET) && handItem.getItem() instanceof BucketItem) {
-                if (pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity fluidTank) {
+            if (handItem.getItem() instanceof BucketItem bucketItem) {
+                if (fluidTank.isFluidSame(bucketItem.getFluid())) {
                     fluidTank.tank.fill(new FluidStack(((BucketItem) handItem.getItem()).getFluid(), FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
                     if (!pPlayer.isCreative()) pPlayer.setItemInHand(pHand, new ItemStack(Items.BUCKET));
-                    return InteractionResult.SUCCESS;
+                    return InteractionResult.CONSUME;
+                }
+            } else {
+                LazyOptional<IFluidHandlerItem> fluidHandler = handItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+                if (fluidHandler.isPresent()) {
+                    fluidTank.tank.fill(fluidHandler.map(tank -> tank.drain(new FluidStack(fluidTank.tank.getFluid(), fluidTank.getTank().getSpace()), IFluidHandler.FluidAction.EXECUTE)).get(), IFluidHandler.FluidAction.EXECUTE);
+                    return InteractionResult.CONSUME;
                 }
             }
         }

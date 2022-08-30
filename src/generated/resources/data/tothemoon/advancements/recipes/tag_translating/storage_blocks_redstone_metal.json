@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "has_tag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/redstone_metal"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tag"
+    ]
+  ]
+}

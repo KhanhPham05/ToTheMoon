@@ -1,4 +1,13 @@
 {
-  "criteria": {},
-  "requirements": []
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ]
 }

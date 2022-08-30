@@ -27,6 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -154,7 +155,7 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
         ItemStack item = getItem(0);
-        if (item.getItem() instanceof BucketItem bucketItem) {
+        if (item.getItem() instanceof BucketItem bucketItem && this.isFluidSame(bucketItem.getFluid())) {
             Fluid fluid = bucketItem.getFluid();
             this.tank.fill(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
             setItem(0, new ItemStack(Items.BUCKET));
@@ -210,5 +211,9 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
     @Override
     public FluidTank getTank() {
         return this.tank;
+    }
+
+    public boolean isFluidSame(Fluid fluid) {
+        return fluid.isSame(Fluids.EMPTY) &&this.tank.getFluid().getFluid().isSame(fluid);
     }
 }

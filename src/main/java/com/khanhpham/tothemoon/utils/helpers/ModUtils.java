@@ -74,8 +74,8 @@ public class ModUtils {
         ToTheMoon.LOG.info(message, arguments);
     }
 
-    public static String getFullItemName(Item item) {
-        return Registry.ITEM.getKey(item).toString();
+    public static <T extends IForgeRegistryEntry<T>> String getFullName(T object) {
+        return Objects.requireNonNull(object.getRegistryName()).toString();
     }
 
     public static <T extends IForgeRegistryEntry<T>> String getPath(T object) {
