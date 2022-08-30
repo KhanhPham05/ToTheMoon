@@ -49,7 +49,7 @@ abstract class AbstractFinishedRecipe<T extends Recipe<?>> implements FinishedRe
     }
 
     protected JsonElement itemStackToJson(ItemStack itemStack) {
-        String itemId = ModUtils.getFullItemName(itemStack.getItem());
+        String itemId = ModUtils.getFullName(itemStack.getItem());
         if (itemStack.getCount() == 1) {
             return new JsonPrimitive(itemId);
         } else {

@@ -51,7 +51,7 @@ public class ChancedResult {
 
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("item", ModUtils.getFullItemName(this.item.getItem()));
+        jsonObject.addProperty("item", ModUtils.getFullName(this.item.getItem()));
         jsonObject.addProperty("chance", this.chance);
         if (this.item.getCount() > 1) jsonObject.addProperty("count", this.item.getCount());
         return jsonObject;

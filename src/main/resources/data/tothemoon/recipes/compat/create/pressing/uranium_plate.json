@@ -9,5 +9,11 @@
     {
       "item": "tothemoon:uranium_plate"
     }
+  ],
+  "conditions": [
+    {
+      "modid": "create",
+      "type": "forge:mod_loaded"
+    }
   ]
 }

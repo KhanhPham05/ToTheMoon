@@ -3,17 +3,11 @@ package com.khanhpham.tothemoon.datagen.recipes.builders;
 import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.JsonNames;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
-import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.TickTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -93,7 +87,7 @@ public class MetalPressRecipeBuilder implements RecipeBuilder {
             json.add(JsonNames.INGREDIENT, ingredient.toJson());
             json.add(JsonNames.MOLD, press.toJson());
             final JsonObject object = new JsonObject();
-                object.addProperty(JsonNames.ITEM, ModUtils.getFullItemName(result.getItem()));
+                object.addProperty(JsonNames.ITEM, ModUtils.getFullName(result.getItem()));
                 object.addProperty("count", result.getCount());
             json.add(JsonNames.RESULT, object);
         }
