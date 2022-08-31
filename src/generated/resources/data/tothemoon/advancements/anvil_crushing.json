@@ -1,24 +1,24 @@
 {
   "parent": "tothemoon:root",
+  "criteria": {
+    "req": {
+      "conditions": {},
+      "trigger": "tothemoon:anvil_crushing"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "minecraft:anvil"
-    },
-    "title": {
-      "translate": "advancement.tothemoon.heavy_crushing"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "advancement.tothemoon.heavy_crushing.description"
     },
     "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:anvil"
+    },
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "req": {
-      "trigger": "tothemoon:anvil_crushing",
-      "conditions": {}
+    "title": {
+      "translate": "advancement.tothemoon.heavy_crushing"
     }
   },
   "requirements": [

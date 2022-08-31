@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blocks.tanks;
 
 import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlockEntitiesTypes;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -17,10 +17,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +33,7 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
 
     @Override
     protected BlockEntityType<FluidTankBlockEntity> getBlockEntityType() {
-        return NonDeferredBlockEntitiesTypes.FLUID_TANK_NON_DEFERRED;
+        return ModBlockEntities.FLUID_TANK.get();
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
@@ -41,12 +41,12 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
             ItemStack handItem = pPlayer.getItemInHand(pHand);
             if (handItem.getItem() instanceof BucketItem bucketItem) {
                 if (fluidTank.isFluidSame(bucketItem.getFluid())) {
-                    fluidTank.tank.fill(new FluidStack(((BucketItem) handItem.getItem()).getFluid(), FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+                    fluidTank.tank.fill(new FluidStack(((BucketItem) handItem.getItem()).getFluid(), FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
                     if (!pPlayer.isCreative()) pPlayer.setItemInHand(pHand, new ItemStack(Items.BUCKET));
                     return InteractionResult.CONSUME;
                 }
             } else {
-                LazyOptional<IFluidHandlerItem> fluidHandler = handItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+                LazyOptional<IFluidHandlerItem> fluidHandler = handItem.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
                 if (fluidHandler.isPresent()) {
                     fluidTank.tank.fill(fluidHandler.map(tank -> tank.drain(new FluidStack(fluidTank.tank.getFluid(), fluidTank.getTank().getSpace()), IFluidHandler.FluidAction.EXECUTE)).get(), IFluidHandler.FluidAction.EXECUTE);
                     return InteractionResult.CONSUME;

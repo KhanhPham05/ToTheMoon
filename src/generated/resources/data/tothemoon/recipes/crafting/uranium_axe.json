@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AA ",
-    "AS ",
-    " S "
-  ],
   "key": {
     "A": {
       "item": "tothemoon:uranium_ingot"
@@ -13,6 +8,11 @@
       "tag": "forge:rods/steel"
     }
   },
+  "pattern": [
+    "AA ",
+    "AS ",
+    " S "
+  ],
   "result": {
     "item": "tothemoon:uranium_axe"
   }

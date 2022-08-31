@@ -4,12 +4,12 @@ import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.core.recipes.OreProcessingRecipe;
 import com.khanhpham.tothemoon.core.recipes.elements.ChancedResult;
 import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredient;
+import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.TickTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -81,7 +81,7 @@ public class OreProcessingBuilder implements RecipeBuilder {
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
         if (this.advancementBuilder.getCriteria().isEmpty()) {
-            this.advancementBuilder.addCriterion("auto_trigger", new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY));
+            this.advancementBuilder.addCriterion("auto_trigger", ModRecipeProvider.tick());
         }
         pFinishedRecipeConsumer.accept(new Finished(pRecipeId, this.result, this.ingredient, this.chancedResult, this.processingTime, this.advancementBuilder, pRecipeId));
     }

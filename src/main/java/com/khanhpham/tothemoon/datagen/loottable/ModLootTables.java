@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -101,7 +100,6 @@ public class ModLootTables extends LootTableProvider {
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
-            knownBlocks.addAll(NonDeferredBlocks.REGISTERED_BLOCKS);
             return knownBlocks;
         }
 
@@ -126,7 +124,7 @@ public class ModLootTables extends LootTableProvider {
                                             .copy("FluidName", LootUtils.SAVE_DATA_FLUID_NAME)
                                             .copy("Amount", LootUtils.SAVE_DATA_FLUID_AMOUNT)
                                             .copy("blazeFuel", LootUtils.SAVE_DATA_BLAZE_FUEL)))));
-            super.add(NonDeferredBlocks.FLUID_TANK_BLOCK, this::createFluidTankDrop);
+            super.add(FLUID_TANK.get(), this::createFluidTankDrop);
             super.dropOther(WORKBENCH_LEFT.get(), WORKBENCH.get());
         }
 

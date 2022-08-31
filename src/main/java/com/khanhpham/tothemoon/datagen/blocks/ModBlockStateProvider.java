@@ -5,6 +5,7 @@ import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -58,11 +59,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
     private void stairBlock(StairBlock block, Block materialBlock) {
-        stairsBlock(block, modLoc("block/" + ModUtils.registryToPath(materialBlock)));
+        stairsBlock(block, modLoc("block/" + RegistryEntries.getKeyFrom(materialBlock).getPath()));
     }
 
     private void slabBlock(SlabBlock block, Block materialBlock) {
-        ResourceLocation rl = modLoc("block/" + ModUtils.registryToPath(materialBlock));
+        ResourceLocation rl = modLoc("block/" + RegistryEntries.getKeyFrom(materialBlock).getPath());
         slabBlock(block, rl, rl);
     }
 

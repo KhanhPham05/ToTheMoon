@@ -7,7 +7,7 @@
     "tag": "tothemoon:metal_press_molds/rod"
   },
   "result": {
-    "item": "tothemoon:redstone_steel_alloy_rod",
-    "count": 2
+    "count": 2,
+    "item": "tothemoon:redstone_steel_alloy_rod"
   }
 }

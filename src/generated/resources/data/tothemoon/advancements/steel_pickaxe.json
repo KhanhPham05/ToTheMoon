@@ -1,24 +1,7 @@
 {
   "parent": "tothemoon:cover_me_with_carbonized_iron",
-  "display": {
-    "icon": {
-      "item": "tothemoon:steel_pickaxe",
-      "nbt": "{Damage:0}"
-    },
-    "title": {
-      "translate": "advancement.tothemoon.isnt_this_steel_pickaxe"
-    },
-    "description": {
-      "translate": "advancement.tothemoon.isnt_this_steel_pickaxe.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": true
-  },
   "criteria": {
     "req": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -27,7 +10,24 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.tothemoon.isnt_this_steel_pickaxe.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "tothemoon:steel_pickaxe",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.tothemoon.isnt_this_steel_pickaxe"
     }
   },
   "requirements": [

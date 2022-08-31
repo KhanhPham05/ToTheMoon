@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "PPH",
-    "WWW",
-    "F F"
-  ],
   "key": {
     "F": {
       "tag": "forge:fences"
+    },
+    "H": {
+      "item": "tothemoon:wooden_hammer"
     },
     "P": {
       "item": "minecraft:paper"
     },
     "W": {
       "tag": "minecraft:planks"
-    },
-    "H": {
-      "item": "tothemoon:wooden_hammer"
     }
   },
+  "pattern": [
+    "PPH",
+    "WWW",
+    "F F"
+  ],
   "result": {
     "item": "tothemoon:workbench"
   }

@@ -7,14 +7,19 @@ import com.khanhpham.tothemoon.core.items.ModArmorItem;
 import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
 import com.khanhpham.tothemoon.core.items.tool.ModToolTiers;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
+import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
+import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
+import com.khanhpham.tothemoon.utils.text.TextUtils;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.advancements.AdvancementProvider;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Items;
@@ -36,7 +41,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
 
     @Override
     protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
-        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_ALLOY.get(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(Names.MOD_ID, "textures/block/steel_sheet_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY)).save(consumer, loc("root"), fileHelper);
+        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_ALLOY.get(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(Names.MOD_ID, "textures/block/steel_sheet_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", ModRecipeProvider.tick()).save(consumer, loc("root"), fileHelper);
         Advancement heavyCrushing = display(Items.ANVIL, HEAVY_CRUSHING, FrameType.GOAL).addCriterion("req", AnvilCrushingTrigger.TriggerInstance.crushItem()).parent(root).parent(root).save(consumer, loc("anvil_crushing"), fileHelper);
         Advancement aHeatedTopic = display(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get(), A_HEATED_TOPIC, FrameType.GOAL).addCriterion("req", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())).parent(heavyCrushing).save(consumer, loc("a_heated_topic"), fileHelper);
         Advancement highHeatSmelting = display(Items.NETHER_BRICK, HIGH_HEAT_SMELTING, FrameType.GOAL)
@@ -51,10 +56,10 @@ public class ModAdvancementProvider extends AdvancementProvider {
 
         Advancement.Builder coverMeWithCarbonizedIronBuilder = Advancement.Builder.advancement()
                 .parent(gettingATrueUpgrade)
-                .display(ModItems.ALL_ARMORS.get(EquipmentSlot.CHEST, ModArmorMaterial.STEEL).get(), COVER_ME_WITH_CARBONIZED_IRON, new TranslatableComponent(COVER_ME_WITH_CARBONIZED_IRON.getKey() + ".description"), null, FrameType.TASK, true, true, true);
+                .display(ModItems.ALL_ARMORS.get(EquipmentSlot.CHEST, ModArmorMaterial.STEEL).get(), COVER_ME_WITH_CARBONIZED_IRON, TextUtils.translatable(COVER_ME_WITH_CARBONIZED_IRON.getString() + ".description"), null, FrameType.TASK, true, true, true);
 
         for (RegistryObject<ModArmorItem> armor : ModItems.ALL_ARMORS.column(ModArmorMaterial.STEEL).values()) {
-            String itemName = armor.get().getRegistryName().getPath();
+            String itemName = RegistryEntries.getKeyFrom(armor.get()).getPath();
             coverMeWithCarbonizedIronBuilder.addCriterion(itemName, InventoryChangeTrigger.TriggerInstance.hasItems(armor.get()));
         }
         Advancement steelArmors = coverMeWithCarbonizedIronBuilder.requirements(RequirementsStrategy.AND).save(consumer, loc("cover_me_with_carbonized_iron"), fileHelper);
@@ -85,14 +90,13 @@ public class ModAdvancementProvider extends AdvancementProvider {
         Advancement ironBlock = Advancement.Builder.advancement().addCriterion("get_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_BLOCK)).parent(root).save(consumer, ModUtils.modLoc("hidden/iron_block"), fileHelper);
     }
 
-    private Advancement.Builder display(ItemLike icon, TranslatableComponent advancementComponent, FrameType frame) {
+    private Advancement.Builder display(ItemLike icon, MutableComponent advancementComponent, FrameType frame) {
         return this.display(icon, advancementComponent, frame, true, true, false);
     }
 
-    private Advancement.Builder display(ItemLike icon, TranslatableComponent advancementComponent, FrameType frame, boolean toast, boolean toChat, boolean hide) {
-        return Advancement.Builder.advancement().display(icon, advancementComponent, new TranslatableComponent(advancementComponent.getKey() + ".description"), null, frame, toast, toChat, hide);
+    private Advancement.Builder display(ItemLike icon, MutableComponent advancementComponent, FrameType frame, boolean toast, boolean toChat, boolean hide) {
+        return Advancement.Builder.advancement().display(icon, advancementComponent, Component.translatable(advancementComponent.getString() + ".description"), null, frame, toast, toChat, hide);
     }
-
 
     private ResourceLocation loc(String loc) {
         return ModUtils.modLoc(loc);

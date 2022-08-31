@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -14,24 +13,25 @@
             },
             {
               "function": "minecraft:copy_nbt",
-              "source": "block_entity",
               "ops": [
                 {
+                  "op": "replace",
                   "source": "FluidName",
-                  "target": "ttmData.fluid",
-                  "op": "replace"
+                  "target": "ttmData.fluid"
                 },
                 {
+                  "op": "replace",
                   "source": "Amount",
-                  "target": "ttmData.fluidAmount",
-                  "op": "replace"
+                  "target": "ttmData.fluidAmount"
                 }
-              ]
+              ],
+              "source": "block_entity"
             }
           ],
           "name": "tothemoon:fluid_tank"
         }
-      ]
+      ],
+      "rolls": 1.0
     }
   ]
 }

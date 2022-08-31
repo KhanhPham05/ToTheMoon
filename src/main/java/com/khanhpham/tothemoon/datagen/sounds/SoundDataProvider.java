@@ -7,10 +7,9 @@ import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.utils.helpers.CompactedLanguage;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 
@@ -33,13 +32,12 @@ public abstract class SoundDataProvider implements DataProvider {
         this.modid = modid;
     }
 
-    @Override
-    public void run(HashCache pCache) {
+    public void run(CachedOutput pCache) {
         this.registerSounds();
         Path path = this.dataProvider.getOutputFolder().resolve("assets/" + this.modid + "/sounds.json");
         sounds.forEach(sound -> {
             try {
-                DataProvider.save(GSON, pCache, sound.toJson(), path);
+                DataProvider.saveStable(pCache, sound.toJson(), path);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -56,7 +54,7 @@ public abstract class SoundDataProvider implements DataProvider {
         String soundPath = ModUtils.getPath(sound);
         String soundSubtitle = source.getName() + '.' + this.modid + "." + soundPath;
         SerializedSoundEvent event = new SerializedSoundEvent(soundPath, source.getName(), soundSubtitle, sounds);
-        soundLanguages.add(new CompactedLanguage(new TranslatableComponent(soundSubtitle), subtitleTranslate));
+        soundLanguages.add(new CompactedLanguage(soundSubtitle, subtitleTranslate));
         this.sounds.add(event);
     }
 

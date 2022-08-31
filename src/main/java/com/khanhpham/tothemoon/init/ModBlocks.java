@@ -24,6 +24,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonRockBarrel;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorBlock;
+import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankBlock;
 import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.FluidAcceptorBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
@@ -71,13 +72,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> MOON_ROCK_BRICK = register("moon_rock_brick", BlockBehaviour.Properties.of(Material.STONE).strength(3f, 6f).sound(SoundType.STONE).sound(ModSoundTypes.MOON_ROCK));
     public static final RegistryObject<StairBlock> MOON_ROCK_BRICK_STAIR = registerWaterlogged("moon_rock_brick_stair", () -> new StairBlock(Blocks.STONE::defaultBlockState, BlockBehaviour.Properties.of(Material.STONE).strength(3.5f, 6.5f).sound(SoundType.STONE).sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<SlabBlock> MOON_ROCK_BRICK_SLAB = registerWaterlogged("moon_rock_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3.5f, 6.5f).sound(SoundType.STONE).sound(ModSoundTypes.MOON_ROCK)));
-    public static final RegistryObject<OreBlock> DEEPSLATE_URANIUM_ORE = register("deepslate_uranium_ore", () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> DEEPSLATE_URANIUM_ORE = register("deepslate_uranium_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<OreBlock> MOON_IRON_ORE = register("moon_iron_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
-    public static final RegistryObject<OreBlock> MOON_GOLD_ORE = register("moon_gold_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
-    public static final RegistryObject<OreBlock> MOON_QUARTZ_ORE = register("moon_quartz_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK), UniformInt.of(1, 5)));
+    public static final RegistryObject<Block> MOON_IRON_ORE = register("moon_iron_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
+    public static final RegistryObject<Block> MOON_GOLD_ORE = register("moon_gold_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
+    public static final RegistryObject<Block> MOON_QUARTZ_ORE = register("moon_quartz_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<RedStoneOreBlock> MOON_REDSTONE_ORE = register("moon_redstone_ore", () -> new RedStoneOreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
-    public static final RegistryObject<OreBlock> MOON_URANIUM_ORE = register("moon_uranium_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
+    public static final RegistryObject<Block> MOON_URANIUM_ORE = register("moon_uranium_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).requiresCorrectToolForDrops().sound(ModSoundTypes.MOON_ROCK)));
     public static final RegistryObject<FallingBlock> MOON_DUST = register("moon_dust", () -> new FallingBlock(BlockBehaviour.Properties.of(Material.SAND).strength(0.75f).sound(ModSoundTypes.MOON_DUST)));
 
     public static final RegistryObject<Block> REDSTONE_METAL_BLOCK = register("redstone_metal_block", BlockBehaviour.Properties.of(Material.METAL).strength(4.5f, 6).sound(SoundType.METAL));
@@ -105,6 +106,7 @@ public class ModBlocks {
             return 20;
         }
     });
+    public static final RegistryObject<FluidTankBlock> FLUID_TANK = register("fluid_tank", () -> new FluidTankBlock(BlockBehaviour.Properties.of(Material.STONE).strength(2.5f, 4.0f).sound(SoundType.STONE)));
     public static final RegistryObject<WorkbenchBlock> WORKBENCH = register("workbench", () -> new WorkbenchBlock(BlockBehaviour.Properties.copy(PROCESSED_WOOD.get())));
     public static final RegistryObject<WorkbenchBlock.LeftSide> WORKBENCH_LEFT = register("wb_l", () -> new WorkbenchBlock.LeftSide(BlockBehaviour.Properties.copy(WORKBENCH.get())));
     public static final RegistryObject<Block> RAW_URANIUM_BLOCK = register("raw_uranium_block", BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK));

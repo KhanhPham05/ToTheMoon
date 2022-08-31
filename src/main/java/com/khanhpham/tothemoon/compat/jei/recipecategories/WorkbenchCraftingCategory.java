@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchScreen;
 import com.khanhpham.tothemoon.core.recipes.WorkbenchCraftingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
+import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -72,7 +73,7 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     @Override
     public void addRecipeTransfer(IRecipeTransferRegistration registration) {
-        registration.addRecipeTransferHandler(WorkbenchMenu.class, RECIPE_CATEGORY_TYPE, 1, 27, 28, 36);
+        registration.addRecipeTransferHandler(WorkbenchMenu.class, ModMenuTypes.WORKBENCH_CRAFTING, RECIPE_CATEGORY_TYPE, 1, 27, 28, 36);
     }
 
     @Override

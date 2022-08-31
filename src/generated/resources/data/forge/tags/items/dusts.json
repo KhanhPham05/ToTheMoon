@@ -1,14 +1,13 @@
 {
-  "replace": false,
   "values": [
-    "#forge:dusts/coal",
-    "#forge:dusts/redstone_steel_metal",
-    "#forge:dusts/heated_coal",
-    "#forge:dusts/steel",
-    "#forge:dusts/gold",
+    "#forge:dusts/uranium",
     "#forge:dusts/redstone_metal",
     "#forge:dusts/iron",
-    "#forge:dusts/uranium",
-    "#forge:dusts/copper"
+    "#forge:dusts/coal",
+    "#forge:dusts/copper",
+    "#forge:dusts/steel",
+    "#forge:dusts/redstone_steel_metal",
+    "#forge:dusts/heated_coal",
+    "#forge:dusts/gold"
   ]
 }

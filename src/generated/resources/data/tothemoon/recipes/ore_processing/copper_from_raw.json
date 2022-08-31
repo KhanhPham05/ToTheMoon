@@ -1,10 +1,10 @@
 {
   "type": "tothemoon:ore_processing",
-  "ingredient": "tag:forge:raw_materials/copper",
-  "result": "tothemoon:copper_dust",
-  "processing_time": 100,
   "extra_result": {
-    "item": "tothemoon:copper_dust",
-    "chance": 30
-  }
+    "chance": 30,
+    "item": "tothemoon:copper_dust"
+  },
+  "ingredient": "tag:forge:raw_materials/copper",
+  "processing_time": 100,
+  "result": "tothemoon:copper_dust"
 }

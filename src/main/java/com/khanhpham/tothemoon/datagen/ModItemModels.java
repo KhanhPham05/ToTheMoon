@@ -8,6 +8,7 @@ import com.khanhpham.tothemoon.core.items.HandheldItem;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DiggerItem;
@@ -32,7 +33,7 @@ public class ModItemModels extends ItemModelProvider {
         for (Item item : items) {
             if (!(item instanceof GearItem)) {
                 if (item instanceof HandheldItem || item instanceof DiggerItem) {
-                    String path = ModUtils.registryToPath(item);
+                    String path = RegistryEntries.getKeyFrom((item)).getPath();
                     withExistingParent(path, new ResourceLocation("item/handheld")).texture("layer0", "item/" + path);
                 } else simpleItem(item);
             }
@@ -51,12 +52,12 @@ public class ModItemModels extends ItemModelProvider {
     }
 
     private void simpleItem(Item item) {
-        String id = ModUtils.registryToPath(item);
+        String id = RegistryEntries.getKeyFrom(item).getPath();
         super.singleTexture(id, new ResourceLocation("item/generated"), "layer0", ModUtils.modLoc("item/" + id));
     }
 
     private <T extends Block> void blockItem(T block) {
-        String id = ModUtils.registryToPath(block.asItem());
+        String id = RegistryEntries.getKeyFrom(block.asItem()).getPath();
         if (super.existingFileHelper.exists(modLoc("block/" + id), ModelProvider.MODEL)) {
             super.withExistingParent(id, modLoc("block/" + id));
         }

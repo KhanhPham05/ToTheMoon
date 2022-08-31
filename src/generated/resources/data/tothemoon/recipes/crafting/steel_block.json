@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "AAA",
-    "AAA"
-  ],
   "key": {
     "A": {
       "item": "tothemoon:steel_ingot"
     }
   },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
   "result": {
     "item": "tothemoon:steel_block"
   }

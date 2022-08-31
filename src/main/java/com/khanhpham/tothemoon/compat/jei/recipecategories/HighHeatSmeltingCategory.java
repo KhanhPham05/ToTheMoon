@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFur
 import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
+import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -23,8 +24,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 
 public class HighHeatSmeltingCategory extends RecipeCategory<HighHeatSmeltingRecipe> {
     public static final ItemStack ICON = new ItemStack(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get());
@@ -66,7 +67,7 @@ public class HighHeatSmeltingCategory extends RecipeCategory<HighHeatSmeltingRec
         addInput(builder, recipe, 0, 26, 31);
         addInput(builder, Ingredient.of(Items.BLAZE_POWDER), 1, 31);
         addOutput(builder, recipe, 116, 31);
-        builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 159, 1).setFluidRenderer(1000, false, 5, 75).addIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.LAVA, FluidAttributes.BUCKET_VOLUME));
+        builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 159, 1).setFluidRenderer(1000, false, 5, 75).addIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.LAVA, FluidType.BUCKET_VOLUME));
     }
 
     @Override
@@ -76,6 +77,6 @@ public class HighHeatSmeltingCategory extends RecipeCategory<HighHeatSmeltingRec
 
     @Override
     public void addRecipeTransfer(IRecipeTransferRegistration registration) {
-        registration.addRecipeTransferHandler(NetherBrickFurnaceControllerMenu.class, RECIPE_TYPE, 0,2,4, 36);
+        registration.addRecipeTransferHandler(NetherBrickFurnaceControllerMenu.class, ModMenuTypes.NETHER_BRICK_FURNACE, RECIPE_TYPE, 0, 2, 4, 36);
     }
 }

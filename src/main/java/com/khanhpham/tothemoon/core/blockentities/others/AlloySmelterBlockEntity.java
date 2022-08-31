@@ -12,7 +12,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -21,11 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -36,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements WorldlyContainer {
     public static final int MENU_SIZE = 3;
-    public static final TranslatableComponent LABEL = ModUtils.translate("gui.tothemoon.alloy_smelter");
+    public static final MutableComponent LABEL = ModUtils.translate("gui.tothemoon.alloy_smelter");
 
     public final ContainerData data = new ContainerData() {
         @Override
@@ -60,6 +55,7 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements
             return 4;
         }
     };
+
     public AlloySmelterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, @NotNull Component label, int containerSize) {
         super(pType, pWorldPosition, pBlockState, energy, label, containerSize);
     }

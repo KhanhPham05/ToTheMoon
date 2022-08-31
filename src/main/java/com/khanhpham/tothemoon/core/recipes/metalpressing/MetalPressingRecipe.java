@@ -125,7 +125,7 @@ public class MetalPressingRecipe implements DisplayRecipe<MetalPressBlockEntity>
         }
 
         @Override
-        protected String getRecipeName() {
+        protected String getSerializerName() {
             return "metal_pressing";
         }
     }

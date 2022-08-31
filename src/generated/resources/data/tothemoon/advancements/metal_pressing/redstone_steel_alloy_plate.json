@@ -1,8 +1,16 @@
 {
   "criteria": {
     "tick": {
-      "trigger": "minecraft:tick",
-      "conditions": {}
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     }
   },
   "requirements": [

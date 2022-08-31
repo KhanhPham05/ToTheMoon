@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
+import com.khanhpham.tothemoon.init.ModRecipes;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -11,9 +12,9 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
@@ -26,7 +27,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,7 +38,6 @@ import java.util.stream.Collectors;
 
 public class ModUtils {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
-    public static final IntegerProperty TANK_LEVEL = IntegerProperty.create("fluid_level", 0, 12);
     public static final Random RANDOM = new Random();
 
     private ModUtils() {
@@ -53,35 +53,27 @@ public class ModUtils {
         return new ResourceLocation(pre.getNamespace(), path);
     }
 
-    public static TranslatableComponent translate(String key, Object... param) {
-        return new TranslatableComponent(key, param);
+    public static MutableComponent translate(String key, Object... param) {
+        return Component.translatable(key, param);
     }
 
     public static <T extends Recipe<?>> RecipeType<T> registerRecipeType(ResourceLocation location) {
-        return new RecipeType<>() {
-            @Override
-            public String toString() {
-                return location.toString();
-            }
-        };
-    }
-
-    public static <T extends IForgeRegistryEntry<T>> String registryToPath(@Nonnull T entry) {
-        return getPath(entry);
+        RecipeType<T> recipeType = RecipeType.simple(location);
+        ModRecipes.ALL_RECIPE_TYPES.put(location.getPath(), recipeType);
+        return recipeType;
     }
 
     public static void log(String message, Object... arguments) {
         ToTheMoon.LOG.info(message, arguments);
     }
 
-    public static <T extends IForgeRegistryEntry<T>> String getFullName(T object) {
-        return Objects.requireNonNull(object.getRegistryName()).toString();
+    public static <T> String getFullName(T object) {
+        return RegistryEntries.getKeyFrom(object).toString();
     }
 
-    public static <T extends IForgeRegistryEntry<T>> String getPath(T object) {
-        return Objects.requireNonNull(object.getRegistryName()).getPath();
+    public static <T> String getPath(T object) {
+        return RegistryEntries.getKeyFrom(object).getPath();
     }
-
 
     public static <T> T roll(T whenHit, int chance, T ifNot) {
         int attempt = RANDOM.nextInt(100);
@@ -89,8 +81,10 @@ public class ModUtils {
     }
 
     public static ItemStack getBucketItem(Fluid fluid) {
-        String namespace = Objects.requireNonNull(fluid.getRegistryName()).getNamespace();
-        String path = fluid.getRegistryName().getPath();
+        ResourceLocation fluidFullName = RegistryEntries.FLUID.getKey(fluid);
+        String namespace = fluidFullName.getNamespace();
+        String path = fluidFullName.getPath();
+
 
         ResourceLocation bucketItem = new ResourceLocation(namespace, path + "_bucket");
         ResourceLocation bucketItem1 = new ResourceLocation(namespace, "bucket_" + path);
@@ -122,10 +116,6 @@ public class ModUtils {
 
     public static List<ItemStack> getItemsForTags(TagKey<Item> tag, ItemStack slotItem) {
         return Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(tag).stream().filter(item -> !slotItem.is(item)).map(ItemStack::new).collect(Collectors.toList());
-    }
-
-    public static List<Item> getItemsForTags(String tagName) {
-        return ForgeRegistries.ITEMS.tags().getTag(ItemTags.create(new ResourceLocation(tagName))).stream().toList();
     }
 
     public static void setupMenuScreen(AbstractContainerScreen<?> screen, String imageNameWithPng, PoseStack pose) {

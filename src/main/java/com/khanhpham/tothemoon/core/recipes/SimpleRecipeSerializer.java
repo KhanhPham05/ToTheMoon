@@ -6,7 +6,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.khanhpham.tothemoon.JsonNames;
 import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -18,18 +20,16 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.LinkedList;
+import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
-
-public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T> {
+public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements RecipeSerializer<T> {
     public SimpleRecipeSerializer() {
-        setRegistryName(Names.MOD_ID, getRecipeName());
+        ModRecipes.ALL_SERIALIZERS.put(this.getSerializerName(), this);
     }
 
-    protected abstract String getRecipeName();
+    protected abstract String getSerializerName();
 
     protected ItemStack stackFromJson(JsonObject jsonObject) {
         if (jsonObject.has(JsonNames.RESULT)) {
@@ -38,7 +38,7 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> extends ForgeR
                 return ShapedRecipe.itemStackFromJson((JsonObject) resultElement);
             } else {
                 ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(jsonObject, JsonNames.RESULT));
-                return new ItemStack(Registry.ITEM.getOptional(itemId).orElseThrow(() -> new IllegalStateException("No item match [" + itemId + "]")));
+                return new ItemStack(RegistryEntries.ITEM.getFromKey(itemId));
             }
         }
 

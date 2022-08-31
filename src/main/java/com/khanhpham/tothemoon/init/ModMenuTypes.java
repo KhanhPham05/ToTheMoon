@@ -4,9 +4,9 @@ import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
-import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorMenu;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenu;
@@ -15,10 +15,10 @@ import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFur
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModMenuTypes {
@@ -62,11 +62,7 @@ public class ModMenuTypes {
     }
 
     @SubscribeEvent
-    public static void init(RegistryEvent.Register<MenuType<?>> event) {
-        init(event.getRegistry());
-    }
-
-    public static void init(IForgeRegistry<MenuType<?>> reg) {
-        MENU_TYPES.registerAll(reg);
+    public static void init(RegisterEvent event) {
+        event.register(ForgeRegistries.Keys.MENU_TYPES, MENU_TYPES::registerAll);
     }
 }

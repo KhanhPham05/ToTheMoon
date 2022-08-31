@@ -97,10 +97,6 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
 
 
     public static final class Serializer extends SimpleRecipeSerializer<WorkbenchCraftingRecipe> {
-        @Override
-        protected String getRecipeName() {
-            return LOCATION.getPath();
-        }
 
         @Override
         public WorkbenchCraftingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
@@ -179,6 +175,11 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
             for (int i = 0; i < 25; i++) {
                 ingredients.get(i).toNetwork(buffer);
             }
+        }
+
+        @Override
+        protected String getSerializerName() {
+            return "workbench_crafting";
         }
     }
 }

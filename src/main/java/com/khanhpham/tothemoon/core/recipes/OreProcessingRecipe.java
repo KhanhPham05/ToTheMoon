@@ -103,10 +103,6 @@ public class OreProcessingRecipe implements DisplayRecipe<OreProcessorBlockEntit
     }
 
     public static final class Serializer extends SimpleRecipeSerializer<OreProcessingRecipe> {
-        @Override
-        protected String getRecipeName() {
-            return "ore_processing";
-        }
 
         @Override
         public OreProcessingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
@@ -127,6 +123,11 @@ public class OreProcessingRecipe implements DisplayRecipe<OreProcessorBlockEntit
             pRecipe.ingredient.toNetwork(pBuffer);
             pBuffer.writeInt(pRecipe.getProcessingTime());
             pRecipe.chancedResult.toNetwork(pBuffer);
+        }
+
+        @Override
+        protected String getSerializerName() {
+            return "ore_processing";
         }
     }
 }

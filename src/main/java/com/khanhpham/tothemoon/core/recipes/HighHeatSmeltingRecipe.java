@@ -12,7 +12,6 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -72,10 +71,6 @@ public class HighHeatSmeltingRecipe implements DisplayRecipe<Container> {
     }
 
     public static final class Serializer extends SimpleRecipeSerializer<HighHeatSmeltingRecipe> {
-        @Override
-        protected String getRecipeName() {
-            return "high_heat_smelting";
-        }
 
         @Override
         public HighHeatSmeltingRecipe fromJson(ResourceLocation id, JsonObject json) {
@@ -95,6 +90,11 @@ public class HighHeatSmeltingRecipe implements DisplayRecipe<Container> {
         public void toNetwork(FriendlyByteBuf buffer, HighHeatSmeltingRecipe recipe) {
             recipe.ingredient.toNetwork(buffer);
             buffer.writeItem(recipe.result);
+        }
+
+        @Override
+        protected String getSerializerName() {
+            return "high_heat_smelting";
         }
     }
 }
