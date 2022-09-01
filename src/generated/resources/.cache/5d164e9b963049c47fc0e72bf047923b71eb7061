@@ -1,5 +1,5 @@
-// 1.19.2	2022-08-31T20:41:03.5362544	TTM Item Tags
-5ebf22cb493997b19513b15769bf8d65cf5a2c4e data/forge/tags/items/dusts.json
+// 1.19.2	2022-09-01T13:51:52.5847954	TTM Item Tags
+d8046aad73e7c3016972bd3d49782bb0ecd8a4c2 data/forge/tags/items/dusts.json
 5d457ed48c2eb9aec4ccf311f45620ae71286a92 data/forge/tags/items/dusts/coal.json
 a3b2d3fb247e6c2620d69428ecab5babcfa81b3b data/forge/tags/items/dusts/copper.json
 f0b3f3d838f316c80c246a24fdba002b84780797 data/forge/tags/items/dusts/gold.json
@@ -9,7 +9,7 @@ b5685b3efc170ecbe7626c30b602cb7d36064adc data/forge/tags/items/dusts/redstone_me
 a4a65572c3740b45fccc085881e1e9ca54006632 data/forge/tags/items/dusts/redstone_steel_metal.json
 9db0fd2684835027b1534aa434c5174058627127 data/forge/tags/items/dusts/steel.json
 f8126194bf595481a20e1de427aa0305c7ac7a42 data/forge/tags/items/dusts/uranium.json
-393c2347a36ef9e8e9dcea0f8a8ba58de47a56a7 data/forge/tags/items/gears.json
+4f5906daafa274d018bd11897e14bc3a986a4e24 data/forge/tags/items/gears.json
 c66208b0cce60a9cea7f076ec80ea30b11cfdfdc data/forge/tags/items/gears/copper.json
 4b7b9495baa09f2b6e32ded661be108b0db4eefe data/forge/tags/items/gears/gold.json
 cef013406d9c0295317fb34573d25d9d40370184 data/forge/tags/items/gears/iron.json
@@ -39,7 +39,7 @@ d0aa9c8f0d224a05fc1379fb510b548870e96094 data/forge/tags/items/plates/redstone_s
 e31197931fcb407ba33587ff7ae6bf2254649aa1 data/forge/tags/items/plates/steel.json
 3f9cad5e580749c309304b11ba72a20486d271fc data/forge/tags/items/plates/uranium.json
 1b872e48733488268a1fb025d11de64c3ca53da4 data/forge/tags/items/raw_materials/uranium.json
-7860afb3633e5677161dd3fb8e0dea5bb6d9eb99 data/forge/tags/items/rods.json
+217b8117657d0fee70c4a56e091c56800bf1d106 data/forge/tags/items/rods.json
 967565623237ecb0566bed42ddac137e0b8bf1c5 data/forge/tags/items/rods/copper.json
 47fee672c801f81fe4f162769b372d967b9d6019 data/forge/tags/items/rods/gold.json
 47fe1de53502a11396b928934917dc1a535e8be2 data/forge/tags/items/rods/iron.json
@@ -47,13 +47,13 @@ f70008895eef5e0753e90daea0d4b09cefa88688 data/forge/tags/items/rods/redstone_met
 d042446816dd91bba0abffd8af662cab750eda4d data/forge/tags/items/rods/redstone_steel.json
 7b200243f704900bad4130fb375554ee3ad5a3b9 data/forge/tags/items/rods/steel.json
 137daed2f208c36f0c8f3e94b765937058e4ee53 data/forge/tags/items/rods/uranium.json
-a409368ab2ed1a623673092c76219af42b2347d4 data/forge/tags/items/sheetmetals.json
+05a39a188376ddbca40a9b1e2a201f41003e0d49 data/forge/tags/items/sheetmetals.json
 7e189732f9c86bdc25d9bbbdb67dfab5b4fedf94 data/forge/tags/items/sheetmetals/copper.json
 e0c861f683be8d956f1ac626717cc13e0061b113 data/forge/tags/items/sheetmetals/gold.json
 bdb34846e7ebec2bf237385179e8960d25f87d4b data/forge/tags/items/sheetmetals/iron.json
 ff59a6cbb68cb5622f3155c63406ff7f8a2d7754 data/forge/tags/items/sheetmetals/steel.json
 c9e516b2c4c505d39091fc4ae5b1248683d3ab60 data/forge/tags/items/stone.json
-369d1d787c132f19500045fb43778603fcc7486b data/forge/tags/items/storage_blocks.json
+3b91da16e0f2a282f7866dd2b0bb6845647b58ed data/forge/tags/items/storage_blocks.json
 30b72a889671de6991230669d8ddb4adeac49d8e data/forge/tags/items/storage_blocks/purified_quartz.json
 021f50b8ab7835539def79490f3787d6be2df7a3 data/forge/tags/items/storage_blocks/raw_uranium.json
 998e77a5737ddbbec8dae6ef52fe5ae090d9e08e data/forge/tags/items/storage_blocks/redstone_metal.json
@@ -70,7 +70,7 @@ dfc521e545b2eb8ba76fb06590412e28d7bf870a data/forge/tags/items/storage_blocks/st
 958eccf26ff68b5349f3438001827f892e32f538 data/forge/tags/items/wires/steel.json
 958eccf26ff68b5349f3438001827f892e32f538 data/forge/tags/items/wires/uranium.json
 88ab58f8f61ef5407dc76735b26fee95026e13ee data/tothemoon/tags/items/hammers.json
-7d30eabcfda6f0bf5b1e5ed27ce718e0c5e66602 data/tothemoon/tags/items/metal_press_molds.json
+f66512926696a3ce93e86686aa0cf98501dbd37a data/tothemoon/tags/items/metal_press_molds.json
 191a08b1f339d67e10b8e02bde7f0dc803d8de37 data/tothemoon/tags/items/metal_press_molds/blank.json
 5a19c5839f826b42ac5045bd206ab2f55c8e509f data/tothemoon/tags/items/metal_press_molds/gear.json
 0a97f7cdfc187b7d4aedf0f349eca8e83c839484 data/tothemoon/tags/items/metal_press_molds/plate.json

@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.init;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
-@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ToTheMoon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModMenuTypes {
 
     public static final MenuTypeRegister MENU_TYPES = new MenuTypeRegister();

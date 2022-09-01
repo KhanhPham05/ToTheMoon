@@ -1,7 +1,8 @@
 package com.khanhpham.tothemoon.utils.text;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -56,7 +57,7 @@ public class TextUtils {
     }
 
     public static MutableComponent translatable(String pre, String suf, Object... params) {
-        return Component.translatable(String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf), params);
+        return Component.translatable(String.format(TRANSLATION_FORMAT, pre, ToTheMoon.MOD_ID, suf), params);
     }
 
     public static Component fluidFuel(int fluid, int capacity) {
@@ -66,7 +67,7 @@ public class TextUtils {
     }
 
     public static String translateFormat(String pre, String suf) {
-        return String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf);
+        return String.format(TRANSLATION_FORMAT, pre, ToTheMoon.MOD_ID, suf);
     }
 
     public static MutableComponent translatable(String key) {
@@ -76,15 +77,10 @@ public class TextUtils {
     public static Component translateItemFluidTank(ItemStack pStack, int capacity) {
         CompoundTag dataTag = LootUtils.getDataTag(pStack);
         if (dataTag.contains(LootUtils.LOOT_DATA_FLUID_AMOUNT, LootUtils.TAG_TYPE_INT) && dataTag.contains(LootUtils.LOOT_DATA_FLUID, LootUtils.TAG_TYPE_STRING)) {
-            return TextUtils.translateFluidTank(getRegistry(Registry.FLUID, new ResourceLocation(dataTag.getString(LootUtils.LOOT_DATA_FLUID))), dataTag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT), capacity);
+            return TextUtils.translateFluidTank(ModUtils.getRegistry(Registry.FLUID, new ResourceLocation(dataTag.getString(LootUtils.LOOT_DATA_FLUID))), dataTag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT), capacity);
         }
 
         return TextUtils.translatable("tooltip", "item_tank", "Empty", "0mB");
-    }
-
-    public static <T> T getRegistry(Registry<T> registry, ResourceLocation location) {
-        if (registry.containsKey(location)) return registry.get(location);
-        throw new IllegalStateException("No registry represent for [" + location + "]");
     }
 
     public static MutableComponent translateFluidTank(Fluid fluid, int amount, int capacity) {

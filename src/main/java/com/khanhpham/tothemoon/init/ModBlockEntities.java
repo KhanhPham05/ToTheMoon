@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.ImmutableSet;
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
@@ -30,7 +29,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("ConstantConditions")
 public class ModBlockEntities {
 
-    public static final DeferredRegister<BlockEntityType<?>> BE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Names.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ToTheMoon.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<CopperEnergyGeneratorBlockEntity>> COPPER_ENERGY_GENERATOR_TE;
     public static final RegistryObject<BlockEntityType<IronEnergyGeneratorBlockEntity>> IRON_ENERGY_GENERATOR_TE;

@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.init;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.recipes.*;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import com.khanhpham.tothemoon.utils.DirectRegistry;
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
-@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ToTheMoon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 
 public class ModRecipes {
     public static final DirectRegistry<RecipeSerializer<?>> ALL_SERIALIZERS = new DirectRegistry<>();

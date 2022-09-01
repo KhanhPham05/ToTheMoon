@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.datagen.blocks;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -12,12 +12,12 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockModels extends BlockModelProvider {
     public ModBlockModels(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, Names.MOD_ID, exFileHelper);
+        super(gen, ToTheMoon.MOD_ID, exFileHelper);
     }
 
     @Override
     protected void registerModels() {
-        ModBlocks.SOLID_BLOCKS.forEach(this::cubeAll);
+        ModBlocks.SOLID_BLOCKS.forEach(block -> this.cubeAllWithRenderType(block, "cutout"));
         batteryBlockModel(ModBlocks.BATTERY.get());
         batteryBlockModel(ModBlocks.STEEL_BATTERY.get());
         batteryBlockModel(ModBlocks.REDSTONE_BATTERY.get());
@@ -25,8 +25,9 @@ public class ModBlockModels extends BlockModelProvider {
 
         orientable("block/netherbrick_furnace_controller", modLoc("block/netherbrick_furnace_controller_side"), modLoc("block/netherbrick_furnace_controller_front"), modLoc("block/netherbrick_furnace_controller_top"));
         orientable("block/nether_brick_furnace_controller_on", modLoc("block/netherbrick_furnace_controller_side"), modLoc("block/netherbrick_furnace_controller_front_on"), modLoc("block/netherbrick_furnace_controller_top"));
-    }
 
+        //this.cubeAllWithRenderType(ModBlocks.ANTI_PRESSURE_GLASS, "translucent");
+    }
 
     private void batteryBlockModel(BatteryBlock batteryBlock) {
         String batteryName = ModUtils.getPath(batteryBlock);
@@ -45,16 +46,15 @@ public class ModBlockModels extends BlockModelProvider {
     }
 
     private void batteryBase(String saveName, String side, String top, String bottom, String front) {
-        super.withExistingParent(saveName, super.modLoc("block/templates/battery_base"))
+        this.withExistingParent(saveName, super.modLoc("block/templates/battery_base"))
                 .texture("side", modLoc(side))
                 .texture("top", modLoc(top))
                 .texture("bottom", modLoc(bottom))
-                .texture("battery_front", modLoc(front))
-        ;
+                .texture("battery_front", modLoc(front));
     }
 
-    private void cubeAll(RegistryObject<? extends Block> supplier) {
+    private void cubeAllWithRenderType(RegistryObject<? extends Block> supplier, String renderType) {
         String id = ModUtils.getPath(supplier.get());
-        super.cubeAll(id, modLoc("block/" + id));
+        super.cubeAll(id, modLoc("block/" + id)).renderType(renderType);
     }
 }

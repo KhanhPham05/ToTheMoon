@@ -5,11 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.khanhpham.tothemoon.JsonNames;
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -22,27 +20,10 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
 import java.util.LinkedList;
-import java.util.function.Supplier;
 
 public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements RecipeSerializer<T> {
     public SimpleRecipeSerializer() {
         ModRecipes.ALL_SERIALIZERS.put(this.getSerializerName(), this);
-    }
-
-    protected abstract String getSerializerName();
-
-    protected ItemStack stackFromJson(JsonObject jsonObject) {
-        if (jsonObject.has(JsonNames.RESULT)) {
-            JsonElement resultElement = jsonObject.get(JsonNames.RESULT);
-            if (resultElement.isJsonObject()) {
-                return ShapedRecipe.itemStackFromJson((JsonObject) resultElement);
-            } else {
-                ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(jsonObject, JsonNames.RESULT));
-                return new ItemStack(RegistryEntries.ITEM.getFromKey(itemId));
-            }
-        }
-
-        throw new JsonSyntaxException("No result was found");
     }
 
     public static Ingredient getShortenIngredient(String name) {
@@ -55,19 +36,6 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements Rec
         } else {
             return Ingredient.of(ModUtils.getItemFromName(name));
         }
-    }
-
-    protected Ingredient getShortenIngredient(JsonObject json, String name) {
-        if (json.has(name)) {
-            JsonElement jsonElement = json.get(name);
-            if (jsonElement.isJsonPrimitive()) {
-                return getShortenIngredient(jsonElement.getAsString());
-            } else if (jsonElement.isJsonArray()) {
-                return getIngredientsFromArray(jsonElement.getAsJsonArray());
-            } else Ingredient.fromJson(jsonElement);
-        }
-
-        throw new JsonSyntaxException("Missing ingredient");
     }
 
     public static Ingredient getIngredientsFromArray(JsonArray array) {
@@ -94,6 +62,35 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements Rec
 
     protected static boolean isTag(String value) {
         return value.contains("tag:");
+    }
+
+    protected abstract String getSerializerName();
+
+    protected ItemStack stackFromJson(JsonObject jsonObject) {
+        if (jsonObject.has(JsonNames.RESULT)) {
+            JsonElement resultElement = jsonObject.get(JsonNames.RESULT);
+            if (resultElement.isJsonObject()) {
+                return ShapedRecipe.itemStackFromJson((JsonObject) resultElement);
+            } else {
+                ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(jsonObject, JsonNames.RESULT));
+                return new ItemStack(RegistryEntries.ITEM.getFromKey(itemId));
+            }
+        }
+
+        throw new JsonSyntaxException("No result was found");
+    }
+
+    protected Ingredient getShortenIngredient(JsonObject json, String name) {
+        if (json.has(name)) {
+            JsonElement jsonElement = json.get(name);
+            if (jsonElement.isJsonPrimitive()) {
+                return getShortenIngredient(jsonElement.getAsString());
+            } else if (jsonElement.isJsonArray()) {
+                return getIngredientsFromArray(jsonElement.getAsJsonArray());
+            } else Ingredient.fromJson(jsonElement);
+        }
+
+        throw new JsonSyntaxException("Missing ingredient");
     }
 
     protected ItemStack getShortenOutput(JsonObject pSerializedRecipe) {

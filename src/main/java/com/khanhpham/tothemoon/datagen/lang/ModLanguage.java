@@ -1,9 +1,8 @@
 package com.khanhpham.tothemoon.datagen.lang;
 
 import com.google.common.base.Preconditions;
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.datagen.advancement.AdvancementComponent;
-import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -106,7 +105,7 @@ public class ModLanguage extends LanguageProvider {
     }
 
     public ModLanguage(DataGenerator gen) {
-        super(gen, Names.MOD_ID, "en_us");
+        super(gen, ToTheMoon.MOD_ID, "en_us");
     }
 
     public static MutableComponent create(String pre, String suf) {
@@ -191,7 +190,7 @@ public class ModLanguage extends LanguageProvider {
         add(ORE_PROCESSING, "Ore Processing");
 
         //sound
-        ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
+        //ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
 
         //ADVANCEMENT
         add(ROOT_DESCRIPTION, "Welcome To The Moon, this advancement will show you al the things that are in this mod");

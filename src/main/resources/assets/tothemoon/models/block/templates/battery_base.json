@@ -1,5 +1,6 @@
 {
   "parent":"minecraft:block/cube",
+  "render_type": "minecraft:cutout",
   "textures": {
     "0": "#side",
     "1": "#top",

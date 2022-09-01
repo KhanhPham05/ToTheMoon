@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.datagen;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.items.GearItem;
@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 
 public class ModItemModels extends ItemModelProvider {
     public ModItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Names.MOD_ID, existingFileHelper);
+        super(generator, ToTheMoon.MOD_ID, existingFileHelper);
     }
 
     @Override

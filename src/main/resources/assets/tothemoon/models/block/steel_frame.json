@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench/Made by xu3u https://www.curseforge.com/members/xu3u_",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "tothemoon:block/steel_frame",
 		"1": "tothemoon:block/steel_frame_in",

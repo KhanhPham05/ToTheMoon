@@ -18,11 +18,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+@Deprecated
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public abstract class SoundDataProvider implements DataProvider {
     public static final ArrayList<CompactedLanguage> soundLanguages = new ArrayList<>();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private final DataGenerator dataProvider;
     private final String modid;
     private final ArrayList<SerializedSoundEvent> sounds = new ArrayList<>();

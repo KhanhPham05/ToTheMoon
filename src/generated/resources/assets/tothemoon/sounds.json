@@ -1,6 +1,5 @@
 {
   "machine_metal_break": {
-    "category": "block",
     "sounds": [
       "tothemoon:machine_metal_break1",
       "tothemoon:machine_metal_break2",
@@ -9,7 +8,6 @@
     "subtitle": "block.tothemoon.machine_metal_break"
   },
   "machine_metal_place": {
-    "category": "block",
     "sounds": [
       "tothemoon:machine_metal_place1",
       "tothemoon:machine_metal_place2"
@@ -17,7 +15,6 @@
     "subtitle": "block.tothemoon.machine_metal_place"
   },
   "machine_metal_step": {
-    "category": "block",
     "sounds": [
       "tothemoon:machine_metal_step1",
       "tothemoon:machine_metal_step2",
@@ -26,14 +23,12 @@
     "subtitle": "block.tothemoon.machine_metal_step"
   },
   "metal_press_used": {
-    "category": "block",
     "sounds": [
       "tothemoon:metal_press_used"
     ],
     "subtitle": "block.tothemoon.metal_press_used"
   },
   "moon_dust_break": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_dust_break1",
       "tothemoon:moon_dust_break2",
@@ -42,7 +37,6 @@
     "subtitle": "block.tothemoon.moon_dust_break"
   },
   "moon_dust_place": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_dust_place1",
       "tothemoon:moon_dust_place2",
@@ -51,7 +45,6 @@
     "subtitle": "block.tothemoon.moon_dust_place"
   },
   "moon_dust_step": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_dust_step1",
       "tothemoon:moon_dust_step2",
@@ -60,7 +53,6 @@
     "subtitle": "block.tothemoon.moon_dust_step"
   },
   "moon_rock_break": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_rock_break1",
       "tothemoon:moon_rock_break2",
@@ -69,7 +61,6 @@
     "subtitle": "block.tothemoon.moon_rock_break"
   },
   "moon_rock_place": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_rock_place1",
       "tothemoon:moon_rock_place2",
@@ -78,7 +69,6 @@
     "subtitle": "block.tothemoon.moon_rock_place"
   },
   "moon_rock_step": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_rock_step1",
       "tothemoon:moon_rock_step2",

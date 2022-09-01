@@ -43,8 +43,12 @@ public class TagTranslatorBlock extends Block implements HasCustomBlockItem, Blo
         return BlockMenuProvider.super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
+
+
     @Override
     public BlockItem getRawItem() {
         return new DetailedBlockItem(this, 1, ModLanguage.TAG_TRANSLATOR);
     }
+
+
 }

@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.init;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.utils.DirectRegistry;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.sounds.SoundEvent;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
-@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ToTheMoon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModSoundEvents {
     public static final DirectRegistry<SoundEvent> ALL_SOUND_EVENTS = new DirectRegistry<>();
 

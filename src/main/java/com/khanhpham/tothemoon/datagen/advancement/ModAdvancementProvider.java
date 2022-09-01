@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.datagen.advancement;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.advancements.AnvilCrushingTrigger;
 import com.khanhpham.tothemoon.advancements.MultiblockFormedTrigger;
 import com.khanhpham.tothemoon.core.items.ModArmorItem;
@@ -10,7 +10,6 @@ import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
@@ -41,7 +40,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
 
     @Override
     protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
-        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_ALLOY.get(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(Names.MOD_ID, "textures/block/steel_sheet_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", ModRecipeProvider.tick()).save(consumer, loc("root"), fileHelper);
+        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_ALLOY.get(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(ToTheMoon.MOD_ID, "textures/block/steel_sheet_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", ModRecipeProvider.tick()).save(consumer, loc("root"), fileHelper);
         Advancement heavyCrushing = display(Items.ANVIL, HEAVY_CRUSHING, FrameType.GOAL).addCriterion("req", AnvilCrushingTrigger.TriggerInstance.crushItem()).parent(root).parent(root).save(consumer, loc("anvil_crushing"), fileHelper);
         Advancement aHeatedTopic = display(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get(), A_HEATED_TOPIC, FrameType.GOAL).addCriterion("req", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())).parent(heavyCrushing).save(consumer, loc("a_heated_topic"), fileHelper);
         Advancement highHeatSmelting = display(Items.NETHER_BRICK, HIGH_HEAT_SMELTING, FrameType.GOAL)

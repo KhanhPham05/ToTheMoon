@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.datagen.blocks;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -25,12 +25,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private final Direction[] horizontalDirections = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
 
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, Names.MOD_ID, exFileHelper);
+        super(gen, ToTheMoon.MOD_ID, exFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
         ModBlocks.SOLID_BLOCKS.stream().map(Supplier::get).forEach(this::simpleBlock);
+        this.simpleBlock(ModBlocks.ANTI_PRESSURE_GLASS.get());
+
         this.slabBlock(ModBlocks.MOON_ROCK_SLAB.get(), ModBlocks.MOON_ROCK.get());
         this.stairBlock(ModBlocks.MOON_ROCK_STAIR.get(), ModBlocks.MOON_ROCK.get());
         this.slabBlock(ModBlocks.POLISHED_MOON_ROCK_SLAB.get(), ModBlocks.POLISHED_MOON_ROCK.get());
@@ -49,10 +51,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         batteryBlockStates(ModBlocks.REDSTONE_BATTERY.get());
         batteryBlockStates(ModBlocks.STEEL_BATTERY.get());
 
-        VariantBlockStateBuilder netherbrickFurnace = super.getVariantBuilder(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get());
+        VariantBlockStateBuilder netherBrickFurnace = super.getVariantBuilder(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get());
         for (Direction direction : horizontalDirections) {
-            netherbrickFurnace.addModels(netherbrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, false), getModel(direction, "block/netherbrick_furnace_controller"));
-            netherbrickFurnace.addModels(netherbrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, true), getModel(direction, "block/nether_brick_furnace_controller_on"));
+            netherBrickFurnace.addModels(netherBrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, false), getModel(direction, "block/netherbrick_furnace_controller"));
+            netherBrickFurnace.addModels(netherBrickFurnace.partialState().with(NetherBrickFurnaceBlock.FACING, direction).with(NetherBrickFurnaceBlock.LIT, true), getModel(direction, "block/nether_brick_furnace_controller_on"));
 
         }
     }

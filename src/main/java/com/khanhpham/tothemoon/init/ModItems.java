@@ -3,7 +3,6 @@ package com.khanhpham.tothemoon.init;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Table;
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.*;
 import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
@@ -25,7 +24,7 @@ import java.util.function.Supplier;
 //Just want to add it here so my IDEA don't give me some stupid warnings
 @SuppressWarnings({"unused", "deprecation"})
 public class ModItems {
-    public static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, Names.MOD_ID);
+    public static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, ToTheMoon.MOD_ID);
     public static final Item.Properties GENERAL_PROPERTIES = new Item.Properties().tab(ToTheMoon.TAB);
     public static final Table<ModToolTiers.ToolType, Tier, RegistryObject<? extends TieredItem>> ALL_TOOLS = HashBasedTable.create();
     public static final HashBasedTable<EquipmentSlot, ModArmorMaterial, RegistryObject<ModArmorItem>> ALL_ARMORS;

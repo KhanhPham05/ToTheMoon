@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.datagen.tags;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.init.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -32,7 +32,7 @@ public class ModTagProvider {
 
     public static final class ModItemTagsProvider extends ItemTagsProvider {
         public ModItemTagsProvider(DataGenerator pGenerator, BlockTagsProvider pBlockTagsProvider, ExistingFileHelper existingFileHelper) {
-            super(pGenerator, pBlockTagsProvider, Names.MOD_ID, existingFileHelper);
+            super(pGenerator, pBlockTagsProvider, ToTheMoon.MOD_ID, existingFileHelper);
         }
 
         @SuppressWarnings("unchecked")
@@ -111,7 +111,7 @@ public class ModTagProvider {
     public static final class ModBlockTagsProvider extends BlockTagsProvider {
 
         public ModBlockTagsProvider(DataGenerator pGenerator, ExistingFileHelper existingFileHelper) {
-            super(pGenerator, Names.MOD_ID, existingFileHelper);
+            super(pGenerator, ToTheMoon.MOD_ID, existingFileHelper);
         }
 
         @SuppressWarnings("unchecked")

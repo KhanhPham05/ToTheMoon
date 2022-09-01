@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.utils.helpers;
 
 import com.google.common.collect.ImmutableMap;
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.khanhpham.tothemoon.init.ModRecipes;
@@ -27,7 +26,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,7 +43,7 @@ public class ModUtils {
     }
 
     public static ResourceLocation modLoc(String loc) {
-        return new ResourceLocation(Names.MOD_ID, loc);
+        return loc.contains("tothemoon:") ? new ResourceLocation(loc) : new ResourceLocation(ToTheMoon.MOD_ID, loc);
     }
 
     public static ResourceLocation append(ResourceLocation pre, String suf) {
@@ -185,5 +183,10 @@ public class ModUtils {
 
     public static int rollIntRange(int from, int to) {
         return from == to ? from : RANDOM.nextInt(from, to);
+    }
+
+    public static <T> T getRegistry(Registry<T> registry, ResourceLocation location) {
+        if (registry.containsKey(location)) return registry.get(location);
+        throw new IllegalStateException("No registry represent for [" + location + "]");
     }
 }
