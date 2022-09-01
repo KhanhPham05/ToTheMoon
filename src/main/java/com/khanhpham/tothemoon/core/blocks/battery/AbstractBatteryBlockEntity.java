@@ -3,7 +3,6 @@ package com.khanhpham.tothemoon.core.blocks.battery;
 import com.khanhpham.tothemoon.core.abstracts.EnergyItemCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlock;
 import com.khanhpham.tothemoon.core.energy.BatteryEnergy;
-import com.khanhpham.tothemoon.core.energy.Energy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -15,14 +14,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 
 public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
-    protected static final int CONTAINER_SIZE = 2;
     public static final int REDSTONE_TIER_ENERGY = 750_000;
     public static final int STEEL_TIER_CAPACITY = 500_000;
+    protected static final int CONTAINER_SIZE = 2;
     public final ContainerData data = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -51,6 +51,7 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
     public AbstractBatteryBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, BatteryEnergy energy, @NotNull Component label) {
         super(pType, pWorldPosition, pBlockState, energy, label, CONTAINER_SIZE);
     }
+
     public static <T extends AbstractBatteryBlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T e) {
         e.serverTick(level, blockPos, blockState);
     }
@@ -77,7 +78,7 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
 
         if (!items.get(0).isEmpty()) {
             ItemStack stack = items.get(0);
-            IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY).orElse(null);
+            IEnergyStorage storage = stack.getCapability(ForgeCapabilities.ENERGY).orElse(null);
             if (!getEnergy().isEmpty()) {
                 getEnergy().extractEnergy(storage.receiveEnergy(1000, false), false);
             }
@@ -86,7 +87,7 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
         //TODO: Need some tests
         if (!items.get(1).isEmpty()) {
             ItemStack stack = items.get(1);
-            IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY).orElse(null);
+            IEnergyStorage storage = stack.getCapability(ForgeCapabilities.ENERGY).orElse(null);
             if (!getEnergy().isFull()) {
                 getEnergy().receiveEnergy(storage.extractEnergy(1500, false), false);
             }
@@ -112,7 +113,7 @@ public class AbstractBatteryBlockEntity extends EnergyItemCapableBlockEntity {
         for (Direction direction : Direction.values()) {
             var be = level.getBlockEntity(pos.relative(direction));
             if (be != null && !(be instanceof BatteryBlockEntity))
-                be.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite()).ifPresent(energy -> energyStorages.put(pos.relative(direction), energy));
+                be.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).ifPresent(energy -> energyStorages.put(pos.relative(direction), energy));
         }
     }
 }

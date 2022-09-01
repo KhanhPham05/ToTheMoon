@@ -1,9 +1,9 @@
 {
   "type": "tothemoon:ore_processing",
   "ingredient": "tag:forge:ores/lapis",
+  "processing_time": 100,
   "result": {
-    "item": "minecraft:lapis_lazuli",
-    "count": 12
-  },
-  "processing_time": 100
+    "count": 12,
+    "item": "minecraft:lapis_lazuli"
+  }
 }

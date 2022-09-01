@@ -1,6 +1,5 @@
 package com.khanhpham.tothemoon.datagen.tags;
 
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -10,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags.Blocks;
 
 import java.util.function.Supplier;
+
 public class ModBlockTags {
     public static final TagKey<Block> ORES_URANIUM = append(Blocks.ORES, "/uranium");
     public static final AppendableBlockTagKey BLOCK_SHEETMETALS = createAppendable(new ResourceLocation("forge", "sheetmetals"));
@@ -38,7 +38,6 @@ public class ModBlockTags {
     private static TagKey<Block> append(AppendableBlockTagKey key, String suf, Supplier<? extends Block> block) {
         return key.append(suf, block);
     }
-
 
 
 }

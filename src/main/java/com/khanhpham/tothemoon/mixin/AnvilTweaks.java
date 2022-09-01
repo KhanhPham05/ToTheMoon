@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.advancements.ModdedTriggers;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
@@ -69,7 +70,7 @@ public class AnvilTweaks extends FallingBlock {
                             }
                             if (material != null) {
                                 ItemStack resultStack = ItemStack.EMPTY;
-                                String modid = Objects.requireNonNull(item.getItem().getItem().getRegistryName()).getNamespace();
+                                String modid = RegistryEntries.ITEM.getNameSpace(item.getItem().getItem());
                                 if (modid.equals("minecraft")) {
                                     resultStack = new ItemStack(Registry.ITEM.get(ModUtils.modLoc(material + "_dust")));
                                 } else if (Registry.ITEM.containsKey(new ResourceLocation(modid, "dust_" + material))) {

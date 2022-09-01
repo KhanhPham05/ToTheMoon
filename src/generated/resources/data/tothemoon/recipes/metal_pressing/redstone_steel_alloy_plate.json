@@ -7,7 +7,7 @@
     "tag": "tothemoon:metal_press_molds/plate"
   },
   "result": {
-    "item": "tothemoon:redstone_steel_alloy_plate",
-    "count": 1
+    "count": 1,
+    "item": "tothemoon:redstone_steel_alloy_plate"
   }
 }

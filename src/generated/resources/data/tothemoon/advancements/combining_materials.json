@@ -1,23 +1,7 @@
 {
   "parent": "tothemoon:burning_energy",
-  "display": {
-    "icon": {
-      "item": "tothemoon:alloy_smelter"
-    },
-    "title": {
-      "translate": "advancement.tothemoon.combining_materials"
-    },
-    "description": {
-      "translate": "advancement.tothemoon.combining_materials.description"
-    },
-    "frame": "goal",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "req": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,7 +10,23 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.tothemoon.combining_materials.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "tothemoon:alloy_smelter"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.tothemoon.combining_materials"
     }
   },
   "requirements": [

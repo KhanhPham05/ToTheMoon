@@ -1,21 +1,21 @@
 {
   "type": "mekanism:metallurgic_infusing",
+  "chemicalInput": {
+    "amount": 30,
+    "tag": "mekanism:redstone"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
   "itemInput": {
     "ingredient": {
       "tag": "forge:dusts/iron"
     }
   },
-  "chemicalInput": {
-    "amount": 30,
-    "tag": "mekanism:redstone"
-  },
   "output": {
     "item": "tothemoon:redstone_metal_dust"
-  },
-  "conditions": [
-    {
-      "modid": "mekanism",
-      "type": "forge:mod_loaded"
-    }
-  ]
+  }
 }

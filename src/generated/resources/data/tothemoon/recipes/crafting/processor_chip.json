@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "RRR",
-    "DGD",
-    "SSS"
-  ],
   "key": {
-    "R": {
-      "tag": "forge:plates/redstone_metal"
-    },
     "D": {
       "tag": "forge:dusts/redstone"
     },
     "G": {
       "tag": "forge:dusts/gold"
     },
+    "R": {
+      "tag": "forge:plates/redstone_metal"
+    },
     "S": {
       "tag": "forge:plates/steel"
     }
   },
+  "pattern": [
+    "RRR",
+    "DGD",
+    "SSS"
+  ],
   "result": {
     "item": "tothemoon:processor_chip"
   }

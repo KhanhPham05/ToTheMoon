@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -14,19 +13,20 @@
             },
             {
               "function": "minecraft:copy_nbt",
-              "source": "block_entity",
               "ops": [
                 {
+                  "op": "replace",
                   "source": "energy",
-                  "target": "ttmData.energy",
-                  "op": "replace"
+                  "target": "ttmData.energy"
                 }
-              ]
+              ],
+              "source": "block_entity"
             }
           ],
           "name": "tothemoon:redstone_battery"
         }
-      ]
+      ],
+      "rolls": 1.0
     }
   ]
 }

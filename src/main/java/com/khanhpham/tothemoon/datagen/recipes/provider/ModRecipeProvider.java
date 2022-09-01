@@ -8,9 +8,9 @@ import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.TickTrigger;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
@@ -39,8 +39,8 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
 
-    public static TickTrigger.TriggerInstance tick() {
-        return new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY);
+    public static PlayerTrigger.TriggerInstance tick() {
+        return PlayerTrigger.TriggerInstance.located(LocationPredicate.ANY);
     }
 
     @Override
@@ -242,7 +242,7 @@ public class ModRecipeProvider extends RecipeProvider {
         OreProcessingBuilder.process(Items.QUARTZ, 4, ShortenIngredient.create().add(ORES_QUARTZ)).extraOutput(new ItemStack(ModItems.PURIFIED_QUARTZ.get(), 3), 10).save(consumer);
         OreProcessingBuilder.process(Items.NETHERITE_SCRAP, 1, ShortenIngredient.create().add(ORES_NETHERITE_SCRAP)).doubleChance(40).save(consumer);
 
-     }
+    }
 
     private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> mold, ItemStack result) {
         MetalPressRecipeBuilder builder = MetalPressRecipeBuilder.press(ingredient, mold, result);

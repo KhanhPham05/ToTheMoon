@@ -14,7 +14,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,7 +33,7 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
         //result slot
         addSlot(new ResultSlotPredicate(externalContainer, 2, 146, 43));
         //lava bucket slot
-        addSlot(new SlotPlacePredicate(externalContainer, 3, 170, 72, stack -> stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()));
+        addSlot(new SlotPlacePredicate(externalContainer, 3, 170, 72, stack -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()));
 
         super.addPlayerInventorySlots(22, 95);
 
@@ -85,7 +85,7 @@ public class NetherBrickFurnaceControllerMenu extends BaseMenu {
             } else if (index != 1 && index != 0 && index != 3) {
                 if (stack1.is(Items.BLAZE_POWDER)) {
                     if (!moveItemStackTo(stack1, 1, 2, false)) return ItemStack.EMPTY;
-                } else if (stack1.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+                } else if (stack1.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) {
                     if (!moveItemStackTo(stack1, 3, 4, false)) return ItemStack.EMPTY;
                 } else if (!moveItemStackTo(stack1, 0, 1, false)) {
                     return ItemStack.EMPTY;

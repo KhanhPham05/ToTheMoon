@@ -1,17 +1,18 @@
 package com.khanhpham.tothemoon.datagen.advancement;
 
-import net.minecraft.network.chat.TranslatableComponent;
+import com.khanhpham.tothemoon.utils.text.TextUtils;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import java.util.HashMap;
 
 public class AdvancementComponent {
 
-    public final HashMap<TranslatableComponent, String> map = new HashMap<>();
+    public final HashMap<MutableComponent, String> map = new HashMap<>();
 
-    public TranslatableComponent add(String titleKey, String titleTranslate, String descriptionTranslate) {
-        TranslatableComponent title = new TranslatableComponent(titleKey);
-        TranslatableComponent description = new TranslatableComponent(titleKey + ".description");
+    public MutableComponent add(String titleKey, String titleTranslate, String descriptionTranslate) {
+        MutableComponent title = TextUtils.translatable(titleKey);
+        MutableComponent description = TextUtils.translatable(titleKey + ".description");
 
         map.put(title, titleTranslate);
         map.put(description, descriptionTranslate);
@@ -19,6 +20,6 @@ public class AdvancementComponent {
     }
 
     public void startTranslating(LanguageProvider language) {
-        map.forEach((component, translate) -> language.add(component.getKey(), translate));
+        map.forEach((component, translate) -> language.add(component.getString(), translate));
     }
 }

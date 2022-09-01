@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
@@ -32,7 +33,7 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
     }
 
     public static String getId(ItemLike item) {
-        return ModUtils.registryToPath(item.asItem());
+        return RegistryEntries.getKeyFrom(item.asItem()).getPath();
     }
 
     public static <T extends RecipeBuilder> void saveGlobal(Consumer<FinishedRecipe> consumer, T builder, String recipeType, String result) {
@@ -120,7 +121,7 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
     @SuppressWarnings("deprecation")
     public void tools() {
         ModItems.ALL_TOOLS.values().stream().map(Supplier::get).forEach(toolItem -> {
-            StringBuilder item = new StringBuilder(toolItem.getRegistryName().getPath());
+            StringBuilder item = new StringBuilder(RegistryEntries.getKeyFrom(toolItem).getPath());
             item.delete(item.lastIndexOf("_"), item.length());
             String craftItemName = item.toString();
             Item craftItem = Registry.ITEM.get(ModUtils.modLoc(craftItemName + "_ingot"));
@@ -143,7 +144,7 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
             }
 
             if (addition != null) {
-                addition.define('A', craftItem).define('S', ModItemTags.RODS_STEEL).getBuilder().unlockedBy("tick", ModRecipeProvider.tick()).save(consumer, ModUtils.modLoc("crafting/" + toolItem.getRegistryName().getPath() + "_r"));
+                addition.define('A', craftItem).define('S', ModItemTags.RODS_STEEL).getBuilder().unlockedBy("tick", ModRecipeProvider.tick()).save(consumer, ModUtils.modLoc("crafting/" + RegistryEntries.getKeyFrom(toolItem).getPath() + "_r"));
             }
             builder.define('A', craftItem).define('S', ModItemTags.RODS_STEEL).save();
         });
@@ -189,7 +190,7 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
         }
 
         public Shaped define(char c, ItemLike item) {
-            this.inputs.add(ModUtils.registryToPath(item.asItem()));
+            this.inputs.add(RegistryEntries.getKeyFrom(item.asItem()).getPath());
             builder.define(c, item);
             return this;
         }

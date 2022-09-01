@@ -1,13 +1,12 @@
 package com.khanhpham.tothemoon.utils.text;
 
-import com.khanhpham.tothemoon.Names;
-import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
@@ -22,7 +21,7 @@ public class TextUtils {
 
     @Deprecated
     public static String energyToString(int energy) {
-        String str = "";
+        String str;
         String fullEnergyString = Integer.toString(energy);
         int energyStringLength = fullEnergyString.length();
 
@@ -53,42 +52,41 @@ public class TextUtils {
         return ENERGY_FORMAT.formatted(energy);
     }
 
-    public static TranslatableComponent translateEnergyStorage(int stored, int capacity) {
-        return translateFormatText("tooltip", "energy", translateEnergy(stored), translateEnergy(capacity));
+    public static MutableComponent translateEnergyStorage(int stored, int capacity) {
+        return translatable("tooltip", "energy", translateEnergy(stored), translateEnergy(capacity));
     }
 
-    public static TranslatableComponent translateFormatText(String pre, String suf, Object... params) {
-        return new TranslatableComponent(String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf), params);
+    public static MutableComponent translatable(String pre, String suf, Object... params) {
+        return Component.translatable(String.format(TRANSLATION_FORMAT, pre, ToTheMoon.MOD_ID, suf), params);
     }
 
     public static Component fluidFuel(int fluid, int capacity) {
         String fluidString = String.format(FLUID_FORMAT, fluid);
         String capacityString = String.format(FLUID_FORMAT, capacity);
-        return translateFormatText("tooltip", "fluid_fuel_tank", fluidString, capacityString);
+        return translatable("tooltip", "fluid_fuel_tank", fluidString, capacityString);
     }
 
     public static String translateFormat(String pre, String suf) {
-        return String.format(TRANSLATION_FORMAT, pre, Names.MOD_ID, suf);
+        return String.format(TRANSLATION_FORMAT, pre, ToTheMoon.MOD_ID, suf);
+    }
+
+    public static MutableComponent translatable(String key) {
+        return Component.translatable(key);
     }
 
     public static Component translateItemFluidTank(ItemStack pStack, int capacity) {
         CompoundTag dataTag = LootUtils.getDataTag(pStack);
         if (dataTag.contains(LootUtils.LOOT_DATA_FLUID_AMOUNT, LootUtils.TAG_TYPE_INT) && dataTag.contains(LootUtils.LOOT_DATA_FLUID, LootUtils.TAG_TYPE_STRING)) {
-            return TextUtils.translateFluidTank(getRegistry(Registry.FLUID, new ResourceLocation(dataTag.getString(LootUtils.LOOT_DATA_FLUID))), dataTag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT), capacity);
+            return TextUtils.translateFluidTank(ModUtils.getRegistry(Registry.FLUID, new ResourceLocation(dataTag.getString(LootUtils.LOOT_DATA_FLUID))), dataTag.getInt(LootUtils.LOOT_DATA_FLUID_AMOUNT), capacity);
         }
 
-        return TextUtils.translateFormatText("tooltip", "item_tank", "Empty", "0mB");
+        return TextUtils.translatable("tooltip", "item_tank", "Empty", "0mB");
     }
 
-    public static <T> T getRegistry(Registry<T> registry, ResourceLocation location) {
-        if (registry.containsKey(location)) return registry.get(location);
-        throw new IllegalStateException("No registry represent for [" + location + "]");
-    }
-
-    public static TranslatableComponent translateFluidTank(Fluid fluid, int amount, int capacity) {
+    public static MutableComponent translateFluidTank(Fluid fluid, int amount, int capacity) {
         String param2 = String.format(FLUID_TANK_ITEM_FORMAT, amount, capacity);
-        String param1 = ModLanguage.getPureName(fluid);
-        return translateFormatText("tooltip", "item_tank", param1, param2);
+        String param1 = fluid.getFluidType().getDescription().getString();
+        return translatable("tooltip", "item_tank", param1, param2);
     }
 
     private static String cutPos(String string, int posToCut, String extension) {

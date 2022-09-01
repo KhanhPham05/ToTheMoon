@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "F": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
   "pattern": [
     " F ",
     " SF",
     "S  "
   ],
-  "key": {
-    "S": {
-      "tag": "forge:rods/wooden"
-    },
-    "F": {
-      "tag": "minecraft:planks"
-    }
-  },
   "result": {
     "item": "tothemoon:wooden_hammer"
   }

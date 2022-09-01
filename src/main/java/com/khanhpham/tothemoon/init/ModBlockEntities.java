@@ -1,7 +1,6 @@
 package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.ImmutableSet;
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
@@ -16,22 +15,21 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankBlockEntity;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Collections;
-import java.util.Set;
 import java.util.function.Supplier;
 
+@SuppressWarnings("ConstantConditions")
 public class ModBlockEntities {
 
-    public static final DeferredRegister<BlockEntityType<?>> BE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Names.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ToTheMoon.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<CopperEnergyGeneratorBlockEntity>> COPPER_ENERGY_GENERATOR_TE;
     public static final RegistryObject<BlockEntityType<IronEnergyGeneratorBlockEntity>> IRON_ENERGY_GENERATOR_TE;
@@ -51,6 +49,7 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> REDSTONE_BATTERY;
     public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> STEEL_BATTERY;
     //public static final RegistryObject<BlockEntityType<TagTranslatorBlockEntity>> TAG_TRANSLATOR;
+    public static final RegistryObject<BlockEntityType<FluidTankBlockEntity>> FLUID_TANK;
 
     static {
         ToTheMoon.LOG.info("Registering BEs");
@@ -67,9 +66,9 @@ public class ModBlockEntities {
         BRICK_FURNACE = register("brick_furnace", () -> BlockEntityType.Builder.of(NetherBrickFurnaceControllerBlockEntity::new, ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get()).build(null));
         ENERGY_PROCESSOR = register("energy_processor", () -> BlockEntityType.Builder.of(OreProcessorBlockEntity::new, ModBlocks.ORE_PROCESSOR.get()).build(null));
         //TAG_TRANSLATOR = register("tag_translators", () -> BlockEntityType.Builder.of(TagTranslatorBlockEntity::new, ModBlocks.TAG_TRANSLATOR.get()).build(null));
-        //FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new).build(null));
+        FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new).build(null));
         REDSTONE_BATTERY = register("redstone_battery", () -> new BlockEntityType<>(RedstoneBatteryBlockEntity::new, Collections.singleton(ModBlocks.REDSTONE_BATTERY.get()), null));
-        STEEL_BATTERY = register("steel_battery", () -> new BlockEntityType<>(SteelBatteryBlockEntity::new, Collections.singleton(ModBlocks.STEEL_BATTERY.get()),null));
+        STEEL_BATTERY = register("steel_battery", () -> new BlockEntityType<>(SteelBatteryBlockEntity::new, Collections.singleton(ModBlocks.STEEL_BATTERY.get()), null));
     }
 
     private ModBlockEntities() {

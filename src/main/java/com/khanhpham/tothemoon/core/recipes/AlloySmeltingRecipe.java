@@ -81,14 +81,6 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
 
     public static final class Serializer extends SimpleRecipeSerializer<AlloySmeltingRecipe> {
 
-        public Serializer() {
-        }
-
-        @Override
-        protected String getRecipeName() {
-            return "alloy_smelting";
-        }
-
         @Override
         public AlloySmeltingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT), false);
@@ -114,6 +106,11 @@ public final class AlloySmeltingRecipe implements Recipe<AlloySmelterBlockEntity
             pRecipe.secondaryIngredient.toNetwork(pBuffer);
             pBuffer.writeItemStack(pRecipe.result, false);
             pBuffer.writeInt(pRecipe.alloyingTime);
+        }
+
+        @Override
+        protected String getSerializerName() {
+            return "alloy_smelting";
         }
     }
 

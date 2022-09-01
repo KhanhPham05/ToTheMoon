@@ -12,11 +12,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 
 public class GuiRenderingUtils {
     private static final Minecraft CLIENT = Minecraft.getInstance();
-    private static final TextureManager TEXTURE_MANAGER = CLIENT.getTextureManager();
 
     private GuiRenderingUtils() {
     }
@@ -35,7 +36,7 @@ public class GuiRenderingUtils {
                 RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
                 Matrix4f matrix = pose.last().pose();
 
-                int fluidColor = fluidStack.getFluid().getAttributes().getColor();
+                int fluidColor = getFluidColorTint(fluidStack);
                 float r = ((fluidColor >> 16) & 0xFF) / 255f;
                 float g = ((fluidColor >> 8) & 0xFF) / 255f;
                 float b = (fluidColor & 0xFF) / 255f;
@@ -66,16 +67,12 @@ public class GuiRenderingUtils {
                         bufferBuilder.vertex(matrix, drawX + drawWidth, drawY + drawHeight, 0).uv(v1, v).endVertex();
                         bufferBuilder.vertex(matrix, drawX + drawWidth, drawY, 0).uv(v1, minV).endVertex();
                         bufferBuilder.vertex(matrix, drawX, drawY, 0).uv(minU, minV).endVertex();
-                        bufferBuilder.end();
-                        BufferUploader.end(bufferBuilder);
+                        tesselator.end();
                         RenderSystem.disableBlend();
                     }
                 }
             }
         }
-
-        //RenderSystem.setShaderColor(1, 1, 1, 1);
-
     }
 
 
@@ -159,12 +156,16 @@ public class GuiRenderingUtils {
     }
 
     private static int getFluidColorTint(FluidStack fluidStack) {
-        return fluidStack.getFluid().getAttributes().getColor(fluidStack);
+        return getFluidRender(fluidStack.getFluid().getFluidType()).getTintColor(fluidStack);
+    }
+
+    private static IClientFluidTypeExtensions getFluidRender(FluidType fluid) {
+        return IClientFluidTypeExtensions.of(fluid);
     }
 
     private static TextureAtlasSprite stillSprite(FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();
-        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getAttributes().getStillTexture(fluidStack));
+        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(getFluidRender(fluid.getFluidType()).getStillTexture(fluidStack));
     }
 
     public static void renderToolTip(BaseMenuScreen<?> screen, PoseStack pPoseStack, int x, int y, int width, int height, int mouseX, int mouseY, Component component) {

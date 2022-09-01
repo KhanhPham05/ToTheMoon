@@ -7,7 +7,7 @@
     "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
-    "item": "tothemoon:redstone_metal_gear",
-    "count": 1
+    "count": 1,
+    "item": "tothemoon:redstone_metal_gear"
   }
 }

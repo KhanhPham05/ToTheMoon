@@ -1,21 +1,21 @@
 package com.khanhpham.tothemoon.init;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.recipes.*;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.Recipe;
+import com.khanhpham.tothemoon.utils.DirectRegistry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
-@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ToTheMoon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 
 public class ModRecipes {
-
+    public static final DirectRegistry<RecipeSerializer<?>> ALL_SERIALIZERS = new DirectRegistry<>();
+    public static final DirectRegistry<RecipeType<?>> ALL_RECIPE_TYPES = new DirectRegistry<>();
     public static final RecipeSerializer<AlloySmeltingRecipe> ALLOY_SMELTING_RECIPE_SERIALIZER = new AlloySmeltingRecipe.Serializer();
     public static final RecipeSerializer<MetalPressingRecipe> METAL_PRESSING_RECIPE_SERIALIZER = new MetalPressingRecipe.Serializer();
     public static final RecipeSerializer<HighHeatSmeltingRecipe> BRICK_FURNACE_SMELTING = new HighHeatSmeltingRecipe.Serializer();
@@ -27,18 +27,8 @@ public class ModRecipes {
     }
 
     @SubscribeEvent
-    public static void registerRecipes(RegistryEvent.Register<RecipeSerializer<?>> event) {
-        register(event, AlloySmeltingRecipe.RECIPE_TYPE, ALLOY_SMELTING_RECIPE_SERIALIZER);
-        register(event, MetalPressingRecipe.RECIPE_TYPE, METAL_PRESSING_RECIPE_SERIALIZER);
-        register(event, HighHeatSmeltingRecipe.RECIPE_TYPE, BRICK_FURNACE_SMELTING);
-        register(event, TagTranslatingRecipe.RECIPE_TYPE, TAG_TRANSLATING);
-        register(event, WorkbenchCraftingRecipe.RECIPE_TYPE, WORKBENCH_CRAFTING);
-        register(event, OreProcessingRecipe.RECIPE_TYPE, ORE_PROCESSING);
-    }
-
-    private static <T extends Recipe<?>> void register(RegistryEvent.Register<RecipeSerializer<?>> event, RecipeType<T> recipeType, RecipeSerializer<T> serializer) {
-        System.out.println("Registering Recipes");
-        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(recipeType.toString()), recipeType);
-        event.getRegistry().register(serializer);
+    public static void registerRecipes(RegisterEvent event) {
+        ALL_SERIALIZERS.registerAll(event, ForgeRegistries.Keys.RECIPE_SERIALIZERS);
+        ALL_RECIPE_TYPES.registerAll(event, ForgeRegistries.Keys.RECIPE_TYPES);
     }
 }

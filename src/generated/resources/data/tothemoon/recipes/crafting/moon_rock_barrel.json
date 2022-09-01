@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "tag": "forge:chests/wooden"
+    },
+    "M": {
+      "tag": "tothemoon:moon_rocks"
+    }
+  },
   "pattern": [
     "MMM",
     "MCM",
     "MMM"
   ],
-  "key": {
-    "M": {
-      "tag": "tothemoon:moon_rocks"
-    },
-    "C": {
-      "tag": "forge:chests/wooden"
-    }
-  },
   "result": {
     "item": "tothemoon:moon_rock_barrel"
   }

@@ -1,6 +1,5 @@
 {
   "machine_metal_break": {
-    "category": "block",
     "sounds": [
       "tothemoon:machine_metal_break1",
       "tothemoon:machine_metal_break2",
@@ -8,8 +7,14 @@
     ],
     "subtitle": "block.tothemoon.machine_metal_break"
   },
+  "machine_metal_place": {
+    "sounds": [
+      "tothemoon:machine_metal_place1",
+      "tothemoon:machine_metal_place2"
+    ],
+    "subtitle": "block.tothemoon.machine_metal_place"
+  },
   "machine_metal_step": {
-    "category": "block",
     "sounds": [
       "tothemoon:machine_metal_step1",
       "tothemoon:machine_metal_step2",
@@ -17,16 +22,13 @@
     ],
     "subtitle": "block.tothemoon.machine_metal_step"
   },
-  "machine_metal_place": {
-    "category": "block",
+  "metal_press_used": {
     "sounds": [
-      "tothemoon:machine_metal_place1",
-      "tothemoon:machine_metal_place2"
+      "tothemoon:metal_press_used"
     ],
-    "subtitle": "block.tothemoon.machine_metal_place"
+    "subtitle": "block.tothemoon.metal_press_used"
   },
   "moon_dust_break": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_dust_break1",
       "tothemoon:moon_dust_break2",
@@ -35,7 +37,6 @@
     "subtitle": "block.tothemoon.moon_dust_break"
   },
   "moon_dust_place": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_dust_place1",
       "tothemoon:moon_dust_place2",
@@ -44,7 +45,6 @@
     "subtitle": "block.tothemoon.moon_dust_place"
   },
   "moon_dust_step": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_dust_step1",
       "tothemoon:moon_dust_step2",
@@ -52,26 +52,7 @@
     ],
     "subtitle": "block.tothemoon.moon_dust_step"
   },
-  "moon_rock_step": {
-    "category": "block",
-    "sounds": [
-      "tothemoon:moon_rock_step1",
-      "tothemoon:moon_rock_step2",
-      "tothemoon:moon_rock_step3"
-    ],
-    "subtitle": "block.tothemoon.moon_rock_step"
-  },
-  "moon_rock_place": {
-    "category": "block",
-    "sounds": [
-      "tothemoon:moon_rock_place1",
-      "tothemoon:moon_rock_place2",
-      "tothemoon:moon_rock_place3"
-    ],
-    "subtitle": "block.tothemoon.moon_rock_place"
-  },
   "moon_rock_break": {
-    "category": "block",
     "sounds": [
       "tothemoon:moon_rock_break1",
       "tothemoon:moon_rock_break2",
@@ -79,11 +60,20 @@
     ],
     "subtitle": "block.tothemoon.moon_rock_break"
   },
-  "metal_press_used": {
-    "category": "block",
+  "moon_rock_place": {
     "sounds": [
-      "tothemoon:metal_press_used"
+      "tothemoon:moon_rock_place1",
+      "tothemoon:moon_rock_place2",
+      "tothemoon:moon_rock_place3"
     ],
-    "subtitle": "block.tothemoon.metal_press_used"
+    "subtitle": "block.tothemoon.moon_rock_place"
+  },
+  "moon_rock_step": {
+    "sounds": [
+      "tothemoon:moon_rock_step1",
+      "tothemoon:moon_rock_step2",
+      "tothemoon:moon_rock_step3"
+    ],
+    "subtitle": "block.tothemoon.moon_rock_step"
   }
 }

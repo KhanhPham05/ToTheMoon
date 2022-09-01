@@ -1,7 +1,5 @@
 package com.khanhpham.tothemoon.compat.jei;
 
-import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
-import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -36,45 +34,8 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
     }
 
 
-
     public static void addOutput(IRecipeLayoutBuilder builder, Recipe<?> recipe, int x, int y) {
         addOutput(builder, recipe.getResultItem(), x, y);
-    }
-
-    public abstract ItemStack getCatalystIcon();
-
-    @Override
-    public final ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @Override
-    public final Class<? extends T> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
-    @Override
-    public abstract RecipeType<T> getRecipeType();
-
-    @Override
-    public final IDrawable getIcon() {
-        return guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.getCatalystIcon());
-    }
-
-    public final <C extends Container, R extends Recipe<C>> List<R> getActualCraftingRecipes(RecipeManager recipeManager, net.minecraft.world.item.crafting.RecipeType<R> recipeType) {
-        return recipeManager.getAllRecipesFor(recipeType);
-    }
-
-    public abstract void registerRecipes(IRecipeRegistration registration, RecipeManager manager);
-    //{
-    //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
-    //}
-
-    public abstract void setRecipeLayout(IRecipeLayoutBuilder builder, T recipe);
-
-    @Override
-    public final void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
-        this.setRecipeLayout(builder, recipe);
     }
 
     public static <R extends Recipe<? extends Container>> void addInput(IRecipeLayoutBuilder builder, R recipe, int ingredientIndex, int x, int y) {
@@ -87,6 +48,32 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
 
     public static void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
         builder.addSlot(RecipeIngredientRole.OUTPUT, x, y).addItemStack(output);
+    }
+
+    public abstract ItemStack getCatalystIcon();
+
+    @Override
+    public abstract RecipeType<T> getRecipeType();
+    //{
+    //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
+    //}
+
+    @Override
+    public final IDrawable getIcon() {
+        return guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.getCatalystIcon());
+    }
+
+    public final <C extends Container, R extends Recipe<C>> List<R> getActualCraftingRecipes(RecipeManager recipeManager, net.minecraft.world.item.crafting.RecipeType<R> recipeType) {
+        return recipeManager.getAllRecipesFor(recipeType);
+    }
+
+    public abstract void registerRecipes(IRecipeRegistration registration, RecipeManager manager);
+
+    public abstract void setRecipeLayout(IRecipeLayoutBuilder builder, T recipe);
+
+    @Override
+    public final void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
+        this.setRecipeLayout(builder, recipe);
     }
 
     public abstract void addShowRecipeZone(IGuiHandlerRegistration registration);

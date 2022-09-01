@@ -1,18 +1,18 @@
 package com.khanhpham.tothemoon.init;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
+import com.khanhpham.tothemoon.utils.DirectRegistry;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
-import java.util.HashSet;
-
-@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ToTheMoon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModSoundEvents {
-    public static final HashSet<SoundEvent> SOUND_EVENT_SET = new HashSet<>();
+    public static final DirectRegistry<SoundEvent> ALL_SOUND_EVENTS = new DirectRegistry<>();
+
     public static final SoundEvent METAL_MACHINE_STEP = register("machine_metal_step");
     public static final SoundEvent METAL_MACHINE_BREAK = register("machine_metal_break");
     public static final SoundEvent METAL_MACHINE_PLACE = register("machine_metal_place");
@@ -27,14 +27,11 @@ public class ModSoundEvents {
     public static final SoundEvent METAL_PRESS_USED = register("metal_press_used");
 
     private static SoundEvent register(String name) {
-        ResourceLocation rl = ModUtils.modLoc(name);
-        SoundEvent soundEvent = new SoundEvent(rl).setRegistryName(rl);
-        SOUND_EVENT_SET.add(soundEvent);
-        return soundEvent;
+        return ALL_SOUND_EVENTS.put(name, new SoundEvent(ModUtils.modLoc(name)));
     }
 
     @SubscribeEvent
-    public static void init(RegistryEvent.Register<SoundEvent> event) {
-        SOUND_EVENT_SET.forEach(event.getRegistry()::register);
+    public static void init(RegisterEvent event) {
+        ALL_SOUND_EVENTS.registerAll(event, ForgeRegistries.Keys.SOUND_EVENTS);
     }
 }

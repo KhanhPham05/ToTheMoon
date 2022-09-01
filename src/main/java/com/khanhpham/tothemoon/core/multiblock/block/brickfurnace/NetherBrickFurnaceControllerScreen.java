@@ -51,6 +51,6 @@ public final class NetherBrickFurnaceControllerScreen extends BaseMenuScreen<Net
     }
 
     private Component translateBlazeFuel() {
-        return TextUtils.translateFormatText("gui", "blaze_fuel", this.menu.getBlazeFuel(), this.menu.getBlazeFuelCapacity()).withStyle(Style.EMPTY.withColor(0xE57A00));
+        return TextUtils.translatable("gui", "blaze_fuel", this.menu.getBlazeFuel(), this.menu.getBlazeFuelCapacity()).withStyle(Style.EMPTY.withColor(0xE57A00));
     }
 }

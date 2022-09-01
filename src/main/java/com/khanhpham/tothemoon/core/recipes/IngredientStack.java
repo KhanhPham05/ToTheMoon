@@ -1,10 +1,8 @@
 package com.khanhpham.tothemoon.core.recipes;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.khanhpham.tothemoon.JsonNames;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
@@ -17,7 +15,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public class IngredientStack implements Predicate<ItemStack> {
@@ -79,14 +76,6 @@ public class IngredientStack implements Predicate<ItemStack> {
 
     public ItemStack getStack() {
         return new ItemStack(this.ingredient.getItems()[0].getItem(), amount);
-    }
-
-    public Item getIngredientItem() {
-        return ingredient.getItems()[0].getItem();
-    }
-
-    public String getIngredientName() {
-        return Objects.requireNonNull(getIngredientItem().getRegistryName()).getPath();
     }
 
     public JsonObject toJson() {

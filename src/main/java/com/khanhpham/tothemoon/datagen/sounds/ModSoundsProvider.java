@@ -1,14 +1,15 @@
 package com.khanhpham.tothemoon.datagen.sounds;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.init.ModSoundEvents;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.sounds.SoundSource;
 
+@Deprecated
 public class ModSoundsProvider extends SoundDataProvider {
 
     public ModSoundsProvider(DataGenerator dataProvider) {
-        super(dataProvider, Names.MOD_ID);
+        super(dataProvider, ToTheMoon.MOD_ID);
     }
 
     @Override

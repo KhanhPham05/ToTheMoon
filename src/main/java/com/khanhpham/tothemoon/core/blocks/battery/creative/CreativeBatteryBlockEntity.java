@@ -7,7 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class CreativeBatteryBlockEntity extends BlockEntity implements TickableB
         checkBlockEntities(level, pos);
         if (!energyBlockEntities.isEmpty()) {
             for (BlockEntity blockEntity : energyBlockEntities.keySet()) {
-                var energy = blockEntity.getCapability(CapabilityEnergy.ENERGY, energyBlockEntities.get(blockEntity).getOpposite()).orElse(null);
+                var energy = blockEntity.getCapability(ForgeCapabilities.ENERGY, energyBlockEntities.get(blockEntity).getOpposite()).orElse(null);
                 this.receiveEnergy(energy);
             }
         }
@@ -41,7 +41,7 @@ public class CreativeBatteryBlockEntity extends BlockEntity implements TickableB
         energyBlockEntities.clear();
         for (Direction direction : Direction.values()) {
             BlockEntity te = level.getBlockEntity(pos.relative(direction));
-            if (te != null && te.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite()).isPresent()) {
+            if (te != null && te.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).isPresent()) {
                 energyBlockEntities.put(te, direction);
             }
         }

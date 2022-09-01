@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "A A",
-    "A A"
-  ],
   "key": {
     "A": {
       "item": "tothemoon:redstone_steel_alloy"
     }
   },
+  "pattern": [
+    "A A",
+    "A A"
+  ],
   "result": {
     "item": "tothemoon:redstone_steel_boots"
   }

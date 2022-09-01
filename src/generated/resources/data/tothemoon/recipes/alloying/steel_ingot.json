@@ -7,14 +7,14 @@
       "tag:forge:dusts/coal"
     ]
   },
+  "result": {
+    "count": 1,
+    "item": "tothemoon:steel_ingot"
+  },
   "secondaryIngredient": {
     "ingredient": [
       "tag:forge:ingots/iron",
       "tag:forge:dusts/iron"
     ]
-  },
-  "result": {
-    "item": "tothemoon:steel_ingot",
-    "count": 1
   }
 }

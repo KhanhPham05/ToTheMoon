@@ -6,12 +6,12 @@
       "tag:forge:ingots/iron"
     ]
   },
-  "secondaryIngredient": {
-    "ingredient": "tag:forge:dusts/redstone",
-    "count": 3
-  },
   "result": {
-    "item": "tothemoon:redstone_metal",
-    "count": 1
+    "count": 1,
+    "item": "tothemoon:redstone_metal"
+  },
+  "secondaryIngredient": {
+    "count": 3,
+    "ingredient": "tag:forge:dusts/redstone"
   }
 }

@@ -1,10 +1,10 @@
 {
   "type": "minecraft:smithing",
-  "base": {
-    "item": "tothemoon:diamond_hammer"
-  },
   "addition": {
     "tag": "forge:ingots/netherite"
+  },
+  "base": {
+    "item": "tothemoon:diamond_hammer"
   },
   "result": {
     "item": "tothemoon:netherite_hammer"
