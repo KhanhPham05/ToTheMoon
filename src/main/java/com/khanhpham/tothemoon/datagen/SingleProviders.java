@@ -1,7 +1,9 @@
 package com.khanhpham.tothemoon.datagen;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.khanhpham.tothemoon.ToTheMoon;
+import com.khanhpham.tothemoon.core.recipes.WorkbenchCraftingRecipe;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
@@ -14,6 +16,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -27,6 +30,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SingleProviders {
@@ -50,8 +55,18 @@ public class SingleProviders {
         data.addProvider(includeServer, provider);
     }
 
-    private static Map.Entry<ResourceLocation, PlacedFeature> getFeatureMap(OreVeins feature) {
-        return entry(feature.getFeatureId(), feature.getOreFeature().get());
+    public static void testRecipe(DataGenerator dataGenerator, ExistingFileHelper fileHelper) {
+        generate(dataGenerator, ops -> {
+            final Map<ResourceLocation, RecipeType<?>> map = ImmutableMap.ofEntries(
+                    entry(ModUtils.modLoc("test"), WorkbenchCraftingRecipe.RECIPE_TYPE)
+            );
+
+            return JsonCodecProvider.forDatapackRegistry(dataGenerator, fileHelper, ToTheMoon.MOD_ID, ops, ForgeRegistries.Keys.RECIPE_TYPES, map);
+        });
+    }
+
+    private static <T> void generate(DataGenerator dataGenerator, Function<RegistryOps<JsonElement>, JsonCodecProvider<T>> function) {
+        dataGenerator.addProvider(true, function.apply(RegistryOps.create(JsonOps.INSTANCE, RegistryAccess.builtinCopy())));
     }
 
     private static <A, B> Map.Entry<A, B> entry(A key, B value) {

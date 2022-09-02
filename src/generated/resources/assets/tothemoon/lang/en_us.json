@@ -120,7 +120,7 @@
   "book.tothemoon.header": "TTM Guide Book",
   "book.tothemoon.header.landing_text": "This guide book will show you all the features that are in this mod. $(br2) This mod is made possible by a single person who do 100% of the code, with the help of 2 texture makers",
   "book.tothemoon.how_to_use": "How To Use",
-  "book.tothemoon.info_deepslate_uranium_ore": "$(li)Ore : Deepslate Uranium Ore. $(li)Generate between : Y = -64 to 0",
+  "book.tothemoon.info_deepslate_uranium_ore": "$(li)Ore : Deepslate Uranium Ore. $(li)Generate between : Y = -64 to 8",
   "book.tothemoon.making_steel": "Making Steel",
   "book.tothemoon.manual_crushing": "Manual Crushing",
   "book.tothemoon.manual_crushing.crafting": "The Crafting recipe of Anvil is shown up here.",

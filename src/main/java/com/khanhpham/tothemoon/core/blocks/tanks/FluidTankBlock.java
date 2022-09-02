@@ -96,7 +96,7 @@ public class FluidTankBlock extends BaseEntityBlock<FluidTankBlockEntity> implem
 
 
     @Override
-    public @Nullable FluidTankBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    public FluidTankBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new FluidTankBlockEntity(pPos, pState);
     }
 

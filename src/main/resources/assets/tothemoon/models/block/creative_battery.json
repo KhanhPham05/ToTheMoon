@@ -1,5 +1,5 @@
 {
-  "parent": "tothemoon:block/template/battery_base",
+  "parent": "tothemoon:block/templates/battery_base",
   "textures": {
     "side": "tothemoon:block/battery/c_battery_side",
     "battery_front": "tothemoon:block/battery/c_battery_front",

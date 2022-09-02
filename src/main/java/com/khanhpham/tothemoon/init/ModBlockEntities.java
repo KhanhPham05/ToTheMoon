@@ -66,7 +66,7 @@ public class ModBlockEntities {
         BRICK_FURNACE = register("brick_furnace", () -> BlockEntityType.Builder.of(NetherBrickFurnaceControllerBlockEntity::new, ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get()).build(null));
         ENERGY_PROCESSOR = register("energy_processor", () -> BlockEntityType.Builder.of(OreProcessorBlockEntity::new, ModBlocks.ORE_PROCESSOR.get()).build(null));
         //TAG_TRANSLATOR = register("tag_translators", () -> BlockEntityType.Builder.of(TagTranslatorBlockEntity::new, ModBlocks.TAG_TRANSLATOR.get()).build(null));
-        FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new).build(null));
+        FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new, ModBlocks.FLUID_TANK.get()).build(null));
         REDSTONE_BATTERY = register("redstone_battery", () -> new BlockEntityType<>(RedstoneBatteryBlockEntity::new, Collections.singleton(ModBlocks.REDSTONE_BATTERY.get()), null));
         STEEL_BATTERY = register("steel_battery", () -> new BlockEntityType<>(SteelBatteryBlockEntity::new, Collections.singleton(ModBlocks.STEEL_BATTERY.get()), null));
     }

@@ -25,7 +25,6 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"removal"})
 public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container>> implements IRecipeCategory<T> {
     protected final IGuiHelper guiHelper;
 
