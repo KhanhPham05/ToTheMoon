@@ -31,7 +31,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         ModBlocks.SOLID_BLOCKS.stream().map(Supplier::get).forEach(this::simpleBlock);
-        this.simpleBlock(ModBlocks.ANTI_PRESSURE_GLASS.get());
+        //this.simpleBlock(ModBlocks.ANTI_PRESSURE_GLASS.get());
 
         this.slabBlock(ModBlocks.MOON_ROCK_SLAB.get(), ModBlocks.MOON_ROCK.get());
         this.stairBlock(ModBlocks.MOON_ROCK_STAIR.get(), ModBlocks.MOON_ROCK.get());

@@ -123,14 +123,14 @@ public class ToTheMoon {
             ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
             if (event.includeServer()) {
+                ModUtils.log("Starting Server Data Generation");
                 addProvider(data, new ModAdvancementProvider(data, fileHelper));
                 addProvider(data, new ModRecipeProvider(data));
                 addProvider(data, new ModLootTables(data));
-                //SingleProviders.biomeModifiers(true, data, fileHelper);
             }
 
             if (event.includeClient()) {
-                //addProvider(data, new ModSoundsProvider(data));
+                ModUtils.log("Starting Client Data Generation");
                 addProvider(data, new ModSoundDefinitionsProvider(data, fileHelper));
                 addProvider(data, new ModLanguage(data));
                 addProvider(data, new ModBlockStateProvider(data, fileHelper));

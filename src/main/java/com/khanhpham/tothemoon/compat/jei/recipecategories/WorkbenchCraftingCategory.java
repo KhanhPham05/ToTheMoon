@@ -27,7 +27,6 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     public WorkbenchCraftingCategory(IGuiHelper helper) {
         super(helper);
-        ModUtils.log("Registering Workbench Crafting Recipe");
     }
 
     @Override

@@ -35,10 +35,10 @@ public enum OreVeins {
         this.oreFeature = PlacementUtils.register(this.featureId.toString(), oreConfig, CountPlacement.of(values.veinsInChunk()), InSquarePlacement.spread(), HeightRangePlacement.triangle(VerticalAnchor.absolute(values.minWorldHeight()), VerticalAnchor.absolute(values.maxWorldHeight())), BiomeFilter.biome());
     }
 
-    public static void registerAll(RegisterEvent.RegisterHelper<PlacedFeature> registerHelper) {
-        for (OreVeins oreVein : values()) {
-            registerHelper.register(oreVein.getFeatureId(), oreVein.getOreFeature().get());
-        }
+    public static void registerAll(RegisterEvent.RegisterHelper<PlacedFeature> ignored) {
+        //for (OreVeins oreVein : values()) {
+        //    registerHelper.register(oreVein.getFeatureId(), oreVein.getOreFeature().get());
+        //}
     }
 
     public Holder<PlacedFeature> getOreFeature() {

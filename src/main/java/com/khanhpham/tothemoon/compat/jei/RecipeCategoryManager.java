@@ -6,8 +6,6 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.*;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,14 +14,6 @@ public class RecipeCategoryManager {
     private final Set<RecipeCategory<?>> recipeCategories = new HashSet<>();
 
     RecipeCategoryManager() {
-    }
-
-    @Deprecated
-    private <T extends DisplayRecipe<?>, R extends RecipeCategory<T>> void register(IRecipeCategoryRegistration recipeRegistration, IGuiHelper helper, Class<R> categoryClass) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Constructor<R> constructor = categoryClass.getConstructor(IGuiHelper.class);
-        R instance = constructor.newInstance(helper);
-        this.recipeCategories.add(instance);
-        recipeRegistration.addRecipeCategories(instance);
     }
 
     public void registerCatalysts(IRecipeCatalystRegistration registration) {
@@ -39,6 +29,7 @@ public class RecipeCategoryManager {
     }
 
     public void registerAllCategories(IRecipeCategoryRegistration registration, IGuiHelper helper) {
+        this.recipeCategories.clear();
         List<RecipeCategory<?>> recipes = ImmutableList.of(
                 new OreProcessingCategory(helper),
                 new WorkbenchCraftingCategory(helper),
