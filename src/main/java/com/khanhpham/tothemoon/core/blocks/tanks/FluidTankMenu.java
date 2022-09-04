@@ -2,23 +2,17 @@ package com.khanhpham.tothemoon.core.blocks.tanks;
 
 import com.khanhpham.tothemoon.core.menus.BaseMenu;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlockEntitiesTypes;
 import com.khanhpham.tothemoon.utils.slot.FluidHandlerSlot;
 import net.minecraft.core.Registry;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class FluidTankMenu extends BaseMenu {
     public final ContainerData data;

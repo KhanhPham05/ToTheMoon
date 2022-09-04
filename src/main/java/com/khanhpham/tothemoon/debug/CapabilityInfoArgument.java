@@ -11,6 +11,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -44,10 +45,10 @@ public class CapabilityInfoArgument implements ArgumentType<CapabilityInfoArgume
 
     public enum BuiltinCapabilities {
         NONE("none", null),
-        FLUID_HANDLER_ITEM("fluid_handler_item", CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY),
-        FLUID_HANDLER("fluid_handler", CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY),
-        ITEM_HANDLER("item_handler", CapabilityItemHandler.ITEM_HANDLER_CAPABILITY),
-        ENERGY_STORAGE("energy_storage", CapabilityEnergy.ENERGY);
+        FLUID_HANDLER_ITEM("fluid_handler_item", ForgeCapabilities.FLUID_HANDLER_ITEM),
+        FLUID_HANDLER("fluid_handler", ForgeCapabilities.FLUID_HANDLER),
+        ITEM_HANDLER("item_handler", ForgeCapabilities.ITEM_HANDLER),
+        ENERGY_STORAGE("energy_storage", ForgeCapabilities.ENERGY);
 
         static final List<BuiltinCapabilities> SUGGESTION_LIST = List.of(FLUID_HANDLER, FLUID_HANDLER_ITEM, ENERGY_STORAGE, ITEM_HANDLER);
         private final String name;

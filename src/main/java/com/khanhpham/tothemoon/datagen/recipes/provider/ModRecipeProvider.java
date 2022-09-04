@@ -1,26 +1,18 @@
 package com.khanhpham.tothemoon.datagen.recipes.provider;
 
 import com.khanhpham.tothemoon.core.items.HammerItem;
-import com.khanhpham.tothemoon.datagen.recipes.*;
+import com.khanhpham.tothemoon.datagen.recipes.builders.*;
+import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredient;
+import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredientStack;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import io.netty.buffer.ByteBuf;
-import mekanism.api.datagen.recipe.builder.ItemStackChemicalToItemStackRecipeBuilder;
-import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
-import mekanism.api.recipes.ingredients.creator.IngredientCreatorAccess;
-import mekanism.common.tags.MekanismTags;
-import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.TickTrigger;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
-import net.minecraft.data.recipes.UpgradeRecipeBuilder;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -41,20 +33,14 @@ import static com.khanhpham.tothemoon.datagen.tags.ModItemTags.*;
 import static net.minecraftforge.common.Tags.Items.*;
 
 public class ModRecipeProvider extends RecipeProvider {
-    public static int RECIPE_CODE = 1;
 
     public ModRecipeProvider(DataGenerator pGenerator) {
         super(pGenerator);
     }
 
-    public static ResourceLocation createRecipeId() {
-        ResourceLocation id = ModUtils.modLoc("recipe_" + RECIPE_CODE);
-        RECIPE_CODE++;
-        return id;
-    }
 
-    public static TickTrigger.TriggerInstance tick() {
-        return new TickTrigger.TriggerInstance(EntityPredicate.Composite.ANY);
+    public static PlayerTrigger.TriggerInstance tick() {
+        return PlayerTrigger.TriggerInstance.located(LocationPredicate.ANY);
     }
 
     @Override
@@ -63,51 +49,11 @@ public class ModRecipeProvider extends RecipeProvider {
         buildSmeltingRecipes(helper);
         buildModdedRecipes(consumer);
         buildCraftingTableRecipes(consumer, helper);
-        buildRecipeCompat(consumer, helper);
+        buildRecipeCompat(consumer);
     }
 
-    private void buildRecipeCompat(Consumer<FinishedRecipe> consumer, RecipeGeneratorHelper helper) {
-        //30mB redstone + iron dust -> redstone metal dust
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(DUSTS_IRON),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_METAL_DUST.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/iron_dust_with_redstone_to_redstone_metal_dust"));
-
-        //30 redstone + iron INGOT -> redstone metal
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(INGOTS_IRON),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_METAL.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/iron_with_redstone_to_redstone_metal"));
-
-        //30mB redstone + steel dust -> redstone steel dust
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(DUSTS_STEEL),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_STEEL_ALLOY_DUST.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/steel_dust_with_redstone_to_redstone_steel_dust"));
-
-        //30 redstone + iron INGOT -> redstone metal
-        ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
-                IngredientCreatorAccess.item().from(INGOTS_STEEL),
-                IngredientCreatorAccess.infusion().from(MekanismTags.InfuseTypes.REDSTONE, 30),
-                new ItemStack(ModItems.REDSTONE_STEEL_ALLOY.get())
-        ).build(consumer, loc("compat/mek/metallurgic_infusing/steel_with_redstone_to_redstone_steel_alloy"));
-
-        //ingots to dusts
-        ItemStackToItemStackRecipeBuilder.crushing(IngredientCreatorAccess.item().from(ModItems.STEEL_INGOT.get()), new ItemStack(ModItems.STEEL_DUST.get()))
-                .build(consumer, loc("compat/mek/crushing/steel_to_dust"));
-
-        ItemStackToItemStackRecipeBuilder.crushing(IngredientCreatorAccess.item().from(ModItems.REDSTONE_METAL.get()), new ItemStack(ModItems.REDSTONE_METAL_DUST.get()))
-                .build(consumer, loc("compat/mek/crushing/redstone_metal_to_dust"));
-
-        ItemStackToItemStackRecipeBuilder.crushing(IngredientCreatorAccess.item().from(ModItems.REDSTONE_STEEL_ALLOY.get()), new ItemStack(ModItems.REDSTONE_STEEL_ALLOY_DUST.get()))
-                .build(consumer, loc("compat/mek/crushing/redstone_steel_to_dust"));
-    }
-
-    private ResourceLocation loc(String saveLoc) {
-        return ModUtils.modLoc(saveLoc);
+    private void buildRecipeCompat(Consumer<FinishedRecipe> consumer) {
+        new MekanismCompatProvider(consumer).run();
     }
 
     private void buildCraftingTableRecipes(Consumer<FinishedRecipe> consumer, final RecipeGeneratorHelper helper) {
@@ -225,13 +171,19 @@ public class ModRecipeProvider extends RecipeProvider {
         //SingleItemRecipeBuilder.stonecutting(Ingredient.of(material.get()), block.get()).unlockedBy("tick", tick()).save(consumer, createRecipeId());
     }
 
-    //FIXME : stabilize metal press recipe
     private void buildModdedRecipes(Consumer<FinishedRecipe> consumer) {
-        alloy(consumer, ModItemTags.INGOTS_STEEL, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_STEEL_ALLOY, 1);
-        alloy(consumer, ModItemTags.DUSTS_IRON, 1, DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
-        alloy(consumer, Tags.Items.INGOTS_IRON, 1, Tags.Items.DUSTS_REDSTONE, 3, ModItems.REDSTONE_METAL, 1);
-        alloy(consumer, ModItemTags.DUSTS_COAL, 1, Tags.Items.INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
-        alloy(consumer, DUSTS_HEATED_COAL, 1, INGOTS_IRON, 1, ModItems.STEEL_INGOT, 1);
+        AlloySmeltingRecipeBuilder.build(
+                new ShortenIngredientStack(ShortenIngredient.create().add(DUSTS_IRON).add(INGOTS_IRON), 1),
+                new ShortenIngredientStack(ShortenIngredient.create().add(DUSTS_REDSTONE), 3),
+                ModItems.REDSTONE_METAL.get(), 1
+        ).save(consumer, "redstone_metal");
+
+        AlloySmeltingRecipeBuilder.build(
+                new ShortenIngredientStack(ShortenIngredient.create().add(DUSTS_HEATED_COAL).add(ItemTags.COALS).add(DUSTS_COAL), 1),
+                new ShortenIngredientStack(ShortenIngredient.create().add(INGOTS_IRON).add(DUSTS_IRON), 1),
+                ModItems.STEEL_INGOT.get(), 1
+        ).save(consumer, "steel_ingot");
+
 
         metalPress(consumer, INGOTS_STEEL, PLATE_MOLD, ModItems.STEEL_PLATE);
         metalPress(consumer, INGOTS_STEEL, GEAR_MOLD, ModItems.STEEL_GEAR);
@@ -275,6 +227,21 @@ public class ModRecipeProvider extends RecipeProvider {
         provider.tag(GENERAL_STORAGE_BLOCKS);
 
         provider.generateRecipe(this::translateTag);
+
+        OreProcessingBuilder.process(ModItems.IRON_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_IRON)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer, "iron_from_raw");
+        OreProcessingBuilder.process(ModItems.COPPER_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_COPPER)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer, "copper_from_raw");
+        OreProcessingBuilder.process(ModItems.GOLD_DUST.get(), ShortenIngredient.create().add(RAW_MATERIALS_GOLD)).doubleChance(OreProcessingBuilder.DEFAULT_RAW_ORE_DOUBLE_CHANCE).save(consumer, "gold_from_raw");
+
+        OreProcessingBuilder.process(ModItems.IRON_DUST.get(), 2, ShortenIngredient.create().add(ORES_IRON)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer, "iron_from_ore");
+        OreProcessingBuilder.process(ModItems.COPPER_DUST.get(), 2, ShortenIngredient.create().add(ORES_COPPER)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer, "copper_from_ore");
+        OreProcessingBuilder.process(ModItems.GOLD_DUST.get(), 2, ShortenIngredient.create().add(ORES_GOLD)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer, "gold_from_ore");
+
+        OreProcessingBuilder.process(ModItems.COAL_DUST.get(), 2, ShortenIngredient.create().add(Items.COAL)).doubleChance(OreProcessingBuilder.DEFAULT_ORE_DOUBLE_CHANCE).save(consumer);
+        OreProcessingBuilder.process(Items.REDSTONE, 10, ShortenIngredient.create().add(ORES_REDSTONE)).save(consumer);
+        OreProcessingBuilder.process(Items.LAPIS_LAZULI, 12, ShortenIngredient.create().add(ORES_LAPIS)).save(consumer);
+        OreProcessingBuilder.process(Items.QUARTZ, 4, ShortenIngredient.create().add(ORES_QUARTZ)).extraOutput(new ItemStack(ModItems.PURIFIED_QUARTZ.get(), 3), 10).save(consumer);
+        OreProcessingBuilder.process(Items.NETHERITE_SCRAP, 1, ShortenIngredient.create().add(ORES_NETHERITE_SCRAP)).doubleChance(40).save(consumer);
+
     }
 
     private void metalPress(Consumer<FinishedRecipe> consumer, TagKey<Item> ingredient, TagKey<Item> mold, ItemStack result) {
@@ -292,50 +259,23 @@ public class ModRecipeProvider extends RecipeProvider {
         RecipeGeneratorHelper.saveGlobal(consumer, builder, "metal_pressing", RecipeGeneratorHelper.getId(result.get()));
     }
 
-    private void alloy(Consumer<FinishedRecipe> consumer, TagKey<Item> item1, int count1, TagKey<Item> item2, int count2, Supplier<? extends ItemLike> result, int amount) {
-        var builder = AlloySmeltingRecipeBuilder.build(item1, count1, item2, count2, result.get(), amount);
-        RecipeGeneratorHelper.saveGlobal(consumer, builder, "alloying", RecipeGeneratorHelper.getId(result.get()));
-    }
-
     private void buildSlab(RecipeGeneratorHelper helper, Supplier<SlabBlock> slabBlockSupplier, Supplier<Block> materialSupplier) {
         helper.buildSlab(slabBlockSupplier, materialSupplier);
         helper.stoneCutting(slabBlockSupplier, 2, materialSupplier);
     }
 
     private void buildSmeltingRecipes(final RecipeGeneratorHelper helper) {
-        this.oreSmelting(helper, ModBlocks.DEEPSLATE_URANIUM_ORE, ModItems.URANIUM_INGOT);
-        this.oreSmelting(helper, ModBlocks.MOON_GOLD_ORE, Items.GOLD_INGOT);
-        this.oreSmelting(helper, ModBlocks.MOON_IRON_ORE, Items.IRON_INGOT);
-        this.oreSmelting(helper, ModBlocks.MOON_QUARTZ_ORE, ModItems.PURIFIED_QUARTZ);
-        this.oreSmelting(helper, ModBlocks.MOON_URANIUM_ORE, ModItems.URANIUM_INGOT);
-        this.oreSmelting(helper, URANIUM_RAW_MATERIAL, ModItems.URANIUM_INGOT);
-        this.rawOreSmelting(helper, RAW_URANIUM_STORAGE_BLOCK, ModBlocks.URANIUM_BLOCK, 200 * 9);
-        this.dustSmelting(helper);
+        Consumer<FinishedRecipe> consumer = helper.consumer();
+        this.oreSmelting(consumer, ModUtils.multiTagsIngredient(ORES_URANIUM, URANIUM_RAW_MATERIAL, DUSTS_URANIUM), ModItems.URANIUM_INGOT.get(), "uranium_ingot");
+        this.oreSmelting(consumer, Ingredient.of(ModBlocks.MOON_QUARTZ_ORE.get()), ModItems.PURIFIED_QUARTZ.get(), "purified_quartz");
+        this.oreSmelting(consumer, Ingredient.of(DUSTS_IRON), Items.IRON_INGOT, "iron_from_dust");
+        this.oreSmelting(consumer, Ingredient.of(DUSTS_GOLD), Items.GOLD_INGOT, "gold_from_dust");
     }
 
-    private void dustSmelting(final RecipeGeneratorHelper helper) {
-        GENERAL_DUSTS.getProcessMap().forEach((tag, item) -> this.oreSmelting(helper, tag, item));
-    }
+    private void oreSmelting(Consumer<FinishedRecipe> finishedRecipe, Ingredient ingredient, ItemLike result, String recipeId) {
+        SimpleCookingRecipeBuilder.smelting(ingredient, result, 1.0f, 200).unlockedBy("tick", tick()).save(finishedRecipe, "tothemoon:smelting/" + recipeId);
+        SimpleCookingRecipeBuilder.blasting(ingredient, result, 1.0f, 100).unlockedBy("tick", tick()).save(finishedRecipe, "tothemoon:blasting/" + recipeId);
 
-    private void rawOreSmelting(final RecipeGeneratorHelper helper, TagKey<Item> tag, Supplier<? extends ItemLike> result, int cookTime) {
-        var smeltingRecipe = new RecipeGeneratorHelper.Smelting(helper.consumer, result.get(), tag, cookTime, true);
-        smeltingRecipe.save();
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, TagKey<Item> tag, Supplier<? extends ItemLike> sup) {
-        helper.smelting(tag, sup.get(), true);
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, Supplier<? extends ItemLike> ingredient, Supplier<? extends Item> resultSupplier) {
-        this.oreSmelting(helper, ingredient.get(), resultSupplier.get());
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, Supplier<? extends ItemLike> ingredient, Item result) {
-        this.oreSmelting(helper, ingredient.get(), result);
-    }
-
-    private void oreSmelting(final RecipeGeneratorHelper helper, ItemLike ingredient, ItemLike result) {
-        helper.smelting(ingredient, result, true);
     }
 
     private void buildStair(final RecipeGeneratorHelper helper, Supplier<? extends StairBlock> resultSupplier, Supplier<? extends Block> materialSupplier) {

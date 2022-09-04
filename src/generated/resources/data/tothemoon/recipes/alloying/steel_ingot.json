@@ -1,19 +1,20 @@
 {
   "type": "tothemoon:alloy_smelting",
   "baseIngredient": {
-    "item": {
-      "tag": "forge:dusts/coal"
-    },
-    "count": 1
-  },
-  "secondaryIngredient": {
-    "item": {
-      "tag": "forge:ingots/iron"
-    },
-    "count": 1
+    "ingredient": [
+      "tag:forge:dusts/heated_coal",
+      "tag:minecraft:coals",
+      "tag:forge:dusts/coal"
+    ]
   },
   "result": {
-    "item": "tothemoon:steel_ingot",
-    "count": 1
+    "count": 1,
+    "item": "tothemoon:steel_ingot"
+  },
+  "secondaryIngredient": {
+    "ingredient": [
+      "tag:forge:ingots/iron",
+      "tag:forge:dusts/iron"
+    ]
   }
 }

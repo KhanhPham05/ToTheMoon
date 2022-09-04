@@ -8,6 +8,7 @@ import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
+import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.IModPlugin;
@@ -38,7 +39,7 @@ import java.util.Objects;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @JeiPlugin
-@SuppressWarnings({"removal", "unused"})
+@SuppressWarnings({"unused"})
 public class ModJeiPlugin implements IModPlugin {
     public static final ResourceLocation PLUGIN_ID = ModUtils.modLoc("jei_compat_plugin");
     public static final RecipeCategoryManager MANAGER = new RecipeCategoryManager();
@@ -81,10 +82,9 @@ public class ModJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         MANAGER.registerRecipeTransferHandlers(registration);
-        registration.addRecipeTransferHandler(AlloySmelterMenu.class, AlloySmelterRecipeCategory.RECIPE_TYPE, 0, 2, 3, 36);
+        registration.addRecipeTransferHandler(AlloySmelterMenu.class, ModMenuTypes.ALLOY_SMELTER, AlloySmelterRecipeCategory.RECIPE_TYPE, 0, 2, 3, 36);
 
-        //FIXME
-        registration.addRecipeTransferHandler(MetalPressMenu.class, MetalPressRecipeCategory.RECIPE_TYPE, 0, 2, 3, 36);
+        registration.addRecipeTransferHandler(MetalPressMenu.class,ModMenuTypes.METAL_PRESS, MetalPressRecipeCategory.RECIPE_TYPE, 0, 2, 3, 36);
     }
 
     public static final class AlloySmelterRecipeCategory implements IRecipeCategory<AlloySmeltingRecipe> {
@@ -129,16 +129,6 @@ public class ModJeiPlugin implements IModPlugin {
         @Override
         public IDrawable getIcon() {
             return icon;
-        }
-
-        @Override
-        public ResourceLocation getUid() {
-            return CATEGORY_ID;
-        }
-
-        @Override
-        public Class<? extends AlloySmeltingRecipe> getRecipeClass() {
-            return AlloySmeltingRecipe.class;
         }
 
         @Override
@@ -201,17 +191,6 @@ public class ModJeiPlugin implements IModPlugin {
             return RECIPE_TYPE;
         }
 
-        @Override
-        public ResourceLocation getUid() {
-            return CATEGORY_ID;
-        }
-
-        @Override
-        public Class<? extends MetalPressingRecipe> getRecipeClass() {
-            return MetalPressingRecipe.class;
-        }
-
-        //FIXME
         @Override
         public void setRecipe(IRecipeLayoutBuilder builder, MetalPressingRecipe recipe, IFocusGroup focuses) {
             RecipeCategory.addInput(builder, recipe, 0, 17, 12);

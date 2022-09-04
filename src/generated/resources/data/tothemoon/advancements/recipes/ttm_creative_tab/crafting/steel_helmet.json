@@ -1,20 +1,23 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "tothemoon:crafting/steel_helmet"
-    ]
-  },
   "criteria": {
-    "tick": {
-      "trigger": "minecraft:tick",
-      "conditions": {}
-    },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "tothemoon:crafting/steel_helmet"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "tick": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     }
   },
   "requirements": [
@@ -22,5 +25,10 @@
       "tick",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tothemoon:crafting/steel_helmet"
+    ]
+  }
 }

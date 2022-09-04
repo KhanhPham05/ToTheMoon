@@ -83,7 +83,7 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
 
         if (!items.get(0).isEmpty()) {
             SmeltingRecipe recipe = super.getRecipe(level, RecipeType.SMELTING, this);
-            if (recipe != null && !energy.isEmpty() && isResultSlotFreeForProcess(items.get(1), recipe)) {
+            if (recipe != null && !energy.isEmpty() && isResultSlotFreeForProcess(1, recipe)) {
                 ++workingTime;
                 energy.consumeEnergyIgnoreCondition();
                 flag = true;

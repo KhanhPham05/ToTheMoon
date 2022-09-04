@@ -7,7 +7,7 @@
     "tag": "tothemoon:metal_press_molds/rod"
   },
   "result": {
-    "item": "tothemoon:uranium_rod",
-    "count": 2
+    "count": 2,
+    "item": "tothemoon:uranium_rod"
   }
 }

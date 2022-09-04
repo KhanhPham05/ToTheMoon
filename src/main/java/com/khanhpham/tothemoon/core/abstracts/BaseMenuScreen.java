@@ -15,15 +15,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContainerScreen<T> {
-    protected final ResourceLocation texture;
     public static final int blackFontColor = 0x404040;
     public static final int whiteFontColor = 0xffffff;
+    protected final ResourceLocation texture;
     protected int xPos = leftPos;
 
     public BaseMenuScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture) {
         super(pMenu, pPlayerInventory, pTitle);
         this.texture = texture;
-        setImageHeightWidth(pMenu.playerInventorySlotStartsY + 82, pMenu.playerInventorySlotStartsX + 168);
+        //setImageHeightWidth(pMenu.playerInventorySlotStartsY + 82, pMenu.playerInventorySlotStartsX + 168);
     }
 
     protected final void setImageHeight(int height) {
@@ -34,7 +34,7 @@ public abstract class BaseMenuScreen<T extends BaseMenu> extends AbstractContain
         super.imageWidth = width;
     }
 
-    protected final void setImageHeightWidth(int height, int width) {
+    protected final void setImageSize(int width, int height) {
         this.setImageHeight(height);
         this.setImageWidth(width);
     }

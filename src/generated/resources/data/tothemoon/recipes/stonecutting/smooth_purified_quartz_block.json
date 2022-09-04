@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
+  "count": 1,
   "ingredient": {
     "item": "tothemoon:purified_quartz_block"
   },
-  "result": "tothemoon:smooth_purified_quartz_block",
-  "count": 1
+  "result": "tothemoon:smooth_purified_quartz_block"
 }

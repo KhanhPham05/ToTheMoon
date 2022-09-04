@@ -1,11 +1,12 @@
 package com.khanhpham.tothemoon.init;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
+import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorMenu;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelMenu;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorMenu;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenu;
@@ -14,12 +15,12 @@ import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFur
 import com.khanhpham.tothemoon.utils.registration.MenuTypeRegister;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
-@Mod.EventBusSubscriber(modid = Names.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ToTheMoon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModMenuTypes {
 
     public static final MenuTypeRegister MENU_TYPES = new MenuTypeRegister();
@@ -37,6 +38,7 @@ public class ModMenuTypes {
     public static final MenuType<FluidTankMenu> FLUID_TANK;
     public static final MenuType<TagTranslatorMenu> TAG_TRANSLATOR;
     public static final MenuType<WorkbenchMenu> WORKBENCH_CRAFTING;
+    public static final MenuType<OreProcessorMenu> ENERGY_PROCESSOR;
 
     static {
         STORAGE_BLOCK = register("moon_storage_container", MoonBarrelMenu::new);
@@ -49,6 +51,7 @@ public class ModMenuTypes {
         FLUID_TANK = MENU_TYPES.register("fluid_tank_menu", FluidTankMenu::new);
         TAG_TRANSLATOR = register("tag_translator_menu", TagTranslatorMenu::new);
         WORKBENCH_CRAFTING = register("workbench", WorkbenchMenu::new);
+        ENERGY_PROCESSOR = register("energy_processor", OreProcessorMenu::new);
     }
 
     private ModMenuTypes() {
@@ -59,11 +62,7 @@ public class ModMenuTypes {
     }
 
     @SubscribeEvent
-    public static void init(RegistryEvent.Register<MenuType<?>> event) {
-        init(event.getRegistry());
-    }
-
-    public static void init(IForgeRegistry<MenuType<?>> reg) {
-        MENU_TYPES.registerAll(reg);
+    public static void init(RegisterEvent event) {
+        event.register(ForgeRegistries.Keys.MENU_TYPES, MENU_TYPES::registerAll);
     }
 }

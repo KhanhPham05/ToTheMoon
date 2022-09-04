@@ -8,7 +8,6 @@ import com.khanhpham.tothemoon.JsonNames;
 import com.khanhpham.tothemoon.compat.jei.DisplayRecipe;
 import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.core.menus.containers.WorkbenchCraftingContainer;
-import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
 import com.khanhpham.tothemoon.init.ModItems;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -98,15 +97,11 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
 
 
     public static final class Serializer extends SimpleRecipeSerializer<WorkbenchCraftingRecipe> {
-        @Override
-        protected String getRecipeName() {
-            return LOCATION.getPath();
-        }
 
         @Override
         public WorkbenchCraftingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             Ingredient hammer = this.getHammerIngredient(pSerializedRecipe);
-            Ingredient extraRequirement = super.getIngredientSpecial(GsonHelper.getAsString(pSerializedRecipe, "extra", ""));
+            Ingredient extraRequirement = super.getShortenIngredient(GsonHelper.getAsString(pSerializedRecipe, "extra", ""));
             NonNullList<Ingredient> nonNullList = this.extractJsonToArray(pSerializedRecipe.getAsJsonArray("craftingPattern"));
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT));
             return new WorkbenchCraftingRecipe(pRecipeId, nonNullList, result, hammer, extraRequirement);
@@ -116,7 +111,7 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
             if (pSerializedJson.has("hammer")) {
                 if (pSerializedJson.get("hammer").isJsonPrimitive()) {
                     String hammerName = pSerializedJson.get("hammer").getAsString();
-                    return super.isTag(hammerName) ? super.getIngredientSpecial(hammerName) : this.getHammers(hammerName);
+                    return super.isTag(hammerName) ? super.getShortenIngredient(hammerName) : this.getHammers(hammerName);
                 }
             }
             return Ingredient.of(HammerItem.getStrongerHammers(ModItems.WOODEN_HAMMER.get()));
@@ -138,7 +133,7 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
                         NonNullList<Ingredient> ingredients = NonNullList.withSize(25, Ingredient.EMPTY);
                         int index = 0;
                         for (JsonElement jsonElement : array) {
-                            ingredients.set(index, super.getIngredientSpecial(jsonElement.getAsString()));
+                            ingredients.set(index, super.getShortenIngredient(jsonElement.getAsString()));
                             index++;
                         }
                         return ingredients;
@@ -180,6 +175,11 @@ public class WorkbenchCraftingRecipe implements DisplayRecipe<WorkbenchCraftingC
             for (int i = 0; i < 25; i++) {
                 ingredients.get(i).toNetwork(buffer);
             }
+        }
+
+        @Override
+        protected String getSerializerName() {
+            return "workbench_crafting";
         }
     }
 }

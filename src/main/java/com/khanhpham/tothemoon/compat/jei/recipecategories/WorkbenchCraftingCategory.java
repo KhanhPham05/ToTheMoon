@@ -6,11 +6,10 @@ import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchScreen;
 import com.khanhpham.tothemoon.core.recipes.WorkbenchCraftingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.init.ModBlocks;
+import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -28,7 +27,6 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     public WorkbenchCraftingCategory(IGuiHelper helper) {
         super(helper);
-        ModUtils.log("Registering Workbench Crafting Recipe");
     }
 
     @Override
@@ -74,7 +72,7 @@ public class WorkbenchCraftingCategory extends RecipeCategory<WorkbenchCraftingR
 
     @Override
     public void addRecipeTransfer(IRecipeTransferRegistration registration) {
-        registration.addRecipeTransferHandler(WorkbenchMenu.class, RECIPE_CATEGORY_TYPE, 1, 27, 28, 36);
+        registration.addRecipeTransferHandler(WorkbenchMenu.class, ModMenuTypes.WORKBENCH_CRAFTING, RECIPE_CATEGORY_TYPE, 1, 27, 28, 36);
     }
 
     @Override

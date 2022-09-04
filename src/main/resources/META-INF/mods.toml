@@ -7,7 +7,8 @@ modId = "tothemoon" #mandatory
 version = "${file.jarVersion}" #mandatory
 displayName = "ToTheMoon" #mandatory
 logoFile = "tothemoon.png" #optional
-authors = "Love, Cheese and small house plants" #optional
+updateJSONURL = "https://api.modrinth.com/updates/project-ttm/forge_updates.json"
+authors = "KhanhTypo a.k.a KhanhPhamDev" #optional
 description = '''
 It's time to go TO THE MOON !!!
 '''
@@ -24,3 +25,10 @@ modId = "jei"
 mandatory = false
 versionRange = "[9.7.0,)"
 ordering = "BEFORE"
+
+[[dependencies.tothemoon]]
+modId = "patchouli"
+mandatory = false
+versionRange = "[1.18.2-71,)"
+ordering = "BEFORE"
+

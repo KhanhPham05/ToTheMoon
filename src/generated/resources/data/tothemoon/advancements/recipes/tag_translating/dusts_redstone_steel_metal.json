@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "has_tag": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/redstone_steel_metal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tag"
+    ]
+  ]
+}

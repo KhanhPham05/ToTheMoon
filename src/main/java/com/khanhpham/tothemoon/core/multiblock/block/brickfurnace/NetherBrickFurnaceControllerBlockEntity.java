@@ -18,7 +18,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -28,7 +27,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -42,12 +40,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -65,14 +62,14 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     public static final int MULTIBLOCK_SIZE = 27;
     public static final int DATA_COUNT = 6;
     public static final int TANK_CAPACITY = 10000;
+    static final int blazeFuelCapacity = 1000;
+    private static final int smeltingDuration = 200;
     final FluidTank tank = new FluidTank(TANK_CAPACITY, (fluidStack -> fluidStack.getFluid().equals(Fluids.LAVA)));
     final LazyOptional<IFluidHandler> fluidHandler = LazyOptional.of(() -> tank);
-    private static final int smeltingDuration = 200;
     private final ArrayList<BlockPos> multiblockPartPositions = new ArrayList<>();
     private final NonNullList<Boolean> partDefinition = NonNullList.withSize(MULTIBLOCK_SIZE, false);
     private final Multiblock.Builder builder = Multiblock.Builder.setup(MULTIBLOCK_SIZE);
     private int smeltingTime;
-    private static final int blazeFuelCapacity = 1000;
     private int blazeFuel;
     private final ContainerData data = new ContainerData() {
         @Override
@@ -140,7 +137,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (!remove && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+        if (!remove && cap == ForgeCapabilities.FLUID_HANDLER_ITEM) {
             return this.fluidHandler.cast();
         }
 
@@ -154,7 +151,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
             if (this.blazeFuel <= 0) {
                 if (!getItem(1).isEmpty()) {
                     this.blazeFuel = blazeFuelCapacity;
-                     getItem(1).shrink(1);
+                    getItem(1).shrink(1);
                 }
             }
 
@@ -164,7 +161,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
                     setItem(3, new ItemStack(Items.BUCKET));
                     this.tank.fill(new FluidStack(Fluids.LAVA, 1000), IFluidHandler.FluidAction.EXECUTE);
                 } else if (this.tank.getSpace() > 0) {
-                    LazyOptional<IFluidHandlerItem> cap = tankItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+                    LazyOptional<IFluidHandlerItem> cap = tankItem.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
                     if (cap.isPresent())
                         this.tank.fill(cap.map(fluid -> fluid.drain(new FluidStack(Fluids.LAVA, this.tank.getSpace()), IFluidHandler.FluidAction.EXECUTE)).get(), IFluidHandler.FluidAction.EXECUTE);
                 }
@@ -293,8 +290,8 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     }
 
     public void fillFromBucket(Player pPlayer) {
-        if (this.tank.getSpace() >= FluidAttributes.BUCKET_VOLUME) {
-            this.tank.fill(new FluidStack(Fluids.LAVA, FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+        if (this.tank.getSpace() >= FluidType.BUCKET_VOLUME) {
+            this.tank.fill(new FluidStack(Fluids.LAVA, FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
             pPlayer.playSound(SoundEvents.BUCKET_EMPTY_LAVA, 1.0f, 1.0f);
         }
     }
@@ -333,7 +330,7 @@ public class NetherBrickFurnaceControllerBlockEntity extends MultiblockEntity im
     }
 
     public boolean canFillFromBucket() {
-        return this.tank.getSpace() >= FluidAttributes.BUCKET_VOLUME;
+        return this.tank.getSpace() >= FluidType.BUCKET_VOLUME;
     }
 
     public void loadBlazeFuel(int blazeFuel) {

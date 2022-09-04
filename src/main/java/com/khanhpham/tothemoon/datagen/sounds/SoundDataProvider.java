@@ -7,10 +7,9 @@ import com.google.gson.JsonObject;
 import com.khanhpham.tothemoon.utils.helpers.CompactedLanguage;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 
@@ -19,14 +18,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+@Deprecated
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public abstract class SoundDataProvider implements DataProvider {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    public static final ArrayList<CompactedLanguage> soundLanguages = new ArrayList<>();
     private final DataGenerator dataProvider;
     private final String modid;
-
-    public static final ArrayList<CompactedLanguage> soundLanguages = new ArrayList<>();
     private final ArrayList<SerializedSoundEvent> sounds = new ArrayList<>();
 
     public SoundDataProvider(DataGenerator dataProvider, String modid) {
@@ -34,13 +32,12 @@ public abstract class SoundDataProvider implements DataProvider {
         this.modid = modid;
     }
 
-    @Override
-    public void run(HashCache pCache) {
+    public void run(CachedOutput pCache) {
         this.registerSounds();
         Path path = this.dataProvider.getOutputFolder().resolve("assets/" + this.modid + "/sounds.json");
         sounds.forEach(sound -> {
             try {
-                DataProvider.save(GSON, pCache, sound.toJson(), path);
+                DataProvider.saveStable(pCache, sound.toJson(), path);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -49,11 +46,15 @@ public abstract class SoundDataProvider implements DataProvider {
 
     protected abstract void registerSounds();
 
-    protected void add(SoundEvent sound, SoundSource source, String subtitleTranslate, String... sounds) {
+    protected void add(SoundEvent sound, SoundSource source, String subtitleTranslate) {
+        add(sound, source, subtitleTranslate, modLoc(sound.getLocation().getPath()));
+    }
+
+    private void add(SoundEvent sound, SoundSource source, String subtitleTranslate, String... sounds) {
         String soundPath = ModUtils.getPath(sound);
         String soundSubtitle = source.getName() + '.' + this.modid + "." + soundPath;
         SerializedSoundEvent event = new SerializedSoundEvent(soundPath, source.getName(), soundSubtitle, sounds);
-        soundLanguages.add(new CompactedLanguage(new TranslatableComponent(soundSubtitle), subtitleTranslate));
+        soundLanguages.add(new CompactedLanguage(soundSubtitle, subtitleTranslate));
         this.sounds.add(event);
     }
 
@@ -61,10 +62,14 @@ public abstract class SoundDataProvider implements DataProvider {
         String[] sounds = new String[i];
         String soundPath = ModUtils.getPath(soundEvent);
         for (int a = 1; a <= i; a++) {
-            sounds[a-1] = this.modid + ':' + soundPath + a;
+            sounds[a - 1] = modLoc(soundPath + a);
         }
 
         this.add(soundEvent, source, subtitleTranslate, sounds);
+    }
+
+    private String modLoc(String path) {
+        return this.modid + ":" + path;
     }
 
     @Override

@@ -49,9 +49,6 @@ public class EnergySmelterMenu extends BaseMenu {
         return j != 0 && i != 0 ? i * 32 / j : 0;
     }
 
-    /**
-     * @see net.minecraft.world.inventory.AbstractFurnaceMenu#quickMoveStack(Player, int)
-     */
     @NotNull
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
@@ -63,7 +60,7 @@ public class EnergySmelterMenu extends BaseMenu {
 
             if (index <= 1) {
                 if (!super.moveItemStackTo(stack1, 2, slots.size() - 1, true)) {
-                    return empty();
+                    return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(stack1, itemStack);

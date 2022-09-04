@@ -1,9 +1,17 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "tothemoon:deepslate_uranium_ore"
-  },
-  "result": "tothemoon:uranium_ingot",
+  "cookingtime": 100,
   "experience": 1.0,
-  "cookingtime": 100
+  "ingredient": [
+    {
+      "tag": "forge:ores/uranium"
+    },
+    {
+      "tag": "forge:raw_materials/uranium"
+    },
+    {
+      "tag": "forge:dusts/uranium"
+    }
+  ],
+  "result": "tothemoon:uranium_ingot"
 }

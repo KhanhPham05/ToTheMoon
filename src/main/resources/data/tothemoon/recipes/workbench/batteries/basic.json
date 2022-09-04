@@ -1,0 +1,15 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "hammer": "tothemoon:diamond_hammer",
+  "extra": "tothemoon:redstone_machine_frame",
+  "craftingPattern": [
+      "tag:forge:ingots/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:ingots/steel",
+      "tag:forge:ingots/steel","tag:forge:wires/copper","tag:forge:wires/copper","tag:forge:wires/copper","tag:forge:ingots/steel",
+      "tag:forge:ingots/steel","tag:forge:wires/copper","tag:forge:storage_blocks/redstone","tag:forge:wires/copper","tag:forge:ingots/steel",
+      "tag:forge:ingots/steel","tag:forge:wires/copper","tag:forge:wires/copper","tag:forge:wires/copper","tag:forge:ingots/steel",
+      "tag:forge:ingots/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:plates/steel","tag:forge:ingots/steel"
+  ],
+  "result": {
+    "item": "tothemoon:battery"
+  }
+}

@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "tothemoon:processor_chip"
+    },
+    "G": {
+      "tag": "forge:plates/gold"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone_steel_metal"
+    },
+    "U": {
+      "tag": "forge:plates/uranium"
+    }
+  },
   "pattern": [
     "UUU",
     "RCR",
     "GGG"
   ],
-  "key": {
-    "U": {
-      "tag": "forge:plates/uranium"
-    },
-    "R": {
-      "tag": "forge:dusts/redstone_steel_metal"
-    },
-    "G": {
-      "tag": "forge:plates/gold"
-    },
-    "C": {
-      "item": "tothemoon:processor_chip"
-    }
-  },
   "result": {
     "item": "tothemoon:circuit_board"
   }

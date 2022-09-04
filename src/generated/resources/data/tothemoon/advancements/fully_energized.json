@@ -1,26 +1,26 @@
 {
   "parent": "tothemoon:energize_the_fuel",
+  "criteria": {
+    "req": {
+      "conditions": {
+        "block": "tothemoon:diamond_energy_generator"
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "tothemoon:diamond_energy_generator"
-    },
-    "title": {
-      "translate": "advancement.tothemoon.fully_energized"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "advancement.tothemoon.fully_energized.description"
     },
     "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "tothemoon:diamond_energy_generator"
+    },
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": true
-  },
-  "criteria": {
-    "req": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "tothemoon:diamond_energy_generator"
-      }
+    "title": {
+      "translate": "advancement.tothemoon.fully_energized"
     }
   },
   "requirements": [

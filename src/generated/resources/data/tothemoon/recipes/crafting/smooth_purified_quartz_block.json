@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AA",
-    "AA"
-  ],
   "key": {
     "A": {
       "item": "tothemoon:purified_quartz_block"
     }
   },
+  "pattern": [
+    "AA",
+    "AA"
+  ],
   "result": {
     "item": "tothemoon:smooth_purified_quartz_block"
   }

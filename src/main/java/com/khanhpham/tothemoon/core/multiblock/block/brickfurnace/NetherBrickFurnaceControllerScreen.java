@@ -19,7 +19,7 @@ public final class NetherBrickFurnaceControllerScreen extends BaseMenuScreen<Net
 
     public NetherBrickFurnaceControllerScreen(NetherBrickFurnaceControllerMenu pMenu, Inventory pPlayerInventory, Component title) {
         super(pMenu, pPlayerInventory, title, GUI);
-        super.setImageHeightWidth(177, 201);
+        super.setImageSize(201, 177);
     }
 
     @Override
@@ -51,6 +51,6 @@ public final class NetherBrickFurnaceControllerScreen extends BaseMenuScreen<Net
     }
 
     private Component translateBlazeFuel() {
-        return TextUtils.translateFormatText("gui", "blaze_fuel", this.menu.getBlazeFuel(), this.menu.getBlazeFuelCapacity()).withStyle(Style.EMPTY.withColor(0xE57A00));
+        return TextUtils.translatable("gui", "blaze_fuel", this.menu.getBlazeFuel(), this.menu.getBlazeFuelCapacity()).withStyle(Style.EMPTY.withColor(0xE57A00));
     }
 }

@@ -1,44 +1,41 @@
 package com.khanhpham.tothemoon.utils.helpers;
 
 import com.google.common.collect.ImmutableMap;
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
+import com.khanhpham.tothemoon.init.ModRecipes;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
+
+@SuppressWarnings("deprecation")
 
 public class ModUtils {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("level", 0, 10);
-    public static final IntegerProperty TANK_LEVEL = IntegerProperty.create("fluid_level", 0, 12);
     public static final Random RANDOM = new Random();
 
     private ModUtils() {
@@ -46,7 +43,7 @@ public class ModUtils {
     }
 
     public static ResourceLocation modLoc(String loc) {
-        return new ResourceLocation(Names.MOD_ID, loc);
+        return loc.contains("tothemoon:") ? new ResourceLocation(loc) : new ResourceLocation(ToTheMoon.MOD_ID, loc);
     }
 
     public static ResourceLocation append(ResourceLocation pre, String suf) {
@@ -54,45 +51,38 @@ public class ModUtils {
         return new ResourceLocation(pre.getNamespace(), path);
     }
 
-    public static TranslatableComponent translate(String key, Object... param) {
-        return new TranslatableComponent(key, param);
+    public static MutableComponent translate(String key, Object... param) {
+        return Component.translatable(key, param);
     }
 
     public static <T extends Recipe<?>> RecipeType<T> registerRecipeType(ResourceLocation location) {
-        return new RecipeType<>() {
-            @Override
-            public String toString() {
-                return location.toString();
-            }
-        };
-    }
-
-    public static <T extends IForgeRegistryEntry<T>> String registryToPath(@Nonnull T entry) {
-        return Objects.requireNonNull(entry.getRegistryName()).getPath();
+        RecipeType<T> recipeType = RecipeType.simple(location);
+        ModRecipes.ALL_RECIPE_TYPES.put(location.getPath(), recipeType);
+        return recipeType;
     }
 
     public static void log(String message, Object... arguments) {
         ToTheMoon.LOG.info(message, arguments);
     }
 
-    @SuppressWarnings("deprecation")
-    public static String getFullItemName(Item item) {
-        return Registry.ITEM.getKey(item).toString();
+    public static <T> String getFullName(T object) {
+        return RegistryEntries.getKeyFrom(object).toString();
     }
 
-    public static <T extends IForgeRegistryEntry<T>> String getPath(T object) {
-        return Objects.requireNonNull(object.getRegistryName()).getPath();
+    public static <T> String getPath(T object) {
+        return RegistryEntries.getKeyFrom(object).getPath();
     }
 
-    public static int roll(int whenHit, int chance) {
+    public static <T> T roll(T whenHit, int chance, T ifNot) {
         int attempt = RANDOM.nextInt(100);
-        return attempt < chance ? whenHit : 0;
+        return attempt < chance ? whenHit : ifNot;
     }
 
-    @SuppressWarnings("deprecation")
     public static ItemStack getBucketItem(Fluid fluid) {
-        String namespace = Objects.requireNonNull(fluid.getRegistryName()).getNamespace();
-        String path = fluid.getRegistryName().getPath();
+        ResourceLocation fluidFullName = RegistryEntries.FLUID.getKey(fluid);
+        String namespace = fluidFullName.getNamespace();
+        String path = fluidFullName.getPath();
+
 
         ResourceLocation bucketItem = new ResourceLocation(namespace, path + "_bucket");
         ResourceLocation bucketItem1 = new ResourceLocation(namespace, "bucket_" + path);
@@ -123,7 +113,7 @@ public class ModUtils {
     }
 
     public static List<ItemStack> getItemsForTags(TagKey<Item> tag, ItemStack slotItem) {
-        return ForgeRegistries.ITEMS.tags().getTag(tag).stream().filter(item -> !slotItem.is(item)).map(ItemStack::new).collect(Collectors.toList());
+        return Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(tag).stream().filter(item -> !slotItem.is(item)).map(ItemStack::new).collect(Collectors.toList());
     }
 
     public static void setupMenuScreen(AbstractContainerScreen<?> screen, String imageNameWithPng, PoseStack pose) {
@@ -160,5 +150,43 @@ public class ModUtils {
             }
         }
         return null;
+    }
+
+    public static Item getItemFromName(String itemName) {
+        Optional<Item> optionalItem = Registry.ITEM.getOptional(new ResourceLocation(itemName));
+        return optionalItem.orElseThrow(() -> new IllegalStateException("No Item For Id [" + itemName + "] Was Found"));
+    }
+
+    public static ItemStack getItemStackFromName(String name) {
+        return new ItemStack(getItemFromName(name));
+    }
+
+    public static boolean isSlotFree(Container container, int slotIndex, ItemStack queueStack) {
+        ItemStack slot = container.getItem(slotIndex);
+        return slot.isEmpty() || (slot.sameItem(queueStack) && slot.getCount() + queueStack.getCount() <= container.getMaxStackSize());
+    }
+
+    @Nullable
+    public static <C extends Container, R extends Recipe<C>> R getRecipe(Level level, RecipeType<R> recipeType, C container) {
+        return level.getRecipeManager().getRecipeFor(recipeType, container, level).orElse(null);
+    }
+
+    @SafeVarargs
+    public static Ingredient multiTagsIngredient(TagKey<Item>... tags) {
+        LinkedList<Ingredient.TagValue> values = new LinkedList<>();
+        for (TagKey<Item> tag : tags) {
+            values.add(new Ingredient.TagValue(tag));
+        }
+
+        return Ingredient.fromValues(values.stream());
+    }
+
+    public static int rollIntRange(int from, int to) {
+        return from == to ? from : RANDOM.nextInt(from, to);
+    }
+
+    public static <T> T getRegistry(Registry<T> registry, ResourceLocation location) {
+        if (registry.containsKey(location)) return registry.get(location);
+        throw new IllegalStateException("No registry represent for [" + location + "]");
     }
 }

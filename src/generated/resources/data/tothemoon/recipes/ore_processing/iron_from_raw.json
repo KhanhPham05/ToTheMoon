@@ -1,0 +1,10 @@
+{
+  "type": "tothemoon:ore_processing",
+  "extra_result": {
+    "chance": 30,
+    "item": "tothemoon:iron_dust"
+  },
+  "ingredient": "tag:forge:raw_materials/iron",
+  "processing_time": 100,
+  "result": "tothemoon:iron_dust"
+}

@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "A A"
-  ],
   "key": {
     "A": {
       "item": "tothemoon:uranium_ingot"
     }
   },
+  "pattern": [
+    "AAA",
+    "A A"
+  ],
   "result": {
     "item": "tothemoon:uranium_helmet"
   }

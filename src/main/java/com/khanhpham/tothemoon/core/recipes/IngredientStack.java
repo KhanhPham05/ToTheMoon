@@ -1,8 +1,8 @@
 package com.khanhpham.tothemoon.core.recipes;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.khanhpham.tothemoon.JsonNames;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
@@ -15,7 +15,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public class IngredientStack implements Predicate<ItemStack> {
@@ -33,22 +32,17 @@ public class IngredientStack implements Predicate<ItemStack> {
         this.amount = amount;
     }
 
-    public static IngredientStack fromJson(JsonElement ingredientElement) {
-        if (ingredientElement.isJsonObject()) {
-
-            JsonObject ingredientObject = ingredientElement.getAsJsonObject();
-            if (ingredientObject.has(JsonNames.ITEM)) {
-
-                Ingredient item = Ingredient.fromJson(ingredientObject.get(JsonNames.ITEM));
-                int amount = GsonHelper.getAsInt(ingredientObject, JsonNames.COUNT, 1);
-
-                return new IngredientStack(item, amount);
-            } else {
-                throw new IllegalStateException("No item definition found");
-            }
+    public static IngredientStack fromJson(JsonObject ingredientObject) {
+        JsonElement ingredientElement = ingredientObject.get("ingredient");
+        Ingredient ingredient = Ingredient.EMPTY;
+        if (ingredientElement.isJsonArray()) {
+            ingredient = SimpleRecipeSerializer.getIngredientsFromArray(ingredientElement.getAsJsonArray());
+        } else if (ingredientElement.isJsonPrimitive()) {
+            ingredient = SimpleRecipeSerializer.getShortenIngredient(ingredientElement.getAsJsonPrimitive().getAsString());
         }
 
-        throw new IllegalStateException("Ingredient should follow the correct syntax");
+        Preconditions.checkState(ingredient != Ingredient.EMPTY, "Ingredient is not present");
+        return new IngredientStack(ingredient, GsonHelper.getAsInt(ingredientObject, "count", 1));
     }
 
     public static IngredientStack create(ItemLike item, int count) {
@@ -82,14 +76,6 @@ public class IngredientStack implements Predicate<ItemStack> {
 
     public ItemStack getStack() {
         return new ItemStack(this.ingredient.getItems()[0].getItem(), amount);
-    }
-
-    public Item getIngredientItem() {
-        return ingredient.getItems()[0].getItem();
-    }
-
-    public String getIngredientName() {
-        return Objects.requireNonNull(getIngredientItem().getRegistryName()).getPath();
     }
 
     public JsonObject toJson() {

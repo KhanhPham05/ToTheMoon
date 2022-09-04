@@ -69,11 +69,6 @@ public final class TagTranslatingRecipe implements Recipe<Container> {
     public static final class Serializer extends SimpleRecipeSerializer<TagTranslatingRecipe> {
 
         @Override
-        protected String getRecipeName() {
-            return "tag_translating";
-        }
-
-        @Override
         public TagTranslatingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             String tag = GsonHelper.getAsString(pSerializedRecipe, JsonNames.TAG);
             //ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, JsonNames.RESULT));
@@ -91,6 +86,11 @@ public final class TagTranslatingRecipe implements Recipe<Container> {
         public void toNetwork(FriendlyByteBuf pBuffer, TagTranslatingRecipe pRecipe) {
             pBuffer.writeResourceLocation(pRecipe.tag.location());
             //pBuffer.writeItem(pRecipe.resultItem);
+        }
+
+        @Override
+        protected String getSerializerName() {
+            return "tag_translating";
         }
     }
 }

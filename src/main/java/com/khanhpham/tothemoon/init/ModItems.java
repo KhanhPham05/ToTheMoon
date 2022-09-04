@@ -1,20 +1,17 @@
 package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Table;
-import com.khanhpham.tothemoon.Names;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.*;
 import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
 import com.khanhpham.tothemoon.core.items.tool.ModToolTiers;
-import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -25,9 +22,9 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 //Just want to add it here so my IDEA don't give me some stupid warnings
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation"})
 public class ModItems {
-    public static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, Names.MOD_ID);
+    public static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, ToTheMoon.MOD_ID);
     public static final Item.Properties GENERAL_PROPERTIES = new Item.Properties().tab(ToTheMoon.TAB);
     public static final Table<ModToolTiers.ToolType, Tier, RegistryObject<? extends TieredItem>> ALL_TOOLS = HashBasedTable.create();
     public static final HashBasedTable<EquipmentSlot, ModArmorMaterial, RegistryObject<ModArmorItem>> ALL_ARMORS;
@@ -137,7 +134,6 @@ public class ModItems {
 
     public static <T extends Item> RegistryObject<T> register(String name, Supplier<T> supplier) {
         itemCount++;
-        ModUtils.log("Registering [{}] - {}", name, supplier);
         return ITEM_DEFERRED_REGISTER.register(name, supplier);
     }
 
@@ -179,6 +175,6 @@ public class ModItems {
 
     @Nonnull
     public static ResourceLocation getRegistryName(Block block) {
-        return Objects.requireNonNull(block.getRegistryName());
+        return RegistryEntries.getKeyFrom(block);
     }
 }

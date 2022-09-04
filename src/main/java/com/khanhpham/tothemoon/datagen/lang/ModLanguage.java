@@ -1,99 +1,99 @@
 package com.khanhpham.tothemoon.datagen.lang;
 
 import com.google.common.base.Preconditions;
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.datagen.advancement.AdvancementComponent;
-import com.khanhpham.tothemoon.datagen.sounds.ModSoundsProvider;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredItems;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.khanhpham.tothemoon.worldgen.OreGenValues;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+
+@SuppressWarnings("unused")
 public class ModLanguage extends LanguageProvider {
-    public static final TranslatableComponent TAG_TRANSLATOR = create("info", "tag_translator");
+    public static final MutableComponent TAG_TRANSLATOR = create("info", "tag_translator");
     //UTILS
-    public static final TranslatableComponent CAP_UNKNOWN = create("command", "cap_unknown");
-    public static final TranslatableComponent CAP_FOUND = create("command", "cap_found");
+    public static final MutableComponent CAP_UNKNOWN = create("command", "cap_unknown");
+    public static final MutableComponent CAP_FOUND = create("command", "cap_found");
     //JEI
-    public static final TranslatableComponent JEI_METAL_PRESS = create("jei", "metal_press_category");
-    public static final TranslatableComponent JEI_ALLOY_SMELTING = create("jei", "alloy_smelter_category");
+    public static final MutableComponent JEI_METAL_PRESS = create("jei", "metal_press_category");
+    public static final MutableComponent JEI_ALLOY_SMELTING = create("jei", "alloy_smelter_category");
     @Deprecated
-    public static final TranslatableComponent MANUAL_METAL_PRESSING_CATEGORY = create("jei", "manual_metal_pressing");
-    public static final TranslatableComponent JEI_WORKBENCH_CRAFTING = create("jei", "workbench_crafting");
-    public static final TranslatableComponent JEI_METAL_PRESS_CONSUME_MOLD = create("jei", "recipe_consume_mold");
+    public static final MutableComponent MANUAL_METAL_PRESSING_CATEGORY = create("jei", "manual_metal_pressing");
+    public static final MutableComponent JEI_WORKBENCH_CRAFTING = create("jei", "workbench_crafting");
+    public static final MutableComponent JEI_METAL_PRESS_CONSUME_MOLD = create("jei", "recipe_consume_mold");
 
     //GUI
-    public static final TranslatableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
-    public static final TranslatableComponent NETHER_BRICK_FURNACE_CONTROLLER = create("gui", "nether_brick_furnace");
-    public static final TranslatableComponent NEXT = create("container", "next");
-    public static final TranslatableComponent PREV = create("container", "prev");
-    public static final TranslatableComponent HOVER_TO_SHOW_TAG = create("button", "hover_show_tag");
-    public static final TranslatableComponent NO_ITEM = create("button", "no_button");
-    public static final TranslatableComponent JEI_HIGH_HEAT_SMELTING = create("jei", "high_heat_smelting");
-    public static final TranslatableComponent MESSAGE_NBF_FORM_ERROR = create("message", "nbf_form_fail");
-    public static final TranslatableComponent FILL_TANK = create("gui", "fill_tank");
-    public static final TranslatableComponent EMPTY_TANK = create("gui", "empty_tank");
+    public static final MutableComponent MACHINE_UPGRADE_LABELS = create("gui", "insert_upgrades");
+    public static final MutableComponent NETHER_BRICK_FURNACE_CONTROLLER = create("gui", "nether_brick_furnace");
+    public static final MutableComponent NEXT = create("container", "next");
+    public static final MutableComponent PREV = create("container", "prev");
+    public static final MutableComponent HOVER_TO_SHOW_TAG = create("button", "hover_show_tag");
+    public static final MutableComponent NO_ITEM = create("button", "no_button");
+    public static final MutableComponent JEI_HIGH_HEAT_SMELTING = create("jei", "high_heat_smelting");
+    public static final MutableComponent MESSAGE_NBF_FORM_ERROR = create("message", "nbf_form_fail");
+    public static final MutableComponent FILL_TANK = create("gui", "fill_tank");
+    public static final MutableComponent EMPTY_TANK = create("gui", "empty_tank");
     //TOOLTIP
-    public static final TranslatableComponent TANK_ONLY_SUPPORTS_LAVA = create("tooltip", "lava_support_only");
-    public static final TranslatableComponent TANK_AMOUNT = create("tooltip", "amount");
-    public static final TranslatableComponent ANVIL_DESCRIPTION = create("tooltip", "minecraft_anvil");
+    public static final MutableComponent TANK_ONLY_SUPPORTS_LAVA = create("tooltip", "lava_support_only");
+    public static final MutableComponent TANK_AMOUNT = create("tooltip", "amount");
+    public static final MutableComponent ANVIL_DESCRIPTION = create("tooltip", "minecraft_anvil");
     //PATCHOULI
-    public static final TranslatableComponent BOOK_NAME = create("book", "header");
-    public static final TranslatableComponent BOOK_LANDING = create("book", "header.landing_text");
-    public static final TranslatableComponent THE_BASICS = create("book", "the_basics");
-    public static final TranslatableComponent THE_BASICS_DESCRIPTION = create("book", "the_basics.description");
-    public static final TranslatableComponent MANUAL_CRUSHING = create("book", "manual_crushing");
-    public static final TranslatableComponent MANUAL_CRUSHING_PAGE_1 = create("book", "manual_crushing.page_one");
-    public static final TranslatableComponent MANUAL_CRUSHING_CRAFTING_PAGE = create("book", "manual_crushing.crafting");
-    public static final TranslatableComponent MANUAL_CRUSHING_CRAFTING_TITLE = create("book", "manual_crushing.crafting.title");
-    public static final TranslatableComponent MAKING_STEEL = create("book", "making_steel");
-    public static final TranslatableComponent BENCH_WORKING_TITLE = create("book", "bench_working.title");
-    public static final TranslatableComponent TEXT_HOW_TO_USE = create("book", "how_to_use");
-    public static final TranslatableComponent BASIC_MATERIALS_CATEGORY = create("book", "category_basic_materials");
-    public static final TranslatableComponent BASIC_MATERIAL_CATEGORY_DESCRIPTION = create("book", "category_basic_materials.description");
+    public static final MutableComponent BOOK_NAME = create("book", "header");
+    public static final MutableComponent BOOK_LANDING = create("book", "header.landing_text");
+    public static final MutableComponent THE_BASICS = create("book", "the_basics");
+    public static final MutableComponent THE_BASICS_DESCRIPTION = create("book", "the_basics.description");
+    public static final MutableComponent MANUAL_CRUSHING = create("book", "manual_crushing");
+    public static final MutableComponent MANUAL_CRUSHING_PAGE_1 = create("book", "manual_crushing.page_one");
+    public static final MutableComponent MANUAL_CRUSHING_CRAFTING_PAGE = create("book", "manual_crushing.crafting");
+    public static final MutableComponent MANUAL_CRUSHING_CRAFTING_TITLE = create("book", "manual_crushing.crafting.title");
+    public static final MutableComponent MAKING_STEEL = create("book", "making_steel");
+    public static final MutableComponent BENCH_WORKING_TITLE = create("book", "bench_working.title");
+    public static final MutableComponent TEXT_HOW_TO_USE = create("book", "how_to_use");
+    public static final MutableComponent BASIC_MATERIALS_CATEGORY = create("book", "category_basic_materials");
+    public static final MutableComponent BASIC_MATERIAL_CATEGORY_DESCRIPTION = create("book", "category_basic_materials.description");
     //ADVANCEMENTS
-    public static final TranslatableComponent ROOT = create("advancement", "root");
-    public static final TranslatableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
-    public static final TranslatableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
+    public static final MutableComponent ROOT = create("advancement", "root");
+    public static final MutableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
+    public static final MutableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
+    public static final MutableComponent ORE_PROCESSING = create("jei", "ore_processing");
     //ITEM / BLOCK /INVENTORY
     private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
-    public static final TranslatableComponent HARDEN_FRAMED = createAdvancement("harden_framed", "Craft a higher tier of machine frame - Steel Frame.");
-    public static final TranslatableComponent AUTOMATE_THE_FUEL = createAdvancement("automate_the_fuel", "Automate The Fuel", "Craft any type of Fluid Acceptor for Nether Brick Furnace");
-    public static final TranslatableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
-    public static final TranslatableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft the Nether Brick Furnace Controller");
-    public static final TranslatableComponent HIGH_HEAT_SMELTING = createAdvancement("high_heat_smelting", "High Heat Smelting", "Construct A Nether Brick Furnace, see Guide Book for more information");
-    public static final TranslatableComponent GETTING_A_TRUE_UPGRADE = createAdvancement("getting_a_true_upgrade", "Getting A True Upgrade", "Obtain Steel Ingot");
-    public static final TranslatableComponent COVER_ME_WITH_CARBONIZED_IRON = createAdvancement("cover_me_with_carbonized_iron", "Cover Me With Carbonized Carbon", "Wear a full set of Steel Armor with all the steel tools");
-    public static final TranslatableComponent ENERGIZE_THE_FUEL = createAdvancement("energize_the_fuel", "Energize The Fuel", "Craft Copper Energy Generator");
-    public static final TranslatableComponent BENCH_WORKING = createAdvancement("bench_working", "Benchworkin'", "Craft the Workbench");
-    public static final TranslatableComponent FULLY_ENERGIZED = createAdvancement("fully_energized", "Fully Energized", "Craft and place down the Diamond Energy Generator");
-    public static final TranslatableComponent RADIATION_PROTECTED = createAdvancement("radiation_protected", "Radiation Protected", "Obtain a full set of Uranium Armor.");
-    public static final TranslatableComponent ISNT_THIS_STEEL_PICKAXE = createAdvancement("isnt_this_steel_pickaxe", "Isn't This Steel Pickaxe ?", "Craft Steel Pickaxe");
-    public static final TranslatableComponent VERY_SERIOUS_DEDICATION = createAdvancement("very_serious_dedication", "A Very Serious Dedication", "You just broke the Netherite Hoe");
-    public static final TranslatableComponent BURNING_ENERGY = createAdvancement("burning_energy", "Burning Energy", "Craft and use the Energy Smelter");
-    public static final TranslatableComponent THIS_IS_FINE = createAdvancement("this_is_fine", "This is fine ! Too much energy from §o burnt fuel");
-    public static final TranslatableComponent MACHINE_EXOSKELETON = createAdvancement("machine_exoskeleton", "Machine ExoSkeleton", "Craft a Copper Machine Frame.");
-    public static final TranslatableComponent COMBINING_MATERIALS = createAdvancement("combining_materials", "Combining Materials", "Alloy Smelter allows you to combine materials together");
-    public static final TranslatableComponent STORING_ENERGY = createAdvancement("storing_energy", "Craft and place down the Battery to store power !");
-    private static final TranslatableComponent NO_TAG = create("button", "no_tag");
+    public static final MutableComponent HARDEN_FRAMED = createAdvancement("harden_framed", "Craft a higher tier of machine frame - Steel Frame.");
+    public static final MutableComponent AUTOMATE_THE_FUEL = createAdvancement("automate_the_fuel", "Automate The Fuel", "Craft any type of Fluid Acceptor for Nether Brick Furnace");
+    public static final MutableComponent HEAVY_CRUSHING = createAdvancement("heavy_crushing", "Heavy Crushing", "Crush some ores and coals into dusts");
+    public static final MutableComponent A_HEATED_TOPIC = createAdvancement("a_heated_topic", "A Heated Topic", "Craft the Nether Brick Furnace Controller");
+    public static final MutableComponent HIGH_HEAT_SMELTING = createAdvancement("high_heat_smelting", "High Heat Smelting", "Construct A Nether Brick Furnace, see Guide Book for more information");
+    public static final MutableComponent GETTING_A_TRUE_UPGRADE = createAdvancement("getting_a_true_upgrade", "Getting A True Upgrade", "Obtain Steel Ingot");
+    public static final MutableComponent COVER_ME_WITH_CARBONIZED_IRON = createAdvancement("cover_me_with_carbonized_iron", "Cover Me With Carbonized Carbon", "Wear a full set of Steel Armor with all the steel tools");
+    public static final MutableComponent ENERGIZE_THE_FUEL = createAdvancement("energize_the_fuel", "Energize The Fuel", "Craft Copper Energy Generator");
+    public static final MutableComponent BENCH_WORKING = createAdvancement("bench_working", "Benchworkin'", "Craft the Workbench");
+    public static final MutableComponent FULLY_ENERGIZED = createAdvancement("fully_energized", "Fully Energized", "Craft and place down the Diamond Energy Generator");
+    public static final MutableComponent RADIATION_PROTECTED = createAdvancement("radiation_protected", "Radiation Protected", "Obtain a full set of Uranium Armor.");
+    public static final MutableComponent ISNT_THIS_STEEL_PICKAXE = createAdvancement("isnt_this_steel_pickaxe", "Isn't This Steel Pickaxe ?", "Craft Steel Pickaxe");
+    public static final MutableComponent VERY_SERIOUS_DEDICATION = createAdvancement("very_serious_dedication", "A Very Serious Dedication", "You just broke the Netherite Hoe");
+    public static final MutableComponent BURNING_ENERGY = createAdvancement("burning_energy", "Burning Energy", "Craft and use the Energy Smelter");
+    public static final MutableComponent THIS_IS_FINE = createAdvancement("this_is_fine", "This is fine ! Too much energy from §o burnt fuel");
+    public static final MutableComponent MACHINE_EXOSKELETON = createAdvancement("machine_exoskeleton", "Machine ExoSkeleton", "Craft a Copper Machine Frame.");
+    public static final MutableComponent COMBINING_MATERIALS = createAdvancement("combining_materials", "Combining Materials", "Alloy Smelter allows you to combine materials together");
+    public static final MutableComponent STORING_ENERGY = createAdvancement("storing_energy", "Craft and place down the Battery to store power !");
+    private static final MutableComponent NO_TAG = create("button", "no_tag");
     private static final List<Block> ALL_BLOCKS;
     private static final List<Item> ALL_ITEMS;
 
@@ -102,23 +102,22 @@ public class ModLanguage extends LanguageProvider {
         //ALL_BLOCKS.addAll(NonDeferredBlocks.REGISTERED_BLOCKS);
 
         ALL_ITEMS = ModItems.ITEM_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
-        ALL_ITEMS.addAll(NonDeferredItems.REGISTERED_ITEMS);
     }
 
     public ModLanguage(DataGenerator gen) {
-        super(gen, Names.MOD_ID, "en_us");
+        super(gen, ToTheMoon.MOD_ID, "en_us");
     }
 
-    public static TranslatableComponent create(String pre, String suf) {
-        return TextUtils.translateFormatText(pre, suf);
+    public static MutableComponent create(String pre, String suf) {
+        return TextUtils.translatable(pre, suf);
     }
 
-    public static TranslatableComponent createAdvancement(String suf, String title, String description) {
+    public static MutableComponent createAdvancement(String suf, String title, String description) {
         final String component = TextUtils.translateFormat("advancement", suf);
         return ADVANCEMENT_COMPONENT.add(component, title, description);
     }
 
-    private static String convertToTranslatedText(@Nullable ResourceLocation location) {
+    public static String convertToTranslatedText(@Nullable ResourceLocation location) {
         Preconditions.checkNotNull(location, "Location can not be null");
         String id = location.getPath();
         return convertToSpacedText(id);
@@ -144,9 +143,13 @@ public class ModLanguage extends LanguageProvider {
         return buffer.toString();
     }
 
-    public static <T extends IForgeRegistryEntry<?>> String getPureName(T object) {
+    public static <T extends IForgeRegistry<?>> String getPureName(T object) {
         return convertToTranslatedText(object.getRegistryName());
 
+    }
+
+    private static MutableComponent createAdvancement(String key, String description) {
+        return createAdvancement(key, convertToSpacedText(key), description);
     }
 
     @Override
@@ -163,7 +166,7 @@ public class ModLanguage extends LanguageProvider {
         //GUI - TOOLTIP
         add("gui.tothemoon.alloy_smelter", "Alloy Smelter");
         add("gui.tothemoon.metal_press", "Metal Press");
-        add("tooltip.tothemoon.energy", "Energy %s / %s");
+        add("tooltip.tothemoon.energy", "Energy %s %s / %s");
         add("tooltip.tothemoon.fluid_fuel_tank", "Fuel : %s / %s");
         add("tooltip.tothemoon.item_tank", "(%s): %s");
         add(TANK_ONLY_SUPPORTS_LAVA, "Can stores Lava only, more fluids will be added in future updates");
@@ -184,9 +187,10 @@ public class ModLanguage extends LanguageProvider {
         add(JEI_WORKBENCH_CRAFTING, "Workbench Crafting");
         add(JEI_HIGH_HEAT_SMELTING, "High Heat Smelting");
         add(JEI_METAL_PRESS_CONSUME_MOLD, "Consume Mold");
+        add(ORE_PROCESSING, "Ore Processing");
 
         //sound
-        ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
+        //ModSoundsProvider.soundLanguages.forEach(lang -> lang.addTranslation(this));
 
         //ADVANCEMENT
         add(ROOT_DESCRIPTION, "Welcome To The Moon, this advancement will show you al the things that are in this mod");
@@ -248,8 +252,8 @@ public class ModLanguage extends LanguageProvider {
         add(create("gui", "blaze_fuel"), "Blaze Fuel: %s / %s");
     }
 
-    private void add(TranslatableComponent component, String trans) {
-        super.add(component.getKey(), trans);
+    private void add(MutableComponent component, String trans) {
+        super.add(component.getString(), trans);
     }
 
     private void addBlock(Block block) {
@@ -261,7 +265,7 @@ public class ModLanguage extends LanguageProvider {
     }
 
     private String convertToTranslatedText(ItemLike item) {
-        return convertToTranslatedText(Objects.requireNonNull(item.asItem().getRegistryName()));
+        return convertToTranslatedText(RegistryEntries.ITEM.getKey(item.asItem()));
     }
 
     private String book(String translateKey, String translation) {
@@ -270,20 +274,17 @@ public class ModLanguage extends LanguageProvider {
         return key;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void bookOreInfo(OreVeins oreVein) {
         Block oreBlock = oreVein.getOreBlock();
-        String oreName = ModUtils.getPath(oreBlock);
+        String oreName = RegistryEntries.BLOCK.getPath(oreBlock);
         String translation = "info_" + oreName;
         OreGenValues values = oreVein.getValues();
         ModUtils.log(this.book(translation,
                 String.format("$(li)Ore : %s. $(li)Generate between : Y = %s to %s",
-                        convertToTranslatedText(oreBlock.getRegistryName()),
+                        convertToTranslatedText(RegistryEntries.BLOCK.getKey(oreBlock)),
                         values.minWorldHeight(),
                         values.maxWorldHeight()
                 )));
-    }
-
-    private static TranslatableComponent createAdvancement(String key, String description) {
-        return createAdvancement(key, convertToSpacedText(key), description);
     }
 }

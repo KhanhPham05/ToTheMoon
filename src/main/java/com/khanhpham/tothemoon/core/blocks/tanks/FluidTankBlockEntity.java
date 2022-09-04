@@ -3,8 +3,8 @@ package com.khanhpham.tothemoon.core.blocks.tanks;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.ImplementedContainer;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlockEntitiesTypes;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
+import com.khanhpham.tothemoon.init.ModBlockEntities;
+import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,15 +27,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -88,16 +88,16 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
     public LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> new InvWrapper(this));
 
     public FluidTankBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(NonDeferredBlockEntitiesTypes.FLUID_TANK_NON_DEFERRED, pWorldPosition, pBlockState);
+        super(ModBlockEntities.FLUID_TANK.get(), pWorldPosition, pBlockState);
     }
 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (!remove) {
-            if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            if (cap == ForgeCapabilities.FLUID_HANDLER) {
                 return this.tankCap.cast();
-            } else if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            } else if (cap == ForgeCapabilities.FLUID_HANDLER_ITEM) {
                 return this.itemHandlerCap.cast();
             }
         }
@@ -118,7 +118,7 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
 
     @Override
     public Component getContainerDisplayName() {
-        return NonDeferredBlocks.FLUID_TANK_BLOCK.getName();
+        return ModBlocks.FLUID_TANK.get().getName();
     }
 
     @Override
@@ -154,12 +154,12 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
         ItemStack item = getItem(0);
-        if (item.getItem() instanceof BucketItem bucketItem) {
+        if (item.getItem() instanceof BucketItem bucketItem && this.isFluidSame(bucketItem.getFluid())) {
             Fluid fluid = bucketItem.getFluid();
-            this.tank.fill(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+            this.tank.fill(new FluidStack(fluid, FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
             setItem(0, new ItemStack(Items.BUCKET));
         } else {
-            LazyOptional<IFluidHandlerItem> cap = item.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+            LazyOptional<IFluidHandlerItem> cap = item.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
             if (cap.isPresent()) {
                 this.tank.fill(
                         cap.map(fluid -> {
@@ -175,9 +175,9 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
         ItemStack stack1 = getItem(1);
         if (stack1.is(Items.BUCKET)) {
             setItem(1, ModUtils.getBucketItem(this.tank.getFluid().getFluid()));
-            this.tank.drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+            this.tank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
         } else {
-            LazyOptional<IFluidHandlerItem> tankCap = stack1.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+            LazyOptional<IFluidHandlerItem> tankCap = stack1.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
             if (tankCap.isPresent()) {
                 this.tank.drain(tankCap.map(fluid -> {
                     FluidStack fluidInTank = fluid.getFluidInTank(this.tank.getSpace());
@@ -210,5 +210,9 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
     @Override
     public FluidTank getTank() {
         return this.tank;
+    }
+
+    public boolean isFluidSame(Fluid fluid) {
+        return fluid.isSame(Fluids.EMPTY) && this.tank.getFluid().getFluid().isSame(fluid);
     }
 }

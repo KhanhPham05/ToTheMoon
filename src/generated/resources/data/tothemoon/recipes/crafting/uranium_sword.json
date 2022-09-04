@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "A",
-    "A",
-    "S"
-  ],
   "key": {
     "A": {
       "item": "tothemoon:uranium_ingot"
     },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/steel"
     }
   },
+  "pattern": [
+    "A",
+    "A",
+    "S"
+  ],
   "result": {
     "item": "tothemoon:uranium_sword"
   }

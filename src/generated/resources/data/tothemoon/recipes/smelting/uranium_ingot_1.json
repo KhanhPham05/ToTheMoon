@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "tothemoon:moon_uranium_ore"
-  },
-  "result": "tothemoon:uranium_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
-}

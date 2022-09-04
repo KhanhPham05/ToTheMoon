@@ -1,6 +1,6 @@
 package com.khanhpham.tothemoon.core.items.tool;
 
-import com.khanhpham.tothemoon.Names;
+import com.khanhpham.tothemoon.ToTheMoon;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -56,7 +56,7 @@ public enum ModArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return Names.MOD_ID + ':' + name;
+        return ToTheMoon.MOD_ID + ':' + name;
     }
 
     @Override

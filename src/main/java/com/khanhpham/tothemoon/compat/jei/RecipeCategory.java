@@ -1,7 +1,5 @@
 package com.khanhpham.tothemoon.compat.jei;
 
-import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
-import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -27,7 +25,6 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"removal"})
 public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container>> implements IRecipeCategory<T> {
     protected final IGuiHelper guiHelper;
 
@@ -35,24 +32,30 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
         this.guiHelper = guiHelper;
     }
 
+
     public static void addOutput(IRecipeLayoutBuilder builder, Recipe<?> recipe, int x, int y) {
         addOutput(builder, recipe.getResultItem(), x, y);
+    }
+
+    public static <R extends Recipe<? extends Container>> void addInput(IRecipeLayoutBuilder builder, R recipe, int ingredientIndex, int x, int y) {
+        builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(recipe.getIngredients().get(ingredientIndex));
+    }
+
+    public static void addInput(IRecipeLayoutBuilder builder, Ingredient ingredient, int x, int y) {
+        builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ingredient);
+    }
+
+    public static void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
+        builder.addSlot(RecipeIngredientRole.OUTPUT, x, y).addItemStack(output);
     }
 
     public abstract ItemStack getCatalystIcon();
 
     @Override
-    public final ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @Override
-    public final Class<? extends T> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
-    @Override
     public abstract RecipeType<T> getRecipeType();
+    //{
+    //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
+    //}
 
     @Override
     public final IDrawable getIcon() {
@@ -64,27 +67,12 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
     }
 
     public abstract void registerRecipes(IRecipeRegistration registration, RecipeManager manager);
-    //{
-    //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
-    //}
 
     public abstract void setRecipeLayout(IRecipeLayoutBuilder builder, T recipe);
 
     @Override
     public final void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
         this.setRecipeLayout(builder, recipe);
-    }
-
-    public static <R extends Recipe<? extends Container>> void addInput(IRecipeLayoutBuilder builder, R recipe, int ingredientIndex, int x, int y) {
-        builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(recipe.getIngredients().get(ingredientIndex));
-    }
-
-    public static void addInput(IRecipeLayoutBuilder builder, Ingredient ingredient, int x, int y) {
-        builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ingredient);
-    }
-
-    private static void addOutput(IRecipeLayoutBuilder builder, ItemStack output, int x, int y) {
-        builder.addSlot(RecipeIngredientRole.OUTPUT, x, y).addItemStack(output);
     }
 
     public abstract void addShowRecipeZone(IGuiHandlerRegistration registration);

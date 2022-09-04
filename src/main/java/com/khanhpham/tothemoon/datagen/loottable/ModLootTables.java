@@ -1,9 +1,9 @@
 package com.khanhpham.tothemoon.datagen.loottable;
 
 import com.google.common.collect.ImmutableList;
+import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
-import com.khanhpham.tothemoon.init.nondeferred.NonDeferredBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -91,6 +91,7 @@ public class ModLootTables extends LootTableProvider {
                     , SMOOTH_PURIFIED_QUARTZ_BLOCK, MOON_ROCK_BARREL, COPPER_ENERGY_GENERATOR
                     , IRON_ENERGY_GENERATOR, ALLOY_SMELTER, METAL_PRESS, TAG_TRANSLATOR
                     , WORKBENCH, BLACKSTONE_FLUID_ACCEPTOR, NETHER_BRICKS_FLUID_ACCEPTOR
+                    , ORE_PROCESSOR
             );
         }
 
@@ -99,7 +100,6 @@ public class ModLootTables extends LootTableProvider {
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
-            knownBlocks.addAll(NonDeferredBlocks.REGISTERED_BLOCKS);
             return knownBlocks;
         }
 
@@ -112,7 +112,9 @@ public class ModLootTables extends LootTableProvider {
             this.add(MOON_QUARTZ_ORE, this::quartzDrops);
             this.add(MOON_REDSTONE_ORE, BlockLoot::createRedstoneOreDrops);
             DROP_SELF_BLOCKS.forEach(b -> super.dropSelf(b.get()));
-            super.add(BATTERY.get(), block -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energy", LootUtils.SAVE_DATA_ENERGY)))));
+            addBatteryLootTable(BATTERY.get());
+            addBatteryLootTable(REDSTONE_BATTERY.get());
+            addBatteryLootTable(STEEL_BATTERY.get());
             super.add(NETHER_BRICK_FURNACE_CONTROLLER.get(), block -> LootTable.lootTable()
                     .withPool(LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
@@ -122,8 +124,12 @@ public class ModLootTables extends LootTableProvider {
                                             .copy("FluidName", LootUtils.SAVE_DATA_FLUID_NAME)
                                             .copy("Amount", LootUtils.SAVE_DATA_FLUID_AMOUNT)
                                             .copy("blazeFuel", LootUtils.SAVE_DATA_BLAZE_FUEL)))));
-            super.add(NonDeferredBlocks.FLUID_TANK_BLOCK, this::createFluidTankDrop);
+            super.add(FLUID_TANK.get(), this::createFluidTankDrop);
             super.dropOther(WORKBENCH_LEFT.get(), WORKBENCH.get());
+        }
+
+        private void addBatteryLootTable(BatteryBlock batteryBlock) {
+            super.add(batteryBlock, block -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energy", LootUtils.SAVE_DATA_ENERGY)))));
         }
 
         private LootTable.Builder quartzDrops(Block p_176051_) {

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tothemoon:copper_sheet_block"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "tothemoon:copper_plate"
+  }
+}

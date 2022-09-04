@@ -1,23 +1,7 @@
 {
   "parent": "tothemoon:getting_a_true_upgrade",
-  "display": {
-    "icon": {
-      "item": "tothemoon:workbench"
-    },
-    "title": {
-      "translate": "advancement.tothemoon.bench_working"
-    },
-    "description": {
-      "translate": "advancement.tothemoon.bench_working.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "req": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,7 +10,23 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.tothemoon.bench_working.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "tothemoon:workbench"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.tothemoon.bench_working"
     }
   },
   "requirements": [

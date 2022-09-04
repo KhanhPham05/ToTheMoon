@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchMenu;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -39,7 +40,7 @@ public class WorkbenchCraftingContainer extends SimpleContainer implements Stack
 
     public void processCrafting(Player player, ItemStack takenResult) {
         if (!takenResult.isEmpty()) {
-            this.workbenchMenu.slots.get(1).getItem().hurt(1, ModUtils.RANDOM, null);
+            this.workbenchMenu.slots.get(1).getItem().hurt(1, RandomSource.create(), null);
 
             for (int i = 2; i < 28; i++) {
                 this.workbenchMenu.slots.get(i).remove(takenResult.getCount());

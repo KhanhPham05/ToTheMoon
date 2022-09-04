@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/orientable_with_bottom",
+  "parent": "tothemoon:block/templates/battery_base",
   "textures": {
     "side": "tothemoon:block/battery/c_battery_side",
-    "front": "tothemoon:block/battery/c_battery_front",
+    "battery_front": "tothemoon:block/battery/c_battery_front",
     "bottom": "tothemoon:block/battery/c_battery_bottom",
     "top": "tothemoon:block/battery/c_battery_top"
   }
