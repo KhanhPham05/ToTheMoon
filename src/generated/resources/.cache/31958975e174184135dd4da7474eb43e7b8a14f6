@@ -1,4 +1,4 @@
-// 1.19.2	2022-08-31T20:41:03.5322647	LootTablesTTM
+// 1.19.2	2022-09-13T21:19:53.3573065	LootTablesTTM
 da6dc4c2f0ff7cececb2c65412cdce42b05e2b08 data/tothemoon/loot_tables/blocks/alloy_smelter.json
 c8eb816ec00a1434fa7ea438c91ed20ff7ebc389 data/tothemoon/loot_tables/blocks/anti_pressure_glass.json
 1a608649c9ee4fb4a5a8d8d286d4c778f298cdc0 data/tothemoon/loot_tables/blocks/battery.json
@@ -33,6 +33,7 @@ e0db6b259618492ccdfc67bdfded9d5be8fc77d9 data/tothemoon/loot_tables/blocks/moon_
 cf555a6e32495f381a0ac83302f7cdefd21d470c data/tothemoon/loot_tables/blocks/moon_rock_stair.json
 7bb0404898ad11c766963af6b1af2d2ea15e6923 data/tothemoon/loot_tables/blocks/moon_uranium_ore.json
 f3b772f6e3aaa4a52f375723334ba9a42131acad data/tothemoon/loot_tables/blocks/netherbrick_furnace_controller.json
+b178a37b5cfc134a48636fb04c2bc00e2fc0235a data/tothemoon/loot_tables/blocks/nether_bricks.json
 110565ae9774ac9764daa4f31a7ae69b0ca5548c data/tothemoon/loot_tables/blocks/nether_bricks_fluid_acceptor.json
 f03f7328653ef5a5883c5675641d52cc63ca6cf4 data/tothemoon/loot_tables/blocks/ore_processor.json
 bc1bfaa68b61d422fe790f56ee8130d85ca4fd14 data/tothemoon/loot_tables/blocks/polished_moon_rock.json

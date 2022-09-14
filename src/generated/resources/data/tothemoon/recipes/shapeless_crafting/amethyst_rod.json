@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "tothemoon:hammers"
+    },
+    {
+      "tag": "forge:plates/amethyst"
+    }
+  ],
+  "result": {
+    "item": "tothemoon:amethyst_rod"
+  }
+}

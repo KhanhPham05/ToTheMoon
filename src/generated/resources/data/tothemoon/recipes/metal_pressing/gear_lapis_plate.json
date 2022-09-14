@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:gem/lapis"
+  },
+  "mold": {
+    "tag": "forge:gears/gold"
+  },
+  "result": {
+    "count": 1,
+    "item": "tothemoon:lapis_gear"
+  }
+}

@@ -10,8 +10,8 @@ import java.util.function.Consumer;
 
 record MekanismCompatProvider(Consumer<FinishedRecipe> consumer) {
     public void run() {
-        MetallurgicInfusingBuilder.of(consumer, ModItems.REDSTONE_METAL_DUST.get()).from(Ingredient.of(ModItemTags.DUSTS_IRON), MetallurgicInfusingBuilder.InfuseType.REDSTONE, 30);
-        MetallurgicInfusingBuilder.of(consumer, ModItems.REDSTONE_STEEL_ALLOY.get()).from(Ingredient.of(ModItemTags.INGOTS_STEEL), MetallurgicInfusingBuilder.InfuseType.REDSTONE, 30);
-        MetallurgicInfusingBuilder.of(consumer, ModItems.REDSTONE_STEEL_ALLOY_DUST.get()).from(Ingredient.of(ModItemTags.DUSTS_STEEL), MetallurgicInfusingBuilder.InfuseType.REDSTONE, 30);
+        MetallurgicInfusingBuilder.of(consumer, ModItems.REDSTONE_METAL_MATERIAL.getDust()).from(Ingredient.of(ModItemTags.DUSTS_IRON), MetallurgicInfusingBuilder.InfuseType.REDSTONE, 30);
+        MetallurgicInfusingBuilder.of(consumer, ModItems.REDSTONE_STEEL_MATERIALS.getIngot()).from(Ingredient.of(ModItemTags.INGOTS_STEEL), MetallurgicInfusingBuilder.InfuseType.REDSTONE, 30);
+        MetallurgicInfusingBuilder.of(consumer, ModItems.REDSTONE_STEEL_MATERIALS.getDust()).from(Ingredient.of(ModItemTags.DUSTS_STEEL), MetallurgicInfusingBuilder.InfuseType.REDSTONE, 30);
     }
 }

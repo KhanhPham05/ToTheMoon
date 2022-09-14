@@ -1,18 +1,18 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.4\bin\java.exe
-Arguments: '--clean, C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar, --output, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.3\forge-1.19.2-43.1.3-binpatched.jar, --apply, H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.3\forge-1.19.2-43.1.3-binpatches.lzma'
+Arguments: '--clean, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar, --output, H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatched.jar, --apply, H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatches.lzma'
 Classpath:
- - C:\Users\HP\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.1.1\binarypatcher-1.1.1-fatjar.jar
-Working directory: H:\FORGE 1.18\ToTheMoon  NEW\build\_applyBinpatches_2
+ - H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.1.1\binarypatcher-1.1.1-fatjar.jar
+Working directory: H:\[ ToTheMoon Project ]\Forge\build\_applyBinpatches_2
 Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
-  Clean:     C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar
-  Output:    H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.3\forge-1.19.2-43.1.3-binpatched.jar
+  Clean:     H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar
+  Output:    H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatched.jar
   KeepData:  false
   Unpatched: false
   Pack200:   false
   Legacy:    false
-Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.3\forge-1.19.2-43.1.3-binpatches.lzma
+Loading patches file: H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: 19e6c00e Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -565,6 +565,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 43d60b48 Exists: true
   Reading patch net.minecraft.client.renderer.block.ModelBlockRenderer.binpatch
     Checksum: f2dcf0fd Exists: true
+  Reading patch net.minecraft.client.renderer.block.model.BakedQuad.binpatch
+    Checksum: dd465b3e Exists: true
   Reading patch net.minecraft.client.renderer.block.model.BlockElementFace$Deserializer.binpatch
     Checksum: 280efdae Exists: true
   Reading patch net.minecraft.client.renderer.block.model.BlockElementFace.binpatch
@@ -1377,6 +1379,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 86094135 Exists: true
   Reading patch net.minecraft.world.entity.ai.behavior.HarvestFarmland.binpatch
     Checksum: 15da6032 Exists: true
+  Reading patch net.minecraft.world.entity.ai.behavior.StartAttacking.binpatch
+    Checksum: 59d749cb Exists: true
   Reading patch net.minecraft.world.entity.ai.behavior.Swim.binpatch
     Checksum: f20dbeec Exists: true
   Reading patch net.minecraft.world.entity.ai.control.MoveControl$Operation.binpatch
@@ -2233,6 +2237,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: b4f3cee8 Exists: true
   Reading patch net.minecraft.world.level.block.FlowerPotBlock.binpatch
     Checksum: dfc13dcd Exists: true
+  Reading patch net.minecraft.world.level.block.FungusBlock.binpatch
+    Checksum: 3c9e2d7d Exists: true
   Reading patch net.minecraft.world.level.block.GrowingPlantHeadBlock.binpatch
     Checksum: 251d2503 Exists: true
   Reading patch net.minecraft.world.level.block.LeavesBlock.binpatch
@@ -2357,6 +2363,10 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: ac855f18 Exists: true
   Reading patch net.minecraft.world.level.block.entity.SpawnerBlockEntity.binpatch
     Checksum: 5be252a3 Exists: true
+  Reading patch net.minecraft.world.level.block.grower.AbstractMegaTreeGrower.binpatch
+    Checksum: 7dfe63a6 Exists: true
+  Reading patch net.minecraft.world.level.block.grower.AbstractTreeGrower.binpatch
+    Checksum: e8e06a01 Exists: true
   Reading patch net.minecraft.world.level.block.piston.PistonBaseBlock$1.binpatch
     Checksum: dda74cbd Exists: true
   Reading patch net.minecraft.world.level.block.piston.PistonBaseBlock.binpatch
@@ -2455,6 +2465,8 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 7eca2ac5 Exists: true
   Reading patch net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration.binpatch
     Checksum: 88a34ad9 Exists: true
+  Reading patch net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer.binpatch
+    Checksum: 9ff40ed0 Exists: true
   Reading patch net.minecraft.world.level.levelgen.structure.Structure$GenerationContext.binpatch
     Checksum: 643fc180 Exists: true
   Reading patch net.minecraft.world.level.levelgen.structure.Structure$GenerationStub.binpatch
@@ -2599,7 +2611,7 @@ Loading patches file: H:\FORGE 1.18\ToTheMoon  NEW\build\fg_cache\net\minecraftf
     Checksum: 58e446b8 Exists: true
   Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider.binpatch
     Checksum: 8bce6adf Exists: true
-Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar
+Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar
   Patching com/mojang/blaze3d/pipeline/RenderTarget 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager$BlendState 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager$BooleanState 1/1
@@ -2874,6 +2886,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/client/renderer/block/ModelBlockRenderer$Cache 1/1
   Patching net/minecraft/client/renderer/block/ModelBlockRenderer$SizeInfo 1/1
   Patching net/minecraft/client/renderer/block/ModelBlockRenderer 1/1
+  Patching net/minecraft/client/renderer/block/model/BakedQuad 1/1
   Patching net/minecraft/client/renderer/block/model/BlockElementFace$Deserializer 1/1
   Patching net/minecraft/client/renderer/block/model/BlockElementFace 1/1
   Patching net/minecraft/client/renderer/block/model/BlockModel$Deserializer 1/1
@@ -3280,6 +3293,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/entity/ai/behavior/CrossbowAttack$CrossbowState 1/1
   Patching net/minecraft/world/entity/ai/behavior/CrossbowAttack 1/1
   Patching net/minecraft/world/entity/ai/behavior/HarvestFarmland 1/1
+  Patching net/minecraft/world/entity/ai/behavior/StartAttacking 1/1
   Patching net/minecraft/world/entity/ai/behavior/Swim 1/1
   Patching net/minecraft/world/entity/ai/control/MoveControl$Operation 1/1
   Patching net/minecraft/world/entity/ai/control/MoveControl 1/1
@@ -3705,6 +3719,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/FarmBlock 1/1
   Patching net/minecraft/world/level/block/FireBlock 1/1
   Patching net/minecraft/world/level/block/FlowerPotBlock 1/1
+  Patching net/minecraft/world/level/block/FungusBlock 1/1
   Patching net/minecraft/world/level/block/GrowingPlantHeadBlock 1/1
   Patching net/minecraft/world/level/block/LeavesBlock 1/1
   Patching net/minecraft/world/level/block/LiquidBlock 1/1
@@ -3767,6 +3782,8 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/block/entity/ShulkerBoxBlockEntity 1/1
   Patching net/minecraft/world/level/block/entity/SpawnerBlockEntity$1 1/1
   Patching net/minecraft/world/level/block/entity/SpawnerBlockEntity 1/1
+  Patching net/minecraft/world/level/block/grower/AbstractMegaTreeGrower 1/1
+  Patching net/minecraft/world/level/block/grower/AbstractTreeGrower 1/1
   Patching net/minecraft/world/level/block/piston/PistonBaseBlock$1 1/1
   Patching net/minecraft/world/level/block/piston/PistonBaseBlock 1/1
   Patching net/minecraft/world/level/block/piston/PistonMovingBlockEntity$1 1/1
@@ -3816,6 +3833,7 @@ Processing: C:\Users\HP\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\joine
   Patching net/minecraft/world/level/levelgen/feature/MonsterRoomFeature 1/1
   Patching net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration$TreeConfigurationBuilder 1/1
   Patching net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration 1/1
+  Patching net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacer 1/1
   Patching net/minecraft/world/level/levelgen/structure/Structure$GenerationContext 1/1
   Patching net/minecraft/world/level/levelgen/structure/Structure$GenerationStub 1/1
   Patching net/minecraft/world/level/levelgen/structure/Structure$StructureSettings 1/1

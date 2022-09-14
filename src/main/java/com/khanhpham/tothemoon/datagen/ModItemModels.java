@@ -3,6 +3,7 @@ package com.khanhpham.tothemoon.datagen;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
+import com.khanhpham.tothemoon.core.items.CraftingMaterial;
 import com.khanhpham.tothemoon.core.items.GearItem;
 import com.khanhpham.tothemoon.core.items.HandheldItem;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -31,16 +32,20 @@ public class ModItemModels extends ItemModelProvider {
         List<? extends Item> items = ModItems.ITEM_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).toList();
 
         for (Item item : items) {
-            if (!(item instanceof GearItem)) {
-                if (item instanceof HandheldItem || item instanceof DiggerItem) {
-                    String path = RegistryEntries.getKeyFrom((item)).getPath();
-                    withExistingParent(path, new ResourceLocation("item/handheld")).texture("layer0", "item/" + path);
-                } else simpleItem(item);
-            }
+            String path = RegistryEntries.getKeyFrom((item)).getPath();
+            String texturePath = "item/" + path;
+            if (item instanceof HandheldItem || item instanceof DiggerItem) {
+                withExistingParent(path, new ResourceLocation("item/handheld")).texture("layer0", texturePath);
+            } else simpleItem(item);
         }
 
+        CraftingMaterial.ALL_MATERIALS.stream().map(CraftingMaterial::getGear).forEach(gear -> {
+            String itemId = RegistryEntries.getKeyFrom(gear).getPath();
+            String texturePath = "item/" + itemId;
+            withExistingParent(itemId, modLoc("item/templates/gear_template")).texture("gear", texturePath);
+        });
+
         ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(b -> !(b instanceof MachineFrameBlock || b instanceof BatteryBlock)).forEach(this::blockItem);
-        //withExistingParent(ModUtils.registryToPath(ModBlocks.BATTERY.get()), modLoc("block/battery_level_0"));
         batteryItemModel(ModBlocks.BATTERY.get());
         batteryItemModel(ModBlocks.REDSTONE_BATTERY.get());
         batteryItemModel(ModBlocks.STEEL_BATTERY.get());
