@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/redstone_steel_alloy"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "tothemoon:redstone_steel_alloy_ingot"
+  }
+}

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "A": {
-      "item": "tothemoon:uranium_ingot"
+      "item": "tothemoon:uranium_armor_plating"
     }
   },
   "pattern": [

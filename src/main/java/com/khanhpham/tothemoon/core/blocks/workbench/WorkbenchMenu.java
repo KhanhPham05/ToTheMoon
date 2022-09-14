@@ -54,7 +54,7 @@ public final class WorkbenchMenu extends AbstractContainerMenu {
         super.addSlot(new WorkbenchResultSlot(this, this.resultContainer, 0, 156, 54));
 
         //hammer
-        this.addSlot(new SlotPlacePredicate(this.workbenchContainer, 0, 22, 36, stack -> stack.is(ModItemTags.GENERAL_TTM_HAMMERS)));
+        this.addSlot(new SlotPlacePredicate(this.workbenchContainer, 0, 22, 36, stack -> stack.is(ModItemTags.GENERAL_HAMMERS)));
         //extra
         this.addSlot(new Slot(this.workbenchContainer, 1, 22, 73));
 

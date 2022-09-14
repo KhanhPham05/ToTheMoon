@@ -1,0 +1,26 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [48, 48],
+	"textures": {
+		"0": "tothemoon:block/brick_furnace/big_netherbrick_furnace_bottom",
+		"1": "tothemoon:block/brick_furnace/big_netherbrick_furnace_front",
+		"3": "tothemoon:block/brick_furnace/big_netherbrick_furnace_side",
+		"4": "tothemoon:block/brick_furnace/big_netherbrick_furnace_side_fluid",
+		"5": "tothemoon:block/brick_furnace/big_netherbrick_furnace_top",
+		"particle": "tothemoon:block/brick_furnace/big_netherbrick_furnace_bottom"
+	},
+	"elements": [
+		{
+			"from": [-16, -16, -16],
+			"to": [32, 32, 32],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	]
+}

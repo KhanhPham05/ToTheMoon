@@ -5,11 +5,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.function.Supplier;
 
 public class AppendableItemTagKey extends AbstractAppendableTag<Item> {
@@ -18,39 +15,20 @@ public class AppendableItemTagKey extends AbstractAppendableTag<Item> {
         super(mainTag);
     }
 
-    public TagKey<Item> append(String name, ItemLike block) {
+    public TagKey<Item> append(String name) {
+        return append(name, (ItemLike) null);
+    }
+
+    public TagKey<Item> append(String name, @Nullable ItemLike itemLike) {
         TagKey<Item> child = ItemTags.create(ModUtils.append(super.mainTag.location(), "/" + name));
-        super.map.put(child, block.asItem());
+        if (itemLike != null) super.map.put(child, itemLike.asItem()); else super.map.put(child, null);
         return child;
     }
 
     @Override
     public TagKey<Item> append(String name, Supplier<? extends Item> supplier) {
-        TagKey<Item> child = ItemTags.create(ModUtils.append(super.mainTag.location(), "/" + name));
-        super.map.put(child, supplier.get());
-        return child;
+        return append(name, supplier.get());
     }
 
-    /**
-     * This class stores tags for a specific crafting process
-     * e.g : {@code items:forge:storage_blocks/iron -> items:forge:ingots/iron}
-     */
-    public static final class OneWayProcessable extends AppendableItemTagKey {
 
-        private final HashMap<TagKey<Item>, Supplier<? extends ItemLike>> processMap = new HashMap<>();
-
-        public OneWayProcessable(TagKey<Item> mainTag) {
-            super(mainTag);
-        }
-
-        public TagKey<Item> append(String name, Supplier<? extends Item> from, Supplier<? extends ItemLike> craftTo) {
-            TagKey<Item> tag = super.append(name, from);
-            this.processMap.put(tag, craftTo);
-            return tag;
-        }
-
-        public HashMap<TagKey<Item>, Supplier<? extends ItemLike>> getProcessMap() {
-            return processMap;
-        }
-    }
 }

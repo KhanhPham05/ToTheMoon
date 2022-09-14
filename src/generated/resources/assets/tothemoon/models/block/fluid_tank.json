@@ -1,9 +1,0 @@
-{
-  "parent": "tothemoon:block/templates/battery_base",
-  "textures": {
-    "battery_front": "tothemoon:block/fluid_tank_side",
-    "bottom": "tothemoon:block/fluid_tank_bottom",
-    "side": "tothemoon:block/fluid_tank_side",
-    "top": "tothemoon:block/fluid_tank_top"
-  }
-}

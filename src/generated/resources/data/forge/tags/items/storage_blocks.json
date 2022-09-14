@@ -1,10 +1,9 @@
 {
   "values": [
-    "#forge:storage_blocks/redstone_steel",
-    "#forge:storage_blocks/purified_quartz",
-    "#forge:storage_blocks/steel",
+    "#forge:storage_blocks/uranium",
     "#forge:storage_blocks/raw_uranium",
-    "#forge:storage_blocks/redstone_metal",
-    "#forge:storage_blocks/uranium"
+    "#forge:storage_blocks/steel",
+    "#forge:storage_blocks/redstone_steel_alloy",
+    "#forge:storage_blocks/redstone_metal"
   ]
 }

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "tothemoon:steel_block"
+      "tag": "forge:storage_blocks/steel"
     }
   ],
   "result": {

@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/redstone_metal"
+  },
+  "mold": {
+    "tag": "forge:gears/gold"
+  },
+  "result": {
+    "count": 1,
+    "item": "tothemoon:redstone_metal_gear"
+  }
+}

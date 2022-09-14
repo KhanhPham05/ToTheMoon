@@ -2,6 +2,7 @@ package com.khanhpham.tothemoon.core.abstracts;
 
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.core.energy.Energy;
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,9 +27,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -58,6 +57,10 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
         this.label = label;
         this.containerSize = containerSize;
         this.items = NonNullList.withSize(containerSize, ItemStack.EMPTY);
+    }
+
+    public static <T extends Comparable<T>> BlockState setNewBlockState(Level level, BlockPos pos, BlockState state, Property<T> property, T value) {
+        return ModUtils.setNewBlockState(level, pos, state, property, value);
     }
 
     protected boolean canTakeItem(int index) {
@@ -95,6 +98,7 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
     public ItemStack removeItem(int pIndex, int pCount) {
         return ContainerHelper.removeItem(this.items, pIndex, pCount);
     }
+
     @Override
     public ItemStack removeItemNoUpdate(int pIndex) {
         return ContainerHelper.takeItem(this.items, pIndex);
@@ -178,18 +182,9 @@ public abstract class EnergyItemCapableBlockEntity extends EnergyCapableBlockEnt
         return storage.getEnergyStored() >= storage.getMaxEnergyStored();
     }
 
-
     @javax.annotation.Nullable
     protected <C extends Container, T extends Recipe<C>> T getRecipe(Level level, RecipeType<T> recipeType, C container) {
         return level.getRecipeManager().getRecipeFor(recipeType, container, level).orElse(null);
-    }
-
-    protected <T extends Comparable<T>> BlockState setNewBlockState(Level level, BlockPos pos, BlockState state, Property<T> property, T value) {
-        if (!state.getValue(property).equals(value)) {
-            state = state.setValue(property, value);
-            level.setBlock(pos, state, 3);
-        }
-        return state;
     }
 
     @Override

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "A": {
-      "item": "tothemoon:raw_uranium_ore"
+      "item": "tothemoon:raw_uranium"
     }
   },
   "pattern": [

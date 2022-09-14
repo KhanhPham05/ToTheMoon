@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.core.blocks.BurnableBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.blocks.NoBlockItem;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryMenuScreen;
+import com.khanhpham.tothemoon.core.blocks.big_machines_components.IMultiblockComponent;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containerscreens.EnergyGeneratorMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterScreen;
@@ -15,6 +16,7 @@ import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScree
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorScreen;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchScreen;
+import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.ModItemModels;
@@ -36,6 +38,7 @@ import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -49,6 +52,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -85,7 +89,7 @@ public class ToTheMoon {
         @Nonnull
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.URANIUM_INGOT.get());
+            return new ItemStack(ModItems.URANIUM_MATERIAL.getIngot());
         }
     };
     public static final boolean IS_JEI_LOADED = ModList.get().isLoaded("jei");
@@ -199,7 +203,7 @@ public class ToTheMoon {
 
         @SubscribeEvent
         public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
-            var block = event.getPlacedBlock();
+            BlockState block = event.getPlacedBlock();
             Level level = Objects.requireNonNull(event.getEntity()).level;
 
             if (level.dimension().equals(THE_MOON_DIMENSION)) {
@@ -210,11 +214,16 @@ public class ToTheMoon {
                     level.setBlock(event.getPos(), Blocks.PACKED_ICE.defaultBlockState(), 3);
                 }
             }
+
+            if (block.is(Blocks.NETHER_BRICKS)) {
+                level.setBlock(event.getPos(), ModBlocks.STRUCTURE_NETHER_BRICKS.get().defaultBlockState(), 3);
+            }
         }
 
         @SubscribeEvent
         public static void onBlockBroken(BlockEvent.BreakEvent event) {
-            MultiblockManager.INSTANCE.checkAndRemoveMultiblocks(event.getPlayer().getLevel(), event.getPos());
+            if (event.getState().getBlock() instanceof IMultiblockComponent)
+                MultiblockManager.INSTANCE.checkAndRemoveMultiblocks(event.getPlayer().getLevel(), event.getPos());
         }
     }
 }

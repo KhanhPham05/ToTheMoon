@@ -1,8 +1,8 @@
 {
   "values": [
-    "tothemoon:steel_ingot",
-    "tothemoon:uranium_ingot",
-    "tothemoon:redstone_metal",
-    "tothemoon:redstone_steel_alloy"
+    "#forge:ingots/uranium",
+    "#forge:ingots/steel",
+    "#forge:ingots/redstone_steel_alloy",
+    "#forge:ingots/redstone_metal"
   ]
 }

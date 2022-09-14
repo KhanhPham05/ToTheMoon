@@ -1,16 +1,16 @@
-// 1.19.2	2022-09-02T14:58:40.6125516	Tags for minecraft:block
+// 1.19.2	2022-09-13T21:19:53.3513214	Tags for minecraft:block
 9f942cfbe44614caf21719fe34b6b0960cde9a6f data/forge/tags/blocks/ores/quartz.json
 287d0fe5ae3bebac60dd586b85a6e96baa0a4c37 data/forge/tags/blocks/ores/uranium.json
 c9e516b2c4c505d39091fc4ae5b1248683d3ab60 data/forge/tags/blocks/ore_bearing_ground/stone.json
 141eb0c82332420476d515cad7b28a2c51ba574e data/forge/tags/blocks/ore_rates/dense.json
 7e79c96d85819309db4e48672b9331b2d1a1c953 data/forge/tags/blocks/ore_rates/singular.json
-15a0d11d1afc59d14af9182c0c6f4bf0386c0ff9 data/forge/tags/blocks/sheetmetals.json
+efeeaed310e9f75a0874728c41d607f85707d640 data/forge/tags/blocks/sheetmetals.json
 7e189732f9c86bdc25d9bbbdb67dfab5b4fedf94 data/forge/tags/blocks/sheetmetals/copper.json
 e0c861f683be8d956f1ac626717cc13e0061b113 data/forge/tags/blocks/sheetmetals/gold.json
 bdb34846e7ebec2bf237385179e8960d25f87d4b data/forge/tags/blocks/sheetmetals/iron.json
 ff59a6cbb68cb5622f3155c63406ff7f8a2d7754 data/forge/tags/blocks/sheetmetals/steel.json
 c9e516b2c4c505d39091fc4ae5b1248683d3ab60 data/forge/tags/blocks/stone.json
-74b851dd8f79bef09e6a55f9ce4b896e531375b6 data/minecraft/tags/blocks/mineable/pickaxe.json
+70b90a4703d412cd265901cbf154bbc043996c9a data/minecraft/tags/blocks/mineable/pickaxe.json
 10211cff7a8d433497a622aa11a7cb00fd7724d9 data/minecraft/tags/blocks/mineable/shovel.json
 f1e96faa389cf48a00fa323de1f845bc20fbbb9b data/minecraft/tags/blocks/needs_iron_tool.json
 0926a74df7618c414be544b72a8984f351a5c115 data/minecraft/tags/blocks/needs_stone_tool.json
