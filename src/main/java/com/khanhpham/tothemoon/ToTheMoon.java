@@ -16,13 +16,12 @@ import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScree
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorScreen;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchScreen;
-import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerBlockEntity;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
-import com.khanhpham.tothemoon.datagen.ModItemModels;
+import com.khanhpham.tothemoon.datagen.modelandstate.ModItemModels;
 import com.khanhpham.tothemoon.datagen.advancement.ModAdvancementProvider;
-import com.khanhpham.tothemoon.datagen.blocks.ModBlockModels;
-import com.khanhpham.tothemoon.datagen.blocks.ModBlockStateProvider;
+import com.khanhpham.tothemoon.datagen.modelandstate.ModBlockModels;
+import com.khanhpham.tothemoon.datagen.modelandstate.ModBlockStateProvider;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
@@ -38,7 +37,6 @@ import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -113,7 +111,6 @@ public class ToTheMoon {
         ModBlocks.init();
         ModItems.start();
         ModBlockEntities.init();
-
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -213,10 +210,6 @@ public class ToTheMoon {
                 if (block.is(Blocks.WATER)) {
                     level.setBlock(event.getPos(), Blocks.PACKED_ICE.defaultBlockState(), 3);
                 }
-            }
-
-            if (block.is(Blocks.NETHER_BRICKS)) {
-                level.setBlock(event.getPos(), ModBlocks.STRUCTURE_NETHER_BRICKS.get().defaultBlockState(), 3);
             }
         }
 

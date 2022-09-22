@@ -154,11 +154,11 @@ public class CraftingMaterial {
     public void generateRecipes(Consumer<FinishedRecipe> consumer) {
         if (this.getIngotTag() != null && this.ingot != null) {
             MetalPressRecipeBuilder.press(this.getIngotTag(), ModItemTags.PLATE_MOLD, this.getPlate(), 2).save(consumer, "tothemoon:metal_pressing/plate_" + this.plate.getId().getPath());
-            MetalPressRecipeBuilder.press(this.getIngotTag(), ModItemTags.GEARS_GOLD, this.getGear(), 1).save(consumer, "tothemoon:metal_pressing/gear_" + this.plate.getId().getPath());
-            MetalPressRecipeBuilder.press(this.getIngotTag(), ModItemTags.ROD_MOLD, this.getRod(), 2).save(consumer, "tothemoon:metal_pressing/rod" + this.plate.getId().getPath() + "_from_ingot");
+            MetalPressRecipeBuilder.press(this.getIngotTag(), ModItemTags.GEAR_MOLD, this.getGear(), 1).save(consumer, "tothemoon:metal_pressing/gear_" + this.plate.getId().getPath());
+            MetalPressRecipeBuilder.press(this.getIngotTag(), ModItemTags.ROD_MOLD, this.getRod(), 2).save(consumer, "tothemoon:metal_pressing/rod_" + this.plate.getId().getPath() + "_from_ingot");
             ShapelessRecipeBuilder.shapeless(this.getPlate(), 1).unlockedBy("tick", ModRecipeProvider.tick()).requires(ModItemTags.GENERAL_HAMMERS).requires(this.getIngotTag()).save(consumer, ModUtils.modLoc("shapeless_crafting/" + this.plate.getId().getPath()));
             SimpleCookingRecipeBuilder.blasting(Ingredient.of(this.getDustTag()), this.getIngot(), 1.0f, 100).unlockedBy("tick", ModRecipeProvider.tick()).save(consumer, ModUtils.modLoc("smelting/" + RegistryEntries.ITEM.getPath(ingot.get())));
-            MetalPressRecipeBuilder.press(this.getIngotTag(), ModItemTags.GEAR_MOLD, this.ingot.get(), 1).save(consumer, "metal_pressing/gear_" + this.gear.getId().getPath());
+            //MetalPressRecipeBuilder.press(this.getIngotTag(), ModItemTags.GEAR_MOLD, this.ingot.get(), 1).save(consumer, "metal_pressing/gear_" + this.gear.getId().getPath());
 
             if (this.wire != null) {
                 ShapelessRecipeBuilder.shapeless(this.getWire(), 1)

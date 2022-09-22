@@ -4,7 +4,7 @@
     "tag": "forge:ingots/redstone_metal"
   },
   "mold": {
-    "tag": "forge:gears/gold"
+    "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
     "count": 1,

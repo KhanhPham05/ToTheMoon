@@ -15,7 +15,10 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import oshi.util.tuples.Pair;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -98,7 +101,6 @@ public class ModTagProvider {
     }
 
     public static final class ModBlockTagsProvider extends BlockTagsProvider {
-
         public ModBlockTagsProvider(DataGenerator pGenerator, ExistingFileHelper existingFileHelper) {
             super(pGenerator, ToTheMoon.MOD_ID, existingFileHelper);
         }
@@ -117,10 +119,11 @@ public class ModTagProvider {
             tag(Tags.Blocks.ORE_RATES_SINGULAR, MOON_GOLD_ORE, MOON_QUARTZ_ORE, MOON_IRON_ORE, MOON_URANIUM_ORE, DEEPSLATE_URANIUM_ORE);
             tag(Tags.Blocks.ORE_RATES_DENSE, MOON_REDSTONE_ORE);
             tag(Tags.Blocks.ORES_QUARTZ, MOON_QUARTZ_ORE);
-            tag(ModBlockTags.ORES_URANIUM, DEEPSLATE_URANIUM_ORE, MOON_URANIUM_ORE);
+            //tag(ModBlockTags.ORES_URANIUM, DEEPSLATE_URANIUM_ORE, MOON_URANIUM_ORE);
             joinTags(BLOCK_SHEETMETALS);
             super.tag(ModToolTags.NEEDS_STEEL_TOOLS).addTags(ModBlockTags.ORES_URANIUM);
             tag(Tags.Blocks.STONE, MOON_ROCK);
+            joinTags(ModBlockTags.GENERAL_ORES);
         }
 
         @SafeVarargs

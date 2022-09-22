@@ -1,5 +1,8 @@
 package com.khanhpham.tothemoon.datagen.tags;
 
+import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 
 import java.util.HashMap;
@@ -14,7 +17,8 @@ abstract class AbstractAppendableTag<T> {
         this.mainTag = mainTag;
     }
 
-    public abstract TagKey<T> append(String name, Supplier<? extends T> supplier);
+    @SuppressWarnings("unchecked")
+    public abstract TagKey<T> append(String name, Supplier<? extends T>... supplier);
 
     public TagKey<T> getMainTag() {
         return mainTag;
@@ -28,4 +32,7 @@ abstract class AbstractAppendableTag<T> {
         return this.map.keySet();
     }
 
+    protected TagKey<T> createTag(ResourceKey<Registry<T>> registry, String name) {
+        return TagKey.create(registry, ModUtils.append(this.mainTag.location(), "/" + name));
+    }
 }

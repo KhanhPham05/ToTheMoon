@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyItemCapableBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.AbstractEnergyGeneratorBlock;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.BaseEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.containers.EnergyGeneratorMenu;
 import com.khanhpham.tothemoon.core.energy.Energy;
 import com.khanhpham.tothemoon.core.energy.GeneratorEnergyStorage;
@@ -75,16 +75,16 @@ public abstract class AbstractEnergyGeneratorBlockEntity extends EnergyItemCapab
         if (this.burningTime > 0) {
             this.burningTime--;
             energy.generateEnergy();
-            state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, true);
+            state = setNewBlockState(level, pos, state, BaseEnergyGeneratorBlock.LIT, true);
         } else if (!this.energy.isFull() && !items.get(0).isEmpty()) {
             int burnTime = ForgeHooks.getBurnTime(items.get(0), null);
             if (burnTime > 0) {
                 items.get(0).shrink(1);
                 burningDuration = burnTime;
                 burningTime = burningDuration;
-                state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, true);
-            } else state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, false);
-        } else state = setNewBlockState(level, pos, state, AbstractEnergyGeneratorBlock.LIT, false);
+                state = setNewBlockState(level, pos, state, BaseEnergyGeneratorBlock.LIT, true);
+            } else state = setNewBlockState(level, pos, state, BaseEnergyGeneratorBlock.LIT, false);
+        } else state = setNewBlockState(level, pos, state, BaseEnergyGeneratorBlock.LIT, false);
 
         collectBlockEntities(level, pos);
         transferEnergy();

@@ -6,14 +6,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Blocks;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class ModBlockTags {
-    public static final TagKey<Block> ORES_URANIUM = append(Blocks.ORES, "/uranium");
+    public static final AppendableBlockTagKey GENERAL_ORES = new AppendableBlockTagKey(Blocks.ORES);
+    public static final TagKey<Block> ORES_URANIUM = GENERAL_ORES.append("uranium", ModBlocks.DEEPSLATE_URANIUM_ORE, ModBlocks.MOON_URANIUM_ORE);
     public static final AppendableBlockTagKey BLOCK_SHEETMETALS = createAppendable(new ResourceLocation("forge", "sheetmetals"));
-
     public static final TagKey<Block> BLOCK_SHEETMETAL_COPPER = append(BLOCK_SHEETMETALS, "copper", ModBlocks.COPPER_SHEET_BLOCK);
     public static final TagKey<Block> BLOCK_SHEETMETAL_GOLD = append(BLOCK_SHEETMETALS, "gold", ModBlocks.GOLD_SHEET_BLOCK);
     public static final TagKey<Block> BLOCK_SHEETMETAL_IRON = append(BLOCK_SHEETMETALS, "iron", ModBlocks.IRON_SHEET_BLOCK);
@@ -31,7 +33,7 @@ public class ModBlockTags {
         return new AppendableBlockTagKey(id);
     }
 
-    private static TagKey<Block> append(TagKey<Block> tag, String suf) {
+    public static TagKey<Block> append(TagKey<Block> tag, String suf) {
         return BlockTags.create(ModUtils.append(tag.location(), suf));
     }
 

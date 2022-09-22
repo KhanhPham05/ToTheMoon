@@ -4,6 +4,7 @@ import com.khanhpham.tothemoon.advancements.ModdedTriggers;
 import com.khanhpham.tothemoon.advancements.MultiblockFormedTrigger;
 import com.khanhpham.tothemoon.core.blockentities.FluidCapableBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.big_machines_components.FluidAcceptorBlock;
 import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchBlock;
 import com.khanhpham.tothemoon.core.recipes.HighHeatSmeltingRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;

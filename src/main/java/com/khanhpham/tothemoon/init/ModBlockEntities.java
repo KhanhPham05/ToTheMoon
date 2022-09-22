@@ -9,10 +9,7 @@ import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.tiered.RedstoneBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.tiered.SteelBatteryBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.CopperEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.DiamondEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.GoldEnergyGeneratorBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.IronEnergyGeneratorBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.*;
 import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankBlockEntity;
@@ -40,16 +37,17 @@ public class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<MetalPressBlockEntity>> METAL_PRESS;
 
-    public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> BATTERY;
+    public static final RegistryObject<BlockEntityType<BatteryBlockEntity>> BATTERY;
     public static final RegistryObject<BlockEntityType<EnergySmelterBlockEntity>> ENERGY_SMELTER;
     public static final RegistryObject<BlockEntityType<CreativeBatteryBlockEntity>> CREATIVE_BATTERY;
 
     public static final RegistryObject<BlockEntityType<NetherBrickFurnaceControllerBlockEntity>> BRICK_FURNACE;
     public static final RegistryObject<BlockEntityType<OreProcessorBlockEntity>> ENERGY_PROCESSOR;
-    public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> REDSTONE_BATTERY;
-    public static final RegistryObject<BlockEntityType<AbstractBatteryBlockEntity>> STEEL_BATTERY;
+    public static final RegistryObject<BlockEntityType<RedstoneBatteryBlockEntity>> REDSTONE_BATTERY;
+    public static final RegistryObject<BlockEntityType<SteelBatteryBlockEntity>> STEEL_BATTERY;
     //public static final RegistryObject<BlockEntityType<TagTranslatorBlockEntity>> TAG_TRANSLATOR;
     public static final RegistryObject<BlockEntityType<FluidTankBlockEntity>> FLUID_TANK;
+    public static final RegistryObject<BlockEntityType<NetheriteEnergyGeneratorBlockEntity>> NETHERITE_GENERATOR;
 
     static {
         ToTheMoon.LOG.info("Registering BEs");
@@ -69,6 +67,7 @@ public class ModBlockEntities {
         FLUID_TANK = register("fluid_tanks", () -> BlockEntityType.Builder.of(FluidTankBlockEntity::new, ModBlocks.FLUID_TANK.get()).build(null));
         REDSTONE_BATTERY = register("redstone_battery", () -> new BlockEntityType<>(RedstoneBatteryBlockEntity::new, Collections.singleton(ModBlocks.REDSTONE_BATTERY.get()), null));
         STEEL_BATTERY = register("steel_battery", () -> new BlockEntityType<>(SteelBatteryBlockEntity::new, Collections.singleton(ModBlocks.STEEL_BATTERY.get()), null));
+        NETHERITE_GENERATOR = register("netherite_generator", () -> BlockEntityType.Builder.of(NetheriteEnergyGeneratorBlockEntity::new, ModBlocks.NETHERITE_ENERGY_GENERATOR.get()).build(null));
     }
 
     private ModBlockEntities() {

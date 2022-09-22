@@ -91,7 +91,10 @@ public class ModLootTables extends LootTableProvider {
                     , SMOOTH_PURIFIED_QUARTZ_BLOCK, MOON_ROCK_BARREL, COPPER_ENERGY_GENERATOR
                     , IRON_ENERGY_GENERATOR, ALLOY_SMELTER, METAL_PRESS, TAG_TRANSLATOR
                     , WORKBENCH, BLACKSTONE_FLUID_ACCEPTOR, NETHER_BRICKS_FLUID_ACCEPTOR
-                    , ORE_PROCESSOR
+                    , ORE_PROCESSOR, NETHERITE_ENERGY_GENERATOR, ZIRCONIUM_BLOCK, ZIRCONIUM_ALLOY_BLOCK
+                    , SMOOTH_METEORITE, RAW_ZIRCONIUM_BLOCK, PURE_ZIRCONIUM, POLISHED_METEORITE
+                    , METEORITE_ZIRCONIUM_ORE, METEORITE_TILES, METEORITE_LAMP, METEORITE_BRICKS
+                    , METEORITE, GILDED_METEORITE_BRICKS, ERODED_METEORITE, COBBLED_METEORITE
             );
         }
 
@@ -105,7 +108,6 @@ public class ModLootTables extends LootTableProvider {
 
         @Override
         protected void addTables() {
-            //ModUtils.info("Creating loot tables");
             this.createOreDrops(ModBlocks.MOON_IRON_ORE, Items.RAW_IRON);
             this.createOreDrops(ModItems.RAW_URANIUM_ORE.get(), ModBlocks.MOON_URANIUM_ORE, DEEPSLATE_URANIUM_ORE);
             this.createOreDrops(ModBlocks.MOON_GOLD_ORE, Items.RAW_GOLD);
