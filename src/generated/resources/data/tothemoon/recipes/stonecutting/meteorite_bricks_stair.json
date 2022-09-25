@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "tothemoon:meteorite_bricks"
+  },
+  "result": "tothemoon:meteorite_bricks_stair"
+}

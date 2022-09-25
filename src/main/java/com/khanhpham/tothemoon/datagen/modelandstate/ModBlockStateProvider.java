@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.datagen.modelandstate;
 
 import com.khanhpham.tothemoon.ToTheMoon;
+import com.khanhpham.tothemoon.core.blocks.DecorationBlocks;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -49,6 +50,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         this.slabBlock(ModBlocks.COBBLED_MOON_ROCK_SLAB.get(), ModBlocks.COBBLED_MOON_ROCK.get());
         this.horizontalFacingBlock(ModBlocks.CREATIVE_BATTERY.get());
         specialBlocks();
+
+        DecorationBlocks.ALL_DECORATION_BLOCKS.forEach((block) -> block.registerStateAndModels(this));
     }
 
 

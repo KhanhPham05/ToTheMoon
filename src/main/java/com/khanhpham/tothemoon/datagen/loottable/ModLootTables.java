@@ -1,6 +1,7 @@
 package com.khanhpham.tothemoon.datagen.loottable;
 
 import com.google.common.collect.ImmutableList;
+import com.khanhpham.tothemoon.core.blocks.DecorationBlocks;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -31,14 +32,13 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.khanhpham.tothemoon.init.ModBlocks.*;
 
@@ -72,11 +72,12 @@ public class ModLootTables extends LootTableProvider {
 
 
     public static final class ModBlockLoots extends BlockLoot {
-        private static final ImmutableList<Supplier<? extends Block>> DROP_SELF_BLOCKS;
+        private static final List<Supplier<? extends Block>> DROP_SELF_BLOCKS;
         private static final Set<Block> knownBlocks = BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
 
         static {
-            DROP_SELF_BLOCKS = ImmutableList.of(SMOOTH_BLACKSTONE
+            DROP_SELF_BLOCKS = Stream.of(
+                    SMOOTH_BLACKSTONE
                     , NETHER_BRICK_FURNACE_CONTROLLER, CREATIVE_BATTERY
                     , ENERGY_SMELTER, REDSTONE_STEEL_ALLOY_SHEET_BLOCK, URANIUM_BLOCK
                     , RAW_URANIUM_BLOCK, COBBLED_MOON_ROCK, COBBLED_MOON_ROCK_SLAB, COBBLED_MOON_ROCK_STAIR
@@ -95,7 +96,16 @@ public class ModLootTables extends LootTableProvider {
                     , SMOOTH_METEORITE, RAW_ZIRCONIUM_BLOCK, PURE_ZIRCONIUM, POLISHED_METEORITE
                     , METEORITE_ZIRCONIUM_ORE, METEORITE_TILES, METEORITE_LAMP, METEORITE_BRICKS
                     , METEORITE, GILDED_METEORITE_BRICKS, ERODED_METEORITE, COBBLED_METEORITE
-            );
+            ).collect(Collectors.toList());
+
+            for (DecorationBlocks decorationBlock : DecorationBlocks.ALL_DECORATION_BLOCKS) {
+                if (decorationBlock.hasStairBlock()) {
+                    DROP_SELF_BLOCKS.add(decorationBlock::getStairBlock);
+                }
+                if (decorationBlock.hasSlabBlock()) {
+                    DROP_SELF_BLOCKS.add(decorationBlock::getSlabBlock);
+                }
+            }
         }
 
         public ModBlockLoots() {

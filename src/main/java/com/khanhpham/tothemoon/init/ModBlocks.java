@@ -3,6 +3,7 @@ package com.khanhpham.tothemoon.init;
 import com.google.common.collect.ImmutableSet;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
 import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
+import com.khanhpham.tothemoon.core.blocks.DecorationBlocks;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
@@ -33,26 +34,16 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.HashSet;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-
-    @Deprecated
-    public static final HashSet<Block> MODDED_NON_SOLID_BLOCKS = new HashSet<>();
     public static final DeferredRegister<Block> BLOCK_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCKS, "tothemoon");
-
     public static final RegistryObject<MachineFrameBlock.Copper> COPPER_MACHINE_FRAME = register("copper_machine_frame", MachineFrameBlock.Copper::new);
     public static final RegistryObject<MachineFrameBlock.Steel> STEEL_MACHINE_FRAME = register("steel_machine_frame", MachineFrameBlock.Steel::new);
     public static final RegistryObject<MachineFrameBlock.Redstone> REDSTONE_MACHINE_FRAME = register("redstone_machine_frame", MachineFrameBlock.Redstone::new);
-
     public static final RegistryObject<GlassBlock> ANTI_PRESSURE_GLASS = register("anti_pressure_glass", () -> new GlassBlock(BlockBehaviour.Properties.of(Material.STONE, DyeColor.LIGHT_GRAY).strength(4.5f, 7).sound(SoundType.STONE).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(ModBlocks::never)));
-
-
     public static final RegistryObject<Block> ZIRCONIUM_BLOCK = registerStorageBlock("zirconium_block");
     public static final RegistryObject<Block> ZIRCONIUM_ALLOY_BLOCK = registerStorageBlock("zirconium_alloy_block");
-    //ZIRCONIUM_BLOCK, ZIRCONIUM_ALLOY_BLOCK, SMOOTH_METEORITE, RAW_ZIRCONIUM_BLOCK, PURE_ZIRCONIUM, POLISHED_METEORITE, METEORITE_ZIRCONIUM_ORE, METEORITE_TILES
-    //,METEORITE_LAMP, METEORITE_BRICKS, METEORITE, GILDED_METEORITE_BRICKS, ERODED_METEORITE, COBBLED_METEORITE
     public static final RegistryObject<Block> SMOOTH_METEORITE = register("smooth_meteorite", property().strength(4.0f, 5.5f));
     public static final RegistryObject<Block> RAW_ZIRCONIUM_BLOCK = register("raw_zirconium_block", property(Blocks.RAW_GOLD_BLOCK));
     public static final RegistryObject<Block> PURE_ZIRCONIUM = register("pure_zirconium_block", property(Blocks.GOLD_BLOCK));
@@ -127,6 +118,11 @@ public class ModBlocks {
     public static final RegistryObject<NetherBrickFurnaceBlock> NETHER_BRICK_FURNACE_CONTROLLER = registerBlockEntity("netherbrick_furnace_controller", () -> new NetherBrickFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS)));
     public static final RegistryObject<TagTranslatorBlock> TAG_TRANSLATOR = register("tag_translator", TagTranslatorBlock::new);
     public static final RegistryObject<OreProcessorBlock> ORE_PROCESSOR = registerBlockEntity("ore_processor", OreProcessorBlock::new);
+
+    public static final DecorationBlocks METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(METEORITE).setBricks(METEORITE_BRICKS);
+    public static final DecorationBlocks METEORITE_BRICKS_DECORATION = DecorationBlocks.Builder.buildBoth(METEORITE_BRICKS);
+    public static final DecorationBlocks COBBLED_METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(COBBLED_METEORITE);
+    public static final DecorationBlocks ERODED_METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(ERODED_METEORITE);
 
     static {
         SOLID_BLOCKS = ImmutableSet.of(
@@ -204,25 +200,14 @@ public class ModBlocks {
 
     private static RegistryObject<Block> registerStorageBlock(String materialName) {
         return register(materialName, () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    }    public static final RegistryObject<BatteryBlock<BatteryBlockEntity>> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity.ENERGY_CAPACITY, ModBlockEntities.BATTERY, BatteryBlockEntity::new));
+    }
 
-
-
-
-
+    public static final RegistryObject<BatteryBlock<BatteryBlockEntity>> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity.ENERGY_CAPACITY, ModBlockEntities.BATTERY, BatteryBlockEntity::new));
     public static final RegistryObject<BatteryBlock<SteelBatteryBlockEntity>> STEEL_BATTERY = registerBlockEntity("steel_battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.copy(BATTERY.get()), SteelBatteryBlockEntity.STEEL_TIER_CAPACITY, ModBlockEntities.STEEL_BATTERY, SteelBatteryBlockEntity::new));
-
-
     public static final RegistryObject<BatteryBlock<RedstoneBatteryBlockEntity>> REDSTONE_BATTERY = registerBlockEntity("redstone_battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.copy(BATTERY.get()), RedstoneBatteryBlockEntity.REDSTONE_TIER_ENERGY, ModBlockEntities.REDSTONE_BATTERY, RedstoneBatteryBlockEntity::new));
-
-
     public static final RegistryObject<CreativeBatteryBlock> CREATIVE_BATTERY = register("creative_battery", () -> new CreativeBatteryBlock(BlockBehaviour.Properties.copy(BATTERY.get())));
-
-
     public static final RegistryObject<BaseEnergyGeneratorBlock<GoldEnergyGeneratorBlockEntity>> GOLD_ENERGY_GENERATOR = registerBlockEntity("gold_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.GOLD_ENERGY_GENERATOR_TE, GoldEnergyGeneratorBlockEntity::new));
     public static final RegistryObject<BaseEnergyGeneratorBlock<CopperEnergyGeneratorBlockEntity>> COPPER_ENERGY_GENERATOR = registerBlockEntity("copper_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 5).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.COPPER_ENERGY_GENERATOR_TE, CopperEnergyGeneratorBlockEntity::new));
     public static final RegistryObject<BaseEnergyGeneratorBlock<IronEnergyGeneratorBlockEntity>> IRON_ENERGY_GENERATOR = registerBlockEntity("iron_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.IRON_ENERGY_GENERATOR_TE, IronEnergyGeneratorBlockEntity::new));
     public static final RegistryObject<MetalPressBlock> METAL_PRESS = registerBlockEntity("metal_press", () -> new MetalPressBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 4).sound(ModSoundTypes.METAL_MACHINE), MetalPressBlockEntity::new));
-
-
 }

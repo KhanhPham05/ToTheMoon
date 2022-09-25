@@ -1,5 +1,6 @@
 package com.khanhpham.tothemoon.datagen.recipes.provider;
 
+import com.khanhpham.tothemoon.core.blocks.DecorationBlocks;
 import com.khanhpham.tothemoon.core.items.CraftingMaterial;
 import com.khanhpham.tothemoon.core.items.HammerItem;
 import com.khanhpham.tothemoon.datagen.recipes.builders.*;
@@ -100,6 +101,8 @@ public class ModRecipeProvider extends RecipeProvider {
         this.oreSmelting(consumer, Ingredient.of(ModBlocks.MOON_QUARTZ_ORE.get()), ModItems.PURIFIED_QUARTZ.get(), "purified_quartz");
 
         helper.shapelessCrafting(ModItems.URANIUM_ARMOR_PLATING.get(), 2, ModItems.URANIUM_MATERIAL.getPlateTag(), ModItems.URANIUM_MATERIAL.getPlateTag(), ModItems.STEEL_MATERIAL.getPlateTag());
+
+        DecorationBlocks.ALL_DECORATION_BLOCKS.forEach(d -> d.generateCraftingRecipes(consumer));
     }
 
     private void hammer(RecipeGeneratorHelper helper, Supplier<HammerItem> result, TagKey<Item> from) {

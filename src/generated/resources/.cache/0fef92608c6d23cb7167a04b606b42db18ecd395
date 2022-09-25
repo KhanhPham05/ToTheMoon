@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-20T20:56:25.0954167	Item Models: tothemoon
+// 1.19.2	2022-09-25T15:18:38.7677902	Item Models: tothemoon
 b0f6fb159b0576c935243e6e10ab91bb442cc7ca assets/tothemoon/models/item/alloy_smelter.json
 24fd7dd9f1551d84d7384679c66e33d5199dddb1 assets/tothemoon/models/item/amethyst_dust.json
 87a10ca93683af3a7463734b89299013a0e17089 assets/tothemoon/models/item/amethyst_gear.json
@@ -11,6 +11,8 @@ da738286b4bf87f3f784a6ee8ff4d73857d3cfff assets/tothemoon/models/item/anti_press
 bca512e5739d3dd8acaaefccb6c93660f993d95a assets/tothemoon/models/item/circuit_board.json
 1c4db48cafe0f38efdd67c9e774f95180c659fee assets/tothemoon/models/item/coal_dust.json
 0222d28535e318f686cd04f76d53e79765c08f70 assets/tothemoon/models/item/cobbled_meteorite.json
+6ec41462f480f324d295eaa4144ca6ad02aa655d assets/tothemoon/models/item/cobbled_meteorite_slab.json
+1cb7e70a5b467a693a3bc9233813bda7abd728fe assets/tothemoon/models/item/cobbled_meteorite_stair.json
 f6b7b5f84b16d511b0c6c2b92d578204060fc4fd assets/tothemoon/models/item/cobbled_moon_rock.json
 68d81cb6f702953bef11daf80375c5061be47032 assets/tothemoon/models/item/cobbled_moon_rock_slab.json
 2d091782898e8a056c6ae28c8f8ab05631b78162 assets/tothemoon/models/item/cobbled_moon_rock_stair.json
@@ -37,6 +39,8 @@ b3dd2881917e6823cf3bd8c7a363871357c33f34 assets/tothemoon/models/item/energy_sme
 10b1649f96f32b93eb377f6e3c7d3bb384a47811 assets/tothemoon/models/item/energy_upgrade_tier_1.json
 c3c977539de255e86a2b7523b4e4334fc9dfdeda assets/tothemoon/models/item/energy_upgrade_tier_2.json
 30e5dc220068c9ad8974ba45df5918e1b61c70ab assets/tothemoon/models/item/eroded_meteorite.json
+b9e1b56105fde706929bcc3e9871a712c9d34a00 assets/tothemoon/models/item/eroded_meteorite_slab.json
+3264aa126b25f0076f99fff248db34444ebe13eb assets/tothemoon/models/item/eroded_meteorite_stair.json
 186551588d00c668d9eba9e1bc88cba5907152f6 assets/tothemoon/models/item/fluid_tank.json
 847fac683a7afeef0f654bf46cebec19b0d6114e assets/tothemoon/models/item/gear_mold.json
 59ba6d0194e3936480c89a422e20fcadf80d8e40 assets/tothemoon/models/item/gilded_meteorite_bricks.json
@@ -62,7 +66,11 @@ d532262e6335fcc6bd2db7df205bd74115004b4a assets/tothemoon/models/item/lapis_plat
 d2f2feb8028c3906fc23b9db03de5b10567157b6 assets/tothemoon/models/item/metal_press.json
 ce3204a7575b1922cc938ead2a3cbb1a19497cbd assets/tothemoon/models/item/meteorite.json
 319af7a2fa96ed31014c5623108bc0f46ec87234 assets/tothemoon/models/item/meteorite_bricks.json
+6caf7e20614237c6199351cd573948718296933f assets/tothemoon/models/item/meteorite_bricks_slab.json
+9acb3b36d6f547e8a5a7ef7f136948f6ea253f7d assets/tothemoon/models/item/meteorite_bricks_stair.json
 be1ecfb3a5bfca830906fb76fa01d4e350f44dad assets/tothemoon/models/item/meteorite_lamp.json
+f1dae80c2ec7222086cd42852f0651dbbdf591b2 assets/tothemoon/models/item/meteorite_slab.json
+a880efd1eac885c92ec8be3485707b5453422be6 assets/tothemoon/models/item/meteorite_stair.json
 9baaab91deb4a5724398689b7c73f98e47debf9c assets/tothemoon/models/item/meteorite_tiles.json
 86ec7bbf861cf1f6e68e187905071f2cf66a84e8 assets/tothemoon/models/item/meteorite_zirconium_ore.json
 0ea3cb9ea15d7473fca3bfc256aed58f745dc3b3 assets/tothemoon/models/item/moon_dust.json

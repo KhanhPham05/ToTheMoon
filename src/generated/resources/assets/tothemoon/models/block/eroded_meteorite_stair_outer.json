@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "tothemoon:block/eroded_meteorite",
+    "side": "tothemoon:block/eroded_meteorite",
+    "top": "tothemoon:block/eroded_meteorite"
+  }
+}

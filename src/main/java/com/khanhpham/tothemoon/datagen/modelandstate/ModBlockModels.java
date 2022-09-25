@@ -6,7 +6,9 @@ import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.BaseEnergyGe
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -32,7 +34,7 @@ public class ModBlockModels extends BlockModelProvider {
         for (RegistryObject<Block> block : ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries()) {
             if (block.get() instanceof BatteryBlock<?> batteryBlock) {
                 this.batteryBlockModel(batteryBlock);
-            } else if (block.get() instanceof BaseEnergyGeneratorBlock<?> energyGeneratorBlock) {
+            } else if (block.get() instanceof BaseEnergyGeneratorBlock<?>) {
                 this.energyGenerator(block.getId().getPath());
             }
         }
