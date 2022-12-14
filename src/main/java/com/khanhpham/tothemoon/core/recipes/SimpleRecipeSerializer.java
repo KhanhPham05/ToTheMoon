@@ -7,11 +7,9 @@ import com.google.gson.JsonSyntaxException;
 import com.khanhpham.tothemoon.JsonNames;
 import com.khanhpham.tothemoon.init.ModRecipes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -26,15 +24,15 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements Rec
         ModRecipes.ALL_SERIALIZERS.put(this.getSerializerName(), this);
     }
 
-    public static Ingredient getShortenIngredient(String name) {
-        if (name.equalsIgnoreCase("")) {
+    public static Ingredient getShortenIngredient(String ingredientName) {
+        if (ingredientName.equalsIgnoreCase("")) {
             return Ingredient.EMPTY;
-        } else if (name.contains("tag:")) {
-            String tagName = name.replace("tag:", "");
+        } else if (ingredientName.contains("tag:")) {
+            String tagName = ingredientName.replace("tag:", "");
             TagKey<Item> tag = ItemTags.create(new ResourceLocation(clearRedundantSpaces(tagName)));
             return Ingredient.of(tag);
         } else {
-            return Ingredient.of(ModUtils.getItemFromName(name));
+            return Ingredient.of(ModUtils.getItemFromName(ingredientName));
         }
     }
 
@@ -45,7 +43,6 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements Rec
                 String name = jsonElement.getAsString();
                 if (isTag(name)) {
                     TagKey<Item> tag = ItemTags.create(new ResourceLocation(clearRedundantSpaces(name.replace("tag:", ""))));
-                    //ModUtils.log("Tag [{}]", tag.location());
                     values.add(new Ingredient.TagValue(tag));
                 } else {
                     values.add(new Ingredient.ItemValue(ModUtils.getItemStackFromName(name)));
@@ -66,20 +63,6 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements Rec
 
     protected abstract String getSerializerName();
 
-    protected ItemStack stackFromJson(JsonObject jsonObject) {
-        if (jsonObject.has(JsonNames.RESULT)) {
-            JsonElement resultElement = jsonObject.get(JsonNames.RESULT);
-            if (resultElement.isJsonObject()) {
-                return ShapedRecipe.itemStackFromJson((JsonObject) resultElement);
-            } else {
-                ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(jsonObject, JsonNames.RESULT));
-                return new ItemStack(RegistryEntries.ITEM.getFromKey(itemId));
-            }
-        }
-
-        throw new JsonSyntaxException("No result was found");
-    }
-
     protected Ingredient getShortenIngredient(JsonObject json, String name) {
         if (json.has(name)) {
             JsonElement jsonElement = json.get(name);
@@ -93,7 +76,7 @@ public abstract class SimpleRecipeSerializer<T extends Recipe<?>> implements Rec
         throw new JsonSyntaxException("Missing ingredient");
     }
 
-    protected ItemStack getShortenOutput(JsonObject pSerializedRecipe) {
+    protected ItemStack resultFromJson(JsonObject pSerializedRecipe) {
         if (pSerializedRecipe.has(JsonNames.RESULT)) {
             JsonElement resultElement = pSerializedRecipe.get(JsonNames.RESULT);
             if (resultElement.isJsonObject()) {

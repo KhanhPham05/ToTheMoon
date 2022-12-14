@@ -1,0 +1,19 @@
+{
+  "type": "tothemoon:ore_processing",
+  "extra_result": {
+    "chance": 15,
+    "item": "tothemoon:copper_dust"
+  },
+  "ingredient": "tag:create:crushed_ores/copper",
+  "processing_time": 100,
+  "result": {
+    "count": 2,
+    "item": "tothemoon:copper_dust"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import org.jetbrains.annotations.Nullable;
 
+@Deprecated
 public abstract class BaseMachineMenu extends BaseMenu {
     protected BaseMachineMenu(@Nullable MenuType<?> pMenuType, UpgradableContainer externalContainer, Inventory playerInventory, int pContainerId) {
         super(pMenuType, pContainerId, playerInventory, externalContainer);

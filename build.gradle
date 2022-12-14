@@ -26,7 +26,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2022.09.04-1.19.2'
+    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
@@ -126,7 +126,8 @@ mixin {
 
 
 dependencies {
-    minecraft "net.minecraftforge:forge:1.19.2-${forge_version}"
+    def mc = "net.minecraftforge:forge:1.19.2-${forge_version}"
+    minecraft mc
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:${ferrite_core}")
     runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:${lazy_dfu}")
@@ -149,13 +150,13 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3879898")
 
-    //craft tweaker
     //def ct = "com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${ct_version}"
     //implementation(fg.deobf(ct))
 
     //APs
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    //annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors-1.18.2:2.0.0.124'
+    //annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10"
+    //annotationProcessor mc
 }
 
 jar {

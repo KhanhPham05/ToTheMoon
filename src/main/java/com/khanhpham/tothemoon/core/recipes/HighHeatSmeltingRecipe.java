@@ -75,7 +75,7 @@ public class HighHeatSmeltingRecipe implements DisplayRecipe<Container> {
         @Override
         public HighHeatSmeltingRecipe fromJson(ResourceLocation id, JsonObject json) {
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.isArrayNode(json, JsonNames.INGREDIENT) ? GsonHelper.getAsJsonArray(json, JsonNames.INGREDIENT) : GsonHelper.getAsJsonObject(json, JsonNames.INGREDIENT));
-            ItemStack result = stackFromJson(json);
+            ItemStack result = super.resultFromJson(json);
             return new HighHeatSmeltingRecipe(ingredient, result, id);
         }
 

@@ -25,7 +25,7 @@ public class MetalPressBlock extends BaseEntityBlock<MetalPressBlockEntity> {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    public MetalPressBlock(Properties p_49224_, BlockEntityType.BlockEntitySupplier<MetalPressBlockEntity> supplier) {
+    public MetalPressBlock(Properties p_49224_) {
         super(p_49224_.lightLevel((state) -> state.getValue(LIT) ? 15 : 0));
 
         super.registerDefaultState(super.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.FALSE));

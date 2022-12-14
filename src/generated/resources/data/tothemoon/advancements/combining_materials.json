@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "tothemoon:alloy_smelter"
+              "minecraft:air"
             ]
           }
         ]
@@ -22,7 +22,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "tothemoon:alloy_smelter"
+      "item": "minecraft:air"
     },
     "show_toast": true,
     "title": {

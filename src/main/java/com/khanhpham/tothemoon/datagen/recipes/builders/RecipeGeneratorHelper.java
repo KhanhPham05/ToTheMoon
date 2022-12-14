@@ -159,8 +159,12 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
         }
 
         public void save() {
+            this.save(ModUtils.getPath(result.asItem()));
+        }
+
+        public void save(String id) {
             unlock(this.getBuilder());
-            this.builder.save(consumer, "tothemoon:" + recipeType + '/' + ModUtils.getPath(result.asItem()));
+            this.builder.save(consumer, "tothemoon:" + recipeType + '/' + id);
         }
     }
 

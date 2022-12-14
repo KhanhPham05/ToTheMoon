@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.4\bin\java.exe
-Arguments: '--clean, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar, --output, H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatched.jar, --apply, H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatches.lzma'
+Arguments: '--clean, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar, --output, H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.63\forge-1.19.2-43.1.63-binpatched.jar, --apply, H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.63\forge-1.19.2-43.1.63-binpatches.lzma'
 Classpath:
  - H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.1.1\binarypatcher-1.1.1-fatjar.jar
 Working directory: H:\[ ToTheMoon Project ]\Forge\build\_applyBinpatches_2
@@ -7,12 +7,12 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.19.2-20220805.130853\joined-1.19.2-20220805.130853-srg.jar
-  Output:    H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatched.jar
+  Output:    H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.63\forge-1.19.2-43.1.63-binpatched.jar
   KeepData:  false
   Unpatched: false
   Pack200:   false
   Legacy:    false
-Loading patches file: H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.25\forge-1.19.2-43.1.25-binpatches.lzma
+Loading patches file: H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraftforge\forge\1.19.2-43.1.63\forge-1.19.2-43.1.63-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: 19e6c00e Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -61,6 +61,10 @@ Loading patches file: H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraf
     Checksum: 4e3d6690 Exists: true
   Reading patch com.mojang.blaze3d.vertex.BufferBuilder.binpatch
     Checksum: 1013c3c6 Exists: true
+  Reading patch com.mojang.blaze3d.vertex.PoseStack$Pose.binpatch
+    Checksum: bf28f621 Exists: true
+  Reading patch com.mojang.blaze3d.vertex.PoseStack.binpatch
+    Checksum: 4b3337fd Exists: true
   Reading patch com.mojang.blaze3d.vertex.VertexConsumer.binpatch
     Checksum: 372faa85 Exists: true
   Reading patch com.mojang.blaze3d.vertex.VertexFormat$1.binpatch
@@ -423,6 +427,10 @@ Loading patches file: H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraf
     Checksum: 8bf7e5d9 Exists: true
   Reading patch net.minecraft.client.multiplayer.chat.ChatListener.binpatch
     Checksum: d33dc0b6 Exists: true
+  Reading patch net.minecraft.client.multiplayer.resolver.AddressCheck$1.binpatch
+    Checksum: 3d874985 Exists: true
+  Reading patch net.minecraft.client.multiplayer.resolver.AddressCheck.binpatch
+    Checksum: ada1f91d Exists: true
   Reading patch net.minecraft.client.particle.BreakingItemParticle$Provider.binpatch
     Checksum: 9a35261b Exists: true
   Reading patch net.minecraft.client.particle.BreakingItemParticle$SlimeProvider.binpatch
@@ -1257,16 +1265,6 @@ Loading patches file: H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraf
     Checksum: 41104ca5 Exists: true
   Reading patch net.minecraft.server.packs.repository.PackRepository.binpatch
     Checksum: 3b81bd99 Exists: true
-  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager$EntryStack.binpatch
-    Checksum: 201680ea Exists: true
-  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager$LeakedResourceWarningInputStream.binpatch
-    Checksum: f5d6946c Exists: true
-  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager$PackEntry.binpatch
-    Checksum: fa441b05 Exists: true
-  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager$SinglePackResourceThunkSupplier.binpatch
-    Checksum: e5d205ff Exists: true
-  Reading patch net.minecraft.server.packs.resources.FallbackResourceManager.binpatch
-    Checksum: a105374a Exists: true
   Reading patch net.minecraft.server.packs.resources.MultiPackResourceManager.binpatch
     Checksum: c0fe238c Exists: true
   Reading patch net.minecraft.server.packs.resources.ReloadableResourceManager.binpatch
@@ -2235,6 +2233,8 @@ Loading patches file: H:\[ ToTheMoon Project ]\Forge\build\fg_cache\net\minecraf
     Checksum: cff929ba Exists: true
   Reading patch net.minecraft.world.level.block.FireBlock.binpatch
     Checksum: b4f3cee8 Exists: true
+  Reading patch net.minecraft.world.level.block.FlowerBlock.binpatch
+    Checksum: 3e3a2725 Exists: true
   Reading patch net.minecraft.world.level.block.FlowerPotBlock.binpatch
     Checksum: dfc13dcd Exists: true
   Reading patch net.minecraft.world.level.block.FungusBlock.binpatch
@@ -2636,6 +2636,8 @@ Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\mine
   Patching com/mojang/blaze3d/vertex/BufferBuilder$RenderedBuffer 1/1
   Patching com/mojang/blaze3d/vertex/BufferBuilder$SortState 1/1
   Patching com/mojang/blaze3d/vertex/BufferBuilder 1/1
+  Patching com/mojang/blaze3d/vertex/PoseStack$Pose 1/1
+  Patching com/mojang/blaze3d/vertex/PoseStack 1/1
   Patching com/mojang/blaze3d/vertex/VertexConsumer 1/1
   Patching com/mojang/blaze3d/vertex/VertexFormat$1 1/1
   Patching com/mojang/blaze3d/vertex/VertexFormat$IndexType 1/1
@@ -2815,6 +2817,8 @@ Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\mine
   Patching net/minecraft/client/multiplayer/chat/ChatListener$2 1/1
   Patching net/minecraft/client/multiplayer/chat/ChatListener$Message 1/1
   Patching net/minecraft/client/multiplayer/chat/ChatListener 1/1
+  Patching net/minecraft/client/multiplayer/resolver/AddressCheck$1 1/1
+  Patching net/minecraft/client/multiplayer/resolver/AddressCheck 1/1
   Patching net/minecraft/client/particle/BreakingItemParticle$Provider 1/1
   Patching net/minecraft/client/particle/BreakingItemParticle$SlimeProvider 1/1
   Patching net/minecraft/client/particle/BreakingItemParticle$SnowballProvider 1/1
@@ -3232,11 +3236,6 @@ Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\mine
   Patching net/minecraft/server/packs/repository/Pack 1/1
   Patching net/minecraft/server/packs/repository/PackCompatibility 1/1
   Patching net/minecraft/server/packs/repository/PackRepository 1/1
-  Patching net/minecraft/server/packs/resources/FallbackResourceManager$EntryStack 1/1
-  Patching net/minecraft/server/packs/resources/FallbackResourceManager$LeakedResourceWarningInputStream 1/1
-  Patching net/minecraft/server/packs/resources/FallbackResourceManager$PackEntry 1/1
-  Patching net/minecraft/server/packs/resources/FallbackResourceManager$SinglePackResourceThunkSupplier 1/1
-  Patching net/minecraft/server/packs/resources/FallbackResourceManager 1/1
   Patching net/minecraft/server/packs/resources/MultiPackResourceManager 1/1
   Patching net/minecraft/server/packs/resources/ReloadableResourceManager 1/1
   Patching net/minecraft/server/packs/resources/SimpleJsonResourceReloadListener 1/1
@@ -3718,6 +3717,7 @@ Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\mine
   Patching net/minecraft/world/level/block/EnchantmentTableBlock 1/1
   Patching net/minecraft/world/level/block/FarmBlock 1/1
   Patching net/minecraft/world/level/block/FireBlock 1/1
+  Patching net/minecraft/world/level/block/FlowerBlock 1/1
   Patching net/minecraft/world/level/block/FlowerPotBlock 1/1
   Patching net/minecraft/world/level/block/FungusBlock 1/1
   Patching net/minecraft/world/level/block/GrowingPlantHeadBlock 1/1

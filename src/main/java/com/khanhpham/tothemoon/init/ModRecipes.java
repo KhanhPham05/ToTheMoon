@@ -22,7 +22,7 @@ public class ModRecipes {
     public static final RecipeSerializer<TagTranslatingRecipe> TAG_TRANSLATING = new TagTranslatingRecipe.Serializer();
     public static final RecipeSerializer<WorkbenchCraftingRecipe> WORKBENCH_CRAFTING = new WorkbenchCraftingRecipe.Serializer();
     public static final RecipeSerializer<OreProcessingRecipe> ORE_PROCESSING = new OreProcessingRecipe.Serializer();
-
+    public static final SingleProcessRecipe.Serializer METAL_CRUSHING = new MetalCrushingRecipe.Serializer();
     public ModRecipes() {
     }
 

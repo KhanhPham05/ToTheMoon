@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "tothemoon:block/iron_energy_generator",
+    "side": "tothemoon:block/energy_generator_side",
+    "top": "tothemoon:block/energy_generator_top"
+  }
+}

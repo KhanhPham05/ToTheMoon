@@ -107,7 +107,7 @@ public class OreProcessingRecipe implements DisplayRecipe<OreProcessorBlockEntit
         @Override
         public OreProcessingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             Ingredient ingredient = super.getShortenIngredient(pSerializedRecipe, JsonNames.INGREDIENT);
-            ItemStack output = super.getShortenOutput(pSerializedRecipe);
+            ItemStack output = super.resultFromJson(pSerializedRecipe);
             ChancedResult chancedResult = ChancedResult.fromJson(pSerializedRecipe);
             return new OreProcessingRecipe(pRecipeId, output, ingredient, GsonHelper.getAsInt(pSerializedRecipe, "processing_time", 100), chancedResult);
         }

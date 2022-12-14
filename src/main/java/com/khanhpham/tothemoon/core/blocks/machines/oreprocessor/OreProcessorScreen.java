@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class OreProcessorScreen extends BaseMenuScreen<OreProcessorMenu> {
     public OreProcessorScreen(OreProcessorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-        super(pMenu, pPlayerInventory, pTitle, ModUtils.getTextureId("energy_processor.png"));
+        super(pMenu, pPlayerInventory, pTitle, ModUtils.getGuiId("energy_processor.png"));
         super.setImageSize(176, 177);
     }
 

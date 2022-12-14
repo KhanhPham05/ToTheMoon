@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tothemoon:block/meteorite_slab"
+    },
+    "type=double": {
+      "model": "tothemoon:block/meteorite"
+    },
+    "type=top": {
+      "model": "tothemoon:block/meteorite_slab_top"
+    }
+  }
+}

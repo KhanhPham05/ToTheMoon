@@ -1,5 +1,5 @@
-// 1.19.2	2022-09-13T21:19:53.3543142	TTM Item Tags
-4adf39b433a079817b8b8b59523c2393048ec513 data/forge/tags/items/dusts.json
+// 1.19.2	2022-12-07T15:19:22.8236114	TTM Item Tags
+c241b86ef8ea77060dddd7e8bf840428f9866848 data/forge/tags/items/dusts.json
 036fa50019390101f4d45bfdc24658cd19cf3878 data/forge/tags/items/dusts/amethyst.json
 5d457ed48c2eb9aec4ccf311f45620ae71286a92 data/forge/tags/items/dusts/coal.json
 cdba87c10090393672c5c72f56be4da74e730845 data/forge/tags/items/dusts/copper.json
@@ -94,7 +94,7 @@ c12a377151b04c988f66e7da444d3a08134fe5de data/forge/tags/items/wires.json
 4c1697138ce32504b9ca8e5e29512c068bacd78b data/forge/tags/items/wires/steel.json
 f9d15a291bb6ecabc1143b47605193bc0cfff0a0 data/forge/tags/items/wires/uranium.json
 88ab58f8f61ef5407dc76735b26fee95026e13ee data/tothemoon/tags/items/hammers.json
-7d30eabcfda6f0bf5b1e5ed27ce718e0c5e66602 data/tothemoon/tags/items/metal_press_molds.json
+bc06e1d60d2117466315b4ba86d2463e4c0565dc data/tothemoon/tags/items/metal_press_molds.json
 191a08b1f339d67e10b8e02bde7f0dc803d8de37 data/tothemoon/tags/items/metal_press_molds/blank.json
 5a19c5839f826b42ac5045bd206ab2f55c8e509f data/tothemoon/tags/items/metal_press_molds/gear.json
 0a97f7cdfc187b7d4aedf0f349eca8e83c839484 data/tothemoon/tags/items/metal_press_molds/plate.json

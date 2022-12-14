@@ -1,10 +1,10 @@
 {
   "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:gem/diamond"
+    "tag": "forge:gems/diamond"
   },
   "mold": {
-    "tag": "forge:gears/gold"
+    "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
     "count": 1,

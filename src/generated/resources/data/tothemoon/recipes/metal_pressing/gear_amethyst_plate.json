@@ -1,10 +1,10 @@
 {
   "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:gem/amethyst"
+    "tag": "forge:gems/amethyst"
   },
   "mold": {
-    "tag": "forge:gears/gold"
+    "tag": "tothemoon:metal_press_molds/gear"
   },
   "result": {
     "count": 1,

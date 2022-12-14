@@ -130,13 +130,13 @@ public class ModUtils {
     public static void setupMenuScreen(AbstractContainerScreen<?> screen, String imageNameWithPng, PoseStack pose) {
         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, getTextureId(imageNameWithPng));
+        RenderSystem.setShaderTexture(0, getGuiId(imageNameWithPng));
         screen.blit(pose, screen.getGuiLeft(), screen.getGuiTop(), 0, 0, screen.getXSize(), screen.getYSize());
     }
 
     @Nonnull
-    public static ResourceLocation getTextureId(String imageNameWithPng) {
-        return modLoc("textures/gui/" + imageNameWithPng);
+    public static ResourceLocation getGuiId(String imageName) {
+        return modLoc("textures/gui/" + (imageName.contains(".png") ? imageName : imageName + ".png"));
     }
 
     public static <C extends Container, R extends Recipe<C>> Map<ResourceLocation, R> getResourceRecipes(Level level, RecipeType<R> recipeType, ResourceLocation recipeLocation) {

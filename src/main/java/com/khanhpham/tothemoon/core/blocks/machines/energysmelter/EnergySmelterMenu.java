@@ -42,7 +42,7 @@ public class EnergySmelterMenu extends BaseMenu {
         return j != 0 && i != 0 ? i * 147 / j : 0;
     }
 
-    public int getSmeltingProcess() {
+    public int getProcessBar() {
         int i = this.data.get(0);
         int j = this.data.get(1);
 

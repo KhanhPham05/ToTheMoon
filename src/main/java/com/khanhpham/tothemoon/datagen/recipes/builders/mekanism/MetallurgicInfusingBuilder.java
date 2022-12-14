@@ -7,6 +7,7 @@ import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -20,8 +21,8 @@ public class MetallurgicInfusingBuilder extends CompatRecipeBuilder {
         super(result,consumer, CompatRecipeType.METALLURGIC_INFUSING);
     }
 
-    public static MetallurgicInfusingBuilder of(Consumer<FinishedRecipe> consumer, Item item) {
-        return new MetallurgicInfusingBuilder(consumer, item);
+    public static MetallurgicInfusingBuilder of(Consumer<FinishedRecipe> consumer, ItemLike item) {
+        return new MetallurgicInfusingBuilder(consumer, item.asItem());
     }
 
     @Override
@@ -51,6 +52,7 @@ public class MetallurgicInfusingBuilder extends CompatRecipeBuilder {
     }
 
     public enum InfuseType {
-        REDSTONE
+        REDSTONE,
+        GOLD
     }
 }
