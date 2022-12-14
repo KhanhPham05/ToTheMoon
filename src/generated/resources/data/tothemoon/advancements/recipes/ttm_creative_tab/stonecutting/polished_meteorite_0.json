@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tothemoon:stonecutting/polished_moon_rock_0"
+        "recipe": "tothemoon:stonecutting/polished_meteorite_0"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "tothemoon:stonecutting/polished_moon_rock_0"
+      "tothemoon:stonecutting/polished_meteorite_0"
     ]
   }
 }

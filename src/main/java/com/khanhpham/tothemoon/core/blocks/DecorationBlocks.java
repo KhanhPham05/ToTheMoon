@@ -184,7 +184,5 @@ public class DecorationBlocks {
         public DecorationBlocks build() {
             return new DecorationBlocks(this.craftedFrom, stairBlock, slabBlock);
         }
-
-
     }
 }

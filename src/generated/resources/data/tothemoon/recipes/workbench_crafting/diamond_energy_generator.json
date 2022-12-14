@@ -1,0 +1,34 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "craftingPattern": [
+    "tag:forge:plates/diamond",
+    "tag:forge:plates/redstone_steel_alloy",
+    "tag:forge:plates/redstone_steel_alloy",
+    "tag:forge:plates/redstone_steel_alloy",
+    "tag:forge:plates/diamond",
+    "tag:forge:plates/diamond",
+    "tag:forge:wires/redstone_metal",
+    "tag:forge:wires/redstone_metal",
+    "tag:forge:wires/redstone_metal",
+    "tag:forge:plates/diamond",
+    "tag:forge:plates/diamond",
+    "tag:forge:wires/redstone_metal",
+    "minecraft:blast_furnace",
+    "tag:forge:wires/redstone_metal",
+    "tag:forge:plates/diamond",
+    "tag:forge:plates/diamond",
+    "tag:forge:wires/redstone_metal",
+    "tag:forge:wires/redstone_metal",
+    "tag:forge:wires/redstone_metal",
+    "tag:forge:plates/diamond",
+    "tag:forge:plates/diamond",
+    "tag:forge:plates/redstone_steel_alloy",
+    "tag:forge:plates/redstone_steel_alloy",
+    "tag:forge:plates/redstone_steel_alloy",
+    "tag:forge:plates/diamond"
+  ],
+  "extra": "tothemoon:redstone_machine_frame",
+  "result": {
+    "item": "tothemoon:diamond_energy_generator"
+  }
+}

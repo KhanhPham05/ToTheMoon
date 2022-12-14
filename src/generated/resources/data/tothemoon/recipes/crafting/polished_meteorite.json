@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "A": {
-      "item": "tothemoon:purified_quartz_block"
+      "item": "tothemoon:meteorite"
     }
   },
   "pattern": [
@@ -10,6 +10,6 @@
     "AA"
   ],
   "result": {
-    "item": "tothemoon:smooth_purified_quartz_block"
+    "item": "tothemoon:polished_meteorite"
   }
 }

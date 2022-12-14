@@ -2,6 +2,8 @@ package com.khanhpham.tothemoon.datagen.lang;
 
 import com.google.common.base.Preconditions;
 import com.khanhpham.tothemoon.ToTheMoon;
+import com.khanhpham.tothemoon.core.recipes.MetalCrushingRecipe;
+import com.khanhpham.tothemoon.core.recipes.type.SingleProcessRecipeType;
 import com.khanhpham.tothemoon.datagen.advancement.AdvancementComponent;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -11,6 +13,7 @@ import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.khanhpham.tothemoon.worldgen.OreGenValues;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -18,6 +21,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -50,10 +54,14 @@ public class ModLanguage extends LanguageProvider {
     public static final MutableComponent MESSAGE_NBF_FORM_ERROR = create("message", "nbf_form_fail");
     public static final MutableComponent FILL_TANK = create("gui", "fill_tank");
     public static final MutableComponent EMPTY_TANK = create("gui", "empty_tank");
+
     //TOOLTIP
+    public static final String ENERGY_STRING = "tooltip.tothemoon.energy";
+    public static final String MISSING_MOD = "tooltip.tothemoon.mod_required";
     public static final MutableComponent TANK_ONLY_SUPPORTS_LAVA = create("tooltip", "lava_support_only");
     public static final MutableComponent TANK_AMOUNT = create("tooltip", "amount");
     public static final MutableComponent ANVIL_DESCRIPTION = create("tooltip", "minecraft_anvil");
+    public static final MutableComponent ENERGY_TOOLTIP = create("tooltip", "energy_dynamic");
     //PATCHOULI
     public static final MutableComponent BOOK_NAME = create("book", "header");
     public static final MutableComponent BOOK_LANDING = create("book", "header.landing_text");
@@ -73,6 +81,7 @@ public class ModLanguage extends LanguageProvider {
     public static final MutableComponent ROOT_DESCRIPTION = create("advancement", "root.description");
     public static final MutableComponent HIDDEN_ADVANCEMENT = create("advancement", "hidden");
     public static final MutableComponent ORE_PROCESSING = create("jei", "ore_processing");
+
     //ITEM / BLOCK /INVENTORY
     private static final AdvancementComponent ADVANCEMENT_COMPONENT = new AdvancementComponent();
     public static final MutableComponent HARDEN_FRAMED = createAdvancement("harden_framed", "Craft a higher tier of machine frame - Steel Frame.");
@@ -98,10 +107,8 @@ public class ModLanguage extends LanguageProvider {
     private static final List<Item> ALL_ITEMS;
 
     static {
-        ALL_BLOCKS = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
-        //ALL_BLOCKS.addAll(NonDeferredBlocks.REGISTERED_BLOCKS);
-
-        ALL_ITEMS = ModItems.ITEM_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
+        ALL_BLOCKS = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().filter(RegistryObject::isPresent).map(Supplier::get).collect(Collectors.toList());
+        ALL_ITEMS = ModItems.ITEM_DEFERRED_REGISTER.getEntries().stream().filter(RegistryObject::isPresent).map(Supplier::get).collect(Collectors.toList());
     }
 
     public ModLanguage(DataGenerator gen) {
@@ -164,9 +171,11 @@ public class ModLanguage extends LanguageProvider {
         add(TAG_TRANSLATOR, "A simple stonecutter-inspired block that convert items that has the same tag as items in this mod");
 
         //GUI - TOOLTIP
+        add(MISSING_MOD, "Install [%s]");
+        add(ENERGY_TOOLTIP, "Energy :");
         add("gui.tothemoon.alloy_smelter", "Alloy Smelter");
         add("gui.tothemoon.metal_press", "Metal Press");
-        add("tooltip.tothemoon.energy", "Energy %s %s / %s");
+        add(ENERGY_STRING, "Energy %s %s / %s");
         add("tooltip.tothemoon.fluid_fuel_tank", "Fuel : %s / %s");
         add("tooltip.tothemoon.item_tank", "(%s): %s");
         add(TANK_ONLY_SUPPORTS_LAVA, "Can stores Lava only, more fluids will be added in future updates");
@@ -250,6 +259,13 @@ public class ModLanguage extends LanguageProvider {
         add(CAP_FOUND, "CAP FOUND !");
 
         add(create("gui", "blaze_fuel"), "Blaze Fuel: %s / %s");
+        add(MetalCrushingRecipe.RECIPE_TYPE);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private void add( SingleProcessRecipeType recipeType) {
+        String name = recipeType.location.getPath();
+        add(create("jei", name), convertToSpacedText(name));
     }
 
     private void add(MutableComponent component, String trans) {

@@ -2,7 +2,7 @@ package com.khanhpham.tothemoon.core.blocks.tanks;
 
 import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
-import com.khanhpham.tothemoon.utils.GuiRenderingUtils;
+import com.khanhpham.tothemoon.utils.render.GuiRenderingUtils;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -33,7 +33,7 @@ public class FluidTankMenuScreen extends BaseMenuScreen<FluidTankMenu> {
     protected void renderTooltip(PoseStack pPoseStack, int pX, int pY) {
         super.renderTooltip(pPoseStack, pX, pY);
         if (isHovering(143, 15, 16, 69, pX, pY)) {
-            super.renderTooltip(pPoseStack, TextUtils.translateFluidTank(super.menu.getFluidObject(), super.menu.getTankAmount(), super.menu.getCapacity()), pX, pY);
+            super.renderTooltip(pPoseStack, TextUtils.translateFluidTank(super.menu.getFluidObject(), super.menu.getTankAmount(), super.menu.getEnergyCapacity()), pX, pY);
         }
     }
 }

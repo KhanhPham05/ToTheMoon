@@ -1,7 +1,7 @@
 {
   "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:gem/diamond"
+    "tag": "forge:gems/diamond"
   },
   "mold": {
     "tag": "tothemoon:metal_press_molds/gear"

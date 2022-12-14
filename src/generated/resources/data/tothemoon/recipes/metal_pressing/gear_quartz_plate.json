@@ -1,7 +1,7 @@
 {
   "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:gem/quartz"
+    "tag": "forge:gems/quartz"
   },
   "mold": {
     "tag": "tothemoon:metal_press_molds/gear"

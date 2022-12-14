@@ -4,7 +4,7 @@ import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterMenu;
 import com.khanhpham.tothemoon.core.energy.Energy;
-import com.khanhpham.tothemoon.core.energy.EnergyOnlyReceive;
+import com.khanhpham.tothemoon.core.energy.MachineEnergy;
 import com.khanhpham.tothemoon.core.recipes.AlloySmeltingRecipe;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
@@ -61,7 +61,7 @@ public class AlloySmelterBlockEntity extends EnergyProcessBlockEntity implements
     }
 
     public AlloySmelterBlockEntity(BlockPos blockPos, BlockState state) {
-        this(ModBlockEntities.ALLOY_SMELTER.get(), blockPos, state, new EnergyOnlyReceive(175000), LABEL, MENU_SIZE);
+        this(ModBlockEntities.ALLOY_SMELTER.get(), blockPos, state, new MachineEnergy(175000), LABEL, MENU_SIZE);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, AlloySmelterBlockEntity blockEntity) {

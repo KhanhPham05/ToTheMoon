@@ -14,9 +14,11 @@ import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenuScr
 import com.khanhpham.tothemoon.core.blocks.machines.oreprocessor.OreProcessorScreen;
 import com.khanhpham.tothemoon.core.blocks.machines.storageblock.MoonBarrelScreen;
 import com.khanhpham.tothemoon.core.blocks.processblocks.tagtranslator.TagTranslatorScreen;
+import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.tanks.FluidTankMenuScreen;
 import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchScreen;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
+import com.khanhpham.tothemoon.core.processes.single.SingleProcessMenuScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
 import com.khanhpham.tothemoon.datagen.modelandstate.ModItemModels;
 import com.khanhpham.tothemoon.datagen.advancement.ModAdvancementProvider;
@@ -37,6 +39,8 @@ import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -66,6 +70,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
@@ -148,7 +153,7 @@ public class ToTheMoon {
         @SubscribeEvent
         public static void registerEvent(RegisterEvent event) {
             event.register(ForgeRegistries.Keys.ITEMS, (reg) -> {
-                Set<? extends Block> blocks = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(block -> !(block instanceof NoBlockItem)).collect(Collectors.toSet());
+                Set<? extends Block> blocks = ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().filter(RegistryObject::isPresent).map(Supplier::get).filter(block -> !(block instanceof NoBlockItem)).collect(Collectors.toSet());
                 for (Block block : blocks) {
                     if (block instanceof BurnableBlock burnableBlock) {
                         reg.register(ModUtils.modLoc(ModUtils.getPath(burnableBlock)), new BlockItem(burnableBlock, new Item.Properties().tab(ToTheMoon.TAB)) {
@@ -185,6 +190,9 @@ public class ToTheMoon {
             MenuScreens.register(ModMenuTypes.TAG_TRANSLATOR, TagTranslatorScreen::new);
             MenuScreens.register(ModMenuTypes.WORKBENCH_CRAFTING, WorkbenchScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_PROCESSOR, OreProcessorScreen::new);
+            MenuScreens.register(ModMenuTypes.SINGLE_PROCESS, SingleProcessMenuScreen::new);
+
+            BlockEntityRenderers.register(ModBlockEntities.FLUID_TANK.get(), FluidTankBlockEntity.Renderer::new);
         }
     }
 

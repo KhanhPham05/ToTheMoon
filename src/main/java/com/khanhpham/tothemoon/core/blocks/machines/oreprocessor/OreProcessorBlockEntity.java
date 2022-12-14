@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.blocks.machines.oreprocessor;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
-import com.khanhpham.tothemoon.core.energy.EnergyOnlyReceive;
+import com.khanhpham.tothemoon.core.energy.MachineEnergy;
 import com.khanhpham.tothemoon.core.recipes.OreProcessingRecipe;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
@@ -29,7 +29,7 @@ public class OreProcessorBlockEntity extends EnergyProcessBlockEntity {
     //2 : result
     //3 : extra result
     public OreProcessorBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.ENERGY_PROCESSOR.get(), pWorldPosition, pBlockState, new EnergyOnlyReceive(200000, 250), ModBlocks.ORE_PROCESSOR, CONTAINER_SIZE);
+        super(ModBlockEntities.ENERGY_PROCESSOR.get(), pWorldPosition, pBlockState, new MachineEnergy(200000, 250), ModBlocks.ORE_PROCESSOR, CONTAINER_SIZE);
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": {
+      "tag": "forge:plates/uranium"
+    },
+    "S": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "pattern": [
+    "SP",
+    "PS"
+  ],
+  "result": {
+    "item": "tothemoon:uranium_armor_plating"
+  }
+}

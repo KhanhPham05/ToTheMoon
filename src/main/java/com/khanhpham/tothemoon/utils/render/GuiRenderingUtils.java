@@ -1,4 +1,4 @@
-package com.khanhpham.tothemoon.utils;
+package com.khanhpham.tothemoon.utils.render;
 
 import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -155,15 +156,19 @@ public class GuiRenderingUtils {
         RenderSystem.disableBlend();
     }
 
-    private static int getFluidColorTint(FluidStack fluidStack) {
+    public static int getFluidColorTint(FluidStack fluidStack) {
         return getFluidRender(fluidStack.getFluid().getFluidType()).getTintColor(fluidStack);
     }
 
-    private static IClientFluidTypeExtensions getFluidRender(FluidType fluid) {
+    public static ResourceLocation getFluidTextureName(FluidStack fluid) {
+        return IClientFluidTypeExtensions.of(fluid.getFluid()).getStillTexture();
+    }
+
+    public static IClientFluidTypeExtensions getFluidRender(FluidType fluid) {
         return IClientFluidTypeExtensions.of(fluid);
     }
 
-    private static TextureAtlasSprite stillSprite(FluidStack fluidStack) {
+    public static TextureAtlasSprite stillSprite(FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();
         return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(getFluidRender(fluid.getFluidType()).getStillTexture(fluidStack));
     }

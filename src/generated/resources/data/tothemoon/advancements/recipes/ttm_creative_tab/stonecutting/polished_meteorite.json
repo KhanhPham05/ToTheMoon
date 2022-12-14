@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tothemoon:crafting/smooth_purified_quartz_block"
+        "recipe": "tothemoon:stonecutting/polished_meteorite"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "tothemoon:crafting/smooth_purified_quartz_block"
+      "tothemoon:stonecutting/polished_meteorite"
     ]
   }
 }

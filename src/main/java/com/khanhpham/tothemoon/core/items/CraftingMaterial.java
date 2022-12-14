@@ -290,8 +290,8 @@ public class CraftingMaterial {
         return rodTag;
     }
 
-    @Nullable
     public TagKey<Item> getWireTag() {
+        Preconditions.checkNotNull(this.wireTag);
         return wireTag;
     }
 
@@ -323,7 +323,7 @@ public class CraftingMaterial {
     //Mainly used for vanilla stuff
     public CraftingMaterial setGem(Item itemSupplier) {
         this.isIngotVanilla = true;
-        return this.setMainMaterial( () -> itemSupplier, createTag("gem"));
+        return this.setMainMaterial(() -> itemSupplier, createTag("gems"));
     }
 
     public ModArmorItem getArmorItem(EquipmentSlot slot) {

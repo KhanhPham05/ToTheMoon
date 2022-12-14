@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-20T20:56:25.10038	Block Models: tothemoon
+// 1.19.2	2022-11-07T20:26:59.0144964	Block Models: tothemoon
 782a9517cda985fdcb7971f57f40a0b94467bbcb assets/tothemoon/models/block/battery/battery_level_0.json
 3a694a7605577add50f25ab90181d3aea5b863fb assets/tothemoon/models/block/battery/battery_level_1.json
 bafea5928335f7b115730fc7ee68c1efd614d310 assets/tothemoon/models/block/battery/battery_level_10.json
@@ -49,6 +49,8 @@ ca19b3abc96b79e9718746d6de979010194d67ba assets/tothemoon/models/block/gold_ener
 028e65c94b7bd17f6e06164f9203ad2564964346 assets/tothemoon/models/block/iron_energy_generator.json
 3435b95dd5e1d6e2eeae800f02a1b1fa3cad6363 assets/tothemoon/models/block/iron_energy_generator_on.json
 bf948783b3be40b706004119a77c13379e1d92d9 assets/tothemoon/models/block/iron_sheet_block.json
+c69386e73471eb59e281a7561c930d71700d4bb7 assets/tothemoon/models/block/metal_crusher.json
+5d92438481d7980505168ce4047115daf3fc87b2 assets/tothemoon/models/block/metal_crusher_on.json
 d1f0b133fbb1d03def80161f6490369fad9b9da6 assets/tothemoon/models/block/meteorite.json
 97340ce5d03467ad9b86ce33bcd030fd298d9b34 assets/tothemoon/models/block/meteorite_bricks.json
 a396d7e7e273a37c7c0d8a03c67786afc79edb72 assets/tothemoon/models/block/meteorite_lamp.json

@@ -2,15 +2,16 @@ package com.khanhpham.tothemoon.init;
 
 import com.google.common.collect.ImmutableSet;
 import com.khanhpham.tothemoon.core.blockentities.others.AlloySmelterBlockEntity;
-import com.khanhpham.tothemoon.core.blockentities.others.MetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.DecorationBlocks;
 import com.khanhpham.tothemoon.core.blocks.MachineFrameBlock;
+import com.khanhpham.tothemoon.core.blocks.SpecialBlock;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.creative.CreativeBatteryBlock;
 import com.khanhpham.tothemoon.core.blocks.battery.tiered.RedstoneBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.battery.tiered.SteelBatteryBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.big_machines_components.FluidAcceptorBlock;
+import com.khanhpham.tothemoon.core.blocks.machine.crusher.CrusherBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.BaseEnergyGeneratorBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.energygenerator.tileentities.*;
@@ -52,11 +53,14 @@ public class ModBlocks {
     public static final RegistryObject<Block> METEORITE_TILES = register("meteorite_tiles");
     public static final RegistryObject<Block> METEORITE_LAMP = register("meteorite_lamp");
     public static final RegistryObject<Block> METEORITE_BRICKS = register("meteorite_bricks");
+    public static final DecorationBlocks METEORITE_BRICKS_DECORATION = DecorationBlocks.Builder.buildBoth(METEORITE_BRICKS);
     public static final RegistryObject<Block> METEORITE = register("meteorite");
+    public static final DecorationBlocks METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(METEORITE).setBricks(METEORITE_BRICKS);
     public static final RegistryObject<Block> GILDED_METEORITE_BRICKS = register("gilded_meteorite_bricks", property(Blocks.GILDED_BLACKSTONE));
     public static final RegistryObject<Block> ERODED_METEORITE = register("eroded_meteorite");
+    public static final DecorationBlocks ERODED_METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(ERODED_METEORITE);
     public static final RegistryObject<Block> COBBLED_METEORITE = register("cobbled_meteorite");
-
+    public static final DecorationBlocks COBBLED_METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(COBBLED_METEORITE);
     public static final RegistryObject<Block> MOON_ROCK = register("moon_rock", BlockBehaviour.Properties.of(Material.STONE).strength(3, 6).sound(SoundType.STONE).sound(ModSoundTypes.MOON_ROCK));
     public static final RegistryObject<Block> COBBLED_MOON_ROCK = register("cobbled_moon_rock", () -> new Block(BlockBehaviour.Properties.copy(MOON_ROCK.get())));
     public static final RegistryObject<StairBlock> COBBLED_MOON_ROCK_STAIR = register("cobbled_moon_rock_stair", () -> new StairBlock(COBBLED_MOON_ROCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(COBBLED_MOON_ROCK.get())));
@@ -118,11 +122,16 @@ public class ModBlocks {
     public static final RegistryObject<NetherBrickFurnaceBlock> NETHER_BRICK_FURNACE_CONTROLLER = registerBlockEntity("netherbrick_furnace_controller", () -> new NetherBrickFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS)));
     public static final RegistryObject<TagTranslatorBlock> TAG_TRANSLATOR = register("tag_translator", TagTranslatorBlock::new);
     public static final RegistryObject<OreProcessorBlock> ORE_PROCESSOR = registerBlockEntity("ore_processor", OreProcessorBlock::new);
+    public static final RegistryObject<BatteryBlock<BatteryBlockEntity>> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity.ENERGY_CAPACITY, ModBlockEntities.BATTERY, BatteryBlockEntity::new));
+    public static final RegistryObject<BatteryBlock<SteelBatteryBlockEntity>> STEEL_BATTERY = registerBlockEntity("steel_battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.copy(BATTERY.get()), SteelBatteryBlockEntity.STEEL_TIER_CAPACITY, ModBlockEntities.STEEL_BATTERY, SteelBatteryBlockEntity::new));
+    public static final RegistryObject<BatteryBlock<RedstoneBatteryBlockEntity>> REDSTONE_BATTERY = registerBlockEntity("redstone_battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.copy(BATTERY.get()), RedstoneBatteryBlockEntity.REDSTONE_TIER_ENERGY, ModBlockEntities.REDSTONE_BATTERY, RedstoneBatteryBlockEntity::new));
+    public static final RegistryObject<CreativeBatteryBlock> CREATIVE_BATTERY = register("creative_battery", () -> new CreativeBatteryBlock(BlockBehaviour.Properties.copy(BATTERY.get())));
+    public static final RegistryObject<BaseEnergyGeneratorBlock<GoldEnergyGeneratorBlockEntity>> GOLD_ENERGY_GENERATOR = registerBlockEntity("gold_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.GOLD_ENERGY_GENERATOR_TE, GoldEnergyGeneratorBlockEntity::new));
+    public static final RegistryObject<BaseEnergyGeneratorBlock<CopperEnergyGeneratorBlockEntity>> COPPER_ENERGY_GENERATOR = registerBlockEntity("copper_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 5).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.COPPER_ENERGY_GENERATOR_TE, CopperEnergyGeneratorBlockEntity::new));
+    public static final RegistryObject<BaseEnergyGeneratorBlock<IronEnergyGeneratorBlockEntity>> IRON_ENERGY_GENERATOR = registerBlockEntity("iron_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.IRON_ENERGY_GENERATOR_TE, IronEnergyGeneratorBlockEntity::new));
+    public static final RegistryObject<MetalPressBlock> METAL_PRESS = registerBlockEntity("metal_press", () -> new MetalPressBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 4).sound(ModSoundTypes.METAL_MACHINE)));
+    public static final RegistryObject<SpecialBlock<CrusherBlockEntity>> CRUSHER = register("metal_crusher", () -> new SpecialBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.CRUSHER));
 
-    public static final DecorationBlocks METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(METEORITE).setBricks(METEORITE_BRICKS);
-    public static final DecorationBlocks METEORITE_BRICKS_DECORATION = DecorationBlocks.Builder.buildBoth(METEORITE_BRICKS);
-    public static final DecorationBlocks COBBLED_METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(COBBLED_METEORITE);
-    public static final DecorationBlocks ERODED_METEORITE_DECORATION = DecorationBlocks.Builder.buildBoth(ERODED_METEORITE);
 
     static {
         SOLID_BLOCKS = ImmutableSet.of(
@@ -155,7 +164,7 @@ public class ModBlocks {
                 URANIUM_BLOCK,
                 REDSTONE_STEEL_ALLOY_SHEET_BLOCK,
                 ZIRCONIUM_BLOCK, ZIRCONIUM_ALLOY_BLOCK, SMOOTH_METEORITE, RAW_ZIRCONIUM_BLOCK, PURE_ZIRCONIUM, POLISHED_METEORITE, METEORITE_ZIRCONIUM_ORE, METEORITE_TILES
-                ,METEORITE_LAMP, METEORITE_BRICKS, METEORITE, GILDED_METEORITE_BRICKS, ERODED_METEORITE, COBBLED_METEORITE
+                , METEORITE_LAMP, METEORITE_BRICKS, METEORITE, GILDED_METEORITE_BRICKS, ERODED_METEORITE, COBBLED_METEORITE
         );
     }
 
@@ -172,7 +181,7 @@ public class ModBlocks {
 
     private static <T extends Block> RegistryObject<T> registerWaterlogged(String name, Supplier<T> o) {
         return BLOCK_DEFERRED_REGISTER.register(name, o);
-    }    public static final RegistryObject<BaseEnergyGeneratorBlock<DiamondEnergyGeneratorBlockEntity>> DIAMOND_ENERGY_GENERATOR = registerBlockEntity("diamond_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.DIAMOND_ENERGY_GENERATOR_TE, DiamondEnergyGeneratorBlockEntity::new));
+    }
 
     private static <T extends Block & EntityBlock> RegistryObject<T> registerBlockEntity(String name, Supplier<T> block) {
         return BLOCK_DEFERRED_REGISTER.register(name, block);
@@ -180,11 +189,11 @@ public class ModBlocks {
 
     private static RegistryObject<Block> register(String name, BlockBehaviour.Properties properties) {
         return register(name, () -> new Block(properties.requiresCorrectToolForDrops()));
-    }
+    }    public static final RegistryObject<BaseEnergyGeneratorBlock<DiamondEnergyGeneratorBlockEntity>> DIAMOND_ENERGY_GENERATOR = registerBlockEntity("diamond_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.DIAMOND_ENERGY_GENERATOR_TE, DiamondEnergyGeneratorBlockEntity::new));
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier) {
         return BLOCK_DEFERRED_REGISTER.register(name, supplier);
-    }    public static final RegistryObject<BaseEnergyGeneratorBlock<NetheriteEnergyGeneratorBlockEntity>> NETHERITE_ENERGY_GENERATOR = registerBlockEntity("netherite_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK), ModBlockEntities.NETHERITE_GENERATOR, NetheriteEnergyGeneratorBlockEntity::new));
+    }
 
     private static BlockBehaviour.Properties property() {
         return property(Blocks.STONE);
@@ -200,14 +209,7 @@ public class ModBlocks {
 
     private static RegistryObject<Block> registerStorageBlock(String materialName) {
         return register(materialName, () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    }
+    }    public static final RegistryObject<BaseEnergyGeneratorBlock<NetheriteEnergyGeneratorBlockEntity>> NETHERITE_ENERGY_GENERATOR = registerBlockEntity("netherite_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK), ModBlockEntities.NETHERITE_GENERATOR, NetheriteEnergyGeneratorBlockEntity::new));
 
-    public static final RegistryObject<BatteryBlock<BatteryBlockEntity>> BATTERY = registerBlockEntity("battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4.0f), BatteryBlockEntity.ENERGY_CAPACITY, ModBlockEntities.BATTERY, BatteryBlockEntity::new));
-    public static final RegistryObject<BatteryBlock<SteelBatteryBlockEntity>> STEEL_BATTERY = registerBlockEntity("steel_battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.copy(BATTERY.get()), SteelBatteryBlockEntity.STEEL_TIER_CAPACITY, ModBlockEntities.STEEL_BATTERY, SteelBatteryBlockEntity::new));
-    public static final RegistryObject<BatteryBlock<RedstoneBatteryBlockEntity>> REDSTONE_BATTERY = registerBlockEntity("redstone_battery", () -> new BatteryBlock<>(BlockBehaviour.Properties.copy(BATTERY.get()), RedstoneBatteryBlockEntity.REDSTONE_TIER_ENERGY, ModBlockEntities.REDSTONE_BATTERY, RedstoneBatteryBlockEntity::new));
-    public static final RegistryObject<CreativeBatteryBlock> CREATIVE_BATTERY = register("creative_battery", () -> new CreativeBatteryBlock(BlockBehaviour.Properties.copy(BATTERY.get())));
-    public static final RegistryObject<BaseEnergyGeneratorBlock<GoldEnergyGeneratorBlockEntity>> GOLD_ENERGY_GENERATOR = registerBlockEntity("gold_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.GOLD_ENERGY_GENERATOR_TE, GoldEnergyGeneratorBlockEntity::new));
-    public static final RegistryObject<BaseEnergyGeneratorBlock<CopperEnergyGeneratorBlockEntity>> COPPER_ENERGY_GENERATOR = registerBlockEntity("copper_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 5).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.COPPER_ENERGY_GENERATOR_TE, CopperEnergyGeneratorBlockEntity::new));
-    public static final RegistryObject<BaseEnergyGeneratorBlock<IronEnergyGeneratorBlockEntity>> IRON_ENERGY_GENERATOR = registerBlockEntity("iron_energy_generator", () -> new BaseEnergyGeneratorBlock<>(BlockBehaviour.Properties.of(Material.METAL).strength(4, 5).sound(ModSoundTypes.METAL_MACHINE), ModBlockEntities.IRON_ENERGY_GENERATOR_TE, IronEnergyGeneratorBlockEntity::new));
-    public static final RegistryObject<MetalPressBlock> METAL_PRESS = registerBlockEntity("metal_press", () -> new MetalPressBlock(BlockBehaviour.Properties.of(Material.METAL).strength(3.5f, 4).sound(ModSoundTypes.METAL_MACHINE), MetalPressBlockEntity::new));
+
 }

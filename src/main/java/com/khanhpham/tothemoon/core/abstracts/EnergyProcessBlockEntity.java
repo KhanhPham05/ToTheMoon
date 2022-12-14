@@ -20,8 +20,8 @@ import java.util.function.Supplier;
 
 public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEntity {
     public int workingSpeedModify = 1;
-    protected int workingTime;
-    protected int workingDuration = 100;
+    public int workingTime;
+    public int workingDuration = 100;
 
     public EnergyProcessBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, Energy energy, Supplier<? extends Block> block, int containerSize) {
         this(pType, pWorldPosition, pBlockState, energy, block.get().getName(), containerSize);
@@ -39,9 +39,8 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
         return this.workingTime == 0;
     }
 
-    @SuppressWarnings("unchecked")
-    protected <C extends Container> boolean isResultSlotFreeForProcess(int slotIndex, @Nullable Recipe<C> recipe) {
-        return recipe != null && ModUtils.isSlotFree(this, slotIndex, recipe.assemble((C) this));
+    protected boolean isResultSlotFreeForProcess(int slotIndex, @Nullable Recipe<? extends Container> recipe) {
+        return recipe != null && ModUtils.isSlotFree(this, slotIndex, recipe.getResultItem());
     }
 
     protected void modifyTime() {
@@ -51,12 +50,12 @@ public abstract class EnergyProcessBlockEntity extends EnergyItemCapableBlockEnt
 
     protected void resetTime() {
         this.workingTime = 0;
-        this.workingDuration = 0;
+        //this.workingDuration = 0;
     }
 
     protected BlockState resetTime(Level level, BlockPos pos, BlockState state, BooleanProperty lit) {
         this.resetTime();
-        return this.setNewBlockState(level, pos, state, lit, false);
+        return setNewBlockState(level, pos, state, lit, false);
     }
 
     @Override

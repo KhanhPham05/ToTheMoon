@@ -64,6 +64,7 @@
   "block.tothemoon.gold_sheet_block": "Gold Sheet Block",
   "block.tothemoon.iron_energy_generator": "Iron Energy Generator",
   "block.tothemoon.iron_sheet_block": "Iron Sheet Block",
+  "block.tothemoon.metal_crusher": "Metal Crusher",
   "block.tothemoon.metal_press": "Metal Press",
   "block.tothemoon.meteorite": "Meteorite",
   "block.tothemoon.meteorite_bricks": "Meteorite Bricks",
@@ -280,14 +281,17 @@
   "item.tothemoon.zirconium_ingot": "Zirconium Ingot",
   "jei.tothemoon.alloy_smelter_category": "Alloy Smelting",
   "jei.tothemoon.high_heat_smelting": "High Heat Smelting",
+  "jei.tothemoon.metal_crushing": "Metal Crushing",
   "jei.tothemoon.metal_press_category": "Metal Pressing",
   "jei.tothemoon.ore_processing": "Ore Processing",
   "jei.tothemoon.recipe_consume_mold": "Consume Mold",
   "jei.tothemoon.workbench_crafting": "Workbench Crafting",
   "message.tothemoon.nbf_form_fail": "Can not form Nether Brick Furnace",
   "tooltip.tothemoon.energy": "Energy %s %s / %s",
+  "tooltip.tothemoon.energy_dynamic": "Energy :",
   "tooltip.tothemoon.fluid_fuel_tank": "Fuel : %s / %s",
   "tooltip.tothemoon.item_tank": "(%s): %s",
   "tooltip.tothemoon.lava_support_only": "Can stores Lava only, more fluids will be added in future updates",
-  "tooltip.tothemoon.minecraft_anvil": "A heavy block used to repair tools, also a reliable way to smash the raw ores into dusts by using its weight"
+  "tooltip.tothemoon.minecraft_anvil": "A heavy block used to repair tools, also a reliable way to smash the raw ores into dusts by using its weight",
+  "tooltip.tothemoon.mod_required": "Install [%s]"
 }

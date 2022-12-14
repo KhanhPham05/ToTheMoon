@@ -1,13 +1,12 @@
 package com.khanhpham.tothemoon.core.menus;
 
+import com.google.common.base.Preconditions;
+import com.khanhpham.tothemoon.utils.MachineContainerData;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,7 +14,9 @@ import net.minecraftforge.common.util.FakePlayer;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
 public abstract class BaseMenu extends AbstractContainerMenu {
     protected final Inventory playerInventory;
     protected final Container externalContainer;
@@ -25,6 +26,9 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     protected int inventoryIndex;
     protected int hotbarIndex;
     protected int containerEnds;
+
+    @Nullable
+    private ContainerData pArray;
 
     public BaseMenu(@Nullable MenuType<?> pMenuType, int pContainerId, Inventory playerInventory, Container externalContainer) {
         super(pMenuType, pContainerId);
@@ -82,4 +86,31 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     @Override
     @Nonnull
     public abstract ItemStack quickMoveStack(Player player, int index);
+
+    @Override
+    protected void addDataSlots(ContainerData pArray) {
+        this.pArray = pArray;
+        super.addDataSlots(pArray);
+    }
+
+    public int getEnergyBar() {
+        return 0;
+    }
+
+    public int getProcessBar() {
+        return 0;
+    }
+
+    protected int getData(int index) {
+        Preconditions.checkNotNull(this.pArray);
+        return this.pArray.get(index);
+    }
+
+    public int getEnergyCapacity() {
+        return 0;
+    }
+
+    public int getStoredEnergy() {
+        return 0;
+    }
 }

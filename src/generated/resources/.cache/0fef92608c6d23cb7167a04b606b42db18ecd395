@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-25T15:18:38.7677902	Item Models: tothemoon
+// 1.19.2	2022-11-07T20:26:59.0174894	Item Models: tothemoon
 b0f6fb159b0576c935243e6e10ab91bb442cc7ca assets/tothemoon/models/item/alloy_smelter.json
 24fd7dd9f1551d84d7384679c66e33d5199dddb1 assets/tothemoon/models/item/amethyst_dust.json
 87a10ca93683af3a7463734b89299013a0e17089 assets/tothemoon/models/item/amethyst_gear.json
@@ -63,6 +63,7 @@ f9cbe448495eb180de1d1d9586611e611cb6ab5e assets/tothemoon/models/item/gold_sheet
 96fd6470279b90b9060dbdd488277e2a76fb080d assets/tothemoon/models/item/lapis_gear.json
 d532262e6335fcc6bd2db7df205bd74115004b4a assets/tothemoon/models/item/lapis_plate.json
 0f298b3c22bd59d54b5615a676c4b1ed124f46df assets/tothemoon/models/item/lapis_rod.json
+617e96b59d369e065521c584d0ec1d9351c68e73 assets/tothemoon/models/item/metal_crusher.json
 d2f2feb8028c3906fc23b9db03de5b10567157b6 assets/tothemoon/models/item/metal_press.json
 ce3204a7575b1922cc938ead2a3cbb1a19497cbd assets/tothemoon/models/item/meteorite.json
 319af7a2fa96ed31014c5623108bc0f46ec87234 assets/tothemoon/models/item/meteorite_bricks.json

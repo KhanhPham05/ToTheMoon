@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-25T15:18:38.7647967	LootTablesTTM
+// 1.19.2	2022-11-03T15:09:41.0815211	LootTablesTTM
 da6dc4c2f0ff7cececb2c65412cdce42b05e2b08 data/tothemoon/loot_tables/blocks/alloy_smelter.json
 c8eb816ec00a1434fa7ea438c91ed20ff7ebc389 data/tothemoon/loot_tables/blocks/anti_pressure_glass.json
 1a608649c9ee4fb4a5a8d8d286d4c778f298cdc0 data/tothemoon/loot_tables/blocks/battery.json
@@ -25,6 +25,7 @@ d4c9ca9c7eda5e412c9fa220d66104c86f895bdb data/tothemoon/loot_tables/blocks/fluid
 33f709e3bb9f001439231e19b3ab8268c19e9252 data/tothemoon/loot_tables/blocks/gold_sheet_block.json
 a40c0cda56cc226c6133b76e2267a83ae08d04aa data/tothemoon/loot_tables/blocks/iron_energy_generator.json
 1ca196e22e5c0266e61a2e726f94bd1c29bb2ffb data/tothemoon/loot_tables/blocks/iron_sheet_block.json
+1d52b7da1b7d731febb8cfd2a5458b51a4f14e97 data/tothemoon/loot_tables/blocks/metal_crusher.json
 f318cd7f3da0c8eda859cb96d95f870265d2e1c5 data/tothemoon/loot_tables/blocks/metal_press.json
 7b8acf63036521c7f8325a78038d512312dc1563 data/tothemoon/loot_tables/blocks/meteorite.json
 dc16cc547a0a0000cc415410dc037a64f21b1672 data/tothemoon/loot_tables/blocks/meteorite_bricks.json

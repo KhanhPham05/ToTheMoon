@@ -1,14 +1,11 @@
 package com.khanhpham.tothemoon.core.blocks.machines.energysmelter;
 
 import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
-import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelter;
-import com.khanhpham.tothemoon.core.blocks.machines.energysmelter.EnergySmelterMenu;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.core.energy.Energy;
-import com.khanhpham.tothemoon.core.energy.EnergyOnlyReceive;
+import com.khanhpham.tothemoon.core.energy.MachineEnergy;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,13 +17,7 @@ import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
@@ -59,7 +50,7 @@ public class EnergySmelterBlockEntity extends EnergyProcessBlockEntity {
     }
 
     public EnergySmelterBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntities.ENERGY_SMELTER.get(), pos, state, new EnergyOnlyReceive(150000), ModBlocks.ENERGY_SMELTER.get().getName(), 2);
+        this(ModBlockEntities.ENERGY_SMELTER.get(), pos, state, new MachineEnergy(150000), ModBlocks.ENERGY_SMELTER.get().getName(), 2);
     }
 
     @NotNull

@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -44,7 +45,7 @@ public class ModItemModels extends ItemModelProvider {
             withExistingParent(itemId, modLoc("item/templates/gear_template")).texture("gear", texturePath);
         });
 
-        ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).filter(b -> !(b instanceof MachineFrameBlock || b instanceof BatteryBlock)).forEach(this::blockItem);
+        ModBlocks.BLOCK_DEFERRED_REGISTER.getEntries().stream().filter(RegistryObject::isPresent).map(Supplier::get).filter(b -> !(b instanceof MachineFrameBlock || b instanceof BatteryBlock)).forEach(this::blockItem);
         batteryItemModel(ModBlocks.BATTERY.get());
         batteryItemModel(ModBlocks.REDSTONE_BATTERY.get());
         batteryItemModel(ModBlocks.STEEL_BATTERY.get());

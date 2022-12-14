@@ -3,13 +3,17 @@ package com.khanhpham.tothemoon.utils.text;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
+
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class TextUtils {
@@ -105,11 +109,29 @@ public class TextUtils {
         return copied;
     }
 
+
     private static String copy(String string, int end) {
         return copy(string, 0, end);
     }
 
     public static String showPercentage(int value, int maxValue) {
-        return "(" + value * 100 / maxValue + "%)";
+        return "(" + (value * 100 / maxValue) + "%)";
+    }
+
+    public static Component showColoredPercentage(int value, int maxValue) {
+        int percent = (value * 100 / maxValue);
+        return Component.translatable("(" + percent + "%)").withStyle(getColorFromPercent(percent));
+    }
+
+    private static Style getColorFromPercent(int percent) {
+        if (percent <= 30) {
+            return Style.EMPTY.withColor(0xCC0000);
+        }
+
+        if (percent <= 60) {
+            return Style.EMPTY.withColor(0xEF5F00);
+        }
+
+        return Style.EMPTY.withColor(0x00DB00);
     }
 }

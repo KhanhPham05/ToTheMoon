@@ -3,8 +3,12 @@ package com.khanhpham.tothemoon.datagen.recipes.builders;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.khanhpham.tothemoon.utils.helpers.RegistryEntries;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -12,18 +16,39 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
 import javax.annotation.Nonnull;
+import java.util.function.Consumer;
 
-abstract class AbstractFinishedRecipe<T extends Recipe<?>> implements FinishedRecipe {
+public abstract class AbstractFinishedRecipe<T extends Recipe<?>> implements FinishedRecipe {
     protected final ResourceLocation recipeId;
     protected final RecipeSerializer<T> serializer;
     protected final Advancement.Builder advancementBuilder;
     protected final ResourceLocation advancementRecipeId;
+
+    public AbstractFinishedRecipe(ResourceLocation recipeId, RecipeSerializer<T> serializer, Advancement.Builder advancementBuilder) {
+        this(recipeId, serializer, advancementBuilder, recipeId);
+    }
 
     public AbstractFinishedRecipe(ResourceLocation recipeId, RecipeSerializer<T> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementRecipeId) {
         this.recipeId = recipeId;
         this.serializer = serializer;
         this.advancementBuilder = advancementBuilder;
         this.advancementRecipeId = advancementRecipeId;
+
+        if (this.advancementBuilder.getCriteria().isEmpty()) {
+            this.advancementBuilder.addCriterion("tick", ModRecipeProvider.tick());
+        }
+    }
+
+    public static void toJsonResult(JsonObject json, ItemStack result) {
+        String name = RegistryEntries.ITEM.getKey(result.getItem()).toString();
+        if (result.getCount() > 1) {
+            JsonObject resultJson = new JsonObject();
+            resultJson.addProperty("item", name);
+            resultJson.addProperty("count", result.getCount());
+            json.add("result", resultJson);
+        } else {
+            json.addProperty("result", name);
+        }
     }
 
     @Nonnull
@@ -58,5 +83,15 @@ abstract class AbstractFinishedRecipe<T extends Recipe<?>> implements FinishedRe
             jsonObject.addProperty("count", itemStack.getCount());
             return jsonObject;
         }
+    }
+
+    public static <T extends Recipe<?>> AbstractFinishedRecipe<T> serialize(ResourceLocation recipeId, RecipeSerializer<T> serializer, AbstractCriterionTriggerInstance triggerInstance, Consumer<JsonObject> jsonObject) {
+        final Advancement.Builder builder = Advancement.Builder.advancement().addCriterion("trigger", triggerInstance);
+        return new AbstractFinishedRecipe<T>(recipeId, serializer, builder) {
+            @Override
+            public void serializeRecipeData(JsonObject pJson) {
+                jsonObject.accept(pJson);
+            }
+        };
     }
 }

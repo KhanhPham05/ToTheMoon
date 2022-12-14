@@ -1,7 +1,7 @@
 {
   "type": "tothemoon:metal_pressing",
   "ingredient": {
-    "tag": "forge:gem/lapis"
+    "tag": "forge:gems/lapis"
   },
   "mold": {
     "tag": "tothemoon:metal_press_molds/rod"

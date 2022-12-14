@@ -1,0 +1,15 @@
+{
+  "type": "tothemoon:workbench_crafting",
+  "extra": "tothemoon:steel_machine_frame",
+  "hammer": "tothemoon:steel_hammer",
+  "craftingPattern": [
+    ["tag:forge:plates/iron", "tag:forge:plates/steel", "tag:forge:plates/steel", "tag:forge:plates/steel", "tag:forge:plates/iron"],
+    ["tag:forge:plates/iron", "tag:forge:dusts/redstone", "tag:forge:gears/iron", "tag:forge:dusts/redstone", "tag:forge:plates/iron"],
+    ["tag:forge:plates/iron", "tag:forge:dusts/redstone", "", "tag:forge:dusts/redstone", "tag:forge:plates/iron"],
+    ["tag:forge:plates/iron", "tag:forge:dusts/redstone", "tag:forge:gears/iron", "tag:forge:dusts/redstone", "tag:forge:plates/iron"],
+    ["tag:forge:plates/iron", "tag:forge:plates/steel", "tag:forge:plates/steel", "tag:forge:plates/steel", "tag:forge:plates/iron"]
+  ],
+  "result": {
+    "item": "tothemoon:metal_crusher"
+  }
+}

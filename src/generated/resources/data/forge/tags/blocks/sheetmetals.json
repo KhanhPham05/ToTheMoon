@@ -1,8 +1,8 @@
 {
   "values": [
-    "#forge:sheetmetals/iron",
+    "#forge:sheetmetals/copper",
     "#forge:sheetmetals/steel",
     "#forge:sheetmetals/gold",
-    "#forge:sheetmetals/copper"
+    "#forge:sheetmetals/iron"
   ]
 }

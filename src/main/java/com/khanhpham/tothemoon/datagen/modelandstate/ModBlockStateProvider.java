@@ -59,22 +59,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
         batteryBlockStates(ModBlocks.BATTERY.get());
         batteryBlockStates(ModBlocks.REDSTONE_BATTERY.get());
         batteryBlockStates(ModBlocks.STEEL_BATTERY.get());
-        facingWithLitState(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get());
+        facingWithLitState(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get(), false);
         facingWithLitState(ModBlocks.GOLD_ENERGY_GENERATOR.get());
         facingWithLitState(ModBlocks.IRON_ENERGY_GENERATOR.get());
         facingWithLitState(ModBlocks.DIAMOND_ENERGY_GENERATOR.get());
         facingWithLitState(ModBlocks.NETHERITE_ENERGY_GENERATOR.get());
         facingWithLitState(ModBlocks.COPPER_ENERGY_GENERATOR.get());
+        facingWithLitState(ModBlocks.CRUSHER.get());
     }
 
     static final List<Block> facingLitBlocks = new ArrayList<>();
 
     private void facingWithLitState(@NotNull Block block) {
-        facingLitBlocks.add(block);
-        VariantBlockStateBuilder netherBrickFurnace = super.getVariantBuilder(block);
+        facingWithLitState(block, true);
+    }
+
+    private void facingWithLitState(@NotNull Block block, boolean addToList) {
+        if (addToList) facingLitBlocks.add(block);
+        VariantBlockStateBuilder variantBuilder = super.getVariantBuilder(block);
         for (Direction direction : HorizontalDirectionalBlock.FACING.getPossibleValues()) {
             for (Boolean lit : BlockStateProperties.LIT.getPossibleValues()) {
-                netherBrickFurnace.addModels(netherBrickFurnace.partialState().with(HorizontalDirectionalBlock.FACING, direction).with(BlockStateProperties.LIT, lit), getModel(direction, "block/" + RegistryEntries.BLOCK.getPath(block) + (lit ? "_on" : "")));
+                variantBuilder.addModels(variantBuilder.partialState().with(HorizontalDirectionalBlock.FACING, direction).with(BlockStateProperties.LIT, lit), getModel(direction, "block/" + RegistryEntries.BLOCK.getPath(block) + (lit ? "_on" : "")));
             }
         }
     }
@@ -89,7 +94,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock(block, rl, rl);
     }
 
-    private void batteryBlockStates(BatteryBlock batteryBlock) {
+    private void batteryBlockStates(BatteryBlock<?> batteryBlock) {
+        facingLitBlocks.add(batteryBlock);
         var builder = super.getVariantBuilder(batteryBlock);
         String batteryName = ModUtils.getPath(batteryBlock);
 

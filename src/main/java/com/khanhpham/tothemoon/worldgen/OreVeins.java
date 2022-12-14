@@ -36,9 +36,6 @@ public enum OreVeins {
     }
 
     public static void registerAll(RegisterEvent.RegisterHelper<PlacedFeature> ignored) {
-        //for (OreVeins oreVein : values()) {
-        //    registerHelper.register(oreVein.getFeatureId(), oreVein.getOreFeature().get());
-        //}
     }
 
     public Holder<PlacedFeature> getOreFeature() {

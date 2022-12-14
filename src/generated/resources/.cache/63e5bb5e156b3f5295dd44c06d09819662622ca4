@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-25T15:18:38.7747683	Block States: tothemoon
+// 1.19.2	2022-11-07T20:26:59.0194832	Block States: tothemoon
 ea280a0675c7953b7b7ed62f6c968acdf2b116cf assets/tothemoon/blockstates/battery.json
 529e27b701fd920c1f7313911d109d2a10223881 assets/tothemoon/blockstates/blackstone_fluid_acceptor.json
 0f0de3a8aafa3fb2daaa99dfd9bd25abeec36847 assets/tothemoon/blockstates/cobbled_meteorite.json
@@ -20,6 +20,7 @@ f71bea021949e541b37c5ae089ce758e9d942d51 assets/tothemoon/blockstates/deepslate_
 1c02eff32dc7231bbe72689f22b838d26a818851 assets/tothemoon/blockstates/gold_sheet_block.json
 69b19c217844a6ee87e29001c1748bf653e89d5b assets/tothemoon/blockstates/iron_energy_generator.json
 435d8e6ebaa543ebf1b70ea07b69e8a73ebf02ae assets/tothemoon/blockstates/iron_sheet_block.json
+758fd2eac01ddaa6b028b7f0f66e05d494a5a06c assets/tothemoon/blockstates/metal_crusher.json
 956aa1c1cdca0fa27d30cf46d5b969cbcfa092e0 assets/tothemoon/blockstates/meteorite.json
 df473951507fd9e52eb3b89ad366a16642ae486d assets/tothemoon/blockstates/meteorite_bricks.json
 d811806331a8d02828a6b36e200fabec3859c90c assets/tothemoon/blockstates/meteorite_bricks_slab.json

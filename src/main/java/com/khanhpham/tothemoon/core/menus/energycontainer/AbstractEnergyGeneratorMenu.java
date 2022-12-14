@@ -93,7 +93,7 @@ public abstract class AbstractEnergyGeneratorMenu extends BaseMenu implements Da
         return data.get(2);
     }
 
-    public int getCapacity() {
+    public int getEnergyCapacity() {
         return data.get(3);
     }
 
