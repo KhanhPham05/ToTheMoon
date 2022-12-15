@@ -66,5 +66,10 @@
       <option name="name" value="maven3" />
       <option name="url" value="https://maven.k-4u.nl" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="tterrag maven" />
+      <option name="name" value="tterrag maven" />
+      <option name="url" value="https://maven.tterrag.com/" />
+    </remote-repository>
   </component>
 </project>

@@ -1,0 +1,23 @@
+{
+  "type": "tothemoon:alloy_smelting",
+  "baseIngredient": {
+    "ingredient": [
+      "copper_ingot"
+    ]
+  },
+  "secondaryIngredient": {
+    "ingredient": [
+      "tag:forge:ingots/zinc"
+    ]
+  },
+  "result": {
+    "count": 2,
+    "item": "create:brass_ingot"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -163,6 +164,7 @@ public class ModLanguage extends LanguageProvider {
     protected void addTranslations() {
         ALL_BLOCKS.forEach(this::addBlock);
         ALL_ITEMS.forEach(this::addItem);
+        add(((TranslatableContents) ToTheMoon.TAB.getDisplayName().getContents()).getKey(), "TTM Project");
 
         add(MESSAGE_NBF_FORM_ERROR, "Can not form Nether Brick Furnace");
         add(create("book", "title_crafting_smt"), "Crafting %s");

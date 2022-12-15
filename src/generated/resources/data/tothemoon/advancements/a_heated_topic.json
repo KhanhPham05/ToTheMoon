@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "minecraft:air"
+              "tothemoon:netherbrick_furnace_controller"
             ]
           }
         ]
@@ -22,7 +22,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:air"
+      "item": "tothemoon:netherbrick_furnace_controller"
     },
     "show_toast": true,
     "title": {

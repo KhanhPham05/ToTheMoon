@@ -28,6 +28,7 @@ public class ShortenIngredient {
     }
 
     public ShortenIngredient add(ItemLike... items) {
+        Preconditions.checkState(items.length > 0);
         for (ItemLike item : items) {
             this.items.add(item.asItem());
         }
@@ -86,5 +87,14 @@ public class ShortenIngredient {
         }
 
         return InventoryChangeTrigger.TriggerInstance.hasItems(predicate.build());
+    }
+
+    public final ShortenIngredientStack stack() {
+        return stack(1);
+    }
+
+    public final ShortenIngredientStack stack(int count) {
+        if (this.items.isEmpty() && this.tags.isEmpty()) throw new IllegalStateException("Ingredient is empty, can not stack");
+        return new ShortenIngredientStack(this, count);
     }
 }

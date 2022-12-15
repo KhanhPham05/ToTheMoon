@@ -57,7 +57,7 @@ public class ModItems {
 
 
     public static final CraftingMaterial STEEL_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "steel").setIngot().setSheetmetal(ModBlocks.STEEL_SHEET_BLOCK).setWire().storageBlock(ModBlocks.STEEL_BLOCK).setArmor(ModArmorMaterial.STEEL);
-    public static final CraftingMaterial REDSTONE_STEEL_MATERIALS = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "redstone_steel_alloy").setIngot().setWire().setSheetmetal(ModBlocks.REDSTONE_STEEL_ALLOY_SHEET_BLOCK).storageBlock(ModBlocks.REDSTONE_STEEL_ALLOY_BLOCK).setArmor(ModArmorMaterial.REDSTONE_STEEL);
+    public static final CraftingMaterial REDSTONE_STEEL_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "redstone_steel_alloy").setIngot().setWire().setSheetmetal(ModBlocks.REDSTONE_STEEL_ALLOY_SHEET_BLOCK).storageBlock(ModBlocks.REDSTONE_STEEL_ALLOY_BLOCK).setArmor(ModArmorMaterial.REDSTONE_STEEL);
     public static final CraftingMaterial REDSTONE_METAL_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "redstone_metal").setIngot().setWire().storageBlock(ModBlocks.REDSTONE_METAL_BLOCK);
     public static final CraftingMaterial COPPER_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "copper").setVanillaIngot(Items.COPPER_INGOT).setSheetmetal(ModBlocks.COPPER_SHEET_BLOCK).setWire();
     public static final CraftingMaterial IRON_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "iron").setVanillaIngot(Items.IRON_INGOT).setSheetmetal(ModBlocks.IRON_SHEET_BLOCK).setWire();

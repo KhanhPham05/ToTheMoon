@@ -20,12 +20,12 @@ import com.khanhpham.tothemoon.core.blocks.workbench.WorkbenchScreen;
 import com.khanhpham.tothemoon.core.multiblock.block.brickfurnace.NetherBrickFurnaceControllerScreen;
 import com.khanhpham.tothemoon.core.processes.single.SingleProcessMenuScreen;
 import com.khanhpham.tothemoon.core.renderer.TheMoonDimensionEffect;
-import com.khanhpham.tothemoon.datagen.modelandstate.ModItemModels;
 import com.khanhpham.tothemoon.datagen.advancement.ModAdvancementProvider;
-import com.khanhpham.tothemoon.datagen.modelandstate.ModBlockModels;
-import com.khanhpham.tothemoon.datagen.modelandstate.ModBlockStateProvider;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.datagen.loottable.ModLootTables;
+import com.khanhpham.tothemoon.datagen.modelandstate.ModBlockModels;
+import com.khanhpham.tothemoon.datagen.modelandstate.ModBlockStateProvider;
+import com.khanhpham.tothemoon.datagen.modelandstate.ModItemModels;
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.sounds.ModSoundDefinitionsProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModTagProvider;
@@ -39,7 +39,6 @@ import com.khanhpham.tothemoon.utils.multiblock.MultiblockManager;
 import com.khanhpham.tothemoon.worldgen.OreVeins;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -127,23 +126,15 @@ public class ToTheMoon {
         public static void gatherData(GatherDataEvent event) {
             DataGenerator data = event.getGenerator();
             ExistingFileHelper fileHelper = event.getExistingFileHelper();
-
-            if (event.includeServer()) {
-                ModUtils.log("Starting Server Data Generation");
-                addProvider(data, new ModAdvancementProvider(data, fileHelper));
-                addProvider(data, new ModRecipeProvider(data));
-                addProvider(data, new ModLootTables(data));
-            }
-
-            if (event.includeClient()) {
-                ModUtils.log("Starting Client Data Generation");
-                addProvider(data, new ModSoundDefinitionsProvider(data, fileHelper));
-                addProvider(data, new ModLanguage(data));
-                addProvider(data, new ModBlockStateProvider(data, fileHelper));
-                addProvider(data, new ModBlockModels(data, fileHelper));
-                addProvider(data, new ModItemModels(data, fileHelper));
-                new ModTagProvider(data, fileHelper);
-            }
+            data.addProvider(event.includeDev(), new ModAdvancementProvider(data, fileHelper));
+            addProvider(data, new ModRecipeProvider(data));
+            addProvider(data, new ModLootTables(data));
+            addProvider(data, new ModSoundDefinitionsProvider(data, fileHelper));
+            addProvider(data, new ModLanguage(data));
+            addProvider(data, new ModBlockStateProvider(data, fileHelper));
+            addProvider(data, new ModBlockModels(data, fileHelper));
+            addProvider(data, new ModItemModels(data, fileHelper));
+            ModTagProvider.run(data, fileHelper);
         }
 
         private static void addProvider(DataGenerator dataGenerator, DataProvider provider) {

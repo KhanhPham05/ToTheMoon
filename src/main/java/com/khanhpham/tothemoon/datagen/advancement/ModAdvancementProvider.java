@@ -3,7 +3,6 @@ package com.khanhpham.tothemoon.datagen.advancement;
 import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.advancements.AnvilCrushingTrigger;
 import com.khanhpham.tothemoon.advancements.MultiblockFormedTrigger;
-import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
 import com.khanhpham.tothemoon.core.items.tool.ModToolTiers;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
@@ -42,7 +41,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
 
     @Override
     protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
-        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_MATERIALS.getIngot(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(ToTheMoon.MOD_ID, "textures/block/steel_sheet_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", ModRecipeProvider.tick()).save(consumer, loc("root"), fileHelper);
+        Advancement root = Advancement.Builder.advancement().display(ModItems.REDSTONE_STEEL_MATERIAL.getIngot(), ROOT, ROOT_DESCRIPTION, new ResourceLocation(ToTheMoon.MOD_ID, "textures/block/steel_sheet_block.png"), FrameType.CHALLENGE, false, false, false).addCriterion("tick", ModRecipeProvider.tick()).save(consumer, loc("root"), fileHelper);
         Advancement heavyCrushing = display(Items.ANVIL, HEAVY_CRUSHING, FrameType.GOAL).addCriterion("req", AnvilCrushingTrigger.TriggerInstance.crushItem()).parent(root).parent(root).save(consumer, loc("anvil_crushing"), fileHelper);
         Advancement aHeatedTopic = display(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get(), A_HEATED_TOPIC, FrameType.GOAL).addCriterion("req", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.NETHER_BRICK_FURNACE_CONTROLLER.get())).parent(heavyCrushing).save(consumer, loc("a_heated_topic"), fileHelper);
         Advancement highHeatSmelting = display(Items.NETHER_BRICK, HIGH_HEAT_SMELTING, FrameType.GOAL)

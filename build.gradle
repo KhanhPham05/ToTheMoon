@@ -26,7 +26,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
+    mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
@@ -116,6 +116,11 @@ repositories {
         // TOP
         url "https://maven.k-4u.nl"
     }
+
+    maven {
+        name = 'tterrag maven'
+        url = 'https://maven.tterrag.com/'
+    }
 }
 
 mixin {
@@ -141,7 +146,13 @@ dependencies {
 
     //mekanism for compat testing
     def mekanism = "mekanism:Mekanism:${mc_version}-${mekanism_version}"
-    runtimeOnly fg.deobf(mekanism)
+    //runtimeOnly fg.deobf(mekanism)
+
+    //Create - Compat Testing
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
+    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+
 
     def patchouli = "vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}"
 

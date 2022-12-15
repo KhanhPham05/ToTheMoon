@@ -142,7 +142,7 @@ public class ModRecipeProvider extends RecipeProvider {
                         "DWWWD",
                         "DSSSD")
                 .define('D', ModItems.DIAMOND_MATERIAL.getPlateTag())
-                .define('S', ModItems.REDSTONE_STEEL_MATERIALS.getPlateTag())
+                .define('S', ModItems.REDSTONE_STEEL_MATERIAL.getPlateTag())
                 .define('B', Blocks.BLAST_FURNACE)
                 .define('W', ModItems.REDSTONE_METAL_MATERIAL.getWireTag())
                 .save(consumer);
@@ -150,7 +150,7 @@ public class ModRecipeProvider extends RecipeProvider {
         AlloySmeltingRecipeBuilder.build(
                 new ShortenIngredientStack(ShortenIngredient.create().add(DUSTS_IRON).add(INGOTS_IRON), 1),
                 new ShortenIngredientStack(ShortenIngredient.create().add(DUSTS_REDSTONE), 3),
-                ModItems.REDSTONE_STEEL_MATERIALS.getIngot(), 1
+                ModItems.REDSTONE_METAL_MATERIAL.getIngot(), 1
         ).save(consumer, "redstone_metal");
 
         AlloySmeltingRecipeBuilder.build(
@@ -159,6 +159,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 ModItems.STEEL_MATERIAL.getIngot(), 1
         ).save(consumer, "steel_ingot");
 
+        AlloySmeltingRecipeBuilder.build(
+                ShortenIngredient.create().add(ModItems.STEEL_MATERIAL.getDustTag()).add(ModItems.STEEL_MATERIAL.getIngotTag()).stack(),
+                ShortenIngredient.create().add(DUSTS_REDSTONE).stack(3),
+                ModItems.REDSTONE_STEEL_MATERIAL.getIngot(), 1
+        ).save(consumer, "redstone_steel");
 
         TagToItemRecipeHelper provider = TagToItemRecipeHelper.create(consumer);
 

@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:plates/lapis"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/rod"
+  },
+  "result": {
+    "count": 1,
+    "item": "tothemoon:lapis_rod"
+  }
+}

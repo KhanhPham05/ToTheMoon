@@ -68,7 +68,7 @@
   },
   "requirements": [
     [
-      "steel_boots"
+      "steel_helmet"
     ],
     [
       "steel_leggings"
@@ -77,7 +77,7 @@
       "steel_chestplate"
     ],
     [
-      "steel_helmet"
+      "steel_boots"
     ]
   ]
 }

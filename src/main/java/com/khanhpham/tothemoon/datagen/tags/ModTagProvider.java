@@ -30,7 +30,10 @@ import static com.khanhpham.tothemoon.init.ModItems.RAW_URANIUM_ORE;
 import static net.minecraftforge.common.Tags.Items.*;
 
 public class ModTagProvider {
-    public ModTagProvider(DataGenerator data, ExistingFileHelper fileHelper) {
+
+    private ModTagProvider() {}
+
+    public static void run(DataGenerator data, ExistingFileHelper fileHelper) {
         ModBlockTagsProvider provider = new ModBlockTagsProvider(data, fileHelper);
         data.addProvider(true, new ModItemTagsProvider(data, provider, fileHelper));
         data.addProvider(true, provider);

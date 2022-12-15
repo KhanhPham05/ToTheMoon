@@ -2,7 +2,7 @@
   "type": "create:pressing",
   "ingredients": [
     {
-      "item": "tothemoon:redstone_steel_alloy"
+      "item": "tothemoon:redstone_steel_alloy_ingot"
     }
   ],
   "results": [

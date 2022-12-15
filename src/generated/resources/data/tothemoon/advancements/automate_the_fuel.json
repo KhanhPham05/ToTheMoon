@@ -6,12 +6,12 @@
         "items": [
           {
             "items": [
-              "minecraft:air"
+              "tothemoon:nether_bricks_fluid_acceptor"
             ]
           },
           {
             "items": [
-              "minecraft:air"
+              "tothemoon:blackstone_fluid_acceptor"
             ]
           }
         ]
@@ -27,7 +27,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:air"
+      "item": "tothemoon:nether_bricks_fluid_acceptor"
     },
     "show_toast": true,
     "title": {
