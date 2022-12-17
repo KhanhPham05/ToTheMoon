@@ -1,13 +1,12 @@
 {
   "type": "tothemoon:ore_processing",
   "extra_result": {
-    "chance": 15,
+    "chance": 40,
     "item": "tothemoon:iron_dust"
   },
-  "ingredient": "tag:create:crushed_ores/iron",
+  "ingredient": "create:crushed_iron_ore",
   "processing_time": 100,
   "result": {
-    "count": 2,
     "item": "tothemoon:iron_dust"
   },
   "conditions": [

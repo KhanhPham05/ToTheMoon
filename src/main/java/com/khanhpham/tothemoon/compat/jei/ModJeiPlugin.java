@@ -34,6 +34,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.awt.*;
 import java.util.Objects;
 
 @MethodsReturnNonnullByDefault
@@ -135,7 +136,7 @@ public class ModJeiPlugin implements IModPlugin {
         public void setRecipe(IRecipeLayoutBuilder builder, AlloySmeltingRecipe recipe, IFocusGroup focuses) {
             builder.addSlot(RecipeIngredientRole.INPUT, 17, 12).addItemStacks(recipe.baseIngredient.getIngredientStacks());
             builder.addSlot(RecipeIngredientRole.INPUT, 17, 40).addItemStacks(recipe.secondaryIngredient.getIngredientStacks());
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 81, 28).addItemStack(recipe.result);
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 79, 26).addItemStack(recipe.result);
         }
     }
 
@@ -163,9 +164,7 @@ public class ModJeiPlugin implements IModPlugin {
 
             if (recipe.isConsumeMold()) {
                 pose.pushPose();
-                pose.scale(.9f, .9f, .9f);
-                //noinspection ConstantConditions
-                Minecraft.getInstance().font.draw(pose, ModLanguage.JEI_METAL_PRESS_CONSUME_MOLD, 0, 58, ChatFormatting.RED.getColor());
+                Minecraft.getInstance().font.draw(pose, ModLanguage.JEI_METAL_PRESS_CONSUME_MOLD, 37, 54, Color.RED.getRGB());
                 pose.popPose();
             }
         }

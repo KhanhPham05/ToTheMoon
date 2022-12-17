@@ -1,0 +1,8 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "minecraft:golden_horse_armor",
+  "result": {
+    "count": 3,
+    "item": "minecraft:gold_ingot"
+  }
+}

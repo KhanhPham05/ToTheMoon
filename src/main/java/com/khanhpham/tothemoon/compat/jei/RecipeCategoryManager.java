@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.khanhpham.tothemoon.compat.jei.recipecategories.*;
 import com.khanhpham.tothemoon.core.recipes.type.SingleProcessRecipeType;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.*;
 import net.minecraft.world.item.crafting.RecipeManager;
 
@@ -32,13 +33,13 @@ public final class RecipeCategoryManager {
 
     public void registerAllCategories(IRecipeCategoryRegistration registration, IGuiHelper helper) {
         this.recipeCategories.clear();
-        ArrayList<RecipeCategory<?>> recipes = new ArrayList<>();
-        recipes.add(new OreProcessingCategory(helper));
-        recipes.add(new WorkbenchCraftingCategory(helper));
-        recipes.add(new HighHeatSmeltingCategory(helper));
-        recipes.addAll(SingleProcessRecipeType.ALL_TYPES.stream().map(recipeType -> new SingleProcessCategory(helper, recipeType)).toList());
-        registration.addRecipeCategories(recipes.toArray(new RecipeCategory[0]));
-        this.recipeCategories.addAll(recipes);
+        this.recipeCategories.add(new OreProcessingCategory(helper));
+        this.recipeCategories.add(new WorkbenchCraftingCategory(helper));
+        this.recipeCategories.add(new HighHeatSmeltingCategory(helper));
+        for (SingleProcessRecipeType singleType : SingleProcessRecipeType.ALL_TYPES) {
+            this.recipeCategories.add(new SingleProcessCategory(helper, singleType));
+        }
+        registration.addRecipeCategories(this.recipeCategories.toArray(new IRecipeCategory[0]));
     }
 
     public void registerGuiHandler(IGuiHandlerRegistration registration) {

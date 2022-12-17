@@ -1,7 +1,7 @@
 {
   "values": [
-    "#forge:dusts/coal",
     "#forge:dusts/heated_coal",
+    "#forge:dusts/coal",
     "#forge:dusts/uranium",
     "#forge:dusts/steel",
     "#forge:dusts/redstone_steel_alloy",

@@ -1,0 +1,5 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "minecraft:amethyst_shard",
+  "result": "tothemoon:amethyst_dust"
+}

@@ -1,0 +1,5 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "minecraft:diamond",
+  "result": "tothemoon:diamond_dust"
+}

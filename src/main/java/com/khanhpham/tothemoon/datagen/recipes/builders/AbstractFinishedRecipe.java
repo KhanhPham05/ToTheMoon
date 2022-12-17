@@ -87,7 +87,7 @@ public abstract class AbstractFinishedRecipe<T extends Recipe<?>> implements Fin
 
     public static <T extends Recipe<?>> AbstractFinishedRecipe<T> serialize(ResourceLocation recipeId, RecipeSerializer<T> serializer, AbstractCriterionTriggerInstance triggerInstance, Consumer<JsonObject> jsonObject) {
         final Advancement.Builder builder = Advancement.Builder.advancement().addCriterion("trigger", triggerInstance);
-        return new AbstractFinishedRecipe<T>(recipeId, serializer, builder) {
+        return new AbstractFinishedRecipe<>(recipeId, serializer, builder) {
             @Override
             public void serializeRecipeData(JsonObject pJson) {
                 jsonObject.accept(pJson);

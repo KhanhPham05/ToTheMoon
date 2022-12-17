@@ -1,0 +1,5 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "minecraft:iron_ingot",
+  "result": "tothemoon:iron_dust"
+}

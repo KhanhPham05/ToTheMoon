@@ -2,7 +2,6 @@ package com.khanhpham.tothemoon.core.recipes.type;
 
 import com.khanhpham.tothemoon.core.recipes.SingleProcessRecipe;
 import com.khanhpham.tothemoon.datagen.lang.ModLanguage;
-import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -18,10 +17,6 @@ public final class SingleProcessRecipeType implements RecipeType<SingleProcessRe
 
     public final ResourceLocation location;
     private final Supplier<? extends ItemLike> catalystIcon;
-
-    public SingleProcessRecipeType(String name, Supplier<? extends ItemLike> catalystIcon) {
-        this(ModUtils.modLoc(name), catalystIcon);
-    }
 
     public SingleProcessRecipeType(ResourceLocation location, Supplier<? extends ItemLike> catalystIcon) {
         this.location = location;

@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:ingots/netherite"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/gear"
+  },
+  "result": {
+    "count": 1,
+    "item": "tothemoon:netherite_gear"
+  }
+}

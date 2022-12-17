@@ -1,0 +1,5 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "tothemoon:redstone_steel_alloy_ingot",
+  "result": "tothemoon:redstone_steel_alloy_dust"
+}

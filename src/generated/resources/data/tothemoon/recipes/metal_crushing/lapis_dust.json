@@ -1,0 +1,5 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "minecraft:lapis_lazuli",
+  "result": "tothemoon:lapis_dust"
+}

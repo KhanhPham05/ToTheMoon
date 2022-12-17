@@ -1,0 +1,5 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "minecraft:quartz",
+  "result": "tothemoon:quartz_dust"
+}

@@ -6,6 +6,7 @@ import com.khanhpham.tothemoon.ToTheMoon;
 import com.khanhpham.tothemoon.core.items.tool.ModArmorMaterial;
 import com.khanhpham.tothemoon.datagen.recipes.builders.MetalPressRecipeBuilder;
 import com.khanhpham.tothemoon.datagen.recipes.builders.OreProcessingBuilder;
+import com.khanhpham.tothemoon.datagen.recipes.builders.SingleProcessRecipeBuilder;
 import com.khanhpham.tothemoon.datagen.recipes.elements.ShortenIngredient;
 import com.khanhpham.tothemoon.datagen.recipes.provider.ModRecipeProvider;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
@@ -23,6 +24,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -221,8 +223,10 @@ public class CraftingMaterial {
 
         if (this.oreBlockPair != null || this.deepslateOrePair != null) {
             OreProcessingBuilder.process(this.getDust(), 2, ShortenIngredient.create().add(createTag("ores"))).doubleChance(50);
-
         }
+
+
+        SingleProcessRecipeBuilder.metalCrushing(consumer, ShortenIngredient.create().add(this.getIngot()), new ItemStack(this.getDust()), this.dust.getId().getPath());
     }
 
     public void addTags(ModTagProvider.ModItemTagsProvider tagProvider) {

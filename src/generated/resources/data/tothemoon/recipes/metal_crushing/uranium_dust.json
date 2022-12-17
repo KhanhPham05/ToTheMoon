@@ -1,0 +1,5 @@
+{
+  "type": "tothemoon:metal_crushing",
+  "ingredient": "tothemoon:uranium_ingot",
+  "result": "tothemoon:uranium_dust"
+}

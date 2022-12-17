@@ -66,7 +66,7 @@ public class ModItems {
     public static final CraftingMaterial DIAMOND_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "diamond").setGem(Items.DIAMOND).setOres(Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE);
     public static final CraftingMaterial EMERALD_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "emerald").setGem(Items.EMERALD).setOres(Blocks.EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE);
     public static final CraftingMaterial LAPIS_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "lapis").setGem(Items.LAPIS_LAZULI).setOres(Blocks.LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE);
-    public static final CraftingMaterial NETHERITE_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "netherite");
+    public static final CraftingMaterial NETHERITE_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "netherite").setVanillaIngot(Items.NETHERITE_INGOT);
     public static final CraftingMaterial QUARTZ_MATERIAL = new CraftingMaterial(ITEM_DEFERRED_REGISTER, "quartz").setGem(Items.QUARTZ);
 
     static {

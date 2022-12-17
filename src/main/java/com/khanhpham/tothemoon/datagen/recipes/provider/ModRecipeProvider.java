@@ -189,6 +189,9 @@ public class ModRecipeProvider extends RecipeProvider {
         OreProcessingBuilder.process(Items.QUARTZ, 4, ShortenIngredient.create().add(ORES_QUARTZ)).extraOutput(new ItemStack(ModItems.PURIFIED_QUARTZ.get(), 3), 10).save(consumer);
         OreProcessingBuilder.process(Items.NETHERITE_SCRAP, 1, ShortenIngredient.create().add(ORES_NETHERITE_SCRAP)).doubleChance(40).save(consumer);
 
+        SingleProcessRecipeBuilder.metalCrushing(consumer, ShortenIngredient.create().add(Items.IRON_HORSE_ARMOR), new ItemStack(Items.IRON_INGOT, 3), "iron_from_horse_armor");
+        SingleProcessRecipeBuilder.metalCrushing(consumer, ShortenIngredient.create().add(Items.GOLDEN_HORSE_ARMOR), new ItemStack(Items.GOLD_INGOT, 3), "gold_from_horse_armor");
+        SingleProcessRecipeBuilder.metalCrushing(consumer, ShortenIngredient.create().add(Items.DIAMOND_HORSE_ARMOR), new ItemStack(Items.DIAMOND, 3), "diamond_from_horse_armor");
     }
 
     private void translateTag(Consumer<FinishedRecipe> consumer, TagKey<Item> tag) {
@@ -199,13 +202,6 @@ public class ModRecipeProvider extends RecipeProvider {
     private void buildSlab(RecipeGeneratorHelper helper, Supplier<SlabBlock> slabBlockSupplier, Supplier<Block> materialSupplier) {
         helper.buildSlab(slabBlockSupplier, materialSupplier);
         helper.stoneCutting(slabBlockSupplier, 2, materialSupplier);
-    }
-
-    private void buildSmeltingRecipes(final RecipeGeneratorHelper helper) {
-        Consumer<FinishedRecipe> consumer = helper.consumer();
-        this.oreSmelting(consumer, ModUtils.multiTagsIngredient(ORES_URANIUM, URANIUM_RAW_MATERIAL, DUSTS_URANIUM), ModItems.URANIUM_MATERIAL.getIngot(), "uranium_ingot");
-        this.oreSmelting(consumer, Ingredient.of(DUSTS_IRON), Items.IRON_INGOT, "iron_from_dust");
-        this.oreSmelting(consumer, Ingredient.of(DUSTS_GOLD), Items.GOLD_INGOT, "gold_from_dust");
     }
 
     private void oreSmelting(Consumer<FinishedRecipe> finishedRecipe, Ingredient ingredient, ItemLike result, String recipeId) {
