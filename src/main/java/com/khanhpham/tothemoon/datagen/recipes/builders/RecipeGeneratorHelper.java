@@ -103,21 +103,6 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
         saveGlobal(consumer, shapelessRecipe, "shapeless_crafting", getId(result));
     }
 
-    public void armor() {
-        ModItems.ALL_ARMORS.values().stream().map(Supplier::get).forEach(armorItem -> {
-            var builder = this.shaped(armorItem, 1);
-            EquipmentSlot armorSlot = armorItem.getSlot();
-            switch (armorSlot) {
-                case FEET -> builder.pattern("A A").pattern("A A");
-                case LEGS -> builder.pattern("AAA").pattern("A A").pattern("A A");
-                case HEAD -> builder.pattern("AAA").pattern("A A");
-                case CHEST -> builder.pattern("A A").pattern("AAA").pattern("AAA");
-            }
-            builder.define('A', armorItem.getCraftItem());
-            builder.save();
-        });
-    }
-
     @SuppressWarnings("deprecation")
     public void tools() {
         ModItems.ALL_TOOLS.values().stream().map(Supplier::get).forEach(toolItem -> {
@@ -174,8 +159,12 @@ public record RecipeGeneratorHelper(Consumer<FinishedRecipe> consumer) {
         }
 
         public void save() {
+            this.save(ModUtils.getPath(result.asItem()));
+        }
+
+        public void save(String id) {
             unlock(this.getBuilder());
-            this.builder.save(consumer, "tothemoon:" + recipeType + '/' + ModUtils.getPath(result.asItem()));
+            this.builder.save(consumer, "tothemoon:" + recipeType + '/' + id);
         }
     }
 

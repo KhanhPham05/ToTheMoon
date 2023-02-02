@@ -1,7 +1,7 @@
 package com.khanhpham.tothemoon.core.multiblock.block.brickfurnace;
 
 import com.khanhpham.tothemoon.core.abstracts.BaseMenuScreen;
-import com.khanhpham.tothemoon.utils.GuiRenderingUtils;
+import com.khanhpham.tothemoon.utils.render.GuiRenderingUtils;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import com.khanhpham.tothemoon.utils.text.TextUtils;
 import com.mojang.blaze3d.vertex.PoseStack;

@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "tothemoon:steel_machine_frame"
+              "minecraft:air"
             ]
           }
         ]
@@ -22,7 +22,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "tothemoon:steel_machine_frame"
+      "item": "minecraft:air"
     },
     "show_toast": true,
     "title": {

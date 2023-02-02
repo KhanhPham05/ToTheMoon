@@ -4,7 +4,7 @@ import com.khanhpham.tothemoon.core.abstracts.EnergyProcessBlockEntity;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressBlock;
 import com.khanhpham.tothemoon.core.blocks.machines.metalpress.MetalPressMenu;
 import com.khanhpham.tothemoon.core.energy.Energy;
-import com.khanhpham.tothemoon.core.energy.EnergyOnlyReceive;
+import com.khanhpham.tothemoon.core.energy.MachineEnergy;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.IMetalPressBlockEntity;
 import com.khanhpham.tothemoon.core.recipes.metalpressing.MetalPressingRecipe;
 import com.khanhpham.tothemoon.datagen.tags.ModItemTags;
@@ -57,7 +57,7 @@ public class MetalPressBlockEntity extends EnergyProcessBlockEntity implements I
     }
 
     public MetalPressBlockEntity(BlockPos blockPos, BlockState blockState) {
-        this(ModBlockEntities.METAL_PRESS.get(), blockPos, blockState, new EnergyOnlyReceive(200_000), ModBlocks.METAL_PRESS.get().getName(), MENU_SIZE);
+        this(ModBlockEntities.METAL_PRESS.get(), blockPos, blockState, new MachineEnergy(200_000), ModBlocks.METAL_PRESS.get().getName(), MENU_SIZE);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState state, MetalPressBlockEntity e) {

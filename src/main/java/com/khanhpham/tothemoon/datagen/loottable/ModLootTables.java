@@ -1,6 +1,8 @@
 package com.khanhpham.tothemoon.datagen.loottable;
 
 import com.google.common.collect.ImmutableList;
+import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
+import com.khanhpham.tothemoon.core.blocks.DecorationBlocks;
 import com.khanhpham.tothemoon.core.blocks.battery.BatteryBlock;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModItems;
@@ -31,14 +33,13 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.khanhpham.tothemoon.init.ModBlocks.*;
 
@@ -72,11 +73,12 @@ public class ModLootTables extends LootTableProvider {
 
 
     public static final class ModBlockLoots extends BlockLoot {
-        private static final ImmutableList<Supplier<? extends Block>> DROP_SELF_BLOCKS;
-        private static final Set<Block> knownBlocks = BLOCK_DEFERRED_REGISTER.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
+        private static final Set<Supplier<? extends Block>> DROP_SELF_BLOCKS;
+        private static final Set<Supplier<Block>> knownBlocks = new HashSet<>(BLOCK_DEFERRED_REGISTER.getEntries());
 
         static {
-            DROP_SELF_BLOCKS = ImmutableList.of(SMOOTH_BLACKSTONE
+            DROP_SELF_BLOCKS = Stream.of(
+                    SMOOTH_BLACKSTONE
                     , NETHER_BRICK_FURNACE_CONTROLLER, CREATIVE_BATTERY
                     , ENERGY_SMELTER, REDSTONE_STEEL_ALLOY_SHEET_BLOCK, URANIUM_BLOCK
                     , RAW_URANIUM_BLOCK, COBBLED_MOON_ROCK, COBBLED_MOON_ROCK_SLAB, COBBLED_MOON_ROCK_STAIR
@@ -91,8 +93,22 @@ public class ModLootTables extends LootTableProvider {
                     , SMOOTH_PURIFIED_QUARTZ_BLOCK, MOON_ROCK_BARREL, COPPER_ENERGY_GENERATOR
                     , IRON_ENERGY_GENERATOR, ALLOY_SMELTER, METAL_PRESS, TAG_TRANSLATOR
                     , WORKBENCH, BLACKSTONE_FLUID_ACCEPTOR, NETHER_BRICKS_FLUID_ACCEPTOR
-                    , ORE_PROCESSOR
-            );
+                    , ORE_PROCESSOR, NETHERITE_ENERGY_GENERATOR, ZIRCONIUM_BLOCK, ZIRCONIUM_ALLOY_BLOCK
+                    , SMOOTH_METEORITE, RAW_ZIRCONIUM_BLOCK, PURE_ZIRCONIUM, POLISHED_METEORITE
+                    , METEORITE_ZIRCONIUM_ORE, METEORITE_TILES, METEORITE_LAMP, METEORITE_BRICKS
+                    , METEORITE, GILDED_METEORITE_BRICKS, ERODED_METEORITE, COBBLED_METEORITE
+            ).collect(Collectors.toSet());
+
+            for (DecorationBlocks decorationBlock : DecorationBlocks.ALL_DECORATION_BLOCKS) {
+                if (decorationBlock.hasStairBlock()) {
+                    DROP_SELF_BLOCKS.add(decorationBlock::getStairBlock);
+                }
+                if (decorationBlock.hasSlabBlock()) {
+                    DROP_SELF_BLOCKS.add(decorationBlock::getSlabBlock);
+                }
+            }
+
+            knownBlocks.stream().filter(block -> !DROP_SELF_BLOCKS.contains(block) && block.get() instanceof BaseEntityBlock<?>).forEach(DROP_SELF_BLOCKS::add);
         }
 
         public ModBlockLoots() {
@@ -100,12 +116,11 @@ public class ModLootTables extends LootTableProvider {
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
-            return knownBlocks;
+            return knownBlocks.stream().map(Supplier::get).toList();
         }
 
         @Override
         protected void addTables() {
-            //ModUtils.info("Creating loot tables");
             this.createOreDrops(ModBlocks.MOON_IRON_ORE, Items.RAW_IRON);
             this.createOreDrops(ModItems.RAW_URANIUM_ORE.get(), ModBlocks.MOON_URANIUM_ORE, DEEPSLATE_URANIUM_ORE);
             this.createOreDrops(ModBlocks.MOON_GOLD_ORE, Items.RAW_GOLD);

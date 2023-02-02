@@ -14,9 +14,16 @@ public class AppendableBlockTagKey extends AbstractAppendableTag<Block> {
         super(BlockTags.create(location));
     }
 
-    public final TagKey<Block> append(String name, Supplier<? extends Block> block) {
+    public AppendableBlockTagKey(TagKey<Block> mainTag) {
+        super(mainTag);
+    }
+
+    @SafeVarargs
+    public final TagKey<Block> append(String name, Supplier<? extends Block>... block) {
         TagKey<Block> child = BlockTags.create(ModUtils.append(this.mainTag.location(), '/' + name));
-        this.map.put(child, block.get());
+        for (Supplier<? extends Block> supplier : block) {
+            super.map.put(child, supplier.get());
+        }
         return child;
     }
 }

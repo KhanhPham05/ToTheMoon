@@ -1,8 +1,8 @@
 {
   "values": [
-    "#tothemoon:metal_press_molds/plate",
     "#tothemoon:metal_press_molds/rod",
+    "#tothemoon:metal_press_molds/gear",
     "#tothemoon:metal_press_molds/blank",
-    "#tothemoon:metal_press_molds/gear"
+    "#tothemoon:metal_press_molds/plate"
   ]
 }

@@ -7,4 +7,9 @@ import net.minecraft.world.item.crafting.Recipe;
 
 public interface DisplayRecipe<C extends Container> extends Recipe<C> {
     NonNullList<Ingredient> getIngredients();
+
+    @Override
+    default boolean canCraftInDimensions(int pWidth, int pHeight) {
+        return true;
+    };
 }

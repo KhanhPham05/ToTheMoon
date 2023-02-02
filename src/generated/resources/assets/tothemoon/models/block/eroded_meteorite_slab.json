@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "tothemoon:block/eroded_meteorite",
+    "side": "tothemoon:block/eroded_meteorite",
+    "top": "tothemoon:block/eroded_meteorite"
+  }
+}

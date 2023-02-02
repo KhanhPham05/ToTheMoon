@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "tothemoon:steel_pickaxe"
+              "minecraft:air"
             ]
           }
         ]
@@ -22,7 +22,7 @@
     "frame": "task",
     "hidden": true,
     "icon": {
-      "item": "tothemoon:steel_pickaxe",
+      "item": "minecraft:air",
       "nbt": "{Damage:0}"
     },
     "show_toast": true,

@@ -6,6 +6,10 @@ import com.khanhpham.tothemoon.core.blockentities.TickableBlockEntity;
 import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -214,5 +218,15 @@ public class FluidTankBlockEntity extends BlockEntity implements ImplementedCont
 
     public boolean isFluidSame(Fluid fluid) {
         return fluid.isSame(Fluids.EMPTY) && this.tank.getFluid().getFluid().isSame(fluid);
+    }
+
+    public static final class Renderer implements BlockEntityRenderer<FluidTankBlockEntity> {
+        public Renderer(BlockEntityRendererProvider.Context ignored) {
+        }
+
+        @Override
+        public void render(FluidTankBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+
+        }
     }
 }

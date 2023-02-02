@@ -4,7 +4,6 @@ import com.khanhpham.tothemoon.core.blocks.BaseEntityBlock;
 import com.khanhpham.tothemoon.core.blocks.HasCustomBlockItem;
 import com.khanhpham.tothemoon.core.items.BatteryItem;
 import com.khanhpham.tothemoon.datagen.loottable.LootUtils;
-import com.khanhpham.tothemoon.init.ModBlockEntities;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,35 +23,41 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
-public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> implements HasCustomBlockItem {
+public class BatteryBlock<T extends AbstractBatteryBlockEntity> extends BaseEntityBlock<T> implements HasCustomBlockItem {
 
     public static final IntegerProperty ENERGY_LEVEL = ModUtils.ENERGY_LEVEL;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private final int energyCapacity;
+    private final Supplier<BlockEntityType<T>> blockEntity;
+    private final BlockEntityType.BlockEntitySupplier<T> batterySupplier;
 
-    public BatteryBlock(Properties p_49224_, int energyCapacity) {
+    public BatteryBlock(Properties p_49224_, int energyCapacity, Supplier<BlockEntityType<T>> blockEntity, BlockEntityType.BlockEntitySupplier<T> batterySupplier) {
         super(p_49224_);
         this.energyCapacity = energyCapacity;
+        this.blockEntity = blockEntity;
+        this.batterySupplier = batterySupplier;
         super.registerDefaultState(defaultBlockState().setValue(ENERGY_LEVEL, 0).setValue(FACING, Direction.NORTH));
     }
 
     @Override
     @Nonnull
-    protected BlockEntityType<AbstractBatteryBlockEntity> getBlockEntityType() {
-        return ModBlockEntities.BATTERY.get();
+    protected final BlockEntityType<T> getBlockEntityType() {
+        return this.blockEntity.get();
     }
 
     @Override
-    public @Nullable AbstractBatteryBlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new BatteryBlockEntity(pPos, pState);
+    public final @Nonnull T newBlockEntity(BlockPos pPos, BlockState pState) {
+        return this.batterySupplier.create(pPos, pState);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(ENERGY_LEVEL, FACING);
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -60,7 +65,7 @@ public class BatteryBlock extends BaseEntityBlock<AbstractBatteryBlockEntity> im
     }
 
     @Override
-    public BlockItem getRawItem() {
+    public final BlockItem getRawItem() {
         return new BatteryItem(this, this.energyCapacity);
     }
 

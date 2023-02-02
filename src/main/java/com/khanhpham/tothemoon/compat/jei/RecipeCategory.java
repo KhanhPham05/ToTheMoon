@@ -53,10 +53,6 @@ public abstract class RecipeCategory<T extends DisplayRecipe<? extends Container
 
     @Override
     public abstract RecipeType<T> getRecipeType();
-    //{
-    //registration.addRecipes(this.getRecipeType(), this.getActualCraftingRecipes(manager));
-    //}
-
     @Override
     public final IDrawable getIcon() {
         return guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.getCatalystIcon());

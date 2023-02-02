@@ -5,6 +5,7 @@ import com.khanhpham.tothemoon.core.recipes.TagTranslatingRecipe;
 import com.khanhpham.tothemoon.init.ModBlocks;
 import com.khanhpham.tothemoon.init.ModMenuTypes;
 import com.khanhpham.tothemoon.utils.helpers.ModUtils;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

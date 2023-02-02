@@ -35,6 +35,10 @@ public class MetalPressRecipeBuilder implements RecipeBuilder {
         this.result = result;
     }
 
+    public static MetalPressRecipeBuilder press(TagKey<Item> ingredientTag, TagKey<Item> moldTag, Item item, int count) {
+        return press(ingredientTag, moldTag, new ItemStack(item, count));
+    }
+
     public static MetalPressRecipeBuilder press(TagKey<Item> ingredientTag, TagKey<Item> moldTag, ItemStack result) {
         return new MetalPressRecipeBuilder(Ingredient.of(ingredientTag), Ingredient.of(moldTag), result);
     }

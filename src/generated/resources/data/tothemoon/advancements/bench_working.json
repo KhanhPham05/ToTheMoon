@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "tothemoon:workbench"
+              "minecraft:air"
             ]
           }
         ]
@@ -22,7 +22,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "tothemoon:workbench"
+      "item": "minecraft:air"
     },
     "show_toast": true,
     "title": {

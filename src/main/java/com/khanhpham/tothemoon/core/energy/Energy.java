@@ -44,7 +44,6 @@ public class Energy extends EnergyStorage {
         int energyReceived = Math.min(capacity - energy, this.maxReceive);
         energy += energyReceived;
     }
-
     public void setEnergy(int energyNbt) {
         this.energy = energyNbt;
     }

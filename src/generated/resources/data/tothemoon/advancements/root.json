@@ -22,7 +22,7 @@
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "tothemoon:redstone_steel_alloy"
+      "item": "minecraft:air"
     },
     "show_toast": false,
     "title": {

@@ -1,0 +1,7 @@
+{
+  "parent": "tothemoon:item/templates/gear_template",
+  "textures": {
+    "gear": "tothemoon:item/quartz_gear",
+    "layer0": "tothemoon:item/quartz_gear"
+  }
+}

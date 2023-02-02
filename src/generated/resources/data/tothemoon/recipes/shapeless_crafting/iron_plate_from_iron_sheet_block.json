@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:sheetmetals/iron"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "tothemoon:iron_plate"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "tothemoon:metal_pressing",
+  "ingredient": {
+    "tag": "forge:gems/quartz"
+  },
+  "mold": {
+    "tag": "tothemoon:metal_press_molds/plate"
+  },
+  "result": {
+    "count": 2,
+    "item": "tothemoon:quartz_plate"
+  }
+}

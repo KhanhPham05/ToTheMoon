@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "tothemoon:redstone_steel_alloy_plate"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "A A",
+    "AAA"
+  ],
+  "result": {
+    "item": "tothemoon:redstone_steel_alloy_sheet_block"
+  }
+}

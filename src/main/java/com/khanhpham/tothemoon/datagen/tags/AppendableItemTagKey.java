@@ -1,16 +1,13 @@
 package com.khanhpham.tothemoon.datagen.tags;
 
-import com.khanhpham.tothemoon.utils.helpers.ModUtils;
-import net.minecraft.tags.ItemTags;
+import com.google.common.base.Preconditions;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class AppendableItemTagKey extends AbstractAppendableTag<Item> {
 
@@ -18,39 +15,22 @@ public class AppendableItemTagKey extends AbstractAppendableTag<Item> {
         super(mainTag);
     }
 
-    public TagKey<Item> append(String name, ItemLike block) {
-        TagKey<Item> child = ItemTags.create(ModUtils.append(super.mainTag.location(), "/" + name));
-        super.map.put(child, block.asItem());
+    public TagKey<Item> append(String name) {
+        return super.createTag(ForgeRegistries.ITEMS.getRegistryKey(), name);
+    }
+
+    public TagKey<Item> append(String name, ItemLike... items) {
+        Preconditions.checkNotNull(items);
+        TagKey<Item> child = super.createTag(ForgeRegistries.ITEMS.getRegistryKey(), name);
+        if (items.length > 0) for (ItemLike itemLike : items) {
+            super.map.put(child, itemLike.asItem());
+        }
         return child;
     }
 
+    @SafeVarargs
     @Override
-    public TagKey<Item> append(String name, Supplier<? extends Item> supplier) {
-        TagKey<Item> child = ItemTags.create(ModUtils.append(super.mainTag.location(), "/" + name));
-        super.map.put(child, supplier.get());
-        return child;
-    }
-
-    /**
-     * This class stores tags for a specific crafting process
-     * e.g : {@code items:forge:storage_blocks/iron -> items:forge:ingots/iron}
-     */
-    public static final class OneWayProcessable extends AppendableItemTagKey {
-
-        private final HashMap<TagKey<Item>, Supplier<? extends ItemLike>> processMap = new HashMap<>();
-
-        public OneWayProcessable(TagKey<Item> mainTag) {
-            super(mainTag);
-        }
-
-        public TagKey<Item> append(String name, Supplier<? extends Item> from, Supplier<? extends ItemLike> craftTo) {
-            TagKey<Item> tag = super.append(name, from);
-            this.processMap.put(tag, craftTo);
-            return tag;
-        }
-
-        public HashMap<TagKey<Item>, Supplier<? extends ItemLike>> getProcessMap() {
-            return processMap;
-        }
+    public final TagKey<Item> append(String name, Supplier<? extends Item>... suppliers) {
+        return suppliers.length > 0 ? append(name, Stream.of(suppliers).map(Supplier::get).toArray(Item[]::new)) : super.createTag(ForgeRegistries.ITEMS.getRegistryKey(), name);
     }
 }
