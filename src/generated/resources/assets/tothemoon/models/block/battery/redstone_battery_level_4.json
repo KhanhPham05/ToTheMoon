@@ -1,9 +1,0 @@
-{
-  "parent": "tothemoon:block/templates/battery_base",
-  "textures": {
-    "battery_front": "tothemoon:block/battery/redstone_battery/4",
-    "bottom": "tothemoon:block/battery/redstone_battery_bottom",
-    "side": "tothemoon:block/battery/redstone_battery_side",
-    "top": "tothemoon:block/battery/redstone_battery_top"
-  }
-}

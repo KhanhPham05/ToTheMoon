@@ -12,29 +12,9 @@
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://libraries.minecraft.net/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="MavenRepo" />
       <option name="name" value="MavenRepo" />
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://maven.minecraftforge.net/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Progwml6 maven" />
-      <option name="name" value="Progwml6 maven" />
-      <option name="url" value="https://dvs1.progwml6.com/files/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="ParchmentMC" />
-      <option name="name" value="ParchmentMC" />
-      <option name="url" value="https://maven.parchmentmc.org/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven" />
@@ -49,22 +29,17 @@
     <remote-repository>
       <option name="id" value="maven2" />
       <option name="name" value="maven2" />
-      <option name="url" value="https://maven.blamejared.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="MelanX Maven" />
-      <option name="name" value="MelanX Maven" />
-      <option name="url" value="https://maven.melanx.de/" />
+      <option name="url" value="https://maven.minecraftforge.net/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven3" />
       <option name="name" value="maven3" />
-      <option name="url" value="https://maven.zerono.it/" />
+      <option name="url" value="https://libraries.minecraft.net/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven3" />
-      <option name="name" value="maven3" />
-      <option name="url" value="https://maven.k-4u.nl" />
+      <option name="id" value="Jared's maven" />
+      <option name="name" value="Jared's maven" />
+      <option name="url" value="https://maven.blamejared.com/" />
     </remote-repository>
   </component>
 </project>

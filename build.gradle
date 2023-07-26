@@ -1,34 +1,31 @@
 buildscript {
     repositories {
-        maven { url = "https://maven.minecraftforge.net" }
-        maven { url = "https://maven.parchmentmc.org" }
         maven { url = 'https://repo.spongepowered.org/maven' }
-        mavenCentral()
     }
     dependencies {
-        classpath(group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true)
-                { exclude group: 'org.apache.logging.log4j' }
-        classpath 'org.apache.logging.log4j:log4j-api:2.11.2'
-        classpath 'org.apache.logging.log4j:log4j-core:2.11.2'
-        classpath 'org.parchmentmc:librarian:1.+'
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'maven-publish'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
+
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+}
+
 apply plugin: 'org.spongepowered.mixin'
 
-archivesBaseName = 'ttm'
-version = "${build_version}"
+base.archivesName = 'tothemoon'
+group = 'com.khanhtypo'
+version = "2.0"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
+    mappings channel: 'official', version: "1.20.1"
 
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
 
@@ -96,74 +93,49 @@ repositories {
     maven {
         url = "https://www.cursemaven.com/"
     }
-
     maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
     }
     maven {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
-
-    maven {
-        url = "https://maven.blamejared.com"
-    }
-
-    maven {
-        // TOP
-        url "https://maven.k-4u.nl"
-    }
 }
 
 mixin {
     add sourceSets.main, 'ttm.mixin-refmap.json'
     config 'ttm.mixin.json'
-
 }
 
 
 dependencies {
-    def mc = "net.minecraftforge:forge:1.19.2-${forge_version}"
+    def mc = "net.minecraftforge:forge:${mc_version}-${forge_version}"
     minecraft mc
 
-    runtimeOnly fg.deobf("curse.maven:ferritecore-429235:${ferrite_core}")
-    runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:${lazy_dfu}")
-    runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:${shutup_experimental_settings}")
-
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3927520")
+    runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4574361")
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
 
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
     runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 
-    //mekanism for compat testing
-    def mekanism = "mekanism:Mekanism:${mc_version}-${mekanism_version}"
-    runtimeOnly fg.deobf(mekanism)
+    //implementation(fg.deobf("curse.maven:extreme-reactors-250277:4647658"))
+    //implementation(fg.deobf("curse.maven:zerocore-247921:4647656"))
 
-    def patchouli = "vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}"
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}-FORGE:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}-FORGE")
 
-    compileOnly fg.deobf(patchouli + ":api")
-    runtimeOnly fg.deobf(patchouli)
-
-    runtimeOnly fg.deobf("curse.maven:nbt-tool-451553:3879898")
-
-    //def ct = "com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${ct_version}"
-    //implementation(fg.deobf(ct))
-
-    //APs
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    //annotationProcessor "com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10"
-    //annotationProcessor mc
 }
 
 jar {
     manifest {
         attributes([
                 "Specification-Title"     : "tothemoon",
-                "Specification-Vendor"    : "khanhpham05",
+                "Specification-Vendor"    : "khanhtypo",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,

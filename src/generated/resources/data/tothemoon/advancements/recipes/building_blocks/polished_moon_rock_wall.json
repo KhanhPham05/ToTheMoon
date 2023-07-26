@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_moon_rock": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:polished_moon_rock"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tothemoon:polished_moon_rock_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_moon_rock",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tothemoon:polished_moon_rock_wall"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,7 +1,6 @@
 {
   "parent": "tothemoon:item/templates/gear_template",
   "textures": {
-    "gear": "tothemoon:item/emerald_gear",
-    "layer0": "tothemoon:item/emerald_gear"
+    "gear": "tothemoon:item/emerald_gear"
   }
 }

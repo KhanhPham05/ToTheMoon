@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "tothemoon:uranium_armor_plate"
+    }
+  },
+  "pattern": [
+    "A A",
+    "A A"
+  ],
+  "result": {
+    "item": "tothemoon:uranium_boots"
+  },
+  "show_notification": false
+}

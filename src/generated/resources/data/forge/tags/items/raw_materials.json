@@ -1,5 +1,6 @@
 {
   "values": [
-    "#forge:raw_materials/uranium"
+    "#forge:raw_materials/uranium",
+    "#forge:raw_materials/zirconium"
   ]
 }

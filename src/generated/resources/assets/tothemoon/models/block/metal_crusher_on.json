@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "tothemoon:block/metal_crusher_on",
-    "side": "tothemoon:block/metal_crusher_side",
-    "top": "tothemoon:block/metal_crusher_top"
-  }
-}

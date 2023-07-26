@@ -1,0 +1,14 @@
+{
+  "criteria": {
+    "auto_trigger": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "auto_trigger"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

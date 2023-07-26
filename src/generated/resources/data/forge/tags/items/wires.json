@@ -1,11 +1,11 @@
 {
   "values": [
-    "#forge:wires/uranium",
-    "#forge:wires/steel",
-    "#forge:wires/redstone_steel_alloy",
-    "#forge:wires/redstone_metal",
     "#forge:wires/copper",
+    "#forge:wires/gold",
     "#forge:wires/iron",
-    "#forge:wires/gold"
+    "#forge:wires/redstone_metal",
+    "#forge:wires/redstone_steel",
+    "#forge:wires/steel",
+    "#forge:wires/uranium"
   ]
 }

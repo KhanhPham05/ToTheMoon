@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "tothemoon:block/meteorite_bricks",
+    "side": "tothemoon:block/meteorite_bricks",
+    "top": "tothemoon:block/meteorite_bricks"
+  }
+}

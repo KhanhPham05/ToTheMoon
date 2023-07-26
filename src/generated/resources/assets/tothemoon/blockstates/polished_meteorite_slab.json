@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tothemoon:block/polished_meteorite_slab"
+    },
+    "type=double": {
+      "model": "tothemoon:block/polished_meteorite"
+    },
+    "type=top": {
+      "model": "tothemoon:block/polished_meteorite_slab_top"
+    }
+  }
+}

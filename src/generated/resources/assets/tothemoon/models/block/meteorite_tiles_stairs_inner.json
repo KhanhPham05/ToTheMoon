@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "tothemoon:block/meteorite_tiles",
+    "side": "tothemoon:block/meteorite_tiles",
+    "top": "tothemoon:block/meteorite_tiles"
+  }
+}

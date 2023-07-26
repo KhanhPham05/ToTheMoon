@@ -1,7 +1,6 @@
 {
   "parent": "tothemoon:item/templates/gear_template",
   "textures": {
-    "gear": "tothemoon:item/lapis_gear",
-    "layer0": "tothemoon:item/lapis_gear"
+    "gear": "tothemoon:item/lapis_gear"
   }
 }

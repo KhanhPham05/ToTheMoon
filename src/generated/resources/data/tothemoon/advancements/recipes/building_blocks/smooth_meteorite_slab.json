@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_smooth_meteorite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tothemoon:smooth_meteorite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tothemoon:smooth_meteorite_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_meteorite",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tothemoon:smooth_meteorite_slab"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "tothemoon:smooth_blackstone"
+  },
+  "result": "tothemoon:smooth_blackstone_stairs"
+}

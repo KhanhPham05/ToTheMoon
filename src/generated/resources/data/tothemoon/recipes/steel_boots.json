@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "pattern": [
+    "A A",
+    "A A"
+  ],
+  "result": {
+    "item": "tothemoon:steel_boots"
+  },
+  "show_notification": false
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "all": "tothemoon:block/nether_bricks_fluid_acceptor"
-  }
-}

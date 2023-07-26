@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "tothemoon:block/cobbled_meteorite",
-    "side": "tothemoon:block/cobbled_meteorite",
-    "top": "tothemoon:block/cobbled_meteorite"
-  }
-}

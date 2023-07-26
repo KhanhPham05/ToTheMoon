@@ -1,17 +1,17 @@
 {
   "values": [
-    "#forge:plates/uranium",
-    "#forge:plates/steel",
-    "#forge:plates/redstone_steel_alloy",
-    "#forge:plates/redstone_metal",
-    "#forge:plates/copper",
-    "#forge:plates/iron",
-    "#forge:plates/gold",
-    "#forge:plates/amethyst",
-    "#forge:plates/diamond",
-    "#forge:plates/emerald",
-    "#forge:plates/lapis",
-    "#forge:plates/netherite",
-    "#forge:plates/quartz"
+    "#forge:rods/amethyst",
+    "#forge:rods/copper",
+    "#forge:rods/diamond",
+    "#forge:rods/emerald",
+    "#forge:rods/gold",
+    "#forge:rods/iron",
+    "#forge:rods/lapis",
+    "#forge:rods/netherite",
+    "#forge:rods/quartz",
+    "#forge:rods/redstone_metal",
+    "#forge:rods/redstone_steel",
+    "#forge:rods/rod",
+    "#forge:rods/uranium"
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tothemoon:block/smooth_blackstone_slab"
+    },
+    "type=double": {
+      "model": "tothemoon:block/smooth_blackstone"
+    },
+    "type=top": {
+      "model": "tothemoon:block/smooth_blackstone_slab_top"
+    }
+  }
+}

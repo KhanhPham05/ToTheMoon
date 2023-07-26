@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "tothemoon:block/meteorite_bricks",
-    "side": "tothemoon:block/meteorite_bricks",
-    "top": "tothemoon:block/meteorite_bricks"
-  }
-}

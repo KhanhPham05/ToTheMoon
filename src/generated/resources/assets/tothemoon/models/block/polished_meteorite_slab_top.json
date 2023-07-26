@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "tothemoon:block/polished_meteorite",
+    "side": "tothemoon:block/polished_meteorite",
+    "top": "tothemoon:block/polished_meteorite"
+  }
+}

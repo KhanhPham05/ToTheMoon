@@ -1,0 +1,28 @@
+{
+  "type": "tothemoon:workbench_recipe",
+  "mapping": {
+    "D": {
+      "tag": "forge:dusts/redstone"
+    },
+    "M": {
+      "tag": "forge:sheetmetals/copper"
+    },
+    "P": {
+      "tag": "forge:plates/copper"
+    },
+    "R": {
+      "tag": "forge:rods/copper"
+    },
+    "S": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "pattern": [
+    " PPP ",
+    "RSDSR",
+    "RDMDR",
+    "RSDSR",
+    " PPP "
+  ],
+  "result": "tothemoon:copper_machine_frame"
+}

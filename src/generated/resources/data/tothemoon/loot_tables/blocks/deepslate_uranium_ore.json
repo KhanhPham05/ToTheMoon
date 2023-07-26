@@ -38,12 +38,13 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "tothemoon:raw_uranium_ore"
+              "name": "tothemoon:raw_uranium_chunk"
             }
           ]
         }
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "tothemoon:blocks/deepslate_uranium_ore"
 }

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,is_right=false": {
+      "model": "tothemoon:block/workbench_left",
+      "y": 90
+    },
+    "facing=east,is_right=true": {
+      "model": "tothemoon:block/workbench_right",
+      "y": 90
+    },
+    "facing=north,is_right=false": {
+      "model": "tothemoon:block/workbench_left"
+    },
+    "facing=north,is_right=true": {
+      "model": "tothemoon:block/workbench_right"
+    },
+    "facing=south,is_right=false": {
+      "model": "tothemoon:block/workbench_left",
+      "y": 180
+    },
+    "facing=south,is_right=true": {
+      "model": "tothemoon:block/workbench_right",
+      "y": 180
+    },
+    "facing=west,is_right=false": {
+      "model": "tothemoon:block/workbench_left",
+      "y": 270
+    },
+    "facing=west,is_right=true": {
+      "model": "tothemoon:block/workbench_right",
+      "y": 270
+    }
+  }
+}

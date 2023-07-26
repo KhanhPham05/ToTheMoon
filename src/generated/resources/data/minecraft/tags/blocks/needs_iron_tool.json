@@ -1,11 +1,27 @@
 {
   "values": [
     "tothemoon:copper_machine_frame",
-    "tothemoon:steel_machine_frame",
-    "tothemoon:redstone_machine_frame",
     "tothemoon:deepslate_uranium_ore",
+    "tothemoon:gold_sheet_block",
+    "tothemoon:iron_sheet_block",
+    "tothemoon:moon_uranium_ore",
+    "tothemoon:meteorite_zirconium_ore",
     "tothemoon:moon_gold_ore",
     "tothemoon:moon_redstone_ore",
-    "tothemoon:moon_uranium_ore"
+    "tothemoon:pure_zirconium_block",
+    "tothemoon:redstone_metal_machine_frame",
+    "tothemoon:redstone_metal_block",
+    "tothemoon:redstone_steel_alloy_block",
+    "tothemoon:redstone_steel_alloy_sheet_block",
+    "tothemoon:reinforced_wood_planks",
+    "tothemoon:steel_block",
+    "tothemoon:steel_machine_frame",
+    "tothemoon:steel_sheet_block",
+    "tothemoon:uranium_block",
+    "tothemoon:zirconium_alloy_block",
+    "tothemoon:zirconium_block",
+    "tothemoon:raw_zirconium_block",
+    "tothemoon:raw_uranium_block",
+    "tothemoon:copper_sheet_block"
   ]
 }

@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/cube_all",
-  "render_type": "minecraft:cutout",
   "textures": {
     "all": "tothemoon:block/redstone_steel_alloy_sheet_block"
   }

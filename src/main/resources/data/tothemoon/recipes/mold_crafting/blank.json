@@ -1,9 +1,0 @@
-{
-  "type": "tothemoon:metal_pressing",
-  "ingredient": {
-    "tag": "forge:plates/steel"
-  },
-  "result": {
-    "item": "tothemoon:blank_mold"
-  }
-}

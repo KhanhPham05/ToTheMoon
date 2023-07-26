@@ -3,3 +3,4 @@ build/
 .idea/
 hs_err_pid9868.log
 replay_pid9868.log
+unused

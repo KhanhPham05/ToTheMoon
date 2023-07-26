@@ -1,8 +1,10 @@
 {
   "values": [
-    "#forge:ingots/uranium",
+    "#forge:ingots/redstone_metal",
+    "#forge:ingots/redstone_steel",
     "#forge:ingots/steel",
-    "#forge:ingots/redstone_steel_alloy",
-    "#forge:ingots/redstone_metal"
+    "#forge:ingots/uranium",
+    "#forge:ingots/zirconium_alloy",
+    "#forge:ingots/zirconium"
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "tothemoon:block/smooth_meteorite",
+    "side": "tothemoon:block/smooth_meteorite",
+    "top": "tothemoon:block/smooth_meteorite"
+  }
+}

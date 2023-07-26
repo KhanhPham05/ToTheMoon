@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/uranium"
+    },
+    "B": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "AA",
+    "AB",
+    " B"
+  ],
+  "result": {
+    "item": "tothemoon:uranium_axe"
+  },
+  "show_notification": false
+}

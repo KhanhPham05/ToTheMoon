@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "cookingtime": 100,
-  "experience": 1.0,
-  "ingredient": {
-    "item": "tothemoon:moon_quartz_ore"
-  },
-  "result": "tothemoon:purified_quartz"
-}

@@ -1,8 +1,8 @@
 {
   "values": [
-    "tothemoon:diamond_hammer",
-    "tothemoon:netherite_hammer",
-    "tothemoon:steel_hammer",
-    "tothemoon:wooden_hammer"
+    "#tothemoon:hammers/diamond",
+    "#tothemoon:hammers/netherite",
+    "#tothemoon:hammers/steel",
+    "#tothemoon:hammers/wooden"
   ]
 }

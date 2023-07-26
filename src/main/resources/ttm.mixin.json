@@ -1,14 +1,12 @@
 {
   "required": true,
-  "package": "com.khanhpham.tothemoon.mixin",
+  "package": "com.khanhtypo.tothemoon.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "ttm.mixin-refmap.json",
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
-    "AnvilTweaks",
-    "MoonLevelRenderer"
   ],
   "minVersion": "0.8"
 }

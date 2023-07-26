@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "tothemoon:moon_rock"
+  },
+  "result": "tothemoon:moon_rock_stairs"
+}

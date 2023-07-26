@@ -1,0 +1,17 @@
+{
+  "values": [
+    "#forge:gears/amethyst",
+    "#forge:gears/copper",
+    "#forge:gears/diamond",
+    "#forge:gears/emerald",
+    "#forge:gears/gold",
+    "#forge:gears/iron",
+    "#forge:gears/lapis",
+    "#forge:gears/netherite",
+    "#forge:gears/quartz",
+    "#forge:gears/redstone_metal",
+    "#forge:gears/redstone_steel",
+    "#forge:gears/steel",
+    "#forge:gears/uranium"
+  ]
+}

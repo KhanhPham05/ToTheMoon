@@ -1,7 +1,6 @@
 {
   "parent": "tothemoon:item/templates/gear_template",
   "textures": {
-    "gear": "tothemoon:item/redstone_steel_alloy_gear",
-    "layer0": "tothemoon:item/redstone_steel_alloy_gear"
+    "gear": "tothemoon:item/redstone_steel_alloy_gear"
   }
 }

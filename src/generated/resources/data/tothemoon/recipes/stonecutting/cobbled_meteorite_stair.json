@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "tothemoon:cobbled_meteorite"
-  },
-  "result": "tothemoon:cobbled_meteorite_stair"
-}
