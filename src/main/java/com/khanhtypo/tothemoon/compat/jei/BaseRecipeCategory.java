@@ -1,8 +1,8 @@
 package com.khanhtypo.tothemoon.compat.jei;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import com.khanhtypo.tothemoon.serverdata.recipes.BaseRecipe;
 import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
@@ -13,10 +13,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -26,26 +23,31 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
+
+import static java.util.Objects.*;
 
 public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCategory<T> {
     private final RecipeType<T> recipeType;
     private final MenuObject<?> menuObject;
     private final int width;
     private final int height;
+    @Nullable
     private final BiConsumer<GuiGraphics, T> extraRenderer;
     private final BiConsumer<IRecipeLayoutBuilder, T> recipeScreenBuilder;
-    private final List<T> recipes;
+    private final Function<RecipeManager, List<T>> recipes;
+    private final Consumer<IGuiHandlerRegistration> guiHandlerRegistration;
     private IDrawable bg;
     private IDrawable icon;
     private Consumer<IRecipeTransferRegistration> transferHandler;
 
-    private BaseRecipeCategory(RecipeType<T> recipeType, MenuObject<?> menuObject, int width, int height, @Nonnull BiConsumer<IRecipeLayoutBuilder, T> recipeScreenBuilder, @Nullable BiConsumer<GuiGraphics, T> extraRenderer, List<T> recipes) {
+    private BaseRecipeCategory(RecipeType<T> recipeType, MenuObject<?> menuObject, int width, int height, @Nonnull BiConsumer<IRecipeLayoutBuilder, T> recipeScreenBuilder, @Nullable BiConsumer<GuiGraphics, T> extraRenderer, Function<RecipeManager, List<T>> recipes, Consumer<IGuiHandlerRegistration> guiHandlerRegistration) {
         this.recipeType = recipeType;
         this.menuObject = menuObject;
         this.width = width;
@@ -53,14 +55,15 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
         this.extraRenderer = extraRenderer;
         this.recipeScreenBuilder = recipeScreenBuilder;
         this.recipes = recipes;
+        this.guiHandlerRegistration = guiHandlerRegistration;
     }
 
     public static <T extends BaseRecipe<?>> Builder<T> builder(RecipeTypeObject<T> recipeTypeObject, MenuObject<?> menuObject) {
         return new Builder<>(recipeTypeObject, menuObject);
     }
 
-    public static RecipeManager clientRecipeManager() {
-        return Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
+    private static RecipeManager clientRecipeManager() {
+        return requireNonNull(Minecraft.getInstance().level).getRecipeManager();
     }
 
     public void register(IRecipeCategoryRegistration registration) {
@@ -118,8 +121,13 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
     }
 
     public void gatherRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(this.recipeType, this.recipes);
+        registration.addRecipes(this.recipeType, this.recipes.apply(clientRecipeManager()));
     }
+
+    public void registerGuiHandler(IGuiHandlerRegistration registration) {
+        this.guiHandlerRegistration.accept(registration);
+    }
+
     public static final class Builder<T extends BaseRecipe<? extends Container>> {
         private final MenuObject<?> menuObject;
         private final RecipeType<T> recipeType;
@@ -129,7 +137,9 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
         @Nullable
         private Consumer<IRecipeTransferRegistration> transferRegister;
         @Nullable
-        private List<T> recipes;
+        private Function<RecipeManager, List<T>> recipeGetter;
+        @Nullable
+        private Consumer<IGuiHandlerRegistration> guiHandlerRegistration;
 
         public Builder(RecipeTypeObject<T> recipeTypeObject, MenuObject<?> menuObject) {
             this.menuObject = menuObject;
@@ -152,15 +162,31 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
             return this;
         }
 
-        public Builder<T> collectedRecipe(List<T> recipes) {
-            this.recipes = recipes;
+        public Builder<T> collectedRecipe(Function<RecipeManager, @Unmodifiable List<T>> recipeGetter) {
+            this.recipeGetter = recipeGetter;
             return this;
         }
 
+        private Builder<T> setClickableArea(Consumer<IGuiHandlerRegistration> register) {
+            this.guiHandlerRegistration = register;
+            return this;
+        }
+
+        public Builder<T> setClickableArea(Class<? extends BasicScreen<?>> screenClass) {
+            return this.setClickableArea(r -> r.addRecipeClickArea(screenClass, -22, 0,22, 22, this.recipeType));
+        }
+
         public BaseRecipeCategory<T> build(ImmutableSet.Builder<BaseRecipeCategory<?>> setBuilder, int tabWidth, int tabHeight) {
-            Preconditions.checkNotNull(this.recipeScreenBuilder);
-            Preconditions.checkNotNull(this.recipes);
-            BaseRecipeCategory<T> recipeCategory = new BaseRecipeCategory<>(this.recipeType, this.menuObject, tabWidth, tabHeight, this.recipeScreenBuilder, this.extraRenderer, this.recipes);
+            BaseRecipeCategory<T> recipeCategory = new BaseRecipeCategory<>(
+                    this.recipeType,
+                    this.menuObject,
+                    tabWidth,
+                    tabHeight,
+                    requireNonNull(this.recipeScreenBuilder),
+                    this.extraRenderer,
+                    requireNonNull(this.recipeGetter, "There is no way to gather recipes for tab %s".formatted(this.recipeType.getUid())),
+                    requireNonNull(this.guiHandlerRegistration, "It is too inconvenience to view recipe for tab %s".formatted(this.recipeType.getUid()))
+            );
             if (this.transferRegister != null) recipeCategory.setTransferHandler(this.transferRegister);
             setBuilder.add(recipeCategory);
             return recipeCategory;

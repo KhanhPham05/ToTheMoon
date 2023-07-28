@@ -78,6 +78,7 @@
   "block.tothemoon.zirconium_alloy_block": "Zirconium Alloy Block",
   "block.tothemoon.zirconium_block": "Zirconium Block",
   "custom_stat.tothemoon.interact_with_workbench_crafting": "Interact With Workbench Crafting",
+  "gui.tothemoon.mod_needs_installation": "Install %s.",
   "gui.tothemoon.workbench_crafting": "Workbench Crafting",
   "item.tothemoon.amethyst_dust": "Amethyst Dust",
   "item.tothemoon.amethyst_gear": "Amethyst Gear",

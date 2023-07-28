@@ -3,10 +3,7 @@ package com.khanhtypo.tothemoon.compat.jei;
 import com.khanhtypo.tothemoon.ModUtils;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
@@ -31,6 +28,11 @@ public class TTMJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         ModCategories.forEachTab(t -> t.gatherRecipes(registration));
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        ModCategories.forEachTab(t -> t.registerGuiHandler(registration));
     }
 
     @Override

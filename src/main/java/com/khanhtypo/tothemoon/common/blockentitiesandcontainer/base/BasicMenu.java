@@ -4,23 +4,17 @@ import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
-import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-/**
- * Open screen via {@link net.minecraftforge.network.NetworkHooks#openScreen(ServerPlayer, MenuProvider, BlockPos)}
- */
 public abstract class BasicMenu extends AbstractContainerMenu {
     protected final Inventory playerInventory;
     protected final ContainerLevelAccess accessor;
@@ -28,14 +22,11 @@ public abstract class BasicMenu extends AbstractContainerMenu {
     private int invLabelX;
     private int invLabelY;
 
-    protected BasicMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, @Nullable FriendlyByteBuf extraData) {
+    protected BasicMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
         super(menuObject.get(), windowId);
         this.menuObject = menuObject;
         this.playerInventory = playerInventory;
-        this.accessor = extraData == null ? ContainerLevelAccess.NULL : ContainerLevelAccess.create(playerInventory.player.level(), getPos(extraData));
-        //BlockPos containerBlockPos = getPos(extraData);
-        //Level level = playerInventory.player.level();
-        //this.accessor = ContainerLevelAccess.create(level, containerBlockPos);
+        this.accessor = accessor;
     }
 
     private static BlockPos getPos(@Nullable FriendlyByteBuf extraData) {
@@ -47,10 +38,6 @@ public abstract class BasicMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(@Nonnull Player p_38874_) {
         return stillValid(accessor, p_38874_, this.menuObject.getTargetedBlock());
-    }
-
-    protected InvWrapper simpleHandler(int size) {
-        return new InvWrapper(new SimpleContainer(size));
     }
 
     public int getInvLabelX() {
@@ -77,5 +64,13 @@ public abstract class BasicMenu extends AbstractContainerMenu {
 
     public ResourceLocation getGuiPath() {
         return this.menuObject.getGuiPath();
+    }
+
+    public Level getLevel() {
+        return this.player().level();
+    }
+
+    public Player player() {
+        return this.playerInventory.player;
     }
 }

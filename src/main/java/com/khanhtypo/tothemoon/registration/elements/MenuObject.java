@@ -1,6 +1,7 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
 import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.AccessibleMenuSupplier;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
 import com.khanhtypo.tothemoon.data.c.ModLangProvider;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
@@ -12,34 +13,29 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.network.IContainerFactory;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Supplier;
 
 public class MenuObject<T extends BasicMenu> extends BaseObjectSupplier<MenuType<?>> {
     private final ResourceLocation guiTexture;
     private final BlockObject<?> targetBlock;
+    private final AccessibleMenuSupplier<T> menuSupplier;
     private @Nullable Component title = null;
 
 
-    private MenuObject(String name, Supplier<? extends MenuType<T>> builder, BlockObject<?> targetBlock) {
-        super(ModRegistries.MENU_TYPES, name, builder);
+    private MenuObject(String name, AccessibleMenuSupplier<T> menuSupplier, BlockObject<?> targetBlock) {
+        super(ModRegistries.MENU_TYPES, name, () -> new MenuType<>(menuSupplier, FeatureFlags.DEFAULT_FLAGS));
+        this.menuSupplier = menuSupplier;
         ModStats.CONTAINER_INTERACTION_MAP.put(this, this.getId().withPrefix("interact_with_"));
         this.guiTexture = texturePath(name);
         this.targetBlock = targetBlock;
     }
 
-    public static <M extends BasicMenu> MenuObject<M> register(String name, BlockObject<?> targetBlock, IContainerFactory<M> factory) {
-        return new MenuObject<>(name, () -> IForgeMenuType.create(factory), targetBlock);
-    }
-
-    public static <M extends BasicMenu> MenuObject<M> register(String name, BlockObject<?> targetBlock, MenuType.MenuSupplier<M> menuSupplier) {
-        return new MenuObject<>(name, () -> new MenuType<>(menuSupplier, FeatureFlags.DEFAULT_FLAGS), targetBlock);
+    public static <M extends BasicMenu> MenuObject<M> register(String name, BlockObject<?> targetBlock, AccessibleMenuSupplier<M> menuSupplier) {
+        return new MenuObject<>(name, menuSupplier, targetBlock);
     }
 
     private static ResourceLocation texturePath(String fileName) {
@@ -59,11 +55,13 @@ public class MenuObject<T extends BasicMenu> extends BaseObjectSupplier<MenuType
         return this.guiTexture;
     }
 
-    public void openScreen(Player player, BlockPos clickedPos) {
+    public void openScreen(Player player, Level level, BlockPos clickedPos) {
         if (player instanceof ServerPlayer serverPlayer) {
-            NetworkHooks.openScreen(serverPlayer,
-                    new SimpleMenuProvider((id, inventory, p) -> this.get().create(id, inventory), this.title != null ? this.title : this.targetBlock.getTranslationName()),
-                    clickedPos
+            serverPlayer.openMenu(
+                    new SimpleMenuProvider(
+                            (id, inv, p) -> this.menuSupplier.create(id, inv, ContainerLevelAccess.create(level, clickedPos)),
+                            this.getGuiTitle()
+                    )
             );
             serverPlayer.awardStat(ModStats.getCustomStat(this));
         }

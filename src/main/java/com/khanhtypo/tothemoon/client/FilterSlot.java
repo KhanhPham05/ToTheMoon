@@ -26,4 +26,8 @@ public class FilterSlot extends Slot {
     public boolean mayPickup(Player p_40228_) {
         return this.shouldTake.test(super.getItem());
     }
+
+    protected Container getContainer() {
+        return super.container;
+    }
 }

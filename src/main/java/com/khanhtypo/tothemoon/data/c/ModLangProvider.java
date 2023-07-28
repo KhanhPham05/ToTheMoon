@@ -7,7 +7,6 @@ import com.khanhtypo.tothemoon.registration.ModStats;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.stats.Stats;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,9 +15,21 @@ import java.util.Map;
 
 public class ModLangProvider extends LanguageProvider {
     private static final Map<Component, String> ENGLISH_TRANSLATION_MAP = new HashMap<>();
+    public static final Component MOD_NEEDS_INSTALLATION = createTranslatable("gui", "mod_needs_installation", "Install %s.");
 
     public ModLangProvider(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
+    }
+
+    @NotNull
+    public static String getKey(Component component) {
+        return ((TranslatableContents) component.getContents()).getKey();
+    }
+
+    public static Component createTranslatable(String prefix, String suffix, String translated) {
+        Component component = Component.translatable(String.format("%s.%s.%s", prefix, ToTheMoon.MODID, suffix));
+        ENGLISH_TRANSLATION_MAP.put(component, translated);
+        return component;
     }
 
     @Override
@@ -29,7 +40,7 @@ public class ModLangProvider extends LanguageProvider {
     }
 
     private void extraTranslation() {
-        ENGLISH_TRANSLATION_MAP.forEach((component, s) -> super.add(((TranslatableContents) component.getContents()).getKey(), s));
+        ENGLISH_TRANSLATION_MAP.forEach((component, s) -> super.add(getKey(component), s));
         ModStats.CONTAINER_INTERACTION_MAP.values().forEach(rl -> super.add("custom_stat." + rl.toLanguageKey(), this.transform(rl.getPath())));
     }
 
@@ -41,12 +52,6 @@ public class ModLangProvider extends LanguageProvider {
         ModRegistries.BLOCKS.getEntries().forEach(
                 blockRegistryObject -> super.addBlock(blockRegistryObject, transform(blockRegistryObject.getId().getPath()))
         );
-    }
-
-    public static Component createTranslatable(String prefix, String suffix, String translated) {
-        Component component = Component.translatable(String.format("%s.%s.%s", prefix, ToTheMoon.MODID, suffix));
-        ENGLISH_TRANSLATION_MAP.put(component, translated);
-        return component;
     }
 
     private @NotNull String transform(String itemPath) {
