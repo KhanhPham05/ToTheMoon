@@ -8,20 +8,23 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+import javax.annotation.Nullable;
+
 public class BasicScreen<MENU extends BasicMenu> extends AbstractContainerScreen<MENU> {
     public static final ResourceLocation RECIPE_BOOK_WIDGET = ModUtils.location("textures/gui/widgets.png");
     protected static final int TEXT_WHITE = 0xe0e0e0;
     protected static final int TEXT_BLACK = 0x404040;
     private final ResourceLocation guiTexture;
-    private DecorationButton[] buttons;
+    @Nullable
+    private DecorationButton[] buttons = null;
 
-    public BasicScreen(MENU p_97741_, Inventory p_97742_, Component p_97743_) {
-        this(p_97741_, p_97742_, p_97743_, 176, 166);
+    public BasicScreen(MENU menu, Inventory inventory, Component component) {
+        this(menu, inventory, component, 176, 166);
     }
 
-    public BasicScreen(MENU p_97741_, Inventory p_97742_, Component p_97743_, int imageWidth, int imageHeight) {
-        super(p_97741_, p_97742_, p_97743_);
-        this.guiTexture = p_97741_.getGuiPath();
+    public BasicScreen(MENU menu, Inventory inventory, Component component, int imageWidth, int imageHeight) {
+        super(menu, inventory, component);
+        this.guiTexture = menu.getGuiPath();
         super.imageWidth = imageWidth;
         super.imageHeight = imageHeight;
     }
@@ -31,10 +34,12 @@ public class BasicScreen<MENU extends BasicMenu> extends AbstractContainerScreen
         super.init();
         super.inventoryLabelX = super.getMenu().getInvLabelX();
         super.inventoryLabelY = super.getMenu().getInvLabelY() - 12;
-        this.buttons = new DecorationButton[]{
-                super.addRenderableOnly(new DecorationButton("jei", super.leftPos - 22, super.topPos, 22, 0)),
-                //TODO Patchouli Book
-        };
+        if (this instanceof RecipeContainerMenu) {
+            this.buttons = new DecorationButton[]{
+                    super.addRenderableOnly(new DecorationButton("jei", super.leftPos - 22, super.topPos, 22, 0)),
+                    //TODO Patchouli Book
+            };
+        }
     }
 
 
@@ -53,19 +58,21 @@ public class BasicScreen<MENU extends BasicMenu> extends AbstractContainerScreen
     }
 
     private void setHoverToButtons(int mouseX, int mouseY) {
-        for (DecorationButton button : this.buttons) {
-            button.setHovered(super.isHovering(button.x - super.leftPos, button.y - super.topPos, button.width, button.height, mouseX, mouseY));
-        }
+        if (this.buttons != null)
+            for (DecorationButton button : this.buttons) {
+                button.setHovered(super.isHovering(button.x - super.leftPos, button.y - super.topPos, button.width, button.height, mouseX, mouseY));
+            }
     }
 
     @Override
     protected void renderTooltip(GuiGraphics p_283594_, int mouseX, int mouseY) {
         super.renderTooltip(p_283594_, mouseX, mouseY);
-        for (DecorationButton button : this.buttons) {
-            if (button.isHovered) {
-                button.renderToolTip(p_283594_, super.font, mouseX, mouseY);
+        if (this.buttons != null)
+            for (DecorationButton button : this.buttons) {
+                if (button.isHovered) {
+                    button.renderToolTip(p_283594_, super.font, mouseX, mouseY);
+                }
             }
-        }
     }
 
     protected void renderBgAddition(GuiGraphics renderer) {

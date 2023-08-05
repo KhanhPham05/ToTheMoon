@@ -41,5 +41,10 @@
       <option name="name" value="Jared's maven" />
       <option name="url" value="https://maven.blamejared.com/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="ParchmentMC" />
+      <option name="name" value="ParchmentMC" />
+      <option name="url" value="https://maven.parchmentmc.org/" />
+    </remote-repository>
   </component>
 </project>

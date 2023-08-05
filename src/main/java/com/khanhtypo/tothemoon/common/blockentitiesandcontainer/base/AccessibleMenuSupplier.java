@@ -1,4 +1,4 @@
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer;
+package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
 import net.minecraft.world.entity.player.Inventory;

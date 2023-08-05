@@ -38,7 +38,7 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
     }
 
     public boolean isBasic() {
-        return this instanceof BasicBlock;
+        return this instanceof BasicBlockObject;
     }
 
     public @Nonnull ResourceLocation getId() {
@@ -57,7 +57,7 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
     }
 
     public ObjectSupplier<Item> getItemObject() {
-        return ObjectSupplier.existedItem(this.get().asItem(), this.getId());
+        return ObjectSupplier.preExisted(this.get().asItem(), this.getId());
     }
 
     public Component getTranslationName() {

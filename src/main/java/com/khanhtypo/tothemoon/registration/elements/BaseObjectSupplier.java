@@ -21,7 +21,7 @@ public abstract class BaseObjectSupplier<T> implements ObjectSupplier<T> {
         this(registry.register(name, builder));
     }
 
-    public BaseObjectSupplier(RegistryObject<? extends T> holder) {
+    private BaseObjectSupplier(RegistryObject<? extends T> holder) {
         this.holder = holder;
         this.obj = null;
     }

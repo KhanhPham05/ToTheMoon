@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-26T15:03:49.6843925	Loot Tables
+// 1.20.1	2023-08-01T09:44:11.8553433	Loot Tables
 65bb651f42a05521514509b15144e17ababc8fe7 data/tothemoon/loot_tables/blocks/cobbled_meteorite.json
 d6a42ef491ce53dd051954389f59d1787a9fcb6d data/tothemoon/loot_tables/blocks/cobbled_meteorite_slab.json
 e4a57a49bb35ed764995749e2c108c9bf0ddff41 data/tothemoon/loot_tables/blocks/cobbled_meteorite_stairs.json
@@ -7,6 +7,7 @@ b1adaec01a29fbcaa6936688be3e3c4694b1380e data/tothemoon/loot_tables/blocks/cobbl
 496a81332600923d61a50786425ae637ad6d91ad data/tothemoon/loot_tables/blocks/cobbled_moon_rock_slab.json
 e04750e455fb2cc6f38ce5ad60765fc6cc0df804 data/tothemoon/loot_tables/blocks/cobbled_moon_rock_stairs.json
 4d6d70022de6b2b125802ebd6829bd9d663c3383 data/tothemoon/loot_tables/blocks/cobbled_moon_rock_wall.json
+49539751868066b39878d5dd42f6a0993baa4b09 data/tothemoon/loot_tables/blocks/copper_energy_generator.json
 8a12d3c7847a4739bda0de3f85a0cda2ecb033d1 data/tothemoon/loot_tables/blocks/copper_machine_frame.json
 536296bf0cf785ce9d0fee522b25a1b381c795a9 data/tothemoon/loot_tables/blocks/copper_sheet_block.json
 efa1dbbd6ba0c9e1862b2b07ea1819bb7d9253c4 data/tothemoon/loot_tables/blocks/deepslate_uranium_ore.json

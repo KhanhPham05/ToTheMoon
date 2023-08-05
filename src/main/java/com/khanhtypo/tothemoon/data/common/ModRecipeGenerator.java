@@ -10,7 +10,7 @@ import com.khanhtypo.tothemoon.data.recipebuilders.BaseRecipeBuilder;
 import com.khanhtypo.tothemoon.data.recipebuilders.WorkbenchRecipeBuilder;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.bases.IngredientProvider;
-import com.khanhtypo.tothemoon.registration.elements.ChildBlock;
+import com.khanhtypo.tothemoon.registration.elements.ChildBlockObject;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -54,7 +54,7 @@ public class ModRecipeGenerator extends RecipeProvider {
     protected void buildRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
         this.consumer = consumer;
         this.armor();
-        ChildBlock.generateRecipe(this::slab, this::wall, this::stair);
+        ChildBlockObject.generateRecipe(this::slab, this::wall, this::stair);
         this.tool(STEEL_SWORD);
         this.tool(STEEL_SHOVEL);
         this.tool(STEEL_PICKAXE);

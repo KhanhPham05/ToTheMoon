@@ -2,16 +2,23 @@ package com.khanhtypo.tothemoon;
 
 import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.common.block.Workbench;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
 import com.khanhtypo.tothemoon.data.DataStarter;
-import com.khanhtypo.tothemoon.registration.*;
+import com.khanhtypo.tothemoon.registration.ModBlocks;
+import com.khanhtypo.tothemoon.registration.ModItems;
+import com.khanhtypo.tothemoon.registration.ModRegistries;
+import com.khanhtypo.tothemoon.registration.ModStats;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
-import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
+import com.khanhtypo.tothemoon.registration.elements.MenuObject;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
@@ -36,8 +43,16 @@ public class ToTheMoon {
         MOD_BUS.addListener(TabInstance::registerTabs);
         MOD_BUS.addListener(this::registerEvent);
         FORGE_BUS.addListener(Workbench::onBreak);
-        MOD_BUS.addListener(ModMenus.ScreenRegister::registerScreen);
+        MOD_BUS.addListener(ToTheMoon::clientSetup);
         MOD_BUS.addListener(ModStats::registerStats);
+    }
+
+    public static void clientSetup(FMLClientSetupEvent event) {
+        MenuObject.registerScreen(ToTheMoon::registerScreen);
+    }
+
+    private static <T extends BasicMenu, S extends AbstractContainerScreen<T>> void registerScreen(MenuObject<T> menuObject, MenuScreens.ScreenConstructor<T, S> screenConstructor) {
+        MenuScreens.register(menuObject.get(), screenConstructor);
     }
 
     public void registerEvent(RegisterEvent registerEvent) {
@@ -45,7 +60,7 @@ public class ToTheMoon {
             for (RegistryObject<Block> blocksEntry : ModRegistries.BLOCKS.getEntries()) {
                 BlockItem blockItem = new BlockItem(blocksEntry.get(), new Item.Properties());
                 helper.register(blocksEntry.getId(), blockItem);
-                DEFAULT_BLOCK_TAB.addItem(ObjectSupplier.existedItem(blockItem, blocksEntry.getId()));
+                DEFAULT_BLOCK_TAB.addItem(ObjectSupplier.preExisted(blockItem, blocksEntry.getId()));
             }
         });
     }

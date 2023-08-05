@@ -42,7 +42,6 @@ public class DecorationButton implements Renderable {
         int v = cornerY;
         if (isLoaded()) {
             if (this.isHovered) {
-                u = this.cornerX;
                 v = this.cornerY + 22;
             }
         } else {

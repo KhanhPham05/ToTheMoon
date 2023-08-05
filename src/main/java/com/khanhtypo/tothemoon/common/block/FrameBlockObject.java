@@ -11,8 +11,8 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FrameBlock extends BlockObject<FrameBlock.BlockInstance> {
-    public FrameBlock(String name, VoxelShape shape, MapColor mapColor) {
+public class FrameBlockObject extends BlockObject<FrameBlockObject.BlockInstance> {
+    public FrameBlockObject(String name, VoxelShape shape, MapColor mapColor) {
         super(name, () -> new BlockInstance(createProperties(mapColor), shape));
     }
 

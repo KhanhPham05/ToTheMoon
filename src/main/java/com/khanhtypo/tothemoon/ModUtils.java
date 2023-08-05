@@ -2,6 +2,8 @@ package com.khanhtypo.tothemoon;
 
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -13,7 +15,8 @@ import java.util.TreeSet;
 import java.util.function.Function;
 
 public class ModUtils {
-    private ModUtils() {}
+    private ModUtils() {
+    }
 
     public static <T> DeferredRegister<T> createRegistry(IForgeRegistry<T> registry) {
         return DeferredRegister.create(registry, ToTheMoon.MODID);
@@ -46,11 +49,15 @@ public class ModUtils {
     public static <A, B> String toArrayString(Collection<A> collection, @Nullable Function<A, B> transformer) {
         if (collection.isEmpty()) return "";
         final StringBuilder builder = new StringBuilder().append('[');
-        Object[] array = transformer == null ? collection.toArray(): collection.stream().map(transformer).toArray();
+        Object[] array = transformer == null ? collection.toArray() : collection.stream().map(transformer).toArray();
         builder.append(array[0]);
         for (int i = 1; i < array.length; i++) {
             builder.append(", ").append(array[i].toString());
         }
         return builder.append(']').toString();
+    }
+
+    public static boolean canBurn(ItemStack itemStack) {
+        return ForgeHooks.getBurnTime(itemStack, null) > 0;
     }
 }

@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.khanhtypo.tothemoon.registration.ModItems;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
-import com.khanhtypo.tothemoon.registration.elements.ChildBlock;
+import com.khanhtypo.tothemoon.registration.elements.ChildBlockObject;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -37,7 +37,7 @@ public class ModBlockLoots extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        ChildBlock.generateLoot(this::dropSelf, this::slab);
+        ChildBlockObject.generateLoot(this::dropSelf, this::slab);
         this.dropSelf(COBBLED_METEORITE);
         this.dropSelf(COBBLED_MOON_ROCK);
         this.dropSelf(COPPER_MACHINE_FRAME);
@@ -83,6 +83,7 @@ public class ModBlockLoots extends BlockLootSubProvider {
         this.dropSelf(ZIRCONIUM_BLOCK);
         this.dropSelf(ZIRCONIUM_ALLOY_BLOCK);
         this.dropSelf(WORKBENCH);
+        this.dropSelf(COPPER_ENERGY_GENERATOR);
     }
 
     private void dropSelf(BlockObject<?> blockObject) {

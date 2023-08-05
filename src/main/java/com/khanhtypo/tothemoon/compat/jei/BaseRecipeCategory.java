@@ -68,7 +68,7 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
 
     public void register(IRecipeCategoryRegistration registration) {
         IGuiHelper drawer = registration.getJeiHelpers().getGuiHelper();
-        this.icon = drawer.createDrawableItemStack(new ItemStack(this.menuObject.getTargetedBlock()));
+        this.icon = drawer.createDrawableItemStack(new ItemStack(requireNonNull(this.menuObject.getTargetedBlock())));
         final ResourceLocation backgroundId = this.menuObject.getId().withPrefix("textures/jei/").withSuffix(".png");
         this.bg = drawer.createDrawable(backgroundId, 0, 0, this.width, this.height);
         registration.addRecipeCategories(this);
@@ -81,7 +81,7 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
     }
 
     public void registerCatalyst(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(this.menuObject.getTargetedBlock()), this.recipeType);
+        registration.addRecipeCatalyst(new ItemStack(requireNonNull(this.menuObject.getTargetedBlock())), this.recipeType);
     }
 
     private void setTransferHandler(Consumer<IRecipeTransferRegistration> transferHandler) {

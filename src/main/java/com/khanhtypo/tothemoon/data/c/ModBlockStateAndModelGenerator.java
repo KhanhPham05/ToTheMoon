@@ -2,11 +2,13 @@ package com.khanhtypo.tothemoon.data.c;
 
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.block.Workbench;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.impl.AbstractPowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
-import com.khanhtypo.tothemoon.registration.elements.BasicBlock;
+import com.khanhtypo.tothemoon.registration.elements.BasicBlockObject;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
-import com.khanhtypo.tothemoon.registration.elements.ChildBlock;
+import com.khanhtypo.tothemoon.registration.elements.ChildBlockObject;
 import net.minecraft.Util;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -93,11 +95,12 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.simpleBlock(ZIRCONIUM_ALLOY_BLOCK);
         this.simpleBlock(ZIRCONIUM_BLOCK);
         this.simpleBlock(MOON_REDSTONE_ORE);
+        this.energyGenerator(COPPER_ENERGY_GENERATOR);
         this.notSimple();
     }
 
     private void notSimple() {
-        ChildBlock.generateModel(this::slab, this::stoneWall, this::stair);
+        ChildBlockObject.generateModel(this::slab, this::stoneWall, this::stair);
         this.modelPreExisted(COPPER_MACHINE_FRAME, "copper_frame");
         this.modelPreExisted(REDSTONE_METAL_MACHINE_FRAME, "redstone_frame");
         this.modelPreExisted(STEEL_MACHINE_FRAME, "steel_frame");
@@ -117,6 +120,26 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.barrelBlock(MOON_ROCK_BARREL);
     }
 
+    private <T extends AbstractPowerGeneratorBlockEntity> void energyGenerator(BlockObject<FunctionalBlock<T>> blockSupplier) {
+        final ResourceLocation frontOffLocation = this.texturePreExist(blockSupplier.getId().withPrefix("block/"));
+        final ResourceLocation frontOnLocation = this.texturePreExist(frontOffLocation.withSuffix("_on"));
+        final ResourceLocation top = this.texturePreExist(super.modLoc("block/energy_generator_top"));
+        final ResourceLocation side = this.texturePreExist(super.modLoc("block/energy_generator_side"));
+
+        super.getVariantBuilder(blockSupplier.get()).forAllStates(blockState -> {
+            boolean on = blockState.getValue(FunctionalBlock.LIT);
+            Direction facing = blockState.getValue(FunctionalBlock.FACING);
+            BlockModelBuilder model = super.models().orientable(
+                    (on ? frontOnLocation : frontOffLocation).getPath(),
+                    side,
+                    on ? frontOnLocation : frontOffLocation,
+                    top);
+            return this.configuredModel(model.getLocation(), true, builder -> builder.rotationY(this.yRotationMap.get(facing)));
+        });
+
+        this.itemModelProvider.withExistingParent(blockSupplier.getId().getPath(), frontOffLocation);
+    }
+
     private void modelPreExisted(ObjectSupplier<? extends Block> block, String modelName) {
         final ResourceLocation modelLocation = ModUtils.location("block/" + modelName);
         super.getVariantBuilder(block.get())
@@ -126,20 +149,20 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
     }
 
     private void simpleBlock(ObjectSupplier<? extends Block> block) {
-        ensureTexturePresent(block.getId());
+        texturePreExist(block.getId());
         ModelFile saveLocation = super.cubeAll(block.get());
         super.simpleBlockWithItem(block.get(), saveLocation);
     }
 
-    private ResourceLocation ensureTexturePresent(ResourceLocation blockId) {
-        ResourceLocation textureId = blockId.getPath().contains("block/") ? blockId : blockId.withPrefix("block/");
-        Preconditions.checkState(this.fileHelper.exists(textureId, TEXTURE), "Couldn't find block texture file [%s] for [%s]".formatted(textureId, blockId));
-        return textureId;
+    private ResourceLocation texturePreExist(ResourceLocation textureId) {
+        ResourceLocation texture = textureId.getPath().contains("block/") ? textureId : textureId.withPrefix("block/");
+        Preconditions.checkState(this.fileHelper.exists(texture, TEXTURE), "Couldn't find block texture file [%s]".formatted(texture));
+        return texture;
     }
 
-    private void stair(BasicBlock blockSupplier) {
+    private void stair(BasicBlockObject blockSupplier) {
         Block block = blockSupplier.get();
-        ResourceLocation textureFromBlock = ensureTexturePresent(blockSupplier.getParentObject().getId());
+        ResourceLocation textureFromBlock = texturePreExist(blockSupplier.getParentObject().getId());
         if (block instanceof StairBlock stairBlock) {
             super.stairsBlock(stairBlock, textureFromBlock);
             this.itemModelProvider.withExistingParent(blockSupplier.getId().getPath(), blockSupplier.getId().withPrefix("block/"));
@@ -151,10 +174,10 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         String blockName = barrelSupplier.getId().getPath();
 
         ResourceLocation blockPath = barrelSupplier.getId().withPrefix("block/");
-        ResourceLocation bottom = this.ensureTexturePresent(blockPath.withSuffix("_bottom"));
-        ResourceLocation side = this.ensureTexturePresent(blockPath.withSuffix("_side"));
-        ResourceLocation top = this.ensureTexturePresent(blockPath.withSuffix("_top"));
-        ResourceLocation topOpen = this.ensureTexturePresent(top.withSuffix("_open"));
+        ResourceLocation bottom = this.texturePreExist(blockPath.withSuffix("_bottom"));
+        ResourceLocation side = this.texturePreExist(blockPath.withSuffix("_side"));
+        ResourceLocation top = this.texturePreExist(blockPath.withSuffix("_top"));
+        ResourceLocation topOpen = this.texturePreExist(top.withSuffix("_open"));
 
         BlockModelBuilder closeModel = super.models().cubeBottomTop(blockName, side, bottom, top);
         BlockModelBuilder openModel = super.models().cubeBottomTop(blockName + "_open", side, bottom, topOpen);
@@ -165,23 +188,23 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
 
             return this.configuredModel(
                     open ? openModel.getLocation() : closeModel.getLocation(),
-                    false,
+                    true,
                     builder -> builder.rotationX(this.xRotationMap.get(facing)).rotationY(this.yRotationMap.get(facing)));
         });
 
         this.itemModels().withExistingParent(blockName, closeModel.getLocation());
     }
 
-    private void slab(BasicBlock blockProvider) {
+    private void slab(BasicBlockObject blockProvider) {
         SlabBlock slabBlock = ((SlabBlock) blockProvider.get());
-        ResourceLocation parentLocation = this.ensureTexturePresent(blockProvider.getParentObject().getId());
+        ResourceLocation parentLocation = this.texturePreExist(blockProvider.getParentObject().getId());
         super.slabBlock(slabBlock, parentLocation, parentLocation);
         this.itemModelProvider.withExistingParent(blockProvider.getId().getPath(), blockProvider.getId().withPrefix("block/"));
     }
 
-    private void stoneWall(BasicBlock blockProvider) {
+    private void stoneWall(BasicBlockObject blockProvider) {
         WallBlock wallBlock = ((WallBlock) blockProvider.get());
-        super.wallBlock(wallBlock, this.ensureTexturePresent(blockProvider.getParentObject().getId()));
+        super.wallBlock(wallBlock, this.texturePreExist(blockProvider.getParentObject().getId()));
         this.itemModelProvider.withExistingParent(blockProvider.getId().getPath(), blockProvider.getParentObject().getId().withPrefix("block/"));
     }
 

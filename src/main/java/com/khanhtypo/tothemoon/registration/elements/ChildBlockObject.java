@@ -13,11 +13,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 @MethodsReturnNonnullByDefault
-public class ChildBlock extends BasicBlock {
-    private static final Map<ChildBlock, BlockObject<?>> PARENT_MAP = ModUtils.resourceSortedMap(ChildBlock::getId);
+public class ChildBlockObject extends BasicBlockObject {
+    private static final Map<ChildBlockObject, BlockObject<?>> PARENT_MAP = ModUtils.resourceSortedMap(ChildBlockObject::getId);
     private final BlockObject<? extends Block> parent;
 
-    public ChildBlock(String name, Function<BlockBehaviour.Properties, ? extends Block> factory, BasicBlock parent) {
+    public ChildBlockObject(String name, Function<BlockBehaviour.Properties, ? extends Block> factory, BasicBlockObject parent) {
         super(name, factory, parent);
         this.parent = parent;
         PARENT_MAP.put(this, parent);
@@ -36,7 +36,7 @@ public class ChildBlock extends BasicBlock {
     }
 
     @SafeVarargs
-    public static void generateModel(Consumer<BasicBlock>... generators) {
+    public static void generateModel(Consumer<BasicBlockObject>... generators) {
         PARENT_MAP.keySet().forEach(b -> generators[b.getType()].accept(b));
     }
 

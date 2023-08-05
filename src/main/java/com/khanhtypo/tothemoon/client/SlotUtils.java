@@ -16,6 +16,9 @@ public class SlotUtils {
     static final Predicate<ItemStack> YES = (itemStack) -> true;
     static final Predicate<ItemStack> NO = itemStack -> false;
 
+    public static Slot createPlaceFilter(Container container, int index, int x, int y, Predicate<ItemStack> filter) {
+        return new FilterSlot(container, index, x, y, filter, YES);
+    }
     public static Slot createPlaceFilter(Container container, int index, int x, int y, TagKey<Item> tagFilter) {
         return new FilterSlot(container, index, x, y, itemStack -> itemStack.is(tagFilter), YES);
     }

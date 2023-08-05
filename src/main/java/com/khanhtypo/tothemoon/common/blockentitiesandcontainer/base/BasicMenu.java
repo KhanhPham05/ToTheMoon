@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
+import com.khanhtypo.tothemoon.registration.elements.BlockObject;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -10,6 +11,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -19,14 +21,20 @@ public abstract class BasicMenu extends AbstractContainerMenu {
     protected final Inventory playerInventory;
     protected final ContainerLevelAccess accessor;
     private final MenuObject<?> menuObject;
+    @Nullable private Block targetedBlock;
     private int invLabelX;
     private int invLabelY;
 
     protected BasicMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
+        this(menuObject, windowId, playerInventory, accessor, menuObject.getTargetedBlock() != null ? menuObject.getTargetedBlock().get() : null);
+    }
+
+    protected BasicMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor, @Nullable Block targetedBlock) {
         super(menuObject.get(), windowId);
         this.menuObject = menuObject;
         this.playerInventory = playerInventory;
         this.accessor = accessor;
+        this.targetedBlock = targetedBlock;
     }
 
     private static BlockPos getPos(@Nullable FriendlyByteBuf extraData) {
@@ -35,9 +43,14 @@ public abstract class BasicMenu extends AbstractContainerMenu {
                         .readBlockPos(), "Can not retrieve BlockPos data because returned BlockPos is null");
     }
 
+    public BasicMenu setTargetedBlock(Block targetedBlock) {
+        this.targetedBlock = targetedBlock;
+        return this;
+    }
+
     @Override
     public boolean stillValid(@Nonnull Player p_38874_) {
-        return stillValid(accessor, p_38874_, this.menuObject.getTargetedBlock());
+        return this.targetedBlock == null || stillValid(accessor, p_38874_, this.targetedBlock);
     }
 
     public int getInvLabelX() {
