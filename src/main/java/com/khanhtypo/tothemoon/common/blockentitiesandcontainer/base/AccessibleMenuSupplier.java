@@ -1,12 +1,11 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
 
 @FunctionalInterface
-public interface AccessibleMenuSupplier<T extends BasicMenu> extends MenuType.MenuSupplier<T> {
+public interface AccessibleMenuSupplier<T extends BaseMenu> extends MenuType.MenuSupplier<T> {
     T create(int windowId, Inventory inventory, ContainerLevelAccess access);
 
     @Override

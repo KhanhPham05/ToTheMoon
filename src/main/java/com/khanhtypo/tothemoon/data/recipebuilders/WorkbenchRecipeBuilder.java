@@ -3,7 +3,7 @@ package com.khanhtypo.tothemoon.data.recipebuilders;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
-import com.khanhtypo.tothemoon.JsonUtils;
+import com.khanhtypo.tothemoon.utls.JsonUtils;
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
 import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;

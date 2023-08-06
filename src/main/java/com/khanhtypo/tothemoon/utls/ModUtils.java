@@ -1,5 +1,6 @@
-package com.khanhtypo.tothemoon;
+package com.khanhtypo.tothemoon.utls;
 
+import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

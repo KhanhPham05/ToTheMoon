@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.data.common;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.item.BasicArmorItem;
 import com.khanhtypo.tothemoon.common.item.ModArmorMaterials;

@@ -1,9 +1,9 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 
 public class AlwaysSavedResultContainer extends AlwaysSavedContainer {
-    public AlwaysSavedResultContainer(BasicMenu menu) {
+    public AlwaysSavedResultContainer(BaseMenu menu) {
         super(menu, 1);
     }
 

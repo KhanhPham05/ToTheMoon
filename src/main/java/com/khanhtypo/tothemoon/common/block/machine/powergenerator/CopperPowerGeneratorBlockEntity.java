@@ -1,4 +1,4 @@
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.impl;
+package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
 
 import com.khanhtypo.tothemoon.registration.ModBlockEntities;
 import net.minecraft.core.BlockPos;

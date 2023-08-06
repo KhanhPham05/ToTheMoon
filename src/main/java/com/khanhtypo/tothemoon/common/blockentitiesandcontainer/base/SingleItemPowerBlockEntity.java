@@ -3,6 +3,7 @@ package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
@@ -11,12 +12,12 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class SingleItemEnergyBlockEntity extends BaseEnergyBlockEntity {
+public abstract class SingleItemPowerBlockEntity extends AbstractPowerBlockEntity {
     public static final int CONTAINER_SIZE = 1;
     protected int energyProcessDuration;
     protected int energyProcessTime;
 
-    public SingleItemEnergyBlockEntity(BlockEntityObject<? extends BaseEnergyBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, EnergyStorage energyStorage) {
+    public SingleItemPowerBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, EnergyStorage energyStorage) {
         super(blockEntity, blockPos, blockState, CONTAINER_SIZE, energyStorage);
     }
 
@@ -38,6 +39,16 @@ public abstract class SingleItemEnergyBlockEntity extends BaseEnergyBlockEntity 
     @Override
     public boolean canTakeItemThroughFace(int index, ItemStack itemStack, Direction side) {
         return side == Direction.DOWN && !this.isEmpty() && !itemStack.isEmpty();
+    }
+
+    public void loadPowerConsumeProcess(CompoundTag deserializedNBT) {
+        this.energyProcessDuration = deserializedNBT.getInt("EnergyProcessDuration");
+        this.energyProcessTime = deserializedNBT.getInt("EnergyProcessTime");
+    }
+
+    protected void savePowerConsumeProcess(CompoundTag writer) {
+        writer.putInt("EnergyProcessDuration", this.energyProcessDuration);
+        writer.putInt("EnergyProcessTime", this.energyProcessTime);
     }
 
     protected int getBurnTime(ItemStack stack) {

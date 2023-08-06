@@ -2,7 +2,7 @@ package com.khanhtypo.tothemoon;
 
 import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.common.block.Workbench;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.data.DataStarter;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModItems;
@@ -51,7 +51,7 @@ public class ToTheMoon {
         MenuObject.registerScreen(ToTheMoon::registerScreen);
     }
 
-    private static <T extends BasicMenu, S extends AbstractContainerScreen<T>> void registerScreen(MenuObject<T> menuObject, MenuScreens.ScreenConstructor<T, S> screenConstructor) {
+    private static <T extends BaseMenu, S extends AbstractContainerScreen<T>> void registerScreen(MenuObject<T> menuObject, MenuScreens.ScreenConstructor<T, S> screenConstructor) {
         MenuScreens.register(menuObject.get(), screenConstructor);
     }
 

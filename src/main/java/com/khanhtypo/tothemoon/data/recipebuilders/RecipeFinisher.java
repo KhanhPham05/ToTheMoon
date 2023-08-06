@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.data.recipebuilders;
 
 import com.google.gson.JsonObject;
-import com.khanhtypo.tothemoon.JsonUtils;
+import com.khanhtypo.tothemoon.utls.JsonUtils;
 import com.khanhtypo.tothemoon.serverdata.SerializerHelper;
 import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
 import net.minecraft.advancements.Advancement;

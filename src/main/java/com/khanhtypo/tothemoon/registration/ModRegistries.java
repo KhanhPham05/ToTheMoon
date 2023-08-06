@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.registration;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;

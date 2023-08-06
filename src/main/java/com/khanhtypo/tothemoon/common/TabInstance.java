@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import net.minecraft.core.registries.Registries;
@@ -10,7 +10,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashSet;
 import java.util.Set;

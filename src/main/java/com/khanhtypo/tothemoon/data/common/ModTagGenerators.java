@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.data.common;
 
 import com.google.common.base.Preconditions;
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.tag.TagFamily;
 import com.khanhtypo.tothemoon.data.ModBlockItemTags;
@@ -25,11 +25,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static com.khanhtypo.tothemoon.registration.ModBlocks.*;
 

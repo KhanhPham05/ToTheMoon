@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.compat.jei;
 
 import com.google.common.collect.ImmutableSet;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import com.khanhtypo.tothemoon.serverdata.recipes.BaseRecipe;
@@ -157,7 +157,7 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
         }
 
         @SuppressWarnings("unchecked")
-        public <A extends BasicMenu> Builder<T> setRecipeTransfer(Class<A> menuClass, int recipeSlotStart, int recipeSlotCount, int inventorySlotStart) {
+        public <A extends BaseMenu> Builder<T> setRecipeTransfer(Class<A> menuClass, int recipeSlotStart, int recipeSlotCount, int inventorySlotStart) {
             this.transferRegister = registration -> registration.addRecipeTransferHandler(menuClass, (MenuType<A>) this.menuObject.get(), this.recipeType, recipeSlotStart, recipeSlotCount, inventorySlotStart, 9 * 4);
             return this;
         }

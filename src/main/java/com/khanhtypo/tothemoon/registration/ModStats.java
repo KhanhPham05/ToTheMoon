@@ -1,7 +1,8 @@
 package com.khanhtypo.tothemoon.registration;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
@@ -17,6 +18,7 @@ public class ModStats {
                 helper -> CONTAINER_INTERACTION_MAP.forEach((menuObject, resourceLocation) -> {
                     helper.register(resourceLocation, resourceLocation);
                     Stats.CUSTOM.get(resourceLocation);
+                    ModLanguageGenerator.addTranslationMapping("custom_stat." + resourceLocation.toLanguageKey(), ModLanguageGenerator.transform(resourceLocation.getPath()));
                 }));
     }
 

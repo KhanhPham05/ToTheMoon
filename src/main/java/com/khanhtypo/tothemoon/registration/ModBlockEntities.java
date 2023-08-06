@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.registration;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.impl.CopperPowerGeneratorBlockEntity;
+import com.khanhtypo.tothemoon.common.block.machine.powergenerator.CopperPowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 
 public class ModBlockEntities {

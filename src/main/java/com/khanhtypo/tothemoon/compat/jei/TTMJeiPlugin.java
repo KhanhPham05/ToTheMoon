@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.compat.jei;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.*;

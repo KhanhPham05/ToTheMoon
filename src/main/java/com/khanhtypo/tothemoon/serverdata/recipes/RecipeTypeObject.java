@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.serverdata.recipes;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.elements.BaseObjectSupplier;
 import net.minecraft.world.Container;

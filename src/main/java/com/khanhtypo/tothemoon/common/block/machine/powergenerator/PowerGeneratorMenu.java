@@ -1,7 +1,9 @@
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus;
+package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus.AbstractMachineMenu;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.client.SlotUtils;
+import com.khanhtypo.tothemoon.common.block.machine.powergenerator.AbstractPowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.ModMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -19,12 +21,12 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
     private static final Predicate<ItemStack> burnCheck = ModUtils::canBurn;
 
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
-        this(windowId, playerInventory, accessor, new SimpleContainer(1), new SimpleContainerData(5));
+        this(windowId, playerInventory, accessor, new SimpleContainer(1), new SimpleContainerData(AbstractPowerGeneratorBlockEntity.DATA_SIZE));
     }
 
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor, Container container, ContainerData containerData) {
         super(ModMenus.POWER_GENERATOR, windowId, playerInventory, accessor, container, containerData);
-        super.addSlot(SlotUtils.createPlaceFilter(container, 0, 80, 32, burnCheck));
+        super.addSlot(SlotUtils.createPlaceFilter(container, 0, 76, 41, burnCheck));
         super.addPlayerInv(8, 97);
     }
 

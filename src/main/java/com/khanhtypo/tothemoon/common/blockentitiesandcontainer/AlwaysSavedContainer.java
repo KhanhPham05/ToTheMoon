@@ -1,16 +1,13 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Iterator;
 
 public class AlwaysSavedContainer extends SimpleContainer {
-    protected final BasicMenu menu;
+    protected final BaseMenu menu;
 
-    public AlwaysSavedContainer(BasicMenu menu, int p_19150_) {
+    public AlwaysSavedContainer(BaseMenu menu, int p_19150_) {
         super(p_19150_);
         this.menu = menu;
     }
@@ -33,7 +30,7 @@ public class AlwaysSavedContainer extends SimpleContainer {
         this.menu.slotsChanged(this);
     }
 
-    public BasicMenu getMenu() {
+    public BaseMenu getMenu() {
         return menu;
     }
 

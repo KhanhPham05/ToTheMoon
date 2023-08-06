@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.registration.bases.IngredientProvider;

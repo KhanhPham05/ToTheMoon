@@ -25,7 +25,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class BaseEnergyBlockEntity extends BaseContainerBlockEntity implements ImplementedWorldlyContainer, TickableBlockEntity {
+public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity implements ImplementedWorldlyContainer, TickableBlockEntity {
     private static final Direction[] allDirection = Direction.values();
     protected final EnergyStorage energyStorage;
     private final SimpleContainer container;
@@ -33,20 +33,21 @@ public abstract class BaseEnergyBlockEntity extends BaseContainerBlockEntity imp
     private final NonNullConsumer<IEnergyStorage> extractLogic = this::extractEnergy;
     protected LazyOptional<IEnergyStorage> energyHolder;
     protected LazyOptional<IItemHandler> itemHolder;
+    private boolean active = true;
 
-    public BaseEnergyBlockEntity(BlockEntityObject<? extends BaseEnergyBlockEntity> blockEntity,
-                                 BlockPos blockPos,
-                                 BlockState blockState,
-                                 int containerSize,
-                                 int energyCapacity) {
+    public AbstractPowerBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity,
+                                    BlockPos blockPos,
+                                    BlockState blockState,
+                                    int containerSize,
+                                    int energyCapacity) {
         this(blockEntity, blockPos, blockState, containerSize, new EnergyStorage(energyCapacity));
     }
 
-    public BaseEnergyBlockEntity(BlockEntityObject<? extends BaseEnergyBlockEntity> blockEntity,
-                                 BlockPos blockPos,
-                                 BlockState blockState,
-                                 int containerSize,
-                                 EnergyStorage energyStorage) {
+    public AbstractPowerBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity,
+                                    BlockPos blockPos,
+                                    BlockState blockState,
+                                    int containerSize,
+                                    EnergyStorage energyStorage) {
         super(blockEntity.get(), blockPos, blockState);
         this.container = new SimpleContainer(containerSize);
         this.energyStorage = energyStorage;
@@ -67,6 +68,14 @@ public abstract class BaseEnergyBlockEntity extends BaseContainerBlockEntity imp
         setChanged(level, pos, blockState);
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     protected abstract void tick(Level level, BlockPos pos, BlockState blockState);
 
     public void tryExtractEnergy(Level level, BlockPos pos) {
@@ -83,11 +92,11 @@ public abstract class BaseEnergyBlockEntity extends BaseContainerBlockEntity imp
 
     public void extractEnergy(IEnergyStorage energyStorage) {
         if (energyStorage.canReceive()) {
-            this.energyStorage.extractEnergy(energyStorage.receiveEnergy(this.getEnergyLeft(), false), false);
+            this.energyStorage.extractEnergy(energyStorage.receiveEnergy(this.getPowerSpace(), false), false);
         }
     }
 
-    public int getEnergyLeft() {
+    public int getPowerSpace() {
         return this.energyStorage.getMaxEnergyStored() - this.energyStorage.getEnergyStored();
     }
 
@@ -140,7 +149,7 @@ public abstract class BaseEnergyBlockEntity extends BaseContainerBlockEntity imp
     @Override
     public void load(CompoundTag deserializedNBT) {
         super.load(deserializedNBT);
-        this.energyStorage.deserializeNBT(deserializedNBT);
+        this.energyStorage.deserializeNBT(deserializedNBT.get("Energy"));
     }
 
     protected boolean isStackPresent(ItemStack itemStack) {

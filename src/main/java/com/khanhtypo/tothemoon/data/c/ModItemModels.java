@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.data.c;
 
 import com.google.common.base.Preconditions;
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

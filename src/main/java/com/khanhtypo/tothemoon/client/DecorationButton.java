@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.client;
 
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
-import com.khanhtypo.tothemoon.data.c.ModLangProvider;
+import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -11,6 +11,7 @@ import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 
 public class DecorationButton implements Renderable {
     private static final ResourceLocation texture = BasicScreen.RECIPE_BOOK_WIDGET;
@@ -21,8 +22,8 @@ public class DecorationButton implements Renderable {
     private final String requiredModId;
     private final int cornerX;
     private final int cornerY;
-    public boolean isHovered;
     private final Component modNeedsToInstall;
+    public boolean isHovered;
     private @Nullable Component modIsInstalled;
 
     public DecorationButton(String requiredModId, int x, int y, int cornerX, int cornerY) {
@@ -33,7 +34,7 @@ public class DecorationButton implements Renderable {
         this.height = 22;
         this.cornerX = cornerX;
         this.cornerY = cornerY;
-        this.modNeedsToInstall = Component.translatable(ModLangProvider.getKey(ModLangProvider.MOD_NEEDS_INSTALLATION), this.requiredModId);
+        this.modNeedsToInstall = ModLanguageGenerator.MOD_NEEDS_INSTALLATION.withParam(this.requiredModId.toUpperCase(Locale.ROOT));
     }
 
     @Override

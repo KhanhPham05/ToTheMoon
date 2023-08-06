@@ -1,10 +1,10 @@
 package com.khanhtypo.tothemoon.data.c;
 
 import com.google.common.base.Preconditions;
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.block.Workbench;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.impl.AbstractPowerGeneratorBlockEntity;
+import com.khanhtypo.tothemoon.common.block.machine.powergenerator.AbstractPowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.registration.elements.BasicBlockObject;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;

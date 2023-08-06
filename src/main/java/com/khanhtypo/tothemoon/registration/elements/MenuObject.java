@@ -1,9 +1,9 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AccessibleMenuSupplier;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
-import com.khanhtypo.tothemoon.data.c.ModLangProvider;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
+import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.ModStats;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-public class MenuObject<T extends BasicMenu> extends BaseObjectSupplier<MenuType<?>> {
+public class MenuObject<T extends BaseMenu> extends BaseObjectSupplier<MenuType<?>> {
     private static final Set<MenuObject<?>> ALL_MENU_TYPES = ModUtils.resourceSortedSet();
     private final ResourceLocation guiTexture;
     private final AccessibleMenuSupplier<T> menuSupplier;
@@ -45,20 +45,20 @@ public class MenuObject<T extends BasicMenu> extends BaseObjectSupplier<MenuType
     }
 
     @SuppressWarnings("unchecked")
-    public static <A extends BasicMenu, B extends AbstractContainerScreen<A>> void registerScreen(BiConsumer<MenuObject<A>, MenuScreens.ScreenConstructor<A, B>> consumer) {
+    public static <A extends BaseMenu, B extends AbstractContainerScreen<A>> void registerScreen(BiConsumer<MenuObject<A>, MenuScreens.ScreenConstructor<A, B>> consumer) {
         ALL_MENU_TYPES.forEach(menu -> consumer.accept((MenuObject<A>) menu, (MenuScreens.ScreenConstructor<A, B>) menu.screenConstructor));
     }
 
-    public static <M extends BasicMenu, B extends AbstractContainerScreen<M>> MenuObject<M> register(String name, BlockObject<?> targetBlock, AccessibleMenuSupplier<M> menuSupplier, MenuScreens.ScreenConstructor<M, B> screenConstructor) {
+    public static <M extends BaseMenu, B extends AbstractContainerScreen<M>> MenuObject<M> register(String name, BlockObject<?> targetBlock, AccessibleMenuSupplier<M> menuSupplier, MenuScreens.ScreenConstructor<M, B> screenConstructor) {
         return new MenuObject<>(name, menuSupplier, screenConstructor).setTargetedBlock(targetBlock);
     }
 
-    private static ResourceLocation texturePath(String fileName) {
+    public static ResourceLocation texturePath(String fileName) {
         return ModUtils.location("textures/gui/%s.png".formatted(fileName));
     }
 
     public MenuObject<T> translateMenu(String enTranslation) {
-        this.title = ModLangProvider.createTranslatable("gui", this.getId().getPath(), enTranslation);
+        this.title = ModLanguageGenerator.createTranslatable("gui", this.getId().getPath(), enTranslation);
         return this;
     }
 

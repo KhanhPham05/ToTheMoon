@@ -3,7 +3,7 @@ package com.khanhtypo.tothemoon.data;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.data.c.ModBlockStateAndModelGenerator;
 import com.khanhtypo.tothemoon.data.c.ModItemModels;
-import com.khanhtypo.tothemoon.data.c.ModLangProvider;
+import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.data.common.ModBlockLoots;
 import com.khanhtypo.tothemoon.data.common.ModRecipeGenerator;
 import com.khanhtypo.tothemoon.data.common.ModTagGenerators;
@@ -25,7 +25,7 @@ public class DataStarter {
         final var lookupProvider = event.getLookupProvider();
         final ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
-        generator.addProvider(event.includeClient(), new ModLangProvider(packOutput, ToTheMoon.MODID, "en_us"));
+        generator.addProvider(event.includeClient(), new ModLanguageGenerator(packOutput, ToTheMoon.MODID, "en_us"));
         final ItemModelProvider itemModelProvider = generator.addProvider(event.includeClient(), new ModItemModels(packOutput, ToTheMoon.MODID, fileHelper));
         generator.addProvider(event.includeClient(), new ModBlockStateAndModelGenerator(packOutput, itemModelProvider, ToTheMoon.MODID, fileHelper));
 

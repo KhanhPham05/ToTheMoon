@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.client.DecorationButton;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nullable;
 
-public class BasicScreen<MENU extends BasicMenu> extends AbstractContainerScreen<MENU> {
+public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<MENU> {
     public static final ResourceLocation RECIPE_BOOK_WIDGET = ModUtils.location("textures/gui/widgets.png");
     protected static final int TEXT_WHITE = 0xe0e0e0;
     protected static final int TEXT_BLACK = 0x404040;
@@ -52,9 +52,9 @@ public class BasicScreen<MENU extends BasicMenu> extends AbstractContainerScreen
     }
 
     @Override
-    protected void renderBg(GuiGraphics renderer, float p_97788_, int p_97789_, int p_97790_) {
+    protected final void renderBg(GuiGraphics renderer,  float pPartialTick, int pMouseX, int pMouseY) {
         renderer.blit(this.guiTexture, super.leftPos, super.topPos, 0, 0, super.imageWidth, super.imageHeight);
-        this.renderBgAddition(renderer);
+        this.renderBgAddition(renderer, this.guiTexture);
     }
 
     private void setHoverToButtons(int mouseX, int mouseY) {
@@ -75,6 +75,5 @@ public class BasicScreen<MENU extends BasicMenu> extends AbstractContainerScreen
             }
     }
 
-    protected void renderBgAddition(GuiGraphics renderer) {
-    }
+    protected void renderBgAddition(GuiGraphics renderer, ResourceLocation guiTexture) {}
 }

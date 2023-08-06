@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.registration;
 
-import com.khanhtypo.tothemoon.client.screen.PowerGeneratorScreen;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus.PowerGeneratorMenu;
+import com.khanhtypo.tothemoon.common.block.machine.powergenerator.PowerGeneratorScreen;
+import com.khanhtypo.tothemoon.common.block.machine.powergenerator.PowerGeneratorMenu;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.WorkbenchMenu;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.WorkbenchScreen;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;

@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.common.item;
 
 import com.google.common.collect.ImmutableMap;
-import com.khanhtypo.tothemoon.ModUtils;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.data.ModBlockTags;
 import com.khanhtypo.tothemoon.data.ModItemTags;
 import net.minecraft.tags.TagKey;

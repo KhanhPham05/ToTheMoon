@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.MenuProvider;
@@ -23,7 +23,7 @@ public class BlockEntityObject<T extends BlockEntity> extends BaseObjectSupplier
     }
 
     @Nonnull
-    public static <B extends BlockEntity, M extends BasicMenu> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block> blocks) {
+    public static <B extends BlockEntity, M extends BaseMenu> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block> blocks) {
         return new BlockEntityObject<>(name, () -> BlockEntityType.Builder.of(constructor, blocks.get()).build(null));
     }
 
