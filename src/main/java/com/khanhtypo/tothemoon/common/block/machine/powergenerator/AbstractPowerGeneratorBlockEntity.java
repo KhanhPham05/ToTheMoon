@@ -1,14 +1,15 @@
 package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
 
+import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.SingleItemPowerBlockEntity;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.SuppliedContainerData;
 import com.khanhtypo.tothemoon.common.capability.GeneratableEnergyStorage;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,9 +18,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Objects;
 
 public abstract class AbstractPowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
-    public static final int DATA_SIZE = 7;
+    public static final int DATA_SIZE = 8;
     protected final GeneratableEnergyStorage energyStorage;
-    protected final SuppliedContainerData containerData;
     private final int generationPerTick;
     private int burningTime;
     private int burningDuration;
@@ -27,23 +27,46 @@ public abstract class AbstractPowerGeneratorBlockEntity extends SingleItemPowerB
     private int fuelConsumeTime;
 
     public AbstractPowerGeneratorBlockEntity(BlockEntityObject<? extends SingleItemPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, int powerCapacity, int generationPerTick) {
-        super(blockEntity, blockPos, blockState, new GeneratableEnergyStorage(powerCapacity));
+        super(blockEntity, blockPos, blockState, new GeneratableEnergyStorage(powerCapacity),
+                be -> new ContainerData() {
+                    @Override
+                    public int get(int pIndex) {
+                        AbstractPowerGeneratorBlockEntity generator = ((AbstractPowerGeneratorBlockEntity) be);
+                        return switch (pIndex) {
+                            case 0 -> be.energyStorage.getEnergyStored();
+                            case 1 -> be.energyStorage.getMaxEnergyStored();
+                            case 2 -> generator.burningTime;
+                            case 3 -> generator.burningDuration;
+                            case 4 -> generator.generationPerTick;
+                            case 5 -> generator.fuelConsumeTime;
+                            case 6 -> generator.fuelConsumeDuration;
+                            case 7 -> be.active;
+                            default -> throw new ArrayIndexOutOfBoundsException();
+                        };
+                    }
+
+                    @Override
+                    public void set(int pIndex, int pValue) {
+                        Preconditions.checkState(pIndex == 7);
+                        if ((pValue == 0 || pValue == 1)) {
+                            be.setActive(pValue);
+                        }
+                    }
+
+                    @Override
+                    public int getCount() {
+                        return DATA_SIZE;
+                    }
+                }
+        );
         this.generationPerTick = generationPerTick;
         this.energyStorage = ((GeneratableEnergyStorage) super.energyStorage);
-        this.containerData = new SuppliedContainerData(
-                this.energyStorage::getEnergyStored,
-                this.energyStorage::getMaxEnergyStored,
-                this::getBurningTime,
-                this::getBurningDuration,
-                this::getGenerationPerTick,
-                this::getFuelConsumeTime,
-                this::getFuelConsumeDuration
-        );
     }
 
     @Override
     protected void tick(Level level, BlockPos pos, BlockState blockState) {
-        boolean litState = blockState.getValue(FunctionalBlock.LIT);
+        boolean litState;
+        boolean flag = litState = blockState.getValue(FunctionalBlock.LIT);
         if (this.burningTime > 0) {
             if (this.fuelConsumeTime >= this.fuelConsumeDuration) {
                 this.burningTime -= this.fuelConsumeDuration;
@@ -62,34 +85,16 @@ public abstract class AbstractPowerGeneratorBlockEntity extends SingleItemPowerB
             }
         } else litState = false;
 
-        blockState = blockState.setValue(FunctionalBlock.LIT, litState);
-        level.setBlock(pos, blockState, 3);
-    }
-
-    private int getBurningTime() {
-        return this.burningTime;
-    }
-
-    public int getBurningDuration() {
-        return this.burningDuration;
-    }
-
-    public int getGenerationPerTick() {
-        return this.generationPerTick;
-    }
-
-    public int getFuelConsumeDuration() {
-        return fuelConsumeDuration;
-    }
-
-    public int getFuelConsumeTime() {
-        return fuelConsumeTime;
+        if (flag != litState) {
+            blockState = blockState.setValue(FunctionalBlock.LIT, litState);
+            level.setBlock(pos, blockState, 3);
+        }
     }
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         Level level = Objects.requireNonNull(this.getLevel());
-        return new PowerGeneratorMenu(pContainerId, pInventory, ContainerLevelAccess.create(level, this.getBlockPos()), this, this.containerData)
+        return new PowerGeneratorMenu(pContainerId, pInventory, ContainerLevelAccess.create(level, this.getBlockPos()), this, super.getContainerData())
                 .setTargetedBlock(super.getBlockState().getBlock());
     }
 

@@ -4,6 +4,7 @@ import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
@@ -12,13 +13,15 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
+
 public abstract class SingleItemPowerBlockEntity extends AbstractPowerBlockEntity {
     public static final int CONTAINER_SIZE = 1;
     protected int energyProcessDuration;
     protected int energyProcessTime;
 
-    public SingleItemPowerBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, EnergyStorage energyStorage) {
-        super(blockEntity, blockPos, blockState, CONTAINER_SIZE, energyStorage);
+    public SingleItemPowerBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, EnergyStorage energyStorage, Function<AbstractPowerBlockEntity, ContainerData> dataConstructor) {
+        super(blockEntity, blockPos, blockState, CONTAINER_SIZE, energyStorage, dataConstructor);
     }
 
     @Override

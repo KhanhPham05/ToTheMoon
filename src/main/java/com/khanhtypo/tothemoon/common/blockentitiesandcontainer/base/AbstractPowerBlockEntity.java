@@ -7,10 +7,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -24,55 +26,61 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
 public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity implements ImplementedWorldlyContainer, TickableBlockEntity {
     private static final Direction[] allDirection = Direction.values();
-    protected final EnergyStorage energyStorage;
+    public final EnergyStorage energyStorage;
     private final SimpleContainer container;
+    private final ContainerData containerData;
     @Nonnull
     private final NonNullConsumer<IEnergyStorage> extractLogic = this::extractEnergy;
+    public int active = 1;
     protected LazyOptional<IEnergyStorage> energyHolder;
     protected LazyOptional<IItemHandler> itemHolder;
-    private boolean active = true;
 
     public AbstractPowerBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity,
                                     BlockPos blockPos,
                                     BlockState blockState,
                                     int containerSize,
-                                    int energyCapacity) {
-        this(blockEntity, blockPos, blockState, containerSize, new EnergyStorage(energyCapacity));
-    }
-
-    public AbstractPowerBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity,
-                                    BlockPos blockPos,
-                                    BlockState blockState,
-                                    int containerSize,
-                                    EnergyStorage energyStorage) {
+                                    EnergyStorage energyStorage,
+                                    Function<AbstractPowerBlockEntity, ContainerData> dataConstructor) {
         super(blockEntity.get(), blockPos, blockState);
         this.container = new SimpleContainer(containerSize);
         this.energyStorage = energyStorage;
         this.itemHolder = createHandler(() -> new InvWrapper(this));
         this.energyHolder = createHandler(() -> this.energyStorage);
+        this.containerData = dataConstructor.apply(this);
     }
 
     protected static <T> LazyOptional<T> createHandler(NonNullSupplier<T> supplier) {
         return LazyOptional.of(supplier);
     }
 
+    public static boolean intToBoolean(int i) {
+        return i == 1;
+    }
+
     @Override
     public final void serverTick(Level level, BlockPos pos, BlockState blockState) {
-        this.tryExtractEnergy(level, pos);
+        if (this.energyStorage.canExtract())
+            this.tryExtractEnergy(level, pos);
 
-        this.tick(level, pos, blockState);
+        if (isActive()) {
+            this.tick(level, pos, blockState);
+        } else if (blockState.hasProperty(BlockStateProperties.LIT)) {
+            blockState = blockState.setValue(BlockStateProperties.LIT, false);
+            level.setBlock(pos, blockState, 3);
+        }
 
         setChanged(level, pos, blockState);
     }
 
     public boolean isActive() {
-        return active;
+        return intToBoolean(active);
     }
 
-    public void setActive(boolean active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
@@ -158,5 +166,9 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
 
     protected boolean isSlotPresent(int index) {
         return this.isStackPresent(this.getItem(index));
+    }
+
+    public ContainerData getContainerData() {
+        return containerData;
     }
 }

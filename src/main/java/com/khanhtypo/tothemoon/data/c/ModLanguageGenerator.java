@@ -6,7 +6,6 @@ import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.utls.AppendableComponent;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -18,18 +17,13 @@ import java.util.function.Supplier;
 
 public class ModLanguageGenerator extends LanguageProvider {
     public static final Map<String, String> DEFAULT_TRANSLATION_MAP = new TreeMap<>();
-    public static final AppendableComponent MOD_NEEDS_INSTALLATION = AppendableComponent.create("gui", "mod_needs_installation", "Install %s.");
+    public static final AppendableComponent MOD_NEEDS_INSTALLATION = AppendableComponent.create("tooltip", "mod_needs_installation", "Install %s.");
+    public static final AppendableComponent TOGGLE = AppendableComponent.create("button", "Toggle : %s");
+    public static final Component ON = createTranslatable("tooltip", "on", "On");
+    public static final Component OFF = createTranslatable("tooltip", "off", "Off");
 
     public ModLanguageGenerator(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
-    }
-
-    public static String getKey(Component component) {
-        return ((TranslatableContents) component.getContents()).getKey();
-    }
-
-    public static Component createParam(Component component, Object... params) {
-        return Component.translatable(getKey(component), params);
     }
 
     public static Component createTranslatable(String prefix, String suffix, String translated) {

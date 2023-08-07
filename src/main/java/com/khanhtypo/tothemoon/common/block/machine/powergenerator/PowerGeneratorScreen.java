@@ -1,8 +1,11 @@
 package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
 
+import com.khanhtypo.tothemoon.client.ActiveModeButton;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.common.block.machine.powergenerator.PowerGeneratorMenu;
+import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,6 +15,13 @@ public class PowerGeneratorScreen extends BasicScreen<PowerGeneratorMenu> {
 
     public PowerGeneratorScreen(PowerGeneratorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, 176, 179);
+    }
+
+    @Override
+    protected void addExtraButtons() {
+        super.addRenderableWidget(
+                new ActiveModeButton(super.getMenu(), this, super.getButtonX(), super.getButtonY())
+        );
     }
 
     @Override

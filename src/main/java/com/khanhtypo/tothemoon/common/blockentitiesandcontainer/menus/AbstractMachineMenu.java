@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus;
 
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractPowerBlockEntity;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.world.Container;
@@ -24,5 +25,17 @@ public abstract class AbstractMachineMenu extends BaseMenu {
 
     public Container getContainer() {
         return this.container;
+    }
+
+    public boolean isActive() {
+        return AbstractPowerBlockEntity.intToBoolean(this.containerData.get(this.containerData.getCount() - 1));
+    }
+
+    public void toggleActive() {
+        int active = this.containerData.get(this.containerData.getCount() - 1);
+        super.setData(
+                this.containerData.getCount() - 1,
+                active == 1 ? 0 : 1
+        );
     }
 }

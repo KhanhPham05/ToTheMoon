@@ -78,9 +78,9 @@
   "block.tothemoon.workbench": "Workbench",
   "block.tothemoon.zirconium_alloy_block": "Zirconium Alloy Block",
   "block.tothemoon.zirconium_block": "Zirconium Block",
+  "button": "Toggle : %s",
   "custom_stat.tothemoon.interact_with_power_generator": "Interact With Power Generator",
   "custom_stat.tothemoon.interact_with_workbench_crafting": "Interact With Workbench Crafting",
-  "gui.tothemoon.mod_needs_installation": "Install %s.",
   "gui.tothemoon.workbench_crafting": "Workbench Crafting",
   "item.tothemoon.amethyst_dust": "Amethyst Dust",
   "item.tothemoon.amethyst_gear": "Amethyst Gear",
@@ -190,5 +190,8 @@
   "item.tothemoon.zirconium_alloy": "Zirconium Alloy",
   "item.tothemoon.zirconium_ingot": "Zirconium Ingot",
   "itemGroup.tothemoon.ttm_blocks": "TTM Blocks",
-  "itemGroup.tothemoon.ttm_items": "TTM Items"
+  "itemGroup.tothemoon.ttm_items": "TTM Items",
+  "tooltip.tothemoon.mod_needs_installation": "Install %s.",
+  "tooltip.tothemoon.off": "Off",
+  "tooltip.tothemoon.on": "On"
 }

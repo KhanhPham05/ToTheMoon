@@ -3,7 +3,6 @@ package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.client.SlotUtils;
-import com.khanhtypo.tothemoon.common.block.machine.powergenerator.AbstractPowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.ModMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

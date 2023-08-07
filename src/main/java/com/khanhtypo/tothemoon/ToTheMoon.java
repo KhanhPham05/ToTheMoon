@@ -4,6 +4,7 @@ import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.common.block.Workbench;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.data.DataStarter;
+import com.khanhtypo.tothemoon.network.NetworkUtils;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModItems;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
@@ -20,6 +21,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
@@ -35,7 +37,7 @@ public class ToTheMoon {
     public static final IEventBus MOD_BUS = FMLJavaModLoadingContext.get().getModEventBus();
     public static final TabInstance DEFAULT_ITEM_TAB = new TabInstance("ttm_items", "TTM Items", () -> ModItems.CPU_CHIP);
     public static final TabInstance DEFAULT_BLOCK_TAB = new TabInstance("ttm_blocks", "TTM Blocks", () -> ModBlocks.COBBLED_METEORITE);
-
+    public static final SimpleChannel CHANNEL = NetworkUtils.createChannel();
     public ToTheMoon() {
         FORGE_BUS.register(this);
         ModRegistries.staticInit(MOD_BUS);
