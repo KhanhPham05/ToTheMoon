@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.block.Workbench;
-import com.khanhtypo.tothemoon.common.block.machine.powergenerator.AbstractPowerGeneratorBlockEntity;
+import com.khanhtypo.tothemoon.common.block.machine.powergenerator.PowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.registration.elements.BasicBlockObject;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
@@ -95,7 +95,11 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.simpleBlock(ZIRCONIUM_ALLOY_BLOCK);
         this.simpleBlock(ZIRCONIUM_BLOCK);
         this.simpleBlock(MOON_REDSTONE_ORE);
-        this.energyGenerator(COPPER_ENERGY_GENERATOR);
+        this.energyGenerator(COPPER_POWER_GENERATOR);
+        this.energyGenerator(IRON_POWER_GENERATOR);
+        this.energyGenerator(GOLD_POWER_GENERATOR);
+        this.energyGenerator(DIAMOND_POWER_GENERATOR);
+        this.energyGenerator(NETHERITE_POWER_GENERATOR);
         this.notSimple();
     }
 
@@ -120,7 +124,7 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.barrelBlock(MOON_ROCK_BARREL);
     }
 
-    private <T extends AbstractPowerGeneratorBlockEntity> void energyGenerator(BlockObject<FunctionalBlock<T>> blockSupplier) {
+    private void energyGenerator(BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> blockSupplier) {
         final ResourceLocation frontOffLocation = this.texturePreExist(blockSupplier.getId().withPrefix("block/"));
         final ResourceLocation frontOnLocation = this.texturePreExist(frontOffLocation.withSuffix("_on"));
         final ResourceLocation top = this.texturePreExist(super.modLoc("block/energy_generator_top"));

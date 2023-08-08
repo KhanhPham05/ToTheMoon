@@ -16,8 +16,8 @@ public final class NetworkUtils {
                 s -> s.equals(PROTOCOL_VERSION)
         );
 
-        channel.registerMessage(0, ServerBoundMachineActivePacket.class, ServerBoundMachineActivePacket::write, ServerBoundMachineActivePacket::read, ServerBoundMachineActivePacket::handle);
-
+        channel.registerMessage(0, MachineActiveToggleMessage.class, MachineActiveToggleMessage::write, MachineActiveToggleMessage::read, MachineActiveToggleMessage::handle);
+        //channel.registerMessage(1, WorkbenchToolBrokenMessage.class, WorkbenchToolBrokenMessage::write, WorkbenchToolBrokenMessage::read, WorkbenchToolBrokenMessage::handle);
         return channel;
     }
 }

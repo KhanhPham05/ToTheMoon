@@ -1,8 +1,7 @@
 package com.khanhtypo.tothemoon.client;
 
-import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus.AbstractMachineMenu;
-import com.khanhtypo.tothemoon.network.ServerBoundMachineActivePacket;
+import com.khanhtypo.tothemoon.network.MachineActiveToggleMessage;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -48,7 +47,7 @@ public class ActiveModeButton extends Button {
 
     @Override
     public void onPress() {
-        ServerBoundMachineActivePacket.send(this.screen.getMinecraft().getConnection().getConnection());
+        MachineActiveToggleMessage.send(this.screen.getMinecraft().getConnection().getConnection());
     }
 
     @Override

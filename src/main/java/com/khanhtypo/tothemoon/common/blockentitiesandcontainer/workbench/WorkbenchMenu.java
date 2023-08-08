@@ -9,8 +9,11 @@ import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.registration.ModMenus;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
 import com.khanhtypo.tothemoon.serverdata.WorkbenchRecipe;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -87,7 +90,11 @@ public class WorkbenchMenu extends BaseMenu implements RecipeContainerMenu {
             if (slot.isDamageableItem()) {
                 if (slot.hurt(1, player.level().getRandom(), player instanceof ServerPlayer serverPlayer ? serverPlayer : null)) {
                     int durability = slot.getMaxDamage() - slot.getDamageValue();
-                    this.craftingSlots.setItem(i, durability > 0 ? slot : ItemStack.EMPTY);
+                    ItemStack item = durability > 0 ? slot : ItemStack.EMPTY;
+                    this.craftingSlots.setItem(i, item);
+                    if (item.isEmpty()) {
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.ITEM_BREAK, 1.0f));
+                    }
                 }
             } else if (slot.hasCraftingRemainingItem()) {
                 this.craftingSlots.setItem(i, slot.getCraftingRemainingItem());

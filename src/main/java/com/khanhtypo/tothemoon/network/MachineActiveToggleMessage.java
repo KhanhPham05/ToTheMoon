@@ -9,17 +9,17 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class ServerBoundMachineActivePacket {
+public class MachineActiveToggleMessage {
 
-    public ServerBoundMachineActivePacket() {}
+    public MachineActiveToggleMessage() {}
 
     public void write(FriendlyByteBuf ignored) {}
 
-    public static ServerBoundMachineActivePacket read(FriendlyByteBuf ignored) {return new ServerBoundMachineActivePacket();}
+    public static MachineActiveToggleMessage read(FriendlyByteBuf ignored) {return new MachineActiveToggleMessage();}
 
     public static void send(Connection connection) {
         ToTheMoon.CHANNEL.sendTo(
-                new ServerBoundMachineActivePacket(),
+                new MachineActiveToggleMessage(),
                 connection,
                 NetworkDirection.PLAY_TO_SERVER
         );
@@ -30,5 +30,6 @@ public class ServerBoundMachineActivePacket {
         if (context.getSender().containerMenu instanceof AbstractMachineMenu machineMenu) {
             machineMenu.toggleActive();
         }
+        context.setPacketHandled(true);
     }
 }

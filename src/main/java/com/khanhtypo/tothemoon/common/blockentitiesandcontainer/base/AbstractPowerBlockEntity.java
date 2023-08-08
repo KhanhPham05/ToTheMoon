@@ -1,18 +1,19 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
+import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -31,11 +32,12 @@ import java.util.function.Function;
 public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity implements ImplementedWorldlyContainer, TickableBlockEntity {
     private static final Direction[] allDirection = Direction.values();
     public final EnergyStorage energyStorage;
-    private final SimpleContainer container;
+    //TODO : add save and load implementation
+    private final SavableSimpleContainer container;
     private final ContainerData containerData;
     @Nonnull
     private final NonNullConsumer<IEnergyStorage> extractLogic = this::extractEnergy;
-    public int active = 1;
+    public boolean active;
     protected LazyOptional<IEnergyStorage> energyHolder;
     protected LazyOptional<IItemHandler> itemHolder;
 
@@ -46,11 +48,12 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
                                     EnergyStorage energyStorage,
                                     Function<AbstractPowerBlockEntity, ContainerData> dataConstructor) {
         super(blockEntity.get(), blockPos, blockState);
-        this.container = new SimpleContainer(containerSize);
+        this.container = new SavableSimpleContainer(this, containerSize);
         this.energyStorage = energyStorage;
         this.itemHolder = createHandler(() -> new InvWrapper(this));
         this.energyHolder = createHandler(() -> this.energyStorage);
         this.containerData = dataConstructor.apply(this);
+        this.active = true;
     }
 
     protected static <T> LazyOptional<T> createHandler(NonNullSupplier<T> supplier) {
@@ -61,6 +64,25 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
         return i == 1;
     }
 
+    protected static <T extends Comparable<T>> void setBlockState(Level level, BlockPos pos, BlockState blockState, Property<T> property, T value) {
+        setBlockState(level, pos, blockState, property, value, false);
+    }
+
+    protected static <T extends Comparable<T>> void setBlockState(Level level, BlockPos pos, BlockState blockState, Property<T> property, T value, boolean checkPresent) {
+        if (checkPresent) {
+            if (!blockState.hasProperty(property)) {
+                ToTheMoon.LOGGER.warn("Could not set property %s because it is not present at block %s".formatted(property.toString(), pos.toString()));
+                return;
+            }
+        }
+
+        T prevValue = blockState.getValue(property);
+        if (prevValue != value) {
+            blockState = blockState.setValue(property, value);
+            level.setBlock(pos, blockState, 3);
+        }
+    }
+
     @Override
     public final void serverTick(Level level, BlockPos pos, BlockState blockState) {
         if (this.energyStorage.canExtract())
@@ -68,20 +90,15 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
 
         if (isActive()) {
             this.tick(level, pos, blockState);
-        } else if (blockState.hasProperty(BlockStateProperties.LIT)) {
-            blockState = blockState.setValue(BlockStateProperties.LIT, false);
-            level.setBlock(pos, blockState, 3);
+        } else {
+            setBlockState(level, pos, blockState, BlockStateProperties.LIT, false, true);
         }
 
         setChanged(level, pos, blockState);
     }
 
     public boolean isActive() {
-        return intToBoolean(active);
-    }
-
-    public void setActive(int active) {
-        this.active = active;
+        return this.active;
     }
 
     protected abstract void tick(Level level, BlockPos pos, BlockState blockState);
@@ -152,12 +169,16 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
     protected void saveAdditional(CompoundTag writer) {
         super.saveAdditional(writer);
         writer.put("Energy", this.energyStorage.serializeNBT());
+        this.container.saveContainer(writer);
+        writer.putBoolean("IsActive", this.isActive());
     }
 
     @Override
     public void load(CompoundTag deserializedNBT) {
         super.load(deserializedNBT);
         this.energyStorage.deserializeNBT(deserializedNBT.get("Energy"));
+        this.container.loadContainer(deserializedNBT);
+        this.active = deserializedNBT.getBoolean("IsActive");
     }
 
     protected boolean isStackPresent(ItemStack itemStack) {

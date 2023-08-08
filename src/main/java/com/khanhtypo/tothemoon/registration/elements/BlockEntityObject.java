@@ -23,7 +23,7 @@ public class BlockEntityObject<T extends BlockEntity> extends BaseObjectSupplier
     }
 
     @Nonnull
-    public static <B extends BlockEntity, M extends BaseMenu> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block> blocks) {
+    public static <B extends BlockEntity> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block> blocks) {
         return new BlockEntityObject<>(name, () -> BlockEntityType.Builder.of(constructor, blocks.get()).build(null));
     }
 

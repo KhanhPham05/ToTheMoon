@@ -38,10 +38,6 @@ public final class AppendableComponent {
         return key;
     }
 
-    public String getDefaultTranslation() {
-        return defaultTranslation;
-    }
-
     public Component withParam(Object... param) {
         return Component.translatable(this.getKey(), param);
     }

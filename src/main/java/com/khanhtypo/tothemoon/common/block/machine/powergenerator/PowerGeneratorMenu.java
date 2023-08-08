@@ -20,7 +20,7 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
     private static final Predicate<ItemStack> burnCheck = ModUtils::canBurn;
 
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
-        this(windowId, playerInventory, accessor, new SimpleContainer(1), new SimpleContainerData(AbstractPowerGeneratorBlockEntity.DATA_SIZE));
+        this(windowId, playerInventory, accessor, new SimpleContainer(1), new SimpleContainerData(PowerGeneratorBlockEntity.DATA_SIZE));
     }
 
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor, Container container, ContainerData containerData) {

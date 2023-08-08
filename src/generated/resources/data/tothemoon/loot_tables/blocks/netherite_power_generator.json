@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tothemoon:copper_energy_generator"
+          "name": "tothemoon:netherite_power_generator"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "tothemoon:blocks/copper_energy_generator"
+  "random_sequence": "tothemoon:blocks/netherite_power_generator"
 }

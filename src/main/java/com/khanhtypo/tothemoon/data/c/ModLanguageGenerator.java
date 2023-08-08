@@ -4,8 +4,11 @@ import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.utls.AppendableComponent;
+import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -18,17 +21,21 @@ import java.util.function.Supplier;
 public class ModLanguageGenerator extends LanguageProvider {
     public static final Map<String, String> DEFAULT_TRANSLATION_MAP = new TreeMap<>();
     public static final AppendableComponent MOD_NEEDS_INSTALLATION = AppendableComponent.create("tooltip", "mod_needs_installation", "Install %s.");
-    public static final AppendableComponent TOGGLE = AppendableComponent.create("button", "Toggle : %s");
-    public static final Component ON = createTranslatable("tooltip", "on", "On");
-    public static final Component OFF = createTranslatable("tooltip", "off", "Off");
+    public static final AppendableComponent TOGGLE = AppendableComponent.create("button", "Click To Toggle %s");
+    public static final AppendableComponent FUEL_LEFT = AppendableComponent.create("tooltip", "burning_fuel_left", "Fuel Left : %s%");
+    public static final AppendableComponent ENERGY_TOOLTIP = AppendableComponent.create("tooltip", "energy", "Energy : %s FE / %s FE");
+    public static final AppendableComponent ACTION_TIME = AppendableComponent.create("tooltip", "%s in : %s seconds");
+    public static final AppendableComponent GENERATE_ENERGY_AFTER = AppendableComponent.create("tooltip", "Generate %s FE");
+    public static final Component ON = createTranslatable("tooltip", "on", "On").withStyle(ChatFormatting.GREEN);
+    public static final Component OFF = createTranslatable("tooltip", "off", "Off").withStyle(ChatFormatting.RED);
 
     public ModLanguageGenerator(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
     }
 
-    public static Component createTranslatable(String prefix, String suffix, String translated) {
+    public static MutableComponent createTranslatable(String prefix, String suffix, String translated) {
         String key = String.format("%s.%s.%s", prefix, ToTheMoon.MODID, suffix);
-        Component component = Component.translatable(key);
+        MutableComponent component = Component.translatable(key);
         DEFAULT_TRANSLATION_MAP.put(key, translated);
         return component;
     }

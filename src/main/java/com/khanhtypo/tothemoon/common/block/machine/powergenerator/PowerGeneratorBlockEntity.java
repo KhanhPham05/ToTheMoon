@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Objects;
 
-public abstract class AbstractPowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
+public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
     public static final int DATA_SIZE = 8;
     protected final GeneratableEnergyStorage energyStorage;
     private final int generationPerTick;
@@ -26,31 +26,29 @@ public abstract class AbstractPowerGeneratorBlockEntity extends SingleItemPowerB
     private int fuelConsumeDuration;
     private int fuelConsumeTime;
 
-    public AbstractPowerGeneratorBlockEntity(BlockEntityObject<? extends SingleItemPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, int powerCapacity, int generationPerTick) {
+    public PowerGeneratorBlockEntity(BlockEntityObject<? extends SingleItemPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, int powerCapacity, int generationPerTick) {
         super(blockEntity, blockPos, blockState, new GeneratableEnergyStorage(powerCapacity),
                 be -> new ContainerData() {
                     @Override
                     public int get(int pIndex) {
-                        AbstractPowerGeneratorBlockEntity generator = ((AbstractPowerGeneratorBlockEntity) be);
+                        PowerGeneratorBlockEntity generator = ((PowerGeneratorBlockEntity) be);
                         return switch (pIndex) {
                             case 0 -> be.energyStorage.getEnergyStored();
                             case 1 -> be.energyStorage.getMaxEnergyStored();
                             case 2 -> generator.burningTime;
                             case 3 -> generator.burningDuration;
-                            case 4 -> generator.generationPerTick;
+                            case 4 -> generator.getEnergyGenerated();
                             case 5 -> generator.fuelConsumeTime;
                             case 6 -> generator.fuelConsumeDuration;
-                            case 7 -> be.active;
+                            case 7 -> be.active ? 1 : 0;
                             default -> throw new ArrayIndexOutOfBoundsException();
                         };
                     }
 
                     @Override
                     public void set(int pIndex, int pValue) {
-                        Preconditions.checkState(pIndex == 7);
-                        if ((pValue == 0 || pValue == 1)) {
-                            be.setActive(pValue);
-                        }
+                        Preconditions.checkState(pIndex == this.getCount() - 1);
+                        be.active = pValue == 1;
                     }
 
                     @Override
@@ -71,7 +69,7 @@ public abstract class AbstractPowerGeneratorBlockEntity extends SingleItemPowerB
             if (this.fuelConsumeTime >= this.fuelConsumeDuration) {
                 this.burningTime -= this.fuelConsumeDuration;
                 this.fuelConsumeTime = 0;
-                this.energyStorage.generatePower(this.generationPerTick * this.fuelConsumeDuration);
+                this.energyStorage.generatePower(this.getEnergyGenerated());
             } else {
                 this.fuelConsumeTime++;
             }
@@ -89,6 +87,10 @@ public abstract class AbstractPowerGeneratorBlockEntity extends SingleItemPowerB
             blockState = blockState.setValue(FunctionalBlock.LIT, litState);
             level.setBlock(pos, blockState, 3);
         }
+    }
+
+    public int getEnergyGenerated() {
+        return this.generationPerTick * fuelConsumeDuration;
     }
 
     @Override
