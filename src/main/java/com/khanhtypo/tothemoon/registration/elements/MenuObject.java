@@ -22,17 +22,14 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-public class MenuObject<T extends BaseMenu> extends BaseObjectSupplier<MenuType<?>> {
+public class MenuObject<T extends BaseMenu> extends SimpleObjectSupplier<MenuType<?>> {
     private static final Set<MenuObject<?>> ALL_MENU_TYPES = ModUtils.resourceSortedSet();
     private final ResourceLocation guiTexture;
     private final AccessibleMenuSupplier<T> menuSupplier;
     private final MenuScreens.ScreenConstructor<T, ? extends AbstractContainerScreen<T>> screenConstructor;
-    @Nullable
-    private BlockObject<?> targetBlock;
     private @Nullable Component title = null;
 
     public MenuObject(String name, AccessibleMenuSupplier<T> menuSupplier, MenuScreens.ScreenConstructor<T, ? extends AbstractContainerScreen<T>> screenConstructor) {
@@ -49,8 +46,8 @@ public class MenuObject<T extends BaseMenu> extends BaseObjectSupplier<MenuType<
         ALL_MENU_TYPES.forEach(menu -> consumer.accept((MenuObject<A>) menu, (MenuScreens.ScreenConstructor<A, B>) menu.screenConstructor));
     }
 
-    public static <M extends BaseMenu, B extends AbstractContainerScreen<M>> MenuObject<M> register(String name, BlockObject<?> targetBlock, AccessibleMenuSupplier<M> menuSupplier, MenuScreens.ScreenConstructor<M, B> screenConstructor) {
-        return new MenuObject<>(name, menuSupplier, screenConstructor).setTargetedBlock(targetBlock);
+    public static <M extends BaseMenu, B extends AbstractContainerScreen<M>> MenuObject<M> register(String name, AccessibleMenuSupplier<M> menuSupplier, MenuScreens.ScreenConstructor<M, B> screenConstructor) {
+        return new MenuObject<>(name, menuSupplier, screenConstructor);
     }
 
     public static ResourceLocation texturePath(String fileName) {
@@ -59,16 +56,6 @@ public class MenuObject<T extends BaseMenu> extends BaseObjectSupplier<MenuType<
 
     public MenuObject<T> translateMenu(String enTranslation) {
         this.title = ModLanguageGenerator.createTranslatable("gui", this.getId().getPath(), enTranslation);
-        return this;
-    }
-
-    @Nullable
-    public BlockObject<?> getTargetedBlock() {
-        return this.targetBlock != null ? this.targetBlock : null;
-    }
-
-    public MenuObject<T> setTargetedBlock(BlockObject<?> block) {
-        this.targetBlock = block;
         return this;
     }
 
@@ -82,7 +69,7 @@ public class MenuObject<T extends BaseMenu> extends BaseObjectSupplier<MenuType<
             serverPlayer.openMenu(
                     new SimpleMenuProvider(
                             (id, inv, p) -> this.createMenu(id, inv, level, clickedPos),
-                            this.getGuiTitle()
+                            level.getBlockState(clickedPos).getBlock().getName()
                     )
             );
             this.awardOpenScreen(player);
@@ -94,8 +81,9 @@ public class MenuObject<T extends BaseMenu> extends BaseObjectSupplier<MenuType<
         return level instanceof ServerLevel ? this.menuSupplier.create(window, inventory, ContainerLevelAccess.create(level, blockPos)) : null;
     }
 
+    @Nullable
     public Component getGuiTitle() {
-        return this.title != null ? this.title : Objects.requireNonNull(this.getTargetedBlock()).getTranslationName();
+        return this.title;
     }
 
     @SuppressWarnings("unchecked")

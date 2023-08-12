@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon;
 
 import com.khanhtypo.tothemoon.common.TabInstance;
-import com.khanhtypo.tothemoon.common.block.Workbench;
+import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.data.DataStarter;
 import com.khanhtypo.tothemoon.network.NetworkUtils;
@@ -44,7 +44,7 @@ public class ToTheMoon {
         MOD_BUS.addListener(DataStarter::gatherData);
         MOD_BUS.addListener(TabInstance::registerTabs);
         MOD_BUS.addListener(this::registerEvent);
-        FORGE_BUS.addListener(Workbench::onBreak);
+        FORGE_BUS.addListener(WorkbenchBlock::onBreak);
         MOD_BUS.addListener(ToTheMoon::clientSetup);
         MOD_BUS.addListener(ModStats::registerStats);
     }

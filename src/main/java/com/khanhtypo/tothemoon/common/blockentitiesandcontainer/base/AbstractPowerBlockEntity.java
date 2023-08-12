@@ -1,6 +1,7 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
 import com.khanhtypo.tothemoon.ToTheMoon;
+import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,6 +39,7 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
     @Nonnull
     private final NonNullConsumer<IEnergyStorage> extractLogic = this::extractEnergy;
     public boolean active;
+    public MachineRedstoneMode redstoneMode;
     protected LazyOptional<IEnergyStorage> energyHolder;
     protected LazyOptional<IItemHandler> itemHolder;
 
@@ -54,6 +56,7 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
         this.energyHolder = createHandler(() -> this.energyStorage);
         this.containerData = dataConstructor.apply(this);
         this.active = true;
+        this.redstoneMode = MachineRedstoneMode.IGNORE;
     }
 
     protected static <T> LazyOptional<T> createHandler(NonNullSupplier<T> supplier) {
@@ -88,7 +91,7 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
         if (this.energyStorage.canExtract())
             this.tryExtractEnergy(level, pos);
 
-        if (isActive()) {
+        if (isActive() && this.redstoneMode.canMachineWork(level, pos)) {
             this.tick(level, pos, blockState);
         } else {
             setBlockState(level, pos, blockState, BlockStateProperties.LIT, false, true);
@@ -171,6 +174,7 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
         writer.put("Energy", this.energyStorage.serializeNBT());
         this.container.saveContainer(writer);
         writer.putBoolean("IsActive", this.isActive());
+        this.redstoneMode.saveToTag(writer);
     }
 
     @Override
@@ -179,6 +183,7 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
         this.energyStorage.deserializeNBT(deserializedNBT.get("Energy"));
         this.container.loadContainer(deserializedNBT);
         this.active = deserializedNBT.getBoolean("IsActive");
+        this.redstoneMode = MachineRedstoneMode.loadFromTag(deserializedNBT);
     }
 
     protected boolean isStackPresent(ItemStack itemStack) {

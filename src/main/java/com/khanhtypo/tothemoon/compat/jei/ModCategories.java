@@ -1,10 +1,11 @@
 package com.khanhtypo.tothemoon.compat.jei;
 
 import com.google.common.collect.ImmutableSet;
+import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.WorkbenchMenu;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.WorkbenchScreen;
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
-import com.khanhtypo.tothemoon.registration.ModMenus;
+import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
 import com.khanhtypo.tothemoon.serverdata.WorkbenchRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -14,6 +15,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -24,7 +26,7 @@ final class ModCategories {
     static {
         final ImmutableSet.Builder<BaseRecipeCategory<?>> setBuilder = ImmutableSet.builder();
         WORKBENCH_CRAFTING =
-                BaseRecipeCategory.builder(ModRecipeTypes.WORKBENCH_RECIPE, ModMenus.WORKBENCH)
+                BaseRecipeCategory.builder(ModRecipeTypes.WORKBENCH_RECIPE, ModMenuTypes.WORKBENCH)
                         .setRecipeScreenBuilder((builder, recipe) -> {
                             int index = 0;
                             int y = 5;
@@ -46,7 +48,7 @@ final class ModCategories {
                         .setExtraRenderer(null)
                         .setRecipeTransfer(WorkbenchMenu.class, 0, 27, 28)
                         .setClickableArea(WorkbenchScreen.class)
-                        .build(setBuilder, 123, 98);
+                        .build(setBuilder, 123, 98, List.of(WorkbenchBlock.getInstance()));
 
         ALL_CATEGORY_CACHED = setBuilder.build();
     }

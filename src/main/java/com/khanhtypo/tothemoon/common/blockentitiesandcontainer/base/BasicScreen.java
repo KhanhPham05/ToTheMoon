@@ -43,11 +43,11 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
     protected void addExtraButtons() {
     }
 
-    protected final int getButtonY() {
+    public final int getButtonY() {
         return super.topPos + (super.renderables.size() * 22);
     }
 
-    protected final int getButtonX() {
+    public final int getButtonX() {
         return super.leftPos - 22;
     }
 

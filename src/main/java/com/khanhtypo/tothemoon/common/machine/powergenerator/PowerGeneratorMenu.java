@@ -1,9 +1,9 @@
-package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
+package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus.AbstractMachineMenu;
+import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.client.SlotUtils;
-import com.khanhtypo.tothemoon.registration.ModMenus;
+import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,7 +24,7 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
     }
 
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor, Container container, ContainerData containerData) {
-        super(ModMenus.POWER_GENERATOR, windowId, playerInventory, accessor, container, containerData);
+        super(ModMenuTypes.POWER_GENERATOR, windowId, playerInventory, accessor, container, containerData);
         super.addSlot(SlotUtils.createPlaceFilter(container, 0, 76, 41, burnCheck));
         super.addPlayerInv(8, 97);
     }

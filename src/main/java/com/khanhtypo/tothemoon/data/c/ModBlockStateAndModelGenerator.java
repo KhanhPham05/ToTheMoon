@@ -3,8 +3,8 @@ package com.khanhtypo.tothemoon.data.c;
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
-import com.khanhtypo.tothemoon.common.block.Workbench;
-import com.khanhtypo.tothemoon.common.block.machine.powergenerator.PowerGeneratorBlockEntity;
+import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
+import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.registration.elements.BasicBlockObject;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
@@ -110,9 +110,9 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.modelPreExisted(STEEL_MACHINE_FRAME, "steel_frame");
 
         //WORKBENCH
-        super.getVariantBuilder(Workbench.getInstance()).forAllStates(state -> {
-            boolean isRightPart = state.getValue(Workbench.IS_RIGHT);
-            Direction facing = state.getValue(Workbench.FACING);
+        super.getVariantBuilder(WorkbenchBlock.getInstance()).forAllStates(state -> {
+            boolean isRightPart = state.getValue(WorkbenchBlock.IS_RIGHT);
+            Direction facing = state.getValue(WorkbenchBlock.FACING);
             ConfiguredModel.Builder<?> configuredModel = ConfiguredModel.builder().modelFile(new ModelFile.ExistingModelFile(ModUtils.location("block/workbench_" + (isRightPart ? "right" : "left")), this.fileHelper));
             if (yRotationMap.containsKey(facing)) {
                 configuredModel.rotationY(yRotationMap.get(facing));

@@ -1,6 +1,5 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.MenuProvider;
@@ -16,7 +15,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class BlockEntityObject<T extends BlockEntity> extends BaseObjectSupplier<BlockEntityType<?>> {
+public class BlockEntityObject<T extends BlockEntity> extends SimpleObjectSupplier<BlockEntityType<?>> {
 
     private BlockEntityObject(String name, Supplier<? extends BlockEntityType<T>> builder) {
         super(ModRegistries.BLOCK_ENTITY_TYPES, name, builder);

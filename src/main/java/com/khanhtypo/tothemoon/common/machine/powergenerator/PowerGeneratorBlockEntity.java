@@ -1,9 +1,10 @@
-package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
+package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.SingleItemPowerBlockEntity;
 import com.khanhtypo.tothemoon.common.capability.GeneratableEnergyStorage;
+import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Objects;
 
 public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
-    public static final int DATA_SIZE = 8;
+    public static final int DATA_SIZE = 9;
     protected final GeneratableEnergyStorage energyStorage;
     private final int generationPerTick;
     private int burningTime;
@@ -40,15 +41,18 @@ public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
                             case 4 -> generator.getEnergyGenerated();
                             case 5 -> generator.fuelConsumeTime;
                             case 6 -> generator.fuelConsumeDuration;
-                            case 7 -> be.active ? 1 : 0;
+                            case 7 -> be.redstoneMode.getIndex();
+                            case 8 -> be.active ? 1 : 0;
                             default -> throw new ArrayIndexOutOfBoundsException();
                         };
                     }
 
                     @Override
                     public void set(int pIndex, int pValue) {
-                        Preconditions.checkState(pIndex == this.getCount() - 1);
-                        be.active = pValue == 1;
+                        switch (pIndex) {
+                            case 7 -> be.redstoneMode = MachineRedstoneMode.valueFromIndex(pValue);
+                            case 8 -> be.active = pValue == 1;
+                        }
                     }
 
                     @Override
@@ -72,6 +76,7 @@ public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
                 this.energyStorage.generatePower(this.getEnergyGenerated());
             } else {
                 this.fuelConsumeTime++;
+                litState = true;
             }
         } else if (super.getPowerSpace() > 0) {
             if (this.isSlotPresent(0) && super.canBurn(0)) {
@@ -80,7 +85,7 @@ public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
                 this.fuelConsumeTime = 0;
                 super.shrinkItem(0, 1);
                 litState = true;
-            }
+            } else litState = false;
         } else litState = false;
 
         if (flag != litState) {

@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.compat.jei;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
@@ -21,15 +22,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static java.util.Objects.*;
 
@@ -46,8 +52,9 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
     private IDrawable bg;
     private IDrawable icon;
     private Consumer<IRecipeTransferRegistration> transferHandler;
+    private final ItemStack[] catalystIcon;
 
-    private BaseRecipeCategory(RecipeType<T> recipeType, MenuObject<?> menuObject, int width, int height, @Nonnull BiConsumer<IRecipeLayoutBuilder, T> recipeScreenBuilder, @Nullable BiConsumer<GuiGraphics, T> extraRenderer, Function<RecipeManager, List<T>> recipes, Consumer<IGuiHandlerRegistration> guiHandlerRegistration) {
+    private BaseRecipeCategory(RecipeType<T> recipeType, MenuObject<?> menuObject, int width, int height, @Nonnull BiConsumer<IRecipeLayoutBuilder, T> recipeScreenBuilder, @Nullable BiConsumer<GuiGraphics, T> extraRenderer, Function<RecipeManager, List<T>> recipes, Consumer<IGuiHandlerRegistration> guiHandlerRegistration, ItemStack[] catalystIcon) {
         this.recipeType = recipeType;
         this.menuObject = menuObject;
         this.width = width;
@@ -56,6 +63,7 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
         this.recipeScreenBuilder = recipeScreenBuilder;
         this.recipes = recipes;
         this.guiHandlerRegistration = guiHandlerRegistration;
+        this.catalystIcon = catalystIcon;
     }
 
     public static <T extends BaseRecipe<?>> Builder<T> builder(RecipeTypeObject<T> recipeTypeObject, MenuObject<?> menuObject) {
@@ -68,7 +76,7 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
 
     public void register(IRecipeCategoryRegistration registration) {
         IGuiHelper drawer = registration.getJeiHelpers().getGuiHelper();
-        this.icon = drawer.createDrawableItemStack(new ItemStack(requireNonNull(this.menuObject.getTargetedBlock())));
+        this.icon = drawer.createDrawableItemStack(this.catalystIcon[0]);
         final ResourceLocation backgroundId = this.menuObject.getId().withPrefix("textures/jei/").withSuffix(".png");
         this.bg = drawer.createDrawable(backgroundId, 0, 0, this.width, this.height);
         registration.addRecipeCategories(this);
@@ -81,7 +89,9 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
     }
 
     public void registerCatalyst(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(requireNonNull(this.menuObject.getTargetedBlock())), this.recipeType);
+        for (ItemStack stack : this.catalystIcon) {
+            registration.addRecipeCatalyst(stack, this.recipeType);
+        }
     }
 
     private void setTransferHandler(Consumer<IRecipeTransferRegistration> transferHandler) {
@@ -102,7 +112,7 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
 
     @Override
     public Component getTitle() {
-        return this.menuObject.getGuiTitle();
+        return Objects.requireNonNull(menuObject.getGuiTitle(), "Can not display name for tab [%s]".formatted(this.getRecipeType().getUid()));
     }
 
     @Override
@@ -176,7 +186,8 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
             return this.setClickableArea(r -> r.addRecipeClickArea(screenClass, -22, 0,22, 22, this.recipeType));
         }
 
-        public BaseRecipeCategory<T> build(ImmutableSet.Builder<BaseRecipeCategory<?>> setBuilder, int tabWidth, int tabHeight) {
+        public BaseRecipeCategory<T> build(ImmutableSet.Builder<BaseRecipeCategory<?>> setBuilder, int tabWidth, int tabHeight, List<ItemLike> catalystIcons) {
+            Preconditions.checkState(!catalystIcons.isEmpty());
             BaseRecipeCategory<T> recipeCategory = new BaseRecipeCategory<>(
                     this.recipeType,
                     this.menuObject,
@@ -185,8 +196,8 @@ public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCateg
                     requireNonNull(this.recipeScreenBuilder),
                     this.extraRenderer,
                     requireNonNull(this.recipeGetter, "There is no way to gather recipes for tab %s".formatted(this.recipeType.getUid())),
-                    requireNonNull(this.guiHandlerRegistration, "It is too inconvenience to view recipe for tab %s".formatted(this.recipeType.getUid()))
-            );
+                    requireNonNull(this.guiHandlerRegistration, "It is too inconvenience to view recipe for tab %s".formatted(this.recipeType.getUid())),
+                    catalystIcons.stream().map(ItemStack::new).toArray(ItemStack[]::new));
             if (this.transferRegister != null) recipeCategory.setTransferHandler(this.transferRegister);
             setBuilder.add(recipeCategory);
             return recipeCategory;

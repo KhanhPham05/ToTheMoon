@@ -1,7 +1,9 @@
 package com.khanhtypo.tothemoon.registration.bases;
 
+import com.khanhtypo.tothemoon.registration.elements.SimpleObjectSupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -22,8 +24,8 @@ public interface ObjectSupplier<T> extends Supplier<T> {
         };
     }
 
-    static <A> ObjectSupplier<A> preExisted(A preExisted, IForgeRegistry<A> registry) {
-        return preExisted(preExisted, registry.getKey(preExisted));
+    static <A> ObjectSupplier<A> simple(DeferredRegister<A> deferredRegister, String name, Supplier<A> supplier) {
+        return new SimpleObjectSupplier<>(deferredRegister, name, supplier);
     }
 
     ResourceLocation getId();

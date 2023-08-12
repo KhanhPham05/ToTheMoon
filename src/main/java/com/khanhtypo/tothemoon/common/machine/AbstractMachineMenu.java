@@ -1,4 +1,4 @@
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus;
+package com.khanhtypo.tothemoon.common.machine;
 
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractPowerBlockEntity;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
@@ -37,5 +37,9 @@ public abstract class AbstractMachineMenu extends BaseMenu {
                 this.containerData.getCount() - 1,
                 active == 1 ? 0 : 1
         );
+    }
+
+    public void toggleRedstone(MachineRedstoneMode toSet) {
+        super.setData(this.containerData.getCount() - 2, toSet.getIndex());
     }
 }

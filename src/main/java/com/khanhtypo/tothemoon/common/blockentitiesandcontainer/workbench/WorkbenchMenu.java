@@ -6,7 +6,8 @@ import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.AlwaysSavedResul
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.RecipeContainerMenu;
 import com.khanhtypo.tothemoon.data.ModItemTags;
-import com.khanhtypo.tothemoon.registration.ModMenus;
+import com.khanhtypo.tothemoon.registration.ModBlocks;
+import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
 import com.khanhtypo.tothemoon.serverdata.WorkbenchRecipe;
 import net.minecraft.client.Minecraft;
@@ -29,7 +30,7 @@ public class WorkbenchMenu extends BaseMenu implements RecipeContainerMenu {
     private final AlwaysSavedResultContainer resultSlot;
 
     public WorkbenchMenu(int windowId, Inventory playerInventory, ContainerLevelAccess access) {
-        super(ModMenus.WORKBENCH, windowId, playerInventory, access);
+        super(ModMenuTypes.WORKBENCH, windowId, playerInventory, access, ModBlocks.WORKBENCH.get());
         this.craftingSlots = new AlwaysSavedContainer(this, 27);
         this.resultSlot = new AlwaysSavedResultContainer(this);
         int index = 0;

@@ -25,7 +25,7 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     private int invLabelY;
 
     protected BaseMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
-        this(menuObject, windowId, playerInventory, accessor, menuObject.getTargetedBlock() != null ? menuObject.getTargetedBlock().get() : null);
+        this(menuObject, windowId, playerInventory, accessor, accessor.evaluate((level, blockPos) -> level.getBlockState(blockPos).getBlock(), null));
     }
 
     protected BaseMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor, @Nullable Block targetedBlock) {
@@ -34,12 +34,6 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
         this.accessor = accessor;
         this.targetedBlock = targetedBlock;
-    }
-
-    private static BlockPos getPos(@Nullable FriendlyByteBuf extraData) {
-        return Objects.requireNonNull(
-                Objects.requireNonNull(extraData, "Can not retrieve BlockPos data because buffer is null")
-                        .readBlockPos(), "Can not retrieve BlockPos data because returned BlockPos is null");
     }
 
     public BaseMenu setTargetedBlock(Block targetedBlock) {

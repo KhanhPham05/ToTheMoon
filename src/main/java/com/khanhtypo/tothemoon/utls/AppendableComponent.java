@@ -39,6 +39,7 @@ public final class AppendableComponent {
     }
 
     public Component withParam(Object... param) {
+        Preconditions.checkState(param.length > 0);
         return Component.translatable(this.getKey(), param);
     }
 }

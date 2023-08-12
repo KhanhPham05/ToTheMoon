@@ -25,7 +25,13 @@ public class ModLanguageGenerator extends LanguageProvider {
     public static final AppendableComponent FUEL_LEFT = AppendableComponent.create("tooltip", "burning_fuel_left", "Fuel Left : %s%");
     public static final AppendableComponent ENERGY_TOOLTIP = AppendableComponent.create("tooltip", "energy", "Energy : %s FE / %s FE");
     public static final AppendableComponent ACTION_TIME = AppendableComponent.create("tooltip", "%s in : %s seconds");
-    public static final AppendableComponent GENERATE_ENERGY_AFTER = AppendableComponent.create("tooltip", "Generate %s FE");
+    public static final AppendableComponent REDSTONE_MODE = AppendableComponent.create("tooltip", "redstone_mode", "Redstone Mode : %s");
+    public static final Component REDSTONE_IGNORED = createTranslatable("tooltip", "redstone_mode_ignored", "Ignore Redstone");
+    public static final Component REDSTONE_IGNORED_DESC = createTranslatable("tooltip", "redstone_mode_ignored.description", " - Redstone has no effect on machine").withStyle(ChatFormatting.DARK_GRAY);
+    public static final Component REDSTONE_REQUIRED = createTranslatable("tooltip", "redstone_mode_required", "Requires Redstone");
+    public static final Component REDSTONE_REQUIRED_DESC = createTranslatable("tooltip", "redstone_mode_required.description", " - Machine can only function when activated by redstone").withStyle(ChatFormatting.DARK_GRAY);
+    public static final Component REDSTONE_STOP_MACHINE = createTranslatable("tooltip", "redstone_stops_machine", "Redstone Stop Machine");
+    public static final Component REDSTONE_STOP_MACHINE_DESC = createTranslatable("tooltip", "redstone_stops_machine.description", " - Machine will be turned off when affected by redstone signal").withStyle(ChatFormatting.DARK_GRAY);
     public static final Component ON = createTranslatable("tooltip", "on", "On").withStyle(ChatFormatting.GREEN);
     public static final Component OFF = createTranslatable("tooltip", "off", "Off").withStyle(ChatFormatting.RED);
 

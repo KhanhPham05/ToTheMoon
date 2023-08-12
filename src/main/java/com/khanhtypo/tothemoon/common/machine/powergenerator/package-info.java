@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
         @MethodsReturnNonnullByDefault
-package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
+package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

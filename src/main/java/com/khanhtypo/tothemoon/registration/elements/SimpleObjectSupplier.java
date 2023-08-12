@@ -8,20 +8,20 @@ import net.minecraftforge.registries.RegistryObject;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public abstract class BaseObjectSupplier<T> implements ObjectSupplier<T> {
+public class SimpleObjectSupplier<T> implements ObjectSupplier<T> {
     protected final RegistryObject<? extends T> holder;
     protected T obj;
 
-    public BaseObjectSupplier(DeferredRegister<T> registry, String name, T obj) {
+    public SimpleObjectSupplier(DeferredRegister<T> registry, String name, T obj) {
         this(registry, name, () -> obj);
         this.obj = obj;
     }
 
-    public BaseObjectSupplier(DeferredRegister<T> registry, String name, Supplier<? extends T> builder) {
+    public SimpleObjectSupplier(DeferredRegister<T> registry, String name, Supplier<? extends T> builder) {
         this(registry.register(name, builder));
     }
 
-    private BaseObjectSupplier(RegistryObject<? extends T> holder) {
+    private SimpleObjectSupplier(RegistryObject<? extends T> holder) {
         this.holder = holder;
         this.obj = null;
     }

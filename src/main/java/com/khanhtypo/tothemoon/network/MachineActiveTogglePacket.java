@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.network;
 
 import com.khanhtypo.tothemoon.ToTheMoon;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus.AbstractMachineMenu;
+import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkDirection;
@@ -9,20 +9,16 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class MachineActiveToggleMessage {
+public class MachineActiveTogglePacket {
 
-    public MachineActiveToggleMessage() {}
+    public MachineActiveTogglePacket() {}
 
     public void write(FriendlyByteBuf ignored) {}
 
-    public static MachineActiveToggleMessage read(FriendlyByteBuf ignored) {return new MachineActiveToggleMessage();}
+    public static MachineActiveTogglePacket read(FriendlyByteBuf ignored) {return new MachineActiveTogglePacket();}
 
-    public static void send(Connection connection) {
-        ToTheMoon.CHANNEL.sendTo(
-                new MachineActiveToggleMessage(),
-                connection,
-                NetworkDirection.PLAY_TO_SERVER
-        );
+    public static void send() {
+        ToTheMoon.CHANNEL.sendToServer(new MachineActiveTogglePacket());
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {

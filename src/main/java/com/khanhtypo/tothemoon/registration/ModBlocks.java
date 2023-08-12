@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.registration;
 
 import com.khanhtypo.tothemoon.common.block.*;
-import com.khanhtypo.tothemoon.common.block.machine.powergenerator.*;
+import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.registration.elements.BasicBlockObject;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
 import net.minecraft.world.level.block.*;
@@ -87,7 +87,7 @@ public class ModBlocks {
     public static final BasicBlockObject URANIUM_BLOCK = new BasicBlockObject("uranium_block", Blocks.IRON_BLOCK);
     public static final BasicBlockObject ZIRCONIUM_ALLOY_BLOCK = new BasicBlockObject("zirconium_alloy_block", Blocks.IRON_BLOCK);
     public static final BasicBlockObject ZIRCONIUM_BLOCK = new BasicBlockObject("zirconium_block", Blocks.IRON_BLOCK);
-    public static final BlockObject<Workbench> WORKBENCH = new BlockObject<>("workbench", Workbench::new);
+    public static final BlockObject<WorkbenchBlock> WORKBENCH = new BlockObject<>("workbench", WorkbenchBlock::new);
     public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> COPPER_POWER_GENERATOR = new BlockObject<>("copper_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.METAL).strength(2.5f), ModBlockEntities.COPPER_POWER_GENERATOR));
     public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> IRON_POWER_GENERATOR = new BlockObject<>("iron_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.IRON_POWER_GENERATOR));
     public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> GOLD_POWER_GENERATOR = new BlockObject<>("gold_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.GOLD_POWER_GENERATOR));

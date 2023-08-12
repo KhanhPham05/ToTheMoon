@@ -195,10 +195,17 @@
   "item.tothemoon.zirconium_ingot": "Zirconium Ingot",
   "itemGroup.tothemoon.ttm_blocks": "TTM Blocks",
   "itemGroup.tothemoon.ttm_items": "TTM Items",
-  "tooltip": "Generate %s FE",
+  "tooltip": "%s in : %s seconds",
   "tooltip.tothemoon.burning_fuel_left": "Fuel Left : %s%",
   "tooltip.tothemoon.energy": "Energy : %s FE / %s FE",
   "tooltip.tothemoon.mod_needs_installation": "Install %s.",
   "tooltip.tothemoon.off": "Off",
-  "tooltip.tothemoon.on": "On"
+  "tooltip.tothemoon.on": "On",
+  "tooltip.tothemoon.redstone_mode": "Redstone Mode : %s",
+  "tooltip.tothemoon.redstone_mode_ignored": "Ignore Redstone",
+  "tooltip.tothemoon.redstone_mode_ignored.description": " - Redstone has no effect on machine",
+  "tooltip.tothemoon.redstone_mode_required": "Requires Redstone",
+  "tooltip.tothemoon.redstone_mode_required.description": " - Machine can only function when activated by redstone",
+  "tooltip.tothemoon.redstone_stops_machine": "Redstone Stop Machine",
+  "tooltip.tothemoon.redstone_stops_machine.description": " - Machine will be turned off when affected by redstone signal"
 }

@@ -1,4 +1,4 @@
-package com.khanhtypo.tothemoon.common.block.machine.powergenerator;
+package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.SingleItemPowerBlockEntity;
 import com.khanhtypo.tothemoon.registration.ModBlockEntities;

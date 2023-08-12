@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common.block;
 
-import com.khanhtypo.tothemoon.registration.ModMenus;
+import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,22 +25,22 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 @SuppressWarnings("deprecation")
-public class Workbench extends ContainerBlock {
+public class WorkbenchBlock extends ContainerBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty IS_RIGHT = BooleanProperty.create("is_right");
-    public static Workbench INSTANCE;
+    public static WorkbenchBlock INSTANCE;
 
     static {
         AllShapes.staticInit();
     }
 
-    public Workbench() {
-        super(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_PLANKS).sound(SoundType.WOOD), ModMenus.WORKBENCH);
+    public WorkbenchBlock() {
+        super(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_PLANKS).sound(SoundType.WOOD), ModMenuTypes.WORKBENCH);
         super.registerDefaultState(super.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(IS_RIGHT, true));
         INSTANCE = this;
     }
 
-    public static Workbench getInstance() {
+    public static WorkbenchBlock getInstance() {
         return INSTANCE;
     }
 
@@ -56,7 +56,7 @@ public class Workbench extends ContainerBlock {
     }
 
     public static void onBreak(BlockEvent.BreakEvent event) {
-        if (event.getState().getBlock() instanceof Workbench) {
+        if (event.getState().getBlock() instanceof WorkbenchBlock) {
             boolean isRightPart = event.getState().getValue(IS_RIGHT);
             Direction blockFacing = event.getState().getValue(FACING);
             BlockPos blockPos = event.getPos();
