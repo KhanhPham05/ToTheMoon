@@ -8,7 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +26,9 @@ public class ModLanguageGenerator extends LanguageProvider {
     public static final AppendableComponent ENERGY_TOOLTIP = AppendableComponent.create("tooltip", "energy", "Energy : %s FE / %s FE");
     public static final AppendableComponent ACTION_TIME = AppendableComponent.create("tooltip", "%s in : %s seconds");
     public static final AppendableComponent REDSTONE_MODE = AppendableComponent.create("tooltip", "redstone_mode", "Redstone Mode : %s");
+    public static final AppendableComponent STORING_FLUID = AppendableComponent.create("tooltip", "fluid_storing", "Storing Fluid : %s");
+    public static final AppendableComponent STORING_AMOUNT_FLUID = AppendableComponent.create("tooltip", "fluid_storing_amount", "Fluid Storage : %smB / %smb");
+    public static final Component TITLE_BLACK_STONE_FURNACE = createTranslatable("gui", "blackstone_furnace", "Blackstone Furnace");
     public static final Component REDSTONE_IGNORED = createTranslatable("tooltip", "redstone_mode_ignored", "Ignore Redstone");
     public static final Component REDSTONE_IGNORED_DESC = createTranslatable("tooltip", "redstone_mode_ignored.description", " - Redstone has no effect on machine").withStyle(ChatFormatting.DARK_GRAY);
     public static final Component REDSTONE_REQUIRED = createTranslatable("tooltip", "redstone_mode_required", "Requires Redstone");
@@ -34,16 +37,34 @@ public class ModLanguageGenerator extends LanguageProvider {
     public static final Component REDSTONE_STOP_MACHINE_DESC = createTranslatable("tooltip", "redstone_stops_machine.description", " - Machine will be turned off when affected by redstone signal").withStyle(ChatFormatting.DARK_GRAY);
     public static final Component ON = createTranslatable("tooltip", "on", "On").withStyle(ChatFormatting.GREEN);
     public static final Component OFF = createTranslatable("tooltip", "off", "Off").withStyle(ChatFormatting.RED);
+    public static final String NO_CONTROLLER = createTranslatableKey("multiblock", "no_controller", "A controller is required.");
+    public static final String FURNACE_TOO_MUCH_CONTROLLERS = createTranslatableKey("multiblock", "controller_overload", "Nether Brick Furnace can only has 1 controller");
+    public static final String CONTROLLER_FRAME_IS_ERROR = createTranslatableKey("multiblock", "controller_pos_is_not_good.frame", "Controller must not be placed as frame.");
+    public static final String CONTROLLER_FACE_ERROR = createTranslatableKey("multiblock", "controller_pos_is_not_good.face", "Controller must not be placed on top or at the bottom.");
+    public static final String CONTROLLER_FACING_ERROR = createTranslatableKey("multiblock", "controller_face_is_not_good", "Controller must face outside");
+    public static final String BLACKSTONE_ACCEPTOR_NOT_FRAME = createTranslatableKey("multiblock", "blackstone_acceptor_not_frame", "Blackstone Acceptor must be frame");
+    public static final String NETHER_ACCEPTOR_NOT_FRAME = createTranslatableKey("multiblock", "nether_acceptor_not_face", "Nether Acceptor should not be the frame");
+    public static final String FRAME_MUST_BE_BLACKSTONE_ACCEPTABLE = createTranslatableKey("multiblock", "frame_only_blackstone", "Frame must only has %s or %s");
+    public static final String NETHER_BRICK_MISPLACED = createTranslatableKey("multiblock", "nether_brick_misplace", "Nether brick block or acceptor should be at the middle of a side");
+    public static final String BLOCK_MISMATCHED = createTranslatableKey("multiblock", "block_mismatched", "Block mismatched.");
 
     public ModLanguageGenerator(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
     }
 
+    public static String createTranslatableKey(String prefix, String suffix, String translated) {
+        return ((TranslatableContents) createTranslatable(prefix, suffix, translated).getContents()).getKey();
+    }
+
     public static MutableComponent createTranslatable(String prefix, String suffix, String translated) {
-        String key = String.format("%s.%s.%s", prefix, ToTheMoon.MODID, suffix);
+        String key = createKey(prefix, suffix);
         MutableComponent component = Component.translatable(key);
         DEFAULT_TRANSLATION_MAP.put(key, translated);
         return component;
+    }
+
+    public static String createKey(String prefix, String suffix) {
+        return String.format("%s.%s.%s", prefix, ToTheMoon.MODID, suffix);
     }
 
     public static @NotNull String transform(String itemPath) {

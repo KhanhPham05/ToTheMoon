@@ -1,5 +1,5 @@
 Java Launcher: C:\Program Files\Java\jdk-17.0.4\bin\java.exe
-Arguments: '--clean, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.20.1-20230612.114412\joined-1.20.1-20230612.114412-srg.jar, --output, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.20.1-47.1.42\forge-1.20.1-47.1.42-binpatched.jar, --apply, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.20.1-47.1.42\forge-1.20.1-47.1.42-binpatches.lzma'
+Arguments: '--clean, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.20.1-20230612.114412\joined-1.20.1-20230612.114412-srg.jar, --output, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\neoforged\forge\1.20.1-47.1.70\forge-1.20.1-47.1.70-binpatched.jar, --apply, H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\neoforged\forge\1.20.1-47.1.70\forge-1.20.1-47.1.70-binpatches.lzma'
 Classpath:
  - H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\maven_downloader\net\minecraftforge\binarypatcher\1.1.1\binarypatcher-1.1.1-fatjar.jar
 Working directory: H:\[ ToTheMoon Project ]\TTMForgeRework\build\_applyBinpatches_2
@@ -7,12 +7,12 @@ Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
   Clean:     H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\minecraft\joined\1.20.1-20230612.114412\joined-1.20.1-20230612.114412-srg.jar
-  Output:    H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.20.1-47.1.42\forge-1.20.1-47.1.42-binpatched.jar
+  Output:    H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\neoforged\forge\1.20.1-47.1.70\forge-1.20.1-47.1.70-binpatched.jar
   KeepData:  false
   Unpatched: false
   Pack200:   false
   Legacy:    false
-Loading patches file: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.20.1-47.1.42\forge-1.20.1-47.1.42-binpatches.lzma
+Loading patches file: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecraft_user_repo\net\neoforged\forge\1.20.1-47.1.70\forge-1.20.1-47.1.70-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: 151eb55a Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -887,6 +887,22 @@ Loading patches file: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecra
     Checksum: c7989fac Exists: true
   Reading patch net.minecraft.commands.synchronization.ArgumentTypeInfos.binpatch
     Checksum: a51bf21c Exists: true
+  Reading patch net.minecraft.core.Direction$1.binpatch
+    Checksum: 663ebd0 Exists: true
+  Reading patch net.minecraft.core.Direction$Axis$1.binpatch
+    Checksum: 9c8dce12 Exists: true
+  Reading patch net.minecraft.core.Direction$Axis$2.binpatch
+    Checksum: 32cece0c Exists: true
+  Reading patch net.minecraft.core.Direction$Axis$3.binpatch
+    Checksum: 3afece3d Exists: true
+  Reading patch net.minecraft.core.Direction$Axis.binpatch
+    Checksum: 40986b87 Exists: true
+  Reading patch net.minecraft.core.Direction$AxisDirection.binpatch
+    Checksum: d05491ff Exists: true
+  Reading patch net.minecraft.core.Direction$Plane.binpatch
+    Checksum: 8b1ea1c Exists: true
+  Reading patch net.minecraft.core.Direction.binpatch
+    Checksum: b5c765f5 Exists: true
   Reading patch net.minecraft.core.Holder$Direct.binpatch
     Checksum: b19b51b6 Exists: true
   Reading patch net.minecraft.core.Holder$Kind.binpatch
@@ -1429,6 +1445,8 @@ Loading patches file: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecra
     Checksum: 22b9a547 Exists: true
   Reading patch net.minecraft.server.packs.resources.FallbackResourceManager.binpatch
     Checksum: 47d995e3 Exists: true
+  Reading patch net.minecraft.server.packs.resources.MultiPackResourceManager.binpatch
+    Checksum: 75ab5d39 Exists: true
   Reading patch net.minecraft.server.packs.resources.ReloadableResourceManager.binpatch
     Checksum: bc2f5ad5 Exists: true
   Reading patch net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener.binpatch
@@ -1535,14 +1553,6 @@ Loading patches file: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\minecra
     Checksum: 66f85384 Exists: true
   Reading patch net.minecraft.world.entity.TamableAnimal.binpatch
     Checksum: 81d387e7 Exists: true
-  Reading patch net.minecraft.world.entity.ai.Brain$1.binpatch
-    Checksum: 99f3604c Exists: true
-  Reading patch net.minecraft.world.entity.ai.Brain$MemoryValue.binpatch
-    Checksum: 8442dcee Exists: true
-  Reading patch net.minecraft.world.entity.ai.Brain$Provider.binpatch
-    Checksum: 4077211f Exists: true
-  Reading patch net.minecraft.world.entity.ai.Brain.binpatch
-    Checksum: c6fac287 Exists: true
   Reading patch net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder.binpatch
     Checksum: 51df5b04 Exists: true
   Reading patch net.minecraft.world.entity.ai.attributes.AttributeSupplier.binpatch
@@ -3275,6 +3285,14 @@ Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\mine
   Patching net/minecraft/commands/arguments/selector/EntitySelector 1/1
   Patching net/minecraft/commands/arguments/selector/EntitySelectorParser 1/1
   Patching net/minecraft/commands/synchronization/ArgumentTypeInfos 1/1
+  Patching net/minecraft/core/Direction$1 1/1
+  Patching net/minecraft/core/Direction$Axis$1 1/1
+  Patching net/minecraft/core/Direction$Axis$2 1/1
+  Patching net/minecraft/core/Direction$Axis$3 1/1
+  Patching net/minecraft/core/Direction$Axis 1/1
+  Patching net/minecraft/core/Direction$AxisDirection 1/1
+  Patching net/minecraft/core/Direction$Plane 1/1
+  Patching net/minecraft/core/Direction 1/1
   Patching net/minecraft/core/Holder$Direct 1/1
   Patching net/minecraft/core/Holder$Kind 1/1
   Patching net/minecraft/core/Holder$Reference$Type 1/1
@@ -3546,6 +3564,7 @@ Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\mine
   Patching net/minecraft/server/packs/resources/FallbackResourceManager$PackEntry 1/1
   Patching net/minecraft/server/packs/resources/FallbackResourceManager$ResourceWithSource 1/1
   Patching net/minecraft/server/packs/resources/FallbackResourceManager 1/1
+  Patching net/minecraft/server/packs/resources/MultiPackResourceManager 1/1
   Patching net/minecraft/server/packs/resources/ReloadableResourceManager 1/1
   Patching net/minecraft/server/packs/resources/SimpleJsonResourceReloadListener 1/1
   Patching net/minecraft/server/players/PlayerList$1 1/1
@@ -3599,10 +3618,6 @@ Processing: H:\[DO NOT DELETE] Gradle Home\caches\forge_gradle\mcp_repo\net\mine
   Patching net/minecraft/world/entity/SpawnPlacements$Type 1/1
   Patching net/minecraft/world/entity/SpawnPlacements 1/1
   Patching net/minecraft/world/entity/TamableAnimal 1/1
-  Patching net/minecraft/world/entity/ai/Brain$1 1/1
-  Patching net/minecraft/world/entity/ai/Brain$MemoryValue 1/1
-  Patching net/minecraft/world/entity/ai/Brain$Provider 1/1
-  Patching net/minecraft/world/entity/ai/Brain 1/1
   Patching net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder 1/1
   Patching net/minecraft/world/entity/ai/attributes/AttributeSupplier 1/1
   Patching net/minecraft/world/entity/ai/attributes/DefaultAttributes 1/1

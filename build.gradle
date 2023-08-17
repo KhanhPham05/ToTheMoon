@@ -10,7 +10,7 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'net.neoforged.gradle' version '[6.0.13, 6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
@@ -24,7 +24,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: "2023.07.30-1.20.1"
+    mappings channel: 'parchment', version: "2023.08.13-1.20.1"
 
     //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
@@ -95,12 +95,10 @@ repositories {
         url = "https://www.cursemaven.com/"
     }
     maven {
-        // location of the maven that hosts JEI files since January 2023
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
     maven {
-        // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
@@ -113,7 +111,7 @@ mixin {
 
 
 dependencies {
-    def mc = "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    def mc = "net.neoforged:forge:${mc_version}-${forge_version}"
     minecraft mc
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4574361")
@@ -125,6 +123,14 @@ dependencies {
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}-FORGE:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}-FORGE")
+
+    runtimeOnly fg.deobf("curse.maven:pipez-443900:4678952")
+
+    def core = "curse.maven:zerocore-247921:4658270"
+    runtimeOnly fg.deobf(core)
+    compileOnly fg.deobf(core)
+
+    runtimeOnly fg.deobf("curse.maven:extreme-reactors-250277:4659595")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }

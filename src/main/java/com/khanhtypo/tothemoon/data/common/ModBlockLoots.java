@@ -88,6 +88,11 @@ public class ModBlockLoots extends BlockLootSubProvider {
         this.dropSelf(GOLD_POWER_GENERATOR);
         this.dropSelf(DIAMOND_POWER_GENERATOR);
         this.dropSelf(NETHERITE_POWER_GENERATOR);
+        this.dropSelf(BLACK_STONE_FURNACE_CONTROLLER);
+        this.dropSelf(BLACKSTONE_EMPTY_ACCEPTOR);
+        this.dropSelf(NETHER_BRICKS_EMPTY_ACCEPTOR);
+        this.dropSelf(NETHER_BRICKS_ITEM_ACCEPTOR);
+        this.dropSelf(BLACKSTONE_ITEM_ACCEPTOR);
     }
 
     private void dropSelf(BlockObject<?> blockObject) {

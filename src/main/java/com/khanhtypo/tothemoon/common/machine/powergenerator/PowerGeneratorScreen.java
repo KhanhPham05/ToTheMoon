@@ -16,27 +16,15 @@ public class PowerGeneratorScreen extends AbstractMachineScreen<PowerGeneratorMe
     @Override
     protected void renderBgAddition(GuiGraphics renderer, ResourceLocation guiTexture) {
         //render fuel bar
-        this.drawBar(renderer, guiTexture, 150, 16, 212, 3, 2, 3);
+        this.drawVerticalBar(renderer, guiTexture, 150, 16, 212, 3, barHeight, 2, 3);
 
         //render energy storage bar
-        this.drawBar(renderer, guiTexture, 155, 16, 194, 10, 0, 1);
+        this.drawVerticalBar(renderer, guiTexture, 155, 16, 194, 10, barHeight, 0, 1);
 
         //render energy process bar
-        this.drawBar(renderer, guiTexture, 167, 16, 206, 3, 5, 6);
+        this.drawVerticalBar(renderer, guiTexture, 167, 16, 206, 3, barHeight, 5, 6);
     }
 
-
-    private void drawDebugText(GuiGraphics renderer) {
-        for (int i = 0; i < 7; i++) {
-            renderer.drawString(font, "%s : %s".formatted(i, menu.getData(i)), 0, super.topPos + i * 8, TEXT_WHITE, true);
-        }
-    }
-
-    private void drawBar(GuiGraphics renderer, ResourceLocation guiTexture, int maxCorerX, int maxCornerY, int xOffset, int barWidth, int dataIndex, int dataIndexMax) {
-        final int i = super.menu.getData(dataIndexMax);
-        final int height = super.menu.getData(dataIndex) * barHeight / ((i > 0) ? i : 200);
-        renderer.blit(guiTexture, super.leftPos + maxCorerX, super.topPos + maxCornerY + barHeight - height, xOffset, barHeight - height, barWidth, height);
-    }
 
     @Override
     protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {

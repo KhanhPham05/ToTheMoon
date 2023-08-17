@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-26T15:03:49.6853903	Tags for minecraft:item mod id tothemoon
+// 1.20.1	2023-08-15T19:08:53.0329498	Tags for minecraft:item mod id tothemoon
 cb426c6e5e9186342ac3c86fc027ceb3bd1f0950 data/forge/tags/items/armors/boots.json
 9cd57bd93b896beb521176cdbbdef105b2b1b683 data/forge/tags/items/armors/boots/redstone_steel.json
 fca5d5e494bf0c43a282415b0b446109ad06861c data/forge/tags/items/armors/boots/steel.json
@@ -15,8 +15,9 @@ e726a8af7671b4cbe7dc2c48f1b89075420c5d54 data/forge/tags/items/armors/leggings.j
 c9ed7c666a00ad635a9ec4e2fba50e78e14b4af6 data/forge/tags/items/armors/leggings/redstone_steel.json
 7c353a1ad6daf97500b0c4b21be9aa86c81482dc data/forge/tags/items/armors/leggings/steel.json
 92ecb44226b7da4f10917e650f35fae3760f4ffa data/forge/tags/items/armors/leggings/uranium.json
-2925e355381abd983c8c3f40c40a4a10a5ec7311 data/forge/tags/items/dusts.json
+0e9910b6d9810b419c538b651b5dbf1745ce596a data/forge/tags/items/dusts.json
 6b6ee4647d1e65d8fe8883349805534763283797 data/forge/tags/items/dusts/amethyst.json
+5d457ed48c2eb9aec4ccf311f45620ae71286a92 data/forge/tags/items/dusts/coal.json
 a3b2d3fb247e6c2620d69428ecab5babcfa81b3b data/forge/tags/items/dusts/copper.json
 2ee41ffa38fde22cb5101c47d465aad621e88402 data/forge/tags/items/dusts/diamond.json
 835f45fd6e14772e3f8c84fef71a8b2b4b878f3e data/forge/tags/items/dusts/emerald.json

@@ -26,8 +26,9 @@ public class DataStarter {
         final ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
         generator.addProvider(event.includeClient(), new ModLanguageGenerator(packOutput, ToTheMoon.MODID, "en_us"));
-        final ItemModelProvider itemModelProvider = generator.addProvider(event.includeClient(), new ModItemModels(packOutput, ToTheMoon.MODID, fileHelper));
+        final ItemModelProvider itemModelProvider = new ModItemModels(packOutput, ToTheMoon.MODID, fileHelper);
         generator.addProvider(event.includeClient(), new ModBlockStateAndModelGenerator(packOutput, itemModelProvider, ToTheMoon.MODID, fileHelper));
+        generator.addProvider(event.includeClient(), itemModelProvider);
 
         ModTagGenerators.addProviders(event.includeServer(), generator, packOutput, lookupProvider, fileHelper);
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLoots::new, LootContextParamSets.BLOCK))));

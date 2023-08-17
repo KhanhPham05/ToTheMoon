@@ -57,6 +57,10 @@ public class TagFamily<T> {
         return forBlock(BlockTags.create(new ResourceLocation(nameSpace, path)));
     }
 
+    public static TagFamily<Block> forBlock(String name) {
+        return forBlock(ToTheMoon.MODID, name);
+    }
+
     public static TagFamily<Block> forBlock(TagKey<Block> root) {
         return new TagFamily<>(root);
     }

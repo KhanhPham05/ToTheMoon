@@ -11,8 +11,8 @@ public class FilterSlot extends Slot {
     private final Predicate<ItemStack> shouldTake;
     private final Predicate<ItemStack> shouldPlace;
 
-    FilterSlot(Container p_40223_, int p_40224_, int p_40225_, int p_40226_, Predicate<ItemStack> shouldPlace, Predicate<ItemStack> shouldTake) {
-        super(p_40223_, p_40224_, p_40225_, p_40226_);
+    FilterSlot(Container container, int index, int x, int y, Predicate<ItemStack> shouldPlace, Predicate<ItemStack> shouldTake) {
+        super(container, index, x, y);
         this.shouldTake = shouldTake;
         this.shouldPlace = shouldPlace;
     }

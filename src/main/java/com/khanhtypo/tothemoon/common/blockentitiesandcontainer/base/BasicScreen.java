@@ -3,11 +3,10 @@ package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 import com.khanhtypo.tothemoon.client.DecorationButton;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 
 public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<MENU> {
@@ -26,6 +25,12 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
         this.guiTexture = menu.getGuiPath();
         super.imageWidth = imageWidth;
         super.imageHeight = imageHeight;
+    }
+
+    @Deprecated
+    protected static int getColor(int capacity, int current) {
+        float f = Math.max(0.0F, 1.0f - ((float) (capacity - current) / capacity));
+        return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }
 
     @Override
@@ -65,5 +70,33 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
     }
 
     protected void renderBgAddition(GuiGraphics renderer, ResourceLocation guiTexture) {
+    }
+
+    protected void drawVerticalBar(GuiGraphics renderer, ResourceLocation guiTexture, int maxCorerX, int maxCornerY, int xOffset, int barWidth, int barHeight, int dataIndex, int dataIndexMax) {
+        int height = this.getDataHeight(dataIndex, dataIndexMax, barHeight);
+        if (height > 0)
+            renderer.blit(guiTexture, super.leftPos + maxCorerX, super.topPos + maxCornerY + barHeight - height, xOffset, barHeight - height, barWidth, height);
+    }
+
+    protected int getDataHeight(int dataCurrent, int dataMax, int barHeight) {
+        final int current = super.menu.getData(dataCurrent);
+        final int max = super.menu.getData(dataMax);
+        return current != 0 && max != 0 ? (current * barHeight / max) : 0;
+    }
+
+    protected void drawHorizontalBar(GuiGraphics guiGraphics, ResourceLocation guiTexture, int minCornerX, int minCornerY, int startXOffset, int startYOffset, int barWidth, int barHeight, int dataCurrent, int dataMax) {
+        final int current = super.menu.getData(dataCurrent);
+        if (current != 0) {
+            final int max = super.menu.getData(dataMax);
+            final int renderWidth = max != 0 ? (current * barWidth / max) : 0;
+            if (renderWidth > 0)
+                guiGraphics.blit(guiTexture, super.leftPos + minCornerX, super.topPos + minCornerY, startXOffset, startYOffset, renderWidth, barHeight);
+        }
+    }
+
+    protected void drawDebugText(GuiGraphics renderer) {
+        for (int i = 0; i < this.menu.getDataCount(); i++) {
+            renderer.drawString(font, "%s : %s".formatted(i, menu.getData(i)), 0, super.topPos + i * 8, TEXT_WHITE, true);
+        }
     }
 }
