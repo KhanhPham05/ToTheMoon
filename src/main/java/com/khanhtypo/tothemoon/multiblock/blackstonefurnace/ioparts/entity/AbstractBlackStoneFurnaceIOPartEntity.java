@@ -44,8 +44,8 @@ public abstract class AbstractBlackStoneFurnaceIOPartEntity<T> extends AbstractM
 
     @Override
     public @NotNull <A> LazyOptional<A> getCapability(@NotNull Capability<A> cap, @Nullable Direction side) {
-        if (super.isMachineAssembled()) {
-            return this.getRequiredCapability().orEmpty(cap, this.getHolder());
+        if (cap == this.getRequiredCapability()) {
+            return this.getHolder().cast();
         }
 
         return super.getCapability(cap, side);

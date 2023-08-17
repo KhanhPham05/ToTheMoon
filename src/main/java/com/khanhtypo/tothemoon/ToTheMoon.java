@@ -4,6 +4,7 @@ import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.data.DataStarter;
+import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BlackstoneFurnaceControllerBlock;
 import com.khanhtypo.tothemoon.network.NetworkUtils;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModItems;

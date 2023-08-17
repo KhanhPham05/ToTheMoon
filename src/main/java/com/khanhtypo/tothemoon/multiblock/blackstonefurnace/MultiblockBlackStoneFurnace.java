@@ -22,7 +22,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -52,9 +51,9 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
     public static final int DEFAULT_BURNING_DURATION = 1200;
     public static final Predicate<IMultiblockPart<MultiblockBlackStoneFurnace>> ITEM_ACCEPTOR_FILTER = p -> p instanceof BlackStoneFurnaceItemAcceptorPartEntity;
     private static final Predicate<IMultiblockPart<MultiblockBlackStoneFurnace>> CONTROLLER_FILTER = p -> p instanceof ControllerPartEntity;
-    final SavableSimpleContainer itemStackHolder;
     private final BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
     private final FluidTank lavaHolder;
+    SavableSimpleContainer itemStackHolder;
     private List<BlackStoneFurnaceItemAcceptorPartEntity> itemAcceptors;
     private ControllerPartEntity controllerPart;
     private int burningTime = 0;
@@ -107,20 +106,20 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
     @Override
     protected void onPartAdded(IMultiblockPart<MultiblockBlackStoneFurnace> iMultiblockPart) {
         if (CONTROLLER_FILTER.test(iMultiblockPart)) {
-            ToTheMoon.LOGGER.info("Controller at %s added".formatted(iMultiblockPart.getWorldPosition()));
             this.controllerPart = ((ControllerPartEntity) iMultiblockPart);
         }
     }
 
+    //FIXME
     @Override
     protected void onPartRemoved(IMultiblockPart<MultiblockBlackStoneFurnace> iMultiblockPart) {
         if (CONTROLLER_FILTER.test(iMultiblockPart)) {
             ToTheMoon.LOGGER.info("Controller at %s removed".formatted(iMultiblockPart.getWorldPosition()));
-            if (!this.itemStackHolder.isEmpty()) {
-                super.callOnLogicalServer(() -> Containers.dropContents(getWorld(), iMultiblockPart.getWorldPosition(), itemStackHolder));
-                itemStackHolder.setAllEmpty();
-                this.lavaHolder.setContent(FluidStack.EMPTY);
-            }
+            //if (!this.itemStackHolder.isEmpty()) {
+            //    super.callOnLogicalServer(() -> Containers.dropContents(getWorld(), iMultiblockPart.getWorldPosition(), itemStackHolder));
+            //    itemStackHolder.setAllEmpty();
+            //    this.lavaHolder.setContent(FluidStack.EMPTY);
+            //}
             this.controllerPart = null;
         }
         if (iMultiblockPart instanceof BlackStoneFurnaceItemAcceptorPartEntity itemAcceptorPart) {
@@ -220,6 +219,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
             } else {
                 this.lavaHolder.fill(item.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).map(fluid -> FluidUtil.tryFluidTransfer(this.lavaHolder, fluid, Math.min(this.lavaHolder.getFreeSpace(), fluid.getTankCapacity(0) - fluid.getFluidInTank(0).getAmount()), true)).orElse(FluidStack.EMPTY), IFluidHandler.FluidAction.EXECUTE);
             }
+            markDirty();
         }
 
         if (!this.lavaHolder.isEmpty() && !this.itemStackHolder.isSlotEmpty(0) && this.itemStackHolder.isSlotAvailable(1)) {
@@ -232,12 +232,12 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
                 this.emptyOrGrowResultSlot();
             }
 
-            this.markDirty();
             this.turnControllerState(true);
         } else this.resetTime();
 
         return this.serverUpdated;
     }
+
 
     private void emptyOrGrowResultSlot() {
         ItemStack resultSlot = this.itemStackHolder.getItem(1);
@@ -248,12 +248,12 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
             this.itemStackHolder.setItem(1, resultSlot);
         }
         this.itemStackHolder.getItem(0).shrink(1);
+        markDirty();
     }
 
     private void resetTime() {
         if (this.burningTime > 0) {
             this.burningTime = 0;
-            this.markDirty();
         }
 
         this.turnControllerState(false);

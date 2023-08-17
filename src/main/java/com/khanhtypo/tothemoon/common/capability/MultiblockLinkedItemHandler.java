@@ -19,36 +19,36 @@ public class MultiblockLinkedItemHandler<Controller extends IMultiblockControlle
 
     @Override
     public int getSlots() {
-        return this.multiblockController.get().map(IItemHandler::getSlots).orElse(0);
+        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(IItemHandler::getSlots).orElse(0);
     }
 
     @Override
     public @NotNull ItemStack getStackInSlot(int slot) {
-        return this.multiblockController.get().map(container -> container.getStackInSlot(slot)).orElse(ItemStack.EMPTY);
+        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(container -> container.getStackInSlot(slot)).orElse(ItemStack.EMPTY);
     }
 
     @Override
     public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-        return this.multiblockController.get().map(container -> container.insertItem(slot, stack, simulate)).orElse(ItemStack.EMPTY);
+        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(container -> container.insertItem(slot, stack, simulate)).orElse(ItemStack.EMPTY);
     }
 
     @Override
     public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return this.multiblockController.get().map(container -> container.extractItem(slot, amount, simulate)).orElse(ItemStack.EMPTY);
+        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(container -> container.extractItem(slot, amount, simulate)).orElse(ItemStack.EMPTY);
     }
 
     @Override
     public int getSlotLimit(int slot) {
-        return this.multiblockController.get().map(container -> container.getSlotLimit(slot)).orElse(0);
+        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(container -> container.getSlotLimit(slot)).orElse(0);
     }
 
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return this.multiblockController.get().map(container -> container.isItemValid(slot, stack)).orElse(true);
+        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(container -> container.isItemValid(slot, stack)).orElse(true);
     }
 
     @Override
     public void setStackInSlot(int slot, @NotNull ItemStack stack) {
-        this.multiblockController.get().ifPresent(controller -> controller.setStackInSlot(slot, stack));
+        this.multiblockController.get().filter(IMultiblockController::isAssembled).ifPresent(controller -> controller.setStackInSlot(slot, stack));
     }
 }

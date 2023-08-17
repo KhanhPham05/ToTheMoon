@@ -24,6 +24,11 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
         this.items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
+    public static SavableSimpleContainer loadContainer(String tagName, CompoundTag data, SavableSimpleContainer toSave) {
+        toSave.loadContainer(tagName, data);
+        return toSave;
+    }
+
     public CompoundTag saveContainer(String tagName, CompoundTag writer) {
         var savedContainer = ContainerHelper.saveAllItems(new CompoundTag(), this.items);
         writer.put(tagName, savedContainer);
