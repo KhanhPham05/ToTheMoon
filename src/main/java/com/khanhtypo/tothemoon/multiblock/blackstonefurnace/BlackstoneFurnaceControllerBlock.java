@@ -32,13 +32,17 @@ public class BlackstoneFurnaceControllerBlock extends BaseBlackStoneFurnacePartB
     //temporary workaround with the multiblock saving issue
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        if (pLevel.getBlockEntity(pPos) instanceof ControllerPartEntity controllerPart) {
-            controllerPart.getMultiblockController().ifPresent(furnace -> {
-                Containers.dropContents(pLevel, pPos, furnace.itemStackHolder);
-                furnace.itemStackHolder.clearContent();
-            });
+        if (!pState.is(pNewState.getBlock())) {
+            if (!pLevel.isClientSide()) {
+                if (pLevel.getBlockEntity(pPos) instanceof ControllerPartEntity controllerPart) {
+                    controllerPart.getMultiblockController().ifPresent(furnace -> {
+                        Containers.dropContents(pLevel, pPos, furnace.itemStackHolder);
+                        furnace.itemStackHolder.clearContent();
+                    });
+                }
+            }
+            super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         }
-        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
 
     @Nullable

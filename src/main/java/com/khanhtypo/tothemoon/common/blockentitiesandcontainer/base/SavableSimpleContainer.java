@@ -24,11 +24,6 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
         this.items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
-    public static SavableSimpleContainer loadContainer(String tagName, CompoundTag data, SavableSimpleContainer toSave) {
-        toSave.loadContainer(tagName, data);
-        return toSave;
-    }
-
     public CompoundTag saveContainer(String tagName, CompoundTag writer) {
         var savedContainer = ContainerHelper.saveAllItems(new CompoundTag(), this.items);
         writer.put(tagName, savedContainer);
@@ -80,7 +75,11 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-        return ContainerHelper.removeItem(this.items, pSlot, pAmount);
+        var removed =  ContainerHelper.removeItem(this.items, pSlot, pAmount);
+
+        if (!removed.isEmpty()) this.setChanged();
+
+        return removed;
     }
 
     @Override
@@ -91,6 +90,7 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
         this.items.set(pSlot, pStack);
+        this.setChanged();
     }
 
     @Override
@@ -106,6 +106,7 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
     @Override
     public void clearContent() {
         this.items.clear();
+        this.setChanged();
     }
 
     @Override

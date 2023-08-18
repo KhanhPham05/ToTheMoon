@@ -2,7 +2,6 @@ package com.khanhtypo.tothemoon.multiblock.blackstonefurnace.display;
 
 import com.khanhtypo.tothemoon.client.SlotUtils;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
-import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.MultiblockBlackStoneFurnace;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
@@ -61,14 +60,12 @@ public class BlackStoneFurnaceMenu extends BaseMenu {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (itemStack1.is(ModItemTags.DUSTS_COAL)) {
-                    if (!super.moveItemStackTo(itemStack1, 0, 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (isBucketOrHandler(itemStack1)) {
+                if (isBucketOrHandler(itemStack1)) {
                     if (!super.moveItemStackTo(itemStack1, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
+                } else if (!super.moveItemStackTo(itemStack1, 0, 1, false)) {
+                    return ItemStack.EMPTY;
                 }
             }
 

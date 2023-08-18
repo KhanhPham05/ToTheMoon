@@ -29,7 +29,7 @@ public class MultiblockLinkedItemHandler<Controller extends IMultiblockControlle
 
     @Override
     public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(container -> container.insertItem(slot, stack, simulate)).orElse(ItemStack.EMPTY);
+        return this.multiblockController.get().filter(IMultiblockController::isAssembled).map(container -> container.insertItem(slot, stack, simulate)).orElse(stack);
     }
 
     @Override

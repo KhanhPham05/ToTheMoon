@@ -3,6 +3,7 @@ package com.khanhtypo.tothemoon.multiblock.blackstonefurnace;
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.SavableSimpleContainer;
+import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.multiblock.IItemCapableMultiblockController;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.display.BlackStoneFurnaceMenu;
@@ -22,6 +23,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -58,6 +60,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
     private ControllerPartEntity controllerPart;
     private int burningTime = 0;
     private boolean serverUpdated = false;
+    private BlockPos lastAddedPartPos;
 
     public MultiblockBlackStoneFurnace(Level world) {
         super(world);
@@ -77,6 +80,11 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
 
                 return pIndex == 1;
             }
+
+            @Override
+            public void setChanged() {
+                MultiblockBlackStoneFurnace.this.markDirty();
+            }
         };
     }
 
@@ -90,7 +98,6 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
             validatorCallback.setLastError(ModLanguageGenerator.FURNACE_TOO_MUCH_CONTROLLERS);
             return false;
         }
-
 
         boolean machineWhole = super.isMachineWhole(validatorCallback);
 
@@ -108,6 +115,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
         if (CONTROLLER_FILTER.test(iMultiblockPart)) {
             this.controllerPart = ((ControllerPartEntity) iMultiblockPart);
         }
+        this.lastAddedPartPos = iMultiblockPart.getWorldPosition();
     }
 
     //FIXME
@@ -181,7 +189,21 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
     }
 
     @Override
-    protected void onAssimilate(IMultiblockController<MultiblockBlackStoneFurnace> iMultiblockController) {
+    protected void onAssimilate(IMultiblockController<MultiblockBlackStoneFurnace> toMerged) {
+        if (toMerged instanceof MultiblockBlackStoneFurnace otherFurnace) {
+            FluidUtil.tryFluidTransfer(this.lavaHolder, otherFurnace.lavaHolder, this.lavaHolder.getFreeSpace(), true);
+            for (int i = 0; i < this.getSlots(); i++) {
+                ItemStack spareItem = this.insertItem(i, otherFurnace.getStackInSlot(i), false);
+                if (!spareItem.isEmpty()) {
+                    BlockPos pos = this.controllerPart != null ? this.controllerPart.getWorldPosition() : this.lastAddedPartPos;
+                    Containers.dropItemStack(this.getWorld(), pos.getX(), pos.getY(), pos.getZ(), spareItem);
+                }
+            }
+        } else {
+            String mergeFrom = toMerged.getClass().getSimpleName();
+            ToTheMoon.LOGGER.warn("[{} -> {}] Trying to assimilate unmatched multiblock. The data of {} may be deleted", mergeFrom, getClass().getSimpleName(), mergeFrom);
+        }
+        this.resetTime();
         this.turnControllerState(false);
     }
 
@@ -209,7 +231,6 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
 
     @Override
     protected boolean updateServer() {
-        this.serverUpdated = false;
         ItemStack item;
         if (!this.itemStackHolder.isSlotEmpty(2) && this.lavaHolder.getFreeSpace() > 0) {
             item = this.itemStackHolder.getItem(2);
@@ -222,22 +243,29 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
             markDirty();
         }
 
-        if (!this.lavaHolder.isEmpty() && !this.itemStackHolder.isSlotEmpty(0) && this.itemStackHolder.isSlotAvailable(1)) {
-            if (this.burningTime < DEFAULT_BURNING_DURATION) {
-                this.burningTime++;
-                if (Math.floorMod(this.burningTime, 2) == 0)
-                    this.lavaHolder.drain(1, IFluidHandler.FluidAction.EXECUTE);
+        if (!this.lavaHolder.isEmpty()) {
+            if (!this.itemStackHolder.isSlotEmpty(0) && this.itemStackHolder.isSlotAvailable(1) && this.itemStackHolder.getItem(0).is(ModItemTags.DUSTS_COAL)) {
+                if (this.burningTime < DEFAULT_BURNING_DURATION) {
+                    this.burningTime++;
+                    if (Math.floorMod(this.burningTime, 2) == 0)
+                        this.lavaHolder.drain(1, IFluidHandler.FluidAction.EXECUTE);
+                } else {
+                    this.burningTime = 0;
+                    this.emptyOrGrowResultSlot();
+                }
+                this.turnControllerState(true);
             } else {
-                this.burningTime = 0;
-                this.emptyOrGrowResultSlot();
+                this.resetTime();
             }
+        } else if (this.burningTime > 0) {
+            this.burningTime = Math.max(0, this.burningTime - 3);
+            this.markDirty();
+        }
 
-            this.turnControllerState(true);
-        } else this.resetTime();
-
-        return this.serverUpdated;
+        boolean flag = this.serverUpdated;
+        this.serverUpdated = false;
+        return flag;
     }
-
 
     private void emptyOrGrowResultSlot() {
         ItemStack resultSlot = this.itemStackHolder.getItem(1);
@@ -255,6 +283,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
         if (this.burningTime > 0) {
             this.burningTime = 0;
         }
+        this.markDirty();
 
         this.turnControllerState(false);
     }
