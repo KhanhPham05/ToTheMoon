@@ -1,6 +1,8 @@
 package com.khanhtypo.tothemoon.data;
 
 import com.khanhtypo.tothemoon.ToTheMoon;
+import com.khanhtypo.tothemoon.common.tag.TagFamily;
+import com.khanhtypo.tothemoon.registration.ModBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;

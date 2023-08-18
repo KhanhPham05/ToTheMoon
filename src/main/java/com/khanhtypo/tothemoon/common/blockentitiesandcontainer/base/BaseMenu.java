@@ -1,12 +1,11 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
@@ -14,15 +13,16 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 
 public abstract class BaseMenu extends AbstractContainerMenu {
     protected final Inventory playerInventory;
     protected final ContainerLevelAccess accessor;
     private final MenuObject<?> menuObject;
-    @Nullable private Block targetedBlock;
+    @Nullable
+    private Block targetedBlock;
     private int invLabelX;
     private int invLabelY;
+    private @Nullable ContainerData renderData = null;
 
     protected BaseMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
         this(menuObject, windowId, playerInventory, accessor, accessor.evaluate((level, blockPos) -> level.getBlockState(blockPos).getBlock(), null));
@@ -54,7 +54,7 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         return invLabelY;
     }
 
-    protected void addPlayerInv(int startX, int startY) {
+    protected void addPlayerInvSlots(int startX, int startY) {
         this.invLabelX = startX;
         this.invLabelY = startY;
         for (int i = 0; i <= 2; i++) {
@@ -78,5 +78,27 @@ public abstract class BaseMenu extends AbstractContainerMenu {
 
     public Player player() {
         return this.playerInventory.player;
+    }
+
+    @Override
+    protected void addDataSlots(ContainerData pArray) {
+        this.renderData = pArray;
+        super.addDataSlots(pArray);
+    }
+
+    public int getData(int index) {
+        if (this.renderData != null) {
+            return this.renderData.get(index);
+        }
+
+        throw new IllegalStateException("Data is not present in menu : " + this.menuObject.getId());
+    }
+
+    public int getDataCount() {
+        if (this.renderData != null) {
+            return this.renderData.getCount();
+        }
+
+        throw new IllegalStateException("Data is not present in menu : " + this.menuObject.getId());
     }
 }

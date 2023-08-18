@@ -4,6 +4,7 @@ import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.data.DataStarter;
+import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BlackstoneFurnaceControllerBlock;
 import com.khanhtypo.tothemoon.network.NetworkUtils;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModItems;
@@ -37,7 +38,8 @@ public class ToTheMoon {
     public static final IEventBus MOD_BUS = FMLJavaModLoadingContext.get().getModEventBus();
     public static final TabInstance DEFAULT_ITEM_TAB = new TabInstance("ttm_items", "TTM Items", () -> ModItems.CPU_CHIP);
     public static final TabInstance DEFAULT_BLOCK_TAB = new TabInstance("ttm_blocks", "TTM Blocks", () -> ModBlocks.COBBLED_METEORITE);
-    public static final SimpleChannel CHANNEL = NetworkUtils.createChannel();
+    public static final SimpleChannel CHANNEL = NetworkUtils.CHANNEL_INSTANCE;
+
     public ToTheMoon() {
         FORGE_BUS.register(this);
         ModRegistries.staticInit(MOD_BUS);

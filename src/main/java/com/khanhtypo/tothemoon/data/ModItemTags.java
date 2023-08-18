@@ -125,6 +125,7 @@ public class ModItemTags {
     public static final TagKey<Item> MOLD_GEAR = MOLDS.createChild("gear", GEAR_MOLD);
     public static final TagKey<Item> MOLD_ROD = MOLDS.createChild("rod", ROD_MOLD);
     public static final TagKey<Item> HAMMER_WOODEN = HAMMERS.createChild("wooden", WOODEN_HAMMER);
+    public static final TagKey<Item> DUSTS_COAL = DUSTS.createChild("coal", COAL_DUST);
 
     public static void staticInit() {
     }

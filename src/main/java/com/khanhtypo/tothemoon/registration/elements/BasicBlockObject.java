@@ -31,15 +31,15 @@ public class BasicBlockObject extends BlockObject<Block> {
         this(name, BlockBehaviour.Properties.copy(vanillaBlock).mapColor(mapColor));
     }
 
-    public static ChildBlockObject stairs(BasicBlockObject parent) {
+    public static ChildBlockObject stairs(BlockObject<?> parent) {
         return new ChildBlockObject(parent.getId().getPath() + "_stairs", properties -> new StairBlock(parent.defaultBlockState(), properties), parent);
     }
 
-    public static ChildBlockObject slab(BasicBlockObject parent) {
+    public static ChildBlockObject slab(BlockObject<?> parent) {
         return new ChildBlockObject(parent.getId().getPath() + "_slab", SlabBlock::new, parent);
     }
 
-    public static ChildBlockObject wall(BasicBlockObject parent) {
+    public static ChildBlockObject wall(BlockObject<?> parent) {
         return new ChildBlockObject(parent.getId().getPath() + "_wall", WallBlock::new, parent);
     }
 

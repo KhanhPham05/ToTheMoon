@@ -3,6 +3,7 @@ package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -72,18 +73,7 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
     }
 
     protected static <T extends Comparable<T>> void setBlockState(Level level, BlockPos pos, BlockState blockState, Property<T> property, T value, boolean checkPresent) {
-        if (checkPresent) {
-            if (!blockState.hasProperty(property)) {
-                ToTheMoon.LOGGER.warn("Could not set property %s because it is not present at block %s".formatted(property.toString(), pos.toString()));
-                return;
-            }
-        }
-
-        T prevValue = blockState.getValue(property);
-        if (prevValue != value) {
-            blockState = blockState.setValue(property, value);
-            level.setBlock(pos, blockState, 3);
-        }
+        ModUtils.changeBlockState(level, pos, blockState, property, value, checkPresent);
     }
 
     @Override

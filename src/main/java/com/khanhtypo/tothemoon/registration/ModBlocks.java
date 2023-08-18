@@ -2,6 +2,9 @@ package com.khanhtypo.tothemoon.registration;
 
 import com.khanhtypo.tothemoon.common.block.*;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
+import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BaseBlackStoneFurnacePartBlock;
+import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BlackStoneFurnaceAcceptorVariants;
+import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BlackStoneFurnaceFurnacePartTypes;
 import com.khanhtypo.tothemoon.registration.elements.BasicBlockObject;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
 import net.minecraft.world.level.block.*;
@@ -53,7 +56,7 @@ public class ModBlocks {
     public static final BasicBlockObject POLISHED_MOON_ROCK_SLAB = BasicBlockObject.slab(POLISHED_MOON_ROCK);
     public static final BasicBlockObject POLISHED_MOON_ROCK_WALL = BasicBlockObject.wall(POLISHED_MOON_ROCK);
     public static final BasicBlockObject POLISHED_MOON_ROCK_STAIR = BasicBlockObject.stairs(POLISHED_MOON_ROCK);
-    public static final BasicBlockObject SMOOTH_BLACKSTONE = new BasicBlockObject("smooth_blackstone", Blocks.BLACKSTONE);
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> SMOOTH_BLACKSTONE = new BlockObject<>("smooth_blackstone", BlackStoneFurnaceFurnacePartTypes.FRAME::createBlock);
     public static final BasicBlockObject SMOOTH_BLACKSTONE_SLAB = BasicBlockObject.slab(SMOOTH_BLACKSTONE);
     public static final BasicBlockObject SMOOTH_BLACKSTONE_WALL = BasicBlockObject.wall(SMOOTH_BLACKSTONE);
     public static final BasicBlockObject SMOOTH_BLACKSTONE_STAIRS = BasicBlockObject.stairs(SMOOTH_BLACKSTONE);
@@ -93,8 +96,11 @@ public class ModBlocks {
     public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> GOLD_POWER_GENERATOR = new BlockObject<>("gold_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.GOLD_POWER_GENERATOR));
     public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> DIAMOND_POWER_GENERATOR = new BlockObject<>("diamond_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.DIAMOND_POWER_GENERATOR));
     public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> NETHERITE_POWER_GENERATOR = new BlockObject<>("netherite_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.NETHERITE_POWER_GENERATOR));
-
-    //TODO Tag translator
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACK_STONE_FURNACE_CONTROLLER = new BlockObject<>("blackstone_furnace_controller", BlackStoneFurnaceFurnacePartTypes.CONTROLLER::createBlock);
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_EMPTY_ACCEPTOR = new BlockObject<>("blackstone_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE));
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_EMPTY_ACCEPTOR = new BlockObject<>("nether_brick_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK));
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_ITEM_ACCEPTOR = new BlockObject<>("blackstone_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE));
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_ITEM_ACCEPTOR = new BlockObject<>("nether_brick_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK));
 
     static void staticInit() {
     }

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -22,8 +23,9 @@ public class BlockEntityObject<T extends BlockEntity> extends SimpleObjectSuppli
     }
 
     @Nonnull
-    public static <B extends BlockEntity> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block> blocks) {
-        return new BlockEntityObject<>(name, () -> BlockEntityType.Builder.of(constructor, blocks.get()).build(null));
+    @SafeVarargs
+    public static <B extends BlockEntity> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block>... blocks) {
+        return new BlockEntityObject<>(name, () -> BlockEntityType.Builder.of(constructor, Arrays.stream(blocks).map(Supplier::get).toArray(Block[]::new)).build(null));
     }
 
     @Nullable

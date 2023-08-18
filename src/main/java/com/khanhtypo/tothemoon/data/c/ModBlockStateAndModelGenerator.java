@@ -1,7 +1,6 @@
 package com.khanhtypo.tothemoon.data.c;
 
 import com.google.common.base.Preconditions;
-import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
@@ -9,12 +8,14 @@ import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.registration.elements.BasicBlockObject;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
 import com.khanhtypo.tothemoon.registration.elements.ChildBlockObject;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.Util;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -27,6 +28,8 @@ import static com.khanhtypo.tothemoon.registration.ModBlocks.*;
 @SuppressWarnings("SameParameterValue")
 public class ModBlockStateAndModelGenerator extends BlockStateProvider {
     protected static final ExistingFileHelper.ResourceType TEXTURE = new ExistingFileHelper.ResourceType(PackType.CLIENT_RESOURCES, ".png", "textures");
+    private static final Consumer<ConfiguredModel.Builder<?>> NO_ACTION = b -> {
+    };
     private final ItemModelProvider itemModelProvider;
     private final ExistingFileHelper fileHelper;
     private final Map<Direction, Integer> yRotationMap = Util.make(new HashMap<>(), map -> {
@@ -37,7 +40,6 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         map.put(Direction.UP, 0);
         map.put(Direction.NORTH, 0);
     });
-
     private final Map<Direction, Integer> xRotationMap = Util.make(new HashMap<>(), map -> {
         map.put(Direction.DOWN, 180);
         map.put(Direction.EAST, 90);
@@ -100,6 +102,11 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.energyGenerator(GOLD_POWER_GENERATOR);
         this.energyGenerator(DIAMOND_POWER_GENERATOR);
         this.energyGenerator(NETHERITE_POWER_GENERATOR);
+        this.barrelBlock(MOON_ROCK_BARREL);
+        this.simpleBlock(BLACKSTONE_EMPTY_ACCEPTOR);
+        this.simpleBlock(NETHER_BRICKS_EMPTY_ACCEPTOR);
+        this.multiblockAcceptor(BLACKSTONE_ITEM_ACCEPTOR);
+        this.multiblockAcceptor(NETHER_BRICKS_ITEM_ACCEPTOR);
         this.notSimple();
     }
 
@@ -121,7 +128,28 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         });
         this.itemModels().basicItem(WORKBENCH.asItem());
 
-        this.barrelBlock(MOON_ROCK_BARREL);
+        //BLACKSTONE FURNACE CONTROLLER
+        final ResourceLocation prefix = BLACK_STONE_FURNACE_CONTROLLER.getId().withPrefix("block/");
+        super.getVariantBuilder(BLACK_STONE_FURNACE_CONTROLLER.get()).forAllStates(state -> {
+
+            boolean isLit = state.getValue(BlockStateProperties.LIT);
+            var blockModel = models().orientableWithBottom(
+                    "block/" + BLACK_STONE_FURNACE_CONTROLLER.getId().getPath() + (isLit ? "_on" : ""),
+                    texturePreExist(prefix.withSuffix("_side")),
+                    texturePreExist(prefix.withSuffix("_front" + (isLit ? "_on" : ""))),
+                    new ResourceLocation("block/nether_bricks"),
+                    SMOOTH_BLACKSTONE.getId().withPrefix("block/")
+            );
+
+            Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
+            return configuredModel(blockModel.getLocation(), false, builder -> builder.rotationY(yRotationMap.get(facing)));
+        });
+
+        this.itemModelProvider.withExistingParent(BLACK_STONE_FURNACE_CONTROLLER.getId().getPath(), modLoc("block/blackstone_furnace_controller"));
+    }
+
+    private void multiblockAcceptor(BlockObject<?> blockObject) {
+        simpleBlock(blockObject);
     }
 
     private void energyGenerator(BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> blockSupplier) {

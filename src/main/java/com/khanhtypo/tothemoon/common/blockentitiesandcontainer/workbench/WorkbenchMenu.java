@@ -47,7 +47,7 @@ public class WorkbenchMenu extends BaseMenu implements RecipeContainerMenu {
         super.addSlot(SlotUtils.createPlaceFilter(this.craftingSlots, 25, 21, 36, ModItemTags.TOOL_HAMMERS));
         super.addSlot(new Slot(this.craftingSlots, 26, 21, 73));
         super.addSlot(SlotUtils.createTakeOnly(this.resultSlot, this.craftingSlots, 0, 156, 54, this::onResultSlotTaken));
-        super.addPlayerInv(15, 127);
+        super.addPlayerInvSlots(15, 127);
     }
 
     private static void updateCraftingPattern(WorkbenchMenu menu, Level level, Player player) {

@@ -12,6 +12,7 @@
     "#forge:dusts/redstone_metal",
     "#forge:dusts/redstone_steel",
     "#forge:dusts/steel",
-    "#forge:dusts/uranium"
+    "#forge:dusts/uranium",
+    "#forge:dusts/coal"
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tothemoon:block/nether_brick_item_acceptor"
+    }
+  }
+}

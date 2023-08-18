@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
+import com.khanhtypo.tothemoon.ToTheMoon;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
@@ -7,26 +8,48 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public class SavableSimpleContainer implements Container {
+import javax.annotation.Nullable;
+
+public class SavableSimpleContainer implements Container, INBTSerializable<CompoundTag> {
+    @Nullable
     private final BlockEntity blockEntity;
     private final int size;
     private final NonNullList<ItemStack> items;
 
-    public SavableSimpleContainer(BlockEntity blockEntity, int size) {
+    public SavableSimpleContainer(@Nullable BlockEntity blockEntity, int size) {
         this.blockEntity = blockEntity;
         this.size = size;
         this.items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
-    public void saveContainer(CompoundTag writer) {
-        ContainerHelper.saveAllItems(writer, this.items);
+    public CompoundTag saveContainer(String tagName, CompoundTag writer) {
+        var savedContainer = ContainerHelper.saveAllItems(new CompoundTag(), this.items);
+        writer.put(tagName, savedContainer);
         this.setChanged();
+        ToTheMoon.LOGGER.info("Container : %s saved".formatted(tagName));
+        return writer;
+    }
+
+    public CompoundTag saveContainer(CompoundTag writer) {
+        return saveContainer("BlockEntityContainer", writer);
+    }
+
+    public void loadContainer(String tagName, CompoundTag reader) {
+        if (reader.contains(tagName)) {
+            CompoundTag containerTag = reader.getCompound(tagName);
+            ContainerHelper.loadAllItems(containerTag, this.items);
+            this.setChanged();
+            ToTheMoon.LOGGER.info("Container : " + tagName + " loaded");
+            return;
+        }
+
+        ToTheMoon.LOGGER.info("Couldn't load container : %s. it is not present in tag".formatted(tagName));
     }
 
     public void loadContainer(CompoundTag reader) {
-        ContainerHelper.loadAllItems(reader, this.items);
-        this.setChanged();
+        this.loadContainer("BlockEntityContainer", reader);
     }
 
     @Override
@@ -52,7 +75,11 @@ public class SavableSimpleContainer implements Container {
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-        return ContainerHelper.removeItem(this.items, pSlot, pAmount);
+        var removed =  ContainerHelper.removeItem(this.items, pSlot, pAmount);
+
+        if (!removed.isEmpty()) this.setChanged();
+
+        return removed;
     }
 
     @Override
@@ -63,25 +90,49 @@ public class SavableSimpleContainer implements Container {
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
         this.items.set(pSlot, pStack);
-        if (!pStack.isEmpty() && pStack.getCount() > this.getMaxStackSize()) {
-            pStack.setCount(this.getMaxStackSize());
-        }
-
         this.setChanged();
     }
 
     @Override
     public void setChanged() {
-        this.blockEntity.setChanged();
+        if (this.blockEntity != null) this.blockEntity.setChanged();
     }
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return Container.stillValidBlockEntity(this.blockEntity, pPlayer);
+        return this.blockEntity == null || Container.stillValidBlockEntity(this.blockEntity, pPlayer);
     }
 
     @Override
     public void clearContent() {
         this.items.clear();
+        this.setChanged();
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        return this.saveContainer(new CompoundTag());
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag nbt) {
+        this.saveContainer(nbt);
+    }
+
+    public int getSlotSpace(int slot) {
+        ItemStack item = this.items.get(slot);
+        return Math.max(0, item.getMaxStackSize() - item.getCount());
+    }
+
+    public boolean isSlotEmpty(int slot) {
+        return this.getItem(slot).isEmpty();
+    }
+
+    public boolean isSlotAvailable(int slot) {
+        return this.isSlotEmpty(slot) || this.getSlotSpace(slot) > 0;
+    }
+
+    public void setAllEmpty() {
+        this.items.forEach(i -> i.setCount(0));
     }
 }

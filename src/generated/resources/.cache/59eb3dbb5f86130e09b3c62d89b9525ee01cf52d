@@ -1,4 +1,7 @@
-// 1.20.1	2023-08-08T21:29:14.7774177	Loot Tables
+// 1.20.1	2023-08-16T18:58:40.5559395	Loot Tables
+e13375a6f714b329d90c51f0f9654884341989ef data/tothemoon/loot_tables/blocks/blackstone_empty_acceptor.json
+803670ae2f663814e537ebc9c7208f97055d6ec1 data/tothemoon/loot_tables/blocks/blackstone_furnace_controller.json
+cb6334c4e1ebe62993245d0b599826b7b2136e13 data/tothemoon/loot_tables/blocks/blackstone_item_acceptor.json
 65bb651f42a05521514509b15144e17ababc8fe7 data/tothemoon/loot_tables/blocks/cobbled_meteorite.json
 d6a42ef491ce53dd051954389f59d1787a9fcb6d data/tothemoon/loot_tables/blocks/cobbled_meteorite_slab.json
 e4a57a49bb35ed764995749e2c108c9bf0ddff41 data/tothemoon/loot_tables/blocks/cobbled_meteorite_stairs.json
@@ -48,6 +51,8 @@ ceaaa5d95272232c8b6514651c18a935c04e1d1b data/tothemoon/loot_tables/blocks/moon_
 9fff0eaceafcecbec1719487e4c728d747da9f43 data/tothemoon/loot_tables/blocks/moon_rock_wall.json
 8b31145647d9f08a4a610c795ccab391a598912e data/tothemoon/loot_tables/blocks/moon_uranium_ore.json
 394f82b957044169b15bd3a193d3f5e48bff1118 data/tothemoon/loot_tables/blocks/netherite_power_generator.json
+5d2a1bf7b149673bbd4305c2149f76b8d4bef557 data/tothemoon/loot_tables/blocks/nether_brick_empty_acceptor.json
+b285ef82daa828403ae7b7cd8406e1a6cd7d70bf data/tothemoon/loot_tables/blocks/nether_brick_item_acceptor.json
 0f604a3d11813d99f3f419da584a94768d9e2458 data/tothemoon/loot_tables/blocks/polished_meteorite.json
 ffecc4567d2b13da4d332d496c6b17f4603ce1b5 data/tothemoon/loot_tables/blocks/polished_meteorite_slab.json
 ffaeccdded5e56797eaa3793714080599d88a13b data/tothemoon/loot_tables/blocks/polished_meteorite_stairs.json

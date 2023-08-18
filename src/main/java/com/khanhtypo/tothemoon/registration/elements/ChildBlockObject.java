@@ -17,7 +17,7 @@ public class ChildBlockObject extends BasicBlockObject {
     private static final Map<ChildBlockObject, BlockObject<?>> PARENT_MAP = ModUtils.resourceSortedMap(ChildBlockObject::getId);
     private final BlockObject<? extends Block> parent;
 
-    public ChildBlockObject(String name, Function<BlockBehaviour.Properties, ? extends Block> factory, BasicBlockObject parent) {
+    public ChildBlockObject(String name, Function<BlockBehaviour.Properties, ? extends Block> factory, BlockObject<?> parent) {
         super(name, factory, parent);
         this.parent = parent;
         PARENT_MAP.put(this, parent);

@@ -26,7 +26,7 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor, Container container, ContainerData containerData) {
         super(ModMenuTypes.POWER_GENERATOR, windowId, playerInventory, accessor, container, containerData);
         super.addSlot(SlotUtils.createPlaceFilter(container, 0, 76, 41, burnCheck));
-        super.addPlayerInv(8, 97);
+        super.addPlayerInvSlots(8, 97);
     }
 
     @Override

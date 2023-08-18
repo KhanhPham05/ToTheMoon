@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "minecraft:block/nether_bricks",
+    "front": "tothemoon:block/blackstone_furnace_controller_front_on",
+    "side": "tothemoon:block/blackstone_furnace_controller_side",
+    "top": "tothemoon:block/smooth_blackstone"
+  }
+}
