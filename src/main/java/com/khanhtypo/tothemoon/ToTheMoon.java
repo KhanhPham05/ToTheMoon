@@ -4,13 +4,12 @@ import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.data.DataStarter;
-import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BlackstoneFurnaceControllerBlock;
 import com.khanhtypo.tothemoon.network.NetworkUtils;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModItems;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.ModStats;
-import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
+import com.khanhtypo.tothemoon.registration.elements.BlockObject;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -24,7 +23,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,10 +59,9 @@ public class ToTheMoon {
 
     public void registerEvent(RegisterEvent registerEvent) {
         registerEvent.register(ModRegistries.ITEMS.getRegistryKey(), helper -> {
-            for (RegistryObject<Block> blocksEntry : ModRegistries.BLOCKS.getEntries()) {
-                BlockItem blockItem = new BlockItem(blocksEntry.get(), new Item.Properties());
-                helper.register(blocksEntry.getId(), blockItem);
-                DEFAULT_BLOCK_TAB.addItem(ObjectSupplier.preExisted(blockItem, blocksEntry.getId()));
+            for (BlockObject<? extends Block> blockObject : BlockObject.BLOCK_SET) {
+                DEFAULT_BLOCK_TAB.addItem(blockObject);
+                helper.register(blockObject.getId(), new BlockItem(blockObject.get(), new Item.Properties().stacksTo(blockObject.getMaxStackSize())));
             }
         });
     }

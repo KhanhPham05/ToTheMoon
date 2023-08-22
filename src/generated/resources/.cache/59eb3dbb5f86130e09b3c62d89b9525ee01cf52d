@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-16T18:58:40.5559395	Loot Tables
+// 1.20.1	2023-08-19T20:59:40.9455934	Loot Tables
 e13375a6f714b329d90c51f0f9654884341989ef data/tothemoon/loot_tables/blocks/blackstone_empty_acceptor.json
 803670ae2f663814e537ebc9c7208f97055d6ec1 data/tothemoon/loot_tables/blocks/blackstone_furnace_controller.json
 cb6334c4e1ebe62993245d0b599826b7b2136e13 data/tothemoon/loot_tables/blocks/blackstone_item_acceptor.json
@@ -66,6 +66,7 @@ ad9a5e6209af9fa54239a2fac1411eab4b317e6b data/tothemoon/loot_tables/blocks/polis
 eab87d5b713b1ee534cea1da2722066ef417d087 data/tothemoon/loot_tables/blocks/purified_quartz_block.json
 f0e406cc603582c5d2cae88e32c2101d3ebc413a data/tothemoon/loot_tables/blocks/raw_uranium_block.json
 7620aac95bc4af24b3f60cadbd94ecc8db49f406 data/tothemoon/loot_tables/blocks/raw_zirconium_block.json
+1f651815e9070a1e525a1a07c1f1b719705bfb15 data/tothemoon/loot_tables/blocks/redstone_battery.json
 daeb9f6bc0c597481989c207541d4b43ec68d375 data/tothemoon/loot_tables/blocks/redstone_metal_block.json
 9b496324a52cbb37d22d0e5bda30f6dbba411959 data/tothemoon/loot_tables/blocks/redstone_metal_machine_frame.json
 db38f6c0d8bd957efc73c26eeb7eb3471a6e010a data/tothemoon/loot_tables/blocks/redstone_steel_alloy_block.json
@@ -80,6 +81,8 @@ f2798461b969cf8b7cc4f13bf5b3f66618adecbb data/tothemoon/loot_tables/blocks/smoot
 0e7837e2697ff821b521f4db0a476f960f95a6fb data/tothemoon/loot_tables/blocks/smooth_meteorite_stairs.json
 abe50d21007712f916d043988ae7d255a8b201bb data/tothemoon/loot_tables/blocks/smooth_meteorite_wall.json
 5f8a500fee258ac0dcea2cd69ee95bceadd49e67 data/tothemoon/loot_tables/blocks/smooth_purified_quartz_block.json
+598ab29fde19177ecdefd9eed1c5ec90973d0fe5 data/tothemoon/loot_tables/blocks/standard_battery.json
+b762161866b0fc4f1f29caf61120e89942f5fd82 data/tothemoon/loot_tables/blocks/steel_battery.json
 2f3794e5a9b06eb56b86a7ecb2f6d221cc429924 data/tothemoon/loot_tables/blocks/steel_block.json
 08edeaba1b246030ce83217e0802d8d1986c6b48 data/tothemoon/loot_tables/blocks/steel_machine_frame.json
 fa6ff5f8e50474470d209d4b5bd92f4da047497d data/tothemoon/loot_tables/blocks/steel_sheet_block.json

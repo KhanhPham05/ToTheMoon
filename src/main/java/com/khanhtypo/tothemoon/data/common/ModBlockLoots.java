@@ -2,6 +2,7 @@ package com.khanhtypo.tothemoon.data.common;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import com.khanhtypo.tothemoon.common.battery.BatteryBlock;
 import com.khanhtypo.tothemoon.registration.ModItems;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
@@ -12,9 +13,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
+import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import javax.annotation.Nonnull;
@@ -93,6 +100,13 @@ public class ModBlockLoots extends BlockLootSubProvider {
         this.dropSelf(NETHER_BRICKS_EMPTY_ACCEPTOR);
         this.dropSelf(NETHER_BRICKS_ITEM_ACCEPTOR);
         this.dropSelf(BLACKSTONE_ITEM_ACCEPTOR);
+        this.createBatteryLoot(STANDARD_BATTERY);
+        this.createBatteryLoot(REDSTONE_BATTERY);
+        this.createBatteryLoot(STEEL_BATTERY);
+    }
+
+    private void createBatteryLoot(BlockObject<BatteryBlock> batteryBlock) {
+        super.add(batteryBlock.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(batteryBlock).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Energy", "BatteryData.Energy")).apply(CopyBlockState.copyState(batteryBlock.get()).copy(BatteryBlock.ENERGY_LEVEL)))));
     }
 
     private void dropSelf(BlockObject<?> blockObject) {

@@ -27,7 +27,7 @@ public class ActiveModeButton extends AbstractMachineButton {
 
     @Override
     protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        boolean isActive = menu.isActive();
+        boolean isActive = this.getMenu().isActive();
         pGuiGraphics.blit(TEXTURE, super.getX(), super.getY(),
                 isActive ? 0 : 22,
                 super.isHovered() ? 44 : 22,
@@ -38,17 +38,21 @@ public class ActiveModeButton extends AbstractMachineButton {
     }
 
     private Component getToggleText() {
-        boolean isActive = menu.isActive();
+        boolean isActive = this.getMenu().isActive();
         return TOGGLE.withParam(isActive ? OFF : ON);
     }
 
     @Override
-    public void onClick(double pMouseX, double pMouseY) {
+    public void onClick(double pMouseX, double pMouseY, int button) {
         MachineActiveTogglePacket.send();
     }
 
     @Override
     public void playDownSound(SoundManager pHandler) {
-        pHandler.play(SimpleSoundInstance.forUI(Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.wooden_button.click_" + (menu.isActive() ? "on" : "off")))), 1));
+        pHandler.play(SimpleSoundInstance.forUI(Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.wooden_button.click_" + (this.getMenu().isActive() ? "on" : "off")))), 1));
+    }
+
+    private AbstractMachineMenu getMenu() {
+        return ((AbstractMachineMenu) super.menu);
     }
 }

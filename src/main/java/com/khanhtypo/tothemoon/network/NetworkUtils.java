@@ -1,16 +1,15 @@
 package com.khanhtypo.tothemoon.network;
 
-import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.utls.ModUtils;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoader;
-import net.minecraftforge.fml.loading.moddiscovery.ModFile;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
+import java.util.Optional;
+
 public final class NetworkUtils {
-    public static final SimpleChannel CHANNEL_INSTANCE = createChannel();
     public static final String PROTOCOL_VERSION = "1.0";
+    public static final SimpleChannel CHANNEL_INSTANCE = createChannel();
 
     private NetworkUtils() {
     }
@@ -23,8 +22,8 @@ public final class NetworkUtils {
                 s -> s.equals(PROTOCOL_VERSION)
         );
 
-        channel.registerMessage(0, MachineActiveTogglePacket.class, MachineActiveTogglePacket::write, MachineActiveTogglePacket::read, MachineActiveTogglePacket::handle);
-        channel.registerMessage(1, RedstoneModeTogglePacket.class, RedstoneModeTogglePacket::write, RedstoneModeTogglePacket::read, RedstoneModeTogglePacket::handle);
+        channel.registerMessage(0, MachineActiveTogglePacket.class, MachineActiveTogglePacket::write, MachineActiveTogglePacket::read, MachineActiveTogglePacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        channel.registerMessage(1, RedstoneModeTogglePacket.class, RedstoneModeTogglePacket::write, RedstoneModeTogglePacket::read, RedstoneModeTogglePacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
         return channel;
     }
 }

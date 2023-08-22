@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
-import com.khanhtypo.tothemoon.ToTheMoon;
+import com.khanhtypo.tothemoon.common.capability.PowerStorage;
 import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import com.khanhtypo.tothemoon.utls.ModUtils;
@@ -16,13 +16,12 @@ import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.common.util.NonNullSupplier;
-import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
@@ -31,14 +30,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity implements ImplementedWorldlyContainer, TickableBlockEntity {
+@SuppressWarnings("SameParameterValue")
+public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity implements ImplementedContainer, TickableBlockEntity {
     private static final Direction[] allDirection = Direction.values();
-    public final EnergyStorage energyStorage;
-    //TODO : add save and load implementation
+    public final PowerStorage energyStorage;
     private final SavableSimpleContainer container;
     private final ContainerData containerData;
-    @Nonnull
-    private final NonNullConsumer<IEnergyStorage> extractLogic = this::extractEnergy;
     public boolean active;
     public MachineRedstoneMode redstoneMode;
     protected LazyOptional<IEnergyStorage> energyHolder;
@@ -48,7 +45,7 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
                                     BlockPos blockPos,
                                     BlockState blockState,
                                     int containerSize,
-                                    EnergyStorage energyStorage,
+                                    PowerStorage energyStorage,
                                     Function<AbstractPowerBlockEntity, ContainerData> dataConstructor) {
         super(blockEntity.get(), blockPos, blockState);
         this.container = new SavableSimpleContainer(this, containerSize);
@@ -68,18 +65,32 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
         return i == 1;
     }
 
-    protected static <T extends Comparable<T>> void setBlockState(Level level, BlockPos pos, BlockState blockState, Property<T> property, T value) {
-        setBlockState(level, pos, blockState, property, value, false);
-    }
-
     protected static <T extends Comparable<T>> void setBlockState(Level level, BlockPos pos, BlockState blockState, Property<T> property, T value, boolean checkPresent) {
         ModUtils.changeBlockState(level, pos, blockState, property, value, checkPresent);
+    }
+
+    public static void tryExtractEnergyToNeighbour(IEnergyStorage from, Level level, BlockPos pos) {
+        if (from.canExtract()) {
+            for (Direction direction : allDirection) {
+                ICapabilityProvider provider = level.getBlockEntity(pos.relative(direction));
+                if (provider != null) {
+                    LazyOptional<IEnergyStorage> energyStorageLazyOptional = provider.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite());
+                    energyStorageLazyOptional.filter(IEnergyStorage::canReceive).ifPresent(energyStorage -> {
+                        int receiveEnergy = energyStorage.receiveEnergy(from.getEnergyStored(), true);
+                        if (receiveEnergy > 0) {
+                            energyStorage.receiveEnergy(from.extractEnergy(receiveEnergy, false), false);
+                        }
+                    });
+                    return;
+                }
+            }
+        }
     }
 
     @Override
     public final void serverTick(Level level, BlockPos pos, BlockState blockState) {
         if (this.energyStorage.canExtract())
-            this.tryExtractEnergy(level, pos);
+            tryExtractEnergyToNeighbour(this.energyStorage, level, pos);
 
         if (isActive() && this.redstoneMode.canMachineWork(level, pos)) {
             this.tick(level, pos, blockState);
@@ -95,24 +106,6 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
     }
 
     protected abstract void tick(Level level, BlockPos pos, BlockState blockState);
-
-    public void tryExtractEnergy(Level level, BlockPos pos) {
-        if (this.energyStorage.canExtract()) {
-            for (Direction direction : allDirection) {
-                ICapabilityProvider provider = level.getBlockEntity(pos.relative(direction));
-                if (provider != null) {
-                    LazyOptional<IEnergyStorage> energyStorageLazyOptional = provider.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite());
-                    energyStorageLazyOptional.ifPresent(this.extractLogic);
-                }
-            }
-        }
-    }
-
-    public void extractEnergy(IEnergyStorage energyStorage) {
-        if (energyStorage.canReceive()) {
-            this.energyStorage.extractEnergy(energyStorage.receiveEnergy(this.getPowerSpace(), false), false);
-        }
-    }
 
     public int getPowerSpace() {
         return this.energyStorage.getMaxEnergyStored() - this.energyStorage.getEnergyStored();
@@ -130,20 +123,16 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
 
     @Override
     @Nonnull
-    @SuppressWarnings("unchecked")
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
         if (!super.remove) {
             if (cap == ForgeCapabilities.ENERGY) {
                 return this.energyHolder.cast();
             } else if (side != null && cap == ForgeCapabilities.ITEM_HANDLER) {
-                return (LazyOptional<T>) this.getHandlerForEachFace(side);
+                return this.itemHolder.cast();
             }
         }
         return super.getCapability(cap, side);
     }
-
-    protected abstract LazyOptional<IItemHandler> getHandlerForEachFace(Direction side);
-
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
@@ -186,5 +175,22 @@ public abstract class AbstractPowerBlockEntity extends BaseContainerBlockEntity 
 
     public ContainerData getContainerData() {
         return containerData;
+    }
+
+
+    protected int getBurnTime(ItemStack stack) {
+        return ForgeHooks.getBurnTime(stack, null);
+    }
+
+    protected int getBurnTime(int slot) {
+        return this.getBurnTime(this.getItem(slot));
+    }
+
+    protected boolean canBurn(ItemStack stack) {
+        return this.getBurnTime(stack) > 0;
+    }
+
+    protected boolean canBurn(int slot) {
+        return this.canBurn(this.getItem(slot));
     }
 }

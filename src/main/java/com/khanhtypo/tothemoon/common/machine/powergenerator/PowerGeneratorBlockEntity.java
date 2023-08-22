@@ -1,10 +1,10 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
-import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.SingleItemPowerBlockEntity;
-import com.khanhtypo.tothemoon.common.capability.GeneratableEnergyStorage;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractPowerBlockEntity;
+import com.khanhtypo.tothemoon.common.capability.GeneratablePowerStorage;
 import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
+import com.khanhtypo.tothemoon.registration.ModBlockEntities;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -14,21 +14,23 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Objects;
+import java.util.Optional;
 
-public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
+public class PowerGeneratorBlockEntity extends AbstractPowerBlockEntity {
     public static final int DATA_SIZE = 9;
-    protected final GeneratableEnergyStorage energyStorage;
+    protected final GeneratablePowerStorage energyStorage;
     private final int generationPerTick;
     private int burningTime;
     private int burningDuration;
     private int fuelConsumeDuration;
     private int fuelConsumeTime;
 
-    public PowerGeneratorBlockEntity(BlockEntityObject<? extends SingleItemPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, int powerCapacity, int generationPerTick) {
-        super(blockEntity, blockPos, blockState, new GeneratableEnergyStorage(powerCapacity),
+    public PowerGeneratorBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, PowerGeneratorLevels generatorLevel) {
+        super(blockEntity, blockPos, blockState, 1, new GeneratablePowerStorage(generatorLevel.capacity),
                 be -> new ContainerData() {
                     @Override
                     public int get(int pIndex) {
@@ -61,8 +63,12 @@ public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
                     }
                 }
         );
-        this.generationPerTick = generationPerTick;
-        this.energyStorage = ((GeneratableEnergyStorage) super.energyStorage);
+        this.generationPerTick = generatorLevel.generationPerTick;
+        this.energyStorage = ((GeneratablePowerStorage) super.energyStorage);
+    }
+
+    public static BlockEntityType.BlockEntitySupplier<PowerGeneratorBlockEntity> createSupplier() {
+        return (blockPos, blockState) -> new PowerGeneratorBlockEntity(ModBlockEntities.POWER_GENERATOR, blockPos, blockState, Optional.of(blockState.getBlock()).filter(block -> block instanceof PowerGeneratorBlock).map(g -> ((PowerGeneratorBlock) g).getGeneratorLevel()).orElseThrow());
     }
 
     @Override
@@ -81,7 +87,7 @@ public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
         } else if (super.getPowerSpace() > 0) {
             if (this.isSlotPresent(0) && super.canBurn(0)) {
                 this.burningTime = this.burningDuration = super.getBurnTime(0);
-                this.fuelConsumeDuration = 20;
+                //this.fuelConsumeDuration = 20;
                 this.fuelConsumeTime = 0;
                 super.shrinkItem(0, 1);
                 litState = true;
@@ -92,6 +98,10 @@ public class PowerGeneratorBlockEntity extends SingleItemPowerBlockEntity {
             blockState = blockState.setValue(FunctionalBlock.LIT, litState);
             level.setBlock(pos, blockState, 3);
         }
+    }
+
+    private void setFuelConsumeDuration(int value) {
+        this.fuelConsumeTime = value;
     }
 
     public int getEnergyGenerated() {

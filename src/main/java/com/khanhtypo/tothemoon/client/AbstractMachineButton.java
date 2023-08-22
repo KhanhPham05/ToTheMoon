@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.client;
 
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
-import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -15,12 +15,12 @@ import net.minecraft.resources.ResourceLocation;
 public abstract class AbstractMachineButton extends AbstractWidget {
     protected static final ResourceLocation TEXTURE = MenuObject.texturePath("buttons");
     protected final Font font;
-    protected final AbstractMachineMenu menu;
+    protected final BaseMenu menu;
     protected final AbstractContainerScreen<?> screen;
     protected final Minecraft minecraft;
     protected final int dataGetterIndex;
 
-    public AbstractMachineButton(int x, int y, AbstractMachineMenu menu, BasicScreen<?> screen, int dataGetterIndex) {
+    public AbstractMachineButton(int x, int y, BaseMenu menu, BasicScreen<?> screen, int dataGetterIndex) {
         super(x, y, 22, 22, Component.nullToEmpty(null));
         this.menu = menu;
         this.screen = screen;
@@ -36,7 +36,7 @@ public abstract class AbstractMachineButton extends AbstractWidget {
     protected abstract void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick);
 
     @Override
-    public abstract void onClick(double pMouseX, double pMouseY);
+    public abstract void onClick(double pMouseX, double pMouseY, int button);
 
     @Override
     protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {

@@ -28,7 +28,7 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
         var savedContainer = ContainerHelper.saveAllItems(new CompoundTag(), this.items);
         writer.put(tagName, savedContainer);
         this.setChanged();
-        ToTheMoon.LOGGER.info("Container : %s saved".formatted(tagName));
+        //ToTheMoon.LOGGER.info("Container : %s saved".formatted(tagName));
         return writer;
     }
 
@@ -41,7 +41,7 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
             CompoundTag containerTag = reader.getCompound(tagName);
             ContainerHelper.loadAllItems(containerTag, this.items);
             this.setChanged();
-            ToTheMoon.LOGGER.info("Container : " + tagName + " loaded");
+            //ToTheMoon.LOGGER.info("Container : " + tagName + " loaded");
             return;
         }
 
@@ -75,7 +75,7 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-        var removed =  ContainerHelper.removeItem(this.items, pSlot, pAmount);
+        var removed = ContainerHelper.removeItem(this.items, pSlot, pAmount);
 
         if (!removed.isEmpty()) this.setChanged();
 
@@ -132,7 +132,4 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
         return this.isSlotEmpty(slot) || this.getSlotSpace(slot) > 0;
     }
 
-    public void setAllEmpty() {
-        this.items.forEach(i -> i.setCount(0));
-    }
 }

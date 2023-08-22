@@ -18,7 +18,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 base.archivesName = 'tothemoon'
 group = 'com.khanhtypo'
-version = "2.0"
+version = "${mc_version}-2.0"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -116,6 +116,7 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4574361")
     implementation fg.deobf("curse.maven:the-one-probe-245211:4629624")
+    runtimeOnly fg.deobf("curse.maven:item-nbt-viewer-514135:4578522")
 
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
@@ -126,9 +127,7 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:pipez-443900:4678952")
 
-    def core = "curse.maven:zerocore-247921:4658270"
-    runtimeOnly fg.deobf(core)
-    compileOnly fg.deobf(core)
+    implementation fg.deobf("curse.maven:zerocore-247921:4658270")
 
     runtimeOnly fg.deobf("curse.maven:extreme-reactors-250277:4659595")
 

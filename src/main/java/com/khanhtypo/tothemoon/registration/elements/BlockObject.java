@@ -3,8 +3,8 @@ package com.khanhtypo.tothemoon.registration.elements;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.bases.IngredientProvider;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
@@ -16,17 +16,18 @@ import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class BlockObject<T extends Block> implements ObjectSupplier<T>, IngredientProvider {
-    public static final Set<BlockObject<? extends Block>> BLOCK_SET = new HashSet<>();
-    private final RegistryObject<T> object;
-    @Nullable private MutableComponent translateName = null;
+    public static final Set<BlockObject<? extends Block>> BLOCK_SET = ModUtils.resourceSortedSet();
     private static final BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+    private final RegistryObject<T> object;
+    @Nullable
+    private MutableComponent translateName = null;
+    private int maxStackSize = 64;
+
     public BlockObject(String name, Supplier<T> blockSupplier) {
         this(ModRegistries.BLOCKS.register(name, blockSupplier));
     }
@@ -91,4 +92,12 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
         return this.isSame(level, mutableBlockPos.set(x, y, z));
     }
 
+    public int getMaxStackSize() {
+        return maxStackSize;
+    }
+
+    public BlockObject<T> setMaxStackSize(int maxStackSize) {
+        this.maxStackSize = maxStackSize;
+        return this;
+    }
 }

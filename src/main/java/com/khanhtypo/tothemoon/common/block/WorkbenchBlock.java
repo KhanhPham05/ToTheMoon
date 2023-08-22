@@ -35,7 +35,7 @@ public class WorkbenchBlock extends ContainerBlock {
     }
 
     public WorkbenchBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_PLANKS).sound(SoundType.WOOD), ModMenuTypes.WORKBENCH);
+        super(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_PLANKS).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY), ModMenuTypes.WORKBENCH);
         super.registerDefaultState(super.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(IS_RIGHT, true));
         INSTANCE = this;
     }
@@ -75,11 +75,6 @@ public class WorkbenchBlock extends ContainerBlock {
         Direction facingDirection = p_49820_.getHorizontalDirection().getOpposite();
         BlockPos leftPos = p_49820_.getClickedPos().relative(getLeftDirection(facingDirection));
         return p_49820_.getLevel().getBlockState(leftPos).canBeReplaced() && p_49820_.getLevel().isInWorldBounds(p_49820_.getClickedPos()) ? super.defaultBlockState().setValue(FACING, facingDirection).setValue(IS_RIGHT, true) : null;
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState p_60584_) {
-        return PushReaction.DESTROY;
     }
 
     @Override

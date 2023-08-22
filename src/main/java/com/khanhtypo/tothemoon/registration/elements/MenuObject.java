@@ -1,20 +1,19 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
-import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AccessibleMenuSupplier;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.ModStats;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -64,21 +63,11 @@ public class MenuObject<T extends BaseMenu> extends SimpleObjectSupplier<MenuTyp
     }
 
 
-    public void openScreen(Player player, Level level, BlockPos clickedPos) {
+    public void openScreen(Player player, Level level, BlockPos clickedPos, MutableComponent name) {
         if (player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.openMenu(
-                    new SimpleMenuProvider(
-                            (id, inv, p) -> this.createMenu(id, inv, level, clickedPos),
-                            level.getBlockState(clickedPos).getBlock().getName()
-                    )
-            );
+            serverPlayer.openMenu(new SimpleMenuProvider((id, inv, p) -> this.menuSupplier.create(id, inv, ContainerLevelAccess.create(level, clickedPos)), name));
             this.awardOpenScreen(player);
         }
-    }
-
-    @Nullable
-    public T createMenu(int window, Inventory inventory, @Nullable Level level, BlockPos blockPos) {
-        return level instanceof ServerLevel ? this.menuSupplier.create(window, inventory, ContainerLevelAccess.create(level, blockPos)) : null;
     }
 
     @Nullable

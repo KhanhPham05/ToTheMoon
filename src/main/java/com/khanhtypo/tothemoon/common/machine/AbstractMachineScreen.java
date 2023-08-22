@@ -20,8 +20,6 @@ public abstract class AbstractMachineScreen<T extends AbstractMachineMenu> exten
     public AbstractMachineScreen(T menu, Inventory inventory, Component component, int imageWidth, int imageHeight) {
         super(menu, inventory, component, imageWidth, imageHeight);
     }
-
-
     @Override
     protected void addExtraButtons() {
         super.addRenderableWidget(new ActiveModeButton(super.getMenu(), this));

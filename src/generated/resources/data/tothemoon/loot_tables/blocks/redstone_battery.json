@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Energy",
+                  "target": "BatteryData.Energy"
+                }
+              ],
+              "source": "block_entity"
+            },
+            {
+              "block": "tothemoon:redstone_battery",
+              "function": "minecraft:copy_state",
+              "properties": [
+                "battery_level"
+              ]
+            }
+          ],
+          "name": "tothemoon:redstone_battery"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "tothemoon:blocks/redstone_battery"
+}

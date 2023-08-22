@@ -21,9 +21,9 @@ public class ContainerBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState p_60503_, Level level, BlockPos clickedPos, Player p_60506_, InteractionHand p_60507_, BlockHitResult p_60508_) {
+    public InteractionResult use(BlockState pState, Level level, BlockPos clickedPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!level.isClientSide()) {
-            this.menuObject.openScreen(p_60506_, level, clickedPos);
+            this.menuObject.openScreen(pPlayer, level, clickedPos, super.getName());
             return InteractionResult.CONSUME;
         }
 

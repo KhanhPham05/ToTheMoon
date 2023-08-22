@@ -39,7 +39,7 @@ public class RedstoneModeToggleButton extends AbstractMachineButton {
     }
 
     @Override
-    public void onClick(double pMouseX, double pMouseY) {
+    public void onClick(double pMouseX, double pMouseY, int button) {
         int currentModeIndex = super.menu.getData(super.dataGetterIndex);
         ToTheMoon.CHANNEL.sendToServer(new RedstoneModeTogglePacket(MachineRedstoneMode.valueFromIndex(currentModeIndex < 2 ? currentModeIndex + 1 : 0)));
     }

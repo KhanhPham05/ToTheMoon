@@ -1,9 +1,7 @@
 package com.khanhtypo.tothemoon.common.capability;
 
-import net.minecraftforge.energy.EnergyStorage;
-
-public class GeneratableEnergyStorage extends EnergyStorage {
-    public GeneratableEnergyStorage(int capacity) {
+public class GeneratablePowerStorage extends PowerStorage {
+    public GeneratablePowerStorage(int capacity) {
         super(capacity);
     }
 

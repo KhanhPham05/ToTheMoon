@@ -12,12 +12,20 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Consumer;
+
 public class TickableEntityBlock<T extends BlockEntity & TickableBlockEntity> extends BaseEntityBlock {
     protected final BlockEntityObject<T> blockEntityObject;
 
-    public TickableEntityBlock(Properties p_49795_, BlockEntityObject<T> blockEntityObject) {
-        super(p_49795_);
+    public TickableEntityBlock(Properties pProperties, BlockEntityObject<T> blockEntityObject) {
+        super(pProperties);
         this.blockEntityObject = blockEntityObject;
+    }
+
+    protected final void registerDefaultState(Consumer<BlockState> defaultState) {
+        BlockState state = super.stateDefinition.any();
+        defaultState.accept(state);
+        super.registerDefaultState(state);
     }
 
     @Nullable
@@ -34,6 +42,6 @@ public class TickableEntityBlock<T extends BlockEntity & TickableBlockEntity> ex
     @Nullable
     @Override
     public <A extends BlockEntity> BlockEntityTicker<A> getTicker(Level level, BlockState blockState, BlockEntityType<A> blockEntityType) {
-        return level.isClientSide() ? null :  createTickerHelper(blockEntityType, this.blockEntityObject.get(), TickableBlockEntity::tick);
+        return level.isClientSide() ? null : createTickerHelper(blockEntityType, this.blockEntityObject.get(), TickableBlockEntity::tick);
     }
 }

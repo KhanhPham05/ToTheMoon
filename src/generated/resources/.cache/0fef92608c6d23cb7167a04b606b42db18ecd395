@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-16T19:06:35.4147605	Item Models: tothemoon
+// 1.20.1	2023-08-19T21:22:06.7263452	Item Models: tothemoon
 24fd7dd9f1551d84d7384679c66e33d5199dddb1 assets/tothemoon/models/item/amethyst_dust.json
 42842dbf924c22f3de851ca7ca41d0de15dd5059 assets/tothemoon/models/item/amethyst_gear.json
 7f6762d39438071bcf5805157cfc92d29c294ec9 assets/tothemoon/models/item/amethyst_plate.json
@@ -121,6 +121,7 @@ dc244e00284aed0f1bf5c277c25609e4075aece7 assets/tothemoon/models/item/raw_uraniu
 75a6c1ca9808ba99511198c836c5c967a7c0e9dd assets/tothemoon/models/item/raw_uranium_chunk.json
 fd2fc4622e3cefb85f5e7dc985306420cf932826 assets/tothemoon/models/item/raw_zirconium.json
 a076ed700925387e9301042489ce78b376ea7cc9 assets/tothemoon/models/item/raw_zirconium_block.json
+207315d3360b253c2253b3c29f0d578b2f40844e assets/tothemoon/models/item/redstone_battery.json
 f58906fd3d7531ec91f1d5331129497a86818229 assets/tothemoon/models/item/redstone_metal_block.json
 853abc201468cda55e748538e8cd87cad710630a assets/tothemoon/models/item/redstone_metal_dust.json
 20bd920f17e402447b242a79664fbda8d3b47ebb assets/tothemoon/models/item/redstone_metal_gear.json
@@ -152,7 +153,9 @@ e992367481b9744b8680c3326cb79fd8810e0320 assets/tothemoon/models/item/smooth_met
 e18361e462f660a54a08b20903322a416c20bed3 assets/tothemoon/models/item/smooth_meteorite_stairs.json
 e035779f4c5082693f7c9ea836328935d8bc21aa assets/tothemoon/models/item/smooth_meteorite_wall.json
 90ca5ef0c44736c854d762e5cb415e9f112dd7b3 assets/tothemoon/models/item/smooth_purified_quartz_block.json
+5fe3a3d5492edf78f8a4aa9b3d03f8e1c48bb1d3 assets/tothemoon/models/item/standard_battery.json
 7c090d8e25895f40a8511c36ca090ef15915854c assets/tothemoon/models/item/steel_axe.json
+c042518bcc70db98327ea0dc2ff9352e7157951c assets/tothemoon/models/item/steel_battery.json
 4a02aa9600df26ad0c0bf66897493d0900df0a88 assets/tothemoon/models/item/steel_block.json
 c65ce0011add816ddde1d2d3b139a0c868b26ee0 assets/tothemoon/models/item/steel_boots.json
 81a83b13eb2508deb2a5edd9a4efefa5ea87d482 assets/tothemoon/models/item/steel_chestplate.json

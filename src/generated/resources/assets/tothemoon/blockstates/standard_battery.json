@@ -1,0 +1,169 @@
+{
+  "variants": {
+    "battery_level=0,facing=east": {
+      "model": "tothemoon:block/standard_battery",
+      "y": 90
+    },
+    "battery_level=0,facing=north": {
+      "model": "tothemoon:block/standard_battery"
+    },
+    "battery_level=0,facing=south": {
+      "model": "tothemoon:block/standard_battery",
+      "y": 180
+    },
+    "battery_level=0,facing=west": {
+      "model": "tothemoon:block/standard_battery",
+      "y": 270
+    },
+    "battery_level=1,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_1",
+      "y": 90
+    },
+    "battery_level=1,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_1"
+    },
+    "battery_level=1,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_1",
+      "y": 180
+    },
+    "battery_level=1,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_1",
+      "y": 270
+    },
+    "battery_level=10,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_10",
+      "y": 90
+    },
+    "battery_level=10,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_10"
+    },
+    "battery_level=10,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_10",
+      "y": 180
+    },
+    "battery_level=10,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_10",
+      "y": 270
+    },
+    "battery_level=2,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_2",
+      "y": 90
+    },
+    "battery_level=2,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_2"
+    },
+    "battery_level=2,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_2",
+      "y": 180
+    },
+    "battery_level=2,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_2",
+      "y": 270
+    },
+    "battery_level=3,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_3",
+      "y": 90
+    },
+    "battery_level=3,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_3"
+    },
+    "battery_level=3,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_3",
+      "y": 180
+    },
+    "battery_level=3,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_3",
+      "y": 270
+    },
+    "battery_level=4,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_4",
+      "y": 90
+    },
+    "battery_level=4,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_4"
+    },
+    "battery_level=4,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_4",
+      "y": 180
+    },
+    "battery_level=4,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_4",
+      "y": 270
+    },
+    "battery_level=5,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_5",
+      "y": 90
+    },
+    "battery_level=5,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_5"
+    },
+    "battery_level=5,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_5",
+      "y": 180
+    },
+    "battery_level=5,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_5",
+      "y": 270
+    },
+    "battery_level=6,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_6",
+      "y": 90
+    },
+    "battery_level=6,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_6"
+    },
+    "battery_level=6,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_6",
+      "y": 180
+    },
+    "battery_level=6,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_6",
+      "y": 270
+    },
+    "battery_level=7,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_7",
+      "y": 90
+    },
+    "battery_level=7,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_7"
+    },
+    "battery_level=7,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_7",
+      "y": 180
+    },
+    "battery_level=7,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_7",
+      "y": 270
+    },
+    "battery_level=8,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_8",
+      "y": 90
+    },
+    "battery_level=8,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_8"
+    },
+    "battery_level=8,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_8",
+      "y": 180
+    },
+    "battery_level=8,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_8",
+      "y": 270
+    },
+    "battery_level=9,facing=east": {
+      "model": "tothemoon:block/standard_battery_level_9",
+      "y": 90
+    },
+    "battery_level=9,facing=north": {
+      "model": "tothemoon:block/standard_battery_level_9"
+    },
+    "battery_level=9,facing=south": {
+      "model": "tothemoon:block/standard_battery_level_9",
+      "y": 180
+    },
+    "battery_level=9,facing=west": {
+      "model": "tothemoon:block/standard_battery_level_9",
+      "y": 270
+    }
+  }
+}

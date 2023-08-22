@@ -1,11 +1,10 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
 import net.minecraft.world.Container;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-public interface ImplementedWorldlyContainer extends Container, WorldlyContainer {
+public interface ImplementedContainer extends Container {
     @Override
     default int getContainerSize() {
         return this.getContainer().getContainerSize();

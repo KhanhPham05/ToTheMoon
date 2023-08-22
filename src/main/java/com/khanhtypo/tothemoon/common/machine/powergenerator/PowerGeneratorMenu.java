@@ -1,9 +1,9 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
-import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
-import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.client.SlotUtils;
+import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,6 +18,7 @@ import java.util.function.Predicate;
 
 public class PowerGeneratorMenu extends AbstractMachineMenu {
     private static final Predicate<ItemStack> burnCheck = ModUtils::canBurn;
+
 
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
         this(windowId, playerInventory, accessor, new SimpleContainer(1), new SimpleContainerData(PowerGeneratorBlockEntity.DATA_SIZE));
@@ -40,8 +41,11 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
                 if (!super.moveItemStackTo(itemStack1, 1, super.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!super.moveItemStackTo(itemStack1, 0, 1, false)) {
-                return ItemStack.EMPTY;
+            } else {
+
+                if (!super.moveItemStackTo(itemStack1, 0, 1, false)) {
+                    return ItemStack.EMPTY;
+                }
             }
 
 

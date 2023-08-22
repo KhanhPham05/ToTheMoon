@@ -1,6 +1,7 @@
 package com.khanhtypo.tothemoon.data.c;
 
 import com.google.common.base.Preconditions;
+import com.khanhtypo.tothemoon.common.battery.BatteryBlock;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
@@ -28,8 +29,6 @@ import static com.khanhtypo.tothemoon.registration.ModBlocks.*;
 @SuppressWarnings("SameParameterValue")
 public class ModBlockStateAndModelGenerator extends BlockStateProvider {
     protected static final ExistingFileHelper.ResourceType TEXTURE = new ExistingFileHelper.ResourceType(PackType.CLIENT_RESOURCES, ".png", "textures");
-    private static final Consumer<ConfiguredModel.Builder<?>> NO_ACTION = b -> {
-    };
     private final ItemModelProvider itemModelProvider;
     private final ExistingFileHelper fileHelper;
     private final Map<Direction, Integer> yRotationMap = Util.make(new HashMap<>(), map -> {
@@ -107,6 +106,9 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.simpleBlock(NETHER_BRICKS_EMPTY_ACCEPTOR);
         this.multiblockAcceptor(BLACKSTONE_ITEM_ACCEPTOR);
         this.multiblockAcceptor(NETHER_BRICKS_ITEM_ACCEPTOR);
+        this.batteryBlock(STANDARD_BATTERY);
+        this.batteryBlock(REDSTONE_BATTERY);
+        this.batteryBlock(STEEL_BATTERY);
         this.notSimple();
     }
 
@@ -148,6 +150,25 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.itemModelProvider.withExistingParent(BLACK_STONE_FURNACE_CONTROLLER.getId().getPath(), modLoc("block/blackstone_furnace_controller"));
     }
 
+    private void batteryBlock(BlockObject<?> batteryBlockObject) {
+        ResourceLocation saveLocation = batteryBlockObject.getId().withPrefix("block/");
+        ResourceLocation textureRootPath = batteryBlockObject.getId().withPrefix("block/battery/");
+
+        super.getVariantBuilder(batteryBlockObject.get()).forAllStates(state -> {
+            int level = state.getValue(BatteryBlock.ENERGY_LEVEL);
+            var blockModel = this.models().orientableWithBottom(
+                    saveLocation.withSuffix(level != 0 ? "_level_" + level : "").getPath(),
+                    this.texturePreExist(textureRootPath.withSuffix("_side")),
+                    this.texturePreExist(textureRootPath.withSuffix("/" + level)),
+                    this.texturePreExist(textureRootPath.withSuffix("_bottom")),
+                    this.texturePreExist(textureRootPath.withSuffix("_top"))
+            );
+            return this.configuredModel(blockModel.getLocation(), false, builder -> builder.rotationY(this.yRotationMap.get(state.getValue(HorizontalDirectionalBlock.FACING))));
+        });
+
+        this.itemModelProvider.withExistingParent(batteryBlockObject.getId().getPath(), saveLocation);
+    }
+
     private void multiblockAcceptor(BlockObject<?> blockObject) {
         simpleBlock(blockObject);
     }
@@ -159,8 +180,8 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         final ResourceLocation side = this.texturePreExist(super.modLoc("block/energy_generator_side"));
 
         super.getVariantBuilder(blockSupplier.get()).forAllStates(blockState -> {
-            boolean on = blockState.getValue(FunctionalBlock.LIT);
-            Direction facing = blockState.getValue(FunctionalBlock.FACING);
+            boolean on = blockState.getValue(BlockStateProperties.LIT);
+            Direction facing = blockState.getValue(HorizontalDirectionalBlock.FACING);
             BlockModelBuilder model = super.models().orientable(
                     (on ? frontOnLocation : frontOffLocation).getPath(),
                     side,

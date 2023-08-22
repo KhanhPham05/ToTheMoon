@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
+import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.MenuProvider;
@@ -25,6 +26,7 @@ public class BlockEntityObject<T extends BlockEntity> extends SimpleObjectSuppli
     @Nonnull
     @SafeVarargs
     public static <B extends BlockEntity> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block>... blocks) {
+        Preconditions.checkState(blocks.length > 0);
         return new BlockEntityObject<>(name, () -> BlockEntityType.Builder.of(constructor, Arrays.stream(blocks).map(Supplier::get).toArray(Block[]::new)).build(null));
     }
 

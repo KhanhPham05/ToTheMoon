@@ -1,7 +1,11 @@
 package com.khanhtypo.tothemoon.registration;
 
+import com.khanhtypo.tothemoon.common.battery.BatteryBlock;
+import com.khanhtypo.tothemoon.common.battery.BatteryLevel;
 import com.khanhtypo.tothemoon.common.block.*;
+import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlock;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
+import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorLevels;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BaseBlackStoneFurnacePartBlock;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BlackStoneFurnaceAcceptorVariants;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.BlackStoneFurnaceFurnacePartTypes;
@@ -91,16 +95,19 @@ public class ModBlocks {
     public static final BasicBlockObject ZIRCONIUM_ALLOY_BLOCK = new BasicBlockObject("zirconium_alloy_block", Blocks.IRON_BLOCK);
     public static final BasicBlockObject ZIRCONIUM_BLOCK = new BasicBlockObject("zirconium_block", Blocks.IRON_BLOCK);
     public static final BlockObject<WorkbenchBlock> WORKBENCH = new BlockObject<>("workbench", WorkbenchBlock::new);
-    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> COPPER_POWER_GENERATOR = new BlockObject<>("copper_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.METAL).strength(2.5f), ModBlockEntities.COPPER_POWER_GENERATOR));
-    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> IRON_POWER_GENERATOR = new BlockObject<>("iron_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.IRON_POWER_GENERATOR));
-    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> GOLD_POWER_GENERATOR = new BlockObject<>("gold_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.GOLD_POWER_GENERATOR));
-    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> DIAMOND_POWER_GENERATOR = new BlockObject<>("diamond_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.DIAMOND_POWER_GENERATOR));
-    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> NETHERITE_POWER_GENERATOR = new BlockObject<>("netherite_power_generator", () -> new FunctionalBlock<>(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), ModBlockEntities.NETHERITE_POWER_GENERATOR));
+    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> COPPER_POWER_GENERATOR = new BlockObject<>("copper_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.METAL).strength(2.5f), PowerGeneratorLevels.COPPER));
+    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> IRON_POWER_GENERATOR = new BlockObject<>("iron_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.IRON));
+    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> GOLD_POWER_GENERATOR = new BlockObject<>("gold_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.GOLD));
+    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> DIAMOND_POWER_GENERATOR = new BlockObject<>("diamond_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.DIAMOND));
+    public static final BlockObject<FunctionalBlock<PowerGeneratorBlockEntity>> NETHERITE_POWER_GENERATOR = new BlockObject<>("netherite_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.NETHERITE));
     public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACK_STONE_FURNACE_CONTROLLER = new BlockObject<>("blackstone_furnace_controller", BlackStoneFurnaceFurnacePartTypes.CONTROLLER::createBlock);
     public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_EMPTY_ACCEPTOR = new BlockObject<>("blackstone_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE));
     public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_EMPTY_ACCEPTOR = new BlockObject<>("nether_brick_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK));
     public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_ITEM_ACCEPTOR = new BlockObject<>("blackstone_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE));
     public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_ITEM_ACCEPTOR = new BlockObject<>("nether_brick_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK));
+    public static final BlockObject<BatteryBlock> STANDARD_BATTERY = new BlockObject<>("standard_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.METAL), BatteryLevel.STANDARD));
+    public static final BlockObject<BatteryBlock> REDSTONE_BATTERY = new BlockObject<>("redstone_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(REDSTONE_METAL_BLOCK.get()), BatteryLevel.REDSTONE));
+    public static final BlockObject<BatteryBlock> STEEL_BATTERY = new BlockObject<>("steel_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(STEEL_SHEET_BLOCK.get()), BatteryLevel.STEEL));
 
     static void staticInit() {
     }
