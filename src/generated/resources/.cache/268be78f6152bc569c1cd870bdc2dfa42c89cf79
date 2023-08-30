@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-15T19:08:53.0329498	Tags for minecraft:item mod id tothemoon
+// 1.20.1	2023-08-29T10:56:13.2746103	Tags for minecraft:item mod id tothemoon
 cb426c6e5e9186342ac3c86fc027ceb3bd1f0950 data/forge/tags/items/armors/boots.json
 9cd57bd93b896beb521176cdbbdef105b2b1b683 data/forge/tags/items/armors/boots/redstone_steel.json
 fca5d5e494bf0c43a282415b0b446109ad06861c data/forge/tags/items/armors/boots/steel.json
@@ -130,6 +130,8 @@ ca47224ff0d1291d87b791a42c954578d37944d5 data/minecraft/tags/items/swords.json
 e7359de4f103d44fefa2dc8c0571ceaec849caa8 data/tothemoon/tags/items/hammers/netherite.json
 eee3b41c1a4916255d1ba35d61f39a520611dd79 data/tothemoon/tags/items/hammers/steel.json
 0bc130397df28fa7723ad5922ef0cfcc903f6dd2 data/tothemoon/tags/items/hammers/wooden.json
+5d161e95d0330a61fd9f6d361fad1965ae649e2e data/tothemoon/tags/items/machine_upgrades.json
+468cece2cbb58949acb7fc813655b8563ff3aba9 data/tothemoon/tags/items/machine_upgrades/power_generators.json
 3880bed0766af0fa11db53a6f07a272729e0cff0 data/tothemoon/tags/items/metal_press_molds.json
 191a08b1f339d67e10b8e02bde7f0dc803d8de37 data/tothemoon/tags/items/metal_press_molds/blank.json
 5a19c5839f826b42ac5045bd206ab2f55c8e509f data/tothemoon/tags/items/metal_press_molds/gear.json

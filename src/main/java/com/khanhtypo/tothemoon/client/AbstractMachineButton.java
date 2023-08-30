@@ -19,6 +19,8 @@ public abstract class AbstractMachineButton extends AbstractWidget {
     protected final AbstractContainerScreen<?> screen;
     protected final Minecraft minecraft;
     protected final int dataGetterIndex;
+    private final int defaultX;
+    private final int defaultY;
 
     public AbstractMachineButton(int x, int y, BaseMenu menu, BasicScreen<?> screen, int dataGetterIndex) {
         super(x, y, 22, 22, Component.nullToEmpty(null));
@@ -27,6 +29,8 @@ public abstract class AbstractMachineButton extends AbstractWidget {
         this.minecraft = screen.getMinecraft();
         this.dataGetterIndex = dataGetterIndex;
         this.font = this.minecraft.font;
+        this.defaultX = x;
+        this.defaultY = y;
     }
 
     @Override
@@ -41,5 +45,13 @@ public abstract class AbstractMachineButton extends AbstractWidget {
     @Override
     protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
         super.defaultButtonNarrationText(pNarrationElementOutput);
+    }
+
+    public int getDefaultX() {
+        return defaultX;
+    }
+
+    public int getDefaultY() {
+        return defaultY;
     }
 }

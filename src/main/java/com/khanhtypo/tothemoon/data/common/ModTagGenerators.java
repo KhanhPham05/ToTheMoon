@@ -1,15 +1,18 @@
 package com.khanhtypo.tothemoon.data.common;
 
 import com.google.common.base.Preconditions;
-import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.MultiblockBlackStoneFurnace;
-import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.ToTheMoon;
+import com.khanhtypo.tothemoon.common.item.upgrades.ItemPowerGeneratorUpgrade;
+import com.khanhtypo.tothemoon.common.item.upgrades.AbstractUpgradeItem;
 import com.khanhtypo.tothemoon.common.tag.TagFamily;
 import com.khanhtypo.tothemoon.data.ModBlockItemTags;
 import com.khanhtypo.tothemoon.data.ModBlockTags;
 import com.khanhtypo.tothemoon.data.ModItemTags;
+import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.MultiblockBlackStoneFurnace;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
+import com.khanhtypo.tothemoon.registration.elements.ItemObject;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
@@ -44,7 +47,7 @@ public final class ModTagGenerators {
         final Item itemProvider = dataGenerator.addProvider(includeServer, new Item(packOutput, lookup, blockGeneratorsProvider.contentsGetter(), ToTheMoon.MODID, fileHelper));
     }
 
-    public static final class BlockGenerators extends BlockTagsProvider {
+    private static final class BlockGenerators extends BlockTagsProvider {
         private final Set<? extends BlockObject<?>> modBlocks;
 
         BlockGenerators(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
@@ -103,8 +106,7 @@ public final class ModTagGenerators {
         }
     }
 
-    public static final class Item extends ItemTagsProvider {
-
+    private static final class Item extends ItemTagsProvider {
         Item(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookup, CompletableFuture<TagLookup<Block>> blockProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
             super(packOutput, lookup, blockProvider, modId, existingFileHelper);
         }
@@ -112,6 +114,12 @@ public final class ModTagGenerators {
         @Override
         protected void addTags(HolderLookup.Provider p_256380_) {
             TagFamily.generateToJson(Registries.ITEM, super::tag);
+            super.tag(ModItemTags.MACHINE_UPGRADES).addTag(ModItemTags.MACHINE_UPGRADES_GENERATOR);
+            ItemObject.getItems(itemObject -> itemObject.get() instanceof AbstractUpgradeItem)
+                    .forEach(upgradeItem -> {
+                        final var item = upgradeItem.get();
+                        super.tag(item instanceof ItemPowerGeneratorUpgrade ? ModItemTags.MACHINE_UPGRADES_GENERATOR : ModItemTags.MACHINE_UPGRADES).add(item);
+                    });
         }
     }
 }

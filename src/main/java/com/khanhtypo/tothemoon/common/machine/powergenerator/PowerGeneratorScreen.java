@@ -14,6 +14,11 @@ public class PowerGeneratorScreen extends AbstractMachineScreen<PowerGeneratorMe
     }
 
     @Override
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+    }
+
+    @Override
     protected void renderBgAddition(GuiGraphics renderer, ResourceLocation guiTexture) {
         //render fuel bar
         this.drawVerticalBar(renderer, guiTexture, 150, 16, 212, 3, barHeight, 2, 3);
@@ -23,8 +28,8 @@ public class PowerGeneratorScreen extends AbstractMachineScreen<PowerGeneratorMe
 
         //render energy process bar
         this.drawVerticalBar(renderer, guiTexture, 167, 16, 206, 3, barHeight, 5, 6);
+        super.renderBgAddition(renderer, guiTexture);
     }
-
 
     @Override
     protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {

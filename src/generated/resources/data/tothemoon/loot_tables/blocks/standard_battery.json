@@ -13,17 +13,10 @@
                 {
                   "op": "replace",
                   "source": "Energy",
-                  "target": "BatteryData.Energy"
+                  "target": "MachineData.Energy"
                 }
               ],
               "source": "block_entity"
-            },
-            {
-              "block": "tothemoon:standard_battery",
-              "function": "minecraft:copy_state",
-              "properties": [
-                "battery_level"
-              ]
             }
           ],
           "name": "tothemoon:standard_battery"

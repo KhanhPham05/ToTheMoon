@@ -8,11 +8,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.BiConsumer;
@@ -28,6 +31,9 @@ public class ModLanguageGenerator extends LanguageProvider {
     public static final AppendableComponent REDSTONE_MODE = AppendableComponent.create("tooltip", "redstone_mode", "Redstone Mode : %s");
     public static final AppendableComponent STORING_FLUID = AppendableComponent.create("tooltip", "fluid_storing", "Storing Fluid : %s");
     public static final AppendableComponent STORING_AMOUNT_FLUID = AppendableComponent.create("tooltip", "fluid_storing_amount", "Fluid Storage : %smB / %smb");
+    public static final AppendableComponent UPGRADE_GENERATOR_ITEM = AppendableComponent.create("tooltip", "generator_upgradable_item", "- Can be applied in %s").withStyle(ChatFormatting.DARK_GRAY);
+    public static final Component TOGGLE_UPGRADE_BOX = createTranslatable("gui", "toggle_upgrade_box", "Toggle Upgrade Box");
+    public static final Component POWER_GENERATOR_GENERAL = createTranslatable("tooltip", "general_power_generator", "Power Generator").withStyle(Style.EMPTY.withColor(Color.ORANGE.getRGB()));
     public static final Component TITLE_BLACK_STONE_FURNACE = createTranslatable("gui", "blackstone_furnace", "Blackstone Furnace");
     public static final Component REDSTONE_IGNORED = createTranslatable("tooltip", "redstone_mode_ignored", "Ignore Redstone");
     public static final Component REDSTONE_IGNORED_DESC = createTranslatable("tooltip", "redstone_mode_ignored.description", " - Redstone has no effect on machine").withStyle(ChatFormatting.DARK_GRAY);

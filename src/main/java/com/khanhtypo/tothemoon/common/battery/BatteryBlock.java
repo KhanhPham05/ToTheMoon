@@ -45,8 +45,8 @@ public class BatteryBlock extends TickableEntityBlock<BatteryBlockEntity> {
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         CompoundTag tag = pStack.getTag();
-        if (tag != null && tag.contains("BatteryData")) {
-            pLevel.getBlockEntity(pPos, ModBlockEntities.BATTERY.get()).ifPresent(battery -> battery.loadEnergy(tag.getCompound("BatteryData")));
+        if (tag != null && tag.contains("MachineData")) {
+            pLevel.getBlockEntity(pPos, ModBlockEntities.BATTERY.get()).ifPresent(battery -> battery.loadEnergy(tag.getCompound("MachineData")));
         }
     }
 

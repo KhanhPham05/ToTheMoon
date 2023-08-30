@@ -2,6 +2,7 @@ package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -13,11 +14,17 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class BaseMenu extends AbstractContainerMenu {
     protected final Inventory playerInventory;
     protected final ContainerLevelAccess accessor;
+    protected final Set<Container> containerListeners = new HashSet<>();
     private final MenuObject<?> menuObject;
+    protected int inventorySlotIndex;
+    protected int hotbarSlotIndex;
     @Nullable
     private Block targetedBlock;
     private int invLabelX;
@@ -34,6 +41,28 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
         this.accessor = accessor;
         this.targetedBlock = targetedBlock;
+    }
+
+    protected void addContainerListeners(Container... containers) {
+        if (containers.length == 1) {
+            this.containerListeners.add(containers[0]);
+        } else if (containers.length > 1) {
+            this.containerListeners.addAll(Arrays.asList(containers));
+        }
+
+        if (!this.containerListeners.isEmpty()) {
+            this.startOpen();
+        }
+    }
+
+    protected final void startOpen() {
+        this.containerListeners.forEach(container -> container.startOpen(this.player()));
+    }
+
+    @Override
+    public void removed(Player pPlayer) {
+        super.removed(pPlayer);
+        this.containerListeners.forEach(container -> container.stopOpen(this.player()));
     }
 
     public BaseMenu setTargetedBlock(Block targetedBlock) {
@@ -57,11 +86,14 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     protected void addPlayerInvSlots(int startX, int startY) {
         this.invLabelX = startX;
         this.invLabelY = startY;
+        this.inventorySlotIndex = super.slots.size();
         for (int i = 0; i <= 2; i++) {
             for (int j = 0; j < 9; j++) {
                 super.addSlot(new Slot(this.playerInventory, j + i * 9 + 9, startX + j * 18, startY + i * 18));
             }
         }
+
+        this.hotbarSlotIndex = super.slots.size();
 
         for (int i = 0; i < 9; i++) {
             super.addSlot(new Slot(this.playerInventory, i, startX + i * 18, startY + 58));

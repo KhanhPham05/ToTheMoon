@@ -1,8 +1,10 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
+import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractPowerBlockEntity;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractMachineBlockEntity;
 import com.khanhtypo.tothemoon.common.capability.GeneratablePowerStorage;
+import com.khanhtypo.tothemoon.common.machine.CompoundTagSerializable;
 import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
 import com.khanhtypo.tothemoon.registration.ModBlockEntities;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
@@ -20,16 +22,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Objects;
 import java.util.Optional;
 
-public class PowerGeneratorBlockEntity extends AbstractPowerBlockEntity {
+public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implements CompoundTagSerializable {
     public static final int DATA_SIZE = 9;
-    protected final GeneratablePowerStorage energyStorage;
+    public static final int DEFAULT_FUEL_CONSUME_DURATION = 20;
+    public final GeneratablePowerStorage energyStorage;
     private final int generationPerTick;
     private int burningTime;
     private int burningDuration;
     private int fuelConsumeDuration;
     private int fuelConsumeTime;
 
-    public PowerGeneratorBlockEntity(BlockEntityObject<? extends AbstractPowerBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, PowerGeneratorLevels generatorLevel) {
+    public PowerGeneratorBlockEntity(BlockEntityObject<? extends AbstractMachineBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, PowerGeneratorLevels generatorLevel) {
         super(blockEntity, blockPos, blockState, 1, new GeneratablePowerStorage(generatorLevel.capacity),
                 be -> new ContainerData() {
                     @Override
@@ -65,10 +68,16 @@ public class PowerGeneratorBlockEntity extends AbstractPowerBlockEntity {
         );
         this.generationPerTick = generatorLevel.generationPerTick;
         this.energyStorage = ((GeneratablePowerStorage) super.energyStorage);
+        this.fuelConsumeDuration = DEFAULT_FUEL_CONSUME_DURATION;
     }
 
     public static BlockEntityType.BlockEntitySupplier<PowerGeneratorBlockEntity> createSupplier() {
         return (blockPos, blockState) -> new PowerGeneratorBlockEntity(ModBlockEntities.POWER_GENERATOR, blockPos, blockState, Optional.of(blockState.getBlock()).filter(block -> block instanceof PowerGeneratorBlock).map(g -> ((PowerGeneratorBlock) g).getGeneratorLevel()).orElseThrow());
+    }
+
+    @Override
+    public void serverTick(Level level, BlockPos pos, BlockState blockState) {
+        super.serverTick(level, pos, blockState);
     }
 
     @Override
@@ -81,11 +90,15 @@ public class PowerGeneratorBlockEntity extends AbstractPowerBlockEntity {
                 this.fuelConsumeTime = 0;
                 this.energyStorage.generatePower(this.getEnergyGenerated());
             } else {
-                this.fuelConsumeTime++;
-                litState = true;
+                if (this.energyStorage.isFull()) {
+                    litState = false;
+                } else {
+                    this.fuelConsumeTime++;
+                    litState = true;
+                }
             }
         } else if (super.getPowerSpace() > 0) {
-            if (this.isSlotPresent(0) && super.canBurn(0)) {
+            if (super.isSlotPresent(0) && super.canBurn(0)) {
                 this.burningTime = this.burningDuration = super.getBurnTime(0);
                 //this.fuelConsumeDuration = 20;
                 this.fuelConsumeTime = 0;
@@ -100,8 +113,13 @@ public class PowerGeneratorBlockEntity extends AbstractPowerBlockEntity {
         }
     }
 
-    private void setFuelConsumeDuration(int value) {
-        this.fuelConsumeTime = value;
+    public int getDefaultFuelConsumeDuration() {
+        return DEFAULT_FUEL_CONSUME_DURATION;
+    }
+
+    public void setFuelConsumeDuration(int value) {
+        Preconditions.checkState(value > 0, "fuelConsumeDuration can not be smaller than 1");
+        this.fuelConsumeDuration = value;
     }
 
     public int getEnergyGenerated() {
@@ -111,7 +129,7 @@ public class PowerGeneratorBlockEntity extends AbstractPowerBlockEntity {
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         Level level = Objects.requireNonNull(this.getLevel());
-        return new PowerGeneratorMenu(pContainerId, pInventory, ContainerLevelAccess.create(level, this.getBlockPos()), this, super.getContainerData())
+        return new PowerGeneratorMenu(pContainerId, pInventory, ContainerLevelAccess.create(level, this.getBlockPos()), this, super.upgradeContainer, super.getContainerData())
                 .setTargetedBlock(super.getBlockState().getBlock());
     }
 

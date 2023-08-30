@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-19T21:22:06.7263452	Item Models: tothemoon
+// 1.20.1	2023-08-29T10:56:13.2985477	Item Models: tothemoon
 24fd7dd9f1551d84d7384679c66e33d5199dddb1 assets/tothemoon/models/item/amethyst_dust.json
 42842dbf924c22f3de851ca7ca41d0de15dd5059 assets/tothemoon/models/item/amethyst_gear.json
 7f6762d39438071bcf5805157cfc92d29c294ec9 assets/tothemoon/models/item/amethyst_plate.json
@@ -38,6 +38,9 @@ fe4e65d9fda764ae4c6a008a040b4052b7cf6803 assets/tothemoon/models/item/emerald_du
 2b2cabb5577b7d4a1158f552d0fed25a071d85b9 assets/tothemoon/models/item/emerald_gear.json
 a3ab42d94f28e4a7f21d04243d00161205460629 assets/tothemoon/models/item/emerald_plate.json
 9c48c0118b18965b84ed9ad2e4de516621682546 assets/tothemoon/models/item/emerald_rod.json
+e867e09648c977ae32f5f11ee490c8154cc323de assets/tothemoon/models/item/energy_capacity_upgrade_tier_1.json
+7b876f63f36a80138872a7602efb52a736c95c23 assets/tothemoon/models/item/energy_capacity_upgrade_tier_2.json
+0741b84018a6a871ff1efa41f8bc30fb3f60feb5 assets/tothemoon/models/item/energy_capacity_upgrade_tier_3.json
 30e5dc220068c9ad8974ba45df5918e1b61c70ab assets/tothemoon/models/item/eroded_meteorite.json
 847fac683a7afeef0f654bf46cebec19b0d6114e assets/tothemoon/models/item/gear_mold.json
 59ba6d0194e3936480c89a422e20fcadf80d8e40 assets/tothemoon/models/item/gilded_meteorite_bricks.json
@@ -153,6 +156,9 @@ e992367481b9744b8680c3326cb79fd8810e0320 assets/tothemoon/models/item/smooth_met
 e18361e462f660a54a08b20903322a416c20bed3 assets/tothemoon/models/item/smooth_meteorite_stairs.json
 e035779f4c5082693f7c9ea836328935d8bc21aa assets/tothemoon/models/item/smooth_meteorite_wall.json
 90ca5ef0c44736c854d762e5cb415e9f112dd7b3 assets/tothemoon/models/item/smooth_purified_quartz_block.json
+d9f472737e7bec9e56826628711f5e6fb1c6942b assets/tothemoon/models/item/speed_upgrade_tier_1.json
+773302be40579c241a7bcdfe2abff58b636b8470 assets/tothemoon/models/item/speed_upgrade_tier_2.json
+d9e3d74dac46300d9c7f0387ba7f35d41aba82a8 assets/tothemoon/models/item/speed_upgrade_tier_3.json
 5fe3a3d5492edf78f8a4aa9b3d03f8e1c48bb1d3 assets/tothemoon/models/item/standard_battery.json
 7c090d8e25895f40a8511c36ca090ef15915854c assets/tothemoon/models/item/steel_axe.json
 c042518bcc70db98327ea0dc2ff9352e7157951c assets/tothemoon/models/item/steel_battery.json

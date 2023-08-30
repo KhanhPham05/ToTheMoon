@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tothemoon:item/energy_capacity_upgrade_tier_3"
+  }
+}

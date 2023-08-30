@@ -3,6 +3,7 @@ package com.khanhtypo.tothemoon.data.common;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.khanhtypo.tothemoon.common.battery.BatteryBlock;
+import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlock;
 import com.khanhtypo.tothemoon.registration.ModItems;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
@@ -12,11 +13,11 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
@@ -90,11 +91,11 @@ public class ModBlockLoots extends BlockLootSubProvider {
         this.dropSelf(ZIRCONIUM_BLOCK);
         this.dropSelf(ZIRCONIUM_ALLOY_BLOCK);
         this.dropSelf(WORKBENCH);
-        this.dropSelf(COPPER_POWER_GENERATOR);
-        this.dropSelf(IRON_POWER_GENERATOR);
-        this.dropSelf(GOLD_POWER_GENERATOR);
-        this.dropSelf(DIAMOND_POWER_GENERATOR);
-        this.dropSelf(NETHERITE_POWER_GENERATOR);
+        this.createPowerGeneratorLoot(COPPER_POWER_GENERATOR);
+        this.createPowerGeneratorLoot(IRON_POWER_GENERATOR);
+        this.createPowerGeneratorLoot(GOLD_POWER_GENERATOR);
+        this.createPowerGeneratorLoot(DIAMOND_POWER_GENERATOR);
+        this.createPowerGeneratorLoot(NETHERITE_POWER_GENERATOR);
         this.dropSelf(BLACK_STONE_FURNACE_CONTROLLER);
         this.dropSelf(BLACKSTONE_EMPTY_ACCEPTOR);
         this.dropSelf(NETHER_BRICKS_EMPTY_ACCEPTOR);
@@ -105,8 +106,24 @@ public class ModBlockLoots extends BlockLootSubProvider {
         this.createBatteryLoot(STEEL_BATTERY);
     }
 
+    private void createPowerGeneratorLoot(BlockObject<PowerGeneratorBlock> generatorBlockBlockObject) {
+        super.add(generatorBlockBlockObject.get(), LootTable.lootTable().withPool(this.createCopyEntityDataLootPool(generatorBlockBlockObject, "Upgrades", "Energy")));
+    }
+
     private void createBatteryLoot(BlockObject<BatteryBlock> batteryBlock) {
-        super.add(batteryBlock.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(batteryBlock).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Energy", "BatteryData.Energy")).apply(CopyBlockState.copyState(batteryBlock.get()).copy(BatteryBlock.ENERGY_LEVEL)))));
+        super.add(batteryBlock.get(), LootTable.lootTable().withPool(this.createCopyEntityDataLootPool(batteryBlock, "Energy")));
+    }
+
+    private LootPool.Builder createCopyEntityDataLootPool(ItemLike drop, String... fromNbt) {
+        Preconditions.checkState(fromNbt.length > 0);
+
+        var copyNbtFunction = CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY);
+
+        for (String nbtTag : fromNbt) {
+            copyNbtFunction.copy(nbtTag, "MachineData." + nbtTag);
+        }
+
+        return LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(drop).apply(copyNbtFunction));
     }
 
     private void dropSelf(BlockObject<?> blockObject) {

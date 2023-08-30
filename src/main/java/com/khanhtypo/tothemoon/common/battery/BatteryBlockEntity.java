@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common.battery;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractPowerBlockEntity;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractMachineBlockEntity;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.TickableBlockEntity;
 import com.khanhtypo.tothemoon.registration.ModBlockEntities;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
@@ -64,7 +64,7 @@ public abstract class BatteryBlockEntity extends BlockEntity implements Tickable
 
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState blockState) {
-        AbstractPowerBlockEntity.tryExtractEnergyToNeighbour(this.energyStorage, level, pos);
+        AbstractMachineBlockEntity.tryExtractEnergyToNeighbour(this.energyStorage, level, pos);
 
         float percent = ((float) this.energyStorage.getEnergyStored() / this.energyStorage.getMaxEnergyStored()) * 100;
         ModUtils.changeBlockState(level, pos, blockState, BatteryBlock.ENERGY_LEVEL, ((int) percent) / 10, true);

@@ -3,14 +3,27 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Upgrades",
+                  "target": "MachineData.Upgrades"
+                },
+                {
+                  "op": "replace",
+                  "source": "Energy",
+                  "target": "MachineData.Energy"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "tothemoon:netherite_power_generator"
         }
       ],

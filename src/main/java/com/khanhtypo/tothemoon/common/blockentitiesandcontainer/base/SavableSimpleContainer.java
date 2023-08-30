@@ -3,6 +3,7 @@ package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
@@ -11,12 +12,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nullable;
+import java.util.*;
 
-public class SavableSimpleContainer implements Container, INBTSerializable<CompoundTag> {
+public class SavableSimpleContainer implements ImplementedContainer, INBTSerializable<CompoundTag> {
     @Nullable
     private final BlockEntity blockEntity;
     private final int size;
     private final NonNullList<ItemStack> items;
+    public final Set<ServerPlayer> openingPlayers = new TreeSet<>(Comparator.comparing(ServerPlayer::getStringUUID));
 
     public SavableSimpleContainer(@Nullable BlockEntity blockEntity, int size) {
         this.blockEntity = blockEntity;
@@ -24,11 +27,24 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
         this.items = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
+    @Override
+    public void startOpen(Player pPlayer) {
+        if (blockEntity != null && !blockEntity.isRemoved() && pPlayer instanceof ServerPlayer serverPlayer) {
+            openingPlayers.add(serverPlayer);
+        }
+    }
+
+    @Override
+    public void stopOpen(Player pPlayer) {
+        if (blockEntity != null && !blockEntity.isRemoved() && pPlayer instanceof ServerPlayer serverPlayer) {
+            openingPlayers.remove(serverPlayer);
+        }
+    }
+
     public CompoundTag saveContainer(String tagName, CompoundTag writer) {
         var savedContainer = ContainerHelper.saveAllItems(new CompoundTag(), this.items);
         writer.put(tagName, savedContainer);
         this.setChanged();
-        //ToTheMoon.LOGGER.info("Container : %s saved".formatted(tagName));
         return writer;
     }
 
@@ -40,12 +56,19 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
         if (reader.contains(tagName)) {
             CompoundTag containerTag = reader.getCompound(tagName);
             ContainerHelper.loadAllItems(containerTag, this.items);
+            for (int i = 0; i < this.getContainerSize(); i++) {
+                if (this.isSlotPresent(i)) {
+                    this.onItemPlaced(i, this.getItem(i));
+                }
+            }
             this.setChanged();
-            //ToTheMoon.LOGGER.info("Container : " + tagName + " loaded");
             return;
         }
 
-        ToTheMoon.LOGGER.info("Couldn't load container : %s. it is not present in tag".formatted(tagName));
+        ToTheMoon.LOGGER.info("Couldn't load container : {}. it is not present in compound tag", tagName);
+    }
+
+    public void onItemPlaced(int pSlot, ItemStack placedItem) {
     }
 
     public void loadContainer(CompoundTag reader) {
@@ -75,11 +98,18 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-        var removed = ContainerHelper.removeItem(this.items, pSlot, pAmount);
+        ItemStack removed = ContainerHelper.removeItem(this.items, pSlot, pAmount);
 
-        if (!removed.isEmpty()) this.setChanged();
+        if (!removed.isEmpty()) {
+            this.onItemTaken(pSlot, removed);
+            this.setChanged();
+        }
 
         return removed;
+    }
+
+
+    public void onItemTaken(int slot, ItemStack removedStack) {
     }
 
     @Override
@@ -89,8 +119,11 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
 
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
-        this.items.set(pSlot, pStack);
-        this.setChanged();
+        if (!pStack.isEmpty()) {
+            this.items.set(pSlot, pStack);
+            this.onItemPlaced(pSlot, pStack);
+            this.setChanged();
+        }
     }
 
     @Override
@@ -105,8 +138,18 @@ public class SavableSimpleContainer implements Container, INBTSerializable<Compo
 
     @Override
     public void clearContent() {
+        for (int i = 0; i < this.getContainerSize(); i++) {
+            if (!this.isSlotPresent(i)) {
+                this.onItemTaken(i, this.getItem(i));
+            }
+        }
         this.items.clear();
         this.setChanged();
+    }
+
+    @Override
+    public Container getContainer() {
+        return this;
     }
 
     @Override

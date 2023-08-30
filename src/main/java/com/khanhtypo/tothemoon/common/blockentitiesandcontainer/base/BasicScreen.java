@@ -8,13 +8,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
 
+@SuppressWarnings("SameParameterValue")
 public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<MENU> {
-    public static final int DEFAULT_WIDGET_HEIGHT = 22;
     public static final ResourceLocation RECIPE_BOOK_WIDGET = ModUtils.location("textures/gui/widgets.png");
     protected static final int TEXT_WHITE = 0xe0e0e0;
     protected static final int TEXT_BLACK = 0x404040;
     private final ResourceLocation guiTexture;
+    private final int containerSize;
 
     public BasicScreen(MENU menu, Inventory inventory, Component component) {
         this(menu, inventory, component, 176, 166);
@@ -25,6 +27,7 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
         this.guiTexture = menu.getGuiPath();
         super.imageWidth = imageWidth;
         super.imageHeight = imageHeight;
+        this.containerSize = menu.slots.size();
     }
 
     @Deprecated
@@ -57,10 +60,10 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
     }
 
     @Override
-    public void render(GuiGraphics p_283479_, int p_283661_, int p_281248_, float p_281886_) {
-        this.renderBackground(p_283479_);
-        super.render(p_283479_, p_283661_, p_281248_, p_281886_);
-        this.renderTooltip(p_283479_, p_283661_, p_281248_);
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        this.renderBackground(pGuiGraphics);
+        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
     }
 
     @Override
@@ -97,6 +100,15 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
     protected void drawDebugText(GuiGraphics renderer) {
         for (int i = 0; i < this.menu.getDataCount(); i++) {
             renderer.drawString(font, "%s : %s".formatted(i, menu.getData(i)), 0, super.topPos + i * 8, TEXT_WHITE, true);
+        }
+    }
+
+    protected void renderDebugSlotNumber(GuiGraphics renderer) {
+        for (int i = 0; i < this.containerSize; i++) {
+            Slot slot = super.menu.slots.get(i);
+            if (slot.isActive()) {
+                renderer.drawString(font, String.valueOf(i), leftPos + slot.x, topPos + slot.y, TEXT_BLACK, true);
+            }
         }
     }
 }

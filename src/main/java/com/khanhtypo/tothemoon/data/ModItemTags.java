@@ -1,6 +1,8 @@
 package com.khanhtypo.tothemoon.data;
 
 import com.khanhtypo.tothemoon.common.tag.ItemTagFamilies;
+import com.khanhtypo.tothemoon.utls.ModUtils;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -9,6 +11,8 @@ import static com.khanhtypo.tothemoon.registration.ModItems.*;
 
 @SuppressWarnings("unused")
 public class ModItemTags {
+    public static final TagKey<Item> MACHINE_UPGRADES = ItemTags.create(ModUtils.location("machine_upgrades"));
+    public static final TagKey<Item> MACHINE_UPGRADES_GENERATOR = ItemTags.create(MACHINE_UPGRADES.location().withSuffix("/power_generators"));
     public static final TagKey<Item> TOOL_HAMMERS = ItemTagFamilies.HAMMERS.getRootTag();
     public static final TagKey<Item> RAW_ORE_URANIUM = RAW_ORES.createChild("uranium", RAW_URANIUM_CHUNK);
     public static final TagKey<Item> RAW_ORE_ZIRCONIUM = RAW_ORES.createChild("zirconium", RAW_ZIRCONIUM);

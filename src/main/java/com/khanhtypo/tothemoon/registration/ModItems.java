@@ -6,6 +6,7 @@ import com.khanhtypo.tothemoon.common.item.ModToolTiers;
 import com.khanhtypo.tothemoon.common.item.ToolItem;
 import com.khanhtypo.tothemoon.common.item.hammer.HammerItem;
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
+import com.khanhtypo.tothemoon.common.item.upgrades.UpgradeItemType;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.registration.elements.BasicItem;
 import net.minecraft.world.item.*;
@@ -93,7 +94,7 @@ public class ModItems {
     public static final BasicItem STEEL_WIRE = new BasicItem("steel_wire");
     public static final ObjectSupplier<HammerItem> STEEL_HAMMER = HammerLevel.STEEL.getOrRegisterItem();
     public static final ToolItem STEEL_SWORD = new ToolItem("steel_sword", () -> new SwordItem(ModToolTiers.STEEL, 3, -2.4f, new Item.Properties()));
-    public static final ToolItem STEEL_SHOVEL = new ToolItem("steel_shovel", () -> new ShovelItem(ModToolTiers.STEEL,3, 1.5f, new Item.Properties()));
+    public static final ToolItem STEEL_SHOVEL = new ToolItem("steel_shovel", () -> new ShovelItem(ModToolTiers.STEEL, 3, 1.5f, new Item.Properties()));
     public static final ToolItem STEEL_PICKAXE = new ToolItem("steel_pickaxe", () -> new PickaxeItem(ModToolTiers.STEEL, 1, -2.8f, new Item.Properties()));
     public static final ToolItem STEEL_AXE = new ToolItem("steel_axe", () -> new AxeItem(ModToolTiers.STEEL, 5.5f, -3.0f, new Item.Properties()));
     public static final ToolItem STEEL_HOE = new ToolItem("steel_hoe", () -> new HoeItem(ModToolTiers.STEEL, -3, 0, new Item.Properties()));
@@ -108,7 +109,7 @@ public class ModItems {
     public static final ToolItem URANIUM_HOE = new ToolItem("uranium_hoe", () -> new HoeItem(ModToolTiers.URANIUM, -2, -1, new Item.Properties()));
     public static final ToolItem URANIUM_PICKAXE = new ToolItem("uranium_pickaxe", () -> new PickaxeItem(ModToolTiers.URANIUM, 1, -2.8f, new Item.Properties()));
     public static final ToolItem URANIUM_SHOVEL = new ToolItem("uranium_shovel", () -> new ShovelItem(ModToolTiers.URANIUM, 1.5f, -3, new Item.Properties()));
-    public static final ToolItem URANIUM_SWORD = new ToolItem("uranium_sword", () -> new SwordItem(ModToolTiers.URANIUM, -2,4f, new Item.Properties()));
+    public static final ToolItem URANIUM_SWORD = new ToolItem("uranium_sword", () -> new SwordItem(ModToolTiers.URANIUM, -2, 4f, new Item.Properties()));
     public static final BasicArmorItem URANIUM_BOOTS = new BasicArmorItem(ModArmorMaterials.URANIUM, ArmorItem.Type.BOOTS);
     public static final BasicArmorItem URANIUM_CHESTPLATE = new BasicArmorItem(ModArmorMaterials.URANIUM, ArmorItem.Type.CHESTPLATE);
     public static final BasicArmorItem URANIUM_HELMET = new BasicArmorItem(ModArmorMaterials.URANIUM, ArmorItem.Type.HELMET);
@@ -135,5 +136,7 @@ public class ModItems {
     //TODO
     public static final BasicItem GUIDE_BOOK = new BasicItem("guide_book");
 
-    static void staticInit() {}
+    static void staticInit() {
+        UpgradeItemType.register();
+    }
 }

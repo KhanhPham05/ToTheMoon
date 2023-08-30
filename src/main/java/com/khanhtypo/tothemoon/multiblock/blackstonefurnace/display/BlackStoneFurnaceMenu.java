@@ -35,6 +35,7 @@ public class BlackStoneFurnaceMenu extends BaseMenu {
 
         super.addPlayerInvSlots(22, 95);
         super.addDataSlots(containerData);
+        super.addContainerListeners(furnaceSlot);
     }
 
     public static boolean isBucketOrHandler(ItemStack itemStack) {

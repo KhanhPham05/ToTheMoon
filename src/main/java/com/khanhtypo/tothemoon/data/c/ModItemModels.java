@@ -1,8 +1,8 @@
 package com.khanhtypo.tothemoon.data.c;
 
 import com.google.common.base.Preconditions;
-import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -12,12 +12,18 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Consumer;
+
 import static com.khanhtypo.tothemoon.registration.ModItems.*;
 
 public class ModItemModels extends ItemModelProvider {
+    public static final List<Consumer<ModItemModels>> MODEL_ORDERS = new LinkedList<>();
     private final ModelFile gearTemplate = new ModelFile.ExistingModelFile(ModUtils.location("item/templates/gear_template"), existingFileHelper);
     private final ModelFile generatedTemplate = new ModelFile.ExistingModelFile(new ResourceLocation("item/generated"), existingFileHelper);
     private final ModelFile handheldTemplate = new ModelFile.ExistingModelFile(new ResourceLocation("item/handheld"), existingFileHelper);
+
     public ModItemModels(PackOutput output, String modid, ExistingFileHelper existingFileHelper) {
         super(output, modid, existingFileHelper);
     }
@@ -136,9 +142,11 @@ public class ModItemModels extends ItemModelProvider {
         this.basicItem(RAW_ZIRCONIUM);
         this.basicItem(ZIRCONIUM_ALLOY);
         this.basicItem(ZIRCONIUM_INGOT);
+
+        MODEL_ORDERS.forEach(c -> c.accept(this));
     }
 
-    private void basicItem(ObjectSupplier<? extends Item> itemObjectSupplier) {
+    public void basicItem(ObjectSupplier<? extends Item> itemObjectSupplier) {
         this.basicItem(itemObjectSupplier.getId());
     }
 
@@ -171,5 +179,6 @@ public class ModItemModels extends ItemModelProvider {
     }
 
     @Override
-    protected void clear() {}
+    protected void clear() {
+    }
 }

@@ -1,7 +1,9 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
 import com.khanhtypo.tothemoon.client.SlotUtils;
+import com.khanhtypo.tothemoon.common.item.upgrades.ItemPowerGeneratorUpgrade;
 import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
+import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.world.Container;
@@ -19,14 +21,14 @@ import java.util.function.Predicate;
 public class PowerGeneratorMenu extends AbstractMachineMenu {
     private static final Predicate<ItemStack> burnCheck = ModUtils::canBurn;
 
-
     public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
-        this(windowId, playerInventory, accessor, new SimpleContainer(1), new SimpleContainerData(PowerGeneratorBlockEntity.DATA_SIZE));
+        this(windowId, playerInventory, accessor, new SimpleContainer(1), new SimpleContainer(3), new SimpleContainerData(PowerGeneratorBlockEntity.DATA_SIZE));
     }
 
-    public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor, Container container, ContainerData containerData) {
-        super(ModMenuTypes.POWER_GENERATOR, windowId, playerInventory, accessor, container, containerData);
+    public PowerGeneratorMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor, Container container, Container upgradeContainer, ContainerData containerData) {
+        super(ModMenuTypes.POWER_GENERATOR, windowId, playerInventory, accessor, container, upgradeContainer, containerData);
         super.addSlot(SlotUtils.createPlaceFilter(container, 0, 76, 41, burnCheck));
+        super.addUpgradeSlots(179, ModItemTags.MACHINE_UPGRADES_GENERATOR);
         super.addPlayerInvSlots(8, 97);
     }
 
@@ -37,17 +39,34 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
         if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemStack = itemStack1.copy();
-            if (pIndex == 0) {
-                if (!super.moveItemStackTo(itemStack1, 1, super.slots.size(), true)) {
+
+            if (pIndex < super.inventorySlotIndex) {
+                if (pIndex > 0) {
+                    slot.onTake(pPlayer, itemStack1);
+                }
+
+                if (!super.moveItemStackTo(itemStack1, super.inventorySlotIndex, super.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else {
-
-                if (!super.moveItemStackTo(itemStack1, 0, 1, false)) {
-                    return ItemStack.EMPTY;
+                if (burnCheck.test(itemStack1)) {
+                    if (!moveItemStackTo(itemStack, 0, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (itemStack1.getItem() instanceof ItemPowerGeneratorUpgrade) {
+                    if (!moveItemStackTo(itemStack1, 1, 4, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (pIndex >= super.inventorySlotIndex && pIndex < super.hotbarSlotIndex) {
+                    if (!moveItemStackTo(itemStack1, super.hotbarSlotIndex, super.slots.size(), false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (pIndex >= super.hotbarSlotIndex && pIndex < super.slots.size()) {
+                    if (!moveItemStackTo(itemStack1, super.inventorySlotIndex, super.hotbarSlotIndex, false)) {
+                        return ItemStack.EMPTY;
+                    }
                 }
             }
-
 
             if (itemStack1.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
