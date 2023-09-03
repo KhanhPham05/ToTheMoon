@@ -1,6 +1,5 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
-import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.AbstractMachineBlockEntity;
 import com.khanhtypo.tothemoon.common.capability.GeneratablePowerStorage;
@@ -24,13 +23,10 @@ import java.util.Optional;
 
 public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implements CompoundTagSerializable {
     public static final int DATA_SIZE = 9;
-    public static final int DEFAULT_FUEL_CONSUME_DURATION = 20;
     public final GeneratablePowerStorage energyStorage;
     private final int generationPerTick;
     private int burningTime;
     private int burningDuration;
-    private int fuelConsumeDuration;
-    private int fuelConsumeTime;
 
     public PowerGeneratorBlockEntity(BlockEntityObject<? extends AbstractMachineBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, PowerGeneratorLevels generatorLevel) {
         super(blockEntity, blockPos, blockState, 1, new GeneratablePowerStorage(generatorLevel.capacity),
@@ -68,7 +64,7 @@ public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implem
         );
         this.generationPerTick = generatorLevel.generationPerTick;
         this.energyStorage = ((GeneratablePowerStorage) super.energyStorage);
-        this.fuelConsumeDuration = DEFAULT_FUEL_CONSUME_DURATION;
+
     }
 
     public static BlockEntityType.BlockEntitySupplier<PowerGeneratorBlockEntity> createSupplier() {
@@ -100,7 +96,6 @@ public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implem
         } else if (super.getPowerSpace() > 0) {
             if (super.isSlotPresent(0) && super.canBurn(0)) {
                 this.burningTime = this.burningDuration = super.getBurnTime(0);
-                //this.fuelConsumeDuration = 20;
                 this.fuelConsumeTime = 0;
                 super.shrinkItem(0, 1);
                 litState = true;
@@ -111,15 +106,6 @@ public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implem
             blockState = blockState.setValue(FunctionalBlock.LIT, litState);
             level.setBlock(pos, blockState, 3);
         }
-    }
-
-    public int getDefaultFuelConsumeDuration() {
-        return DEFAULT_FUEL_CONSUME_DURATION;
-    }
-
-    public void setFuelConsumeDuration(int value) {
-        Preconditions.checkState(value > 0, "fuelConsumeDuration can not be smaller than 1");
-        this.fuelConsumeDuration = value;
     }
 
     public int getEnergyGenerated() {
@@ -138,8 +124,6 @@ public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implem
         super.saveAdditional(writer);
         writer.putInt("BurningTime", this.burningTime);
         writer.putInt("BurningDuration", this.burningDuration);
-        writer.putInt("FuelConsumeTime", this.fuelConsumeTime);
-        writer.putInt("FuelConsumeDuration", this.fuelConsumeDuration);
     }
 
     @Override
@@ -147,8 +131,6 @@ public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implem
         super.load(deserializedNBT);
         this.burningTime = deserializedNBT.getInt("BurningTime");
         this.burningDuration = deserializedNBT.getInt("BurningDuration");
-        this.fuelConsumeDuration = deserializedNBT.getInt("FuelConsumeDuration");
-        this.fuelConsumeTime = deserializedNBT.getInt("FuelConsumeTime");
     }
 
     @Override

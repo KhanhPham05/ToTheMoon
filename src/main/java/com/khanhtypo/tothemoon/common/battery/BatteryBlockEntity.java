@@ -20,6 +20,8 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 public abstract class BatteryBlockEntity extends BlockEntity implements TickableBlockEntity {
     private final EnergyStorage energyStorage;
     private LazyOptional<IEnergyStorage> handler;
@@ -53,10 +55,17 @@ public abstract class BatteryBlockEntity extends BlockEntity implements Tickable
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (!remove && cap == ForgeCapabilities.ENERGY) {
-            return this.handler.cast();
+        if (!super.remove && cap == ForgeCapabilities.ENERGY) {
+            if (super.level != null) {
+                if (side != null) {
+                    Optional<?> batteryBlockEntity = super.level.getBlockEntity(this.getBlockPos().relative(side), super.getType());
+                    if (batteryBlockEntity.isPresent()) {
+                        return LazyOptional.empty();
+                    }
+                }
+                return this.handler.cast();
+            }
         }
-
         return super.getCapability(cap, side);
     }
 

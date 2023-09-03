@@ -1,0 +1,7 @@
+{
+  "type": "tothemoon:anvil_crushing",
+  "ingredient": {
+    "tag": "forge:raw_materials/copper"
+  },
+  "result": "tothemoon:copper_dust"
+}

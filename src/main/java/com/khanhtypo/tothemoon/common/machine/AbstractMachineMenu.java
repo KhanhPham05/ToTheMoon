@@ -92,11 +92,6 @@ public abstract class AbstractMachineMenu extends BaseMenu {
                 }
 
                 @Override
-                protected void onQuickCraft(ItemStack pStack, int pAmount) {
-                    super.onQuickCraft(pStack, pAmount);
-                }
-
-                @Override
                 public void onTake(Player pPlayer, ItemStack pStack) {
                     if (!pStack.isEmpty()) {
                         if (container instanceof SavableSimpleContainer savableSimpleContainer) {

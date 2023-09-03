@@ -1,0 +1,7 @@
+{
+  "type": "tothemoon:anvil_crushing",
+  "ingredient": {
+    "tag": "forge:raw_materials/uranium"
+  },
+  "result": "tothemoon:uranium_dust"
+}

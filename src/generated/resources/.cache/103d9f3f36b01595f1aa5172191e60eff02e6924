@@ -1,0 +1,4 @@
+// 1.20.1	2023-09-03T15:22:39.7212315	Registries
+adbb722b127a1f9b8f8b9ba01ba61b016ce4495d data/tothemoon/forge/biome_modifier/overworld_ores.json
+49c62da43bd897b7a461729ae5a22198896cb017 data/tothemoon/worldgen/configured_feature/uranium_ore_config.json
+915006c7de26489007595db744e45fce16f3da18 data/tothemoon/worldgen/placed_feature/uranium_ore_placed.json

@@ -1,0 +1,7 @@
+{
+  "type": "tothemoon:lava_smelting",
+  "ingredient": {
+    "tag": "forge:dusts/coal"
+  },
+  "result": "tothemoon:heated_coal_dust"
+}

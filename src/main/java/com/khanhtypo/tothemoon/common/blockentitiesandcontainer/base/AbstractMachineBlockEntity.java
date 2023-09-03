@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
+import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.common.capability.PowerStorage;
 import com.khanhtypo.tothemoon.common.item.upgrades.AbstractUpgradeItem;
 import com.khanhtypo.tothemoon.common.item.upgrades.IUpgradeItem;
@@ -40,6 +41,7 @@ import java.util.function.Function;
 
 @SuppressWarnings("SameParameterValue")
 public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntity implements ImplementedContainer, TickableBlockEntity {
+    public static final int DEFAULT_FUEL_CONSUME_DURATION = 20;
     private static final Direction[] allDirection = Direction.values();
     public final PowerStorage energyStorage;
     public final SavableSimpleContainer upgradeContainer;
@@ -49,6 +51,8 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
     public MachineRedstoneMode redstoneMode;
     protected LazyOptional<IEnergyStorage> energyHolder;
     protected LazyOptional<IItemHandler> itemHolder;
+    protected int fuelConsumeDuration;
+    protected int fuelConsumeTime;
 
     public AbstractMachineBlockEntity(BlockEntityObject<? extends AbstractMachineBlockEntity> blockEntity,
                                       BlockPos blockPos,
@@ -58,6 +62,8 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
                                       Function<AbstractMachineBlockEntity, ContainerData> dataConstructor) {
         super(blockEntity.get(), blockPos, blockState);
         this.container = new SavableSimpleContainer(this, containerSize);
+        this.fuelConsumeDuration = DEFAULT_FUEL_CONSUME_DURATION;
+
         this.upgradeContainer = new SavableSimpleContainer(this, 3) {
             @Override
             public void onItemTaken(int slot, ItemStack removedStack) {
@@ -202,6 +208,8 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
             }
             writer.put("Upgrades", upgrades);
         }
+        writer.putInt("FuelConsumeTime", this.fuelConsumeTime);
+        writer.putInt("FuelConsumeDuration", this.fuelConsumeDuration);
     }
 
     @Override
@@ -219,6 +227,8 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
                 }
             }
         }
+        this.fuelConsumeDuration = deserializedNBT.getInt("FuelConsumeDuration");
+        this.fuelConsumeTime = deserializedNBT.getInt("FuelConsumeTime");
     }
 
     public ContainerData getContainerData() {
@@ -254,5 +264,14 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
 
     public void loadEnergyFrom(CompoundTag rootTag) {
         this.energyStorage.deserializeNBT(rootTag);
+    }
+
+    public int getDefaultFuelConsumeDuration() {
+        return DEFAULT_FUEL_CONSUME_DURATION;
+    }
+
+    public void setFuelConsumeDuration(int value) {
+        Preconditions.checkState(value > 0, "fuelConsumeDuration can not be smaller than 1");
+        this.fuelConsumeDuration = value;
     }
 }

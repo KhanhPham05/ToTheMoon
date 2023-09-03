@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "auto_trigger": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": ""
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "tothemoon:uranium_dust"
+    },
+    "show_toast": false,
+    "title": {
+      "text": ""
+    }
+  },
+  "requirements": [
+    [
+      "auto_trigger"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

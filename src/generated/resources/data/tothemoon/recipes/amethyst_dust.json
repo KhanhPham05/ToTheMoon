@@ -1,0 +1,7 @@
+{
+  "type": "tothemoon:anvil_crushing",
+  "ingredient": {
+    "tag": "forge:gems/amethyst"
+  },
+  "result": "tothemoon:amethyst_dust"
+}
