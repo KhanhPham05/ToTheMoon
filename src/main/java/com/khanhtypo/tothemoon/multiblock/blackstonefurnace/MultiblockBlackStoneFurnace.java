@@ -3,13 +3,14 @@ package com.khanhtypo.tothemoon.multiblock.blackstonefurnace;
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.SavableSimpleContainer;
-import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.multiblock.IItemCapableMultiblockController;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.display.BlackStoneFurnaceMenu;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.ioparts.entity.BlackStoneFurnaceItemAcceptorPartEntity;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
-import com.khanhtypo.tothemoon.registration.ModItems;
+import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
+import com.khanhtypo.tothemoon.serverdata.recipes.LavaSmeltingRecipe;
+import com.khanhtypo.tothemoon.serverdata.recipes.serializers.LavaSmeltingRecipeSerializer;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import it.zerono.mods.zerocore.lib.fluid.FluidTank;
 import it.zerono.mods.zerocore.lib.multiblock.IMultiblockController;
@@ -43,6 +44,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -50,7 +52,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
     public static final TagKey<Block> BLACKSTONE_ACCEPTABLE = BlockTags.create(ModUtils.location("multiblock_blackstone_furnace_acceptable/blackstone"));
     public static final TagKey<Block> NETHER_BRICK_ACCEPTABLE = BlockTags.create(ModUtils.location("multiblock_blackstone_furnace_acceptable/nether_bricks"));
     public static final BiPredicate<Integer, FluidStack> FLUID_CHECKER = (i, fluid) -> fluid.getFluid().isSame(Fluids.LAVA);
-    public static final int DEFAULT_BURNING_DURATION = 1200;
+    public static final int DEFAULT_BURNING_DURATION = LavaSmeltingRecipeSerializer.DEFAULT_SMELTING_TICK;
     public static final Predicate<IMultiblockPart<MultiblockBlackStoneFurnace>> ITEM_ACCEPTOR_FILTER = p -> p instanceof BlackStoneFurnaceItemAcceptorPartEntity;
     private static final Predicate<IMultiblockPart<MultiblockBlackStoneFurnace>> CONTROLLER_FILTER = p -> p instanceof ControllerPartEntity;
     private final BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
@@ -59,6 +61,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
     private List<BlackStoneFurnaceItemAcceptorPartEntity> itemAcceptors;
     private ControllerPartEntity controllerPart;
     private int burningTime = 0;
+    private int burningDuration = DEFAULT_BURNING_DURATION;
     private boolean serverUpdated = false;
     private BlockPos lastAddedPartPos;
 
@@ -86,6 +89,10 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
                 MultiblockBlackStoneFurnace.this.markDirty();
             }
         };
+    }
+
+    public SavableSimpleContainer getItemStackHolder() {
+        return itemStackHolder;
     }
 
     @Override
@@ -118,7 +125,6 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
         this.lastAddedPartPos = iMultiblockPart.getWorldPosition();
     }
 
-    //FIXME
     @Override
     protected void onPartRemoved(IMultiblockPart<MultiblockBlackStoneFurnace> iMultiblockPart) {
         if (CONTROLLER_FILTER.test(iMultiblockPart)) {
@@ -244,16 +250,21 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
         }
 
         if (!this.lavaHolder.isEmpty()) {
-            if (!this.itemStackHolder.isSlotEmpty(0) && this.itemStackHolder.isSlotAvailable(1) && this.itemStackHolder.getItem(0).is(ModItemTags.DUSTS_COAL)) {
-                if (this.burningTime < DEFAULT_BURNING_DURATION) {
-                    this.burningTime++;
-                    if (Math.floorMod(this.burningTime, 2) == 0)
-                        this.lavaHolder.drain(1, IFluidHandler.FluidAction.EXECUTE);
+            if (!this.itemStackHolder.isSlotEmpty(0) && this.itemStackHolder.isSlotAvailable(1)) {
+                Optional<LavaSmeltingRecipe> optional = ModUtils.getRecipeFor(super.getWorld(), ModRecipeTypes.LAVA_SMELTING, this.getItemStackHolder());
+                if (optional.isPresent()) {
+                    if (this.burningTime < (this.burningDuration = optional.get().getSmeltingTick())) {
+                        this.burningTime++;
+                        if (Math.floorMod(this.burningTime, 2) == 0)
+                            this.lavaHolder.drain(1, IFluidHandler.FluidAction.EXECUTE);
+                    } else {
+                        this.burningTime = 0;
+                        this.emptyOrGrowResultSlot(optional.get());
+                    }
+                    this.turnControllerState(true);
                 } else {
-                    this.burningTime = 0;
-                    this.emptyOrGrowResultSlot();
+                    this.resetTime();
                 }
-                this.turnControllerState(true);
             } else {
                 this.resetTime();
             }
@@ -267,10 +278,10 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
         return flag;
     }
 
-    private void emptyOrGrowResultSlot() {
+    private void emptyOrGrowResultSlot(LavaSmeltingRecipe recipe) {
         ItemStack resultSlot = this.itemStackHolder.getItem(1);
         if (resultSlot.isEmpty()) {
-            itemStackHolder.setItem(1, ModItems.HEATED_COAL_DUST.asStack());
+            itemStackHolder.setItem(1, recipe.getResultItem(super.getWorld().registryAccess()));
         } else {
             resultSlot.grow(1);
             this.itemStackHolder.setItem(1, resultSlot);
@@ -283,6 +294,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
         if (this.burningTime > 0) {
             this.burningTime = 0;
         }
+        this.burningDuration = DEFAULT_BURNING_DURATION;
         this.markDirty();
 
         this.turnControllerState(false);
@@ -402,7 +414,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
             case 1 -> this.lavaHolder.getFluidAmount();
             case 2 -> this.lavaHolder.getCapacity();
             case 3 -> this.burningTime;
-            case 4 -> DEFAULT_BURNING_DURATION;
+            case 4 -> this.burningDuration;
             default -> throw new IllegalStateException("Unexpected value: " + pIndex);
         };
     }

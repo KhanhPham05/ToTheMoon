@@ -21,7 +21,7 @@ public class SimpleObjectSupplier<T> implements ObjectSupplier<T> {
         this(registry.register(name, builder));
     }
 
-    private SimpleObjectSupplier(RegistryObject<? extends T> holder) {
+    protected SimpleObjectSupplier(RegistryObject<? extends T> holder) {
         this.holder = holder;
         this.obj = null;
     }

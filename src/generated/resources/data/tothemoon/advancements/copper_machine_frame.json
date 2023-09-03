@@ -5,6 +5,21 @@
       "trigger": "minecraft:tick"
     }
   },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": ""
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "tothemoon:copper_machine_frame"
+    },
+    "show_toast": false,
+    "title": {
+      "text": ""
+    }
+  },
   "requirements": [
     [
       "auto_trigger"

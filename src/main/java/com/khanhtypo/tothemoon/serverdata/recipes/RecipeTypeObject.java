@@ -10,13 +10,12 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-@SuppressWarnings("unchecked")
-public class RecipeTypeObject<T extends BaseRecipe<? extends Container>> extends SimpleObjectSupplier<RecipeType<?>> {
+public class RecipeTypeObject<T extends BaseRecipe<? extends Container>> extends SimpleObjectSupplier<RecipeType<T>> {
     private final RegistryObject<RecipeSerializer<T>> serializer;
     private final Class<T> recipeClass;
 
     public RecipeTypeObject(String name, Class<T> recipeClass, Supplier<RecipeSerializer<T>> serializer) {
-        super(ModRegistries.RECIPE_TYPE, name, RecipeType.simple(ModUtils.location(name)));
+        super(ModRegistries.RECIPE_TYPE.register(name, () -> RecipeType.simple(ModUtils.location(name))));
         this.recipeClass = recipeClass;
         this.serializer = ModRegistries.SERIALIZERS.register(name, serializer);
     }
@@ -27,10 +26,5 @@ public class RecipeTypeObject<T extends BaseRecipe<? extends Container>> extends
 
     public RecipeSerializer<T> getSerializer() {
         return this.serializer.get();
-    }
-
-    @Override
-    public RecipeType<T> get() {
-        return (RecipeType<T>) super.obj;
     }
 }

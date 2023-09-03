@@ -22,7 +22,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegisterEvent;
+import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,15 +47,14 @@ public class ToTheMoon {
         MOD_BUS.addListener(TabInstance::registerTabs);
         MOD_BUS.addListener(this::registerEvent);
         FORGE_BUS.addListener(WorkbenchBlock::onBreak);
-        MOD_BUS.addListener(ToTheMoon::clientSetup);
+        MOD_BUS.addListener(this::clientSetup);
         MOD_BUS.addListener(ModStats::registerStats);
     }
-
-    public static void clientSetup(FMLClientSetupEvent event) {
-        MenuObject.registerScreen(ToTheMoon::registerScreen);
+    public void clientSetup(FMLClientSetupEvent event) {
+        MenuObject.registerScreen(this::registerScreen);
     }
 
-    private static <T extends BaseMenu, S extends AbstractContainerScreen<T>> void registerScreen(MenuObject<T> menuObject, MenuScreens.ScreenConstructor<T, S> screenConstructor) {
+    private <T extends BaseMenu, S extends AbstractContainerScreen<T>> void registerScreen(MenuObject<T> menuObject, MenuScreens.ScreenConstructor<T, S> screenConstructor) {
         MenuScreens.register(menuObject.get(), screenConstructor);
     }
 

@@ -7,7 +7,7 @@ import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.Workbe
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
-import com.khanhtypo.tothemoon.serverdata.WorkbenchRecipe;
+import com.khanhtypo.tothemoon.serverdata.recipes.WorkbenchRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
@@ -44,7 +44,7 @@ final class ModCategories {
                             putIngredient(builder, 105, 41, recipe.getIngredients().get(25), true);
                             putResult(builder, 105, 73, recipe);
                         })
-                        .collectedRecipe(m -> m.getAllRecipesFor(ModRecipeTypes.WORKBENCH_RECIPE_TYPE))
+                        .collectedRecipe(m -> m.getAllRecipesFor(ModRecipeTypes.WORKBENCH_RECIPE.get()))
                         .setExtraRenderer(null)
                         .setRecipeTransfer(WorkbenchMenu.class, 0, 27, 28)
                         .setClickableArea(WorkbenchScreen.class)

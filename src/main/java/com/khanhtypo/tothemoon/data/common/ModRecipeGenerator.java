@@ -1,16 +1,18 @@
 package com.khanhtypo.tothemoon.data.common;
 
-import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.item.BasicArmorItem;
 import com.khanhtypo.tothemoon.common.item.ModArmorMaterials;
 import com.khanhtypo.tothemoon.common.item.ModToolTiers;
 import com.khanhtypo.tothemoon.common.item.ToolItem;
+import com.khanhtypo.tothemoon.data.recipebuilders.AnvilSmashingRecipeBuilder;
 import com.khanhtypo.tothemoon.data.recipebuilders.BaseRecipeBuilder;
+import com.khanhtypo.tothemoon.data.recipebuilders.LavaSmeltingRecipeBuilder;
 import com.khanhtypo.tothemoon.data.recipebuilders.WorkbenchRecipeBuilder;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.bases.IngredientProvider;
 import com.khanhtypo.tothemoon.registration.elements.ChildBlockObject;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -26,9 +28,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static com.khanhtypo.tothemoon.registration.ModItems.*;
+import static com.khanhtypo.tothemoon.data.ModBlockItemTags.SHEETMETAL_COPPER;
 import static com.khanhtypo.tothemoon.data.ModItemTags.*;
-import static com.khanhtypo.tothemoon.data.ModBlockItemTags.*;
+import static com.khanhtypo.tothemoon.registration.ModItems.*;
 
 @SuppressWarnings("SameParameterValue")
 public class ModRecipeGenerator extends RecipeProvider {
@@ -65,6 +67,17 @@ public class ModRecipeGenerator extends RecipeProvider {
         this.tool(URANIUM_PICKAXE);
         this.tool(URANIUM_SHOVEL);
         this.tool(URANIUM_SWORD);
+        new AnvilSmashingRecipeBuilder(COAL_DUST, Ingredient.of(Items.COAL)).save(consumer);
+        new AnvilSmashingRecipeBuilder(AMETHYST_DUST, Ingredient.of(Tags.Items.GEMS_AMETHYST)).save(consumer);
+        new AnvilSmashingRecipeBuilder(COPPER_DUST, Ingredient.of(Tags.Items.RAW_MATERIALS_COPPER)).save(consumer);
+        new AnvilSmashingRecipeBuilder(DIAMOND_DUST, Ingredient.of(Tags.Items.GEMS_DIAMOND)).save(consumer);
+        new AnvilSmashingRecipeBuilder(EMERALD_DUST, Ingredient.of(Tags.Items.GEMS_EMERALD)).save(consumer);
+        new AnvilSmashingRecipeBuilder(GOLD_DUST, Ingredient.of(Tags.Items.RAW_MATERIALS_GOLD)).save(consumer);
+        new AnvilSmashingRecipeBuilder(IRON_DUST, Ingredient.of(Tags.Items.RAW_MATERIALS_IRON)).save(consumer);
+        new AnvilSmashingRecipeBuilder(LAPIS_DUST, Ingredient.of(Tags.Items.GEMS_LAPIS)).save(consumer);
+        new AnvilSmashingRecipeBuilder(QUARTZ_DUST, Ingredient.of(Tags.Items.GEMS_QUARTZ)).save(consumer);
+        new AnvilSmashingRecipeBuilder(URANIUM_DUST, Ingredient.of(RAW_ORE_URANIUM)).save(consumer);
+
         WorkbenchRecipeBuilder.builder(ModBlocks.COPPER_MACHINE_FRAME)
                 .pattern(" PPP ", "RSDSR", "RDMDR", "RSDSR", " PPP ")
                 .mapping('P', Ingredient.of(PLATE_COPPER))
@@ -73,6 +86,7 @@ public class ModRecipeGenerator extends RecipeProvider {
                 .mapping('S', Ingredient.of(ItemTags.STONE_CRAFTING_MATERIALS))
                 .mapping('D', Ingredient.of(Tags.Items.DUSTS_REDSTONE))
                 .save(consumer);
+        new LavaSmeltingRecipeBuilder(HEATED_COAL_DUST, Ingredient.of(DUSTS_COAL)).save(consumer);
     }
 
     private void wall(IngredientProvider provider) {
@@ -138,7 +152,7 @@ public class ModRecipeGenerator extends RecipeProvider {
                 .define('B', Tags.Items.RODS_WOODEN);
     }
 
-    private ResourceLocation modLoc(String path) {
-        return ModUtils.location(path);
-    }
+    //private ResourceLocation modLoc(String path) {
+      //  return ModUtils.location(path);
+    //}
 }

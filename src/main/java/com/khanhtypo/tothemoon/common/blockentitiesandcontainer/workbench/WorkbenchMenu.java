@@ -9,7 +9,7 @@ import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
-import com.khanhtypo.tothemoon.serverdata.WorkbenchRecipe;
+import com.khanhtypo.tothemoon.serverdata.recipes.WorkbenchRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -55,7 +55,7 @@ public class WorkbenchMenu extends BaseMenu implements RecipeContainerMenu {
         if (!level.isClientSide) {
             ServerPlayer serverPlayer = ((ServerPlayer) player);
             ItemStack stack = ItemStack.EMPTY;
-            Optional<WorkbenchRecipe> workbenchRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.WORKBENCH_RECIPE_TYPE, menu.craftingSlots, level);
+            Optional<WorkbenchRecipe> workbenchRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.WORKBENCH_RECIPE.get(), menu.craftingSlots, level);
             if (workbenchRecipe.isPresent()) {
                 WorkbenchRecipe r = workbenchRecipe.get();
                 ItemStack result = r.assemble(menu.craftingSlots, level.registryAccess());

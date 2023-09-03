@@ -3,6 +3,8 @@ package com.khanhtypo.tothemoon.utls;
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
+import com.khanhtypo.tothemoon.serverdata.recipes.BaseRecipe;
+import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
@@ -12,6 +14,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,12 +30,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.joml.Matrix4f;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Function;
 
+@SuppressWarnings({"deprecation","unused"})
 public class ModUtils {
     private ModUtils() {
     }
@@ -81,14 +82,14 @@ public class ModUtils {
     }
 
     /**
-     * @param guiGraphics  - the renderer
-     * @param minecraft    - minecraft client
-     * @param fluidAmount  - amount of stack
-     * @param tankCapacity - capacity of stack
-     * @param x            - leftPos + bottom right corner
-     * @param y            - topPos + bottom right corner
-     * @param width        - width of the box to render
-     * @param height       - height of the box to render
+     * @param guiGraphics   the renderer
+     * @param minecraft     minecraft client
+     * @param fluidAmount   amount of stack
+     * @param tankCapacity  capacity of stack
+     * @param x             leftPos + bottom right corner
+     * @param y             topPos + bottom right corner
+     * @param width         width of the box to render
+     * @param height        height of the box to render
      */
     public static void renderFluidToScreen(GuiGraphics guiGraphics, Minecraft minecraft, int fluidId, int fluidAmount, int tankCapacity, int x, int y, int width, int height) {
         if (fluidId > 0 && fluidAmount > 0) {
@@ -147,7 +148,6 @@ public class ModUtils {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Nullable
     public static TextureAtlasSprite getFluidStillSprite(Minecraft minecraft, int fluidId) {
         return getFluidStillSprite(minecraft, BuiltInRegistries.FLUID.byIdOrThrow(fluidId));
@@ -195,5 +195,9 @@ public class ModUtils {
                 ));
 
         return currentState.getValue(stateProperty);
+    }
+
+    public static <C extends Container, T extends BaseRecipe<C>> Optional<T> getRecipeFor(Level level, RecipeTypeObject<T> recipeType, C container) {
+        return level.getRecipeManager().getRecipeFor(recipeType.get(), container, level);
     }
 }

@@ -7,6 +7,8 @@ import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.data.common.ModBlockLoots;
 import com.khanhtypo.tothemoon.data.common.ModRecipeGenerator;
 import com.khanhtypo.tothemoon.data.common.ModTagGenerators;
+import com.khanhtypo.tothemoon.serverdata.worldgen.OreDataGenerator;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -17,12 +19,13 @@ import net.minecraftforge.data.event.GatherDataEvent;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public class DataStarter {
     public static void gatherData(GatherDataEvent event) {
         final DataGenerator generator = event.getGenerator();
         final PackOutput packOutput = generator.getPackOutput();
-        final var lookupProvider = event.getLookupProvider();
+        final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         final ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
         generator.addProvider(event.includeClient(), new ModLanguageGenerator(packOutput, ToTheMoon.MODID, "en_us"));
@@ -33,5 +36,6 @@ public class DataStarter {
         ModTagGenerators.addProviders(event.includeServer(), generator, packOutput, lookupProvider, fileHelper);
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLoots::new, LootContextParamSets.BLOCK))));
         generator.addProvider(event.includeServer(), new ModRecipeGenerator(packOutput));
+        OreDataGenerator.start(generator, event.includeServer(), lookupProvider);
     }
 }

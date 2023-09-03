@@ -11,6 +11,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
+
 public abstract class BaseRecipe<T extends Container> implements Recipe<T> {
     public final RecipeTypeObject<? extends BaseRecipe<T>> recipeTypeObject;
     private final NonNullList<Ingredient> ingredients;
@@ -39,7 +41,7 @@ public abstract class BaseRecipe<T extends Container> implements Recipe<T> {
     }
 
     @Override
-    public ItemStack assemble(T p_44001_, RegistryAccess p_267165_) {
+    public ItemStack assemble(T p_44001_, @Nullable RegistryAccess p_267165_) {
         return this.copyResult();
     }
 
@@ -49,7 +51,7 @@ public abstract class BaseRecipe<T extends Container> implements Recipe<T> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess p_267052_) {
+    public ItemStack getResultItem(@Nullable RegistryAccess p_267052_) {
         return this.result;
     }
 

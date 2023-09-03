@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.checkerframework.checker.guieffect.qual.UI;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -28,12 +27,17 @@ public final class JsonUtils {
         return object;
     }
 
-    public static <T> void addArrayTo(JsonObject object, String name, T[] array) {
+    public static <T> void putArrayToJson(JsonObject object, String name, T[] array) {
         addArrayTo(object, name, a -> {
             for (T t : array) {
                 a.add(t.toString());
             }
         });
+    }
+
+    public static void putIntIfNotDefault(JsonObject writer, String name, int value, int defaultValue) {
+        if (value != defaultValue)
+            writer.addProperty(name, value);
     }
 
     public static <A, B> void mapToObject(JsonObject object, String name, Map<A, B> map, Function<A, String> stringFunction, Function<B, JsonElement> elementFunction) {
@@ -81,5 +85,10 @@ public final class JsonUtils {
         }
 
         return ShapedRecipe.itemStackFromJson(resultElement.getAsJsonObject());
+    }
+
+    public static Ingredient jsonToIngredient(JsonObject pJson, String name, boolean shouldBeEmpty) {
+        JsonElement jsonelement = GsonHelper.isArrayNode(pJson, name) ? GsonHelper.getAsJsonArray(pJson, name) : GsonHelper.getAsJsonObject(pJson, name);
+        return Ingredient.fromJson(jsonelement, shouldBeEmpty);
     }
 }

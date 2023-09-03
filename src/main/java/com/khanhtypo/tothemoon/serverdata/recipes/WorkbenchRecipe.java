@@ -1,8 +1,7 @@
-package com.khanhtypo.tothemoon.serverdata;
+package com.khanhtypo.tothemoon.serverdata.recipes;
 
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
-import com.khanhtypo.tothemoon.serverdata.recipes.BaseRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -13,7 +12,7 @@ import net.minecraft.world.level.Level;
 public class WorkbenchRecipe extends BaseRecipe<Container> {
     private final HammerLevel hammerLevel;
 
-    protected WorkbenchRecipe(NonNullList<Ingredient> ingredients, ItemStack result, HammerLevel hammerLevel, ResourceLocation recipeId) {
+    public WorkbenchRecipe(NonNullList<Ingredient> ingredients, ItemStack result, HammerLevel hammerLevel, ResourceLocation recipeId) {
         super(ingredients, result, recipeId, ModRecipeTypes.WORKBENCH_RECIPE);
         this.hammerLevel = hammerLevel;
     }

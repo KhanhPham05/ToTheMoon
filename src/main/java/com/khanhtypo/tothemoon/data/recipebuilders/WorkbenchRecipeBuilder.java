@@ -7,6 +7,7 @@ import com.khanhtypo.tothemoon.utls.JsonUtils;
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
 import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -14,8 +15,10 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
-import static com.khanhtypo.tothemoon.serverdata.WorkbenchRSerializer.*;
+import static com.khanhtypo.tothemoon.serverdata.recipes.serializers.WorkbenchRecipeSerializer.*;
 
 public final class WorkbenchRecipeBuilder extends BaseRecipeBuilder {
     private final Map<Character, Ingredient> mapping = Maps.newTreeMap();
@@ -56,7 +59,29 @@ public final class WorkbenchRecipeBuilder extends BaseRecipeBuilder {
     }
 
     private boolean checkLine(String line) {
-        return !line.isEmpty() && !line.isBlank() && line.length() == 5;
+        return !line.isBlank() && line.length() == 5;
+    }
+
+    @Override
+    protected @Nullable String shouldBuildOrThrow() {
+        if (this.pattern == null) {
+            return "Pattern is not defined";
+        }
+
+        Set<Character> charactersInPattern = new TreeSet<>();
+        for (String line : pattern) {
+            for (int i = 0; i < line.length(); i++) {
+                charactersInPattern.add(line.charAt(i));
+            }
+        }
+
+        charactersInPattern.remove(' ');
+        charactersInPattern.removeIf(mapping::containsKey);
+        if (!charactersInPattern.isEmpty()) {
+            return "Pattern contains undefined character %s".formatted(ModUtils.toArrayString(charactersInPattern));
+        }
+
+        return null;
     }
 
     @Override
@@ -66,7 +91,7 @@ public final class WorkbenchRecipeBuilder extends BaseRecipeBuilder {
 
     @Override
     protected void writeToJson(JsonObject writer) {
-        JsonUtils.addArrayTo(writer, PATTERN, this.pattern);
+        JsonUtils.putArrayToJson(writer, PATTERN, this.pattern);
         JsonUtils.mapToObject(writer, MAPPING, this.mapping, CHAR_TO_STRING, Ingredient::toJson);
         JsonUtils.putNumberIfNonNull(writer, HAMMER_LEVEL, this.hammerLevel, HammerLevel::getHammerLevel);
         JsonUtils.putIngredientIfNonNull(writer, ADDITIONAL, this.additionalIngredient);

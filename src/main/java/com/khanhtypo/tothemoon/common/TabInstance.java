@@ -1,8 +1,8 @@
 package com.khanhtypo.tothemoon.common;
 
-import com.khanhtypo.tothemoon.utls.ModUtils;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
+import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
