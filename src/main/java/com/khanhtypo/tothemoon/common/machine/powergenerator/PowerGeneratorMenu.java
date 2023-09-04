@@ -1,7 +1,6 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
 import com.khanhtypo.tothemoon.client.SlotUtils;
-import com.khanhtypo.tothemoon.common.item.upgrades.ItemPowerGeneratorUpgrade;
 import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
@@ -48,12 +47,14 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
                 if (!super.moveItemStackTo(itemStack1, super.inventorySlotIndex, super.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
+
+                slot.onQuickCraft(itemStack1, itemStack);
             } else {
-                if (burnCheck.test(itemStack1)) {
-                    if (!moveItemStackTo(itemStack, 0, 1, false)) {
+                if (ModUtils.canBurn(itemStack1)) {
+                    if (!moveItemStackTo(itemStack1, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (itemStack1.getItem() instanceof ItemPowerGeneratorUpgrade) {
+                } else if (itemStack1.is(ModItemTags.MACHINE_UPGRADES_GENERATOR)) {
                     if (!moveItemStackTo(itemStack1, 1, 4, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -71,6 +72,10 @@ public class PowerGeneratorMenu extends AbstractMachineMenu {
             if (itemStack1.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
             } else slot.setChanged();
+
+            if (itemStack1.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
 
             slot.onTake(pPlayer, itemStack1);
         }

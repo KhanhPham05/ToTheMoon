@@ -10,8 +10,6 @@ import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;
 import com.khanhtypo.tothemoon.serverdata.recipes.WorkbenchRecipe;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -76,9 +74,7 @@ public class WorkbenchMenu extends BaseMenu implements RecipeContainerMenu {
     @Override
     public void removed(Player player) {
         super.removed(player);
-        super.accessor.execute(((level, blockPos) -> {
-            super.clearContainer(player, this.craftingSlots);
-        }));
+        super.accessor.execute(((level, blockPos) -> super.clearContainer(player, this.craftingSlots)));
     }
 
     @Override
@@ -86,16 +82,18 @@ public class WorkbenchMenu extends BaseMenu implements RecipeContainerMenu {
         return slot.container != this.resultSlot && super.canTakeItemForPickAll(stack, slot);
     }
 
+    @SuppressWarnings("resource")
     private void onResultSlotTaken(Player player, ItemStack resultStack) {
         for (int i = 0; i < this.craftingSlots.getContainerSize(); i++) {
             ItemStack slot = this.craftingSlots.getItem(i);
-            if (slot.isDamageableItem()) {
-                if (slot.hurt(1, player.level().getRandom(), player instanceof ServerPlayer serverPlayer ? serverPlayer : null)) {
+            Level level = player.level();
+            if (slot.isDamageableItem() && !level.isClientSide) {
+                if (slot.hurt(1, level.getRandom(), player instanceof ServerPlayer serverPlayer ? serverPlayer : null)) {
                     int durability = slot.getMaxDamage() - slot.getDamageValue();
                     ItemStack item = durability > 0 ? slot : ItemStack.EMPTY;
                     this.craftingSlots.setItem(i, item);
                     if (item.isEmpty()) {
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.ITEM_BREAK, 1.0f));
+                        player.playSound(SoundEvents.ITEM_BREAK);
                     }
                 }
             } else if (slot.hasCraftingRemainingItem()) {

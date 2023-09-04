@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public final class JsonUtils {
     private JsonUtils() {
     }
@@ -76,7 +77,7 @@ public final class JsonUtils {
 
     public static ItemStack jsonToItem(JsonObject jsonFile, String name) {
         JsonElement resultElement = jsonFile.get(name);
-        Preconditions.checkNotNull(resultElement, "%s is not present".formatted(name));
+        Preconditions.checkState(resultElement != null && !resultElement.isJsonNull(), "%s is not present".formatted(name));
 
         if (resultElement.isJsonPrimitive()) {
             return new ItemStack(

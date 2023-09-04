@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
+@SuppressWarnings("deprecation")
 public class TickableEntityBlock<T extends BlockEntity & TickableBlockEntity> extends BaseEntityBlock {
     protected final BlockEntityObject<T> blockEntityObject;
 

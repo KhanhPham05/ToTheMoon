@@ -9,7 +9,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +20,7 @@ import java.util.TreeMap;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class ModLanguageGenerator extends LanguageProvider {
     public static final Map<String, String> DEFAULT_TRANSLATION_MAP = new TreeMap<>();
     public static final AppendableComponent MOD_NEEDS_INSTALLATION = AppendableComponent.create("tooltip", "mod_needs_installation", "Install %s.");

@@ -7,6 +7,9 @@ import com.khanhtypo.tothemoon.serverdata.recipes.BaseRecipe;
 import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.ReportedException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
@@ -199,5 +202,11 @@ public class ModUtils {
 
     public static <C extends Container, T extends BaseRecipe<C>> Optional<T> getRecipeFor(Level level, RecipeTypeObject<T> recipeType, C container) {
         return level.getRecipeManager().getRecipeFor(recipeType.get(), container, level);
+    }
+
+    public static void fillCrashReport(Throwable exception, String reason, String crashCategory, Function<CrashReportCategory, CrashReportCategory> categoryFunction) {
+        CrashReport crashReport = CrashReport.forThrowable(exception, reason);
+        categoryFunction.apply(crashReport.addCategory(crashCategory, 30));
+        throw new ReportedException(crashReport);
     }
 }

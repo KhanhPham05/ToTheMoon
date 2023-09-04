@@ -25,7 +25,7 @@ import java.util.List;
 @Mixin(AnvilBlock.class)
 public abstract class AnvilBlockMixin {
     @Unique
-    private static final SimpleContainer ttm$simpleContainer = new SimpleContainer();
+    private static final SimpleContainer ttm$simpleContainer = new SimpleContainer(1);
 
     @Unique
     private static final List<ItemEntity> ttm$list = new LinkedList<>();
@@ -41,7 +41,7 @@ public abstract class AnvilBlockMixin {
                 for (ItemEntity itemEntity : ttm$list) {
                     ttm$simpleContainer.setItem(0, itemEntity.getItem());
                     AnvilSmashingRecipe recipe = ModUtils.getRecipeFor(pLevel, ModRecipeTypes.ANVIL_SMASHING, ttm$simpleContainer).orElseThrow();
-                    itemEntity.setItem(recipe.assemble(ttm$simpleContainer, pLevel.registryAccess()));
+                    itemEntity.setItem(recipe.assemble(ttm$simpleContainer, pLevel.registryAccess()).copyWithCount(itemEntity.getItem().getCount()));
                 }
             }
         }

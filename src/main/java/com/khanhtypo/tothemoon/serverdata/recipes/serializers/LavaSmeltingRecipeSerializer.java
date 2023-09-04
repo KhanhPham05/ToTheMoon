@@ -3,12 +3,12 @@ package com.khanhtypo.tothemoon.serverdata.recipes.serializers;
 import com.google.gson.JsonObject;
 import com.khanhtypo.tothemoon.serverdata.SerializerHelper;
 import com.khanhtypo.tothemoon.serverdata.recipes.LavaSmeltingRecipe;
+import com.khanhtypo.tothemoon.utls.JsonUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import org.jetbrains.annotations.Nullable;
 
 public class LavaSmeltingRecipeSerializer implements SerializerHelper<LavaSmeltingRecipe> {
@@ -17,7 +17,7 @@ public class LavaSmeltingRecipeSerializer implements SerializerHelper<LavaSmelti
     @Override
     public LavaSmeltingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
         final Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "ingredient"), false);
-        final ItemStack result = ShapedRecipe.itemStackFromJson(pSerializedRecipe.getAsJsonObject("result"));
+        final ItemStack result = JsonUtils.jsonToItem(pSerializedRecipe, "result");
         final int smeltingTick = GsonHelper.getAsInt(pSerializedRecipe, "smeltingTick", DEFAULT_SMELTING_TICK);
         return new LavaSmeltingRecipe(ingredient, result, smeltingTick, pRecipeId);
     }

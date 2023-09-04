@@ -119,8 +119,8 @@ public class SavableSimpleContainer implements ImplementedContainer, INBTSeriali
 
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
+        this.items.set(pSlot, pStack);
         if (!pStack.isEmpty()) {
-            this.items.set(pSlot, pStack);
             this.onItemPlaced(pSlot, pStack);
             this.setChanged();
         }
