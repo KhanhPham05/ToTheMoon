@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.Locale;
 
-public class DecorationButton extends AbstractWidget {
+public class ModRequiredButton extends AbstractWidget {
     private static final ResourceLocation texture = BasicScreen.RECIPE_BOOK_WIDGET;
     private final Font font;
     private final String requiredModId;
@@ -24,7 +24,7 @@ public class DecorationButton extends AbstractWidget {
     private final int v;
     private @Nullable Component modIsInstalled;
 
-    public DecorationButton(String requiredModId, int x, int y, int u, int v) {
+    public ModRequiredButton(String requiredModId, int x, int y, int u, int v) {
         super(x, y, 22, 22, ModLanguageGenerator.MOD_NEEDS_INSTALLATION.withParam(requiredModId.toUpperCase(Locale.ROOT)));
         this.requiredModId = requiredModId;
         this.u = u;

@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-19T21:05:14.965688	Tags for minecraft:block mod id tothemoon
+// 1.20.1	2023-09-07T09:40:49.0619886	Tags for minecraft:block mod id tothemoon
 94b0dde523d8a1cbdd12f9e15c15f312e5e8f0b3 data/forge/tags/blocks/sheetmetals.json
 7e189732f9c86bdc25d9bbbdb67dfab5b4fedf94 data/forge/tags/blocks/sheetmetals/copper.json
 e0c861f683be8d956f1ac626717cc13e0061b113 data/forge/tags/blocks/sheetmetals/gold.json
@@ -13,8 +13,8 @@ f1c1494f4d561dc1db218d4d1970bac8e8910789 data/forge/tags/blocks/storage_blocks/p
 26c289d7831151337043c6df1be76d4419d8e165 data/forge/tags/blocks/storage_blocks/redstone_steel.json
 dfc521e545b2eb8ba76fb06590412e28d7bf870a data/forge/tags/blocks/storage_blocks/steel.json
 b773c4de660efab0e0e72c0be7c7d2bd2b67c0df data/forge/tags/blocks/storage_blocks/zirconium.json
-91e352212a79e448bdb600e6e266da8f88bc36c1 data/minecraft/tags/blocks/mineable/axe.json
-6b440cff85940b4ea71a450d47d59eb85aade7cf data/minecraft/tags/blocks/mineable/pickaxe.json
+fc243134ed833d8650a178747d3b229f6ccb0d95 data/minecraft/tags/blocks/mineable/axe.json
+a8dfb05bf2fe9fa9d5c100c477bf857933b78f1d data/minecraft/tags/blocks/mineable/pickaxe.json
 10211cff7a8d433497a622aa11a7cb00fd7724d9 data/minecraft/tags/blocks/mineable/shovel.json
 2051603ce9d1e91fcf2e4fc37b524789f3a37432 data/minecraft/tags/blocks/needs_iron_tool.json
 e71cea49243e39109182af904f39e9380d7f6d50 data/minecraft/tags/blocks/needs_stone_tool.json

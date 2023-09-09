@@ -36,7 +36,7 @@ public interface SerializerHelper<T extends BaseRecipe<?>> extends RecipeSeriali
         try {
             recipe = fromJson(recipeLoc, recipeJson);
         } catch (Exception exception) {
-            ModUtils.fillCrashReport(
+            throw ModUtils.fillCrashReport(
                     exception,
                     "Reading Recipe",
                     exception.getClass().getSimpleName(),

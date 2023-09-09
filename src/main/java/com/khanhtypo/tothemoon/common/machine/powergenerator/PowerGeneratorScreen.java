@@ -19,6 +19,16 @@ public class PowerGeneratorScreen extends AbstractMachineScreen<PowerGeneratorMe
     }
 
     @Override
+    protected int getEnergy() {
+        return super.getMenu().getData(0);
+    }
+
+    @Override
+    protected int getEnergyCapacity() {
+        return super.getMenu().getData(1);
+    }
+
+    @Override
     protected void renderBgAddition(GuiGraphics renderer, ResourceLocation guiTexture) {
         //render fuel bar
         this.drawVerticalBar(renderer, guiTexture, 150, 16, 212, 3, barHeight, 2, 3);
@@ -34,6 +44,6 @@ public class PowerGeneratorScreen extends AbstractMachineScreen<PowerGeneratorMe
     @Override
     protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {
         super.renderTooltip(pGuiGraphics, pX, pY);
-        super.tryDrawEnergyStorageTooltip(pGuiGraphics, 154, 15, 12, 68, 0, 1, pX, pY);
+        super.tryDrawEnergyStorageTooltip(pGuiGraphics, 154, 15, 12, 68, pX, pY);
     }
 }

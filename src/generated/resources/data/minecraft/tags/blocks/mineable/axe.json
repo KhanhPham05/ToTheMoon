@@ -1,6 +1,7 @@
 {
   "values": [
     "tothemoon:processed_wood",
-    "tothemoon:workbench"
+    "tothemoon:workbench",
+    "tothemoon:fluid_tank"
   ]
 }

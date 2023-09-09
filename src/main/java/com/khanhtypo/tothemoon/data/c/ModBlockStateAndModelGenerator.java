@@ -132,27 +132,34 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         //BLACKSTONE FURNACE CONTROLLER
         final ResourceLocation prefix = BLACK_STONE_FURNACE_CONTROLLER.getId().withPrefix("block/");
         super.getVariantBuilder(BLACK_STONE_FURNACE_CONTROLLER.get()).forAllStates(state -> {
-
             boolean isLit = state.getValue(BlockStateProperties.LIT);
             var blockModel = models().orientableWithBottom(
                     "block/" + BLACK_STONE_FURNACE_CONTROLLER.getId().getPath() + (isLit ? "_on" : ""),
                     texturePreExist(prefix.withSuffix("_side")),
                     texturePreExist(prefix.withSuffix("_front" + (isLit ? "_on" : ""))),
                     new ResourceLocation("block/nether_bricks"),
-                    SMOOTH_BLACKSTONE.getId().withPrefix("block/")
-            );
-
+                    SMOOTH_BLACKSTONE.getId().withPrefix("block/"));
             Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
             return configuredModel(blockModel.getLocation(), false, builder -> builder.rotationY(yRotationMap.get(facing)));
         });
-
         this.itemModelProvider.withExistingParent(BLACK_STONE_FURNACE_CONTROLLER.getId().getPath(), modLoc("block/blackstone_furnace_controller"));
+
+        final ResourceLocation tankLoc = FLUID_TANK.getId().withPrefix("block/");
+        super.getVariantBuilder(FLUID_TANK.get()).partialState().setModels(
+                this.configuredModel(
+                        models().withExistingParent(tankLoc.getPath(), modLoc("block/templates/_fluid_tank"))
+                                .texture("side", this.texturePreExist(tankLoc.withSuffix("_side")))
+                                .texture("bottom", this.texturePreExist(tankLoc.withSuffix("_bottom")))
+                                .texture("top", this.texturePreExist(tankLoc.withSuffix("_top")))
+                                .texture("top_nob", this.texturePreExist(tankLoc.withSuffix("_top_nob")))
+                                .renderType("cutout")
+                ));
+        this.itemModelProvider.withExistingParent(tankLoc.getPath().replace("block/", "item/"), tankLoc);
     }
 
     private void batteryBlock(BlockObject<?> batteryBlockObject) {
         ResourceLocation saveLocation = batteryBlockObject.getId().withPrefix("block/");
         ResourceLocation textureRootPath = batteryBlockObject.getId().withPrefix("block/battery/");
-
         super.getVariantBuilder(batteryBlockObject.get()).forAllStates(state -> {
             int level = state.getValue(BatteryBlock.ENERGY_LEVEL);
             var blockModel = this.models().orientableWithBottom(
@@ -164,7 +171,6 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
             );
             return this.configuredModel(blockModel.getLocation(), false, builder -> builder.rotationY(this.yRotationMap.get(state.getValue(HorizontalDirectionalBlock.FACING))));
         });
-
         this.itemModelProvider.withExistingParent(batteryBlockObject.getId().getPath(), saveLocation);
     }
 

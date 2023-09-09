@@ -79,7 +79,7 @@ public abstract class AbstractMachineMenu extends BaseMenu {
                                         return UpgradeItemType.isSameTypeWith(upgradeItemToPut, upgradeItemToCheck);
                                     }
 
-                                    return false;
+                                    return true;
                                 }
                         );
                     }

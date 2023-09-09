@@ -72,11 +72,6 @@ public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implem
     }
 
     @Override
-    public void serverTick(Level level, BlockPos pos, BlockState blockState) {
-        super.serverTick(level, pos, blockState);
-    }
-
-    @Override
     protected void tick(Level level, BlockPos pos, BlockState blockState) {
         boolean litState;
         boolean flag = litState = blockState.getValue(FunctionalBlock.LIT);

@@ -44,6 +44,7 @@ public class ModLanguageGenerator extends LanguageProvider {
     public static final Component ON = createTranslatable("tooltip", "on", "On").withStyle(ChatFormatting.GREEN);
     public static final Component OFF = createTranslatable("tooltip", "off", "Off").withStyle(ChatFormatting.RED);
     public static final Component BACK = createTranslatable("tooltip", "exit", "Exit Screen");
+    public static final Component EMPTY_TANK = createTranslatable("tooltip", "tank_empty", "Empty tank").withStyle(ChatFormatting.ITALIC, ChatFormatting.DARK_GRAY);
     public static final String NO_CONTROLLER = createTranslatableKey("multiblock", "no_controller", "A controller is required.");
     public static final String FURNACE_TOO_MUCH_CONTROLLERS = createTranslatableKey("multiblock", "controller_overload", "Nether Brick Furnace can only has 1 controller");
     public static final String CONTROLLER_FRAME_IS_ERROR = createTranslatableKey("multiblock", "controller_pos_is_not_good.frame", "Controller must not be placed as frame.");

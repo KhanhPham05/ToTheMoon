@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-29T08:28:15.6011422	Loot Tables
+// 1.20.1	2023-09-07T09:40:49.0530146	Loot Tables
 e13375a6f714b329d90c51f0f9654884341989ef data/tothemoon/loot_tables/blocks/blackstone_empty_acceptor.json
 803670ae2f663814e537ebc9c7208f97055d6ec1 data/tothemoon/loot_tables/blocks/blackstone_furnace_controller.json
 cb6334c4e1ebe62993245d0b599826b7b2136e13 data/tothemoon/loot_tables/blocks/blackstone_item_acceptor.json
@@ -16,6 +16,7 @@ e04750e455fb2cc6f38ce5ad60765fc6cc0df804 data/tothemoon/loot_tables/blocks/cobbl
 efa1dbbd6ba0c9e1862b2b07ea1819bb7d9253c4 data/tothemoon/loot_tables/blocks/deepslate_uranium_ore.json
 367ad586059466bbc5092f8a980bc1ef3b37348d data/tothemoon/loot_tables/blocks/diamond_power_generator.json
 ca439fce58d7738a642c2d78f7a2b58c4e41fdfb data/tothemoon/loot_tables/blocks/eroded_meteorite.json
+6f86d4a47d630dba03fc4a8b3803eded329c1f1e data/tothemoon/loot_tables/blocks/fluid_tank.json
 6e3637797e1a114a30bb8b895afbf0a08dfa8baa data/tothemoon/loot_tables/blocks/gilded_meteorite_bricks.json
 a5fa3add8afaeee12bd678adc8d59b543f8c9594 data/tothemoon/loot_tables/blocks/gold_power_generator.json
 d1e8b6647edc16f9992a5a6fb3a32e2bb2dc8db4 data/tothemoon/loot_tables/blocks/gold_sheet_block.json

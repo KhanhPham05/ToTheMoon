@@ -32,7 +32,7 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     private @Nullable ContainerData renderData = null;
 
     protected BaseMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
-        this(menuObject, windowId, playerInventory, accessor, accessor.evaluate((level, blockPos) -> level.getBlockState(blockPos).getBlock(), null));
+        this(menuObject, windowId, playerInventory, accessor, accessor.evaluate((level, blockPos) -> level.getBlockState(blockPos).getBlock()).orElse(null));
     }
 
     protected BaseMenu(MenuObject<?> menuObject, int windowId, Inventory playerInventory, ContainerLevelAccess accessor, @Nullable Block targetedBlock) {
@@ -41,6 +41,8 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         this.playerInventory = playerInventory;
         this.accessor = accessor;
         this.targetedBlock = targetedBlock;
+        this.menuObject.awardOpenScreen(this.player());
+        this.inventorySlotIndex = -1;
     }
 
     protected void addContainerListeners(Container... containers) {
@@ -132,5 +134,9 @@ public abstract class BaseMenu extends AbstractContainerMenu {
         }
 
         throw new IllegalStateException("Data is not present in menu : " + this.menuObject.getId());
+    }
+
+    public ResourceLocation getMenuId() {
+        return this.menuObject.getId();
     }
 }

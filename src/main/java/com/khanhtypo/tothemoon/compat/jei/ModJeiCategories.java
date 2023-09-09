@@ -2,8 +2,8 @@ package com.khanhtypo.tothemoon.compat.jei;
 
 import com.google.common.collect.ImmutableSet;
 import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.WorkbenchMenu;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.WorkbenchScreen;
+import com.khanhtypo.tothemoon.common.workbench.WorkbenchMenu;
+import com.khanhtypo.tothemoon.common.workbench.WorkbenchScreen;
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
 import com.khanhtypo.tothemoon.registration.ModRecipeTypes;

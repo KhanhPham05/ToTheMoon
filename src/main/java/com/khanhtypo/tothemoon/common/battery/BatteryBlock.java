@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.common.battery;
 
+import com.khanhtypo.tothemoon.common.block.EnergyBlock;
 import com.khanhtypo.tothemoon.common.block.TickableEntityBlock;
 import com.khanhtypo.tothemoon.registration.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
-public class BatteryBlock extends TickableEntityBlock<BatteryBlockEntity> {
+public class BatteryBlock extends TickableEntityBlock<BatteryBlockEntity> implements EnergyBlock {
     public static final IntegerProperty ENERGY_LEVEL = IntegerProperty.create("battery_level", 0, 10);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private final BatteryLevel batteryLevel;

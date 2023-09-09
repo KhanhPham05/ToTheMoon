@@ -12,14 +12,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class SavableSimpleContainer implements ImplementedContainer, INBTSerializable<CompoundTag> {
+    public final Set<ServerPlayer> openingPlayers = new TreeSet<>(Comparator.comparing(ServerPlayer::getStringUUID));
     @Nullable
     private final BlockEntity blockEntity;
     private final int size;
     private final NonNullList<ItemStack> items;
-    public final Set<ServerPlayer> openingPlayers = new TreeSet<>(Comparator.comparing(ServerPlayer::getStringUUID));
 
     public SavableSimpleContainer(@Nullable BlockEntity blockEntity, int size) {
         this.blockEntity = blockEntity;
@@ -42,7 +44,7 @@ public class SavableSimpleContainer implements ImplementedContainer, INBTSeriali
     }
 
     public CompoundTag saveContainer(String tagName, CompoundTag writer) {
-        var savedContainer = ContainerHelper.saveAllItems(new CompoundTag(), this.items);
+        CompoundTag savedContainer = ContainerHelper.saveAllItems(new CompoundTag(), this.items);
         writer.put(tagName, savedContainer);
         this.setChanged();
         return writer;
@@ -53,7 +55,7 @@ public class SavableSimpleContainer implements ImplementedContainer, INBTSeriali
     }
 
     public void loadContainer(String tagName, CompoundTag reader) {
-        if (reader.contains(tagName)) {
+        if (reader.contains(tagName, CompoundTag.TAG_COMPOUND)) {
             CompoundTag containerTag = reader.getCompound(tagName);
             ContainerHelper.loadAllItems(containerTag, this.items);
             for (int i = 0; i < this.getContainerSize(); i++) {
@@ -65,7 +67,7 @@ public class SavableSimpleContainer implements ImplementedContainer, INBTSeriali
             return;
         }
 
-        ToTheMoon.LOGGER.info("Couldn't load container : {}. it is not present in compound tag", tagName);
+        ToTheMoon.LOGGER.info("Couldn't load container{} : {}. it is not present in compound tag", this.blockEntity != null ? " at " + this.blockEntity.getBlockPos() : "", tagName);
     }
 
     public void onItemPlaced(int pSlot, ItemStack placedItem) {
@@ -175,4 +177,14 @@ public class SavableSimpleContainer implements ImplementedContainer, INBTSeriali
         return this.isSlotEmpty(slot) || this.getSlotSpace(slot) > 0;
     }
 
+    public ItemStack growItem(int slot, int amount) {
+        if (this.isSlotEmpty(slot)) {
+            return ItemStack.EMPTY;
+        }
+
+        ItemStack stack = this.items.get(slot);
+        stack.grow(amount);
+        this.setChanged();
+        return stack;
+    }
 }

@@ -21,6 +21,20 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.tothemoon]]
+modId = "zerocore"
+mandatory = true
+versionRange = "*"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.tothemoon]]
+modId = "xaeronbtslotids"
+mandatory = false
+versionRange = "*"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.tothemoon]]
 modId = "jei"
 mandatory = false
 versionRange = "[13,)"

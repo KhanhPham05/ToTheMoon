@@ -1,16 +1,16 @@
 package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
 
-import com.khanhtypo.tothemoon.client.DecorationButton;
+import com.google.common.base.Preconditions;
+import com.khanhtypo.tothemoon.client.ModRequiredButton;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<MENU> {
     public static final ResourceLocation RECIPE_BOOK_WIDGET = ModUtils.location("textures/gui/widgets.png");
     protected static final int TEXT_WHITE = 0xe0e0e0;
@@ -18,22 +18,17 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
     private final ResourceLocation guiTexture;
     private final int containerSize;
 
-    public BasicScreen(MENU menu, Inventory inventory, Component component) {
-        this(menu, inventory, component, 176, 166);
+    public BasicScreen(MENU menu, Inventory inventory, Component title) {
+        this(menu, inventory, title, 176, 166);
     }
 
-    public BasicScreen(MENU menu, Inventory inventory, Component component, int imageWidth, int imageHeight) {
-        super(menu, inventory, component);
+    public BasicScreen(MENU menu, Inventory inventory, Component title, int imageWidth, int imageHeight) {
+        super(menu, inventory, title);
         this.guiTexture = menu.getGuiPath();
         super.imageWidth = imageWidth;
         super.imageHeight = imageHeight;
         this.containerSize = menu.slots.size();
-    }
-
-    @Deprecated
-    protected static int getColor(int capacity, int current) {
-        float f = Math.max(0.0F, 1.0f - ((float) (capacity - current) / capacity));
-        return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
+        Preconditions.checkState(menu.inventorySlotIndex >= 0, "Container %s did not include player inventory".formatted(menu.getMenuId()));
     }
 
     @Override
@@ -41,8 +36,8 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
         super.init();
         super.inventoryLabelX = super.getMenu().getInvLabelX();
         super.inventoryLabelY = super.getMenu().getInvLabelY() - 12;
-        if (this instanceof RecipeContainerMenu) {
-            super.addRenderableOnly(new DecorationButton("jei", this.getButtonX(), this.getButtonY(), 22, 0));
+        if (this instanceof ScreenHasRecipe) {
+            super.addRenderableOnly(new ModRequiredButton("jei", this.getButtonX(), this.getButtonY(), 22, 0));
             //TODO Patchouli Book
         }
         this.addExtraButtons();
@@ -87,10 +82,10 @@ public class BasicScreen<MENU extends BaseMenu> extends AbstractContainerScreen<
         return current != 0 && max != 0 ? (current * barHeight / max) : 0;
     }
 
-    protected void drawHorizontalBar(GuiGraphics guiGraphics, ResourceLocation guiTexture, int minCornerX, int minCornerY, int startXOffset, int startYOffset, int barWidth, int barHeight, int dataCurrent, int dataMax) {
-        final int current = super.menu.getData(dataCurrent);
+    protected void drawHorizontalBar(GuiGraphics guiGraphics, ResourceLocation guiTexture, int minCornerX, int minCornerY, int startXOffset, int startYOffset, int barWidth, int barHeight, int dataSlotCurrent, int dataSlotMax) {
+        final int current = super.menu.getData(dataSlotCurrent);
         if (current != 0) {
-            final int max = super.menu.getData(dataMax);
+            final int max = super.menu.getData(dataSlotMax);
             final int renderWidth = max != 0 ? (current * barWidth / max) : 0;
             if (renderWidth > 0)
                 guiGraphics.blit(guiTexture, super.leftPos + minCornerX, super.topPos + minCornerY, startXOffset, startYOffset, renderWidth, barHeight);

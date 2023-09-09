@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.registration.elements;
 
+import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.bases.IngredientProvider;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
@@ -8,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -17,6 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -26,7 +29,9 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
     private final RegistryObject<T> object;
     @Nullable
     private MutableComponent translateName = null;
-    private int maxStackSize = 64;
+    private final Item.Properties blockItemProperties;
+    @Nullable
+    private BiFunction<Block, Item.Properties, BlockItem> blockItemSupplier;
 
     public BlockObject(String name, Supplier<T> blockSupplier) {
         this(ModRegistries.BLOCKS.register(name, blockSupplier));
@@ -35,6 +40,8 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
     public BlockObject(RegistryObject<T> object) {
         this.object = object;
         BLOCK_SET.add(this);
+        ToTheMoon.DEFAULT_BLOCK_TAB.addItem(this);
+        this.blockItemProperties = new Item.Properties();
     }
 
     public static Stream<BlockObject<? extends Block>> allBlocks() {
@@ -92,12 +99,22 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
         return this.isSame(level, mutableBlockPos.set(x, y, z));
     }
 
-    public int getMaxStackSize() {
-        return maxStackSize;
+    @Nullable
+    public BiFunction<Block, Item.Properties, BlockItem> getBlockItemSupplier() {
+        return blockItemSupplier;
+    }
+
+    public BlockObject<T> setBlockItemSupplier(@Nullable BiFunction<Block, Item.Properties, BlockItem> blockItemSupplier) {
+        this.blockItemSupplier = blockItemSupplier;
+        return this;
     }
 
     public BlockObject<T> setMaxStackSize(int maxStackSize) {
-        this.maxStackSize = maxStackSize;
+        this.blockItemProperties.stacksTo(maxStackSize);
         return this;
+    }
+
+    public Item.Properties getBlockItemProperties() {
+        return blockItemProperties;
     }
 }

@@ -3,11 +3,11 @@
 	"parent": "block/cube",
 	"render_type": "cutout",
 	"textures": {
-		"0": "tothemoon:block/fluid_tank_bottom",
-		"1": "tothemoon:block/fluid_tank_side",
-		"2": "tothemoon:block/fluid_tank_top",
-		"3": "tothemoon:block/fluid_tank_top_nob",
-		"particle": "tothemoon:block/fluid_tank_bottom"
+		"0": "#bottom",
+		"1": "#side",
+		"2": "#top",
+		"3": "#top_nob",
+		"particle": "#bottom"
 	},
 	"elements": [
 		{

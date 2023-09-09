@@ -2,6 +2,7 @@ package com.khanhtypo.tothemoon.common.capability;
 
 import com.khanhtypo.tothemoon.ToTheMoon;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NumericTag;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.energy.EnergyStorage;
 
@@ -56,17 +57,16 @@ public class PowerStorage extends EnergyStorage {
     }
 
     @Override
-    public void deserializeNBT(Tag energyTag) {
+    public void deserializeNBT(@Nullable Tag energyTag) {
         @Nullable String failReason = null;
         if (energyTag != null) {
             if (energyTag instanceof CompoundTag energyCompound) {
-                this.energy = energyCompound.getInt("Amount");
+                this.energy = energyCompound.contains("Amount", Tag.TAG_INT) ? energyCompound.getInt("Amount") : 0;
                 if (energyCompound.contains("Capacity", CompoundTag.TAG_INT)) {
                     this.setCapacity(energyCompound.getInt("Capacity"));
                 }
-            } else {
-                failReason = "Energy tag is not a compound tag.";
-            }
+            } else
+                failReason = "Energy tag must be a CompoundTag";
         } else {
             failReason = "Energy tag is not present.";
         }

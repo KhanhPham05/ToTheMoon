@@ -1,0 +1,10 @@
+{
+  "parent": "tothemoon:block/templates/_fluid_tank",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "tothemoon:block/fluid_tank_bottom",
+    "side": "tothemoon:block/fluid_tank_side",
+    "top": "tothemoon:block/fluid_tank_top",
+    "top_nob": "tothemoon:block/fluid_tank_top_nob"
+  }
+}

@@ -1,7 +1,8 @@
 package com.khanhtypo.tothemoon.registration;
 
 import com.khanhtypo.tothemoon.common.battery.BatteryBlockEntity;
-import com.khanhtypo.tothemoon.common.machine.powergenerator.*;
+import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
+import com.khanhtypo.tothemoon.common.tank.FluidTankBlockEntity;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.ControllerPartEntity;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.EmptyAcceptorPartEntity;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.SmoothBlackStonePartEntity;
@@ -18,4 +19,5 @@ public class ModBlockEntities {
     public static final BlockEntityObject<EmptyAcceptorPartEntity> EMPTY_ACCESSOR_PART = BlockEntityObject.register("empty_accessor_part", EmptyAcceptorPartEntity::new, ModBlocks.BLACKSTONE_EMPTY_ACCEPTOR, ModBlocks.NETHER_BRICKS_EMPTY_ACCEPTOR);
     public static final BlockEntityObject<BlackStoneFurnaceItemAcceptorPartEntity> BLACK_STONE_FURNACE_ITEM_ACCEPTOR = BlockEntityObject.register("blackstone_item_acceptor", BlackStoneFurnaceItemAcceptorPartEntity::new, ModBlocks.BLACKSTONE_ITEM_ACCEPTOR, ModBlocks.NETHER_BRICKS_ITEM_ACCEPTOR);
     public static final BlockEntityObject<BatteryBlockEntity> BATTERY = BlockEntityObject.register("battery", BatteryBlockEntity.createSupplier(), ModBlocks.STANDARD_BATTERY, ModBlocks.REDSTONE_BATTERY, ModBlocks.STEEL_BATTERY);
+    public static final BlockEntityObject<FluidTankBlockEntity> FLUID_TANK = BlockEntityObject.register("fluid_tank", FluidTankBlockEntity::new, ModBlocks.FLUID_TANK);
 }

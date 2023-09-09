@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
         @MethodsReturnNonnullByDefault
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.menus;
+package com.khanhtypo.tothemoon.api.implemented.capability.fluid;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

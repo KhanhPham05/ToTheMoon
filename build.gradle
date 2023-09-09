@@ -35,8 +35,6 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
 
             mods {
@@ -51,9 +49,6 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
 
             mods {
                 tothemoon {
@@ -67,8 +62,6 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             args '--mod', 'tothemoon',
                     '--all',
@@ -80,6 +73,11 @@ minecraft {
                     source sourceSets.main
                 }
             }
+        }
+
+        configureEach {
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
     }
 }
@@ -109,6 +107,7 @@ mixin {
     config 'ttm.mixin.json'
 }
 
+Dependency nbtView
 
 dependencies {
     def mc = "net.neoforged:forge:${mc_version}-${forge_version}"
@@ -116,7 +115,7 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:4574361")
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
-    //runtimeOnly fg.deobf("curse.maven:item-nbt-viewer-514135:4578522")
+    runtimeOnly fg.deobf("curse.maven:item-nbt-viewer-514135:4578522")
 
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))

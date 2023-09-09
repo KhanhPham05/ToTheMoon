@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
+import com.khanhtypo.tothemoon.common.block.EnergyBlock;
 import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.registration.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class PowerGeneratorBlock extends FunctionalBlock<PowerGeneratorBlockEntity> {
+public class PowerGeneratorBlock extends FunctionalBlock<PowerGeneratorBlockEntity> implements EnergyBlock {
     private final PowerGeneratorLevels generatorLevel;
 
     public PowerGeneratorBlock(Properties p_49795_, PowerGeneratorLevels generatorLevel) {
@@ -24,6 +25,11 @@ public class PowerGeneratorBlock extends FunctionalBlock<PowerGeneratorBlockEnti
 
     public PowerGeneratorLevels getGeneratorLevel() {
         return generatorLevel;
+    }
+
+    @Override
+    public int getEnergyCapacity() {
+        return this.getGeneratorLevel().capacity;
     }
 
     @Override

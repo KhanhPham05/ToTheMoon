@@ -7,11 +7,10 @@ import com.khanhtypo.tothemoon.client.RedstoneModeToggleButton;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.common.item.upgrades.UpgradeItemType;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
+import com.khanhtypo.tothemoon.utls.GuiRenderHelper;
 import com.khanhtypo.tothemoon.utls.ModUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -24,6 +23,10 @@ public abstract class AbstractMachineScreen<T extends AbstractMachineMenu> exten
         super(menu, inventory, component, imageWidth, imageHeight);
         this.isUpgradeBoxVisible = false;
     }
+
+    protected abstract int getEnergy();
+
+    protected abstract int getEnergyCapacity();
 
     @Override
     protected void addExtraButtons() {
@@ -68,12 +71,9 @@ public abstract class AbstractMachineScreen<T extends AbstractMachineMenu> exten
         super.removed();
     }
 
-    public void tryDrawEnergyStorageTooltip(GuiGraphics guiGraphics, int x, int y, int boxWidth, int boxHeight, int energyDataSlot, int energyCapDataSlot, int mouseX, int mouseY) {
+    public void tryDrawEnergyStorageTooltip(GuiGraphics guiGraphics, int x, int y, int boxWidth, int boxHeight, int mouseX, int mouseY) {
         if (isHovering(x, y, boxWidth, boxHeight, mouseX, mouseY)) {
-            int energy = super.menu.getData(energyDataSlot);
-            int cap = super.menu.getData(energyCapDataSlot);
-            guiGraphics.renderTooltip(font, ModLanguageGenerator.ENERGY_TOOLTIP.withParam(Component.literal(String.valueOf(energy)).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), cap), mouseX, mouseY);
+            GuiRenderHelper.renderStorageTooltip(guiGraphics, font, ModLanguageGenerator.ENERGY_TOOLTIP, this.getEnergy(), this.getEnergyCapacity(), mouseX, mouseY);
         }
     }
-
 }

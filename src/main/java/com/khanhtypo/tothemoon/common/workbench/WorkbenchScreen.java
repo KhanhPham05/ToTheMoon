@@ -1,12 +1,12 @@
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench;
+package com.khanhtypo.tothemoon.common.workbench;
 
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.RecipeContainerMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.ScreenHasRecipe;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class WorkbenchScreen extends BasicScreen<WorkbenchMenu> implements RecipeContainerMenu {
+public class WorkbenchScreen extends BasicScreen<WorkbenchMenu> implements ScreenHasRecipe {
     public static final int IMAGE_WIDTH = 190;
     public static final int IMAGE_HEIGHT = 209;
 

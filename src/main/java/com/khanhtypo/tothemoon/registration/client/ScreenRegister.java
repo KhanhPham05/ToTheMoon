@@ -2,7 +2,8 @@ package com.khanhtypo.tothemoon.registration.client;
 
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench.WorkbenchScreen;
+import com.khanhtypo.tothemoon.common.tank.FluidTankScreen;
+import com.khanhtypo.tothemoon.common.workbench.WorkbenchScreen;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorScreen;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.display.BlackStoneFurnaceScreen;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
@@ -25,6 +26,7 @@ public final class ScreenRegister {
         registerScreen(POWER_GENERATOR, PowerGeneratorScreen::new);
         registerScreen(WORKBENCH, WorkbenchScreen::new);
         registerScreen(BLACK_STONE_FURNACE, BlackStoneFurnaceScreen::new);
+        registerScreen(FLUID_TANK, FluidTankScreen::new);
     }
 
     private static <T extends BaseMenu, S extends AbstractContainerScreen<T>> void registerScreen(MenuObject<T> menuObject, MenuScreens.ScreenConstructor<T, S> constructor) {

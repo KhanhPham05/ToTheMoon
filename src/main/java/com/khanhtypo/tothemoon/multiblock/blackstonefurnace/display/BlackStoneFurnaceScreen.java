@@ -2,7 +2,7 @@ package com.khanhtypo.tothemoon.multiblock.blackstonefurnace.display;
 
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
-import com.khanhtypo.tothemoon.utls.ModUtils;
+import com.khanhtypo.tothemoon.utls.GuiRenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
@@ -28,9 +28,7 @@ public class BlackStoneFurnaceScreen extends BasicScreen<BlackStoneFurnaceMenu> 
     protected void renderBgAddition(GuiGraphics renderer, ResourceLocation guiTexture) {
         super.drawHorizontalBar(renderer, guiTexture, 66, 42, 0, 177, 68, 16, 3, 4);
 
-        ModUtils.renderFluidToScreen(renderer, super.getMinecraft(), super.menu.getData(0), super.menu.getData(1), super.menu.getData(2), leftPos + 189, topPos + 88, 5, 75);
-
-        drawDebugText(renderer);
+        GuiRenderHelper.renderFluidToScreen(renderer, super.getMinecraft(), super.menu.getData(0), super.menu.getData(1), super.menu.getData(2), leftPos + 189, topPos + 88, 5, 75);
     }
 
     @Override

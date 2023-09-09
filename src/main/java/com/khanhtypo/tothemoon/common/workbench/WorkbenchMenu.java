@@ -1,10 +1,10 @@
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench;
+package com.khanhtypo.tothemoon.common.workbench;
 
 import com.khanhtypo.tothemoon.client.SlotUtils;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.AlwaysSavedContainer;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.AlwaysSavedResultContainer;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.RecipeContainerMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.ScreenHasRecipe;
 import com.khanhtypo.tothemoon.data.ModItemTags;
 import com.khanhtypo.tothemoon.registration.ModBlocks;
 import com.khanhtypo.tothemoon.registration.ModMenuTypes;
@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public class WorkbenchMenu extends BaseMenu implements RecipeContainerMenu {
+public class WorkbenchMenu extends BaseMenu implements ScreenHasRecipe {
     private final AlwaysSavedContainer craftingSlots;
     private final AlwaysSavedResultContainer resultSlot;
 

@@ -9,9 +9,8 @@ import com.khanhtypo.tothemoon.registration.ModItems;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.registration.ModStats;
 import com.khanhtypo.tothemoon.registration.elements.BlockObject;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -38,17 +37,19 @@ public class ToTheMoon {
         ModRegistries.staticInit(MOD_BUS);
         MOD_BUS.addListener(DataStarter::gatherData);
         MOD_BUS.addListener(TabInstance::registerTabs);
-        MOD_BUS.addListener(this::registerEvent);
         FORGE_BUS.addListener(WorkbenchBlock::onBreak);
         MOD_BUS.addListener(ModStats::registerStats);
+        MOD_BUS.addListener(this::registerItems);
     }
 
-    public void registerEvent(RegisterEvent registerEvent) {
-        registerEvent.register(ModRegistries.ITEMS.getRegistryKey(), helper -> {
-            for (BlockObject<? extends Block> blockObject : BlockObject.BLOCK_SET) {
-                DEFAULT_BLOCK_TAB.addItem(blockObject);
-                helper.register(blockObject.getId(), new BlockItem(blockObject.get(), new Item.Properties().stacksTo(blockObject.getMaxStackSize())));
-            }
-        });
+    private void registerItems(RegisterEvent event) {
+        event.register(Registries.ITEM, helper ->
+                BlockObject.BLOCK_SET.forEach(blockObject -> helper.register(blockObject.getId(),
+                                blockObject.getBlockItemSupplier() != null ? blockObject.getBlockItemSupplier().apply(blockObject.get(), blockObject.getBlockItemProperties()) : new BlockItem(blockObject.get(), blockObject.getBlockItemProperties())
+                        )
+                )
+        );
     }
+
+
 }

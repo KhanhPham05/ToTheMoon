@@ -73,7 +73,11 @@ public abstract class BatteryBlockEntity extends BlockEntity implements Tickable
 
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState blockState) {
+        int prevEnergy = this.energyStorage.getEnergyStored();
         AbstractMachineBlockEntity.tryExtractEnergyToNeighbour(this.energyStorage, level, pos);
+        if (prevEnergy != this.energyStorage.getEnergyStored()) {
+            setChanged(level, pos, blockState);
+        }
 
         float percent = ((float) this.energyStorage.getEnergyStored() / this.energyStorage.getMaxEnergyStored()) * 100;
         ModUtils.changeBlockState(level, pos, blockState, BatteryBlock.ENERGY_LEVEL, ((int) percent) / 10, true);

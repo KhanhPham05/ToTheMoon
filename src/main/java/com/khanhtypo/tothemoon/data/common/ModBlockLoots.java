@@ -104,6 +104,7 @@ public class ModBlockLoots extends BlockLootSubProvider {
         this.createBatteryLoot(STANDARD_BATTERY);
         this.createBatteryLoot(REDSTONE_BATTERY);
         this.createBatteryLoot(STEEL_BATTERY);
+        this.add(FLUID_TANK.get(), tank -> LootTable.lootTable().withPool(this.createCopyEntityDataLootPool(tank, "FluidTank", "FluidTankContainer")));
     }
 
     private void createPowerGeneratorLoot(BlockObject<PowerGeneratorBlock> generatorBlockBlockObject) {

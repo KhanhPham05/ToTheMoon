@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.workbench;
+package com.khanhtypo.tothemoon.common.workbench;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

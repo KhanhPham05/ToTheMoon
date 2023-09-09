@@ -42,7 +42,7 @@ import java.util.function.Function;
 @SuppressWarnings("SameParameterValue")
 public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntity implements ImplementedContainer, TickableBlockEntity {
     public static final int DEFAULT_FUEL_CONSUME_DURATION = 20;
-    private static final Direction[] allDirection = Direction.values();
+    public static final Direction[] allDirections = Direction.values();
     public final PowerStorage energyStorage;
     public final SavableSimpleContainer upgradeContainer;
     private final SavableSimpleContainer container;
@@ -115,7 +115,7 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
 
     public static void tryExtractEnergyToNeighbour(IEnergyStorage from, Level level, BlockPos pos) {
         if (from.canExtract()) {
-            for (Direction direction : allDirection) {
+            for (Direction direction : allDirections) {
                 ICapabilityProvider provider = level.getBlockEntity(pos.relative(direction));
                 if (provider != null) {
                     LazyOptional<IEnergyStorage> energyStorageLazyOptional = provider.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite());

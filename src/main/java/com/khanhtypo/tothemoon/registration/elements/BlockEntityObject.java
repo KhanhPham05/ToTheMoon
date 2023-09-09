@@ -27,6 +27,7 @@ public class BlockEntityObject<T extends BlockEntity> extends SimpleObjectSuppli
     @SafeVarargs
     public static <B extends BlockEntity> BlockEntityObject<B> register(String name, BlockEntityType.BlockEntitySupplier<B> constructor, Supplier<? extends Block>... blocks) {
         Preconditions.checkState(blocks.length > 0);
+        //noinspection DataFlowIssue
         return new BlockEntityObject<>(name, () -> BlockEntityType.Builder.of(constructor, Arrays.stream(blocks).map(Supplier::get).toArray(Block[]::new)).build(null));
     }
 
@@ -35,11 +36,14 @@ public class BlockEntityObject<T extends BlockEntity> extends SimpleObjectSuppli
         return this.get().create(blockPos, state);
     }
 
-    public void openBlockEntityContainer(Level level, BlockPos pos, Player player) {
+    public boolean openBlockEntityContainer(Level level, BlockPos pos, Player player) {
         Optional<T> optional = level.getBlockEntity(pos, this.get());
         if (optional.isPresent() && optional.get() instanceof MenuProvider blockEntity) {
             player.openMenu(blockEntity);
+            return true;
         }
+
+        return false;
     }
 
     @Override

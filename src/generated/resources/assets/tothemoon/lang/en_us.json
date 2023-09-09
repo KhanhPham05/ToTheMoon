@@ -16,6 +16,7 @@
   "block.tothemoon.deepslate_uranium_ore": "Deepslate Uranium Ore",
   "block.tothemoon.diamond_power_generator": "Diamond Power Generator",
   "block.tothemoon.eroded_meteorite": "Eroded Meteorite",
+  "block.tothemoon.fluid_tank": "Fluid Tank",
   "block.tothemoon.gilded_meteorite_bricks": "Gilded Meteorite Bricks",
   "block.tothemoon.gold_power_generator": "Gold Power Generator",
   "block.tothemoon.gold_sheet_block": "Gold Sheet Block",
@@ -92,6 +93,7 @@
   "block.tothemoon.zirconium_block": "Zirconium Block",
   "button": "Click To Toggle %s",
   "custom_stat.tothemoon.interact_with_blackstone_furnace": "Interact With Blackstone Furnace",
+  "custom_stat.tothemoon.interact_with_fluid_tank": "Interact With Fluid Tank",
   "custom_stat.tothemoon.interact_with_power_generator": "Interact With Power Generator",
   "custom_stat.tothemoon.interact_with_workbench_crafting": "Interact With Workbench Crafting",
   "gui.tothemoon.blackstone_furnace": "Blackstone Furnace",
@@ -231,6 +233,7 @@
   "tooltip.tothemoon.fluid_storing_amount": "Fluid Storage : %smB / %smb",
   "tooltip.tothemoon.general_power_generator": "Power Generator",
   "tooltip.tothemoon.generator_upgradable_item": "- Can be applied in %s",
+  "tooltip.tothemoon.installed_upgrades": "Installed Upgrades :",
   "tooltip.tothemoon.mod_needs_installation": "Install %s.",
   "tooltip.tothemoon.off": "Off",
   "tooltip.tothemoon.on": "On",
@@ -240,5 +243,6 @@
   "tooltip.tothemoon.redstone_mode_required": "Requires Redstone",
   "tooltip.tothemoon.redstone_mode_required.description": " - Machine can only function when activated by redstone",
   "tooltip.tothemoon.redstone_stops_machine": "Redstone Stop Machine",
-  "tooltip.tothemoon.redstone_stops_machine.description": " - Machine will be turned off when affected by redstone signal"
+  "tooltip.tothemoon.redstone_stops_machine.description": " - Machine will be turned off when affected by redstone signal",
+  "tooltip.tothemoon.tank_empty": "Empty tank"
 }

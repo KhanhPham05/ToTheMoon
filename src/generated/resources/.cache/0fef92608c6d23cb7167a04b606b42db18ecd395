@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-29T10:56:13.2985477	Item Models: tothemoon
+// 1.20.1	2023-09-07T09:40:49.0589973	Item Models: tothemoon
 24fd7dd9f1551d84d7384679c66e33d5199dddb1 assets/tothemoon/models/item/amethyst_dust.json
 42842dbf924c22f3de851ca7ca41d0de15dd5059 assets/tothemoon/models/item/amethyst_gear.json
 7f6762d39438071bcf5805157cfc92d29c294ec9 assets/tothemoon/models/item/amethyst_plate.json
@@ -42,6 +42,7 @@ e867e09648c977ae32f5f11ee490c8154cc323de assets/tothemoon/models/item/energy_cap
 7b876f63f36a80138872a7602efb52a736c95c23 assets/tothemoon/models/item/energy_capacity_upgrade_tier_2.json
 0741b84018a6a871ff1efa41f8bc30fb3f60feb5 assets/tothemoon/models/item/energy_capacity_upgrade_tier_3.json
 30e5dc220068c9ad8974ba45df5918e1b61c70ab assets/tothemoon/models/item/eroded_meteorite.json
+186551588d00c668d9eba9e1bc88cba5907152f6 assets/tothemoon/models/item/fluid_tank.json
 847fac683a7afeef0f654bf46cebec19b0d6114e assets/tothemoon/models/item/gear_mold.json
 59ba6d0194e3936480c89a422e20fcadf80d8e40 assets/tothemoon/models/item/gilded_meteorite_bricks.json
 73258dffd1095304105d5a304c15d730addc69a8 assets/tothemoon/models/item/gold_dust.json
