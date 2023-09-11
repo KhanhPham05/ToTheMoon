@@ -10,13 +10,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 public class NbtHelper {
-
-
     private NbtHelper() {
         throw new UnsupportedOperationException("Can not construct a util class");
     }
@@ -26,17 +23,13 @@ public class NbtHelper {
      * @param placer  the
      */
     public static void saveFluidTankToItem(INbtItemFluidStorage handler, @Nullable ITagPlacer placer) {
-        CompoundTag rootItemTag = handler.getContainer().getTag();
-        if (rootItemTag != null) {
-            CompoundTag fluidTankTag = new CompoundTag();
-            saveFluidTankTo(new CompoundTag(), handler);
-            if (placer != null) {
-                placer.placeTag(new MutableCompoundTag(rootItemTag), "FluidTank", fluidTankTag);
-            } else {
-                rootItemTag.put("FluidTank", fluidTankTag);
-            }
+        CompoundTag rootItemTag = handler.getContainer().getOrCreateTag();
+        CompoundTag fluidTankTag = new CompoundTag();
+        saveFluidTankTo(fluidTankTag, handler);
+        if (placer != null) {
+            placer.placeTag(new MutableCompoundTag(rootItemTag), "FluidTank", fluidTankTag);
         } else {
-            throw ModUtils.fillCrashReport(new IllegalStateException(), "Can not save fluid tank to item handler", "Item Has No Tag", crashReportCategory -> crashReportCategory.setDetail("ItemStack", handler.getContainer().toString()));
+            rootItemTag.put("FluidTank", fluidTankTag);
         }
     }
 
@@ -44,16 +37,15 @@ public class NbtHelper {
      * @param rootTag   an instance of {@link CompoundTag} that the tank should be saved into.
      * @param fluidTank the tank that its data such as fluid amount, fluid name, fluid extra nbt can be saved into the tag. If the tank has its own capacity that can be changed, implement {@link ICapacityFlexibleFluidStorage}.
      */
-    public static void saveFluidTankTo(CompoundTag rootTag, IFluidTank fluidTank) {
+    public static void saveFluidTankTo(CompoundTag rootTag, INbtFluidStorage fluidTank) {
         if (!isTankEmpty(fluidTank)) {
-            FluidStack content = fluidTank.getFluid();
-            rootTag.put("FluidTank", new MutableCompoundTag()
+            FluidStack content = fluidTank.getInternal();
+            new MutableCompoundTag(rootTag)
                     .putInt("Amount", fluidTank.getFluidAmount())
                     .putString("FluidName", ModRegistries.getNameOrThrow(Registries.FLUID, content.getFluid()))
                     .putIfPresent("FluidNbt", content.getTag())
-                    .putIf("TankCapacity", fluidTank instanceof ICapacityFlexibleFluidStorage fluidStorage && fluidStorage.isCapacityChanged(), IntTag.valueOf(fluidTank.getCapacity()))
-                    .build()
-            );
+                    .putIf("TankCapacity", fluidTank.isCapacityChanged(), IntTag.valueOf(fluidTank.getCapacity()))
+                    .build();
         }
     }
 
@@ -65,7 +57,10 @@ public class NbtHelper {
         Preconditions.checkNotNull(parent, "root tag must not be null");
         Preconditions.checkNotNull(fluidStorage, "fluidStorage must not be null");
         if (parent.contains("FluidTank", CompoundTag.TAG_COMPOUND)) {
-            fluidStorage.readCompound(parent.getCompound("FluidTank"));
+            CompoundTag fluidTankCompound = parent.getCompound("FluidTank");
+            if (!fluidTankCompound.isEmpty()) {
+                fluidStorage.readCompound(fluidTankCompound);
+            }
             return;
         }
 
@@ -73,8 +68,8 @@ public class NbtHelper {
     }
 
     @ApiStatus.Internal
-    private static boolean isTankEmpty(IFluidTank fluidTank) {
-        return fluidTank.getFluid().isEmpty();
+    private static boolean isTankEmpty(INbtFluidStorage fluidTank) {
+        return fluidTank.getInternal().isEmpty();
     }
 
 }

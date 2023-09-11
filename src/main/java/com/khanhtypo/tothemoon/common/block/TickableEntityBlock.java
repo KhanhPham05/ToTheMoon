@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.common.block;
 
+import com.khanhtypo.tothemoon.api.abstracts.IItemDropOnBreak;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.TickableBlockEntity;
 import com.khanhtypo.tothemoon.registration.elements.BlockEntityObject;
 import net.minecraft.core.BlockPos;
@@ -68,6 +69,8 @@ public class TickableEntityBlock<T extends BlockEntity & TickableBlockEntity> ex
                 BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
                 if (blockEntity instanceof Container containerBlockEntity) {
                     Containers.dropContents(pLevel, pPos, containerBlockEntity);
+                } else if (blockEntity instanceof IItemDropOnBreak dropOnBreak) {
+                    Containers.dropContents(pLevel, pPos, dropOnBreak.getContainer());
                 }
             }
             super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);

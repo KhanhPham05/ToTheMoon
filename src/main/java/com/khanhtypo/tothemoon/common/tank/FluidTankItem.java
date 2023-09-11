@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class FluidTankItem extends BlockItem {
-    private NbtItemFluidStorageHandler fluidHandlerItemStack;
 
     public FluidTankItem(Block pBlock, Properties pProperties) {
         super(pBlock, pProperties);
@@ -25,15 +25,22 @@ public class FluidTankItem extends BlockItem {
 
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return this.fluidHandlerItemStack = new NbtItemFluidStorageHandler(stack, FluidTankBlockEntity.TANK_CAPACITY, (root, name, tank) -> root.getOrCompoundThrow("MachineData").put(name, tank));
+        return new NbtItemFluidStorageHandler(stack, FluidTankBlockEntity.TANK_CAPACITY, (root, name, tank) -> root.getOrCreateCompound("MachineData").put(name, tank), rootTag -> rootTag.getCompound("MachineData"));
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        FluidStack fluidStack = fluidHandlerItemStack.getFluid();
-        if (!fluidStack.isEmpty()) {
-            pTooltip.add(ModLanguageGenerator.STORING_FLUID.withParam(fluidStack.getFluid().getFluidType().getDescription()));
-            pTooltip.add(GuiRenderHelper.getStorageComponent(ModLanguageGenerator.STORING_AMOUNT_FLUID, fluidStack.getAmount(), fluidHandlerItemStack.getTankCapacity(0)));
-        }
+        pStack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(fluidHandlerItemStack -> {
+            FluidStack fluidStack = fluidHandlerItemStack.getFluidInTank(0);
+            if (!fluidStack.isEmpty()) {
+                pTooltip.add(ModLanguageGenerator.STORING_FLUID.withParam(fluidStack.getFluid().getFluidType().getDescription()));
+                pTooltip.add(GuiRenderHelper.getStorageComponent(ModLanguageGenerator.STORING_AMOUNT_FLUID, fluidStack.getAmount(), fluidHandlerItemStack.getTankCapacity(0)));
+            }
+        });
+    }
+
+    @Override
+    public int getMaxStackSize(ItemStack stack) {
+        return stack.hasTag() ? 1 : super.getMaxStackSize(stack);
     }
 }

@@ -17,12 +17,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @SuppressWarnings({"unused"})
@@ -119,5 +121,18 @@ public class ModUtils {
         CrashReport crashReport = CrashReport.forThrowable(exception, reason);
         categoryFunction.apply(crashReport.addCategory(crashCategory));
         return new ReportedException(crashReport);
+    }
+
+    private static final Consumer<?> NO_ACTION = a -> {};
+
+    @SuppressWarnings("unchecked")
+    public static <T> Consumer<T> noActionConsume() {
+        return (Consumer<T>) NO_ACTION;
+    }
+
+    public static FluidStack copyFluidStackWithSize(FluidStack from, int amount) {
+        FluidStack copied = from.copy();
+        copied.setAmount(amount);
+        return copied;
     }
 }

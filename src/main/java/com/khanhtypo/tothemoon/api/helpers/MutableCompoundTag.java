@@ -53,9 +53,18 @@ public class MutableCompoundTag {
         return this;
     }
 
-    public CompoundTag getOrCompoundThrow(String pKey) {
-        if (this.compoundTag.contains(pKey, Tag.TAG_COMPOUND)) this.compoundTag.getCompound(pKey);
+    public CompoundTag getCompoundOrThrow(String pKey) {
+        if (this.compoundTag.contains(pKey, Tag.TAG_COMPOUND)) return this.compoundTag.getCompound(pKey);
         throw ModUtils.fillCrashReport(new IllegalStateException(), "Member " + pKey + " not present or is not an instance of CompoundTag", "Gathering Tag Data", crashReportCategory -> crashReportCategory.setDetail("Tag", this));
+    }
+
+    public CompoundTag getOrCreateCompound(String pKey) {
+        if (this.compoundTag.contains(pKey, Tag.TAG_COMPOUND)) {
+            return this.compoundTag.getCompound(pKey);
+        }
+
+        this.put(pKey, new CompoundTag());
+        return this.getOrCreateCompound(pKey);
     }
 
     public CompoundTag build() {

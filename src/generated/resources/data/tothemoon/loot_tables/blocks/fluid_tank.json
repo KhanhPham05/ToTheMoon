@@ -14,11 +14,6 @@
                   "op": "replace",
                   "source": "FluidTank",
                   "target": "MachineData.FluidTank"
-                },
-                {
-                  "op": "replace",
-                  "source": "FluidTankContainer",
-                  "target": "MachineData.FluidTankContainer"
                 }
               ],
               "source": "block_entity"

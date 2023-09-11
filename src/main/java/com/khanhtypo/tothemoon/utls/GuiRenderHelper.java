@@ -60,6 +60,7 @@ public class GuiRenderHelper {
 
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderTexture(0, fluidSprite.atlasLocation());
+                RenderSystem.enableBlend();
 
                 int fluidColor = textureGetter.getTintColor();
                 float r = ((fluidColor >> 16) & 0xFF) / 255f;
@@ -102,6 +103,8 @@ public class GuiRenderHelper {
                         BufferUploader.drawWithShader(bufferBuilder.end());
                     }
                 }
+                RenderSystem.setShaderColor(1, 1, 1, 1);
+                RenderSystem.disableBlend();
             }
         }
     }

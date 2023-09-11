@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.api.implemented.capability.fluid;
 
+import com.khanhtypo.tothemoon.api.helpers.ICompoundTagGetter;
 import com.khanhtypo.tothemoon.api.helpers.ITagPlacer;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -17,18 +18,18 @@ public class NbtItemFluidStorageHandler implements ICapabilityProvider, IFluidHa
     private final LazyOptional<IFluidHandlerItem> handler;
     private final NbtItemFluidStorage itemFluidStorage;
 
-    public NbtItemFluidStorageHandler(ItemStack itemStack, int capacity, @Nullable ITagPlacer parentTag) {
-        this.itemFluidStorage = new NbtItemFluidStorage(capacity, itemStack, parentTag);
+    public NbtItemFluidStorageHandler(ItemStack itemStack, int capacity, ITagPlacer parentTag, ICompoundTagGetter compoundTagGetter) {
+        this.itemFluidStorage = new NbtItemFluidStorage(capacity, itemStack, parentTag, compoundTagGetter);
         this.handler = LazyOptional.of(() -> this.itemFluidStorage);
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         return ForgeCapabilities.FLUID_HANDLER_ITEM.orEmpty(cap, this.handler);
     }
 
     @Override
-    public @NotNull ItemStack getContainer() {
+    public ItemStack getContainer() {
         return this.itemFluidStorage.getContainer();
     }
 
@@ -38,7 +39,7 @@ public class NbtItemFluidStorageHandler implements ICapabilityProvider, IFluidHa
     }
 
     @Override
-    public @NotNull FluidStack getFluidInTank(int tank) {
+    public FluidStack getFluidInTank(int tank) {
         return this.itemFluidStorage.getFluidInTank(tank);
     }
 

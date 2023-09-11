@@ -17,11 +17,16 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
-import java.util.function.BiPredicate;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class FluidTankMenu extends BaseMenu {
-    private final Container tankContainer;
+
+    private final Predicate<ItemStack> inputTest;
+    private final Predicate<ItemStack> extractTest;
 
     public FluidTankMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor) {
         this(windowId, playerInventory, accessor, new SimpleContainer(FluidTankBlockEntity.CONTAINER_SIZE), new SimpleContainerData(FluidTankBlockEntity.DATA_SIZE));
@@ -29,27 +34,22 @@ public class FluidTankMenu extends BaseMenu {
 
     public FluidTankMenu(int windowId, Inventory playerInventory, ContainerLevelAccess accessor, Container tankContainer, ContainerData containerData) {
         super(ModMenuTypes.FLUID_TANK, windowId, playerInventory, accessor);
-        this.tankContainer = tankContainer;
-        super.addSlot(SlotUtils.createPlaceFilter(tankContainer, 0, 39, 35, (stack) -> testInputSlot(tankContainer, stack)));
-        super.addSlot(SlotUtils.createTakeOnly(tankContainer, 1, 39, 60));
+        this.inputTest = (i) -> FluidTankMenu.testInputSlot(i).isPresent();
+        this.extractTest = (i) -> FluidTankMenu.testExtractSlot(i).isPresent();
+        super.addSlot(SlotUtils.createPlaceFilter(tankContainer, 0, 39, 35, this.inputTest));
+        super.addSlot(SlotUtils.createPlaceFilter(tankContainer, 1, 39, 60, this.extractTest));
         super.addPlayerInvSlots(8, 104);
         super.addDataSlots(containerData);
         super.addContainerListeners(tankContainer);
     }
 
-    protected static boolean testInputSlot(Container tankContainer, ItemStack toPlace) {
-        if (toPlace.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) {
-            ItemStack output = tankContainer.getItem(1);
-            if (output.isEmpty()) {
-                return true;
-            } else {
-                ItemStack toCompare = toPlace.hasCraftingRemainingItem() ? toPlace.getCraftingRemainingItem() : toPlace;
-                if (ItemStack.isSameItem(toCompare, output)) {
-                    return toPlace.getCount() + output.getCount() <= output.getMaxStackSize();
-                }
-            }
-        }
-        return false;
+    static Optional<IFluidHandlerItem> testExtractSlot(ItemStack itemStack) {
+        return itemStack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).map(f -> f);
+    }
+
+    static Optional<IFluidHandlerItem> testInputSlot(ItemStack toPlace) {
+        return toPlace.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
+                .filter(fluidHandlerItem -> !fluidHandlerItem.getFluidInTank(0).isEmpty());
     }
 
     boolean hasFluid() {
@@ -63,38 +63,42 @@ public class FluidTankMenu extends BaseMenu {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(pIndex);
         if (slot.hasItem()) {
-            ItemStack itemstack1 = slot.getItem();
-            itemstack = itemstack1.copy();
+            ItemStack itemStack1 = slot.getItem();
+            itemstack = itemStack1.copy();
 
             if (pIndex >= super.inventorySlotIndex) {
-                if (testInputSlot(this.tankContainer, itemstack1)) {
-                    if (!super.moveItemStackTo(itemstack1, 0, 1, false)) {
+                if (this.inputTest.test(itemStack1)) {
+                    if (!super.moveItemStackTo(itemStack1, 0, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (this.extractTest.test(itemStack1)) {
+                    if (!super.moveItemStackTo(itemStack1, 1, 2, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (pIndex >= super.hotbarSlotIndex) {
-                    if (!super.moveItemStackTo(itemstack1, super.inventorySlotIndex, super.hotbarSlotIndex, false)) {
+                    if (!super.moveItemStackTo(itemStack1, super.inventorySlotIndex, super.hotbarSlotIndex, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (!super.moveItemStackTo(itemstack1, super.hotbarSlotIndex, menuSlotsSize, false)) {
+                } else if (!super.moveItemStackTo(itemStack1, super.hotbarSlotIndex, menuSlotsSize, false)) {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (!super.moveItemStackTo(itemstack1, this.inventorySlotIndex, menuSlotsSize, true)) {
+                if (!super.moveItemStackTo(itemStack1, this.inventorySlotIndex, menuSlotsSize, true)) {
                     return ItemStack.EMPTY;
                 }
             }
 
-            if (itemstack1.isEmpty()) {
+            if (itemStack1.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
 
-            if (itemstack1.getCount() == itemstack.getCount()) {
+            if (itemStack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(pPlayer, itemstack1);
+            slot.onTake(pPlayer, itemStack1);
         }
 
         return itemstack;
