@@ -20,7 +20,7 @@ base.archivesName = 'tothemoon'
 group = 'com.khanhtypo'
 version = "${mc_version}-2.0"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+//java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
@@ -78,15 +78,9 @@ minecraft {
         configureEach {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            property 'Xmx', '3G'
-            property 'Xms', '512m'
         }
     }
 }
-
-//tasks.withType(JavaCompile).configureEach {
-//    options.forkOptions.jvmArgs += '-Xmx2G -Xms512m -XX:+HeapDumpOnOutOfMemoryError -Dmixin.debug=true -Dmixin.debug.export=true'
-//}
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
@@ -119,16 +113,16 @@ dependencies {
 
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+    implementation(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}-FORGE:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}-FORGE")
 
-    runtimeOnly fg.deobf("curse.maven:pipez-443900:4678952")
+    runtimeOnly fg.deobf("curse.maven:pipez-443900:4713656")
 
-    implementation fg.deobf("curse.maven:zerocore-247921:4658270")
+    implementation fg.deobf("curse.maven:zerocore-247921:4702626")
 
-    runtimeOnly fg.deobf("curse.maven:extreme-reactors-250277:4659595")
+    runtimeOnly fg.deobf("curse.maven:extreme-reactors-250277:4744862")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
@@ -153,4 +147,10 @@ jar {
 
 jar.finalizedBy('reobfJar')
 
-java { withSourcesJar() }
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+        vendor.set(JvmVendorSpec.ADOPTIUM)
+    }
+    withSourcesJar()
+}

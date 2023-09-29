@@ -2,6 +2,7 @@ package com.khanhtypo.tothemoon.data.c;
 
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.common.battery.BatteryBlock;
+import com.khanhtypo.tothemoon.common.block.FunctionalBlock;
 import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlock;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
@@ -108,7 +109,33 @@ public class ModBlockStateAndModelGenerator extends BlockStateProvider {
         this.batteryBlock(STANDARD_BATTERY);
         this.batteryBlock(REDSTONE_BATTERY);
         this.batteryBlock(STEEL_BATTERY);
+        this.machineBlock(ELECTRICAL_SMELTER, true);
         this.notSimple();
+    }
+
+    private void machineBlock(BlockObject<? extends FunctionalBlock<?>> machineBlock, boolean hasSideOn) {
+        ResourceLocation rootId = this.texturePreExist(machineBlock.getId());
+        ResourceLocation side = this.texturePreExist(rootId.withSuffix("_side"));
+        ResourceLocation top = this.texturePreExist(rootId.withSuffix("_top"));
+        var partialStateBuilder = super.getVariantBuilder(machineBlock.get()).partialState();
+        for (Boolean lit : BlockStateProperties.LIT.getPossibleValues()) {
+
+            var model = this.models().orientable(rootId.getPath() + (lit ? "_on" : ""),
+                    lit ? (hasSideOn ? side.withSuffix("_on") : side) : side,
+                    lit ? rootId.withSuffix("_on") : rootId,
+                    top
+            );
+
+            for (Direction facing : HorizontalDirectionalBlock.FACING.getPossibleValues()) {
+                partialStateBuilder.with(HorizontalDirectionalBlock.FACING, facing)
+                        .with(BlockStateProperties.LIT, lit)
+                        .addModels(this.configuredModel(model.getLocation(), false, builder -> builder.rotationY(this.yRotationMap.get(facing))));
+            }
+
+            if (!lit) {
+                this.itemModelProvider.withExistingParent(rootId.getPath().replace("block/", "item/"), rootId);
+            }
+        }
     }
 
     private void notSimple() {

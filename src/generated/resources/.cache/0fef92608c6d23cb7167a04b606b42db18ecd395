@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-07T09:40:49.0589973	Item Models: tothemoon
+// 1.20.1	2023-09-29T16:43:43.5820447	Item Models: tothemoon
 24fd7dd9f1551d84d7384679c66e33d5199dddb1 assets/tothemoon/models/item/amethyst_dust.json
 42842dbf924c22f3de851ca7ca41d0de15dd5059 assets/tothemoon/models/item/amethyst_gear.json
 7f6762d39438071bcf5805157cfc92d29c294ec9 assets/tothemoon/models/item/amethyst_plate.json
@@ -34,6 +34,7 @@ d8fe6e1bf40565971f26e7fde1bf7704a60774a1 assets/tothemoon/models/item/diamond_ge
 408a9f3c09ed121144ceb3ea43ddda7c0637bc5d assets/tothemoon/models/item/diamond_plate.json
 98d4c5c121ad499972049de4c7163d803141f1f3 assets/tothemoon/models/item/diamond_power_generator.json
 623e5a2758d05024f997c4ea9a3c16b7095b91f6 assets/tothemoon/models/item/diamond_rod.json
+913eaa9a937ae744b3cd693766a0df780ec74a36 assets/tothemoon/models/item/electrical_smelter.json
 fe4e65d9fda764ae4c6a008a040b4052b7cf6803 assets/tothemoon/models/item/emerald_dust.json
 2b2cabb5577b7d4a1158f552d0fed25a071d85b9 assets/tothemoon/models/item/emerald_gear.json
 a3ab42d94f28e4a7f21d04243d00161205460629 assets/tothemoon/models/item/emerald_plate.json

@@ -2,11 +2,9 @@ package com.khanhtypo.tothemoon.registration;
 
 import com.khanhtypo.tothemoon.common.battery.BatteryBlock;
 import com.khanhtypo.tothemoon.common.battery.BatteryLevel;
-import com.khanhtypo.tothemoon.common.block.FrameBlockObject;
-import com.khanhtypo.tothemoon.common.block.MachineFrameShapes;
-import com.khanhtypo.tothemoon.common.block.MoonBarrelBlock;
-import com.khanhtypo.tothemoon.common.block.WorkbenchBlock;
+import com.khanhtypo.tothemoon.common.block.*;
 import com.khanhtypo.tothemoon.common.item.EnergyBlockItem;
+import com.khanhtypo.tothemoon.common.machine.electricalsmelter.ElectricalSmelterBlockEntity;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlock;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorItem;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorLevels;
@@ -23,7 +21,7 @@ import net.minecraft.world.level.material.MapColor;
 
 @SuppressWarnings("unused")
 public class ModBlocks {
-    public static final BasicBlockObject COBBLED_METEORITE = new BasicBlockObject("cobbled_meteorite", BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.STONE));
+    public static final BasicBlockObject COBBLED_METEORITE = new BasicBlockObject("cobbled_meteorite", BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(ModSoundTypes.MOON_ROCK));
     public static final BasicBlockObject COBBLED_METEORITE_STAIRS = BasicBlockObject.stairs(COBBLED_METEORITE);
     public static final BasicBlockObject COBBLED_METEORITE_SLAB = BasicBlockObject.slab(COBBLED_METEORITE);
     public static final BasicBlockObject COBBLED_METEORITE_WALL = BasicBlockObject.wall(COBBLED_METEORITE);
@@ -74,15 +72,15 @@ public class ModBlocks {
     public static final BasicBlockObject SMOOTH_METEORITE_SLAB = BasicBlockObject.slab(SMOOTH_METEORITE);
     public static final BasicBlockObject SMOOTH_METEORITE_WALL = BasicBlockObject.wall(SMOOTH_METEORITE);
     public static final BasicBlockObject SMOOTH_METEORITE_STAIRS = BasicBlockObject.stairs(SMOOTH_METEORITE);
-    public static final BasicBlockObject METEORITE_LAMP = new BasicBlockObject("meteorite_lamp", BlockBehaviour.Properties.copy(Blocks.SHROOMLIGHT).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.STONE));
+    public static final BasicBlockObject METEORITE_LAMP = new BasicBlockObject("meteorite_lamp", BlockBehaviour.Properties.copy(Blocks.SHROOMLIGHT).mapColor(MapColor.COLOR_PURPLE).sound(ModSoundTypes.MOON_ROCK));
     public static final BasicBlockObject MOON_URANIUM_ORE = new BasicBlockObject("moon_uranium_ore", COBBLED_METEORITE);
     public static final BasicBlockObject METEORITE_ZIRCONIUM_ORE = new BasicBlockObject("meteorite_zirconium_ore", COBBLED_METEORITE);
-    public static final BlockObject<FallingBlock> MOON_DUST = new BlockObject<>("moon_dust", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.COLOR_LIGHT_GRAY)));
-    public static final BasicBlockObject MOON_GOLD_ORE = new BasicBlockObject("moon_gold_ore", Blocks.DEEPSLATE_GOLD_ORE, MapColor.COLOR_LIGHT_GRAY);
-    public static final BasicBlockObject MOON_IRON_ORE = new BasicBlockObject("moon_iron_ore", Blocks.DEEPSLATE_IRON_ORE, MapColor.COLOR_LIGHT_GRAY);
-    public static final BlockObject<DropExperienceBlock> MOON_QUARTZ_ORE = new BlockObject<>("moon_quartz_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.DEEPSLATE)));
-    public static final BlockObject<RedStoneOreBlock> MOON_REDSTONE_ORE = new BlockObject<>("moon_redstone_ore", () -> new RedStoneOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_REDSTONE_ORE).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.DEEPSLATE)));
-    public static final BlockObject<BarrelBlock> MOON_ROCK_BARREL = new BlockObject<>("moon_rock_barrel", () -> new MoonBarrelBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.STONE)));
+    public static final BlockObject<FallingBlock> MOON_DUST = new BlockObject<>("moon_dust", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).sound(ModSoundTypes.MOON_DUST).mapColor(MapColor.COLOR_LIGHT_GRAY)));
+    public static final BasicBlockObject MOON_GOLD_ORE = new BasicBlockObject("moon_gold_ore", BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE).sound(ModSoundTypes.MOON_ROCK));
+    public static final BasicBlockObject MOON_IRON_ORE = new BasicBlockObject("moon_iron_ore", BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).sound(ModSoundTypes.MOON_ROCK));
+    public static final BlockObject<DropExperienceBlock> MOON_QUARTZ_ORE = new BlockObject<>("moon_quartz_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(ModSoundTypes.MOON_ROCK)));
+    public static final BlockObject<RedStoneOreBlock> MOON_REDSTONE_ORE = new BlockObject<>("moon_redstone_ore", () -> new RedStoneOreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_REDSTONE_ORE).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(ModSoundTypes.MOON_ROCK)));
+    public static final BlockObject<BarrelBlock> MOON_ROCK_BARREL = new BlockObject<>("moon_rock_barrel", () -> new MoonBarrelBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(ModSoundTypes.MOON_ROCK)));
     public static final BasicBlockObject PROCESSED_WOOD_PLANKS = new BasicBlockObject("processed_wood", Blocks.SPRUCE_PLANKS);
     public static final BasicBlockObject PURE_ZIRCONIUM_BLOCK = new BasicBlockObject("pure_zirconium_block", Blocks.IRON_BLOCK, MapColor.COLOR_PURPLE);
     public static final BasicBlockObject PURIFIED_QUARTZ_BLOCK = new BasicBlockObject("purified_quartz_block", Blocks.QUARTZ_BLOCK);
@@ -101,20 +99,22 @@ public class ModBlocks {
     public static final BasicBlockObject ZIRCONIUM_ALLOY_BLOCK = new BasicBlockObject("zirconium_alloy_block", Blocks.IRON_BLOCK);
     public static final BasicBlockObject ZIRCONIUM_BLOCK = new BasicBlockObject("zirconium_block", Blocks.IRON_BLOCK);
     public static final BlockObject<WorkbenchBlock> WORKBENCH = new BlockObject<>("workbench", WorkbenchBlock::new);
-    public static final BlockObject<PowerGeneratorBlock> COPPER_POWER_GENERATOR = new BlockObject<>("copper_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.METAL).strength(2.5f), PowerGeneratorLevels.COPPER)).setBlockItemSupplier(PowerGeneratorItem::new).setMaxStackSize(8);
+    public static final BlockObject<PowerGeneratorBlock> COPPER_POWER_GENERATOR = new BlockObject<>("copper_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.of().sound(ModSoundTypes.MACHINE_METAL).mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.METAL).strength(2.5f), PowerGeneratorLevels.COPPER)).setBlockItemSupplier(PowerGeneratorItem::new).setMaxStackSize(8);
     public static final BlockObject<PowerGeneratorBlock> IRON_POWER_GENERATOR = new BlockObject<>("iron_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.IRON)).setBlockItemSupplier(PowerGeneratorItem::new).setMaxStackSize(8);
     public static final BlockObject<PowerGeneratorBlock> GOLD_POWER_GENERATOR = new BlockObject<>("gold_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.GOLD)).setBlockItemSupplier(PowerGeneratorItem::new).setMaxStackSize(8);
     public static final BlockObject<PowerGeneratorBlock> DIAMOND_POWER_GENERATOR = new BlockObject<>("diamond_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.DIAMOND)).setBlockItemSupplier(PowerGeneratorItem::new).setMaxStackSize(8);
     public static final BlockObject<PowerGeneratorBlock> NETHERITE_POWER_GENERATOR = new BlockObject<>("netherite_power_generator", () -> new PowerGeneratorBlock(BlockBehaviour.Properties.copy(COPPER_POWER_GENERATOR.get()), PowerGeneratorLevels.NETHERITE)).setBlockItemSupplier(PowerGeneratorItem::new).setMaxStackSize(8);
     public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACK_STONE_FURNACE_CONTROLLER = new BlockObject<>("blackstone_furnace_controller", BlackStoneFurnaceFurnacePartTypes.CONTROLLER::createBlock).setMaxStackSize(1);
-    public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_EMPTY_ACCEPTOR = new BlockObject<>("blackstone_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE)).setMaxStackSize(8);
-    public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_EMPTY_ACCEPTOR = new BlockObject<>("nether_brick_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK)).setMaxStackSize(8);
-    public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_ITEM_ACCEPTOR = new BlockObject<>("blackstone_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE)).setMaxStackSize(8);
-    public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_ITEM_ACCEPTOR = new BlockObject<>("nether_brick_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK)).setMaxStackSize(8);
-    public static final BlockObject<BatteryBlock> STANDARD_BATTERY = new BlockObject<>("standard_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.METAL), BatteryLevel.STANDARD)).setBlockItemSupplier(EnergyBlockItem::new).setMaxStackSize(8);
-    public static final BlockObject<BatteryBlock> REDSTONE_BATTERY = new BlockObject<>("redstone_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(REDSTONE_METAL_BLOCK.get()), BatteryLevel.REDSTONE)).setBlockItemSupplier(EnergyBlockItem::new).setMaxStackSize(8);
-    public static final BlockObject<BatteryBlock> STEEL_BATTERY = new BlockObject<>("steel_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(STEEL_SHEET_BLOCK.get()), BatteryLevel.STEEL)).setBlockItemSupplier(EnergyBlockItem::new).setMaxStackSize(8);
-    public static final BlockObject<FluidTankBlock> FLUID_TANK = new BlockObject<>("fluid_tank", () -> new FluidTankBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(1.5f, 6f).sound(SoundType.STONE).noOcclusion())).setBlockItemSupplier(FluidTankItem::new).setMaxStackSize(8);
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_EMPTY_ACCEPTOR = new BlockObject<>("blackstone_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE)).setMaxStackSize(1);
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_EMPTY_ACCEPTOR = new BlockObject<>("nether_brick_empty_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ACCEPTOR_EMPTY.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK)).setMaxStackSize(1);
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> BLACKSTONE_ITEM_ACCEPTOR = new BlockObject<>("blackstone_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.BLACKSTONE)).setMaxStackSize(1);
+    public static final BlockObject<BaseBlackStoneFurnacePartBlock> NETHER_BRICKS_ITEM_ACCEPTOR = new BlockObject<>("nether_brick_item_acceptor", () -> BlackStoneFurnaceFurnacePartTypes.ITEM_ACCEPTOR.createBlock(BlackStoneFurnaceAcceptorVariants.NETHER_BRICK)).setMaxStackSize(1);
+    public static final BlockObject<BatteryBlock> STANDARD_BATTERY = new BlockObject<>("standard_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(ModSoundTypes.MACHINE_METAL), BatteryLevel.STANDARD)).setBlockItemSupplier(EnergyBlockItem::new).setMaxStackSize(1);
+    public static final BlockObject<BatteryBlock> REDSTONE_BATTERY = new BlockObject<>("redstone_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(REDSTONE_METAL_BLOCK.get()).sound(ModSoundTypes.MACHINE_METAL), BatteryLevel.REDSTONE)).setBlockItemSupplier(EnergyBlockItem::new).setMaxStackSize(1);
+    public static final BlockObject<BatteryBlock> STEEL_BATTERY = new BlockObject<>("steel_battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(STEEL_SHEET_BLOCK.get()).sound(ModSoundTypes.MACHINE_METAL), BatteryLevel.STEEL)).setBlockItemSupplier(EnergyBlockItem::new).setMaxStackSize(1);
+    public static final BlockObject<FluidTankBlock> FLUID_TANK = new BlockObject<>("fluid_tank", () -> new FluidTankBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(1.5f, 6f).sound(ModSoundTypes.MACHINE_METAL).noOcclusion())).setBlockItemSupplier(FluidTankItem::new).setMaxStackSize(1);
+    public static final BlockObject<FunctionalBlock<ElectricalSmelterBlockEntity>> ELECTRICAL_SMELTER = new BlockObject<>("electrical_smelter", () -> new FunctionalBlock<>(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().sound(ModSoundTypes.MACHINE_METAL), ModBlockEntities.ELECTRICAL_SMELTER));
+
 
     static void staticInit() {
     }

@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Upgrades",
+                  "target": "MachineData.Upgrades"
+                },
+                {
+                  "op": "replace",
+                  "source": "Energy",
+                  "target": "MachineData.Energy"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "tothemoon:electrical_smelter"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "tothemoon:blocks/electrical_smelter"
+}

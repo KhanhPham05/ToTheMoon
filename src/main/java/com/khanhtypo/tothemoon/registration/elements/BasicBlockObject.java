@@ -19,7 +19,7 @@ public class BasicBlockObject extends BlockObject<Block> {
         super(name, () -> new Block(properties));
     }
 
-    public BasicBlockObject(String name, Function<BlockBehaviour.Properties, ? extends Block> factory, ObjectSupplier<? extends Block> property) {
+    public BasicBlockObject(String name, ObjectSupplier<? extends Block> property, Function<BlockBehaviour.Properties, ? extends Block> factory) {
         super(name, () -> factory.apply(BlockBehaviour.Properties.copy(property.get())));
     }
 
@@ -27,20 +27,20 @@ public class BasicBlockObject extends BlockObject<Block> {
         this(name, vanillaBlock, vanillaBlock.defaultMapColor());
     }
 
-    public BasicBlockObject(String name, Block vanillaBlock, MapColor mapColor) {
+    public BasicBlockObject(String name, BlockBehaviour vanillaBlock, MapColor mapColor) {
         this(name, BlockBehaviour.Properties.copy(vanillaBlock).mapColor(mapColor));
     }
 
     public static ChildBlockObject stairs(BlockObject<?> parent) {
-        return new ChildBlockObject(parent.getId().getPath() + "_stairs", properties -> new StairBlock(parent.defaultBlockState(), properties), parent);
+        return new ChildBlockObject(parent.getId().getPath() + "_stairs", parent, properties -> new StairBlock(parent.defaultBlockState(), properties));
     }
 
     public static ChildBlockObject slab(BlockObject<?> parent) {
-        return new ChildBlockObject(parent.getId().getPath() + "_slab", SlabBlock::new, parent);
+        return new ChildBlockObject(parent.getId().getPath() + "_slab", parent, SlabBlock::new);
     }
 
     public static ChildBlockObject wall(BlockObject<?> parent) {
-        return new ChildBlockObject(parent.getId().getPath() + "_wall", WallBlock::new, parent);
+        return new ChildBlockObject(parent.getId().getPath() + "_wall", parent, WallBlock::new);
     }
 
     public BlockObject<?> getParentObject() {

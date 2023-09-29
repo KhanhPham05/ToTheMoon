@@ -26,7 +26,7 @@ import java.util.Optional;
 public class ModRegistries {
     private static final Map<DeferredRegister<?>, ObjectInitializer> REGISTER_SET = new HashMap<>();
     public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS, ModBlocks::staticInit);
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = create(ForgeRegistries.SOUND_EVENTS, ModSoundTypesAndEvents::staticInit);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = create(ForgeRegistries.SOUND_EVENTS, ModSoundTypes::staticInit);
     public static final DeferredRegister<Item> ITEMS = create(ForgeRegistries.ITEMS, ModItems::staticInit);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = create(ForgeRegistries.BLOCK_ENTITY_TYPES, ModBlockEntities::staticInit);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = create(ForgeRegistries.MENU_TYPES, ModMenuTypes::staticInit);

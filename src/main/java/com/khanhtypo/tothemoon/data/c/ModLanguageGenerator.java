@@ -3,6 +3,8 @@ package com.khanhtypo.tothemoon.data.c;
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.TabInstance;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
+import com.khanhtypo.tothemoon.registration.ModSoundTypes;
+import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.utls.AppendableComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
@@ -10,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -75,15 +78,15 @@ public class ModLanguageGenerator extends LanguageProvider {
         return String.format("%s.%s.%s", prefix, ToTheMoon.MODID, suffix);
     }
 
-    public static @NotNull String transform(String itemPath) {
-        StringBuilder translationBuilder = new StringBuilder(itemPath.length());
-        translationBuilder.append(Character.toUpperCase(itemPath.charAt(0)));
-        for (int i = 1; i < itemPath.length(); i++) {
-            if (itemPath.charAt(i) == '_') {
+    public static @NotNull String transform(String toBeTransformed) {
+        StringBuilder translationBuilder = new StringBuilder(toBeTransformed.length());
+        translationBuilder.append(Character.toUpperCase(toBeTransformed.charAt(0)));
+        for (int i = 1; i < toBeTransformed.length(); i++) {
+            if (toBeTransformed.charAt(i) == '_') {
                 translationBuilder.append(" ");
-            } else if (i > 1 && itemPath.charAt(i - 1) == '_') {
-                translationBuilder.append(Character.toUpperCase(itemPath.charAt(i)));
-            } else translationBuilder.append(itemPath.charAt(i));
+            } else if (i > 1 && toBeTransformed.charAt(i - 1) == '_') {
+                translationBuilder.append(Character.toUpperCase(toBeTransformed.charAt(i)));
+            } else translationBuilder.append(toBeTransformed.charAt(i));
         }
 
         return translationBuilder.toString();
@@ -98,6 +101,9 @@ public class ModLanguageGenerator extends LanguageProvider {
         this.tabInstances();
         this.blockAndItem();
         this.extraTranslation();
+        for (ObjectSupplier<SoundEvent> eventObjectSupplier : ModSoundTypes.SOUND_MAPPING.keySet()) {
+            super.add(eventObjectSupplier.getId().toLanguageKey("subtitles"), transform(eventObjectSupplier.getId().getPath()));
+        }
     }
 
     private void extraTranslation() {

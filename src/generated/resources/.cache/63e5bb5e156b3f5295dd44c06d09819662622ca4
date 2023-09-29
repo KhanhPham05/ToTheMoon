@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-07T16:24:30.2042438	Block States: tothemoon
+// 1.20.1	2023-09-29T16:43:43.5500643	Block States: tothemoon
 2007eb73bc197b0334520ece13c0b013ab50273f assets/tothemoon/blockstates/blackstone_empty_acceptor.json
 4ee2ad3c8728d7553226ff688ccf4bda0937f6c8 assets/tothemoon/blockstates/blackstone_furnace_controller.json
 940182a9cfaed377c0f6410ffb8dc268b1be3adc assets/tothemoon/blockstates/blackstone_item_acceptor.json
@@ -15,6 +15,7 @@ c237e2c53260c85cc89a87df87245634b5d58710 assets/tothemoon/blockstates/cobbled_mo
 8d6c33782f3a0f8b74858e60d7413e77217cb67a assets/tothemoon/blockstates/copper_sheet_block.json
 f71bea021949e541b37c5ae089ce758e9d942d51 assets/tothemoon/blockstates/deepslate_uranium_ore.json
 8a02b5a0eaf0000afddb732c274902827859efda assets/tothemoon/blockstates/diamond_power_generator.json
+d937a931f36db6656d1edd99bdda92cffe79affb assets/tothemoon/blockstates/electrical_smelter.json
 2c2da0016d000d4e0ed18f7165397a105da97a40 assets/tothemoon/blockstates/eroded_meteorite.json
 f9e0e5005777e840be9a43a163fa682fd3a763fb assets/tothemoon/blockstates/fluid_tank.json
 4a9d76f26a834fb4711b8476bfc85fcc86a249cd assets/tothemoon/blockstates/gilded_meteorite_bricks.json
@@ -119,6 +120,8 @@ a9476c5a92dd85f514fd0d6b9e451893258d3cdd assets/tothemoon/models/block/copper_sh
 661c2bd22adb9bbeb0bb68a0a6f95ad2df65573f assets/tothemoon/models/block/deepslate_uranium_ore.json
 2f326211d9411abc8c3fecc576a244afd89141c5 assets/tothemoon/models/block/diamond_power_generator.json
 7d3f213528125b54fa633457811c575f65014052 assets/tothemoon/models/block/diamond_power_generator_on.json
+31ba91ddbbbe346ce4ff5fed67a912bd1e3f1ce9 assets/tothemoon/models/block/electrical_smelter.json
+2c67b92e0332d09252084a6f7bc5c71874ec59b6 assets/tothemoon/models/block/electrical_smelter_on.json
 05e31c7a13316950176f7a6476adc464a65816a4 assets/tothemoon/models/block/eroded_meteorite.json
 b0d5c6893ef55686d3d83531a0a3aebf7c68dc6a assets/tothemoon/models/block/fluid_tank.json
 0937631a15eb5222f1dddba1397923f120d3c73b assets/tothemoon/models/block/gilded_meteorite_bricks.json
@@ -287,6 +290,7 @@ c95a2d7ef4e81b1dd3352fefcc2dbf0395694a99 assets/tothemoon/models/item/copper_pow
 7c131d469d1d5b4d561b4aa88c5534ea1c7ba94d assets/tothemoon/models/item/copper_sheet_block.json
 787bfd83702a3cb0a52b7a4cc07c1577d284ddbb assets/tothemoon/models/item/deepslate_uranium_ore.json
 98d4c5c121ad499972049de4c7163d803141f1f3 assets/tothemoon/models/item/diamond_power_generator.json
+913eaa9a937ae744b3cd693766a0df780ec74a36 assets/tothemoon/models/item/electrical_smelter.json
 30e5dc220068c9ad8974ba45df5918e1b61c70ab assets/tothemoon/models/item/eroded_meteorite.json
 186551588d00c668d9eba9e1bc88cba5907152f6 assets/tothemoon/models/item/fluid_tank.json
 59ba6d0194e3936480c89a422e20fcadf80d8e40 assets/tothemoon/models/item/gilded_meteorite_bricks.json

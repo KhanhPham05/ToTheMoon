@@ -6,6 +6,7 @@ import com.khanhtypo.tothemoon.registration.bases.IngredientProvider;
 import com.khanhtypo.tothemoon.registration.bases.ObjectSupplier;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -37,7 +39,7 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
         this(ModRegistries.BLOCKS.register(name, blockSupplier));
     }
 
-    public BlockObject(RegistryObject<T> object) {
+    private BlockObject(RegistryObject<T> object) {
         this.object = object;
         BLOCK_SET.add(this);
         ToTheMoon.DEFAULT_BLOCK_TAB.addItem(this);
@@ -72,7 +74,7 @@ public class BlockObject<T extends Block> implements ObjectSupplier<T>, Ingredie
     }
 
     public ObjectSupplier<Item> getItemObject() {
-        return ObjectSupplier.preExisted(this.get().asItem(), this.getId());
+        return ObjectSupplier.preExisted(Registries.ITEM, this.asItem());
     }
 
     public MutableComponent getTranslationName() {

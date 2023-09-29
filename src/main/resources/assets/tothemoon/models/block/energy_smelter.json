@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "tothemoon:block/energy_smelter_top",
-    "front": "tothemoon:block/energy_smelter",
-    "side": "tothemoon:block/energy_smelter_side"
-  }
-}

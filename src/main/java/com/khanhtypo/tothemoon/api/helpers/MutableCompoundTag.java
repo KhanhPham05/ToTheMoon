@@ -11,10 +11,6 @@ import javax.annotation.Nonnull;
 public class MutableCompoundTag {
     private final CompoundTag compoundTag;
 
-    public MutableCompoundTag() {
-        this(new CompoundTag());
-    }
-
     public MutableCompoundTag(CompoundTag compoundTag) {
         this.compoundTag = compoundTag;
     }

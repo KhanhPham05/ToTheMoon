@@ -4,6 +4,7 @@ import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.data.c.ModBlockStateAndModelGenerator;
 import com.khanhtypo.tothemoon.data.c.ModItemModels;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
+import com.khanhtypo.tothemoon.data.c.ModSoundDefinitionGenerator;
 import com.khanhtypo.tothemoon.data.common.ModBlockLoots;
 import com.khanhtypo.tothemoon.data.common.ModRecipeGenerator;
 import com.khanhtypo.tothemoon.data.common.ModTagGenerators;
@@ -32,6 +33,7 @@ public class DataStarter {
         final ItemModelProvider itemModelProvider = new ModItemModels(packOutput, ToTheMoon.MODID, fileHelper);
         generator.addProvider(event.includeClient(), new ModBlockStateAndModelGenerator(packOutput, itemModelProvider, ToTheMoon.MODID, fileHelper));
         generator.addProvider(event.includeClient(), itemModelProvider);
+        generator.addProvider(event.includeClient(), new ModSoundDefinitionGenerator(packOutput, fileHelper));
 
         ModTagGenerators.addProviders(event.includeServer(), generator, packOutput, lookupProvider, fileHelper);
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLoots::new, LootContextParamSets.BLOCK))));
