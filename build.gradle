@@ -142,10 +142,32 @@ jar {
                 "MixinConfigs"            : "ttm.mixin.json"
         ])
     }
+    finalizedBy('reobfJar')
 }
 
+tasks.register('sourcesJar', Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allJava
+}
 
-jar.finalizedBy('reobfJar')
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/KhanhPham05/ToTheMoon")
+            credentials {
+                username = property('username')
+                password = property('credKey')
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            artifactId = 'tothemoon'
+            from components.java
+        }
+    }
+}
 
 java {
     toolchain {
