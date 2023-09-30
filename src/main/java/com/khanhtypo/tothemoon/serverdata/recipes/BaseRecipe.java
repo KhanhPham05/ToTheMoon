@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 public abstract class BaseRecipe<T extends Container> implements Recipe<T> {
     public final RecipeTypeObject<? extends BaseRecipe<T>> recipeTypeObject;
     private final NonNullList<Ingredient> ingredients;
-    private final ItemStack result;
+    public final ItemStack result;
     private final ResourceLocation recipeId;
 
     protected BaseRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId, RecipeTypeObject<? extends BaseRecipe<T>> recipeTypeObject) {

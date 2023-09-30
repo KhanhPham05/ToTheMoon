@@ -1,5 +1,6 @@
 package com.khanhtypo.tothemoon.registration;
 
+import com.khanhtypo.tothemoon.common.machine.electricalsmelter.ElectricalSmelterMenu;
 import com.khanhtypo.tothemoon.common.tank.FluidTankMenu;
 import com.khanhtypo.tothemoon.common.workbench.WorkbenchMenu;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorMenu;
@@ -14,6 +15,6 @@ public class ModMenuTypes {
     public static final MenuObject<WorkbenchMenu> WORKBENCH = new MenuObject<>("workbench_crafting", WorkbenchMenu::new).translateMenu("Workbench Crafting");
     public static final MenuObject<BlackStoneFurnaceMenu> BLACK_STONE_FURNACE = new MenuObject<>("blackstone_furnace", BlackStoneFurnaceMenu::new).translateMenu("Blackstone Furnace");
     public static final MenuObject<FluidTankMenu> FLUID_TANK = new MenuObject<>("fluid_tank", FluidTankMenu::new);
-
+    public static final MenuObject<ElectricalSmelterMenu> ELECTRICAL_SMELTER = new MenuObject<>("electrical_smelter", ElectricalSmelterMenu::new);
 
 }

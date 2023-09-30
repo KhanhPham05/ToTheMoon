@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import org.jetbrains.annotations.Nullable;
 
-public interface SerializerHelper<T extends BaseRecipe<?>> extends RecipeSerializer<T> {
+public interface RecipeSerializerHelper<T extends BaseRecipe<?>> extends RecipeSerializer<T> {
     String RESULT = "result";
 
     default NonNullList<Ingredient> ingredientsFromNetwork(FriendlyByteBuf buffer, int size) {

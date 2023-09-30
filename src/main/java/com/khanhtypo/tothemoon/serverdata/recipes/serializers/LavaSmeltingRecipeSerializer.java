@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.serverdata.recipes.serializers;
 
 import com.google.gson.JsonObject;
-import com.khanhtypo.tothemoon.serverdata.SerializerHelper;
+import com.khanhtypo.tothemoon.serverdata.RecipeSerializerHelper;
 import com.khanhtypo.tothemoon.serverdata.recipes.LavaSmeltingRecipe;
 import com.khanhtypo.tothemoon.utls.JsonUtils;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,29 +11,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
-public class LavaSmeltingRecipeSerializer implements SerializerHelper<LavaSmeltingRecipe> {
+public class LavaSmeltingRecipeSerializer extends AbstractProcessSingleInputRecipeSerializer<LavaSmeltingRecipe> {
     public static final int DEFAULT_SMELTING_TICK = 30 * 20;
 
     @Override
-    public LavaSmeltingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-        final Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "ingredient"), false);
-        final ItemStack result = JsonUtils.jsonToItem(pSerializedRecipe, "result");
-        final int smeltingTick = GsonHelper.getAsInt(pSerializedRecipe, "smeltingTick", DEFAULT_SMELTING_TICK);
-        return new LavaSmeltingRecipe(ingredient, result, smeltingTick, pRecipeId);
+    protected int defaultDuration() {
+        return DEFAULT_SMELTING_TICK;
     }
 
     @Override
-    public @Nullable LavaSmeltingRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-        final Ingredient ingredient = Ingredient.fromNetwork(pBuffer);
-        final ItemStack result = pBuffer.readItem();
-        final int smeltingTick = pBuffer.readInt();
-        return new LavaSmeltingRecipe(ingredient, result, smeltingTick, pRecipeId);
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf pBuffer, LavaSmeltingRecipe pRecipe) {
-        pRecipe.getIngredient().toNetwork(pBuffer);
-        pBuffer.writeItem(pRecipe.getResultItem(null));
-        pBuffer.writeInt(pRecipe.getSmeltingTick());
+    protected LavaSmeltingRecipe createRecipe(Ingredient ingredient, ItemStack result, int duration, ResourceLocation recipeId) {
+        return new LavaSmeltingRecipe(ingredient, result, duration, recipeId);
     }
 }

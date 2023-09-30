@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.khanhtypo.tothemoon.serverdata.SerializerHelper;
+import com.khanhtypo.tothemoon.serverdata.RecipeSerializerHelper;
 import com.khanhtypo.tothemoon.serverdata.recipes.WorkbenchRecipe;
 import com.khanhtypo.tothemoon.utls.JsonUtils;
 import com.khanhtypo.tothemoon.common.item.hammer.HammerLevel;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class WorkbenchRecipeSerializer implements SerializerHelper<WorkbenchRecipe> {
+public class WorkbenchRecipeSerializer implements RecipeSerializerHelper<WorkbenchRecipe> {
     public static final String HAMMER_LEVEL = "hammer_level";
     public static final String ADDITIONAL = "additional";
     public static final String PATTERN = "pattern";

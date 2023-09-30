@@ -4,6 +4,7 @@ import com.khanhtypo.tothemoon.common.battery.BatteryBlock;
 import com.khanhtypo.tothemoon.common.battery.BatteryLevel;
 import com.khanhtypo.tothemoon.common.block.*;
 import com.khanhtypo.tothemoon.common.item.EnergyBlockItem;
+import com.khanhtypo.tothemoon.common.machine.AbstractSingleItemProcessingMachineBlockEntity;
 import com.khanhtypo.tothemoon.common.machine.electricalsmelter.ElectricalSmelterBlockEntity;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlock;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorItem;

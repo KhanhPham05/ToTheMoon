@@ -24,13 +24,12 @@ public class LavaSmeltingRecipeBuilder extends BaseSingleIngredientRecipeBuilder
         super(itemLike, count, ingredient);
     }
 
-
     @Override
     protected RecipeTypeObject<?> getRecipeType() {
         return ModRecipeTypes.LAVA_SMELTING;
     }
 
-    public LavaSmeltingRecipeBuilder setSmeltingTick(int smeltingTick) {
+    public LavaSmeltingRecipeBuilder setDuration(int smeltingTick) {
         this.smeltingTick = smeltingTick;
         return this;
     }
@@ -38,6 +37,6 @@ public class LavaSmeltingRecipeBuilder extends BaseSingleIngredientRecipeBuilder
     @Override
     protected void writeToJson(JsonObject writer) {
         super.writeToJson(writer);
-        JsonUtils.putIntIfNotDefault(writer, "smeltingTick", this.smeltingTick, LavaSmeltingRecipeSerializer.DEFAULT_SMELTING_TICK);
+        JsonUtils.putIntIfNotEqualsDefault(writer, "duration", this.smeltingTick, LavaSmeltingRecipeSerializer.DEFAULT_SMELTING_TICK);
     }
 }

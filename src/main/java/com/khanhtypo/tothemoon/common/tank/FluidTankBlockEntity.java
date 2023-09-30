@@ -58,7 +58,7 @@ public class FluidTankBlockEntity extends BlockEntity implements TickableBlockEn
 
     public FluidTankBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.FLUID_TANK.get(), pPos, pBlockState);
-        this.fluidTank = new SimpleFluidStorage(this, TANK_CAPACITY, mbEachTick);
+        this.fluidTank = new SimpleFluidStorage(this, TANK_CAPACITY);
         this.fluidTankHandler = LazyOptional.of(() -> this.fluidTank);
         this.container = new SavableSimpleContainer(this, CONTAINER_SIZE);
         this.bucketTransferTime = 0;
@@ -68,8 +68,7 @@ public class FluidTankBlockEntity extends BlockEntity implements TickableBlockEn
                 return switch (pIndex) {
                     case 0 -> fluidTank.getFluidAmount();
                     case 1 -> fluidTank.getCapacity();
-                    case 2 ->
-                            ModRegistries.getId(Registries.FLUID, fluidTank.isEmpty() ? Fluids.EMPTY : fluidTank.getFluid().getRawFluid());
+                    case 2 -> ModRegistries.getId(Registries.FLUID, fluidTank.isEmpty() ? Fluids.EMPTY : fluidTank.getFluid().getRawFluid());
                     case 3 -> bucketTransferTime;
                     case 4 -> bucketTransferDuration;
                     default -> throw new IllegalStateException("Unexpected value: " + pIndex);
@@ -121,7 +120,7 @@ public class FluidTankBlockEntity extends BlockEntity implements TickableBlockEn
 
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState blockState) {
-        this.trySendFluid(level, pos);
+        //this.trySendFluid(level, pos);
         this.dataChanged = false;
 
         if (!this.fluidTank.isFull() && !this.container.isSlotEmpty(0)) {
@@ -203,7 +202,7 @@ public class FluidTankBlockEntity extends BlockEntity implements TickableBlockEn
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-        NbtHelper.saveFluidTankTo(pTag, this.fluidTank);
+        pTag.put("FluidTank", NbtHelper.createFluidTankTag(this.fluidTank));
         if (!this.container.isEmpty()) {
             this.container.saveContainer("FluidTankContainer", pTag);
         }
@@ -213,13 +212,12 @@ public class FluidTankBlockEntity extends BlockEntity implements TickableBlockEn
     public void load(CompoundTag pTag) {
         super.load(pTag);
         if (pTag.contains("FluidTank", Tag.TAG_COMPOUND)) {
-            NbtHelper.loadFluidTankFrom(pTag.getCompound("FluidTank"), this.fluidTank);
+            NbtHelper.loadFluidTankFrom(pTag, this.fluidTank);
         }
         if (pTag.contains("FluidTankContainer", CompoundTag.TAG_COMPOUND)) {
             this.container.loadContainer("FluidTankContainer", pTag);
         }
     }
-
 
     @Override
     public Component getDisplayName() {

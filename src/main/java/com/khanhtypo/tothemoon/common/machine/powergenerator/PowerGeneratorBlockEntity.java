@@ -21,27 +21,26 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Objects;
 import java.util.Optional;
 
-public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity implements CompoundTagSerializable {
+public class PowerGeneratorBlockEntity extends AbstractMachineBlockEntity<PowerGeneratorBlockEntity> implements CompoundTagSerializable {
     public static final int DATA_SIZE = 9;
     public final GeneratablePowerStorage energyStorage;
     private final int generationPerTick;
     private int burningTime;
     private int burningDuration;
 
-    public PowerGeneratorBlockEntity(BlockEntityObject<? extends AbstractMachineBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, PowerGeneratorLevels generatorLevel) {
+    public PowerGeneratorBlockEntity(BlockEntityObject<PowerGeneratorBlockEntity> blockEntity, BlockPos blockPos, BlockState blockState, PowerGeneratorLevels generatorLevel) {
         super(blockEntity, blockPos, blockState, 1, new GeneratablePowerStorage(generatorLevel.capacity),
                 be -> new ContainerData() {
                     @Override
                     public int get(int pIndex) {
-                        PowerGeneratorBlockEntity generator = ((PowerGeneratorBlockEntity) be);
                         return switch (pIndex) {
                             case 0 -> be.energyStorage.getEnergyStored();
                             case 1 -> be.energyStorage.getMaxEnergyStored();
-                            case 2 -> generator.burningTime;
-                            case 3 -> generator.burningDuration;
-                            case 4 -> generator.getEnergyGenerated();
-                            case 5 -> generator.fuelConsumeTime;
-                            case 6 -> generator.fuelConsumeDuration;
+                            case 2 -> be.burningTime;
+                            case 3 -> be.burningDuration;
+                            case 4 -> be.getEnergyGenerated();
+                            case 5 -> be.fuelConsumeTime;
+                            case 6 -> be.fuelConsumeDuration;
                             case 7 -> be.redstoneMode.getIndex();
                             case 8 -> be.active ? 1 : 0;
                             default -> throw new ArrayIndexOutOfBoundsException();

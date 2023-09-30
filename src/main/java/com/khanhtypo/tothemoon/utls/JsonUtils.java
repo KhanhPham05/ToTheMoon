@@ -36,7 +36,7 @@ public final class JsonUtils {
         });
     }
 
-    public static void putIntIfNotDefault(JsonObject writer, String name, int value, int defaultValue) {
+    public static void putIntIfNotEqualsDefault(JsonObject writer, String name, int value, int defaultValue) {
         if (value != defaultValue)
             writer.addProperty(name, value);
     }

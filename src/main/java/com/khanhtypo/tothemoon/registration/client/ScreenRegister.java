@@ -2,9 +2,9 @@ package com.khanhtypo.tothemoon.registration.client;
 
 import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
+import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorScreen;
 import com.khanhtypo.tothemoon.common.tank.FluidTankScreen;
 import com.khanhtypo.tothemoon.common.workbench.WorkbenchScreen;
-import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorScreen;
 import com.khanhtypo.tothemoon.multiblock.blackstonefurnace.display.BlackStoneFurnaceScreen;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import static com.khanhtypo.tothemoon.registration.ModMenuTypes.*;
+
 @Mod.EventBusSubscriber(modid = ToTheMoon.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ScreenRegister {
 

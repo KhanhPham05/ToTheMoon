@@ -94,6 +94,7 @@
   "block.tothemoon.zirconium_block": "Zirconium Block",
   "button": "Click To Toggle %s",
   "custom_stat.tothemoon.interact_with_blackstone_furnace": "Interact With Blackstone Furnace",
+  "custom_stat.tothemoon.interact_with_electrical_smelter": "Interact With Electrical Smelter",
   "custom_stat.tothemoon.interact_with_fluid_tank": "Interact With Fluid Tank",
   "custom_stat.tothemoon.interact_with_power_generator": "Interact With Power Generator",
   "custom_stat.tothemoon.interact_with_workbench_crafting": "Interact With Workbench Crafting",

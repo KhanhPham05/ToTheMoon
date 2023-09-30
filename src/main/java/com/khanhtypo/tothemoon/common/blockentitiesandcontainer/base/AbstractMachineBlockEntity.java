@@ -39,12 +39,13 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.function.Function;
 
-@SuppressWarnings("SameParameterValue")
-public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntity implements ImplementedContainer, TickableBlockEntity {
+@SuppressWarnings({"SameParameterValue", "unchecked"})
+public abstract class AbstractMachineBlockEntity<T extends AbstractMachineBlockEntity<T>> extends BaseContainerBlockEntity implements ImplementedContainer, TickableBlockEntity {
     public static final int DEFAULT_FUEL_CONSUME_DURATION = 20;
     public static final Direction[] allDirections = Direction.values();
     public final PowerStorage energyStorage;
     public final SavableSimpleContainer upgradeContainer;
+    private final BlockEntityObject<T> blockEntityObject;
     private final SavableSimpleContainer container;
     private final ContainerData containerData;
     public boolean active;
@@ -54,13 +55,14 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
     protected int fuelConsumeDuration;
     protected int fuelConsumeTime;
 
-    public AbstractMachineBlockEntity(BlockEntityObject<? extends AbstractMachineBlockEntity> blockEntity,
+    public AbstractMachineBlockEntity(BlockEntityObject<T> blockEntityObject,
                                       BlockPos blockPos,
                                       BlockState blockState,
                                       int containerSize,
                                       PowerStorage energyStorage,
-                                      Function<AbstractMachineBlockEntity, ContainerData> dataConstructor) {
-        super(blockEntity.get(), blockPos, blockState);
+                                      Function<T, ContainerData> dataConstructor) {
+        super(blockEntityObject.get(), blockPos, blockState);
+        this.blockEntityObject = blockEntityObject;
         this.container = new SavableSimpleContainer(this, containerSize);
         this.fuelConsumeDuration = DEFAULT_FUEL_CONSUME_DURATION;
 
@@ -96,7 +98,7 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
         this.energyStorage = energyStorage;
         this.itemHolder = createHandler(() -> new InvWrapper(this));
         this.energyHolder = createHandler(() -> this.energyStorage);
-        this.containerData = dataConstructor.apply(this);
+        this.containerData = dataConstructor.apply((T) this);
         this.active = true;
         this.redstoneMode = MachineRedstoneMode.IGNORE;
     }
@@ -166,7 +168,7 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
 
     @Override
     @Nonnull
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+    public <A> LazyOptional<A> getCapability(Capability<A> cap, @Nullable Direction side) {
         if (!super.remove) {
             if (cap == ForgeCapabilities.ENERGY) {
                 return this.energyHolder.cast();
@@ -273,5 +275,10 @@ public abstract class AbstractMachineBlockEntity extends BaseContainerBlockEntit
     public void setFuelConsumeDuration(int value) {
         Preconditions.checkState(value > 0, "fuelConsumeDuration can not be smaller than 1");
         this.fuelConsumeDuration = value;
+    }
+
+    protected final Level getLevelOrThrow() {
+        if (super.level == null) throw ModUtils.fillCrashReport(new IllegalStateException(), "Level does not present", "Value Not Present", category -> category.setDetail("BlockEntityType", this.blockEntityObject.getId()).setDetail("BlockPos", super.getBlockPos()));
+        return super.level;
     }
 }

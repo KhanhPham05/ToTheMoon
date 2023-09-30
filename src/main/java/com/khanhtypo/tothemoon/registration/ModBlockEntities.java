@@ -1,6 +1,7 @@
 package com.khanhtypo.tothemoon.registration;
 
 import com.khanhtypo.tothemoon.common.battery.BatteryBlockEntity;
+import com.khanhtypo.tothemoon.common.machine.AbstractSingleItemProcessingMachineBlockEntity;
 import com.khanhtypo.tothemoon.common.machine.electricalsmelter.ElectricalSmelterBlockEntity;
 import com.khanhtypo.tothemoon.common.machine.powergenerator.PowerGeneratorBlockEntity;
 import com.khanhtypo.tothemoon.common.tank.FluidTankBlockEntity;

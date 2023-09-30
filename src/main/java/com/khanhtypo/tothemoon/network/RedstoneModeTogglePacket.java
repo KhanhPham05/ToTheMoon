@@ -3,6 +3,7 @@ package com.khanhtypo.tothemoon.network;
 import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
@@ -22,9 +23,11 @@ public class RedstoneModeTogglePacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
-        if (contextSupplier.get().getSender().containerMenu instanceof AbstractMachineMenu machineMenu) {
+        NetworkEvent.Context context = contextSupplier.get();
+        ServerPlayer sender = context.getSender();
+        if (sender.containerMenu instanceof AbstractMachineMenu machineMenu) {
             machineMenu.toggleRedstone(this.redstoneMode);
         }
-        contextSupplier.get().setPacketHandled(true);
+        context.setPacketHandled(true);
     }
 }

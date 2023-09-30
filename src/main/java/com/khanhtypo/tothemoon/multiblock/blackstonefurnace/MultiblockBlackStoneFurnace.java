@@ -253,7 +253,7 @@ public class MultiblockBlackStoneFurnace extends AbstractCuboidMultiblockControl
             if (!this.itemStackHolder.isSlotEmpty(0) && this.itemStackHolder.isSlotAvailable(1)) {
                 Optional<LavaSmeltingRecipe> optional = ModUtils.getRecipeFor(super.getWorld(), ModRecipeTypes.LAVA_SMELTING, this.getItemStackHolder());
                 if (optional.isPresent()) {
-                    if (this.burningTime < (this.burningDuration = optional.get().getSmeltingTick())) {
+                    if (this.burningTime < (this.burningDuration = optional.get().processDuration)) {
                         this.burningTime++;
                         if (Math.floorMod(this.burningTime, 2) == 0)
                             this.lavaHolder.drain(1, IFluidHandler.FluidAction.EXECUTE);

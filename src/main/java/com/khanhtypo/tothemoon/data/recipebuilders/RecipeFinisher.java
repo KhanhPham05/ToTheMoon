@@ -2,7 +2,7 @@ package com.khanhtypo.tothemoon.data.recipebuilders;
 
 import com.google.gson.JsonObject;
 import com.khanhtypo.tothemoon.utls.JsonUtils;
-import com.khanhtypo.tothemoon.serverdata.SerializerHelper;
+import com.khanhtypo.tothemoon.serverdata.RecipeSerializerHelper;
 import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -33,7 +33,7 @@ public final class RecipeFinisher implements FinishedRecipe {
     @Override
     public void serializeRecipeData(JsonObject jsonObject) {
         this.serializer.accept(jsonObject);
-        jsonObject.add(SerializerHelper.RESULT, JsonUtils.itemToJson(this.result));
+        jsonObject.add(RecipeSerializerHelper.RESULT, JsonUtils.itemToJson(this.result));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.khanhtypo.tothemoon.api.helpers;
 
 import com.google.common.base.Preconditions;
+import com.khanhtypo.tothemoon.ToTheMoon;
 import com.khanhtypo.tothemoon.api.abstracts.capabilities.fluid.ICapacityFlexibleFluidStorage;
 import com.khanhtypo.tothemoon.api.abstracts.capabilities.fluid.INbtFluidStorage;
 import com.khanhtypo.tothemoon.api.abstracts.capabilities.fluid.INbtItemFluidStorage;
@@ -24,8 +25,7 @@ public class NbtHelper {
      */
     public static void saveFluidTankToItem(INbtItemFluidStorage handler, @Nullable ITagPlacer placer) {
         CompoundTag rootItemTag = handler.getContainer().getOrCreateTag();
-        CompoundTag fluidTankTag = new CompoundTag();
-        saveFluidTankTo(fluidTankTag, handler);
+        CompoundTag fluidTankTag = createFluidTankTag(handler);
         if (placer != null) {
             placer.placeTag(new MutableCompoundTag(rootItemTag), "FluidTank", fluidTankTag);
         } else {
@@ -34,19 +34,20 @@ public class NbtHelper {
     }
 
     /**
-     * @param rootTag   an instance of {@link CompoundTag} that the tank should be saved into.
      * @param fluidTank the tank that its data such as fluid amount, fluid name, fluid extra nbt can be saved into the tag. If the tank has its own capacity that can be changed, implement {@link ICapacityFlexibleFluidStorage}.
      */
-    public static void saveFluidTankTo(CompoundTag rootTag, INbtFluidStorage fluidTank) {
+    public static CompoundTag createFluidTankTag(INbtFluidStorage fluidTank) {
         if (!isTankEmpty(fluidTank)) {
             FluidStack content = fluidTank.getInternal();
-            new MutableCompoundTag(rootTag)
+            return new MutableCompoundTag(new CompoundTag())
                     .putInt("Amount", fluidTank.getFluidAmount())
                     .putString("FluidName", ModRegistries.getNameOrThrow(Registries.FLUID, content.getFluid()))
                     .putIfPresent("FluidNbt", content.getTag())
                     .putIf("TankCapacity", fluidTank.isCapacityChanged(), IntTag.valueOf(fluidTank.getCapacity()))
                     .build();
         }
+
+        return new CompoundTag();
     }
 
     /**
