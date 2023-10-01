@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.client;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

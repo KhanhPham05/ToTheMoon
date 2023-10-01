@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common.machine.powergenerator;
 
-import com.khanhtypo.tothemoon.common.machine.AbstractMachineScreen;
+import com.khanhtypo.tothemoon.client.screen.AbstractMachineScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

@@ -1,8 +1,7 @@
 package com.khanhtypo.tothemoon.client;
 
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
-import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 

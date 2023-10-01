@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.multiblock.blackstonefurnace.display;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.utls.GuiRenderHelper;
 import net.minecraft.client.gui.GuiGraphics;

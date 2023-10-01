@@ -23,7 +23,7 @@ public abstract class BaseMenu extends AbstractContainerMenu {
     protected final ContainerLevelAccess accessor;
     protected final Set<Container> containerListeners = new HashSet<>();
     private final MenuObject<?> menuObject;
-    protected int inventorySlotIndex;
+    public int inventorySlotIndex;
     protected int hotbarSlotIndex;
     @Nullable
     private Block targetedBlock;

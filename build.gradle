@@ -84,6 +84,11 @@ minecraft {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+def creds = {
+    username = property('username')
+    password = property('credKey')
+}
+
 repositories {
     maven {
         url = "https://www.cursemaven.com/"
@@ -142,7 +147,7 @@ jar {
                 "MixinConfigs"            : "ttm.mixin.json"
         ])
     }
-    finalizedBy('reobfJar')
+    finalizedBy 'reobfJar'
 }
 
 tasks.register('sourcesJar', Jar) {
@@ -154,11 +159,8 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/KhanhPham05/ToTheMoon")
-            credentials {
-                username = property('username')
-                password = property('credKey')
-            }
+            url = "https://maven.pkg.github.com/KhanhPham05/ToTheMoon"
+            credentials creds
         }
     }
     publications {

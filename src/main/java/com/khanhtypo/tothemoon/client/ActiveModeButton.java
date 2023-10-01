@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.client;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.network.MachineActiveTogglePacket;
 import net.minecraft.client.gui.GuiGraphics;

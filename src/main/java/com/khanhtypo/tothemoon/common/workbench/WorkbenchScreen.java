@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common.workbench;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.ScreenHasRecipe;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

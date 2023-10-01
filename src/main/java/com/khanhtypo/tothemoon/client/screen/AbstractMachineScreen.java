@@ -1,11 +1,11 @@
-package com.khanhtypo.tothemoon.common.machine;
+package com.khanhtypo.tothemoon.client.screen;
 
 import com.khanhtypo.tothemoon.client.ActiveModeButton;
 import com.khanhtypo.tothemoon.client.ItemStackMachineButton;
 import com.khanhtypo.tothemoon.client.MutableSlot;
 import com.khanhtypo.tothemoon.client.RedstoneModeToggleButton;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.common.item.upgrades.UpgradeItemType;
+import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.utls.GuiRenderHelper;
 import com.khanhtypo.tothemoon.utls.ModUtils;

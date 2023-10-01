@@ -1,6 +1,6 @@
 package com.khanhtypo.tothemoon.common.tank;
 
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;
 import com.khanhtypo.tothemoon.registration.ModRegistries;
 import com.khanhtypo.tothemoon.utls.GuiRenderHelper;
@@ -25,7 +25,7 @@ public class FluidTankScreen extends BasicScreen<FluidTankMenu> {
     @Override
     protected void renderBgAddition(GuiGraphics renderer, ResourceLocation guiTexture) {
         if (menu.hasFluid()) {
-            GuiRenderHelper.renderFluidToScreen(renderer, minecraft, menu.getData(2), menu.getData(0), menu.getData(1), leftPos + 78, topPos + 90, 64, 69);
+            GuiRenderHelper.renderFluidToScreen(renderer, getMinecraft(), menu.getData(2), menu.getData(0), menu.getData(1), leftPos + 78, topPos + 90, 64, 69);
         }
 
         if (menu.getData(3) > 0) {

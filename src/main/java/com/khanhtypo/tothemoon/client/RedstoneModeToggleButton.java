@@ -1,7 +1,8 @@
 package com.khanhtypo.tothemoon.client;
 
 import com.khanhtypo.tothemoon.ToTheMoon;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
+
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.common.machine.AbstractMachineMenu;
 import com.khanhtypo.tothemoon.common.machine.MachineRedstoneMode;
 import com.khanhtypo.tothemoon.data.c.ModLanguageGenerator;

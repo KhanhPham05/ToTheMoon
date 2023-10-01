@@ -1,4 +1,4 @@
 package com.khanhtypo.tothemoon.common.machine.electricalsmelter;
 
-public class ElectricalSmelterScreen {
+public class ElectricalSmelterScreen  {
 }

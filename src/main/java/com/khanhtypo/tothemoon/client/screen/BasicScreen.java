@@ -1,7 +1,9 @@
-package com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base;
+package com.khanhtypo.tothemoon.client.screen;
 
 import com.google.common.base.Preconditions;
 import com.khanhtypo.tothemoon.client.ModRequiredButton;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
+import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.ScreenHasRecipe;
 import com.khanhtypo.tothemoon.utls.ModUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

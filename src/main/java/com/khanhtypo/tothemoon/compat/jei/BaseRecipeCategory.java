@@ -2,8 +2,8 @@ package com.khanhtypo.tothemoon.compat.jei;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import com.khanhtypo.tothemoon.serverdata.recipes.BaseRecipe;
 import com.khanhtypo.tothemoon.serverdata.recipes.RecipeTypeObject;
@@ -22,22 +22,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-import static java.util.Objects.*;
+import static java.util.Objects.requireNonNull;
 
 public class BaseRecipeCategory<T extends BaseRecipe<?>> implements IRecipeCategory<T> {
     private final RecipeType<T> recipeType;

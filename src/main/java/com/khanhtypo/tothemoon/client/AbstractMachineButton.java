@@ -1,7 +1,7 @@
 package com.khanhtypo.tothemoon.client;
 
+import com.khanhtypo.tothemoon.client.screen.BasicScreen;
 import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BaseMenu;
-import com.khanhtypo.tothemoon.common.blockentitiesandcontainer.base.BasicScreen;
 import com.khanhtypo.tothemoon.registration.elements.MenuObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
